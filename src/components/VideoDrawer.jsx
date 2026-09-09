@@ -105,7 +105,8 @@ export default function VideoDrawer({ entity, onClose }) {
                 videoId={entity.video_id}
                 title={entity.name}
                 handle={entity.youtube_handle || '@PattayaOhBar'}
-                isLive={isVenue && !!entity.video_id}
+                type={entity.type}
+                isLive={isVenue}
                 badgeText={isStreamer ? '4K WALKING TOUR' : (isVenue ? 'LIVE STREAM BROADCAST' : undefined)}
               />
             )}

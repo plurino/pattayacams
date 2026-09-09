@@ -115,6 +115,9 @@ export default function VenuePage({ params }) {
             channelId={venue.youtube_channel_id}
             videoId={venue.video_id}
             title={`${venue.name} Live Stream`}
+            handle={venue.youtube_handle}
+            type="venue"
+            isLive={true}
           />
         </div>
 

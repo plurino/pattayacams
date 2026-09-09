@@ -93,23 +93,8 @@ export default function MapCanvas({ onSelectEntity, onMapInstance }) {
       });
       transitGroup.addTo(map);
 
-      // 2. Municipal CCTV Cluster Group
-      const cctvCluster = Leaflet.markerClusterGroup ? Leaflet.markerClusterGroup({
-        maxClusterRadius: 50,
-        showCoverageOnHover: false,
-        spiderfyOnMaxZoom: true,
-        chunkedLoading: true,
-        iconCreateFunction: (cluster) => {
-          const count = cluster.getChildCount();
-          let sizeClass = 'marker-cluster-small';
-          if (count > 15) sizeClass = 'marker-cluster-medium';
-          return Leaflet.divIcon({
-            html: `<div><span>${count}</span></div>`,
-            className: `marker-cluster ${sizeClass}`,
-            iconSize: Leaflet.point(34, 34),
-          });
-        },
-      }) : Leaflet.layerGroup();
+      // 2. Municipal CCTV Layer (Individual 8px dots, unclustered per user request)
+      const cctvGroup = Leaflet.layerGroup();
 
       cctvData.forEach((cam) => {
         const cctvIcon = Leaflet.divIcon({
@@ -137,9 +122,9 @@ export default function MapCanvas({ onSelectEntity, onMapInstance }) {
             onSelectEntity({ ...cam, type: 'cctv' });
           }
         });
-        cctvCluster.addLayer(marker);
+        cctvGroup.addLayer(marker);
       });
-      cctvCluster.addTo(map);
+      cctvGroup.addTo(map);
 
       // 3. Hero Venues Layer Group (High-Visibility Unclustered Markers)
       const venueGroup = Leaflet.layerGroup();
@@ -205,7 +190,7 @@ export default function MapCanvas({ onSelectEntity, onMapInstance }) {
 
       mapRef.current = map;
       layersRef.current = {
-        cctvCluster,
+        cctvGroup,
         venueGroup,
         transitGroup,
       };
@@ -241,13 +226,13 @@ export default function MapCanvas({ onSelectEntity, onMapInstance }) {
 
   useEffect(() => {
     if (!mapRef.current) return;
-    const { cctvCluster } = layersRef.current;
-    if (!cctvCluster) return;
+    const { cctvGroup } = layersRef.current;
+    if (!cctvGroup) return;
 
     if (showCams) {
-      if (!mapRef.current.hasLayer(cctvCluster)) mapRef.current.addLayer(cctvCluster);
+      if (!mapRef.current.hasLayer(cctvGroup)) mapRef.current.addLayer(cctvGroup);
     } else {
-      if (mapRef.current.hasLayer(cctvCluster)) mapRef.current.removeLayer(cctvCluster);
+      if (mapRef.current.hasLayer(cctvGroup)) mapRef.current.removeLayer(cctvGroup);
     }
   }, [showCams]);
 
