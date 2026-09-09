@@ -198,6 +198,8 @@ export default function MultiCamGrid({ onSelectEntity }) {
                       channelId={entity.youtube_channel_id}
                       videoId={entity.video_id}
                       title={entity.name}
+                      handle={entity.youtube_handle || '@PattayaOhBar'}
+                      isLive={entity.type === 'venue' && !!entity.video_id}
                     />
                   )
                 ) : (

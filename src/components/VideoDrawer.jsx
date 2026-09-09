@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { X, Car, Hotel, ExternalLink, MessageCircle, Send, Star, Compass, Wifi, MapPin } from 'lucide-react';
+import { X, Car, Hotel, ExternalLink, MessageCircle, Send, Star, Compass, Wifi, MapPin, Youtube } from 'lucide-react';
 import HlsPlayer from './common/HlsPlayer';
 import YouTubePlayer from './common/YouTubePlayer';
 import EmojiReactionGroup from './common/EmojiReactionGroup';
@@ -43,7 +43,11 @@ export default function VideoDrawer({ entity, onClose }) {
           <div className="flex items-center gap-2 overflow-hidden">
             <span
               className={`w-2.5 h-2.5 rounded-full shrink-0 ${
-                isCctv ? 'bg-brandCyan shadow-[0_0_8px_#00E5FF]' : 'bg-brandPink shadow-[0_0_8px_#FF2A6D]'
+                isCctv
+                  ? 'bg-brandCyan shadow-[0_0_8px_#00E5FF]'
+                  : isStreamer
+                    ? 'bg-indigo-400 shadow-[0_0_8px_rgba(129,140,248,0.5)]'
+                    : 'bg-brandPink shadow-[0_0_8px_#FF2A6D]'
               }`}
             />
             <div className="flex flex-col min-w-0">
@@ -57,11 +61,19 @@ export default function VideoDrawer({ entity, onClose }) {
           </div>
 
           <div className="flex items-center gap-2 shrink-0">
-            {entity.category && (
+            {isStreamer ? (
+              <span className="text-[10px] uppercase font-bold font-mono px-2 py-0.5 rounded bg-indigo-950/60 text-indigo-300 border border-indigo-500/30">
+                4K Walking Tour
+              </span>
+            ) : entity.category ? (
               <span className="text-[10px] uppercase font-bold font-mono px-2 py-0.5 rounded bg-surfaceLight text-brandPink border border-brandPink/30">
                 {entity.category.replace('_', ' ')}
               </span>
-            )}
+            ) : isCctv ? (
+              <span className="text-[10px] uppercase font-bold font-mono px-2 py-0.5 rounded bg-cyan-950/60 text-brandCyan border border-cyan-500/30">
+                Municipal CCTV
+              </span>
+            ) : null}
             <button
               onClick={onClose}
               className="p-1.5 rounded-lg bg-surface hover:bg-borderDark text-slate-400 hover:text-white transition-colors"
@@ -84,9 +96,39 @@ export default function VideoDrawer({ entity, onClose }) {
                 videoId={entity.video_id}
                 title={entity.name}
                 handle={entity.youtube_handle || '@PattayaOhBar'}
+                isLive={isVenue && !!entity.video_id}
+                badgeText={isStreamer ? '4K WALKING TOUR' : (isVenue ? 'LIVE STREAM BROADCAST' : undefined)}
               />
             )}
           </div>
+
+          {/* Creator Channel Context Card (for IRL Walking Streamers) */}
+          {isStreamer && (
+            <div className="p-3 rounded-xl bg-indigo-950/30 border border-indigo-500/30 flex flex-col gap-2 shadow-md">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-1.5 text-indigo-300 text-xs font-bold font-mono">
+                  <Youtube className="w-4 h-4 text-red-500" />
+                  <span>Recorded 4K Street Walk Episodes</span>
+                </div>
+                <span className="text-[9px] font-mono text-indigo-300 bg-indigo-900/40 px-2 py-0.5 rounded border border-indigo-500/30">
+                  VOD Showcase
+                </span>
+              </div>
+              <p className="text-[11px] text-slate-300 leading-relaxed">
+                This channel features ultra-high-definition 4K pedestrian walking tours and street guides around Pattaya. When the creator is not actively streaming live, this player showcases their latest 4K episodes and route walks.
+              </p>
+              <a
+                href={entity.youtube_handle ? `https://www.youtube.com/${entity.youtube_handle.startsWith('@') ? entity.youtube_handle : '@' + entity.youtube_handle}` : `https://www.youtube.com/channel/${entity.youtube_channel_id}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-1 flex items-center justify-center gap-1.5 w-full py-2 px-3 rounded-lg bg-red-600 hover:bg-red-500 text-white text-xs font-semibold transition-colors shadow-sm"
+              >
+                <Youtube className="w-3.5 h-3.5" />
+                <span>Visit {entity.name} on YouTube</span>
+                <ExternalLink className="w-3 h-3" />
+              </a>
+            </div>
+          )}
 
           {/* Municipal Portal Verification Badge (for CCTV) */}
           {isCctv && (
@@ -287,16 +329,18 @@ export default function VideoDrawer({ entity, onClose }) {
             </a>
           </div>
 
-          {/* Static Permalink */}
-          <div className="pt-2 pb-6 text-center">
-            <a
-              href={permalink}
-              className="inline-flex items-center gap-1.5 text-xs font-mono text-slate-400 hover:text-brandCyan transition-colors"
-            >
-              <span>View Dedicated Camera Landing Page</span>
-              <Compass className="w-3.5 h-3.5" />
-            </a>
-          </div>
+          {/* Static Permalink (Venues & CCTVs only) */}
+          {!isStreamer && (
+            <div className="pt-2 pb-6 text-center">
+              <a
+                href={permalink}
+                className="inline-flex items-center gap-1.5 text-xs font-mono text-slate-400 hover:text-brandCyan transition-colors"
+              >
+                <span>View Dedicated Camera Landing Page</span>
+                <Compass className="w-3.5 h-3.5" />
+              </a>
+            </div>
+          )}
         </div>
       </aside>
     </div>

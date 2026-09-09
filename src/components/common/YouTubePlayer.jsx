@@ -6,10 +6,11 @@ import { ExternalLink, Youtube } from 'lucide-react';
 export default function YouTubePlayer({
   channelId,
   videoId,
-  title = 'Live Venue Stream',
+  title = 'Venue Stream',
   handle = '@PattayaOhBar',
-  badgeText = 'LIVE STREAM BROADCAST',
-  badgeColor = 'brandPink',
+  isLive = false,
+  badgeText,
+  badgeColor,
 }) {
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -23,29 +24,41 @@ export default function YouTubePlayer({
 
   const liveChannelUrl = resolvedVideoId
     ? `https://www.youtube.com/watch?v=${resolvedVideoId}`
-    : (handle ? `https://www.youtube.com/${handle.startsWith('@') ? handle : '@' + handle}/live` : `https://www.youtube.com/channel/${channelId}`);
+    : (handle ? `https://www.youtube.com/${handle.startsWith('@') ? handle : '@' + handle}${isLive ? '/live' : ''}` : `https://www.youtube.com/channel/${channelId}`);
 
   const isCyan = badgeColor === 'brandCyan';
+  const resolvedBadgeText = badgeText || (isLive ? 'LIVE STREAM BROADCAST' : '4K WALKING TOUR');
 
   return (
     <div className="flex flex-col gap-2 w-full">
       <div className="relative w-full aspect-video bg-black rounded-xl overflow-hidden border border-borderDark flex flex-col group shadow-lg">
         {/* Top Badges */}
-        <div className={`absolute top-2 left-2 z-20 flex items-center gap-1.5 px-2.5 py-1 rounded bg-black/80 backdrop-blur-md border border-white/10 text-[10px] font-mono ${isCyan ? 'text-brandCyan' : 'text-brandPink'}`}>
-          <span className={`w-2 h-2 rounded-full animate-ping ${isCyan ? 'bg-brandCyan' : 'bg-brandPink'}`}></span>
-          <span className="font-bold">{badgeText}</span>
-        </div>
+        {isLive ? (
+          <div className={`absolute top-2 left-2 z-20 flex items-center gap-1.5 px-2.5 py-1 rounded bg-black/85 backdrop-blur-md border border-white/10 text-[10px] font-mono ${isCyan ? 'text-brandCyan' : 'text-brandPink'}`}>
+            <span className={`w-2 h-2 rounded-full animate-ping ${isCyan ? 'bg-brandCyan' : 'bg-brandPink'}`}></span>
+            <span className="font-bold">{resolvedBadgeText}</span>
+          </div>
+        ) : (
+          <div className="absolute top-2 left-2 z-20 flex items-center gap-1.5 px-2.5 py-1 rounded bg-black/85 backdrop-blur-md border border-indigo-500/30 text-[10px] font-mono text-indigo-300">
+            <span className="w-2 h-2 rounded-full bg-indigo-400"></span>
+            <span className="font-bold">{resolvedBadgeText}</span>
+          </div>
+        )}
 
         {/* Direct Action Link */}
         <a
           href={liveChannelUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="absolute top-2 right-2 z-20 flex items-center gap-1 px-2.5 py-1 rounded bg-red-600/90 hover:bg-red-600 text-white border border-red-400/40 text-[10px] font-mono font-bold transition-all shadow-md"
-          title="Open video on YouTube"
+          className={`absolute top-2 right-2 z-20 flex items-center gap-1 px-2.5 py-1 rounded text-white text-[10px] font-mono font-bold transition-all shadow-md ${
+            isLive
+              ? 'bg-red-600/90 hover:bg-red-600 border border-red-400/40'
+              : 'bg-indigo-600/90 hover:bg-indigo-500 border border-indigo-400/40'
+          }`}
+          title={isLive ? 'Open live stream on YouTube' : 'Open creator channel on YouTube'}
         >
           <Youtube className="w-3 h-3" />
-          <span>Open YouTube</span>
+          <span>{isLive ? 'Open Live' : 'Open YouTube'}</span>
           <ExternalLink className="w-2.5 h-2.5" />
         </a>
 
@@ -62,34 +75,44 @@ export default function YouTubePlayer({
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center bg-surface text-slate-400 text-xs font-mono">
-            No live video feed configured
+            No video feed configured
           </div>
         )}
 
         {/* Loading / Connecting Overlay */}
         {!isLoaded && embedUrl && (
           <div className="absolute inset-0 flex flex-col items-center justify-center bg-surface gap-2 z-10 pointer-events-none">
-            <Youtube className="w-8 h-8 text-red-500 animate-pulse" />
-            <span className="text-xs font-mono text-slate-300">Connecting to Live Video Feed...</span>
+            <Youtube className={`w-8 h-8 animate-pulse ${isLive ? 'text-red-500' : 'text-indigo-400'}`} />
+            <span className="text-xs font-mono text-slate-300">
+              {isLive ? 'Connecting to Live Broadcast...' : 'Loading 4K Street Walk Tour...'}
+            </span>
           </div>
         )}
       </div>
 
-      {/* Live Stream Helper Bar */}
+      {/* Stream / Channel Helper Bar */}
       <div className="flex items-center justify-between p-2 rounded-lg bg-surfaceLight/50 border border-borderDark text-xs">
         <div className="flex items-center gap-2 min-w-0">
-          <div className={`w-2 h-2 rounded-full shrink-0 ${isCyan ? 'bg-brandCyan animate-pulse' : 'bg-red-500'}`}></div>
+          <div className={`w-2 h-2 rounded-full shrink-0 ${
+            isLive
+              ? (isCyan ? 'bg-brandCyan animate-pulse' : 'bg-red-500 animate-pulse')
+              : 'bg-indigo-400'
+          }`}></div>
           <span className="text-slate-300 font-mono text-[11px] truncate">
-            {isCyan ? 'Municipal Surveillance Node' : 'Broadcast Channel'}: <strong className="text-white">{handle || resolvedVideoId || channelId}</strong>
+            {isLive
+              ? (isCyan ? 'Municipal Surveillance Node' : 'Broadcast Channel')
+              : 'IRL Walking Channel'}: <strong className="text-white">{handle || resolvedVideoId || channelId}</strong>
           </span>
         </div>
         <a
           href={liveChannelUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="shrink-0 flex items-center gap-1 text-[11px] font-semibold text-red-400 hover:text-red-300 transition-colors"
+          className={`shrink-0 flex items-center gap-1 text-[11px] font-semibold transition-colors ${
+            isLive ? 'text-red-400 hover:text-red-300' : 'text-indigo-400 hover:text-indigo-300'
+          }`}
         >
-          <span>Watch Feed</span>
+          <span>{isLive ? 'Watch Live' : 'Visit Channel'}</span>
           <ExternalLink className="w-3 h-3" />
         </a>
       </div>

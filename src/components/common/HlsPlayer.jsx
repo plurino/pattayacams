@@ -91,8 +91,8 @@ export default function HlsPlayer({ streamUrl, title = 'City CCTV Stream', camId
     <div className="relative w-full aspect-video bg-black rounded-xl overflow-hidden border border-borderDark flex flex-col group shadow-lg">
       {/* CCTV Top Status Bar */}
       <div className="absolute top-2 left-2 z-20 flex items-center gap-2 px-2.5 py-1 rounded bg-black/85 backdrop-blur-md border border-white/10 text-[10px] font-mono text-brandCyan">
-        <span className="w-2 h-2 rounded-full bg-brandCyan animate-ping"></span>
-        <span className="font-bold">MUNICIPAL CCTV • LIVE</span>
+        <span className={`w-2 h-2 rounded-full ${hasError ? 'bg-brandCyan' : 'bg-brandCyan animate-ping'}`}></span>
+        <span className="font-bold">{hasError ? 'MUNICIPAL CCTV • PORTAL ACCESS' : 'MUNICIPAL CCTV • LIVE'}</span>
         <span className="text-slate-400">|</span>
         <span className="text-slate-300 hidden sm:inline">{clock}</span>
       </div>
