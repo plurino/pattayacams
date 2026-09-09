@@ -114,11 +114,11 @@ export default function MapCanvas({ onSelectEntity, onMapInstance }) {
       cctvData.forEach((cam) => {
         const cctvIcon = Leaflet.divIcon({
           className: 'custom-cctv-marker-container',
-          iconSize: [22, 22],
-          iconAnchor: [11, 11],
+          iconSize: [14, 14],
+          iconAnchor: [7, 7],
           html: `
-            <div style="width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
-              <div style="width: 14px; height: 14px; border-radius: 50%; background-color: #00E5FF; border: 2px solid #0B0F17; box-shadow: 0 0 10px #00E5FF;"></div>
+            <div style="width: 14px; height: 14px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+              <div style="width: 8px; height: 8px; border-radius: 50%; background-color: #00E5FF; border: 1.5px solid #0B0F17; box-shadow: 0 0 6px #00E5FF; transition: transform 0.15s ease;"></div>
             </div>
           `,
         });
@@ -126,11 +126,11 @@ export default function MapCanvas({ onSelectEntity, onMapInstance }) {
         const marker = Leaflet.marker([cam.lat, cam.lng], { icon: cctvIcon });
         marker.bindTooltip(
           `<div style="font-family: inherit; font-size: 11px;">
-             <span style="color: #00E5FF; font-family: monospace; font-weight: 700; display: block;">${cam.id}</span>
-             <strong style="color: #F8FAFC;">${cam.name}</strong>
-             <span style="display: block; color: #94A3B8; font-size: 10px;">${cam.name_th}</span>
+             <span style="color: #00E5FF; font-family: monospace; font-weight: 700; display: block;">${cam.camera_code || cam.id}</span>
+             <strong style="color: #F8FAFC;">${cam.name_th || cam.name}</strong>
+             <span style="display: block; color: #94A3B8; font-size: 10px;">District: ${cam.district || 'Pattaya'}</span>
            </div>`,
-          { className: 'pattaya-dark-tooltip', direction: 'top', offset: [0, -8] }
+          { className: 'pattaya-dark-tooltip', direction: 'top', offset: [0, -6] }
         );
         marker.on('click', () => {
           if (onSelectEntity) {
@@ -144,8 +144,24 @@ export default function MapCanvas({ onSelectEntity, onMapInstance }) {
       // 3. Hero Venues Layer Group (High-Visibility Unclustered Markers)
       const venueGroup = Leaflet.layerGroup();
 
+      const getCategoryIcon = (category, isSponsor) => {
+        if (isSponsor) return '⭐';
+        switch (category) {
+          case 'dispensary': return '🌿';
+          case 'webcam': return '📹';
+          case 'sports_bar': return '⚽';
+          case 'restaurant': return '🍜';
+          case 'cafe': return '☕';
+          case 'beach_club': return '🏖️';
+          case 'lounge': return '✨';
+          default: return '🍸';
+        }
+      };
+
       venuesData.forEach((venue) => {
         const isSponsor = venue.is_sponsored;
+        const iconEmoji = getCategoryIcon(venue.category, isSponsor);
+
         const venueIcon = Leaflet.divIcon({
           className: 'custom-venue-marker-container',
           iconSize: [38, 38],
@@ -154,7 +170,7 @@ export default function MapCanvas({ onSelectEntity, onMapInstance }) {
             <div style="position: relative; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
               <span style="position: absolute; width: 32px; height: 32px; border-radius: 50%; background: ${isSponsor ? '#EAB308' : '#FF2A6D'}; opacity: 0.6; animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;"></span>
               <div style="position: relative; width: 32px; height: 32px; border-radius: 50%; background: ${isSponsor ? 'linear-gradient(135deg, #FACC15, #CA8A04)' : 'linear-gradient(135deg, #FF2A6D, #BE185D)'}; border: 2px solid #FFFFFF; box-shadow: 0 0 16px ${isSponsor ? '#EAB308' : '#FF2A6D'}; display: flex; align-items: center; justify-content: center; color: white; font-size: 13px;">
-                ${isSponsor ? '⭐' : '🍸'}
+                ${iconEmoji}
               </div>
             </div>
           `,
@@ -170,10 +186,10 @@ export default function MapCanvas({ onSelectEntity, onMapInstance }) {
           `<div style="font-family: inherit; font-size: 11px;">
              <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 2px;">
                <span style="background: ${isSponsor ? '#EAB308' : '#FF2A6D'}; color: #0B0F17; font-size: 9px; font-weight: 800; padding: 1px 5px; border-radius: 4px;">${categoryLabel}</span>
-               <span style="color: #EAB308; font-weight: 700; font-size: 10px;">FEATURED LIVE</span>
+               <span style="color: #EAB308; font-weight: 700; font-size: 10px;">LIVE STREAM</span>
              </div>
              <strong style="color: #FFFFFF; font-size: 12px;">${venue.name}</strong>
-             <div style="color: #94A3B8; font-size: 10px; margin-top: 2px;">Zone: ${venue.zone}</div>
+             <div style="color: #94A3B8; font-size: 10px; margin-top: 2px;">Zone: ${venue.zone.replace('_', ' ')}</div>
            </div>`,
           { className: 'pattaya-dark-tooltip', direction: 'top', offset: [0, -14] }
         );

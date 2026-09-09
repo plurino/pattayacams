@@ -110,6 +110,7 @@ export default function CamPage({ params }) {
           <HlsPlayer
             streamUrl={cam.stream_url}
             title={`${cam.name} Live CCTV`}
+            cameraCode={cam.camera_code || cam.id}
           />
         </div>
 

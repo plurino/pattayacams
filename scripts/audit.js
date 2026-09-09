@@ -45,7 +45,7 @@ const streamers = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'public'
 const transit = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'public', 'data', 'pattaya_baht_bus.geojson'), 'utf8'));
 
 // Venues
-const validCategories = ['bar', 'lounge', 'cafe', 'beach_club', 'complex'];
+const validCategories = ['bar', 'lounge', 'cafe', 'beach_club', 'complex', 'restaurant', 'sports_bar', 'dispensary', 'webcam'];
 venues.forEach((v) => {
   if (!v.slug || !v.name || !v.zone || !v.category || typeof v.lat !== 'number' || typeof v.lng !== 'number') {
     console.error(`❌ Invalid venue schema: ${JSON.stringify(v)}`);

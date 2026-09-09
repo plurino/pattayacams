@@ -1,7 +1,7 @@
 'use client';
 
-import React from 'react';
-import { X, Car, Hotel, ExternalLink, MessageCircle, Send, Star, Compass, Wifi, MapPin, Youtube } from 'lucide-react';
+import React, { useState } from 'react';
+import { X, Car, Hotel, ExternalLink, MessageCircle, Send, Star, Compass, Wifi, MapPin, Youtube, Radio, Check } from 'lucide-react';
 import HlsPlayer from './common/HlsPlayer';
 import YouTubePlayer from './common/YouTubePlayer';
 import EmojiReactionGroup from './common/EmojiReactionGroup';
@@ -15,7 +15,16 @@ import {
 } from '@/src/utils/affiliate';
 
 export default function VideoDrawer({ entity, onClose }) {
+  const [copiedCode, setCopiedCode] = useState(false);
   if (!entity) return null;
+
+  const handleCopyCode = (code) => {
+    if (typeof navigator !== 'undefined' && navigator.clipboard) {
+      navigator.clipboard.writeText(code);
+      setCopiedCode(true);
+      setTimeout(() => setCopiedCode(false), 2000);
+    }
+  };
 
   const isCctv = entity.type === 'cctv';
   const isVenue = entity.type === 'venue';
@@ -89,7 +98,7 @@ export default function VideoDrawer({ entity, onClose }) {
           {/* Video Player Stage */}
           <div className="w-full">
             {isCctv ? (
-              <HlsPlayer streamUrl={entity.stream_url} title={entity.name} />
+              <HlsPlayer streamUrl={entity.stream_url} title={entity.name} cameraCode={entity.camera_code || entity.id} />
             ) : (
               <YouTubePlayer
                 channelId={entity.youtube_channel_id}
@@ -132,18 +141,46 @@ export default function VideoDrawer({ entity, onClose }) {
 
           {/* Municipal Portal Verification Badge (for CCTV) */}
           {isCctv && (
-            <div className="flex items-center justify-between p-2 rounded-lg bg-surfaceLight/40 border border-brandCyan/20 text-xs">
-              <span className="text-[11px] font-mono text-slate-300">
-                Pattaya City Hall Municipal Camera Node
-              </span>
+            <div className="p-3.5 rounded-xl bg-cyan-950/20 border border-brandCyan/30 flex flex-col gap-2.5 shadow-md">
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] font-mono text-slate-300 font-bold flex items-center gap-1.5">
+                  <Radio className="w-3.5 h-3.5 text-brandCyan" />
+                  <span>Pattaya City Hall CCTV Network</span>
+                </span>
+                <span className="text-[9px] font-mono text-brandCyan bg-cyan-900/40 px-2 py-0.5 rounded border border-cyan-500/30">
+                  {entity.type || 'Fix'} • {entity.brand || 'AXIS'}
+                </span>
+              </div>
+              <p className="text-[11px] text-slate-300 leading-relaxed">
+                Pattaya City operates 600+ municipal surveillance cameras for public safety and traffic monitoring. Live WebRTC video is hosted directly on the City Hall streaming portal.
+              </p>
+              <div className="flex items-center justify-between p-2 rounded-lg bg-black/40 border border-borderDark text-xs font-mono">
+                <div className="flex items-center gap-2 min-w-0">
+                  <span className="text-slate-400 text-[11px]">Search Code:</span>
+                  <span className="text-brandCyan font-bold text-xs truncate">{entity.camera_code || entity.id}</span>
+                </div>
+                <button
+                  onClick={() => handleCopyCode(entity.camera_code || entity.id)}
+                  className="flex items-center gap-1 px-2.5 py-1 rounded bg-brandCyan/20 hover:bg-brandCyan/30 text-brandCyan border border-brandCyan/40 text-[10px] font-bold transition-all shrink-0"
+                >
+                  {copiedCode ? (
+                    <>
+                      <Check className="w-3 h-3 text-brandGreen" />
+                      <span className="text-brandGreen">✓ Copied to Clipboard</span>
+                    </>
+                  ) : (
+                    <span>Copy Code</span>
+                  )}
+                </button>
+              </div>
               <a
-                href={entity.stream_url || "https://livestream.pattaya.go.th/"}
+                href="https://livestream.pattaya.go.th/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1 text-[11px] font-semibold text-brandCyan hover:text-cyan-300 transition-colors"
+                className="flex items-center justify-center gap-1.5 w-full py-2 px-3 rounded-lg bg-brandCyan hover:bg-cyan-400 text-canvas text-xs font-bold transition-all shadow-[0_0_12px_rgba(0,229,255,0.3)]"
               >
-                <span>City Portal</span>
-                <ExternalLink className="w-3 h-3" />
+                <span>Launch Official City Hall Stream</span>
+                <ExternalLink className="w-3.5 h-3.5" />
               </a>
             </div>
           )}

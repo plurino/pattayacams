@@ -34,5 +34,86 @@
     "youtube_channel_id": "UCBHe3wIIdd4xES3I_lP03kQ",
     "youtube_handle": "@EverythingPattaya",
     "avatar_url": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=150&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": "RS-005",
+    "name": "David Strachan Pattaya",
+    "current_route": "Central Pattaya & Evening Bike Tours",
+    "status": "channel",
+    "youtube_channel_id": "UCDSPattaya",
+    "youtube_handle": "@DSPattaya",
+    "avatar_url": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": "RS-006",
+    "name": "NDtvi Thailand",
+    "current_route": "Tree Town & Sunday Interactive Walks",
+    "status": "channel",
+    "youtube_channel_id": "UCNDTViThailand",
+    "youtube_handle": "@NDTViThailand",
+    "avatar_url": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": "RS-007",
+    "name": "Buzzin Pattaya",
+    "current_route": "Soi Buakhao, Beach Rd & Area Reviews",
+    "status": "channel",
+    "youtube_channel_id": "UCBuzzinpattaya",
+    "youtube_handle": "@Buzzinpattaya",
+    "avatar_url": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": "RS-008",
+    "name": "4K Pimmy",
+    "current_route": "Soi 6, Soi 7 & Night POV Rides",
+    "status": "channel",
+    "youtube_channel_id": "UC4kpimmy",
+    "youtube_handle": "@4kpimmy",
+    "avatar_url": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": "RS-009",
+    "name": "SLYMAN TRAVELS",
+    "current_route": "Soi Honey & Street Market Walks",
+    "status": "channel",
+    "youtube_channel_id": "UCslyman6666",
+    "youtube_handle": "@slyman6666",
+    "avatar_url": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=150&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": "RS-010",
+    "name": "Pattaya Beach Live",
+    "current_route": "Beach Road Promenade Live Feeds",
+    "status": "channel",
+    "youtube_channel_id": "UCwilliamgilday",
+    "youtube_handle": "@williamgilday",
+    "avatar_url": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": "RS-011",
+    "name": "JWINTHAI",
+    "current_route": "Walking Street & Bali Hai City Walks",
+    "status": "channel",
+    "youtube_channel_id": "UCjwinthai",
+    "youtube_handle": "@jwinthai",
+    "avatar_url": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": "RS-012",
+    "name": "Global Street Walk",
+    "current_route": "Nighttime Walking POV & Crowd Vibes",
+    "status": "channel",
+    "youtube_channel_id": "UCglobalstreetwalk",
+    "youtube_handle": "@GlobalStreetWalk",
+    "avatar_url": "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=150&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": "RS-013",
+    "name": "Vespa Life Thailand",
+    "current_route": "Soi 7, Soi 8 & Scooter Tours",
+    "status": "channel",
+    "youtube_channel_id": "UCVespaLifeThailand",
+    "youtube_handle": "@VespaLifeThailand",
+    "avatar_url": "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?w=150&auto=format&fit=crop&q=80"
   }
 ]
