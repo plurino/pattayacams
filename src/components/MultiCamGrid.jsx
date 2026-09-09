@@ -1,44 +1,96 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Grid2X2, Grid3X3, Video, X, Maximize2, RefreshCw } from 'lucide-react';
-import HlsPlayer from './common/HlsPlayer';
+import { Grid2X2, Grid3X3, Video, X, Maximize2, RefreshCw, Radio } from 'lucide-react';
 import YouTubePlayer from './common/YouTubePlayer';
 import venuesData from '@/public/data/venues.json';
-import cctvData from '@/public/data/cctv_cams.json';
+import streamersData from '@/public/data/roaming_streamers.json';
+import streamStatus from '@/public/data/stream_status.json';
 import { getSavedGridConfig, saveGridConfig } from '@/src/utils/storage';
-
-const DEFAULT_SLOTS_2X2 = [
-  'CC-001', // Dolphin Roundabout
-  'CC-002', // Soi 6 Entrance
-  'CC-009', // Walking Street
-  'pattaya-oh-bar', // Pattaya Oh Bar
-];
 
 export default function MultiCamGrid({ onSelectEntity }) {
   const [gridMode, setGridMode] = useState('2x2'); // '2x2' or '3x3'
   const [slots, setSlots] = useState([null, null, null, null]);
   const [isClientLoaded, setIsClientLoaded] = useState(false);
 
-  // Find entity by id or slug
+  // Filter out 404 / broken entities
+  const activeVenues = venuesData.filter(
+    (v) => streamStatus?.entities?.[`venue-${v.slug}`]?.status !== 'error_404'
+  );
+  const activeStreamers = streamersData.filter(
+    (s) => streamStatus?.entities?.[`streamer-${s.id}`]?.status !== 'error_404'
+  );
+
+  // Auto-populate prioritized candidate list: live venues first, then live creators, then top venues
+  const liveVenues = activeVenues.filter(
+    (v) => streamStatus?.entities?.[`venue-${v.slug}`]?.is_live
+  );
+  const liveStreamers = activeStreamers.filter(
+    (s) => streamStatus?.entities?.[`streamer-${s.id}`]?.is_live
+  );
+  const offlineVenues = activeVenues.filter(
+    (v) => !streamStatus?.entities?.[`venue-${v.slug}`]?.is_live
+  );
+
+  const prioritizedCandidates = [
+    ...liveVenues.map((v) => v.slug),
+    ...liveStreamers.map((s) => s.id),
+    ...offlineVenues.map((v) => v.slug),
+  ];
+
+  // Find entity by id or slug (strictly venues & streamers, NO CCTVs)
   const resolveEntity = (val) => {
     if (!val) return null;
-    const cam = cctvData.find(c => c.id === val || c.slug === val);
-    if (cam) return { ...cam, type: 'cctv' };
-    const venue = venuesData.find(v => v.slug === val || v.id === val);
-    if (venue) return { ...venue, type: 'venue' };
+    const venue = activeVenues.find((v) => v.slug === val || v.id === val);
+    if (venue) {
+      const statusInfo = streamStatus?.entities?.[`venue-${venue.slug}`];
+      return {
+        ...venue,
+        type: 'venue',
+        video_id: statusInfo?.video_id || venue.video_id,
+        is_live: statusInfo ? statusInfo.is_live : !!venue.video_id,
+      };
+    }
+    const streamer = activeStreamers.find((s) => s.id === val || s.slug === val);
+    if (streamer) {
+      const statusInfo = streamStatus?.entities?.[`streamer-${streamer.id}`];
+      return {
+        ...streamer,
+        type: 'streamer',
+        video_id: statusInfo?.video_id || null,
+        is_live: statusInfo?.is_live || false,
+      };
+    }
     return null;
   };
 
-  // Load from localStorage or use sensible defaults
+  // Load from localStorage or auto-populate with live streams
   useEffect(() => {
     const saved = getSavedGridConfig();
     const mode = saved.mode === '3x3' ? '3x3' : '2x2';
     const slotCount = mode === '3x3' ? 9 : 4;
-    
-    let initialSlots = saved.slots && saved.slots.length === slotCount
-      ? saved.slots.map((s, idx) => resolveEntity(s) ? s : DEFAULT_SLOTS_2X2[idx % DEFAULT_SLOTS_2X2.length])
-      : (mode === '2x2' ? DEFAULT_SLOTS_2X2 : [...DEFAULT_SLOTS_2X2, 'CC-004', 'CC-005', 'CC-006', 'CC-007', 'CC-008']);
+
+    // Check if saved slots contain non-CCTV valid entities
+    const hasValidSaved =
+      saved.slots &&
+      saved.slots.length === slotCount &&
+      saved.slots.some((s) => s && !s.startsWith('CC-') && resolveEntity(s));
+
+    let initialSlots;
+    if (hasValidSaved) {
+      initialSlots = saved.slots.map((s, idx) => {
+        // If it was a CCTV or invalid, replace with a live prioritized candidate
+        if (!s || s.startsWith('CC-') || !resolveEntity(s)) {
+          return prioritizedCandidates[idx % prioritizedCandidates.length] || null;
+        }
+        return s;
+      });
+    } else {
+      // Auto-populate slots with up to 4 (or 9) active live streams
+      initialSlots = Array(slotCount)
+        .fill(null)
+        .map((_, idx) => prioritizedCandidates[idx] || null);
+    }
 
     setGridMode(mode);
     setSlots(initialSlots);
@@ -157,22 +209,28 @@ export default function MultiCamGrid({ onSelectEntity }) {
                   <select
                     value={feedKey || ''}
                     onChange={(e) => handleSelectSlotFeed(idx, e.target.value)}
-                    className="bg-canvas border border-borderDark text-[11px] font-mono text-slate-300 rounded px-2 py-1 focus:outline-none focus:border-brandCyan max-w-[140px] truncate"
+                    className="bg-canvas border border-borderDark text-[11px] font-mono text-slate-300 rounded px-2 py-1 focus:outline-none focus:border-brandCyan max-w-[150px] truncate"
                   >
-                    <option value="">-- Choose Feed --</option>
+                    <option value="">-- Choose Live Feed --</option>
                     <optgroup label="✨ Live Venues">
-                      {venuesData.map((v) => (
-                        <option key={v.slug} value={v.slug}>
-                          {v.name} ({v.category})
-                        </option>
-                      ))}
+                      {activeVenues.map((v) => {
+                        const isLive = streamStatus?.entities?.[`venue-${v.slug}`]?.is_live;
+                        return (
+                          <option key={v.slug} value={v.slug}>
+                            {isLive ? '🔴 ' : '⚪ '}{v.name} ({v.category})
+                          </option>
+                        );
+                      })}
                     </optgroup>
-                    <optgroup label="📹 Municipal CCTVs">
-                      {cctvData.map((c) => (
-                        <option key={c.id} value={c.id}>
-                          {c.id} - {c.name}
-                        </option>
-                      ))}
+                    <optgroup label="🚶 Live Streamers & Creators">
+                      {activeStreamers.map((s) => {
+                        const isLive = streamStatus?.entities?.[`streamer-${s.id}`]?.is_live;
+                        return (
+                          <option key={s.id} value={s.id}>
+                            {isLive ? '🔴 ' : '⚪ '}{s.name} ({s.youtube_handle})
+                          </option>
+                        );
+                      })}
                     </optgroup>
                   </select>
 
@@ -191,17 +249,14 @@ export default function MultiCamGrid({ onSelectEntity }) {
               {/* Slot Video Content */}
               <div className="flex-1 relative bg-black flex items-center justify-center overflow-hidden">
                 {entity ? (
-                  entity.type === 'cctv' ? (
-                    <HlsPlayer streamUrl={entity.stream_url} title={entity.name} />
-                  ) : (
-                    <YouTubePlayer
-                      channelId={entity.youtube_channel_id}
-                      videoId={entity.video_id}
-                      title={entity.name}
-                      handle={entity.youtube_handle || '@PattayaOhBar'}
-                      isLive={entity.type === 'venue' && !!entity.video_id}
-                    />
-                  )
+                  <YouTubePlayer
+                    channelId={entity.youtube_channel_id}
+                    videoId={entity.video_id}
+                    title={entity.name}
+                    handle={entity.youtube_handle || '@PattayaOhBar'}
+                    type={entity.type}
+                    isLive={entity.is_live}
+                  />
                 ) : (
                   <div className="flex flex-col items-center justify-center p-6 text-center text-slate-500 gap-2">
                     <Video className="w-8 h-8 text-slate-600 animate-pulse" />
@@ -209,7 +264,7 @@ export default function MultiCamGrid({ onSelectEntity }) {
                       Empty Slot #{idx + 1}
                     </span>
                     <span className="text-[10px] text-slate-400">
-                      Use dropdown above to assign a live camera
+                      Use dropdown above to assign a live stream
                     </span>
                   </div>
                 )}
