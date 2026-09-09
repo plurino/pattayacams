@@ -1,0 +1,170 @@
+[
+  {
+    "slug": "myth-night-lounge-soi6",
+    "id": "VN-001",
+    "name": "Myth Night Lounge",
+    "zone": "soi_6",
+    "category": "lounge",
+    "lat": 12.9433,
+    "lng": 100.8862,
+    "youtube_channel_id": "UCm6gK_qL0mJtYpL0V4yN12A",
+    "description": "Premier open-air entertainment lounge situated midway down Soi 6 featuring ambient lighting, signature tropical cocktails, and live DJ sets.",
+    "is_sponsored": true,
+    "sponsor_data": {
+      "badge": "VIP Featured Partner",
+      "promo_text": "Present PattayaCams.com on your phone for a complimentary welcome draft beer before 9:00 PM.",
+      "line_id": "@mythlounge",
+      "whatsapp": "+66812345678"
+    }
+  },
+  {
+    "slug": "ruby-club-pattaya-soi6",
+    "id": "VN-002",
+    "name": "Ruby Entertainment Club",
+    "zone": "soi_6",
+    "category": "bar",
+    "lat": 12.9432,
+    "lng": 100.8875,
+    "youtube_channel_id": "UC9u2K7Bv9K9q1n4wz9X78AA",
+    "description": "Long-running lively sports and music bar on Soi 6 offering pool tables, craft beers, and full HD broadcast sports screens.",
+    "is_sponsored": false
+  },
+  {
+    "slug": "tree-town-beer-garden",
+    "id": "VN-003",
+    "name": "Tree Town Open-Air Complex",
+    "zone": "soi_buakhao",
+    "category": "complex",
+    "lat": 12.9318,
+    "lng": 100.8879,
+    "youtube_channel_id": "UC3pL4_oPq6wR4k4yN8x99QQ",
+    "description": "The largest pedestrian nightlife and dining complex on Soi Buakhao, featuring dozens of boutique craft bars, street food kitchens, and live acoustic stages.",
+    "is_sponsored": true,
+    "sponsor_data": {
+      "badge": "Official Complex Partner",
+      "promo_text": "Live acoustic performances nightly starting at 8:30 PM. Free pool tables all evening.",
+      "line_id": "@treetownpattaya",
+      "whatsapp": "+66823456789"
+    }
+  },
+  {
+    "slug": "oasis-sports-bar-buakhao",
+    "id": "VN-004",
+    "name": "Oasis Sports & Grill Bar",
+    "zone": "soi_buakhao",
+    "category": "bar",
+    "lat": 12.9305,
+    "lng": 100.8872,
+    "youtube_channel_id": "UC4vN8_yXq2wR6k4yN8x11ZZ",
+    "description": "Popular British-style sports pub and restaurant located along central Soi Buakhao with traditional roasted roasts and Premier League live feeds.",
+    "is_sponsored": false
+  },
+  {
+    "slug": "republic-club-walking-street",
+    "id": "VN-005",
+    "name": "Republic Mega Club & Lounge",
+    "zone": "walking_street",
+    "category": "complex",
+    "lat": 12.9242,
+    "lng": 100.8718,
+    "youtube_channel_id": "UC5pL9_mK8q1r6wZ8x9x33CC",
+    "description": "Multi-tier flagship dance club and VIP lounge in the center of Pattaya Walking Street featuring international guest DJs, laser shows, and private booth service.",
+    "is_sponsored": true,
+    "sponsor_data": {
+      "badge": "VIP Platinum Partner",
+      "promo_text": "VIP table reservations receive complimentary expedited door entry and premium fruit platter.",
+      "line_id": "@republicpattaya",
+      "whatsapp": "+66834567890"
+    }
+  },
+  {
+    "slug": "candy-shop-live-music-walking-st",
+    "id": "VN-006",
+    "name": "Candy Shop Live Music Bar",
+    "zone": "walking_street",
+    "category": "bar",
+    "lat": 12.9250,
+    "lng": 100.8724,
+    "youtube_channel_id": "UC6qM2_wR8x1y6k4yN8x44DD",
+    "description": "Iconic open-air live R&B and Hip-Hop music venue on Walking Street since 2005 with sidewalk terrace seating and energetic stage bands.",
+    "is_sponsored": false
+  },
+  {
+    "slug": "horizon-rooftop-restaurant-beach-rd",
+    "id": "VN-007",
+    "name": "Horizon Ocean Rooftop Lounge",
+    "zone": "central_beach",
+    "category": "lounge",
+    "lat": 12.9352,
+    "lng": 100.8835,
+    "youtube_channel_id": "UC7tN4_zX9q2wR6k4yN8x55EE",
+    "description": "Elevated 34th-floor oceanfront rooftop restaurant and cocktail lounge perched atop Central Festival Hilton, commanding 360-degree views across Pattaya Bay.",
+    "is_sponsored": true,
+    "sponsor_data": {
+      "badge": "Luxury Partner",
+      "promo_text": "Sunset Happy Hour 5:00 PM - 7:00 PM: 2-for-1 signature botanical cocktails on the observation deck.",
+      "line_id": "@horizonpattaya",
+      "whatsapp": "+66845678901"
+    }
+  },
+  {
+    "slug": "surf-turf-beach-club-naklua",
+    "id": "VN-008",
+    "name": "Surf & Turf Beach Club",
+    "zone": "naklua",
+    "category": "beach_club",
+    "lat": 12.9660,
+    "lng": 100.8860,
+    "youtube_channel_id": "UC8uO5_aP1q3wR7k5yN8x66FF",
+    "description": "Chic beachfront restaurant, day club, and sunset lounge nestled on the tranquil sands of Wong Amat Beach in North Naklua.",
+    "is_sponsored": false
+  },
+  {
+    "slug": "cave-beach-club-jomtien",
+    "id": "VN-009",
+    "name": "The Cave Oceanfront Beach Club",
+    "zone": "jomtien",
+    "category": "beach_club",
+    "lat": 12.8650,
+    "lng": 100.8950,
+    "youtube_channel_id": "UC9vP6_bQ2q4wR8k6yN8x77GG",
+    "description": "Bohemian-style luxury seaside beach club and cafe with beanbags directly on the sand, artisanal coffee, wood-fired pizzas, and live acoustic sunset sessions.",
+    "is_sponsored": false
+  },
+  {
+    "slug": "fat-coco-beach-club-north",
+    "id": "VN-010",
+    "name": "Fat Coco Beach Club & Pool Lounge",
+    "zone": "north_pattaya",
+    "category": "beach_club",
+    "lat": 12.9465,
+    "lng": 100.8860,
+    "youtube_channel_id": "UC0wQ7_cR3q5wR9k7yN8x88HH",
+    "description": "Vibrant Bali-inspired tropical pool club with turquoise cabanas, swim-up bar, and weekend daytime pool parties on North Beach Road.",
+    "is_sponsored": false
+  },
+  {
+    "slug": "coffee-club-royal-garden-beach",
+    "id": "VN-011",
+    "name": "The Waterfront Garden Cafe",
+    "zone": "central_beach",
+    "category": "cafe",
+    "lat": 12.9295,
+    "lng": 100.8775,
+    "youtube_channel_id": "UC1xR8_dS4q6wS0k8yN8x99II",
+    "description": "Relaxing seaside patio cafe situated outside Royal Garden Plaza overlooking the gulf, serving premium single-origin coffees and brunch.",
+    "is_sponsored": false
+  },
+  {
+    "slug": "luna-sky-lounge-jomtien",
+    "id": "VN-012",
+    "name": "Luna Sky View Lounge",
+    "zone": "jomtien",
+    "category": "lounge",
+    "lat": 12.8910,
+    "lng": 100.8780,
+    "youtube_channel_id": "UC2yS9_eT5q7wT1k9yN8x00JJ",
+    "description": "Modern high-rise cocktail lounge along Jomtien Beach Road offering unobstructed ocean views, fusion tapas, and sunset cocktails.",
+    "is_sponsored": false
+  }
+]

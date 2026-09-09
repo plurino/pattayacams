@@ -1,0 +1,53 @@
+import { Inter, JetBrains_Mono } from 'next/font/google';
+import './globals.css';
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-mono',
+  display: 'swap',
+});
+
+export const metadata = {
+  title: 'PattayaCams | Live Street Webcams, Beach Feeds & City Transit Radar',
+  description: 'Real-time interactive map, municipal CCTV streams, beachfront live cams, and Songthaew transit radar for Pattaya, Thailand.',
+  keywords: ['Pattaya webcams', 'Pattaya live camera', 'Walking Street Pattaya', 'Pattaya Beach live', 'Songthaew Baht bus map', 'Pattaya CCTV'],
+  authors: [{ name: 'PattayaCams' }],
+  metadataBase: new URL('https://pattayacams.com'),
+  openGraph: {
+    title: 'PattayaCams | Live Street Webcams & Transit Radar',
+    description: 'Real-time interactive map and live streams for Pattaya, Thailand.',
+    url: 'https://pattayacams.com',
+    siteName: 'PattayaCams',
+    images: [
+      {
+        url: '/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'PattayaCams Live Feeds & Transit Radar',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'PattayaCams | Live Street Webcams & Transit Radar',
+    description: 'Explore live webcams and Songthaew routes in Pattaya, Thailand.',
+  },
+};
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en" className={`dark ${inter.variable} ${jetbrainsMono.variable}`}>
+      <body className="bg-canvas text-slate-100 antialiased h-screen w-screen overflow-hidden flex flex-col">
+        {children}
+      </body>
+    </html>
+  );
+}

@@ -1,0 +1,34 @@
+[
+  {
+    "id": "RS-001",
+    "name": "Pattaya 4K Walker",
+    "current_route": "Walking Street to Bali Hai Pier",
+    "status": "active",
+    "youtube_channel_id": "UCm6gK_qL0mJtYpL0V4yN12A",
+    "avatar_url": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": "RS-002",
+    "name": "Bangkok & Beyond Explorer",
+    "current_route": "Central Beach Rd to Soi 6 Promenade",
+    "status": "active",
+    "youtube_channel_id": "UC9u2K7Bv9K9q1n4wz9X78AA",
+    "avatar_url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": "RS-003",
+    "name": "Siam Street Walk",
+    "current_route": "Soi Buakhao & Tree Town Food Safari",
+    "status": "active",
+    "youtube_channel_id": "UC3pL4_oPq6wR4k4yN8x99QQ",
+    "avatar_url": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": "RS-004",
+    "name": "Jomtien Sunset Cruiser",
+    "current_route": "Rompho Market to Dongtan Beachwalk",
+    "status": "active",
+    "youtube_channel_id": "UC4vN8_yXq2wR6k4yN8x11ZZ",
+    "avatar_url": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=150&auto=format&fit=crop&q=80"
+  }
+]

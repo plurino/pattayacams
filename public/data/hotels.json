@@ -1,0 +1,230 @@
+{
+  "default": [
+    {
+      "id": "HT-DEF-01",
+      "name": "Hilton Pattaya Beach",
+      "agoda_hotel_id": "236402",
+      "rating": "9.1",
+      "typical_price_usd": 145,
+      "distance": "Directly on Beach Rd"
+    },
+    {
+      "id": "HT-DEF-02",
+      "name": "Hard Rock Hotel Pattaya",
+      "agoda_hotel_id": "8432",
+      "rating": "8.7",
+      "typical_price_usd": 85,
+      "distance": "150m from Beach"
+    },
+    {
+      "id": "HT-DEF-03",
+      "name": "Amber Hotel Pattaya",
+      "agoda_hotel_id": "4958120",
+      "rating": "8.8",
+      "typical_price_usd": 42,
+      "distance": "300m to Soi Buakhao"
+    }
+  ],
+  "soi_6": [
+    {
+      "id": "HT-S6-01",
+      "name": "Siam @ Siam Design Hotel Pattaya",
+      "agoda_hotel_id": "528574",
+      "rating": "8.9",
+      "typical_price_usd": 78,
+      "distance": "220m from Soi 6"
+    },
+    {
+      "id": "HT-S6-02",
+      "name": "Queen Victoria Inn",
+      "agoda_hotel_id": "315420",
+      "rating": "8.4",
+      "typical_price_usd": 32,
+      "distance": "50m inside Soi 6"
+    },
+    {
+      "id": "HT-S6-03",
+      "name": "Sabai Wing Hotel",
+      "agoda_hotel_id": "10452",
+      "rating": "8.2",
+      "typical_price_usd": 35,
+      "distance": "180m from Soi 6"
+    }
+  ],
+  "soi_buakhao": [
+    {
+      "id": "HT-SB-01",
+      "name": "Amber Hotel Pattaya",
+      "agoda_hotel_id": "4958120",
+      "rating": "8.8",
+      "typical_price_usd": 42,
+      "distance": "100m to Tree Town"
+    },
+    {
+      "id": "HT-SB-02",
+      "name": "D Hotel Pattaya",
+      "agoda_hotel_id": "982314",
+      "rating": "8.5",
+      "typical_price_usd": 38,
+      "distance": "150m to Soi Lengkee"
+    },
+    {
+      "id": "HT-SB-03",
+      "name": "Page 10 Hotel",
+      "agoda_hotel_id": "164289",
+      "rating": "8.6",
+      "typical_price_usd": 55,
+      "distance": "200m to Second Road"
+    }
+  ],
+  "walking_street": [
+    {
+      "id": "HT-WS-01",
+      "name": "Siam Bayshore Resort Pattaya",
+      "agoda_hotel_id": "8435",
+      "rating": "8.6",
+      "typical_price_usd": 72,
+      "distance": "Adjacent to Walking Street"
+    },
+    {
+      "id": "HT-WS-02",
+      "name": "Grand Hotel Pattaya",
+      "agoda_hotel_id": "18342",
+      "rating": "8.1",
+      "typical_price_usd": 39,
+      "distance": "Directly on Walking Street"
+    },
+    {
+      "id": "HT-WS-03",
+      "name": "Balihai Bay Residence",
+      "agoda_hotel_id": "824915",
+      "rating": "8.4",
+      "typical_price_usd": 45,
+      "distance": "250m to Ferry Pier"
+    }
+  ],
+  "central_beach": [
+    {
+      "id": "HT-CB-01",
+      "name": "Hilton Pattaya",
+      "agoda_hotel_id": "236402",
+      "rating": "9.1",
+      "typical_price_usd": 145,
+      "distance": "Direct Beach Rd Overlook"
+    },
+    {
+      "id": "HT-CB-02",
+      "name": "Wave Hotel Pattaya",
+      "agoda_hotel_id": "421890",
+      "rating": "9.0",
+      "typical_price_usd": 120,
+      "distance": "Directly on Beach Road"
+    },
+    {
+      "id": "HT-CB-03",
+      "name": "Areca Lodge",
+      "agoda_hotel_id": "14210",
+      "rating": "8.5",
+      "typical_price_usd": 48,
+      "distance": "180m to Beach Rd"
+    }
+  ],
+  "jomtien": [
+    {
+      "id": "HT-JT-01",
+      "name": "U Jomtien Pattaya",
+      "agoda_hotel_id": "4952130",
+      "rating": "8.9",
+      "typical_price_usd": 68,
+      "distance": "Directly on Jomtien Beach"
+    },
+    {
+      "id": "HT-JT-02",
+      "name": "Zand Morada Pattaya",
+      "agoda_hotel_id": "6732910",
+      "rating": "8.7",
+      "typical_price_usd": 52,
+      "distance": "50m to Beachfront"
+    },
+    {
+      "id": "HT-JT-03",
+      "name": "Grand Jomtien Palace Hotel",
+      "agoda_hotel_id": "10425",
+      "rating": "8.1",
+      "typical_price_usd": 36,
+      "distance": "Across from Night Market"
+    }
+  ],
+  "naklua": [
+    {
+      "id": "HT-NK-01",
+      "name": "Centara Grand Mirage Beach Resort",
+      "agoda_hotel_id": "156420",
+      "rating": "8.8",
+      "typical_price_usd": 135,
+      "distance": "Wong Amat Private Beach"
+    },
+    {
+      "id": "HT-NK-02",
+      "name": "Pullman Pattaya Hotel G",
+      "agoda_hotel_id": "78412",
+      "rating": "8.6",
+      "typical_price_usd": 95,
+      "distance": "Direct Naklua Beach Access"
+    }
+  ],
+  "pratumnak": [
+    {
+      "id": "HT-PN-01",
+      "name": "Royal Cliff Beach Hotel",
+      "agoda_hotel_id": "8431",
+      "rating": "8.9",
+      "typical_price_usd": 110,
+      "distance": "Cliffside Pratumnak Cape"
+    },
+    {
+      "id": "HT-PN-02",
+      "name": "The Monttra Pattaya",
+      "agoda_hotel_id": "1165320",
+      "rating": "9.2",
+      "typical_price_usd": 125,
+      "distance": "Above Cosy Beach"
+    }
+  ],
+  "north_pattaya": [
+    {
+      "id": "HT-NP-01",
+      "name": "Grande Centre Point Pattaya",
+      "agoda_hotel_id": "5124930",
+      "rating": "9.1",
+      "typical_price_usd": 105,
+      "distance": "Integrated in Terminal 21"
+    },
+    {
+      "id": "HT-NP-02",
+      "name": "Dusit Thani Pattaya",
+      "agoda_hotel_id": "8430",
+      "rating": "8.7",
+      "typical_price_usd": 92,
+      "distance": "Next to Dolphin Roundabout"
+    }
+  ],
+  "south_pattaya": [
+    {
+      "id": "HT-SP-01",
+      "name": "Citrus Grande Hotel Pattaya",
+      "agoda_hotel_id": "4951230",
+      "rating": "8.6",
+      "typical_price_usd": 50,
+      "distance": "300m to South Pattaya Rd"
+    },
+    {
+      "id": "HT-SP-02",
+      "name": "VC Hotel Pattaya",
+      "agoda_hotel_id": "11234",
+      "rating": "7.9",
+      "typical_price_usd": 28,
+      "distance": "150m to Wat Chai Mongkhon"
+    }
+  ]
+}

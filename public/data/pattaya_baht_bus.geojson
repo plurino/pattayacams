@@ -1,0 +1,111 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "route-circular-loop",
+      "properties": {
+        "route_id": "beach-second-loop",
+        "name": "Beach Road & Second Road Circular Loop",
+        "name_th": "สายรอบเมือง ถนนเลียบชายหาด - สายสอง",
+        "color": "#3B82F6",
+        "fare_thb": 10,
+        "direction": "Clockwise Loop (Beach Rd Southbound ➔ Second Rd Northbound)",
+        "frequency": "Every 1-2 minutes (24/7 continuous)",
+        "description": "The quintessential Pattaya 10-THB Songthaew. Hop on anywhere along Beach Road heading south, or Second Road heading north. Press the overhead buzzer to stop."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [100.8887, 12.9518],
+          [100.8876, 12.9495],
+          [100.8860, 12.9465],
+          [100.8847, 12.9436],
+          [100.8839, 12.9405],
+          [100.8837, 12.9362],
+          [100.8832, 12.9348],
+          [100.8810, 12.9315],
+          [100.8775, 12.9295],
+          [100.8745, 12.9275],
+          [100.8732, 12.9262],
+          [100.8738, 12.9255],
+          [100.8758, 12.9252],
+          [100.8795, 12.9248],
+          [100.8805, 12.9252],
+          [100.8820, 12.9270],
+          [100.8835, 12.9290],
+          [100.8850, 12.9310],
+          [100.8858, 12.9340],
+          [100.8868, 12.9370],
+          [100.8876, 12.9400],
+          [100.8884, 12.9431],
+          [100.8890, 12.9460],
+          [100.8899, 12.9501],
+          [100.8887, 12.9518]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "route-jomtien-line",
+      "properties": {
+        "route_id": "south-pattaya-jomtien",
+        "name": "South Pattaya to Jomtien Beach Line",
+        "name_th": "สายพัทยาใต้ - ชายหาดจอมเทียน",
+        "color": "#10B981",
+        "fare_thb": 10,
+        "direction": "Bi-directional: Wat Chai Mongkhon ⇄ South Jomtien Beach",
+        "frequency": "Every 3-5 minutes (06:00 - 02:00)",
+        "description": "Standard 10-THB route connecting Central/South Pattaya with Jomtien Beach. Boards outside Wat Chai Mongkhon school on South Pattaya Road, heads down Thappraya Road, and runs the entire length of Jomtien Beach Road."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [100.8795, 12.9248],
+          [100.8785, 12.9230],
+          [100.8765, 12.9205],
+          [100.8745, 12.9175],
+          [100.8735, 12.9135],
+          [100.8715, 12.9080],
+          [100.8690, 12.9025],
+          [100.8682, 12.9000],
+          [100.8695, 12.8995],
+          [100.8725, 12.8988],
+          [100.8745, 12.8955],
+          [100.8762, 12.8920],
+          [100.8780, 12.8880],
+          [100.8810, 12.8835],
+          [100.8845, 12.8795],
+          [100.8872, 12.8785]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "route-naklua-line",
+      "properties": {
+        "route_id": "dolphin-naklua-market",
+        "name": "Dolphin Roundabout to Naklua Fish Market",
+        "name_th": "สายวงเวียนปลาโลมา - ตลาดลานโพธิ์นาเกลือ",
+        "color": "#F59E0B",
+        "fare_thb": 10,
+        "direction": "Bi-directional: Dolphin Roundabout ⇄ Lan Pho Naklua Market",
+        "frequency": "Every 5-8 minutes (06:00 - 22:00)",
+        "description": "Northern 10-THB commuter route linking the North Pattaya hotel district and Terminal 21 with historic Naklua Old Town and Lan Pho fresh seafood pier."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [100.8887, 12.9518],
+          [100.8900, 12.9555],
+          [100.8915, 12.9595],
+          [100.8932, 12.9640],
+          [100.8955, 12.9690],
+          [100.8980, 12.9745],
+          [100.9015, 12.9800],
+          [100.9045, 12.9832]
+        ]
+      }
+    }
+  ]
+}
