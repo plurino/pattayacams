@@ -11,14 +11,24 @@ import { getSavedGridConfig, saveGridConfig } from '@/src/utils/storage';
 const DEFAULT_SLOTS_2X2 = [
   'CC-001', // Dolphin Roundabout
   'CC-002', // Soi 6 Entrance
-  'myth-night-lounge-soi6', // Myth Lounge
-  'republic-club-walking-street', // Republic Club
+  'CC-009', // Walking Street
+  'pattaya-oh-bar', // Pattaya Oh Bar
 ];
 
 export default function MultiCamGrid({ onSelectEntity }) {
   const [gridMode, setGridMode] = useState('2x2'); // '2x2' or '3x3'
   const [slots, setSlots] = useState([null, null, null, null]);
   const [isClientLoaded, setIsClientLoaded] = useState(false);
+
+  // Find entity by id or slug
+  const resolveEntity = (val) => {
+    if (!val) return null;
+    const cam = cctvData.find(c => c.id === val || c.slug === val);
+    if (cam) return { ...cam, type: 'cctv' };
+    const venue = venuesData.find(v => v.slug === val || v.id === val);
+    if (venue) return { ...venue, type: 'venue' };
+    return null;
+  };
 
   // Load from localStorage or use sensible defaults
   useEffect(() => {
@@ -27,8 +37,8 @@ export default function MultiCamGrid({ onSelectEntity }) {
     const slotCount = mode === '3x3' ? 9 : 4;
     
     let initialSlots = saved.slots && saved.slots.length === slotCount
-      ? saved.slots
-      : (mode === '2x2' ? DEFAULT_SLOTS_2X2 : [...DEFAULT_SLOTS_2X2, null, null, null, null, null]);
+      ? saved.slots.map((s, idx) => resolveEntity(s) ? s : DEFAULT_SLOTS_2X2[idx % DEFAULT_SLOTS_2X2.length])
+      : (mode === '2x2' ? DEFAULT_SLOTS_2X2 : [...DEFAULT_SLOTS_2X2, 'CC-004', 'CC-005', 'CC-006', 'CC-007', 'CC-008']);
 
     setGridMode(mode);
     setSlots(initialSlots);
@@ -60,15 +70,7 @@ export default function MultiCamGrid({ onSelectEntity }) {
     saveGridConfig({ mode: gridMode, slots: next });
   };
 
-  // Find entity by id or slug
-  const resolveEntity = (val) => {
-    if (!val) return null;
-    const cam = cctvData.find(c => c.id === val || c.slug === val);
-    if (cam) return { ...cam, type: 'cctv' };
-    const venue = venuesData.find(v => v.slug === val || v.id === val);
-    if (venue) return { ...venue, type: 'venue' };
-    return null;
-  };
+
 
   if (!isClientLoaded) {
     return (
@@ -190,10 +192,20 @@ export default function MultiCamGrid({ onSelectEntity }) {
               <div className="flex-1 relative bg-black flex items-center justify-center overflow-hidden">
                 {entity ? (
                   entity.type === 'cctv' ? (
-                    <HlsPlayer streamUrl={entity.stream_url} title={entity.name} />
+                    entity.video_id ? (
+                      <YouTubePlayer
+                        videoId={entity.video_id}
+                        title={entity.name}
+                        badgeText="MUNICIPAL LIVE"
+                        badgeColor="brandCyan"
+                      />
+                    ) : (
+                      <HlsPlayer streamUrl={entity.stream_url} title={entity.name} />
+                    )
                   ) : (
                     <YouTubePlayer
                       channelId={entity.youtube_channel_id}
+                      videoId={entity.video_id}
                       title={entity.name}
                     />
                   )

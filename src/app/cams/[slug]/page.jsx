@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Video, MapPin, ArrowLeft, Car, Hotel, ExternalLink, Compass } from 'lucide-react';
 import HlsPlayer from '@/src/components/common/HlsPlayer';
+import YouTubePlayer from '@/src/components/common/YouTubePlayer';
 import EmojiReactionGroup from '@/src/components/common/EmojiReactionGroup';
 import cctvData from '@/public/data/cctv_cams.json';
 import hotelsData from '@/public/data/hotels.json';
@@ -106,10 +107,19 @@ export default function CamPage({ params }) {
 
         {/* Video Player Stage */}
         <div className="w-full">
-          <HlsPlayer
-            streamUrl={cam.stream_url}
-            title={`${cam.name} Live CCTV`}
-          />
+          {cam.video_id ? (
+            <YouTubePlayer
+              videoId={cam.video_id}
+              title={`${cam.name} Live CCTV`}
+              badgeText="MUNICIPAL CCTV LIVE"
+              badgeColor="brandCyan"
+            />
+          ) : (
+            <HlsPlayer
+              streamUrl={cam.stream_url}
+              title={`${cam.name} Live CCTV`}
+            />
+          )}
         </div>
 
         {/* Camera Description */}

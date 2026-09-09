@@ -113,6 +113,7 @@ export default function VenuePage({ params }) {
         <div className="w-full">
           <YouTubePlayer
             channelId={venue.youtube_channel_id}
+            videoId={venue.video_id}
             title={`${venue.name} Live Stream`}
           />
         </div>

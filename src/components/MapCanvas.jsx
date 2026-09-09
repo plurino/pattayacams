@@ -49,8 +49,11 @@ export default function MapCanvas({ onSelectEntity, onMapInstance }) {
 
       Leaflet.control.zoom({ position: 'topright' }).addTo(map);
 
-      // CartoDB Dark Matter Tile Layer (100% Free, NO API Key needed)
-      Leaflet.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+      // CartoDB Dark Matter Tile Layer with API Key to remove watermarks
+      const cartoKey = process.env.NEXT_PUBLIC_CARTO_API_KEY || 'cb1_33su_1_683c1b500e92ad8b2069c2d2';
+      const tileUrl = `https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png?key=${cartoKey}`;
+
+      Leaflet.tileLayer(tileUrl, {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
         subdomains: 'abcd',
         maxZoom: 19,

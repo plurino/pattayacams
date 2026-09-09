@@ -77,15 +77,43 @@ export default function VideoDrawer({ entity, onClose }) {
           {/* Video Player Stage */}
           <div className="w-full">
             {isCctv ? (
-              <HlsPlayer streamUrl={entity.stream_url} title={entity.name} />
+              entity.video_id ? (
+                <YouTubePlayer
+                  videoId={entity.video_id}
+                  title={entity.name}
+                  badgeText="MUNICIPAL CCTV LIVE"
+                  badgeColor="brandCyan"
+                />
+              ) : (
+                <HlsPlayer streamUrl={entity.stream_url} title={entity.name} />
+              )
             ) : (
               <YouTubePlayer
                 channelId={entity.youtube_channel_id}
+                videoId={entity.video_id}
                 title={entity.name}
                 handle={entity.youtube_handle || '@PattayaOhBar'}
               />
             )}
           </div>
+
+          {/* Municipal Portal Verification Badge (for CCTV) */}
+          {isCctv && (
+            <div className="flex items-center justify-between p-2 rounded-lg bg-surfaceLight/40 border border-brandCyan/20 text-xs">
+              <span className="text-[11px] font-mono text-slate-300">
+                Pattaya City Hall Municipal Camera Node
+              </span>
+              <a
+                href={entity.stream_url || "https://livestream.pattaya.go.th/"}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1 text-[11px] font-semibold text-brandCyan hover:text-cyan-300 transition-colors"
+              >
+                <span>City Portal</span>
+                <ExternalLink className="w-3 h-3" />
+              </a>
+            </div>
+          )}
 
           {/* Description & Google Maps Location Link */}
           <div className="p-3 rounded-xl bg-surfaceLight/30 border border-borderDark/60 space-y-2">
