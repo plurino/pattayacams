@@ -62,6 +62,16 @@ async function fetchChannelRss(channelId) {
   }
 }
 
+const forbiddenKeywords = [
+  'bar fine', 'barfine', 'gogo', 'go-go', 'ladyboy', 'freelancer',
+  'escort', 'happy ending', 'massage parlor', 'soi 6 girls', 'red light', 'red-light'
+];
+
+function isCompliant(title) {
+  const lower = (title || '').toLowerCase();
+  return !forbiddenKeywords.some(kw => lower.includes(kw));
+}
+
 function parseEntries(xml, creator) {
   const entries = [];
   const entryRegex = /<entry>([\s\S]*?)<\/entry>/g;
@@ -78,6 +88,11 @@ function parseEntries(xml, creator) {
     if (videoIdMatch && titleMatch && publishedMatch) {
       const videoId = videoIdMatch[1];
       const title = decodeHtmlEntities(titleMatch[1]);
+
+      if (!isCompliant(title)) {
+        continue;
+      }
+
       const publishedAt = publishedMatch[1].trim();
       const thumbnailUrl = thumbnailMatch ? thumbnailMatch[1] : `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
 
