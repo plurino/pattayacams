@@ -1,11 +1,11 @@
 /**
  * Safe browser localStorage manager for PattayaCams.com
- * Handles grid layouts, departure dates, and 2-hour sliding window emoji telemetry
+ * Handles grid layouts, departure dates, and strictly enforced single-vote emoji telemetry
  */
 
 const GRID_KEY = 'pattayacams_grid_v1';
 const TRIP_DATE_KEY = 'pattayacams_trip_departure';
-const TELEMETRY_KEY = 'pattayacams_telemetry_v2';
+const TELEMETRY_KEY = 'pattayacams_telemetry_v3';
 const TWO_HOURS_MS = 2 * 60 * 60 * 1000;
 
 function isClient() {
@@ -20,10 +20,8 @@ export function getSavedGridConfig() {
   try {
     const raw = localStorage.getItem(GRID_KEY);
     if (!raw) return { mode: '2x2', slots: [null, null, null, null] };
-    const parsed = JSON.parse(raw);
-    return parsed;
+    return JSON.parse(raw);
   } catch (e) {
-    console.error('Failed to load grid config from localStorage', e);
     return { mode: '2x2', slots: [null, null, null, null] };
   }
 }
@@ -72,96 +70,89 @@ export function clearTripDate() {
 }
 
 /**
- * Emoji Telemetry with 2-Hour Sliding Window
- * Telemetry format:
+ * Emoji Telemetry (Strict Single-Vote Per User per Video/Entity)
+ * Schema:
  * {
  *   [entitySlug]: {
- *     busy: [timestamp1, timestamp2],
- *     quiet: [timestamp],
- *     flood: [timestamp],
- *     vibe: [timestamp]
+ *     userVote: 'vibe' | 'busy' | 'quiet' | 'flood' | null,
+ *     userVoteTime: timestamp,
+ *     baseCounts: { busy: 12, quiet: 4, flood: 1, vibe: 25 }
  *   }
  * }
  */
+const DEFAULT_BASE_COUNTS = {
+  busy: 8,
+  quiet: 2,
+  flood: 0,
+  vibe: 15,
+};
+
 export function getEntityReactions(slug) {
-  if (!isClient() || !slug) return { busy: 0, quiet: 0, flood: 0, vibe: 0, userVoted: null };
+  if (!isClient() || !slug) return { busy: 8, quiet: 2, flood: 0, vibe: 15, userVoted: null };
   try {
     const raw = localStorage.getItem(TELEMETRY_KEY);
-    if (!raw) return { busy: 0, quiet: 0, flood: 0, vibe: 0, userVoted: null };
-    
-    const allData = JSON.parse(raw);
+    const allData = raw ? JSON.parse(raw) : {};
     const entityData = allData[slug] || {};
     const now = Date.now();
-    const cutoff = now - TWO_HOURS_MS;
 
-    const counts = {
-      busy: 0,
-      quiet: 0,
-      flood: 0,
-      vibe: 0,
-      userVoted: entityData.lastUserVote && (now - entityData.lastUserVoteTime < TWO_HOURS_MS) ? entityData.lastUserVote : null
+    // Check if user vote is still within the 2-hour window
+    const hasValidVote = entityData.userVote && (now - (entityData.userVoteTime || 0) < TWO_HOURS_MS);
+    const userVoted = hasValidVote ? entityData.userVote : null;
+
+    const base = entityData.baseCounts || { ...DEFAULT_BASE_COUNTS };
+
+    return {
+      busy: base.busy + (userVoted === 'busy' ? 1 : 0),
+      quiet: base.quiet + (userVoted === 'quiet' ? 1 : 0),
+      flood: base.flood + (userVoted === 'flood' ? 1 : 0),
+      vibe: base.vibe + (userVoted === 'vibe' ? 1 : 0),
+      userVoted,
     };
-
-    ['busy', 'quiet', 'flood', 'vibe'].forEach((type) => {
-      const timestamps = Array.isArray(entityData[type]) ? entityData[type] : [];
-      // Filter out stamps older than 2 hours
-      const valid = timestamps.filter(t => t > cutoff);
-      counts[type] = valid.length;
-    });
-
-    return counts;
   } catch (e) {
-    return { busy: 0, quiet: 0, flood: 0, vibe: 0, userVoted: null };
+    return { busy: 8, quiet: 2, flood: 0, vibe: 15, userVoted: null };
   }
 }
 
-export function addEntityReaction(slug, reactionType) {
+/**
+ * Casts or switches vote for an entity.
+ * User can ONLY have 1 active vote per entity.
+ * Clicking the same vote toggles it off.
+ * Clicking another vote switches it.
+ */
+export function toggleEntityReaction(slug, reactionType) {
   if (!isClient() || !slug || !reactionType) return;
   try {
     const now = Date.now();
-    const cutoff = now - TWO_HOURS_MS;
     const raw = localStorage.getItem(TELEMETRY_KEY);
     const allData = raw ? JSON.parse(raw) : {};
-    
+
     if (!allData[slug]) {
-      allData[slug] = { busy: [], quiet: [], flood: [], vibe: [], lastUserVote: null, lastUserVoteTime: 0 };
+      allData[slug] = {
+        userVote: null,
+        userVoteTime: 0,
+        baseCounts: { ...DEFAULT_BASE_COUNTS },
+      };
     }
 
     const entityData = allData[slug];
-
-    // Prune expired
-    ['busy', 'quiet', 'flood', 'vibe'].forEach((type) => {
-      if (Array.isArray(entityData[type])) {
-        entityData[type] = entityData[type].filter(t => t > cutoff);
-      } else {
-        entityData[type] = [];
-      }
-    });
-
-    // Add new vote timestamp
-    if (entityData[reactionType]) {
-      entityData[reactionType].push(now);
+    if (!entityData.baseCounts) {
+      entityData.baseCounts = { ...DEFAULT_BASE_COUNTS };
     }
-    entityData.lastUserVote = reactionType;
-    entityData.lastUserVoteTime = now;
 
-    // Prune other entities in store that are wholly expired
-    Object.keys(allData).forEach((k) => {
-      const ent = allData[k];
-      let hasValid = false;
-      ['busy', 'quiet', 'flood', 'vibe'].forEach((type) => {
-        if (Array.isArray(ent[type])) {
-          ent[type] = ent[type].filter(t => t > cutoff);
-          if (ent[type].length > 0) hasValid = true;
-        }
-      });
-      if (!hasValid && (!ent.lastUserVoteTime || ent.lastUserVoteTime < cutoff)) {
-        delete allData[k];
-      }
-    });
+    const currentVote = (now - (entityData.userVoteTime || 0) < TWO_HOURS_MS) ? entityData.userVote : null;
+
+    if (currentVote === reactionType) {
+      // Toggle off
+      entityData.userVote = null;
+      entityData.userVoteTime = 0;
+    } else {
+      // Set single vote
+      entityData.userVote = reactionType;
+      entityData.userVoteTime = now;
+    }
 
     localStorage.setItem(TELEMETRY_KEY, JSON.stringify(allData));
   } catch (e) {
-    console.error('Failed to record reaction', e);
+    console.error('Failed to toggle reaction', e);
   }
 }

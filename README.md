@@ -19,6 +19,14 @@ It aggregates live municipal CCTV feeds from Pattaya City Hall and commercial ve
 
 ---
 
+## 🗺️ Map Tiles & API Key FAQ
+
+**Q: Does PattayaCams.com require an API key or paid Google Maps subscription?**  
+**A: NO.** The map engine uses **Leaflet** paired with **CartoDB Dark Matter / OpenStreetMap tiles**, which are **100% free with NO API key, credit card, or billing required**.  
+*(Note: If you see an API key warning when clicking external City Hall links, that is because Pattaya City Hall's third-party government portal has an unconfigured Google Maps key on their own server. PattayaCams itself does not require any API keys).*
+
+---
+
 ## ⚡ Key Features
 
 - **Interactive Dark Map Engine**: Powered by Leaflet and CartoDB Dark Matter tiles with zero client-side fetch waterfall (static direct imports bundled at compile-time).

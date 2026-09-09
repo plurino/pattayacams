@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { X, Car, Hotel, ExternalLink, ShieldCheck, MessageCircle, Send, Star, Compass } from 'lucide-react';
+import { X, Car, Hotel, ExternalLink, MessageCircle, Send, Star, Compass, Wifi, MapPin } from 'lucide-react';
 import HlsPlayer from './common/HlsPlayer';
 import YouTubePlayer from './common/YouTubePlayer';
 import EmojiReactionGroup from './common/EmojiReactionGroup';
@@ -10,6 +10,7 @@ import {
   getUpcomingWeekendDates,
   buildAgodaHotelUrl,
   build12GoTransferUrl,
+  buildAiraloEsimUrl,
   getTelegramCommunityUrl,
 } from '@/src/utils/affiliate';
 
@@ -81,19 +82,84 @@ export default function VideoDrawer({ entity, onClose }) {
               <YouTubePlayer
                 channelId={entity.youtube_channel_id}
                 title={entity.name}
+                handle={entity.youtube_handle || '@PattayaOhBar'}
               />
             )}
           </div>
 
-          {/* Description */}
-          {entity.description && (
-            <p className="text-xs text-slate-300 leading-relaxed bg-surfaceLight/30 p-3 rounded-xl border border-borderDark/60">
-              {entity.description}
-            </p>
-          )}
+          {/* Description & Google Maps Location Link */}
+          <div className="p-3 rounded-xl bg-surfaceLight/30 border border-borderDark/60 space-y-2">
+            {entity.description && (
+              <p className="text-xs text-slate-300 leading-relaxed">
+                {entity.description}
+              </p>
+            )}
+            {entity.google_maps_url && (
+              <a
+                href={entity.google_maps_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-brandCyan hover:underline"
+              >
+                <MapPin className="w-3.5 h-3.5" />
+                <span>View Exact Location on Google Maps</span>
+                <ExternalLink className="w-2.5 h-2.5" />
+              </a>
+            )}
+          </div>
 
-          {/* 1-Click Emoji Telemetry Group */}
+          {/* 1-Click Emoji Telemetry (Strict Single-Vote per video) */}
           <EmojiReactionGroup entitySlug={entity.slug || entity.id} />
+
+          {/* HIGH-REVENUE PROMINENT eSIM CARD */}
+          <div className="p-3.5 rounded-xl bg-gradient-to-r from-amber-500/20 via-surfaceLight to-surfaceLight border border-brandGold/50 flex flex-col gap-2 shadow-lg">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-1.5 text-brandGold text-xs font-bold">
+                <Wifi className="w-4 h-4 text-brandGold" />
+                <span>Instant Thailand 5G Tourist eSIM</span>
+              </div>
+              <span className="text-[11px] font-mono font-bold text-brandGold bg-brandGold/20 px-2 py-0.5 rounded border border-brandGold/40">
+                From $4.50
+              </span>
+            </div>
+            <p className="text-[11px] text-slate-300">
+              Skip airport SIM card counters and high roaming fees. Scan the QR code to connect to Thailand DTAC/AIS 5G the minute your plane lands.
+            </p>
+            <a
+              href={buildAiraloEsimUrl()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-1 flex items-center justify-center gap-1.5 w-full py-2 px-3 rounded-lg bg-gradient-to-r from-amber-500 to-brandGold hover:brightness-110 text-canvas text-xs font-bold transition-all shadow-md"
+            >
+              <span>Get Thailand eSIM via Airalo ($4.50)</span>
+              <ExternalLink className="w-3.5 h-3.5" />
+            </a>
+          </div>
+
+          {/* High-Intent Airport Transfer Card (12Go Private Sedan) */}
+          <div className="p-3.5 rounded-xl bg-gradient-to-r from-blue-950/40 to-surfaceLight border border-brandBlue/40 flex flex-col gap-2 shadow-md">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-1.5 text-brandBlue text-xs font-bold">
+                <Car className="w-4 h-4" />
+                <span>Bangkok Airport ➔ Pattaya Hotel Direct</span>
+              </div>
+              <span className="text-[11px] font-mono font-bold text-brandGreen bg-brandGreen/10 px-2 py-0.5 rounded border border-brandGreen/30">
+                1,200 THB (~$35)
+              </span>
+            </div>
+            <p className="text-[11px] text-slate-300">
+              Private sedan transfer door-to-door from Suvarnabhumi (BKK) or Don Mueang (DMK) directly to your hotel. Fixed rate, zero meter haggling.
+            </p>
+            <a
+              href={build12GoTransferUrl()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-1 flex items-center justify-center gap-1.5 w-full py-2 px-3 rounded-lg bg-brandBlue hover:bg-blue-600 text-white text-xs font-semibold transition-colors shadow-[0_0_12px_rgba(59,130,246,0.3)]"
+            >
+              <span>Book Airport Taxi via 12Go</span>
+              <ExternalLink className="w-3.5 h-3.5" />
+            </a>
+          </div>
 
           {/* B2B VIP Sponsor Box (if sponsored) */}
           {entity.is_sponsored && entity.sponsor_data && (
@@ -136,31 +202,6 @@ export default function VideoDrawer({ entity, onClose }) {
               </div>
             </div>
           )}
-
-          {/* High-Intent Airport Transfer Card (12Go Private Sedan) */}
-          <div className="p-3.5 rounded-xl bg-gradient-to-r from-blue-950/40 to-surfaceLight border border-brandBlue/40 flex flex-col gap-2 shadow-md">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-1.5 text-brandBlue text-xs font-bold">
-                <Car className="w-4 h-4" />
-                <span>Bangkok Airport ➔ Pattaya Direct</span>
-              </div>
-              <span className="text-[11px] font-mono font-bold text-brandGreen bg-brandGreen/10 px-2 py-0.5 rounded border border-brandGreen/30">
-                1,200 THB (~$35)
-              </span>
-            </div>
-            <p className="text-[11px] text-slate-300">
-              Skip taxi queues. Fixed-price private sedan from Suvarnabhumi (BKK) or Don Mueang (DMK) directly to your Pattaya hotel door.
-            </p>
-            <a
-              href={build12GoTransferUrl()}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-1 flex items-center justify-center gap-1.5 w-full py-2 px-3 rounded-lg bg-brandBlue hover:bg-blue-600 text-white text-xs font-semibold transition-colors shadow-[0_0_12px_rgba(59,130,246,0.3)]"
-            >
-              <span>Book Airport Taxi via 12Go</span>
-              <ExternalLink className="w-3.5 h-3.5" />
-            </a>
-          </div>
 
           {/* Contextual Hotel Directory Card (Agoda) */}
           {zoneHotels.length > 0 && (
@@ -213,7 +254,7 @@ export default function VideoDrawer({ entity, onClose }) {
                 <Send className="w-3.5 h-3.5" />
               </div>
               <div className="flex flex-col min-w-0">
-                <span className="text-xs font-semibold text-slate-200">Join Community Discussion</span>
+                <span className="text-xs font-semibold text-slate-200">Community Discussion</span>
                 <span className="text-[10px] text-slate-400 truncate">Official PattayaCams Telegram</span>
               </div>
             </div>

@@ -80,6 +80,12 @@ body {
   color: #FFFFFF !important;
 }
 
+.custom-venue-marker-container,
+.custom-cctv-marker-container {
+  background: transparent !important;
+  border: none !important;
+}
+
 /* Custom Marker Pin Animations */
 @keyframes neon-pulse-pink {
   0% {

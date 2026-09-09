@@ -18,18 +18,14 @@ export default function MapCanvas({ onSelectEntity, onMapInstance }) {
   const [showVenues, setShowVenues] = useState(true);
   const [showCams, setShowCams] = useState(true);
   const [showTransit, setShowTransit] = useState(true);
-  const [isMapLoaded, setIsMapLoaded] = useState(false);
 
   useEffect(() => {
     let isMounted = true;
 
-    // Isolate Leaflet & MarkerCluster strictly within client mount
     async function initLeaflet() {
       if (!mapContainerRef.current || mapRef.current) return;
 
       const L = await import('leaflet');
-      // Ensure markercluster plugin is attached to L
-      // window.L must be defined for leaflet.markercluster if required
       if (typeof window !== 'undefined') {
         window.L = L.default || L;
         try {
@@ -41,7 +37,7 @@ export default function MapCanvas({ onSelectEntity, onMapInstance }) {
 
       const Leaflet = L.default || L;
 
-      // Initialize map instance centered on Central Pattaya
+      // Initialize map centered at Central Pattaya / Soi Buakhao
       const map = Leaflet.map(mapContainerRef.current, {
         center: [12.9345, 100.8825],
         zoom: 14,
@@ -51,25 +47,27 @@ export default function MapCanvas({ onSelectEntity, onMapInstance }) {
         attributionControl: true,
       });
 
-      // Zoom control in top right
       Leaflet.control.zoom({ position: 'topright' }).addTo(map);
 
-      // CartoDB Dark Matter Tile Layer
+      // CartoDB Dark Matter Tile Layer (100% Free, NO API Key needed)
       Leaflet.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
         subdomains: 'abcd',
         maxZoom: 19,
       }).addTo(map);
 
       // 1. Transit Vectors Layer Group
       const transitGroup = Leaflet.geoJSON(busRoutes, {
-        style: (feature) => ({
-          color: feature.properties?.color || '#3B82F6',
-          weight: 4,
-          opacity: 0.9,
-          lineJoin: 'round',
-          dashArray: feature.properties?.route_id === 'beach-second-loop' ? null : '6, 6',
-        }),
+        style: (feature) => {
+          const color = feature.properties?.color || '#3B82F6';
+          return {
+            color: color,
+            weight: 5,
+            opacity: 0.95,
+            lineJoin: 'round',
+            lineCap: 'round',
+          };
+        },
         onEachFeature: (feature, layer) => {
           const p = feature.properties || {};
           const tooltipContent = `
@@ -101,21 +99,25 @@ export default function MapCanvas({ onSelectEntity, onMapInstance }) {
         iconCreateFunction: (cluster) => {
           const count = cluster.getChildCount();
           let sizeClass = 'marker-cluster-small';
-          if (count > 20) sizeClass = 'marker-cluster-medium';
-          if (count > 50) sizeClass = 'marker-cluster-large';
+          if (count > 15) sizeClass = 'marker-cluster-medium';
           return Leaflet.divIcon({
             html: `<div><span>${count}</span></div>`,
             className: `marker-cluster ${sizeClass}`,
-            iconSize: Leaflet.point(36, 36),
+            iconSize: Leaflet.point(34, 34),
           });
         },
       }) : Leaflet.layerGroup();
 
       cctvData.forEach((cam) => {
         const cctvIcon = Leaflet.divIcon({
-          className: 'marker-cctv-cyan',
-          iconSize: [14, 14],
-          iconAnchor: [7, 7],
+          className: 'custom-cctv-marker-container',
+          iconSize: [22, 22],
+          iconAnchor: [11, 11],
+          html: `
+            <div style="width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+              <div style="width: 14px; height: 14px; border-radius: 50%; background-color: #00E5FF; border: 2px solid #0B0F17; box-shadow: 0 0 10px #00E5FF;"></div>
+            </div>
+          `,
         });
 
         const marker = Leaflet.marker([cam.lat, cam.lng], { icon: cctvIcon });
@@ -125,7 +127,7 @@ export default function MapCanvas({ onSelectEntity, onMapInstance }) {
              <strong style="color: #F8FAFC;">${cam.name}</strong>
              <span style="display: block; color: #94A3B8; font-size: 10px;">${cam.name_th}</span>
            </div>`,
-          { className: 'pattaya-dark-tooltip', direction: 'top', offset: [0, -6] }
+          { className: 'pattaya-dark-tooltip', direction: 'top', offset: [0, -8] }
         );
         marker.on('click', () => {
           if (onSelectEntity) {
@@ -136,40 +138,41 @@ export default function MapCanvas({ onSelectEntity, onMapInstance }) {
       });
       cctvCluster.addTo(map);
 
-      // 3. Hero Venues Layer Group (Unclustered)
+      // 3. Hero Venues Layer Group (High-Visibility Unclustered Markers)
       const venueGroup = Leaflet.layerGroup();
 
       venuesData.forEach((venue) => {
         const isSponsor = venue.is_sponsored;
-        const iconClass = isSponsor ? 'marker-venue-gold' : 'marker-venue-pink';
-        const iconSize = isSponsor ? [28, 28] : [24, 24];
-        const iconAnchor = isSponsor ? [14, 14] : [12, 12];
-
         const venueIcon = Leaflet.divIcon({
-          className: iconClass,
-          iconSize,
-          iconAnchor,
-          html: isSponsor
-            ? '<span style="font-size: 12px;">⭐</span>'
-            : '<span style="width: 8px; height: 8px; border-radius: 50%; background: #fff;"></span>',
+          className: 'custom-venue-marker-container',
+          iconSize: [38, 38],
+          iconAnchor: [19, 19],
+          html: `
+            <div style="position: relative; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+              <span style="position: absolute; width: 32px; height: 32px; border-radius: 50%; background: ${isSponsor ? '#EAB308' : '#FF2A6D'}; opacity: 0.6; animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;"></span>
+              <div style="position: relative; width: 32px; height: 32px; border-radius: 50%; background: ${isSponsor ? 'linear-gradient(135deg, #FACC15, #CA8A04)' : 'linear-gradient(135deg, #FF2A6D, #BE185D)'}; border: 2px solid #FFFFFF; box-shadow: 0 0 16px ${isSponsor ? '#EAB308' : '#FF2A6D'}; display: flex; align-items: center; justify-content: center; color: white; font-size: 13px;">
+                ${isSponsor ? '⭐' : '🍸'}
+              </div>
+            </div>
+          `,
         });
 
         const marker = Leaflet.marker([venue.lat, venue.lng], {
           icon: venueIcon,
-          zIndexOffset: isSponsor ? 1000 : 500,
+          zIndexOffset: 1200,
         });
 
         const categoryLabel = venue.category ? venue.category.toUpperCase().replace('_', ' ') : 'VENUE';
         marker.bindTooltip(
           `<div style="font-family: inherit; font-size: 11px;">
-             <div style="display: flex; items-center; gap: 6px; margin-bottom: 2px;">
+             <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 2px;">
                <span style="background: ${isSponsor ? '#EAB308' : '#FF2A6D'}; color: #0B0F17; font-size: 9px; font-weight: 800; padding: 1px 5px; border-radius: 4px;">${categoryLabel}</span>
-               ${isSponsor ? '<span style="color: #EAB308; font-weight: 700; font-size: 10px;">VIP PARTNER</span>' : ''}
+               <span style="color: #EAB308; font-weight: 700; font-size: 10px;">FEATURED LIVE</span>
              </div>
              <strong style="color: #FFFFFF; font-size: 12px;">${venue.name}</strong>
              <div style="color: #94A3B8; font-size: 10px; margin-top: 2px;">Zone: ${venue.zone}</div>
            </div>`,
-          { className: 'pattaya-dark-tooltip', direction: 'top', offset: [0, -10] }
+          { className: 'pattaya-dark-tooltip', direction: 'top', offset: [0, -14] }
         );
 
         marker.on('click', () => {
@@ -181,7 +184,6 @@ export default function MapCanvas({ onSelectEntity, onMapInstance }) {
       });
       venueGroup.addTo(map);
 
-      // Store references
       mapRef.current = map;
       layersRef.current = {
         cctvCluster,
@@ -191,10 +193,6 @@ export default function MapCanvas({ onSelectEntity, onMapInstance }) {
 
       if (onMapInstance) {
         onMapInstance(map);
-      }
-
-      if (isMounted) {
-        setIsMapLoaded(true);
       }
     }
 
@@ -216,13 +214,9 @@ export default function MapCanvas({ onSelectEntity, onMapInstance }) {
     if (!venueGroup) return;
 
     if (showVenues) {
-      if (!mapRef.current.hasLayer(venueGroup)) {
-        mapRef.current.addLayer(venueGroup);
-      }
+      if (!mapRef.current.hasLayer(venueGroup)) mapRef.current.addLayer(venueGroup);
     } else {
-      if (mapRef.current.hasLayer(venueGroup)) {
-        mapRef.current.removeLayer(venueGroup);
-      }
+      if (mapRef.current.hasLayer(venueGroup)) mapRef.current.removeLayer(venueGroup);
     }
   }, [showVenues]);
 
@@ -232,13 +226,9 @@ export default function MapCanvas({ onSelectEntity, onMapInstance }) {
     if (!cctvCluster) return;
 
     if (showCams) {
-      if (!mapRef.current.hasLayer(cctvCluster)) {
-        mapRef.current.addLayer(cctvCluster);
-      }
+      if (!mapRef.current.hasLayer(cctvCluster)) mapRef.current.addLayer(cctvCluster);
     } else {
-      if (mapRef.current.hasLayer(cctvCluster)) {
-        mapRef.current.removeLayer(cctvCluster);
-      }
+      if (mapRef.current.hasLayer(cctvCluster)) mapRef.current.removeLayer(cctvCluster);
     }
   }, [showCams]);
 
@@ -248,22 +238,16 @@ export default function MapCanvas({ onSelectEntity, onMapInstance }) {
     if (!transitGroup) return;
 
     if (showTransit) {
-      if (!mapRef.current.hasLayer(transitGroup)) {
-        mapRef.current.addLayer(transitGroup);
-      }
+      if (!mapRef.current.hasLayer(transitGroup)) mapRef.current.addLayer(transitGroup);
     } else {
-      if (mapRef.current.hasLayer(transitGroup)) {
-        mapRef.current.removeLayer(transitGroup);
-      }
+      if (mapRef.current.hasLayer(transitGroup)) mapRef.current.removeLayer(transitGroup);
     }
   }, [showTransit]);
 
   return (
     <div className="relative w-full h-full overflow-hidden bg-canvas">
-      {/* Map Canvas Leaflet Target */}
       <div ref={mapContainerRef} className="w-full h-full z-0" />
 
-      {/* Floating HUD Layer Controller */}
       <LayerToggleHUD
         showVenues={showVenues}
         setShowVenues={setShowVenues}

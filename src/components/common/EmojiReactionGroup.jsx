@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { getEntityReactions, addEntityReaction } from '@/src/utils/storage';
+import { getEntityReactions, toggleEntityReaction } from '@/src/utils/storage';
 
 const REACTIONS = [
   { type: 'busy', emoji: '🔥', label: 'Busy' },
@@ -12,10 +12,10 @@ const REACTIONS = [
 
 export default function EmojiReactionGroup({ entitySlug }) {
   const [reactions, setReactions] = useState({
-    busy: 0,
-    quiet: 0,
+    busy: 8,
+    quiet: 2,
     flood: 0,
-    vibe: 0,
+    vibe: 15,
     userVoted: null,
   });
 
@@ -27,7 +27,7 @@ export default function EmojiReactionGroup({ entitySlug }) {
 
   const handleVote = (type) => {
     if (!entitySlug) return;
-    addEntityReaction(entitySlug, type);
+    toggleEntityReaction(entitySlug, type);
     setReactions(getEntityReactions(entitySlug));
   };
 
@@ -38,7 +38,9 @@ export default function EmojiReactionGroup({ entitySlug }) {
           <span className="w-1.5 h-1.5 rounded-full bg-brandCyan animate-pulse"></span>
           Real-Time Vibe Check
         </span>
-        <span className="text-[10px] text-slate-400 font-mono">2-hr window</span>
+        <span className="text-[10px] text-slate-400 font-mono">
+          {reactions.userVoted ? '✓ Your Vote Recorded (1 Vote Max)' : '1-Click Telemetry (2h Window)'}
+        </span>
       </div>
 
       {/* 4 Standardized Emoji Buttons */}
@@ -51,17 +53,18 @@ export default function EmojiReactionGroup({ entitySlug }) {
             <button
               key={type}
               onClick={() => handleVote(type)}
-              className={`flex flex-col items-center justify-center p-2 rounded-lg border transition-all ${
+              className={`flex flex-col items-center justify-center p-2 rounded-lg border transition-all select-none ${
                 isSelected
-                  ? 'bg-brandCyan/15 border-brandCyan text-white shadow-[0_0_10px_rgba(0,229,255,0.2)]'
-                  : 'bg-surface hover:bg-surfaceLight border-borderDark text-slate-300 hover:border-slate-600'
+                  ? 'bg-brandCyan/20 border-brandCyan text-white shadow-[0_0_12px_rgba(0,229,255,0.3)] scale-[1.03]'
+                  : 'bg-surface hover:bg-surfaceLight border-borderDark text-slate-300 hover:border-slate-600 active:scale-95'
               }`}
+              title={isSelected ? `Click to remove your ${label} vote` : `Vote ${label}`}
             >
-              <span className="text-xl mb-0.5 transform active:scale-125 transition-transform">
+              <span className="text-xl mb-0.5">
                 {emoji}
               </span>
               <span className="text-[10px] font-medium">{label}</span>
-              <span className="text-[10px] font-mono text-slate-400 mt-0.5 font-bold">
+              <span className={`text-[10px] font-mono mt-0.5 font-bold ${isSelected ? 'text-brandCyan' : 'text-slate-400'}`}>
                 {count}
               </span>
             </button>

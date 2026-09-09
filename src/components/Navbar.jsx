@@ -1,10 +1,10 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Video, Map as MapIcon, Grid, Calendar, ExternalLink, Sparkles, Navigation } from 'lucide-react';
+import { Video, Map as MapIcon, Grid, Calendar, ExternalLink, Wifi, Compass } from 'lucide-react';
 import { QUICK_JUMP_TARGETS } from '@/src/utils/zones';
 import { getSavedTripDate } from '@/src/utils/storage';
-import { getKofiTipUrl } from '@/src/utils/affiliate';
+import { getKofiTipUrl, buildAiraloEsimUrl } from '@/src/utils/affiliate';
 
 export default function Navbar({
   viewMode = 'map',
@@ -16,7 +16,6 @@ export default function Navbar({
   const [tripDays, setTripDays] = useState(null);
   const [activeZone, setActiveZone] = useState('');
 
-  // Read saved trip date from storage
   useEffect(() => {
     function calculateDays() {
       const saved = getSavedTripDate();
@@ -35,7 +34,6 @@ export default function Navbar({
 
     calculateDays();
 
-    // Listen for custom trip update event if triggered
     window.addEventListener('pattayacams_trip_updated', calculateDays);
     return () => window.removeEventListener('pattayacams_trip_updated', calculateDays);
   }, []);
@@ -52,7 +50,7 @@ export default function Navbar({
 
   return (
     <header className="h-14 border-b border-borderDark bg-surface flex items-center justify-between px-3 md:px-5 shrink-0 z-50 select-none shadow-md">
-      {/* Brand Logo & Live Status */}
+      {/* Brand Logo & Tagline */}
       <div className="flex items-center gap-3">
         <a href="/" className="flex items-center gap-2 group">
           <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-brandCyan to-brandBlue flex items-center justify-center shadow-[0_0_12px_rgba(0,229,255,0.4)]">
@@ -62,13 +60,13 @@ export default function Navbar({
             <span className="font-bold text-base tracking-tight text-white group-hover:text-brandCyan transition-colors">
               Pattaya<span className="text-brandCyan">Cams</span>
             </span>
-            <span className="hidden sm:inline-block text-[9px] font-mono text-slate-400 -mt-1 tracking-wider uppercase">
-              Radar & Surveillance
+            <span className="hidden sm:inline-block text-[9px] font-mono text-slate-300 -mt-0.5 tracking-wider uppercase">
+              Live Streams and Cameras
             </span>
           </div>
         </a>
 
-        {/* Live Network Pill */}
+        {/* Live Network Status Pill */}
         <div className="hidden lg:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surfaceLight border border-borderDark text-[11px] font-mono text-slate-300">
           <span className="w-2 h-2 rounded-full bg-brandGreen animate-pulse shadow-[0_0_8px_#10B981]"></span>
           <span className="font-semibold text-brandGreen">600 Cams</span>
@@ -101,8 +99,21 @@ export default function Navbar({
         })}
       </nav>
 
-      {/* Right Controls: Mode Switcher, Trip Countdown, Tip Dev */}
+      {/* Right Controls: High-Income eSIM CTA, Mode Switcher, Trip Countdown */}
       <div className="flex items-center gap-2 sm:gap-3">
+        {/* HIGH-INTENT PROMINENT eSIM PILL */}
+        <a
+          href={buildAiraloEsimUrl()}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-gradient-to-r from-amber-500/20 to-brandGold/20 hover:from-amber-500/30 hover:to-brandGold/30 border border-brandGold/60 text-brandGold text-xs font-bold transition-all shadow-[0_0_10px_rgba(234,179,8,0.2)]"
+          title="Instant 5G Tourist eSIM for Thailand starting at $4.50"
+        >
+          <Wifi className="w-3.5 h-3.5 text-brandGold" />
+          <span>Thailand 5G eSIM ($4.50)</span>
+          <ExternalLink className="w-2.5 h-2.5 text-brandGold/70" />
+        </a>
+
         {/* Mode Switcher: Map vs Grid */}
         <div className="flex items-center bg-canvas/80 p-0.5 rounded-lg border border-borderDark">
           <button
@@ -131,10 +142,11 @@ export default function Navbar({
           </button>
         </div>
 
-        {/* Dynamic Trip Countdown Pill */}
+        {/* Dynamic Trip Countdown / Date Picker Button */}
         <button
           onClick={onOpenTripModal}
-          className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-surfaceLight hover:bg-surfaceLight/80 border border-borderDark text-xs font-mono transition-all text-slate-200 hover:border-brandGreen/40"
+          className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-surfaceLight hover:bg-surfaceLight/80 border border-borderDark text-xs font-mono transition-all text-slate-200 hover:border-brandGreen/50"
+          title="Click to set your departure date & view countdown clock"
         >
           {tripDays !== null ? (
             <>
@@ -144,23 +156,11 @@ export default function Navbar({
             </>
           ) : (
             <>
-              <span className="text-base">✈️</span>
-              <span className="hidden sm:inline text-slate-300">Book Flight to</span>
-              <span className="text-brandCyan font-semibold">BKK</span>
+              <Calendar className="w-3.5 h-3.5 text-brandGreen" />
+              <span className="font-semibold text-slate-200">Set Trip Date & Countdown</span>
             </>
           )}
         </button>
-
-        {/* Tip Dev CTA */}
-        <a
-          href={getKofiTipUrl()}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hidden xl:flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-brandAmber/10 hover:bg-brandAmber/20 border border-brandAmber/40 text-brandAmber text-xs font-medium transition-colors"
-        >
-          <span>🍺</span>
-          <span>Tip Dev</span>
-        </a>
       </div>
     </header>
   );

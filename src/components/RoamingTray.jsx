@@ -1,32 +1,32 @@
 'use client';
 
 import React from 'react';
-import { Radio, Star, Play, ChevronRight } from 'lucide-react';
+import { Youtube, Star, ExternalLink, Play } from 'lucide-react';
 import streamersData from '@/public/data/roaming_streamers.json';
 
 export default function RoamingTray({ onSelectStreamer, onOpenSponsorModal }) {
   return (
-    <aside aria-label="Live Roaming Creators and Venue Sponsorship" className="h-16 border-t border-borderDark bg-surface flex items-center justify-between px-3 md:px-5 shrink-0 z-40 select-none shadow-lg">
-      {/* Live IRL Walkers Stream Carousel */}
+    <aside aria-label="IRL Walking Channels and Venue Sponsorship" className="h-16 border-t border-borderDark bg-surface flex items-center justify-between px-3 md:px-5 shrink-0 z-40 select-none shadow-lg">
+      {/* Real YouTube IRL Creators Carousel */}
       <div className="flex items-center gap-3 overflow-x-auto py-1 scrollbar-none flex-1 mr-3">
         <div className="flex items-center gap-1.5 shrink-0 pr-2 border-r border-borderDark">
-          <span className="w-2 h-2 rounded-full bg-brandPink animate-ping"></span>
-          <span className="text-[11px] font-bold font-mono text-brandPink uppercase tracking-wider hidden sm:inline">
-            IRL Walkers:
+          <Youtube className="w-4 h-4 text-red-500" />
+          <span className="text-[11px] font-bold font-mono text-slate-300 uppercase tracking-wider hidden sm:inline">
+            IRL Walking Channels:
           </span>
         </div>
 
-        {/* Creator Pills */}
+        {/* Creator Channel Pills */}
         <div className="flex items-center gap-2">
           {streamersData.map((streamer) => (
             <div
               key={streamer.id}
-              className="flex items-center gap-2 p-1 pl-1.5 pr-2.5 rounded-full bg-surfaceLight/60 hover:bg-surfaceLight border border-borderDark hover:border-brandPink/50 transition-all shrink-0"
+              className="flex items-center gap-2 p-1 pl-1.5 pr-2.5 rounded-full bg-surfaceLight/60 hover:bg-surfaceLight border border-borderDark hover:border-slate-500 transition-all shrink-0"
             >
               <img
                 src={streamer.avatar_url}
                 alt={streamer.name}
-                className="w-7 h-7 rounded-full object-cover border border-brandPink/40 shrink-0"
+                className="w-7 h-7 rounded-full object-cover border border-slate-600 shrink-0"
                 onError={(e) => {
                   e.target.src = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&fit=crop&q=60';
                 }}
@@ -36,17 +36,26 @@ export default function RoamingTray({ onSelectStreamer, onOpenSponsorModal }) {
                   <span className="text-xs font-bold text-white truncate max-w-[120px]">
                     {streamer.name}
                   </span>
-                  <span className="w-1.5 h-1.5 rounded-full bg-brandGreen"></span>
+                  <span className="text-[9px] font-mono text-slate-400 bg-surface px-1 rounded">
+                    {streamer.youtube_handle}
+                  </span>
                 </div>
                 <span className="text-[9px] font-mono text-slate-400 truncate max-w-[140px]">
                   {streamer.current_route}
                 </span>
               </div>
               <button
-                onClick={() => onSelectStreamer({ ...streamer, type: 'streamer' })}
-                className="ml-1 px-2 py-0.5 rounded-full bg-brandPink hover:bg-pink-600 text-white text-[10px] font-bold uppercase transition-colors flex items-center gap-0.5 shadow-sm"
+                onClick={() => onSelectStreamer({
+                  slug: streamer.id.toLowerCase(),
+                  name: streamer.name,
+                  youtube_channel_id: streamer.youtube_channel_id,
+                  youtube_handle: streamer.youtube_handle,
+                  description: `Popular YouTube IRL walking creator ${streamer.name} (${streamer.youtube_handle}) capturing 4K pedestrian street walks around Pattaya, Thailand.`,
+                  type: 'streamer'
+                })}
+                className="ml-1 px-2 py-0.5 rounded-full bg-red-600 hover:bg-red-500 text-white text-[10px] font-bold uppercase transition-colors flex items-center gap-0.5 shadow-sm"
               >
-                <span>Watch</span>
+                <span>Channel</span>
                 <Play className="w-2.5 h-2.5 fill-white" />
               </button>
             </div>
