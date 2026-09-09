@@ -12,6 +12,7 @@ import {
   build12GoTransferUrl,
   getTelegramCommunityUrl,
 } from '@/src/utils/affiliate';
+import { FEATURES } from '@/src/config/features';
 
 export async function generateStaticParams() {
   return venuesData.map((venue) => ({
@@ -173,37 +174,39 @@ export default function VenuePage({ params }) {
         {/* 1-Click Emoji Telemetry */}
         <EmojiReactionGroup entitySlug={venue.slug} />
 
-        {/* High-Intent 12Go Airport Transfer Card */}
-        <div className="p-4 rounded-xl bg-gradient-to-r from-blue-950/50 to-surface border border-brandBlue/40 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-brandBlue/20 text-brandBlue flex items-center justify-center shrink-0">
-              <Car className="w-5 h-5" />
-            </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="text-sm font-bold text-white">Bangkok Airport ➔ Pattaya Direct</span>
-                <span className="text-xs font-mono font-bold text-brandGreen bg-brandGreen/10 px-2 py-0.5 rounded border border-brandGreen/30">
-                  1,200 THB (~$35)
-                </span>
+        {/* High-Intent 12Go Airport Transfer Card (Conditional on FEATURES.SHOW_AFFILIATE_ADS) */}
+        {FEATURES.SHOW_AFFILIATE_ADS && (
+          <div className="p-4 rounded-xl bg-gradient-to-r from-blue-950/50 to-surface border border-brandBlue/40 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-brandBlue/20 text-brandBlue flex items-center justify-center shrink-0">
+                <Car className="w-5 h-5" />
               </div>
-              <p className="text-xs text-slate-400 mt-0.5">
-                Door-to-door private sedan transfer from Suvarnabhumi (BKK) or Don Mueang (DMK).
-              </p>
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-bold text-white">Bangkok Airport ➔ Pattaya Direct</span>
+                  <span className="text-xs font-mono font-bold text-brandGreen bg-brandGreen/10 px-2 py-0.5 rounded border border-brandGreen/30">
+                    1,200 THB (~$35)
+                  </span>
+                </div>
+                <p className="text-xs text-slate-400 mt-0.5">
+                  Door-to-door private sedan transfer from Suvarnabhumi (BKK) or Don Mueang (DMK).
+                </p>
+              </div>
             </div>
+            <a
+              href={build12GoTransferUrl()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="shrink-0 flex items-center gap-1.5 px-4 py-2 rounded-lg bg-brandBlue hover:bg-blue-600 text-white text-xs font-semibold shadow-md transition-colors"
+            >
+              <span>Book Taxi via 12Go</span>
+              <ExternalLink className="w-3.5 h-3.5" />
+            </a>
           </div>
-          <a
-            href={build12GoTransferUrl()}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="shrink-0 flex items-center gap-1.5 px-4 py-2 rounded-lg bg-brandBlue hover:bg-blue-600 text-white text-xs font-semibold shadow-md transition-colors"
-          >
-            <span>Book Taxi via 12Go</span>
-            <ExternalLink className="w-3.5 h-3.5" />
-          </a>
-        </div>
+        )}
 
-        {/* Curated Nearby Hotels */}
-        {zoneHotels.length > 0 && (
+        {/* Curated Nearby Hotels (Conditional on FEATURES.SHOW_AFFILIATE_ADS) */}
+        {FEATURES.SHOW_AFFILIATE_ADS && zoneHotels.length > 0 && (
           <div className="p-4 rounded-xl bg-surface border border-borderDark space-y-3">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">

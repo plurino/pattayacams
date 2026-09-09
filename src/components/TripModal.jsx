@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { X, Calendar, Plane, Car, Wifi, Trash2, ExternalLink } from 'lucide-react';
 import { getSavedTripDate, saveTripDate, clearTripDate } from '@/src/utils/storage';
 import { buildFlightSearchUrl, build12GoTransferUrl, buildAiraloEsimUrl } from '@/src/utils/affiliate';
+import { FEATURES } from '@/src/config/features';
 
 export default function TripModal({ isOpen, onClose }) {
   const [dateInput, setDateInput] = useState('');
@@ -135,78 +136,80 @@ export default function TripModal({ isOpen, onClose }) {
           )}
         </form>
 
-        {/* High-Intent Conversion Cards */}
-        <div className="space-y-2.5">
-          <span className="text-[11px] font-mono uppercase tracking-wider text-slate-400 font-bold block">
-            Essential Traveler Toolkit:
-          </span>
+        {/* High-Intent Conversion Cards (Conditional on FEATURES.SHOW_AFFILIATE_ADS) */}
+        {FEATURES.SHOW_AFFILIATE_ADS && (
+          <div className="space-y-2.5">
+            <span className="text-[11px] font-mono uppercase tracking-wider text-slate-400 font-bold block">
+              Essential Traveler Toolkit:
+            </span>
 
-          {/* 1. Aviasales Flights */}
-          <div className="p-3 rounded-xl bg-surfaceLight/40 border border-borderDark flex items-center justify-between gap-3 hover:border-slate-500 transition-colors">
-            <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center shrink-0">
-                <Plane className="w-5 h-5" />
+            {/* 1. Aviasales Flights */}
+            <div className="p-3 rounded-xl bg-surfaceLight/40 border border-borderDark flex items-center justify-between gap-3 hover:border-slate-500 transition-colors">
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center shrink-0">
+                  <Plane className="w-5 h-5" />
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-xs font-semibold text-white">Find Flights to Bangkok (BKK)</span>
+                  <span className="text-[10px] text-slate-400">Compare lowest international airfares to Thailand</span>
+                </div>
               </div>
-              <div className="flex flex-col">
-                <span className="text-xs font-semibold text-white">Find Flights to Bangkok (BKK)</span>
-                <span className="text-[10px] text-slate-400">Compare lowest international airfares to Thailand</span>
-              </div>
+              <a
+                href={buildFlightSearchUrl('', savedDate || '')}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="shrink-0 flex items-center gap-1 px-3 py-1.5 rounded-lg bg-brandBlue hover:bg-blue-600 text-white text-xs font-semibold transition-colors shadow-sm"
+              >
+                <span>Search</span>
+                <ExternalLink className="w-3 h-3" />
+              </a>
             </div>
-            <a
-              href={buildFlightSearchUrl('', savedDate || '')}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="shrink-0 flex items-center gap-1 px-3 py-1.5 rounded-lg bg-brandBlue hover:bg-blue-600 text-white text-xs font-semibold transition-colors shadow-sm"
-            >
-              <span>Search</span>
-              <ExternalLink className="w-3 h-3" />
-            </a>
-          </div>
 
-          {/* 2. 12Go Airport Taxi */}
-          <div className="p-3 rounded-xl bg-surfaceLight/40 border border-borderDark flex items-center justify-between gap-3 hover:border-slate-500 transition-colors">
-            <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-lg bg-brandGreen/20 text-brandGreen flex items-center justify-center shrink-0">
-                <Car className="w-5 h-5" />
+            {/* 2. 12Go Airport Taxi */}
+            <div className="p-3 rounded-xl bg-surfaceLight/40 border border-borderDark flex items-center justify-between gap-3 hover:border-slate-500 transition-colors">
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 rounded-lg bg-brandGreen/20 text-brandGreen flex items-center justify-center shrink-0">
+                  <Car className="w-5 h-5" />
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-xs font-semibold text-white">Private Airport Taxi (1,200 THB)</span>
+                  <span className="text-[10px] text-slate-400">Fixed rate private sedan door-to-door from BKK/DMK</span>
+                </div>
               </div>
-              <div className="flex flex-col">
-                <span className="text-xs font-semibold text-white">Private Airport Taxi (1,200 THB)</span>
-                <span className="text-[10px] text-slate-400">Fixed rate private sedan door-to-door from BKK/DMK</span>
-              </div>
+              <a
+                href={build12GoTransferUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="shrink-0 flex items-center gap-1 px-3 py-1.5 rounded-lg bg-brandGreen hover:bg-emerald-600 text-canvas text-xs font-bold transition-colors shadow-sm"
+              >
+                <span>Book Taxi</span>
+                <ExternalLink className="w-3 h-3" />
+              </a>
             </div>
-            <a
-              href={build12GoTransferUrl()}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="shrink-0 flex items-center gap-1 px-3 py-1.5 rounded-lg bg-brandGreen hover:bg-emerald-600 text-canvas text-xs font-bold transition-colors shadow-sm"
-            >
-              <span>Book Taxi</span>
-              <ExternalLink className="w-3 h-3" />
-            </a>
-          </div>
 
-          {/* 3. Airalo eSIM */}
-          <div className="p-3 rounded-xl bg-surfaceLight/40 border border-borderDark flex items-center justify-between gap-3 hover:border-slate-500 transition-colors">
-            <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-lg bg-brandAmber/20 text-brandAmber flex items-center justify-center shrink-0">
-                <Wifi className="w-5 h-5" />
+            {/* 3. Airalo eSIM */}
+            <div className="p-3 rounded-xl bg-surfaceLight/40 border border-borderDark flex items-center justify-between gap-3 hover:border-slate-500 transition-colors">
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 rounded-lg bg-brandAmber/20 text-brandAmber flex items-center justify-center shrink-0">
+                  <Wifi className="w-5 h-5" />
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-xs font-semibold text-white">Airalo 5G Thailand eSIM</span>
+                  <span className="text-[10px] text-slate-400">Instant unlimited data setup before boarding</span>
+                </div>
               </div>
-              <div className="flex flex-col">
-                <span className="text-xs font-semibold text-white">Airalo 5G Thailand eSIM</span>
-                <span className="text-[10px] text-slate-400">Instant unlimited data setup before boarding</span>
-              </div>
+              <a
+                href={buildAiraloEsimUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="shrink-0 flex items-center gap-1 px-3 py-1.5 rounded-lg bg-brandAmber hover:bg-amber-500 text-canvas text-xs font-bold transition-colors shadow-sm"
+              >
+                <span>Get eSIM</span>
+                <ExternalLink className="w-3 h-3" />
+              </a>
             </div>
-            <a
-              href={buildAiraloEsimUrl()}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="shrink-0 flex items-center gap-1 px-3 py-1.5 rounded-lg bg-brandAmber hover:bg-amber-500 text-canvas text-xs font-bold transition-colors shadow-sm"
-            >
-              <span>Get eSIM</span>
-              <ExternalLink className="w-3 h-3" />
-            </a>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
