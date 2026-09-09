@@ -1,0 +1,261 @@
+{
+  "last_check": "2026-09-09T18:13:43.966Z",
+  "entities": {
+    "venue-pattaya-oh-bar": {
+      "is_live": true,
+      "video_id": "k8zVyL8mk74",
+      "last_live_at": "2026-09-09T18:13:43.966Z",
+      "status": "active",
+      "name": "Pattaya Oh Bar",
+      "handle": "@PattayaOhBar"
+    },
+    "venue-kares-partybar-ismannen": {
+      "is_live": true,
+      "video_id": "GQnjaPRYHsU",
+      "last_live_at": "2026-09-09T18:13:43.966Z",
+      "status": "active",
+      "name": "Kåres Party Bar & Guesthouse (Ismannen)",
+      "handle": "@ismannen"
+    },
+    "venue-i-rovers-sports-bar": {
+      "is_live": false,
+      "video_id": null,
+      "last_live_at": null,
+      "status": "error_404",
+      "name": "i-Rovers Sports Bar & Restaurant",
+      "handle": "@iroverssportsbarpattaya"
+    },
+    "venue-fat-coco-beach-club": {
+      "is_live": false,
+      "video_id": null,
+      "last_live_at": null,
+      "status": "error_404",
+      "name": "Fat Coco Seafood Club & Beach Bar",
+      "handle": "@FatCocoPattaya"
+    },
+    "venue-green-stop-cannabis": {
+      "is_live": true,
+      "video_id": "MQamtIyvLvw",
+      "last_live_at": "2026-09-09T18:13:43.966Z",
+      "status": "active",
+      "name": "Green Stop Dispensary & Bar",
+      "handle": "@amazingtravellive213"
+    },
+    "venue-smoky-bar-lounge": {
+      "is_live": false,
+      "video_id": null,
+      "last_live_at": null,
+      "status": "active",
+      "name": "Smoky Bar & Cannabis Lounge",
+      "handle": "@smokybar"
+    },
+    "venue-siris-beach-cafe": {
+      "is_live": false,
+      "video_id": null,
+      "last_live_at": null,
+      "status": "error_404",
+      "name": "Siri’s Beach Café, Wine Bar & Rooftop",
+      "handle": "@SirisBeachCafe"
+    },
+    "venue-ud-restaurant-shokudo": {
+      "is_live": false,
+      "video_id": null,
+      "last_live_at": null,
+      "status": "active",
+      "name": "UD Restaurant (Umaroi Shokudo)",
+      "handle": "@udthailand6560"
+    },
+    "venue-nine-star-restaurant-bar": {
+      "is_live": true,
+      "video_id": "mgTChsJzH3Q",
+      "last_live_at": "2026-09-09T18:13:43.966Z",
+      "status": "active",
+      "name": "Nine Star Restaurant & Bar",
+      "handle": "@SUGARBxPATTAYA"
+    },
+    "venue-x-club-pattaya": {
+      "is_live": true,
+      "video_id": "Tm5QYXH_4RA",
+      "last_live_at": "2026-09-09T18:13:43.966Z",
+      "status": "active",
+      "name": "X Club Pattaya",
+      "handle": "@XClubPattayaSoiChaiapoon"
+    },
+    "venue-the-wet-spot": {
+      "is_live": false,
+      "video_id": null,
+      "last_live_at": null,
+      "status": "error_404",
+      "name": "The Wet Spot Lounge",
+      "handle": "@PattayaNightlifeLive"
+    },
+    "venue-las-vegas-beer-garden": {
+      "is_live": true,
+      "video_id": "AH2BqtRKa40",
+      "last_live_at": "2026-09-09T18:13:43.966Z",
+      "status": "active",
+      "name": "Las Vegas Beer Garden",
+      "handle": "@LasVegasBeerGarden-PKBar"
+    },
+    "venue-gold-bar-soi-6": {
+      "is_live": true,
+      "video_id": "IrZRKZyyg3Q",
+      "last_live_at": "2026-09-09T18:13:43.966Z",
+      "status": "active",
+      "name": "Gold Bar Soi 6",
+      "handle": "@GoldBarSoi6"
+    },
+    "venue-s3xy-bar-pattaya": {
+      "is_live": true,
+      "video_id": "DMsLKTEaSic",
+      "last_live_at": "2026-09-09T18:13:43.966Z",
+      "status": "active",
+      "name": "S3XY Bar Pattaya",
+      "handle": "@s3xybarpattayalivestream333"
+    },
+    "venue-mafia-bar-pattaya": {
+      "is_live": true,
+      "video_id": "FjjCFJtmmGg",
+      "last_live_at": "2026-09-09T18:13:43.966Z",
+      "status": "active",
+      "name": "Mafia Bar (The Godfather)",
+      "handle": "@MafiaBarPattaya"
+    },
+    "venue-oasis-cocktail-lounge": {
+      "is_live": false,
+      "video_id": null,
+      "last_live_at": null,
+      "status": "error_404",
+      "name": "Oasis Cocktail Lounge",
+      "handle": "@oasis-cocktail-lounge"
+    },
+    "venue-luckynana-bar": {
+      "is_live": true,
+      "video_id": "aa9xW5OYAes",
+      "last_live_at": "2026-09-09T18:13:43.966Z",
+      "status": "active",
+      "name": "LuckyNaNa Bar Pattaya",
+      "handle": "@luckynanabarpattayalivestr2350"
+    },
+    "venue-rum-runner-bar": {
+      "is_live": true,
+      "video_id": "1odI_sRCq1Q",
+      "last_live_at": "2026-09-09T18:13:43.966Z",
+      "status": "active",
+      "name": "Rum Runner Bar (Mr Egg)",
+      "handle": "@mreggthailand"
+    },
+    "venue-miso-bar-pattaya": {
+      "is_live": true,
+      "video_id": "80ZyImIC32k",
+      "last_live_at": "2026-09-09T18:13:43.966Z",
+      "status": "active",
+      "name": "Miso Bar Pattaya",
+      "handle": "@MisoBarPattaya"
+    },
+    "streamer-RS-001": {
+      "is_live": false,
+      "video_id": null,
+      "last_live_at": null,
+      "status": "active",
+      "name": "Pattaya 4K Walker",
+      "handle": "@Pattaya4KWalker"
+    },
+    "streamer-RS-002": {
+      "is_live": false,
+      "video_id": null,
+      "last_live_at": null,
+      "status": "active",
+      "name": "Walk East",
+      "handle": "@WalkEast"
+    },
+    "streamer-RS-003": {
+      "is_live": false,
+      "video_id": null,
+      "last_live_at": null,
+      "status": "active",
+      "name": "Live Love Thailand",
+      "handle": "@LiveLoveThailand"
+    },
+    "streamer-RS-004": {
+      "is_live": false,
+      "video_id": null,
+      "last_live_at": null,
+      "status": "active",
+      "name": "Everything Pattaya",
+      "handle": "@EverythingPattaya"
+    },
+    "streamer-RS-005": {
+      "is_live": false,
+      "video_id": null,
+      "last_live_at": null,
+      "status": "active",
+      "name": "David Strachan Pattaya",
+      "handle": "@DSPattaya"
+    },
+    "streamer-RS-006": {
+      "is_live": false,
+      "video_id": null,
+      "last_live_at": null,
+      "status": "active",
+      "name": "NDtvi Thailand",
+      "handle": "@NDTViThailand"
+    },
+    "streamer-RS-007": {
+      "is_live": false,
+      "video_id": null,
+      "last_live_at": null,
+      "status": "active",
+      "name": "Buzzin Pattaya",
+      "handle": "@Buzzinpattaya"
+    },
+    "streamer-RS-008": {
+      "is_live": false,
+      "video_id": null,
+      "last_live_at": null,
+      "status": "active",
+      "name": "4K Pimmy",
+      "handle": "@4kpimmy"
+    },
+    "streamer-RS-009": {
+      "is_live": false,
+      "video_id": null,
+      "last_live_at": null,
+      "status": "active",
+      "name": "SLYMAN TRAVELS",
+      "handle": "@slyman6666"
+    },
+    "streamer-RS-010": {
+      "is_live": true,
+      "video_id": "0bGNCCBXAKI",
+      "last_live_at": "2026-09-09T18:13:43.966Z",
+      "status": "active",
+      "name": "Pattaya Beach Live",
+      "handle": "@williamgilday"
+    },
+    "streamer-RS-011": {
+      "is_live": false,
+      "video_id": null,
+      "last_live_at": null,
+      "status": "active",
+      "name": "JWINTHAI",
+      "handle": "@jwinthai"
+    },
+    "streamer-RS-012": {
+      "is_live": false,
+      "video_id": null,
+      "last_live_at": null,
+      "status": "active",
+      "name": "Global Street Walk",
+      "handle": "@GlobalStreetWalk"
+    },
+    "streamer-RS-013": {
+      "is_live": false,
+      "video_id": null,
+      "last_live_at": null,
+      "status": "error_404",
+      "name": "Vespa Life Thailand",
+      "handle": "@VespaLifeThailand"
+    }
+  }
+}
