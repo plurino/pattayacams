@@ -4,6 +4,7 @@ import React, { useState, useRef, useCallback } from 'react';
 import Navbar from '@/src/components/Navbar';
 import MapCanvasWrapper from '@/src/components/MapCanvasWrapper';
 import MultiCamGrid from '@/src/components/MultiCamGrid';
+import CreatorVODFeed from '@/src/components/CreatorVODFeed';
 import VideoDrawer from '@/src/components/VideoDrawer';
 import RoamingTray from '@/src/components/RoamingTray';
 import TripModal from '@/src/components/TripModal';
@@ -94,21 +95,27 @@ export default function AppRoot() {
 
       {/* 2. Main Content Canvas */}
       <main className="flex-1 relative overflow-hidden">
-        {viewMode === 'map' ? (
+        {viewMode === 'map' && (
           <MapCanvasWrapper
             onSelectEntity={handleSelectEntity}
             onMapInstance={handleMapInstance}
           />
-        ) : (
+        )}
+        {viewMode === 'grid' && (
           <MultiCamGrid onSelectEntity={handleSelectEntity} />
+        )}
+        {viewMode === 'pulse' && (
+          <CreatorVODFeed />
         )}
       </main>
 
-      {/* 3. Bottom Roaming Streamers Tray */}
-      <RoamingTray
-        onSelectStreamer={handleSelectEntity}
-        onOpenSponsorModal={() => setIsSponsorModalOpen(true)}
-      />
+      {/* 3. Bottom Roaming Streamers Tray (shown on map and grid views) */}
+      {viewMode !== 'pulse' && (
+        <RoamingTray
+          onSelectStreamer={handleSelectEntity}
+          onOpenSponsorModal={() => setIsSponsorModalOpen(true)}
+        />
+      )}
 
       {/* 4. Slide-Over Video Drawer */}
       <VideoDrawer

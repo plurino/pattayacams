@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Video, Map as MapIcon, Grid, Calendar, ExternalLink, Wifi, Compass } from 'lucide-react';
+import { Video, Map as MapIcon, Grid, Calendar, ExternalLink, Wifi, Compass, Film, Users } from 'lucide-react';
 import { QUICK_JUMP_TARGETS } from '@/src/utils/zones';
 import { getSavedTripDate } from '@/src/utils/storage';
 import { getKofiTipUrl, buildAiraloEsimUrl } from '@/src/utils/affiliate';
@@ -131,7 +131,7 @@ export default function Navbar({
           </a>
         )}
 
-        {/* Mode Switcher: Map vs Grid */}
+        {/* Mode Switcher: Map vs Grid vs Pulse */}
         <div className="flex items-center bg-canvas/80 p-0.5 rounded-lg border border-borderDark">
           <button
             onClick={() => setViewMode('map')}
@@ -156,6 +156,19 @@ export default function Navbar({
           >
             <Grid className="w-3.5 h-3.5" />
             <span className="hidden sm:inline">Grid</span>
+          </button>
+          <button
+            onClick={() => setViewMode('pulse')}
+            className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium transition-all ${
+              viewMode === 'pulse'
+                ? 'bg-brandPink text-white font-bold shadow-[0_0_10px_rgba(255,42,109,0.4)]'
+                : 'text-slate-400 hover:text-slate-200'
+            }`}
+            title="Pattaya Pulse: Recent 4K VODs & Episodes"
+          >
+            <Film className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline font-mono">Pattaya Pulse</span>
+            <span className="sm:hidden font-mono">Pulse</span>
           </button>
         </div>
 
