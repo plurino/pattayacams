@@ -22,6 +22,7 @@ import {
 } from 'lucide-react';
 import HlsPlayer from './common/HlsPlayer';
 import YouTubePlayer from './common/YouTubePlayer';
+import KickPlayer from './common/KickPlayer';
 import EmojiReactionGroup from './common/EmojiReactionGroup';
 import hotelsData from '@/public/data/hotels.json';
 import { FEATURES } from '@/src/config/features';
@@ -77,6 +78,14 @@ export default function VideoDrawer({ entity, onClose }) {
   // Render video stage or offline standby card
   const renderVideoStage = () => {
     if (isVenueOffline) {
+      const isKick = entity.platform === 'kick';
+      const kickSlug = (entity.channel_id || entity.slug || entity.handle || '').replace(/^@/, '');
+      const channelUrl = isKick
+        ? `https://kick.com/${kickSlug}`
+        : (entity.youtube_handle
+            ? `https://www.youtube.com/${entity.youtube_handle.startsWith('@') ? entity.youtube_handle : '@' + entity.youtube_handle}`
+            : `https://www.youtube.com/channel/${entity.youtube_channel_id}`);
+
       return (
         <div className="w-full aspect-video bg-surfaceLight/70 border border-borderDark rounded-xl p-6 flex flex-col items-center justify-center text-center gap-3 shadow-lg">
           <div className="w-12 h-12 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-400 shadow-inner">
@@ -92,16 +101,31 @@ export default function VideoDrawer({ entity, onClose }) {
             </p>
           </div>
           <a
-            href={entity.youtube_handle ? `https://www.youtube.com/${entity.youtube_handle.startsWith('@') ? entity.youtube_handle : '@' + entity.youtube_handle}` : `https://www.youtube.com/channel/${entity.youtube_channel_id}`}
+            href={channelUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-1 flex items-center gap-1.5 px-4 py-2 rounded-lg bg-red-600 hover:bg-red-500 text-white text-xs font-bold transition-all shadow-md"
+            className={`mt-1 flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold transition-all shadow-md ${
+              isKick
+                ? 'bg-[#53FC18] hover:bg-[#46d614] text-black'
+                : 'bg-red-600 hover:bg-red-500 text-white'
+            }`}
           >
-            <Bell className="w-3.5 h-3.5" />
-            <span>Open YouTube Channel</span>
+            {isKick ? <Radio className="w-3.5 h-3.5" /> : <Bell className="w-3.5 h-3.5" />}
+            <span>{isKick ? 'Open Kick Channel' : 'Open YouTube Channel'}</span>
             <ExternalLink className="w-3 h-3" />
           </a>
         </div>
+      );
+    }
+
+    if (entity.platform === 'kick') {
+      return (
+        <KickPlayer
+          channelSlug={entity.channel_id || entity.slug || entity.handle}
+          title={entity.name}
+          isLive={entity.is_live ?? true}
+          badgeText="KICK LIVE STREAM"
+        />
       );
     }
 
@@ -129,27 +153,53 @@ export default function VideoDrawer({ entity, onClose }) {
     <>
       {/* Creator Context Card (for Streamers) */}
       {isStreamer && (
-        <div className="p-3 rounded-xl bg-indigo-950/30 border border-indigo-500/30 flex flex-col gap-2 shadow-md">
+        <div className={`p-3 rounded-xl border flex flex-col gap-2 shadow-md ${
+          entity.platform === 'kick'
+            ? 'bg-emerald-950/20 border-emerald-500/30'
+            : 'bg-indigo-950/30 border-indigo-500/30'
+        }`}>
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-1.5 text-indigo-300 text-xs font-bold font-mono">
-              <Youtube className="w-4 h-4 text-red-500" />
-              <span>Recorded 4K Street Walk Episodes</span>
+            <div className={`flex items-center gap-1.5 text-xs font-bold font-mono ${
+              entity.platform === 'kick' ? 'text-emerald-300' : 'text-indigo-300'
+            }`}>
+              {entity.platform === 'kick' ? (
+                <Radio className="w-4 h-4 text-emerald-400" />
+              ) : (
+                <Youtube className="w-4 h-4 text-red-500" />
+              )}
+              <span>{entity.platform === 'kick' ? 'Kick Live Broadcast Feed' : 'Recorded 4K Street Walk Episodes'}</span>
             </div>
-            <span className="text-[9px] font-mono text-indigo-300 bg-indigo-900/40 px-2 py-0.5 rounded border border-indigo-500/30">
-              VOD Showcase
+            <span className={`text-[9px] font-mono px-2 py-0.5 rounded border ${
+              entity.platform === 'kick'
+                ? 'text-emerald-300 bg-emerald-900/40 border-emerald-500/30'
+                : 'text-indigo-300 bg-indigo-900/40 border-indigo-500/30'
+            }`}>
+              {entity.platform === 'kick' ? 'Kick Channel' : 'VOD Showcase'}
             </span>
           </div>
           <p className="text-[11px] text-slate-300 leading-relaxed">
-            This channel features ultra-high-definition 4K pedestrian walking tours and street guides around Pattaya. When the creator is not actively streaming live, this player showcases their latest 4K episodes and route walks.
+            {entity.platform === 'kick'
+              ? 'This creator broadcasts real-time mobile IRL street walks and live community exploration on Kick. Watch live interactions, crowd walks, and nighttime venues directly in high definition.'
+              : 'This channel features ultra-high-definition 4K pedestrian walking tours and street guides around Pattaya. When the creator is not actively streaming live, this player showcases their latest 4K episodes and route walks.'}
           </p>
           <a
-            href={entity.youtube_handle ? `https://www.youtube.com/${entity.youtube_handle.startsWith('@') ? entity.youtube_handle : '@' + entity.youtube_handle}` : `https://www.youtube.com/channel/${entity.youtube_channel_id}`}
+            href={
+              entity.platform === 'kick'
+                ? `https://kick.com/${(entity.channel_id || entity.slug || entity.handle || '').replace(/^@/, '')}`
+                : (entity.youtube_handle
+                    ? `https://www.youtube.com/${entity.youtube_handle.startsWith('@') ? entity.youtube_handle : '@' + entity.youtube_handle}`
+                    : `https://www.youtube.com/channel/${entity.youtube_channel_id}`)
+            }
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-1 flex items-center justify-center gap-1.5 w-full py-2 px-3 rounded-lg bg-red-600 hover:bg-red-500 text-white text-xs font-semibold transition-colors shadow-sm"
+            className={`mt-1 flex items-center justify-center gap-1.5 w-full py-2 px-3 rounded-lg text-xs font-semibold transition-colors shadow-sm ${
+              entity.platform === 'kick'
+                ? 'bg-[#53FC18] hover:bg-[#46d614] text-black font-bold'
+                : 'bg-red-600 hover:bg-red-500 text-white'
+            }`}
           >
-            <Youtube className="w-3.5 h-3.5" />
-            <span>Visit ${entity.name} on YouTube</span>
+            {entity.platform === 'kick' ? <Radio className="w-3.5 h-3.5" /> : <Youtube className="w-3.5 h-3.5" />}
+            <span>Visit {entity.name} on {entity.platform === 'kick' ? 'Kick' : 'YouTube'}</span>
             <ExternalLink className="w-3 h-3" />
           </a>
         </div>
