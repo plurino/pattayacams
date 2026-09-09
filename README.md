@@ -29,19 +29,22 @@ It aggregates live municipal CCTV feeds from Pattaya City Hall and commercial ve
 
 ## ⚡ Key Features
 
-- **Interactive Dark Map Engine**: Powered by Leaflet and CartoDB Dark Matter tiles with zero client-side fetch waterfall (static direct imports bundled at compile-time).
-- **Municipal CCTV Network**: Clustered cyan camera nodes (`#00E5FF`) with Thai/English street names, coordinates, and automated expansion generator supporting 600+ city camera points.
-- **Hero Entertainment Venues**: Unclustered, high-visibility neon pink pulsing pins (`#FF2A6D`) and VIP glowing gold pins (`#EAB308`).
-- **Songthaew (Baht Bus) Transit Vectors**: Accurate GeoJSON road paths with interactive tooltips showing loop direction, frequency, and 10 THB fixed fare:
+- **Interactive Dark Map Engine**: Powered by Leaflet and licensed CartoDB Dark Matter tiles (`cb1_33su_1_683c1b500e92ad8b2069c2d2`) with zero watermarks and zero client-side fetch waterfall.
+- **Municipal CCTV Network**: 600 unclustered individual 8px cyan dots (`#00E5FF`) along all city streets and junctions. Disabled by default (`cctv: false`) for maximum performance, with an informative municipal network disclaimer toast on activation.
+- **Hero Entertainment Venues**: High-visibility neon pink pulsing pins (`🔴 LIVE`) with active live stream radar pings vs dim slate pins (`⚪ OFFLINE`) for offline venues.
+- **Automated Stream Health-Checker**: Quota-free 15-minute GitHub Actions automation (`scripts/check_streams.mjs` + `.github/workflows/check_streams.yml`) probing YouTube handle redirects without burning API quota.
+- **Multi-Cam Command Grid**: 2x2 multi-screen grid wall with municipal CCTVs completely excluded from the dropdown selector and slots auto-populated with active live YouTube feeds.
+- **Desktop Theater Mode**: VideoDrawer includes a Maximize/Minimize toggle expanding into an 800px+ 2-column widescreen desktop command console.
+- **Offline Telemetry Standby Card**: Inactive venues render an offline card with radio icon, relative timestamp ("Last live recently"), and YouTube channel CTA (zero broken iframes or black screens).
+- **🎲 Live Shuffle (City Roulette)**: Glowing neon button in the top navbar that randomly selects an active live stream, smoothly flies the map (`zoom: 17`), and opens the VideoDrawer for immediate playback.
+- **Pattaya Live Streamers Dock**: Footer dock tracking active live creators (e.g. *Pattaya Beach Live*), auto-collapsing to a minimal `[ ⚪ 0 Streamers Live ]` pill with optional 4K walking channel expansion.
+- **Songthaew (Baht Bus) Transit Vectors**: Road-aligned GeoJSON paths snapped to OpenStreetMap centerlines with interactive tooltips showing loop direction, frequency, and 10 THB fixed fare:
   1. *Beach Rd & Second Rd Circular Loop* (`#3B82F6`)
   2. *South Pattaya to Jomtien Beach Line* (`#10B981`)
   3. *Dolphin Roundabout to Naklua Fish Market* (`#F59E0B`)
-- **Slide-Over Video Drawer**: Slides smoothly from the right with HLS video player (HLS.js with City Hall offline fallback), YouTube live player, 12Go private airport taxi booking card (~1,200 THB / $35 flat rate), and Agoda hotel cards.
-- **1-Click Emoji Telemetry**: 4 standardized emoji reactions (`🔥 Busy`, `😴 Quiet`, `🌧️ Flood`, `🍻 Vibe`) expiring over a 2-hour sliding window stored locally. Zero platform defamation liability (no text chat).
-- **Multi-Cam Command Center**: 2x2 and 3x3 multi-screen grid wall with individual stream dropdown selectors and persistent layout caching in `localStorage` (`pattayacams_grid_v1`).
-- **IRL Roaming Creators Tray**: Bottom horizontal bar tracking mobile IRL streamers (e.g., Pattaya 4K Walker) with route updates and instant "Watch" CTA.
-- **Programmatic SSG SEO**: 41 pre-rendered physical HTML landing pages (`/venues/[slug]/index.html` and `/cams/[slug]/index.html`) generated via Next.js `generateStaticParams()` with `trailingSlash: true`.
-- **Cloudflare Edge Manifest Guard**: `proxy/worker.js` proxies only text `.m3u8` playlists while blocking `.ts` media segments with `403 Forbidden` to ensure zero egress bandwidth costs.
+- **Central Feature Flags & Zero Ad Gaps**: Configured via `src/config/features.js` (`FEATURES.SHOW_AFFILIATE_ADS`). All affiliate ad containers (12Go, Agoda, Airalo, Aviasales) gracefully disappear when disabled with zero blank gaps.
+- **Self-Serve B2B Sponsorship**: `⭐ List Venue` button opening the high-conversion pricing modal (30-day and 90-day seasonal tiers with PromptPay QR and Stripe options).
+- **Programmatic SSG SEO**: 623 pre-rendered physical HTML landing pages (`/venues/[slug]/index.html` and `/cams/[slug]/index.html`) generated via Next.js `generateStaticParams()` with `trailingSlash: true`.
 
 ---
 
