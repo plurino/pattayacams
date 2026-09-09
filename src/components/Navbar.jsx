@@ -1,0 +1,167 @@
+'use client';
+
+import React, { useEffect, useState } from 'react';
+import { Video, Map as MapIcon, Grid, Calendar, ExternalLink, Sparkles, Navigation } from 'lucide-react';
+import { QUICK_JUMP_TARGETS } from '@/src/utils/zones';
+import { getSavedTripDate } from '@/src/utils/storage';
+import { getKofiTipUrl } from '@/src/utils/affiliate';
+
+export default function Navbar({
+  viewMode = 'map',
+  setViewMode,
+  onQuickJump,
+  onOpenTripModal,
+  onOpenSponsorModal,
+}) {
+  const [tripDays, setTripDays] = useState(null);
+  const [activeZone, setActiveZone] = useState('');
+
+  // Read saved trip date from storage
+  useEffect(() => {
+    function calculateDays() {
+      const saved = getSavedTripDate();
+      if (!saved) {
+        setTripDays(null);
+        return;
+      }
+      const target = new Date(saved);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      target.setHours(0, 0, 0, 0);
+      const diffMs = target.getTime() - today.getTime();
+      const days = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
+      setTripDays(days > 0 ? days : 0);
+    }
+
+    calculateDays();
+
+    // Listen for custom trip update event if triggered
+    window.addEventListener('pattayacams_trip_updated', calculateDays);
+    return () => window.removeEventListener('pattayacams_trip_updated', calculateDays);
+  }, []);
+
+  const handleJump = (target) => {
+    setActiveZone(target.label);
+    if (viewMode !== 'map') {
+      setViewMode('map');
+    }
+    if (onQuickJump) {
+      onQuickJump(target.center, target.zoom);
+    }
+  };
+
+  return (
+    <header className="h-14 border-b border-borderDark bg-surface flex items-center justify-between px-3 md:px-5 shrink-0 z-50 select-none shadow-md">
+      {/* Brand Logo & Live Status */}
+      <div className="flex items-center gap-3">
+        <a href="/" className="flex items-center gap-2 group">
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-brandCyan to-brandBlue flex items-center justify-center shadow-[0_0_12px_rgba(0,229,255,0.4)]">
+            <Video className="w-4 h-4 text-canvas" />
+          </div>
+          <div className="flex flex-col">
+            <span className="font-bold text-base tracking-tight text-white group-hover:text-brandCyan transition-colors">
+              Pattaya<span className="text-brandCyan">Cams</span>
+            </span>
+            <span className="hidden sm:inline-block text-[9px] font-mono text-slate-400 -mt-1 tracking-wider uppercase">
+              Radar & Surveillance
+            </span>
+          </div>
+        </a>
+
+        {/* Live Network Pill */}
+        <div className="hidden lg:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surfaceLight border border-borderDark text-[11px] font-mono text-slate-300">
+          <span className="w-2 h-2 rounded-full bg-brandGreen animate-pulse shadow-[0_0_8px_#10B981]"></span>
+          <span className="font-semibold text-brandGreen">600 Cams</span>
+          <span className="text-slate-500">|</span>
+          <span className="text-slate-400">Live</span>
+        </div>
+      </div>
+
+      {/* Quick Jump Zone Pills */}
+      <nav aria-label="Zone Quick Jumps" className="hidden md:flex items-center gap-1 bg-canvas/60 p-1 rounded-xl border border-borderDark/80">
+        {QUICK_JUMP_TARGETS.map((target) => {
+          const isActive = activeZone === target.label;
+          return (
+            <button
+              key={target.label}
+              onClick={() => handleJump(target)}
+              className={`px-2.5 py-1 text-xs font-medium rounded-lg transition-all duration-150 flex items-center gap-1.5 ${
+                isActive
+                  ? 'bg-surfaceLight text-brandCyan shadow-sm border border-brandCyan/40'
+                  : 'text-slate-300 hover:text-white hover:bg-surfaceLight/50'
+              }`}
+            >
+              <span
+                className="w-1.5 h-1.5 rounded-full"
+                style={{ backgroundColor: target.color }}
+              ></span>
+              {target.label}
+            </button>
+          );
+        })}
+      </nav>
+
+      {/* Right Controls: Mode Switcher, Trip Countdown, Tip Dev */}
+      <div className="flex items-center gap-2 sm:gap-3">
+        {/* Mode Switcher: Map vs Grid */}
+        <div className="flex items-center bg-canvas/80 p-0.5 rounded-lg border border-borderDark">
+          <button
+            onClick={() => setViewMode('map')}
+            className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium transition-all ${
+              viewMode === 'map'
+                ? 'bg-brandCyan text-canvas font-semibold shadow-[0_0_10px_rgba(0,229,255,0.4)]'
+                : 'text-slate-400 hover:text-slate-200'
+            }`}
+            title="Interactive Map View"
+          >
+            <MapIcon className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">Map</span>
+          </button>
+          <button
+            onClick={() => setViewMode('grid')}
+            className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium transition-all ${
+              viewMode === 'grid'
+                ? 'bg-brandCyan text-canvas font-semibold shadow-[0_0_10px_rgba(0,229,255,0.4)]'
+                : 'text-slate-400 hover:text-slate-200'
+            }`}
+            title="Multi-Cam Command Grid"
+          >
+            <Grid className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">Grid</span>
+          </button>
+        </div>
+
+        {/* Dynamic Trip Countdown Pill */}
+        <button
+          onClick={onOpenTripModal}
+          className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-surfaceLight hover:bg-surfaceLight/80 border border-borderDark text-xs font-mono transition-all text-slate-200 hover:border-brandGreen/40"
+        >
+          {tripDays !== null ? (
+            <>
+              <span className="text-base">🌴</span>
+              <span className="text-brandGreen font-bold">{tripDays}d</span>
+              <span className="hidden sm:inline text-slate-400">to Pattaya</span>
+            </>
+          ) : (
+            <>
+              <span className="text-base">✈️</span>
+              <span className="hidden sm:inline text-slate-300">Book Flight to</span>
+              <span className="text-brandCyan font-semibold">BKK</span>
+            </>
+          )}
+        </button>
+
+        {/* Tip Dev CTA */}
+        <a
+          href={getKofiTipUrl()}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hidden xl:flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-brandAmber/10 hover:bg-brandAmber/20 border border-brandAmber/40 text-brandAmber text-xs font-medium transition-colors"
+        >
+          <span>🍺</span>
+          <span>Tip Dev</span>
+        </a>
+      </div>
+    </header>
+  );
+}
