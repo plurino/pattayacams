@@ -1,10 +1,10 @@
 {
-  "last_check": "2026-09-09T18:13:43.966Z",
+  "last_check": "2026-09-09T20:04:32.041Z",
   "entities": {
     "venue-pattaya-oh-bar": {
       "is_live": true,
       "video_id": "k8zVyL8mk74",
-      "last_live_at": "2026-09-09T18:13:43.966Z",
+      "last_live_at": "2026-09-09T20:04:32.041Z",
       "status": "active",
       "name": "Pattaya Oh Bar",
       "handle": "@PattayaOhBar"
@@ -12,7 +12,7 @@
     "venue-kares-partybar-ismannen": {
       "is_live": true,
       "video_id": "GQnjaPRYHsU",
-      "last_live_at": "2026-09-09T18:13:43.966Z",
+      "last_live_at": "2026-09-09T20:04:32.041Z",
       "status": "active",
       "name": "Kåres Party Bar & Guesthouse (Ismannen)",
       "handle": "@ismannen"
@@ -36,7 +36,7 @@
     "venue-green-stop-cannabis": {
       "is_live": true,
       "video_id": "MQamtIyvLvw",
-      "last_live_at": "2026-09-09T18:13:43.966Z",
+      "last_live_at": "2026-09-09T20:04:32.041Z",
       "status": "active",
       "name": "Green Stop Dispensary & Bar",
       "handle": "@amazingtravellive213"
@@ -68,7 +68,7 @@
     "venue-nine-star-restaurant-bar": {
       "is_live": true,
       "video_id": "mgTChsJzH3Q",
-      "last_live_at": "2026-09-09T18:13:43.966Z",
+      "last_live_at": "2026-09-09T20:04:32.041Z",
       "status": "active",
       "name": "Nine Star Restaurant & Bar",
       "handle": "@SUGARBxPATTAYA"
@@ -76,7 +76,7 @@
     "venue-x-club-pattaya": {
       "is_live": true,
       "video_id": "Tm5QYXH_4RA",
-      "last_live_at": "2026-09-09T18:13:43.966Z",
+      "last_live_at": "2026-09-09T20:04:32.041Z",
       "status": "active",
       "name": "X Club Pattaya",
       "handle": "@XClubPattayaSoiChaiapoon"
@@ -92,15 +92,15 @@
     "venue-las-vegas-beer-garden": {
       "is_live": true,
       "video_id": "AH2BqtRKa40",
-      "last_live_at": "2026-09-09T18:13:43.966Z",
+      "last_live_at": "2026-09-09T20:04:32.041Z",
       "status": "active",
       "name": "Las Vegas Beer Garden",
       "handle": "@LasVegasBeerGarden-PKBar"
     },
     "venue-gold-bar-soi-6": {
       "is_live": true,
-      "video_id": "IrZRKZyyg3Q",
-      "last_live_at": "2026-09-09T18:13:43.966Z",
+      "video_id": "ODensH9FL5o",
+      "last_live_at": "2026-09-09T20:04:32.041Z",
       "status": "active",
       "name": "Gold Bar Soi 6",
       "handle": "@GoldBarSoi6"
@@ -108,7 +108,7 @@
     "venue-s3xy-bar-pattaya": {
       "is_live": true,
       "video_id": "DMsLKTEaSic",
-      "last_live_at": "2026-09-09T18:13:43.966Z",
+      "last_live_at": "2026-09-09T20:04:32.041Z",
       "status": "active",
       "name": "S3XY Bar Pattaya",
       "handle": "@s3xybarpattayalivestream333"
@@ -116,7 +116,7 @@
     "venue-mafia-bar-pattaya": {
       "is_live": true,
       "video_id": "FjjCFJtmmGg",
-      "last_live_at": "2026-09-09T18:13:43.966Z",
+      "last_live_at": "2026-09-09T20:04:32.041Z",
       "status": "active",
       "name": "Mafia Bar (The Godfather)",
       "handle": "@MafiaBarPattaya"
@@ -132,7 +132,7 @@
     "venue-luckynana-bar": {
       "is_live": true,
       "video_id": "aa9xW5OYAes",
-      "last_live_at": "2026-09-09T18:13:43.966Z",
+      "last_live_at": "2026-09-09T20:04:32.041Z",
       "status": "active",
       "name": "LuckyNaNa Bar Pattaya",
       "handle": "@luckynanabarpattayalivestr2350"
@@ -140,7 +140,7 @@
     "venue-rum-runner-bar": {
       "is_live": true,
       "video_id": "1odI_sRCq1Q",
-      "last_live_at": "2026-09-09T18:13:43.966Z",
+      "last_live_at": "2026-09-09T20:04:32.041Z",
       "status": "active",
       "name": "Rum Runner Bar (Mr Egg)",
       "handle": "@mreggthailand"
@@ -148,7 +148,7 @@
     "venue-miso-bar-pattaya": {
       "is_live": true,
       "video_id": "80ZyImIC32k",
-      "last_live_at": "2026-09-09T18:13:43.966Z",
+      "last_live_at": "2026-09-09T20:04:32.041Z",
       "status": "active",
       "name": "Miso Bar Pattaya",
       "handle": "@MisoBarPattaya"
@@ -228,7 +228,7 @@
     "streamer-RS-010": {
       "is_live": true,
       "video_id": "0bGNCCBXAKI",
-      "last_live_at": "2026-09-09T18:13:43.966Z",
+      "last_live_at": "2026-09-09T20:04:32.041Z",
       "status": "active",
       "name": "Pattaya Beach Live",
       "handle": "@williamgilday"

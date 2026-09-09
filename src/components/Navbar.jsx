@@ -5,6 +5,7 @@ import { Video, Map as MapIcon, Grid, Calendar, ExternalLink, Wifi, Compass } fr
 import { QUICK_JUMP_TARGETS } from '@/src/utils/zones';
 import { getSavedTripDate } from '@/src/utils/storage';
 import { getKofiTipUrl, buildAiraloEsimUrl } from '@/src/utils/affiliate';
+import { FEATURES } from '@/src/config/features';
 
 export default function Navbar({
   viewMode = 'map',
@@ -12,6 +13,7 @@ export default function Navbar({
   onQuickJump,
   onOpenTripModal,
   onOpenSponsorModal,
+  onLiveShuffle,
 }) {
   const [tripDays, setTripDays] = useState(null);
   const [activeZone, setActiveZone] = useState('');
@@ -99,20 +101,35 @@ export default function Navbar({
         })}
       </nav>
 
-      {/* Right Controls: High-Income eSIM CTA, Mode Switcher, Trip Countdown */}
+      {/* Right Controls: Live Shuffle, Mode Switcher, Trip Countdown, and eSIM */}
       <div className="flex items-center gap-2 sm:gap-3">
-        {/* HIGH-INTENT PROMINENT eSIM PILL */}
-        <a
-          href={buildAiraloEsimUrl()}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-gradient-to-r from-amber-500/20 to-brandGold/20 hover:from-amber-500/30 hover:to-brandGold/30 border border-brandGold/60 text-brandGold text-xs font-bold transition-all shadow-[0_0_10px_rgba(234,179,8,0.2)]"
-          title="Instant 5G Tourist eSIM for Thailand starting at $4.50"
-        >
-          <Wifi className="w-3.5 h-3.5 text-brandGold" />
-          <span>Thailand 5G eSIM ($4.50)</span>
-          <ExternalLink className="w-2.5 h-2.5 text-brandGold/70" />
-        </a>
+        {/* City Roulette: Live Shuffle Button */}
+        {FEATURES.ENABLE_ROULETTE && (
+          <button
+            onClick={onLiveShuffle}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-brandPink/20 via-purple-600/20 to-brandCyan/20 hover:from-brandPink/30 hover:to-brandCyan/30 border border-brandPink/60 hover:border-brandPink text-white text-xs font-bold transition-all shadow-[0_0_12px_rgba(255,42,109,0.3)] hover:shadow-[0_0_16px_rgba(255,42,109,0.5)] cursor-pointer group shrink-0 active:scale-95"
+            title="City Roulette: Fly to a random live stream"
+          >
+            <span className="text-sm group-hover:rotate-45 transition-transform duration-300">🎲</span>
+            <span className="hidden sm:inline font-mono tracking-wide">Live Shuffle</span>
+            <span className="sm:hidden font-mono">Shuffle</span>
+          </button>
+        )}
+
+        {/* HIGH-INTENT PROMINENT eSIM PILL (Conditional on FEATURES.SHOW_AFFILIATE_ADS) */}
+        {FEATURES.SHOW_AFFILIATE_ADS && (
+          <a
+            href={buildAiraloEsimUrl()}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-gradient-to-r from-amber-500/20 to-brandGold/20 hover:from-amber-500/30 hover:to-brandGold/30 border border-brandGold/60 text-brandGold text-xs font-bold transition-all shadow-[0_0_10px_rgba(234,179,8,0.2)]"
+            title="Instant 5G Tourist eSIM for Thailand starting at $4.50"
+          >
+            <Wifi className="w-3.5 h-3.5 text-brandGold" />
+            <span>Thailand 5G eSIM ($4.50)</span>
+            <ExternalLink className="w-2.5 h-2.5 text-brandGold/70" />
+          </a>
+        )}
 
         {/* Mode Switcher: Map vs Grid */}
         <div className="flex items-center bg-canvas/80 p-0.5 rounded-lg border border-borderDark">
