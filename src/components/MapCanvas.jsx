@@ -5,18 +5,19 @@ import venuesData from '@/public/data/venues.json';
 import cctvData from '@/public/data/cctv_cams.json';
 import busRoutes from '@/public/data/pattaya_baht_bus.geojson';
 import LayerToggleHUD from './LayerToggleHUD';
+import streamStatus from '@/public/data/stream_status.json';
 
 export default function MapCanvas({ onSelectEntity, onMapInstance }) {
   const mapContainerRef = useRef(null);
   const mapRef = useRef(null);
   const layersRef = useRef({
-    cctvCluster: null,
+    cctvGroup: null,
     venueGroup: null,
     transitGroup: null,
   });
 
   const [showVenues, setShowVenues] = useState(true);
-  const [showCams, setShowCams] = useState(true);
+  const [showCams, setShowCams] = useState(false);
   const [showTransit, setShowTransit] = useState(true);
 
   useEffect(() => {
@@ -124,9 +125,9 @@ export default function MapCanvas({ onSelectEntity, onMapInstance }) {
         });
         cctvGroup.addLayer(marker);
       });
-      cctvGroup.addTo(map);
+      // Do not add cctvGroup on initial mount since showCams is false by default
 
-      // 3. Hero Venues Layer Group (High-Visibility Unclustered Markers)
+      // 3. Hero Venues Layer Group (Live Pulsing vs Offline Dim Pins, 404 Pruned)
       const venueGroup = Leaflet.layerGroup();
 
       const getCategoryIcon = (category, isSponsor) => {
@@ -143,35 +144,57 @@ export default function MapCanvas({ onSelectEntity, onMapInstance }) {
         }
       };
 
-      venuesData.forEach((venue) => {
+      // Prune 404 / broken venues
+      const activeVenues = venuesData.filter((venue) => {
+        const statusInfo = streamStatus?.entities?.[`venue-${venue.slug}`];
+        return statusInfo?.status !== 'error_404';
+      });
+
+      activeVenues.forEach((venue) => {
         const isSponsor = venue.is_sponsored;
         const iconEmoji = getCategoryIcon(venue.category, isSponsor);
+        const statusInfo = streamStatus?.entities?.[`venue-${venue.slug}`];
+        const isLive = statusInfo ? statusInfo.is_live : (venue.video_id != null);
 
-        const venueIcon = Leaflet.divIcon({
-          className: 'custom-venue-marker-container',
-          iconSize: [38, 38],
-          iconAnchor: [19, 19],
-          html: `
+        let htmlIcon;
+        if (isLive) {
+          htmlIcon = `
             <div style="position: relative; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
-              <span style="position: absolute; width: 32px; height: 32px; border-radius: 50%; background: ${isSponsor ? '#EAB308' : '#FF2A6D'}; opacity: 0.6; animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;"></span>
-              <div style="position: relative; width: 32px; height: 32px; border-radius: 50%; background: ${isSponsor ? 'linear-gradient(135deg, #FACC15, #CA8A04)' : 'linear-gradient(135deg, #FF2A6D, #BE185D)'}; border: 2px solid #FFFFFF; box-shadow: 0 0 16px ${isSponsor ? '#EAB308' : '#FF2A6D'}; display: flex; align-items: center; justify-content: center; color: white; font-size: 13px;">
+              <span style="position: absolute; width: 34px; height: 34px; border-radius: 50%; background: ${isSponsor ? '#EAB308' : '#FF2A6D'}; opacity: 0.7; animation: ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;"></span>
+              <div style="position: relative; width: 32px; height: 32px; border-radius: 50%; background: ${isSponsor ? 'linear-gradient(135deg, #FACC15, #CA8A04)' : 'linear-gradient(135deg, #FF2A6D, #BE185D)'}; border: 2px solid #FFFFFF; box-shadow: 0 0 16px ${isSponsor ? '#EAB308' : '#FF2A6D'}; display: flex; align-items: center; justify-content: center; color: white; font-size: 14px;">
+                ${iconEmoji}
+              </div>
+              <span style="position: absolute; top: -6px; right: -8px; background: #FF2A6D; color: white; font-size: 8px; font-weight: 900; font-family: monospace; padding: 1px 4px; border-radius: 4px; box-shadow: 0 0 8px #FF2A6D; border: 1px solid rgba(255,255,255,0.6); z-index: 10;">LIVE</span>
+            </div>
+          `;
+        } else {
+          htmlIcon = `
+            <div style="position: relative; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0.65;">
+              <div style="width: 28px; height: 28px; border-radius: 50%; background: #161F30; border: 1.5px solid #475569; display: flex; align-items: center; justify-content: center; color: #94A3B8; font-size: 12px; filter: grayscale(50%);">
                 ${iconEmoji}
               </div>
             </div>
-          `,
+          `;
+        }
+
+        const venueIcon = Leaflet.divIcon({
+          className: 'custom-venue-marker-container',
+          iconSize: isLive ? [38, 38] : [30, 30],
+          iconAnchor: isLive ? [19, 19] : [15, 15],
+          html: htmlIcon,
         });
 
         const marker = Leaflet.marker([venue.lat, venue.lng], {
           icon: venueIcon,
-          zIndexOffset: 1200,
+          zIndexOffset: isLive ? 1200 : 800,
         });
 
         const categoryLabel = venue.category ? venue.category.toUpperCase().replace('_', ' ') : 'VENUE';
         marker.bindTooltip(
           `<div style="font-family: inherit; font-size: 11px;">
              <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 2px;">
-               <span style="background: ${isSponsor ? '#EAB308' : '#FF2A6D'}; color: #0B0F17; font-size: 9px; font-weight: 800; padding: 1px 5px; border-radius: 4px;">${categoryLabel}</span>
-               <span style="color: #EAB308; font-weight: 700; font-size: 10px;">LIVE STREAM</span>
+               <span style="background: ${isSponsor ? '#EAB308' : (isLive ? '#FF2A6D' : '#475569')}; color: ${isSponsor ? '#0B0F17' : '#FFFFFF'}; font-size: 9px; font-weight: 800; padding: 1px 5px; border-radius: 4px;">${categoryLabel}</span>
+               <span style="color: ${isLive ? '#FF2A6D' : '#94A3B8'}; font-weight: 700; font-size: 10px;">${isLive ? '🔴 LIVE NOW' : '⚪ OFFLINE'}</span>
              </div>
              <strong style="color: #FFFFFF; font-size: 12px;">${venue.name}</strong>
              <div style="color: #94A3B8; font-size: 10px; margin-top: 2px;">Zone: ${venue.zone.replace('_', ' ')}</div>
@@ -181,7 +204,12 @@ export default function MapCanvas({ onSelectEntity, onMapInstance }) {
 
         marker.on('click', () => {
           if (onSelectEntity) {
-            onSelectEntity({ ...venue, type: 'venue' });
+            onSelectEntity({
+              ...venue,
+              type: 'venue',
+              is_live: isLive,
+              last_live_at: statusInfo?.last_live_at || null,
+            });
           }
         });
         venueGroup.addLayer(marker);
@@ -259,7 +287,7 @@ export default function MapCanvas({ onSelectEntity, onMapInstance }) {
         setShowCams={setShowCams}
         showTransit={showTransit}
         setShowTransit={setShowTransit}
-        venueCount={venuesData.length}
+        venueCount={venuesData.filter(v => streamStatus?.entities?.[`venue-${v.slug}`]?.status !== 'error_404').length}
         camCount={cctvData.length}
         transitCount={busRoutes.features.length}
       />
