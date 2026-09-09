@@ -3,10 +3,17 @@
 import React, { useState, useRef, useCallback } from 'react';
 import Navbar from '@/src/components/Navbar';
 import MapCanvasWrapper from '@/src/components/MapCanvasWrapper';
+import MultiCamGrid from '@/src/components/MultiCamGrid';
+import VideoDrawer from '@/src/components/VideoDrawer';
+import RoamingTray from '@/src/components/RoamingTray';
+import TripModal from '@/src/components/TripModal';
+import SponsorModal from '@/src/components/SponsorModal';
 
 export default function AppRoot() {
-  const [viewMode, setViewMode] = useState('map');
+  const [viewMode, setViewMode] = useState('map'); // 'map' | 'grid'
   const [selectedEntity, setSelectedEntity] = useState(null);
+  const [isTripModalOpen, setIsTripModalOpen] = useState(false);
+  const [isSponsorModalOpen, setIsSponsorModalOpen] = useState(false);
   const mapInstanceRef = useRef(null);
 
   const handleMapInstance = useCallback((map) => {
@@ -26,18 +33,22 @@ export default function AppRoot() {
     setSelectedEntity(entity);
   }, []);
 
+  const handleCloseDrawer = useCallback(() => {
+    setSelectedEntity(null);
+  }, []);
+
   return (
     <div className="flex flex-col h-screen w-screen overflow-hidden bg-canvas">
-      {/* Top Header Navbar */}
+      {/* 1. Top Navigation Bar */}
       <Navbar
         viewMode={viewMode}
         setViewMode={setViewMode}
         onQuickJump={handleQuickJump}
-        onOpenTripModal={() => console.log('Open trip modal')}
-        onOpenSponsorModal={() => console.log('Open sponsor modal')}
+        onOpenTripModal={() => setIsTripModalOpen(true)}
+        onOpenSponsorModal={() => setIsSponsorModalOpen(true)}
       />
 
-      {/* Main Content Area */}
+      {/* 2. Main Content Canvas */}
       <main className="flex-1 relative overflow-hidden">
         {viewMode === 'map' ? (
           <MapCanvasWrapper
@@ -45,11 +56,32 @@ export default function AppRoot() {
             onMapInstance={handleMapInstance}
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center bg-canvas text-slate-400 font-mono text-sm">
-            Multi-Cam Command Grid (Batch 3)
-          </div>
+          <MultiCamGrid onSelectEntity={handleSelectEntity} />
         )}
       </main>
+
+      {/* 3. Bottom Roaming Streamers Tray */}
+      <RoamingTray
+        onSelectStreamer={handleSelectEntity}
+        onOpenSponsorModal={() => setIsSponsorModalOpen(true)}
+      />
+
+      {/* 4. Slide-Over Video Drawer */}
+      <VideoDrawer
+        entity={selectedEntity}
+        onClose={handleCloseDrawer}
+      />
+
+      {/* 5. Conversion Modals */}
+      <TripModal
+        isOpen={isTripModalOpen}
+        onClose={() => setIsTripModalOpen(false)}
+      />
+
+      <SponsorModal
+        isOpen={isSponsorModalOpen}
+        onClose={() => setIsSponsorModalOpen(false)}
+      />
     </div>
   );
 }
