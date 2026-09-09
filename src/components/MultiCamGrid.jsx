@@ -192,16 +192,7 @@ export default function MultiCamGrid({ onSelectEntity }) {
               <div className="flex-1 relative bg-black flex items-center justify-center overflow-hidden">
                 {entity ? (
                   entity.type === 'cctv' ? (
-                    entity.video_id ? (
-                      <YouTubePlayer
-                        videoId={entity.video_id}
-                        title={entity.name}
-                        badgeText="MUNICIPAL LIVE"
-                        badgeColor="brandCyan"
-                      />
-                    ) : (
-                      <HlsPlayer streamUrl={entity.stream_url} title={entity.name} />
-                    )
+                    <HlsPlayer streamUrl={entity.stream_url} title={entity.name} />
                   ) : (
                     <YouTubePlayer
                       channelId={entity.youtube_channel_id}

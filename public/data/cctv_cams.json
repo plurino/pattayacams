@@ -9,7 +9,8 @@
     "lng": 100.8888,
     "stream_url": "https://livestream.pattaya.go.th/",
     "description": "Live traffic camera overlooking the iconic Dolphin Roundabout connecting North Pattaya Road, Pattaya-Naklua Road, and Pattaya Beach Road.",
-    "video_id": "Qe5P2aWcdcg"
+    "provider": "Pattaya City Hall (livestream.pattaya.go.th)",
+    "is_municipal": true
   },
   {
     "slug": "soi-6-entrance-beach-rd",
@@ -21,7 +22,8 @@
     "lng": 100.8846,
     "stream_url": "https://livestream.pattaya.go.th/",
     "description": "West entrance of Soi 6 at Pattaya Beach Road, monitoring pedestrian activity, beachfront traffic, and taxi drop-offs.",
-    "video_id": "k8zVyL8mk74"
+    "provider": "Pattaya City Hall (livestream.pattaya.go.th)",
+    "is_municipal": true
   },
   {
     "slug": "soi-6-mid-second-rd",
@@ -33,7 +35,8 @@
     "lng": 100.8885,
     "stream_url": "https://livestream.pattaya.go.th/",
     "description": "Mid-block camera along Soi 6 near Pattaya Second Road, capturing street-level hospitality venues and evening foot traffic.",
-    "video_id": "k8zVyL8mk74"
+    "provider": "Pattaya City Hall (livestream.pattaya.go.th)",
+    "is_municipal": true
   },
   {
     "slug": "central-festival-beach-rd",
@@ -45,7 +48,8 @@
     "lng": 100.8828,
     "stream_url": "https://livestream.pattaya.go.th/",
     "description": "Broad angle view of Central Festival shopping mall beachfront promenade, boardwalk promenade, and songthaew queue.",
-    "video_id": "k8zVyL8mk74"
+    "provider": "Pattaya City Hall (livestream.pattaya.go.th)",
+    "is_municipal": true
   },
   {
     "slug": "beach-road-soi-8",
@@ -57,7 +61,8 @@
     "lng": 100.8833,
     "stream_url": "https://livestream.pattaya.go.th/",
     "description": "Direct beachfront overview near Soi 8 showing ocean water conditions, palm walk, and southbound road traffic.",
-    "video_id": "k8zVyL8mk74"
+    "provider": "Pattaya City Hall (livestream.pattaya.go.th)",
+    "is_municipal": true
   },
   {
     "slug": "soi-buakhao-tree-town",
@@ -69,7 +74,8 @@
     "lng": 100.8879,
     "stream_url": "https://livestream.pattaya.go.th/",
     "description": "High-density pedestrian crossing outside Tree Town entertainment plaza on Soi Buakhao, central Pattaya dining and nightlife hub.",
-    "video_id": "GQnjaPRYHsU"
+    "provider": "Pattaya City Hall (livestream.pattaya.go.th)",
+    "is_municipal": true
   },
   {
     "slug": "soi-buakhao-soi-lengkee",
@@ -81,7 +87,8 @@
     "lng": 100.8869,
     "stream_url": "https://livestream.pattaya.go.th/",
     "description": "Busy junction of Soi Buakhao and Soi Lengkee featuring international restaurants, motorbike transit, and 24-hour convenience stores.",
-    "video_id": "GQnjaPRYHsU"
+    "provider": "Pattaya City Hall (livestream.pattaya.go.th)",
+    "is_municipal": true
   },
   {
     "slug": "soi-buakhao-soi-diana",
@@ -93,7 +100,8 @@
     "lng": 100.8881,
     "stream_url": "https://livestream.pattaya.go.th/",
     "description": "Key transit intersection connecting Soi Diana Inn to Soi Buakhao, popular with hotel guests and scooter rentals.",
-    "video_id": "GQnjaPRYHsU"
+    "provider": "Pattaya City Hall (livestream.pattaya.go.th)",
+    "is_municipal": true
   },
   {
     "slug": "walking-street-entrance-arch",
@@ -105,7 +113,8 @@
     "lng": 100.8732,
     "stream_url": "https://livestream.pattaya.go.th/",
     "description": "The world-renowned neon entrance archway of Walking Street at South Pattaya Beach Road, monitoring pedestrian security and tourist crowds.",
-    "video_id": "Qe5P2aWcdcg"
+    "provider": "Pattaya City Hall (livestream.pattaya.go.th)",
+    "is_municipal": true
   },
   {
     "slug": "walking-street-midpoint",
@@ -117,7 +126,8 @@
     "lng": 100.8725,
     "stream_url": "https://livestream.pattaya.go.th/",
     "description": "Heart of Pattaya Walking Street entertainment corridor, showing multi-story live entertainment venues, lounges, and visitors.",
-    "video_id": "Qe5P2aWcdcg"
+    "provider": "Pattaya City Hall (livestream.pattaya.go.th)",
+    "is_municipal": true
   },
   {
     "slug": "walking-street-south-end",
@@ -129,7 +139,8 @@
     "lng": 100.8705,
     "stream_url": "https://livestream.pattaya.go.th/",
     "description": "Southern exit of Walking Street opening onto Bali Hai Pier road, street seafood markets, and harbor boardwalks.",
-    "video_id": "Qe5P2aWcdcg"
+    "provider": "Pattaya City Hall (livestream.pattaya.go.th)",
+    "is_municipal": true
   },
   {
     "slug": "bali-hai-pier-ferry",
@@ -141,7 +152,8 @@
     "lng": 100.8715,
     "stream_url": "https://livestream.pattaya.go.th/",
     "description": "Main embarkation dock for express speedboats and public passenger ferries departing for Koh Larn island.",
-    "video_id": "Qe5P2aWcdcg"
+    "provider": "Pattaya City Hall (livestream.pattaya.go.th)",
+    "is_municipal": true
   },
   {
     "slug": "jomtien-beach-rompho",
@@ -153,7 +165,8 @@
     "lng": 100.8755,
     "stream_url": "https://livestream.pattaya.go.th/",
     "description": "Jomtien Beach beachfront promenade near Rompho complex, displaying sea breeze, windsurfers, and family dining terraces.",
-    "video_id": "MmmvtFK_fV0"
+    "provider": "Pattaya City Hall (livestream.pattaya.go.th)",
+    "is_municipal": true
   },
   {
     "slug": "jomtien-beach-night-market",
@@ -165,7 +178,8 @@
     "lng": 100.8725,
     "stream_url": "https://livestream.pattaya.go.th/",
     "description": "Vibrant night market situated along Jomtien Beach Road with fresh fruit stalls, Thai street cuisine, and live acoustic music.",
-    "video_id": "MmmvtFK_fV0"
+    "provider": "Pattaya City Hall (livestream.pattaya.go.th)",
+    "is_municipal": true
   },
   {
     "slug": "jomtien-south-soi-chayapruek",
@@ -177,7 +191,8 @@
     "lng": 100.8885,
     "stream_url": "https://livestream.pattaya.go.th/",
     "description": "Southern Jomtien coastline junction connecting to Sukhumvit highway, water sports zone, and upscale resort beachfronts.",
-    "video_id": "MmmvtFK_fV0"
+    "provider": "Pattaya City Hall (livestream.pattaya.go.th)",
+    "is_municipal": true
   },
   {
     "slug": "naklua-fish-market-pier",
@@ -185,11 +200,12 @@
     "name": "Lan Pho Naklua Seafood Market Pier",
     "name_th": "ลานโพธิ์นาเกลือ ตลาดอาหารทะเลสด",
     "zone": "naklua",
-    "lat": 12.982,
-    "lng": 100.9035,
+    "lat": 12.9738,
+    "lng": 100.9055,
     "stream_url": "https://livestream.pattaya.go.th/",
     "description": "Historic North Naklua fishing port and public seafood market where local fishermen unload daily fresh catches.",
-    "video_id": "Qe5P2aWcdcg"
+    "provider": "Pattaya City Hall (livestream.pattaya.go.th)",
+    "is_municipal": true
   },
   {
     "slug": "sanctuary-of-truth-viewpoint",
@@ -197,11 +213,12 @@
     "name": "Sanctuary of Truth Approach (Naklua Soi 12)",
     "name_th": "ทางเข้าปราสาทสัจธรรม นาเกลือ ซอย 12",
     "zone": "naklua",
-    "lat": 12.9715,
-    "lng": 100.889,
+    "lat": 12.9708,
+    "lng": 100.8935,
     "stream_url": "https://livestream.pattaya.go.th/",
     "description": "Scenic northern cape approaching the famed all-wood Sanctuary of Truth museum and coastal cliffs.",
-    "video_id": "GQnjaPRYHsU"
+    "provider": "Pattaya City Hall (livestream.pattaya.go.th)",
+    "is_municipal": true
   },
   {
     "slug": "pratumnak-hill-viewpoint",
@@ -209,11 +226,12 @@
     "name": "Pratumnak Hill (Khao Phra Tamnak Summit)",
     "name_th": "จุดชมวิวเขาพระตำหนัก พัทยา",
     "zone": "pratumnak",
-    "lat": 12.9228,
-    "lng": 100.8665,
+    "lat": 12.9215,
+    "lng": 100.8675,
     "stream_url": "https://livestream.pattaya.go.th/",
     "description": "Panoramic panoramic overlook of Pattaya Bay, the crescent beach curve, and Koh Larn ferry shipping lanes.",
-    "video_id": "k8zVyL8mk74"
+    "provider": "Pattaya City Hall (livestream.pattaya.go.th)",
+    "is_municipal": true
   },
   {
     "slug": "pratumnak-cosy-beach",
@@ -221,11 +239,12 @@
     "name": "Cosy Beach & Cliff Promenade",
     "name_th": "หาดโคซี่บีช พระตำหนัก",
     "zone": "pratumnak",
-    "lat": 12.9182,
-    "lng": 100.858,
+    "lat": 12.9205,
+    "lng": 100.8615,
     "stream_url": "https://livestream.pattaya.go.th/",
     "description": "Secluded hillside cove with cliffside oceanfront cafes and sunset viewpoints overlooking the Gulf of Thailand.",
-    "video_id": "MmmvtFK_fV0"
+    "provider": "Pattaya City Hall (livestream.pattaya.go.th)",
+    "is_municipal": true
   },
   {
     "slug": "south-pattaya-wat-chai",
@@ -237,7 +256,8 @@
     "lng": 100.882,
     "stream_url": "https://livestream.pattaya.go.th/",
     "description": "Crucial Songthaew transit terminus where 10-THB baht buses assemble to transport passengers to Jomtien Beach.",
-    "video_id": "Qe5P2aWcdcg"
+    "provider": "Pattaya City Hall (livestream.pattaya.go.th)",
+    "is_municipal": true
   },
   {
     "slug": "pattaya-second-rd-soi-honey",
@@ -249,7 +269,8 @@
     "lng": 100.8858,
     "stream_url": "https://livestream.pattaya.go.th/",
     "description": "Major pedestrian corridor connecting Second Road to Soi Buakhao, lined with traditional Thai massage studios and restaurants.",
-    "video_id": "k8zVyL8mk74"
+    "provider": "Pattaya City Hall (livestream.pattaya.go.th)",
+    "is_municipal": true
   },
   {
     "slug": "north-pattaya-terminal-21",
@@ -261,7 +282,8 @@
     "lng": 100.8898,
     "stream_url": "https://livestream.pattaya.go.th/",
     "description": "Exterior square of Terminal 21 shopping complex with the mockup passenger aircraft and evening event stage.",
-    "video_id": "GQnjaPRYHsU"
+    "provider": "Pattaya City Hall (livestream.pattaya.go.th)",
+    "is_municipal": true
   },
   {
     "slug": "pattaya-klang-third-rd",
@@ -273,7 +295,8 @@
     "lng": 100.895,
     "stream_url": "https://livestream.pattaya.go.th/",
     "description": "Major traffic artery intersection linking inner commercial Pattaya with residential sectors and fitness centers.",
-    "video_id": "k8zVyL8mk74"
+    "provider": "Pattaya City Hall (livestream.pattaya.go.th)",
+    "is_municipal": true
   },
   {
     "slug": "sukhumvit-south-pattaya-junction",
@@ -281,11 +304,12 @@
     "name": "Sukhumvit Highway & South Pattaya Rd",
     "name_th": "แยกสุขุมวิท - พัทยาใต้",
     "zone": "south_pattaya",
-    "lat": 12.9198,
-    "lng": 100.9025,
+    "lat": 12.9185,
+    "lng": 100.8995,
     "stream_url": "https://livestream.pattaya.go.th/",
     "description": "Primary highway gateway connecting Bangkok motorway tollways to southern Pattaya districts.",
-    "video_id": "Qe5P2aWcdcg"
+    "provider": "Pattaya City Hall (livestream.pattaya.go.th)",
+    "is_municipal": true
   },
   {
     "slug": "north-pattaya-bus-terminal",
@@ -293,10 +317,11 @@
     "name": "North Pattaya Bangkok Bus Terminal (Roong Reuang)",
     "name_th": "สถานีขนส่งผู้โดยสารพัทยาเหนือ (รถทัวร์กรุงเทพ)",
     "zone": "north_pattaya",
-    "lat": 12.949,
-    "lng": 100.9015,
+    "lat": 12.9375,
+    "lng": 100.9025,
     "stream_url": "https://livestream.pattaya.go.th/",
     "description": "Central departure platform for intercity express coach buses linking Pattaya directly to Bangkok Ekkamai and Mochit stations.",
-    "video_id": "lBbuZlppL_U"
+    "provider": "Pattaya City Hall (livestream.pattaya.go.th)",
+    "is_municipal": true
   }
 ]

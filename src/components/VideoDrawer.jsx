@@ -77,16 +77,7 @@ export default function VideoDrawer({ entity, onClose }) {
           {/* Video Player Stage */}
           <div className="w-full">
             {isCctv ? (
-              entity.video_id ? (
-                <YouTubePlayer
-                  videoId={entity.video_id}
-                  title={entity.name}
-                  badgeText="MUNICIPAL CCTV LIVE"
-                  badgeColor="brandCyan"
-                />
-              ) : (
-                <HlsPlayer streamUrl={entity.stream_url} title={entity.name} />
-              )
+              <HlsPlayer streamUrl={entity.stream_url} title={entity.name} />
             ) : (
               <YouTubePlayer
                 channelId={entity.youtube_channel_id}

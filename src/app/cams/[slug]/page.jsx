@@ -107,19 +107,10 @@ export default function CamPage({ params }) {
 
         {/* Video Player Stage */}
         <div className="w-full">
-          {cam.video_id ? (
-            <YouTubePlayer
-              videoId={cam.video_id}
-              title={`${cam.name} Live CCTV`}
-              badgeText="MUNICIPAL CCTV LIVE"
-              badgeColor="brandCyan"
-            />
-          ) : (
-            <HlsPlayer
-              streamUrl={cam.stream_url}
-              title={`${cam.name} Live CCTV`}
-            />
-          )}
+          <HlsPlayer
+            streamUrl={cam.stream_url}
+            title={`${cam.name} Live CCTV`}
+          />
         </div>
 
         {/* Camera Description */}
