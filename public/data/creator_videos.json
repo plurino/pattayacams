@@ -1,26 +1,16 @@
 {
-  "last_updated": "2026-09-09T20:23:12.045Z",
-  "total_videos": 60,
+  "last_updated": "2026-09-10T02:24:03.758Z",
+  "total_videos": 27,
   "videos": [
     {
-      "id": "P7ze3IrwMWA",
-      "title": "Pattaya Walking Street Night Walk 🇹🇭 | Wednesday 11:30PM + Beach Road",
-      "channel_name": "Vespa Life Thailand",
-      "channel_slug": "vespa-life-thailand",
-      "channel_avatar": "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?w=200&auto=format&fit=crop&q=80",
-      "thumbnail_url": "https://i1.ytimg.com/vi/P7ze3IrwMWA/hqdefault.jpg",
-      "published_at": "2026-09-09T19:26:25+00:00",
-      "url": "https://www.youtube.com/watch?v=P7ze3IrwMWA"
-    },
-    {
-      "id": "KCoiHcSEy5A",
-      "title": "Pattaya Soi Buakhao at 8PM 🇹🇭 Fast Vespa Ride | Low Season Traffic",
-      "channel_name": "Vespa Life Thailand",
-      "channel_slug": "vespa-life-thailand",
-      "channel_avatar": "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?w=200&auto=format&fit=crop&q=80",
-      "thumbnail_url": "https://i4.ytimg.com/vi/KCoiHcSEy5A/hqdefault.jpg",
-      "published_at": "2026-09-09T13:25:33+00:00",
-      "url": "https://www.youtube.com/watch?v=KCoiHcSEy5A"
+      "id": "Rit_OHyzBYU",
+      "title": "Central Pattaya, check this place out! #shorts #pattaya #pattayathailand",
+      "channel_name": "Buzzin Pattaya",
+      "channel_slug": "buzzin-pattaya",
+      "channel_avatar": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&auto=format&fit=crop&q=80",
+      "thumbnail_url": "https://i3.ytimg.com/vi/Rit_OHyzBYU/hqdefault.jpg",
+      "published_at": "2026-09-10T02:00:11+00:00",
+      "url": "https://www.youtube.com/watch?v=Rit_OHyzBYU"
     },
     {
       "id": "IAHgyNVNH2Y",
@@ -29,8 +19,28 @@
       "channel_slug": "pattaya-beach-live",
       "channel_avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&auto=format&fit=crop&q=80",
       "thumbnail_url": "https://i2.ytimg.com/vi/IAHgyNVNH2Y/hqdefault.jpg",
-      "published_at": "2026-09-09T10:37:44+00:00",
+      "published_at": "2026-09-10T00:47:02+00:00",
       "url": "https://www.youtube.com/watch?v=IAHgyNVNH2Y"
+    },
+    {
+      "id": "5WgPvZ-L8VA",
+      "title": "Bangkok Sukhumvit Rd 🇹🇭 Gentle Rain in the City | 4K HDR • Binaural Audio 🎧",
+      "channel_name": "JWINTHAI",
+      "channel_slug": "jwinthai",
+      "channel_avatar": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=200&auto=format&fit=crop&q=80",
+      "thumbnail_url": "https://i2.ytimg.com/vi/5WgPvZ-L8VA/hqdefault.jpg",
+      "published_at": "2026-09-10T00:00:08+00:00",
+      "url": "https://www.youtube.com/watch?v=5WgPvZ-L8VA"
+    },
+    {
+      "id": "kdb4o-pVRr4",
+      "title": "Pattaya Beach Live Thailand",
+      "channel_name": "Pattaya Beach Live",
+      "channel_slug": "pattaya-beach-live",
+      "channel_avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&auto=format&fit=crop&q=80",
+      "thumbnail_url": "https://i4.ytimg.com/vi/kdb4o-pVRr4/hqdefault.jpg",
+      "published_at": "2026-09-09T23:05:36+00:00",
+      "url": "https://www.youtube.com/watch?v=kdb4o-pVRr4"
     },
     {
       "id": "1RZg-BtFipc",
@@ -53,26 +63,6 @@
       "url": "https://www.youtube.com/watch?v=_Wsv8jptIg4"
     },
     {
-      "id": "XT-U7iKRRxE",
-      "title": "Pattaya Cheap Short Term Condo Rentals, 1 week, 1 month",
-      "channel_name": "Everything Pattaya",
-      "channel_slug": "everything-pattaya",
-      "channel_avatar": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=200&auto=format&fit=crop&q=80",
-      "thumbnail_url": "https://i1.ytimg.com/vi/XT-U7iKRRxE/hqdefault.jpg",
-      "published_at": "2026-09-09T02:00:21+00:00",
-      "url": "https://www.youtube.com/watch?v=XT-U7iKRRxE"
-    },
-    {
-      "id": "TQTXtzwL4ys",
-      "title": "VERY LATEST NEWS FROM THAILAND in English (9 September 2026) from Fabulous Radio Pattaya",
-      "channel_name": "Fabulous Pattaya",
-      "channel_slug": "fabulous-pattaya",
-      "channel_avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&auto=format&fit=crop&q=80",
-      "thumbnail_url": "https://i1.ytimg.com/vi/TQTXtzwL4ys/hqdefault.jpg",
-      "published_at": "2026-09-09T02:00:00+00:00",
-      "url": "https://www.youtube.com/watch?v=TQTXtzwL4ys"
-    },
-    {
       "id": "7XK6n6nkeFw",
       "title": "Pattaya Beach Live Thailand",
       "channel_name": "Pattaya Beach Live",
@@ -93,46 +83,6 @@
       "url": "https://www.youtube.com/watch?v=Jbqa8SeWZyQ"
     },
     {
-      "id": "ym4QEQHiEiU",
-      "title": "9PM Pattaya Walk | Soi Buakhao, Soi Honey, Second Road, LK Metro, Soi Lengkee",
-      "channel_name": "Vespa Life Thailand",
-      "channel_slug": "vespa-life-thailand",
-      "channel_avatar": "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?w=200&auto=format&fit=crop&q=80",
-      "thumbnail_url": "https://i2.ytimg.com/vi/ym4QEQHiEiU/hqdefault.jpg",
-      "published_at": "2026-09-08T16:08:56+00:00",
-      "url": "https://www.youtube.com/watch?v=ym4QEQHiEiU"
-    },
-    {
-      "id": "yGPlfO1Qcqw",
-      "title": "PATTAYA: BIG Changes in Soi 7 + News Update",
-      "channel_name": "NDtvi Thailand",
-      "channel_slug": "ndtvi-thailand",
-      "channel_avatar": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=200&auto=format&fit=crop&q=80",
-      "thumbnail_url": "https://i2.ytimg.com/vi/yGPlfO1Qcqw/hqdefault.jpg",
-      "published_at": "2026-09-08T13:21:30+00:00",
-      "url": "https://www.youtube.com/watch?v=yGPlfO1Qcqw"
-    },
-    {
-      "id": "p3a4iL6sJH0",
-      "title": "Soi 6 Pattaya at 10PM Last Night 🇹🇭",
-      "channel_name": "Vespa Life Thailand",
-      "channel_slug": "vespa-life-thailand",
-      "channel_avatar": "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?w=200&auto=format&fit=crop&q=80",
-      "thumbnail_url": "https://i1.ytimg.com/vi/p3a4iL6sJH0/hqdefault.jpg",
-      "published_at": "2026-09-08T12:30:21+00:00",
-      "url": "https://www.youtube.com/watch?v=p3a4iL6sJH0"
-    },
-    {
-      "id": "G6O9QVfj6ek",
-      "title": "Runway Market Pattaya Night Walk | The View Ferris Wheel, Street Food & Boeing 747 | 10:30pm",
-      "channel_name": "Vespa Life Thailand",
-      "channel_slug": "vespa-life-thailand",
-      "channel_avatar": "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?w=200&auto=format&fit=crop&q=80",
-      "thumbnail_url": "https://i4.ytimg.com/vi/G6O9QVfj6ek/hqdefault.jpg",
-      "published_at": "2026-09-08T08:25:43+00:00",
-      "url": "https://www.youtube.com/watch?v=G6O9QVfj6ek"
-    },
-    {
       "id": "iRF5XrYEM5o",
       "title": "Pattaya Beach Live Thailand",
       "channel_name": "Pattaya Beach Live",
@@ -141,16 +91,6 @@
       "thumbnail_url": "https://i2.ytimg.com/vi/iRF5XrYEM5o/hqdefault.jpg",
       "published_at": "2026-09-08T04:23:51+00:00",
       "url": "https://www.youtube.com/watch?v=iRF5XrYEM5o"
-    },
-    {
-      "id": "ruLn3MsSeLg",
-      "title": "VERY LATEST NEWS FROM THAILAND in English (8 September 2026) from Fabulous Radio Pattaya",
-      "channel_name": "Fabulous Pattaya",
-      "channel_slug": "fabulous-pattaya",
-      "channel_avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&auto=format&fit=crop&q=80",
-      "thumbnail_url": "https://i3.ytimg.com/vi/ruLn3MsSeLg/hqdefault.jpg",
-      "published_at": "2026-09-08T02:00:23+00:00",
-      "url": "https://www.youtube.com/watch?v=ruLn3MsSeLg"
     },
     {
       "id": "vmrcaoNZqMA",
@@ -173,26 +113,6 @@
       "url": "https://www.youtube.com/watch?v=KWFjDMbGN60"
     },
     {
-      "id": "cDw04fGc958",
-      "title": "Pattaya Soi 6 Walk 🇹🇭 | Monday at 10PM",
-      "channel_name": "Vespa Life Thailand",
-      "channel_slug": "vespa-life-thailand",
-      "channel_avatar": "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?w=200&auto=format&fit=crop&q=80",
-      "thumbnail_url": "https://i4.ytimg.com/vi/cDw04fGc958/hqdefault.jpg",
-      "published_at": "2026-09-07T16:27:15+00:00",
-      "url": "https://www.youtube.com/watch?v=cDw04fGc958"
-    },
-    {
-      "id": "yBt1Y4_DwZ4",
-      "title": "Thepprasit Night Market Food Court 🇹🇭 | Pattaya Street Food Walk",
-      "channel_name": "Vespa Life Thailand",
-      "channel_slug": "vespa-life-thailand",
-      "channel_avatar": "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?w=200&auto=format&fit=crop&q=80",
-      "thumbnail_url": "https://i2.ytimg.com/vi/yBt1Y4_DwZ4/hqdefault.jpg",
-      "published_at": "2026-09-07T15:46:02+00:00",
-      "url": "https://www.youtube.com/watch?v=yBt1Y4_DwZ4"
-    },
-    {
       "id": "8278MYGkLxY",
       "title": "Pattaya Beach Live Thailand",
       "channel_name": "Pattaya Beach Live",
@@ -213,16 +133,6 @@
       "url": "https://www.youtube.com/watch?v=LpYDGA0WwLw"
     },
     {
-      "id": "4P_DwkZgDzI",
-      "title": "VERY LATEST NEWS FROM THAILAND in English (7 September 2026)",
-      "channel_name": "Fabulous Pattaya",
-      "channel_slug": "fabulous-pattaya",
-      "channel_avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&auto=format&fit=crop&q=80",
-      "thumbnail_url": "https://i1.ytimg.com/vi/4P_DwkZgDzI/hqdefault.jpg",
-      "published_at": "2026-09-07T02:00:19+00:00",
-      "url": "https://www.youtube.com/watch?v=4P_DwkZgDzI"
-    },
-    {
       "id": "G-jwyGCG674",
       "title": "Pattaya Beach Live Thailand",
       "channel_name": "Pattaya Beach Live",
@@ -231,36 +141,6 @@
       "thumbnail_url": "https://i4.ytimg.com/vi/G-jwyGCG674/hqdefault.jpg",
       "published_at": "2026-09-07T01:05:31+00:00",
       "url": "https://www.youtube.com/watch?v=G-jwyGCG674"
-    },
-    {
-      "id": "N6AR9zDrTHs",
-      "title": "Indian Tourist detained in Pattaya after picking up taxi driver's wallet and not returning it.",
-      "channel_name": "The Pattaya News",
-      "channel_slug": "the-pattaya-news",
-      "channel_avatar": "https://images.unsplash.com/photo-1585829365295-ab7cd400c167?w=200&auto=format&fit=crop&q=80",
-      "thumbnail_url": "https://i3.ytimg.com/vi/N6AR9zDrTHs/hqdefault.jpg",
-      "published_at": "2026-09-06T19:39:35+00:00",
-      "url": "https://www.youtube.com/watch?v=N6AR9zDrTHs"
-    },
-    {
-      "id": "_qpEQPPEvOs",
-      "title": "Pattaya Right Now 🇹🇭 | Tree Town, Myth Night & LK Metro at 7PM",
-      "channel_name": "Vespa Life Thailand",
-      "channel_slug": "vespa-life-thailand",
-      "channel_avatar": "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?w=200&auto=format&fit=crop&q=80",
-      "thumbnail_url": "https://i4.ytimg.com/vi/_qpEQPPEvOs/hqdefault.jpg",
-      "published_at": "2026-09-06T13:56:55+00:00",
-      "url": "https://www.youtube.com/watch?v=_qpEQPPEvOs"
-    },
-    {
-      "id": "Bf097cVmfz0",
-      "title": "SUNDAY NIGHT LIVE with Nick & Marti - 6th SEPT 2026 - 5pm",
-      "channel_name": "NDtvi Thailand",
-      "channel_slug": "ndtvi-thailand",
-      "channel_avatar": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=200&auto=format&fit=crop&q=80",
-      "thumbnail_url": "https://i3.ytimg.com/vi/Bf097cVmfz0/hqdefault.jpg",
-      "published_at": "2026-09-06T11:42:05+00:00",
-      "url": "https://www.youtube.com/watch?v=Bf097cVmfz0"
     },
     {
       "id": "zXfswS-xzbM",
@@ -303,26 +183,6 @@
       "url": "https://www.youtube.com/watch?v=G1RTX6dWHLI"
     },
     {
-      "id": "eccievAlBdQ",
-      "title": "Walking Street Packed 11:30PM | Last Night of Navy Shore Leave — Sat 5 Sep 🇹🇭",
-      "channel_name": "Vespa Life Thailand",
-      "channel_slug": "vespa-life-thailand",
-      "channel_avatar": "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?w=200&auto=format&fit=crop&q=80",
-      "thumbnail_url": "https://i2.ytimg.com/vi/eccievAlBdQ/hqdefault.jpg",
-      "published_at": "2026-09-05T18:25:13+00:00",
-      "url": "https://www.youtube.com/watch?v=eccievAlBdQ"
-    },
-    {
-      "id": "QbQSZidg-Vw",
-      "title": "Elderly British Tourist Brutally Assaulted on Jomtien Beach by Intoxicated Thai Man",
-      "channel_name": "The Pattaya News",
-      "channel_slug": "the-pattaya-news",
-      "channel_avatar": "https://images.unsplash.com/photo-1585829365295-ab7cd400c167?w=200&auto=format&fit=crop&q=80",
-      "thumbnail_url": "https://i2.ytimg.com/vi/QbQSZidg-Vw/hqdefault.jpg",
-      "published_at": "2026-09-05T14:47:18+00:00",
-      "url": "https://www.youtube.com/watch?v=QbQSZidg-Vw"
-    },
-    {
       "id": "ULeVS1TCE-g",
       "title": "泰國簽證新規10天後生效，中國遊客的免簽到底削沒削？泰國旅遊稅大漲，最快明年初開徵；新版驅逐條例施行，在泰國惹事將享受一條龍服務（泰國週刊 375 期 • 社會）",
       "channel_name": "Kev-in-Thailand",
@@ -331,16 +191,6 @@
       "thumbnail_url": "https://i2.ytimg.com/vi/ULeVS1TCE-g/hqdefault.jpg",
       "published_at": "2026-09-05T12:30:06+00:00",
       "url": "https://www.youtube.com/watch?v=ULeVS1TCE-g"
-    },
-    {
-      "id": "f2Bv-SBzvWw",
-      "title": "Pattaya Right Now 🇹🇭 | Soi 7 & Soi 8 at 8PM",
-      "channel_name": "Vespa Life Thailand",
-      "channel_slug": "vespa-life-thailand",
-      "channel_avatar": "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?w=200&auto=format&fit=crop&q=80",
-      "thumbnail_url": "https://i3.ytimg.com/vi/f2Bv-SBzvWw/hqdefault.jpg",
-      "published_at": "2026-09-05T04:43:37+00:00",
-      "url": "https://www.youtube.com/watch?v=f2Bv-SBzvWw"
     },
     {
       "id": "Ur-UDpN0180",
@@ -373,86 +223,6 @@
       "url": "https://www.youtube.com/watch?v=emVogz_ZOGM"
     },
     {
-      "id": "CSoCMv4aRYQ",
-      "title": "Indian Tourist scammed for 3000 Baht in Pattaya in \"Show me your money\" scam.",
-      "channel_name": "The Pattaya News",
-      "channel_slug": "the-pattaya-news",
-      "channel_avatar": "https://images.unsplash.com/photo-1585829365295-ab7cd400c167?w=200&auto=format&fit=crop&q=80",
-      "thumbnail_url": "https://i4.ytimg.com/vi/CSoCMv4aRYQ/hqdefault.jpg",
-      "published_at": "2026-09-04T22:25:09+00:00",
-      "url": "https://www.youtube.com/watch?v=CSoCMv4aRYQ"
-    },
-    {
-      "id": "CF-swrQyEYg",
-      "title": "US Military have a good time in Pattaya on first port stop in over 260 Days.",
-      "channel_name": "The Pattaya News",
-      "channel_slug": "the-pattaya-news",
-      "channel_avatar": "https://images.unsplash.com/photo-1585829365295-ab7cd400c167?w=200&auto=format&fit=crop&q=80",
-      "thumbnail_url": "https://i4.ytimg.com/vi/CF-swrQyEYg/hqdefault.jpg",
-      "published_at": "2026-09-04T21:34:43+00:00",
-      "url": "https://www.youtube.com/watch?v=CF-swrQyEYg"
-    },
-    {
-      "id": "kL4tQ0aEjnY",
-      "title": "Pattaya Soi 6 Walk 🇹🇭 | Friday Sep 2026 at 8PM",
-      "channel_name": "Vespa Life Thailand",
-      "channel_slug": "vespa-life-thailand",
-      "channel_avatar": "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?w=200&auto=format&fit=crop&q=80",
-      "thumbnail_url": "https://i4.ytimg.com/vi/kL4tQ0aEjnY/hqdefault.jpg",
-      "published_at": "2026-09-04T16:41:34+00:00",
-      "url": "https://www.youtube.com/watch?v=kL4tQ0aEjnY"
-    },
-    {
-      "id": "1o_aM7FRjPk",
-      "title": "Would I ever go back to live in England?  #livingabroad #england #thailand #expat",
-      "channel_name": "Dan About Thailand",
-      "channel_slug": "dan-about-thailand",
-      "channel_avatar": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&auto=format&fit=crop&q=80",
-      "thumbnail_url": "https://i2.ytimg.com/vi/1o_aM7FRjPk/hqdefault.jpg",
-      "published_at": "2026-09-04T15:27:04+00:00",
-      "url": "https://www.youtube.com/watch?v=1o_aM7FRjPk"
-    },
-    {
-      "id": "ynzbVb9b2-Y",
-      "title": "5,000 sailors hit Pattaya. Traffic looks like this.",
-      "channel_name": "Vespa Life Thailand",
-      "channel_slug": "vespa-life-thailand",
-      "channel_avatar": "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?w=200&auto=format&fit=crop&q=80",
-      "thumbnail_url": "https://i2.ytimg.com/vi/ynzbVb9b2-Y/hqdefault.jpg",
-      "published_at": "2026-09-04T13:00:03+00:00",
-      "url": "https://www.youtube.com/watch?v=ynzbVb9b2-Y"
-    },
-    {
-      "id": "joFdrlIsa4o",
-      "title": "THE YAYA VIDEO. V 829 20 Seconds in Thailand",
-      "channel_name": "Thailand Rob",
-      "channel_slug": "thailand-rob",
-      "channel_avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&auto=format&fit=crop&q=80",
-      "thumbnail_url": "https://i3.ytimg.com/vi/joFdrlIsa4o/hqdefault.jpg",
-      "published_at": "2026-09-04T12:04:15+00:00",
-      "url": "https://www.youtube.com/watch?v=joFdrlIsa4o"
-    },
-    {
-      "id": "sbbqOg-cYv8",
-      "title": "A Perfect Rainy Day In BANGKOK 🇹🇭 #arsenabroad",
-      "channel_name": "Live Love Thailand",
-      "channel_slug": "live-love-thailand",
-      "channel_avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&auto=format&fit=crop&q=80",
-      "thumbnail_url": "https://i4.ytimg.com/vi/sbbqOg-cYv8/hqdefault.jpg",
-      "published_at": "2026-09-04T11:00:22+00:00",
-      "url": "https://www.youtube.com/watch?v=sbbqOg-cYv8"
-    },
-    {
-      "id": "lbHe6hzrThE",
-      "title": "Walking Street Pattaya — Navy in Town | USS Abraham Lincoln Shore Leave Night Walk",
-      "channel_name": "Vespa Life Thailand",
-      "channel_slug": "vespa-life-thailand",
-      "channel_avatar": "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?w=200&auto=format&fit=crop&q=80",
-      "thumbnail_url": "https://i1.ytimg.com/vi/lbHe6hzrThE/hqdefault.jpg",
-      "published_at": "2026-09-04T07:59:42+00:00",
-      "url": "https://www.youtube.com/watch?v=lbHe6hzrThE"
-    },
-    {
       "id": "Gjw_Uy-KnEc",
       "title": "Pattaya Beach Live Thailand",
       "channel_name": "Pattaya Beach Live",
@@ -461,16 +231,6 @@
       "thumbnail_url": "https://i4.ytimg.com/vi/Gjw_Uy-KnEc/hqdefault.jpg",
       "published_at": "2026-09-04T05:04:01+00:00",
       "url": "https://www.youtube.com/watch?v=Gjw_Uy-KnEc"
-    },
-    {
-      "id": "dZVHru5H8zA",
-      "title": "WHAT'S HAPPENING IN PATTAYA? Fabulous Radio Pattaya (4 September 2026)",
-      "channel_name": "Fabulous Pattaya",
-      "channel_slug": "fabulous-pattaya",
-      "channel_avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&auto=format&fit=crop&q=80",
-      "thumbnail_url": "https://i1.ytimg.com/vi/dZVHru5H8zA/hqdefault.jpg",
-      "published_at": "2026-09-04T05:00:18+00:00",
-      "url": "https://www.youtube.com/watch?v=dZVHru5H8zA"
     },
     {
       "id": "p0K2GlzQOCU",
@@ -483,16 +243,6 @@
       "url": "https://www.youtube.com/watch?v=p0K2GlzQOCU"
     },
     {
-      "id": "iwvt8E9-YSg",
-      "title": "VERY LATEST NEWS FROM THAILAND in English (4 September 2026) from Fabulous Radio Pattaya",
-      "channel_name": "Fabulous Pattaya",
-      "channel_slug": "fabulous-pattaya",
-      "channel_avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&auto=format&fit=crop&q=80",
-      "thumbnail_url": "https://i2.ytimg.com/vi/iwvt8E9-YSg/hqdefault.jpg",
-      "published_at": "2026-09-04T02:00:01+00:00",
-      "url": "https://www.youtube.com/watch?v=iwvt8E9-YSg"
-    },
-    {
       "id": "JyCqbkC6U0Q",
       "title": "Pattaya Beach Live Thailand",
       "channel_name": "Pattaya Beach Live",
@@ -501,16 +251,6 @@
       "thumbnail_url": "https://i3.ytimg.com/vi/JyCqbkC6U0Q/hqdefault.jpg",
       "published_at": "2026-09-04T01:12:48+00:00",
       "url": "https://www.youtube.com/watch?v=JyCqbkC6U0Q"
-    },
-    {
-      "id": "Ga0t_pUH7TY",
-      "title": "LK Metro Pattaya at Night | Nightlife Walking Tour",
-      "channel_name": "Vespa Life Thailand",
-      "channel_slug": "vespa-life-thailand",
-      "channel_avatar": "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?w=200&auto=format&fit=crop&q=80",
-      "thumbnail_url": "https://i4.ytimg.com/vi/Ga0t_pUH7TY/hqdefault.jpg",
-      "published_at": "2026-09-04T00:43:11+00:00",
-      "url": "https://www.youtube.com/watch?v=Ga0t_pUH7TY"
     },
     {
       "id": "KGOzUgtT9CE",
@@ -531,76 +271,6 @@
       "thumbnail_url": "https://i1.ytimg.com/vi/xVyLj30sRr4/hqdefault.jpg",
       "published_at": "2026-09-03T18:44:30+00:00",
       "url": "https://www.youtube.com/watch?v=xVyLj30sRr4"
-    },
-    {
-      "id": "Tv58VVA4HzI",
-      "title": "Pattaya Beach Live Thailand",
-      "channel_name": "Pattaya Beach Live",
-      "channel_slug": "pattaya-beach-live",
-      "channel_avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&auto=format&fit=crop&q=80",
-      "thumbnail_url": "https://i1.ytimg.com/vi/Tv58VVA4HzI/hqdefault.jpg",
-      "published_at": "2026-09-03T13:37:48+00:00",
-      "url": "https://www.youtube.com/watch?v=Tv58VVA4HzI"
-    },
-    {
-      "id": "bCWoFOXmw-c",
-      "title": "Pattaya DREAM Delayed",
-      "channel_name": "NDtvi Thailand",
-      "channel_slug": "ndtvi-thailand",
-      "channel_avatar": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=200&auto=format&fit=crop&q=80",
-      "thumbnail_url": "https://i3.ytimg.com/vi/bCWoFOXmw-c/hqdefault.jpg",
-      "published_at": "2026-09-03T11:52:53+00:00",
-      "url": "https://www.youtube.com/watch?v=bCWoFOXmw-c"
-    },
-    {
-      "id": "eRIh1Ba4Mls",
-      "title": "Pattaya Night Walk: Soi Pothole, Tree town, Myth Night, Soi Honey, LK Metro",
-      "channel_name": "Vespa Life Thailand",
-      "channel_slug": "vespa-life-thailand",
-      "channel_avatar": "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?w=200&auto=format&fit=crop&q=80",
-      "thumbnail_url": "https://i2.ytimg.com/vi/eRIh1Ba4Mls/hqdefault.jpg",
-      "published_at": "2026-09-03T08:02:27+00:00",
-      "url": "https://www.youtube.com/watch?v=eRIh1Ba4Mls"
-    },
-    {
-      "id": "8KtjtUIdZUc",
-      "title": "VERY LATEST NEWS FROM THAILAND in English (3 September 2026) from Fabulous Radio Pattaya",
-      "channel_name": "Fabulous Pattaya",
-      "channel_slug": "fabulous-pattaya",
-      "channel_avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&auto=format&fit=crop&q=80",
-      "thumbnail_url": "https://i1.ytimg.com/vi/8KtjtUIdZUc/hqdefault.jpg",
-      "published_at": "2026-09-03T02:00:39+00:00",
-      "url": "https://www.youtube.com/watch?v=8KtjtUIdZUc"
-    },
-    {
-      "id": "KQpaAe-jFtQ",
-      "title": "Pattaya Short Term Condo Rentals, 1 week, 1 month",
-      "channel_name": "Everything Pattaya",
-      "channel_slug": "everything-pattaya",
-      "channel_avatar": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=200&auto=format&fit=crop&q=80",
-      "thumbnail_url": "https://i4.ytimg.com/vi/KQpaAe-jFtQ/hqdefault.jpg",
-      "published_at": "2026-09-03T02:00:21+00:00",
-      "url": "https://www.youtube.com/watch?v=KQpaAe-jFtQ"
-    },
-    {
-      "id": "y7DZgysK0Xg",
-      "title": "Jatoi’s Kitchen, check this out! #shorts #pattaya #pattayathailand",
-      "channel_name": "Buzzin Pattaya",
-      "channel_slug": "buzzin-pattaya",
-      "channel_avatar": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&auto=format&fit=crop&q=80",
-      "thumbnail_url": "https://i2.ytimg.com/vi/y7DZgysK0Xg/hqdefault.jpg",
-      "published_at": "2026-09-03T02:00:15+00:00",
-      "url": "https://www.youtube.com/watch?v=y7DZgysK0Xg"
-    },
-    {
-      "id": "uLgzgu4jK8g",
-      "title": "【4K HDR】5AM Bangkok Traffic 🇹🇭 Before the City Wakes Up | Sukhumvit Rd - Siam",
-      "channel_name": "JWINTHAI",
-      "channel_slug": "jwinthai",
-      "channel_avatar": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=200&auto=format&fit=crop&q=80",
-      "thumbnail_url": "https://i2.ytimg.com/vi/uLgzgu4jK8g/hqdefault.jpg",
-      "published_at": "2026-09-03T00:00:28+00:00",
-      "url": "https://www.youtube.com/watch?v=uLgzgu4jK8g"
     }
   ]
 }
