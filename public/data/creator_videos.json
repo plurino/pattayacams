@@ -1,7 +1,37 @@
 {
-  "last_updated": "2026-09-10T10:20:23.271Z",
-  "total_videos": 60,
+  "last_updated": "2026-09-10T15:36:01.657Z",
+  "total_videos": 61,
   "videos": [
+    {
+      "id": "eovnKGvHAbk",
+      "title": "Rainy Season. No Problem. 🍺  #rainyseason #rain #thailand #pattaya",
+      "channel_name": "Dan About Thailand",
+      "channel_slug": "dan-about-thailand",
+      "channel_avatar": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&auto=format&fit=crop&q=80",
+      "thumbnail_url": "https://i2.ytimg.com/vi/eovnKGvHAbk/hqdefault.jpg",
+      "published_at": "2026-09-10T14:38:34+00:00",
+      "url": "https://www.youtube.com/watch?v=eovnKGvHAbk"
+    },
+    {
+      "id": "4fWhyg39Y6c",
+      "title": "Police Officer who shot and killed Teacher wife at Banglamung school Surrenders, Charged with murder",
+      "channel_name": "The Pattaya News",
+      "channel_slug": "the-pattaya-news",
+      "channel_avatar": "https://images.unsplash.com/photo-1585829365295-ab7cd400c167?w=200&auto=format&fit=crop&q=80",
+      "thumbnail_url": "https://i1.ytimg.com/vi/4fWhyg39Y6c/hqdefault.jpg",
+      "published_at": "2026-09-10T11:18:21+00:00",
+      "url": "https://www.youtube.com/watch?v=4fWhyg39Y6c"
+    },
+    {
+      "id": "wpjiyDFoN0Q",
+      "title": "Pattaya Beach Live Thailand",
+      "channel_name": "Pattaya Beach Live",
+      "channel_slug": "pattaya-beach-live",
+      "channel_avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&auto=format&fit=crop&q=80",
+      "thumbnail_url": "https://i4.ytimg.com/vi/wpjiyDFoN0Q/hqdefault.jpg",
+      "published_at": "2026-09-10T10:46:34+00:00",
+      "url": "https://www.youtube.com/watch?v=wpjiyDFoN0Q"
+    },
     {
       "id": "kdb4o-pVRr4",
       "title": "Pattaya Beach Live Thailand",
@@ -581,26 +611,6 @@
       "thumbnail_url": "https://i4.ytimg.com/vi/KGOzUgtT9CE/hqdefault.jpg",
       "published_at": "2026-09-04T00:00:10+00:00",
       "url": "https://www.youtube.com/watch?v=KGOzUgtT9CE"
-    },
-    {
-      "id": "xVyLj30sRr4",
-      "title": "Pattaya Beach Live Thailand",
-      "channel_name": "Pattaya Beach Live",
-      "channel_slug": "pattaya-beach-live",
-      "channel_avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&auto=format&fit=crop&q=80",
-      "thumbnail_url": "https://i1.ytimg.com/vi/xVyLj30sRr4/hqdefault.jpg",
-      "published_at": "2026-09-03T18:44:30+00:00",
-      "url": "https://www.youtube.com/watch?v=xVyLj30sRr4"
-    },
-    {
-      "id": "bCWoFOXmw-c",
-      "title": "Pattaya DREAM Delayed",
-      "channel_name": "NDtvi Thailand",
-      "channel_slug": "ndtvi-thailand",
-      "channel_avatar": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=200&auto=format&fit=crop&q=80",
-      "thumbnail_url": "https://i3.ytimg.com/vi/bCWoFOXmw-c/hqdefault.jpg",
-      "published_at": "2026-09-03T11:52:53+00:00",
-      "url": "https://www.youtube.com/watch?v=bCWoFOXmw-c"
     }
   ]
 }
