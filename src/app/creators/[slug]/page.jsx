@@ -422,7 +422,7 @@ export default function CreatorProfilePage({ params }) {
           <p>© {new Date().getFullYear()} PattayaCams.com • Independent Tourism & Webcam Directory</p>
           <div className="flex items-center gap-4">
             <Link href="/" className="hover:text-slate-300 transition-colors">Live Radar</Link>
-            <Link href="/?view=pulse" className="hover:text-slate-300 transition-colors">Pattaya Pulse</Link>
+            <Link href="/?view=vids" className="hover:text-slate-300 transition-colors">PattayaVids</Link>
             <Link href="/creators" className="hover:text-slate-300 transition-colors">Creators Hub</Link>
           </div>
         </div>

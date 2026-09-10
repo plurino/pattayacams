@@ -13,11 +13,21 @@ import venuesData from '@/public/data/venues.json';
 import streamStatus from '@/public/data/stream_status.json';
 
 export default function AppRoot() {
-  const [viewMode, setViewMode] = useState('map'); // 'map' | 'grid'
+  const [viewMode, setViewMode] = useState('map'); // 'map' | 'grid' | 'vids'
   const [selectedEntity, setSelectedEntity] = useState(null);
   const [isTripModalOpen, setIsTripModalOpen] = useState(false);
   const [isSponsorModalOpen, setIsSponsorModalOpen] = useState(false);
   const mapInstanceRef = useRef(null);
+
+  React.useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const v = params.get('view');
+      if (v === 'vids' || v === 'pulse') setViewMode('vids');
+      else if (v === 'grid') setViewMode('grid');
+      else if (v === 'map') setViewMode('map');
+    }
+  }, []);
 
   const handleMapInstance = useCallback((map) => {
     mapInstanceRef.current = map;
@@ -104,13 +114,13 @@ export default function AppRoot() {
         {viewMode === 'grid' && (
           <MultiCamGrid onSelectEntity={handleSelectEntity} />
         )}
-        {viewMode === 'pulse' && (
+        {(viewMode === 'vids' || viewMode === 'pulse') && (
           <CreatorVODFeed />
         )}
       </main>
 
       {/* 3. Bottom Roaming Streamers Tray (shown on map and grid views) */}
-      {viewMode !== 'pulse' && (
+      {viewMode !== 'vids' && viewMode !== 'pulse' && (
         <RoamingTray
           onSelectStreamer={handleSelectEntity}
           onOpenSponsorModal={() => setIsSponsorModalOpen(true)}

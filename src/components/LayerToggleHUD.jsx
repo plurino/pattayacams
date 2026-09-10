@@ -1,7 +1,17 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Layers, Video, Eye, Navigation, AlertCircle, X } from 'lucide-react';
+import {
+  Layers,
+  AlertCircle,
+  X,
+  Compass,
+  RotateCcw,
+  RotateCw,
+  Sun,
+  Moon,
+  Navigation,
+} from 'lucide-react';
 
 export default function LayerToggleHUD({
   showVenues,
@@ -13,96 +23,184 @@ export default function LayerToggleHUD({
   venueCount = 0,
   camCount = 0,
   transitCount = 3,
+  bearing = 0,
+  onRotateLeft,
+  onRotateRight,
+  onResetNorth,
+  mapTheme = 'dark',
+  onToggleTheme,
 }) {
   const [toastMessage, setToastMessage] = useState(null);
 
   const handleCctvToggle = (checked) => {
     setShowCams(checked);
     if (checked) {
-      setToastMessage('Pattaya municipal cameras require manual code lookup on the official city portal.');
+      setToastMessage('Surveillance mode active: click any cyan camera to inspect official city stream code.');
       setTimeout(() => setToastMessage(null), 5000);
     }
   };
 
+  const isRotated = bearing !== 0;
+
   return (
-    <aside aria-label="Map Layer Controls" className="absolute bottom-6 left-6 z-[1000] flex flex-col gap-2 pointer-events-auto">
-      {/* CCTV Disclaimer Toast */}
-      {toastMessage && (
-        <div className="bg-surface/95 backdrop-blur-md border border-brandCyan/50 text-slate-200 text-xs px-3 py-2 rounded-xl shadow-2xl flex items-center gap-2 max-w-[280px] animate-fade-in">
-          <AlertCircle className="w-4 h-4 text-brandCyan shrink-0" />
-          <span className="leading-tight text-[11px]">{toastMessage}</span>
-          <button
-            onClick={() => setToastMessage(null)}
-            className="text-slate-400 hover:text-white shrink-0 p-0.5"
+    <>
+      {/* 1. Top-Right Floating Controls: Compass, Quick Rotation & Theme Switcher */}
+      <div className="absolute top-24 right-3 z-[1000] flex flex-col items-center gap-1.5 pointer-events-auto select-none">
+        {/* Compass Needle Rose Button (Click to reset to North) */}
+        <button
+          onClick={onResetNorth}
+          className={`w-9 h-9 rounded-xl bg-surface/90 backdrop-blur-md border transition-all flex items-center justify-center relative shadow-xl group ${
+            isRotated
+              ? 'border-brandCyan text-brandCyan shadow-[0_0_12px_rgba(0,229,255,0.4)]'
+              : 'border-borderDark text-slate-300 hover:text-white hover:border-slate-500'
+          }`}
+          title={isRotated ? `Bearing: ${bearing}° • Click to Reset North (0°)` : 'Facing North (0°)'}
+        >
+          {/* Rotating Compass Needle */}
+          <div
+            className="w-5 h-5 transition-transform duration-200 ease-out flex items-center justify-center relative"
+            style={{ transform: `rotate(${-bearing}deg)` }}
           >
-            <X className="w-3 h-3" />
+            <Navigation className="w-4 h-4 fill-brandPink text-brandCyan drop-shadow" />
+            <span className="absolute -top-1.5 text-[7px] font-black text-brandPink font-mono">N</span>
+          </div>
+
+          {/* Rotated Angle Badge */}
+          {isRotated && (
+            <span className="absolute -bottom-1 -right-1 px-1 py-0.2 rounded bg-brandCyan text-canvas font-mono font-black text-[8px]">
+              {bearing}°
+            </span>
+          )}
+        </button>
+
+        {/* Quick Rotation Buttons (-45° and +45°) */}
+        <div className="flex flex-col rounded-xl bg-surface/90 backdrop-blur-md border border-borderDark shadow-xl overflow-hidden divide-y divide-borderDark/60">
+          <button
+            onClick={onRotateLeft}
+            className="w-9 h-8 flex items-center justify-center text-slate-300 hover:text-brandCyan hover:bg-surfaceLight/60 transition-colors"
+            title="Rotate Left 45° (↶)"
+          >
+            <RotateCcw className="w-3.5 h-3.5" />
+          </button>
+          <button
+            onClick={onRotateRight}
+            className="w-9 h-8 flex items-center justify-center text-slate-300 hover:text-brandCyan hover:bg-surfaceLight/60 transition-colors"
+            title="Rotate Right 45° (↷)"
+          >
+            <RotateCw className="w-3.5 h-3.5" />
           </button>
         </div>
-      )}
 
-      <div className="bg-surface/90 backdrop-blur-md border border-borderDark rounded-xl p-3 shadow-2xl flex flex-col gap-2 min-w-[200px] text-xs font-medium">
-        <div className="flex items-center gap-2 pb-1.5 border-b border-borderDark/60 text-slate-400 uppercase tracking-wider font-mono text-[10px]">
-          <Layers className="w-3.5 h-3.5 text-brandCyan" />
-          <span>Map Layers</span>
-        </div>
-
-        {/* Venues Toggle */}
-        <label className="flex items-center justify-between gap-3 cursor-pointer py-1 px-1.5 rounded-lg hover:bg-surfaceLight/50 transition-colors select-none">
-          <div className="flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-brandPink shadow-[0_0_8px_#FF2A6D]"></span>
-            <span className="text-slate-200">Live Venues</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-[10px] font-mono text-slate-400 bg-surfaceLight px-1.5 py-0.5 rounded">
-              {venueCount}
-            </span>
-            <input
-              type="checkbox"
-              checked={showVenues}
-              onChange={(e) => setShowVenues(e.target.checked)}
-              className="w-4 h-4 rounded border-borderDark bg-surface text-brandPink focus:ring-brandPink focus:ring-offset-0 cursor-pointer accent-brandPink"
-            />
-          </div>
-        </label>
-
-        {/* CCTVs Toggle */}
-        <label className="flex items-center justify-between gap-3 cursor-pointer py-1 px-1.5 rounded-lg hover:bg-surfaceLight/50 transition-colors select-none">
-          <div className="flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-brandCyan shadow-[0_0_8px_#00E5FF]"></span>
-            <span className="text-slate-200">City CCTV Cams</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-[10px] font-mono text-slate-400 bg-surfaceLight px-1.5 py-0.5 rounded">
-              {camCount}
-            </span>
-            <input
-              type="checkbox"
-              checked={showCams}
-              onChange={(e) => handleCctvToggle(e.target.checked)}
-              className="w-4 h-4 rounded border-borderDark bg-surface text-brandCyan focus:ring-brandCyan focus:ring-offset-0 cursor-pointer accent-brandCyan"
-            />
-          </div>
-        </label>
-
-      {/* Transit Lines Toggle */}
-      <label className="flex items-center justify-between gap-3 cursor-pointer py-1 px-1.5 rounded-lg hover:bg-surfaceLight/50 transition-colors select-none">
-        <div className="flex items-center gap-2">
-          <span className="w-2.5 h-1 rounded bg-brandBlue shadow-[0_0_6px_#3B82F6]"></span>
-          <span className="text-slate-200">Baht Bus Transit</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <span className="text-[10px] font-mono text-slate-400 bg-surfaceLight px-1.5 py-0.5 rounded">
-            {transitCount}
-          </span>
-          <input
-            type="checkbox"
-            checked={showTransit}
-            onChange={(e) => setShowTransit(e.target.checked)}
-            className="w-4 h-4 rounded border-borderDark bg-surface text-brandBlue focus:ring-brandBlue focus:ring-offset-0 cursor-pointer accent-brandBlue"
-          />
-        </div>
-      </label>
+        {/* Dark / Light Basemap Theme Toggle */}
+        <button
+          onClick={onToggleTheme}
+          className="w-9 h-9 rounded-xl bg-surface/90 backdrop-blur-md border border-borderDark hover:border-brandGold/60 text-slate-300 hover:text-brandGold transition-all flex items-center justify-center shadow-xl group"
+          title={mapTheme === 'dark' ? 'Switch to Light Map Mode' : 'Switch to Dark Map Mode'}
+        >
+          {mapTheme === 'dark' ? (
+            <Sun className="w-4 h-4 group-hover:rotate-90 transition-transform text-brandGold" />
+          ) : (
+            <Moon className="w-4 h-4 group-hover:-rotate-12 transition-transform text-indigo-400" />
+          )}
+        </button>
       </div>
-    </aside>
+
+      {/* 2. Bottom-Left Map Layer Controller */}
+      <aside aria-label="Map Layer Controls" className="absolute bottom-6 left-6 z-[1000] flex flex-col gap-2 pointer-events-auto select-none">
+        {/* CCTV Disclaimer Toast */}
+        {toastMessage && (
+          <div className="bg-surface/95 backdrop-blur-md border border-brandCyan/50 text-slate-200 text-xs px-3 py-2 rounded-xl shadow-2xl flex items-center gap-2 max-w-[280px] animate-fade-in">
+            <AlertCircle className="w-4 h-4 text-brandCyan shrink-0" />
+            <span className="leading-tight text-[11px]">{toastMessage}</span>
+            <button
+              onClick={() => setToastMessage(null)}
+              className="text-slate-400 hover:text-white shrink-0 p-0.5"
+            >
+              <X className="w-3 h-3" />
+            </button>
+          </div>
+        )}
+
+        <div className="bg-surface/90 backdrop-blur-md border border-borderDark rounded-xl p-3 shadow-2xl flex flex-col gap-2 min-w-[220px] text-xs font-medium">
+          <div className="flex items-center justify-between pb-1.5 border-b border-borderDark/60 text-slate-400 font-mono text-[10px]">
+            <div className="flex items-center gap-1.5 uppercase tracking-wider">
+              <Layers className="w-3.5 h-3.5 text-brandCyan" />
+              <span>Map Layers</span>
+            </div>
+            <span className="text-[9px] text-slate-400 uppercase">
+              {mapTheme === 'dark' ? 'Dark Matter' : 'Light Map'}
+            </span>
+          </div>
+
+          {/* Venues Toggle */}
+          <label className="flex items-center justify-between gap-3 cursor-pointer py-1 px-1.5 rounded-lg hover:bg-surfaceLight/50 transition-colors">
+            <div className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-brandPink shadow-[0_0_8px_#FF2A6D]"></span>
+              <span className="text-slate-200">Live Venues</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-[10px] font-mono text-slate-400 bg-surfaceLight px-1.5 py-0.5 rounded">
+                {venueCount}
+              </span>
+              <input
+                type="checkbox"
+                checked={showVenues}
+                onChange={(e) => setShowVenues(e.target.checked)}
+                className="w-4 h-4 rounded border-borderDark bg-surface text-brandPink focus:ring-brandPink focus:ring-offset-0 cursor-pointer accent-brandPink"
+              />
+            </div>
+          </label>
+
+          {/* CCTVs Toggle (Dormant Constellation vs Active Cyan) */}
+          <label className="flex items-center justify-between gap-3 cursor-pointer py-1 px-1.5 rounded-lg hover:bg-surfaceLight/50 transition-colors">
+            <div className="flex items-center gap-2">
+              <span
+                className={`w-2.5 h-2.5 rounded-full transition-all ${
+                  showCams
+                    ? 'bg-brandCyan shadow-[0_0_8px_#00E5FF]'
+                    : 'bg-slate-400 opacity-60'
+                }`}
+              ></span>
+              <div className="flex flex-col">
+                <span className="text-slate-200">City CCTV Cams</span>
+                <span className="text-[9px] font-mono text-slate-400 -mt-0.5">
+                  {showCams ? 'Active Cyan Pins' : 'Dormant Radar Dots'}
+                </span>
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-[10px] font-mono text-slate-400 bg-surfaceLight px-1.5 py-0.5 rounded">
+                {camCount}
+              </span>
+              <input
+                type="checkbox"
+                checked={showCams}
+                onChange={(e) => handleCctvToggle(e.target.checked)}
+                className="w-4 h-4 rounded border-borderDark bg-surface text-brandCyan focus:ring-brandCyan focus:ring-offset-0 cursor-pointer accent-brandCyan"
+              />
+            </div>
+          </label>
+
+          {/* Transit Lines Toggle */}
+          <label className="flex items-center justify-between gap-3 cursor-pointer py-1 px-1.5 rounded-lg hover:bg-surfaceLight/50 transition-colors">
+            <div className="flex items-center gap-2">
+              <span className="w-2.5 h-1 rounded bg-brandBlue shadow-[0_0_6px_#3B82F6]"></span>
+              <span className="text-slate-200">Baht Bus Transit</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-[10px] font-mono text-slate-400 bg-surfaceLight px-1.5 py-0.5 rounded">
+                {transitCount}
+              </span>
+              <input
+                type="checkbox"
+                checked={showTransit}
+                onChange={(e) => setShowTransit(e.target.checked)}
+                className="w-4 h-4 rounded border-borderDark bg-surface text-brandBlue focus:ring-brandBlue focus:ring-offset-0 cursor-pointer accent-brandBlue"
+              />
+            </div>
+          </label>
+        </div>
+      </aside>
+    </>
   );
 }

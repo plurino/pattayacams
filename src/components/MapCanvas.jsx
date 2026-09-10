@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import venuesData from '@/public/data/venues.json';
 import cctvData from '@/public/data/cctv_cams.json';
 import busRoutes from '@/public/data/pattaya_baht_bus.geojson';
@@ -10,8 +10,10 @@ import streamStatus from '@/public/data/stream_status.json';
 export default function MapCanvas({ onSelectEntity, onMapInstance }) {
   const mapContainerRef = useRef(null);
   const mapRef = useRef(null);
+  const tileLayerRef = useRef(null);
   const layersRef = useRef({
-    cctvGroup: null,
+    cctvActiveGroup: null,
+    cctvDormantGroup: null,
     venueGroup: null,
     transitGroup: null,
   });
@@ -19,6 +21,54 @@ export default function MapCanvas({ onSelectEntity, onMapInstance }) {
   const [showVenues, setShowVenues] = useState(true);
   const [showCams, setShowCams] = useState(false);
   const [showTransit, setShowTransit] = useState(true);
+  const [bearing, setBearing] = useState(0);
+  const [mapTheme, setMapTheme] = useState('dark');
+
+  const cartoKey = process.env.NEXT_PUBLIC_CARTO_API_KEY || 'cb1_33su_1_683c1b500e92ad8b2069c2d2';
+
+  const getTileUrl = useCallback((theme) => {
+    return theme === 'light'
+      ? `https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png?key=${cartoKey}`
+      : `https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png?key=${cartoKey}`;
+  }, [cartoKey]);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const savedTheme = localStorage.getItem('pattayacams_map_theme');
+      if (savedTheme === 'light' || savedTheme === 'dark') {
+        setMapTheme(savedTheme);
+      }
+    }
+  }, []);
+
+  const handleToggleTheme = useCallback(() => {
+    const nextTheme = mapTheme === 'dark' ? 'light' : 'dark';
+    setMapTheme(nextTheme);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('pattayacams_map_theme', nextTheme);
+    }
+    if (tileLayerRef.current) {
+      tileLayerRef.current.setUrl(getTileUrl(nextTheme));
+    }
+  }, [mapTheme, getTileUrl]);
+
+  const handleRotateBy = useCallback((delta) => {
+    if (!mapRef.current) return;
+    if (typeof mapRef.current.setBearing === 'function') {
+      const current = mapRef.current.getBearing ? mapRef.current.getBearing() : 0;
+      const next = (current + delta + 360) % 360;
+      mapRef.current.setBearing(next);
+      setBearing(Math.round(next));
+    }
+  }, []);
+
+  const handleResetNorth = useCallback(() => {
+    if (!mapRef.current) return;
+    if (typeof mapRef.current.setBearing === 'function') {
+      mapRef.current.setBearing(0);
+      setBearing(0);
+    }
+  }, []);
 
   useEffect(() => {
     let isMounted = true;
@@ -30,6 +80,11 @@ export default function MapCanvas({ onSelectEntity, onMapInstance }) {
       if (typeof window !== 'undefined') {
         window.L = L.default || L;
         try {
+          require('leaflet-rotate');
+        } catch (e) {
+          console.warn('leaflet-rotate load warning', e);
+        }
+        try {
           require('leaflet.markercluster');
         } catch (e) {
           console.warn('MarkerCluster load warning', e);
@@ -38,7 +93,12 @@ export default function MapCanvas({ onSelectEntity, onMapInstance }) {
 
       const Leaflet = L.default || L;
 
-      // Initialize map centered at Central Pattaya / Soi Buakhao
+      // Determine initial theme
+      const currentTheme = typeof window !== 'undefined'
+        ? localStorage.getItem('pattayacams_map_theme') || 'dark'
+        : 'dark';
+
+      // Initialize map centered at Central Pattaya / Soi Buakhao with rotation support
       const map = Leaflet.map(mapContainerRef.current, {
         center: [12.9345, 100.8825],
         zoom: 14,
@@ -46,19 +106,29 @@ export default function MapCanvas({ onSelectEntity, onMapInstance }) {
         maxZoom: 18,
         zoomControl: false,
         attributionControl: true,
+        rotate: true,
+        bearing: 0,
+        touchRotate: true,
+        shiftKeyRotate: true,
       });
 
       Leaflet.control.zoom({ position: 'topright' }).addTo(map);
 
-      // CartoDB Dark Matter Tile Layer with API Key to remove watermarks
-      const cartoKey = process.env.NEXT_PUBLIC_CARTO_API_KEY || 'cb1_33su_1_683c1b500e92ad8b2069c2d2';
-      const tileUrl = `https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png?key=${cartoKey}`;
+      // Listen for rotation changes
+      map.on('rotate', () => {
+        if (typeof map.getBearing === 'function') {
+          setBearing(Math.round(map.getBearing() || 0));
+        }
+      });
 
-      Leaflet.tileLayer(tileUrl, {
+      // CartoDB Tile Layer with API Key
+      const initialTileUrl = getTileUrl(currentTheme);
+      const tileLayer = Leaflet.tileLayer(initialTileUrl, {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
         subdomains: 'abcd',
         maxZoom: 19,
       }).addTo(map);
+      tileLayerRef.current = tileLayer;
 
       // 1. Transit Vectors Layer Group
       const transitGroup = Leaflet.geoJSON(busRoutes, {
@@ -94,9 +164,23 @@ export default function MapCanvas({ onSelectEntity, onMapInstance }) {
       });
       transitGroup.addTo(map);
 
-      // 2. Municipal CCTV Layer (Individual 8px dots, unclustered per user request)
-      const cctvGroup = Leaflet.layerGroup();
+      // 2. Municipal CCTV Layer Groups:
+      // A) Dormant Subtle Radar Dots (Default unselected view: 5px subtle dots, non-clickable, no clutter)
+      const cctvDormantGroup = Leaflet.layerGroup();
+      cctvData.forEach((cam) => {
+        const dormantDot = Leaflet.circleMarker([cam.lat, cam.lng], {
+          radius: 2.5,
+          color: '#64748B',
+          fillColor: '#94A3B8',
+          fillOpacity: 0.35,
+          weight: 0.5,
+          interactive: false,
+        });
+        cctvDormantGroup.addLayer(dormantDot);
+      });
 
+      // B) Active CCTV Layer (Interactive 8px cyan glowing markers with tooltips and drawer trigger)
+      const cctvActiveGroup = Leaflet.layerGroup();
       cctvData.forEach((cam) => {
         const cctvIcon = Leaflet.divIcon({
           className: 'custom-cctv-marker-container',
@@ -123,9 +207,11 @@ export default function MapCanvas({ onSelectEntity, onMapInstance }) {
             onSelectEntity({ ...cam, type: 'cctv' });
           }
         });
-        cctvGroup.addLayer(marker);
+        cctvActiveGroup.addLayer(marker);
       });
-      // Do not add cctvGroup on initial mount since showCams is false by default
+
+      // Add dormant group initially since showCams is false by default
+      cctvDormantGroup.addTo(map);
 
       // 3. Hero Venues Layer Group (Live Pulsing vs Offline Dim Pins, 404 Pruned)
       const venueGroup = Leaflet.layerGroup();
@@ -218,7 +304,8 @@ export default function MapCanvas({ onSelectEntity, onMapInstance }) {
 
       mapRef.current = map;
       layersRef.current = {
-        cctvGroup,
+        cctvActiveGroup,
+        cctvDormantGroup,
         venueGroup,
         transitGroup,
       };
@@ -237,7 +324,7 @@ export default function MapCanvas({ onSelectEntity, onMapInstance }) {
         mapRef.current = null;
       }
     };
-  }, [onSelectEntity, onMapInstance]);
+  }, [onSelectEntity, onMapInstance, getTileUrl]);
 
   // Handle Layer Visibility Toggles
   useEffect(() => {
@@ -252,15 +339,26 @@ export default function MapCanvas({ onSelectEntity, onMapInstance }) {
     }
   }, [showVenues]);
 
+  // CCTV Toggle: Swap between Dormant subtle dots and Active cyan surveillance markers
   useEffect(() => {
     if (!mapRef.current) return;
-    const { cctvGroup } = layersRef.current;
-    if (!cctvGroup) return;
+    const { cctvActiveGroup, cctvDormantGroup } = layersRef.current;
+    if (!cctvActiveGroup || !cctvDormantGroup) return;
 
     if (showCams) {
-      if (!mapRef.current.hasLayer(cctvGroup)) mapRef.current.addLayer(cctvGroup);
+      if (mapRef.current.hasLayer(cctvDormantGroup)) {
+        mapRef.current.removeLayer(cctvDormantGroup);
+      }
+      if (!mapRef.current.hasLayer(cctvActiveGroup)) {
+        mapRef.current.addLayer(cctvActiveGroup);
+      }
     } else {
-      if (mapRef.current.hasLayer(cctvGroup)) mapRef.current.removeLayer(cctvGroup);
+      if (mapRef.current.hasLayer(cctvActiveGroup)) {
+        mapRef.current.removeLayer(cctvActiveGroup);
+      }
+      if (!mapRef.current.hasLayer(cctvDormantGroup)) {
+        mapRef.current.addLayer(cctvDormantGroup);
+      }
     }
   }, [showCams]);
 
@@ -280,6 +378,7 @@ export default function MapCanvas({ onSelectEntity, onMapInstance }) {
     <div className="relative w-full h-full overflow-hidden bg-canvas">
       <div ref={mapContainerRef} className="w-full h-full z-0" />
 
+      {/* Floating Map Controls & Layer Toggle HUD */}
       <LayerToggleHUD
         showVenues={showVenues}
         setShowVenues={setShowVenues}
@@ -290,6 +389,12 @@ export default function MapCanvas({ onSelectEntity, onMapInstance }) {
         venueCount={venuesData.filter(v => streamStatus?.entities?.[`venue-${v.slug}`]?.status !== 'error_404').length}
         camCount={cctvData.length}
         transitCount={busRoutes.features.length}
+        bearing={bearing}
+        onRotateLeft={() => handleRotateBy(-45)}
+        onRotateRight={() => handleRotateBy(45)}
+        onResetNorth={handleResetNorth}
+        mapTheme={mapTheme}
+        onToggleTheme={handleToggleTheme}
       />
     </div>
   );

@@ -71,9 +71,9 @@ export default function Navbar({
         {/* Live Network Status Pill */}
         <div className="hidden lg:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surfaceLight border border-borderDark text-[11px] font-mono text-slate-300">
           <span className="w-2 h-2 rounded-full bg-brandGreen animate-pulse shadow-[0_0_8px_#10B981]"></span>
-          <span className="font-semibold text-brandGreen">600 Cams</span>
-          <span className="text-slate-500">|</span>
-          <span className="text-slate-400">Live</span>
+          <span className="font-semibold text-brandGreen">Live Radar</span>
+          <span className="text-slate-500">•</span>
+          <span className="text-slate-300">Active</span>
         </div>
       </div>
 
@@ -131,44 +131,50 @@ export default function Navbar({
           </a>
         )}
 
-        {/* Mode Switcher: Map vs Grid vs Pulse */}
-        <div className="flex items-center bg-canvas/80 p-0.5 rounded-lg border border-borderDark">
+        {/* Mode Switcher: Map vs Grid vs PattayaVids */}
+        <div className="flex items-center bg-canvas/90 p-1 rounded-xl border border-borderDark/90 shadow-inner">
           <button
             onClick={() => setViewMode('map')}
-            className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium transition-all ${
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
               viewMode === 'map'
-                ? 'bg-brandCyan text-canvas font-semibold shadow-[0_0_10px_rgba(0,229,255,0.4)]'
-                : 'text-slate-400 hover:text-slate-200'
+                ? 'bg-brandCyan text-canvas shadow-[0_0_12px_rgba(0,229,255,0.4)]'
+                : 'text-slate-300 hover:text-white hover:bg-surfaceLight/50'
             }`}
-            title="Interactive Map View"
+            title="Interactive Live Map & Surveillance Radar"
           >
             <MapIcon className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">Map</span>
+            <span className="hidden sm:inline">Radar</span>
           </button>
           <button
             onClick={() => setViewMode('grid')}
-            className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium transition-all ${
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
               viewMode === 'grid'
-                ? 'bg-brandCyan text-canvas font-semibold shadow-[0_0_10px_rgba(0,229,255,0.4)]'
-                : 'text-slate-400 hover:text-slate-200'
+                ? 'bg-brandCyan text-canvas shadow-[0_0_12px_rgba(0,229,255,0.4)]'
+                : 'text-slate-300 hover:text-white hover:bg-surfaceLight/50'
             }`}
-            title="Multi-Cam Command Grid"
+            title="Multi-Cam Command Grid (4-up Quad View)"
           >
             <Grid className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">Grid</span>
+            <span className="hidden sm:inline">Multi-Cam</span>
           </button>
           <button
-            onClick={() => setViewMode('pulse')}
-            className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium transition-all ${
-              viewMode === 'pulse'
-                ? 'bg-brandPink text-white font-bold shadow-[0_0_10px_rgba(255,42,109,0.4)]'
-                : 'text-slate-400 hover:text-slate-200'
+            onClick={() => setViewMode('vids')}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+              viewMode === 'vids' || viewMode === 'pulse'
+                ? 'bg-gradient-to-r from-brandPink to-purple-600 text-white shadow-[0_0_14px_rgba(255,42,109,0.5)] border border-white/20'
+                : 'text-brandPink hover:text-white hover:bg-brandPink/10'
             }`}
-            title="Pattaya Pulse: Recent 4K VODs & Episodes"
+            title="PattayaVids: Curated 4K Street Walks, Nightlife Highlights & Expat Guides"
           >
             <Film className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline font-mono">Pattaya Pulse</span>
-            <span className="sm:hidden font-mono">Pulse</span>
+            <span>Pattaya<span className={viewMode === 'vids' || viewMode === 'pulse' ? 'text-white' : 'text-brandPink font-extrabold'}>Vids</span></span>
+            <span className={`text-[9px] px-1.5 py-0.2 rounded font-mono uppercase tracking-wider font-extrabold ${
+              viewMode === 'vids' || viewMode === 'pulse'
+                ? 'bg-white/20 text-white'
+                : 'bg-brandPink/20 text-brandPink border border-brandPink/40'
+            }`}>
+              VOD
+            </span>
           </button>
         </div>
 

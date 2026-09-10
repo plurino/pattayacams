@@ -323,7 +323,7 @@ export default function CreatorDirectoryClient({ creators = [], streamStatus = {
           <p>© {new Date().getFullYear()} PattayaCams.com • Independent Pattaya Tourism & Streaming Directory</p>
           <div className="flex items-center gap-4">
             <Link href="/" className="hover:text-slate-300 transition-colors">Live Radar</Link>
-            <Link href="/?view=pulse" className="hover:text-slate-300 transition-colors">Pattaya Pulse</Link>
+            <Link href="/?view=vids" className="hover:text-slate-300 transition-colors">PattayaVids</Link>
             <Link href="/creators" className="text-brandCyan font-semibold">Creator Hub</Link>
           </div>
         </div>
