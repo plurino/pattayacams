@@ -12,16 +12,28 @@ import TripModal from '@/src/components/TripModal';
 import SponsorModal from '@/src/components/SponsorModal';
 import venuesData from '@/public/data/venues.json';
 import { useStreamStatus } from '@/src/hooks/useStreamStatus';
+import { useTickerData } from '@/src/hooks/useTickerData';
+import { useLiveAlerts } from '@/src/hooks/useLiveAlerts';
+import TickerBar from '@/src/components/TickerBar';
+import KohLarnModal from '@/src/components/KohLarnModal';
+import EventRadarModal from '@/src/components/EventRadarModal';
+import FlashFloodAdvisory from '@/src/components/FlashFloodAdvisory';
 
 export default function AppRoot() {
   const [viewMode, setViewMode] = useState('map'); // 'map' | 'grid' | 'vids'
   const [selectedEntity, setSelectedEntity] = useState(null);
   const [isTripModalOpen, setIsTripModalOpen] = useState(false);
   const [isSponsorModalOpen, setIsSponsorModalOpen] = useState(false);
+  const [isKohLarnModalOpen, setIsKohLarnModalOpen] = useState(false);
+  const [isEventsModalOpen, setIsEventsModalOpen] = useState(false);
+  const [isFloodDismissed, setIsFloodDismissed] = useState(false);
+  const [highlightFloodZones, setHighlightFloodZones] = useState(false);
   const [isBannerDismissed, setIsBannerDismissed] = useState(false);
   const mapInstanceRef = useRef(null);
 
   const streamStatus = useStreamStatus();
+  const { isHeavyRain, rainRate } = useTickerData();
+  const { isEnabled: hasLiveAlerts, toggleLiveAlerts } = useLiveAlerts(streamStatus);
   const activeLiveCount = useMemo(() => {
     const entities = streamStatus?.entities || {};
     return Object.values(entities).filter((e) => e.is_live === true).length;
@@ -186,12 +198,33 @@ export default function AppRoot() {
         onOpenSponsorModal={() => setIsSponsorModalOpen(true)}
       />
 
+      {/* Real-Time Financial & Indochina Time Ticker Bar */}
+      <TickerBar
+        onOpenKohLarn={() => setIsKohLarnModalOpen(true)}
+        onOpenEvents={() => setIsEventsModalOpen(true)}
+        onToggleAlerts={toggleLiveAlerts}
+        hasLiveAlerts={hasLiveAlerts}
+      />
+
       {/* 2. Main Content Canvas */}
       <main className="flex-1 relative overflow-hidden">
+        {/* Automated Flash Flood Hazard Advisory Banner */}
+        {isHeavyRain && !isFloodDismissed && (
+          <FlashFloodAdvisory
+            rainRate={rainRate}
+            onHighlightFloodZones={() => {
+              if (viewMode !== 'map') setViewMode('map');
+              setHighlightFloodZones(true);
+            }}
+            onDismiss={() => setIsFloodDismissed(true)}
+          />
+        )}
+
         <div className={`w-full h-full ${viewMode === 'map' ? 'block' : 'hidden'}`}>
           <MapCanvasWrapper
             onSelectEntity={handleSelectEntity}
             onMapInstance={handleMapInstance}
+            externalShowFlood={highlightFloodZones}
           />
         </div>
         {viewMode === 'grid' && (
@@ -212,7 +245,7 @@ export default function AppRoot() {
               <div className="flex items-center gap-2.5 text-slate-200">
                 <span className="text-base animate-pulse">🌙</span>
                 <span className="leading-snug">
-                  <strong className="text-white font-semibold">Pattaya is resting.</strong> No streams are live right now. Watch latest videos & nightlife highlights on{' '}
+                  <strong className="text-white font-semibold">Pattaya is resting.</strong> No streams are live right now. Watch latest 4K street walks & nightlife episodes on{' '}
                   <button
                     onClick={() => setViewMode('vids')}
                     className="text-brandPink font-bold hover:underline inline-flex items-center gap-0.5 ml-0.5"
@@ -290,6 +323,17 @@ export default function AppRoot() {
       <SponsorModal
         isOpen={isSponsorModalOpen}
         onClose={() => setIsSponsorModalOpen(false)}
+      />
+
+      {/* 6. Utility & Retention Modals */}
+      <KohLarnModal
+        isOpen={isKohLarnModalOpen}
+        onClose={() => setIsKohLarnModalOpen(false)}
+      />
+
+      <EventRadarModal
+        isOpen={isEventsModalOpen}
+        onClose={() => setIsEventsModalOpen(false)}
       />
     </div>
   );

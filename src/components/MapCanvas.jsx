@@ -4,26 +4,41 @@ import React, { useEffect, useRef, useState, useCallback } from 'react';
 import venuesData from '@/public/data/venues.json';
 import cctvData from '@/public/data/cctv_cams.json';
 import busRoutes from '@/public/data/pattaya_baht_bus.geojson';
+import floodZonesData from '@/public/data/pattaya_flood_zones.geojson';
 import LayerToggleHUD from './LayerToggleHUD';
 import { useStreamStatus } from '@/src/hooks/useStreamStatus';
+import { useRainViewer } from '@/src/hooks/useRainViewer';
 
-export default function MapCanvas({ onSelectEntity, onMapInstance }) {
+export default function MapCanvas({ onSelectEntity, onMapInstance, externalShowFlood = false }) {
   const streamStatus = useStreamStatus();
   const mapContainerRef = useRef(null);
   const mapRef = useRef(null);
   const tileLayerRef = useRef(null);
+  const radarTileLayerRef = useRef(null);
   const layersRef = useRef({
     cctvActiveGroup: null,
     cctvDormantGroup: null,
     venueGroup: null,
     transitGroup: null,
+    floodGroup: null,
   });
 
   const [showVenues, setShowVenues] = useState(true);
   const [showCams, setShowCams] = useState(false);
   const [showTransit, setShowTransit] = useState(true);
+  const [showRadar, setShowRadar] = useState(false);
+  const [showFloodZones, setShowFloodZones] = useState(false);
   const [bearing, setBearing] = useState(0);
   const [mapTheme, setMapTheme] = useState('dark');
+
+  const radarState = useRainViewer(showRadar);
+
+  // Sync external flood highlight if triggered from Flash Flood Advisory banner
+  useEffect(() => {
+    if (externalShowFlood) {
+      setShowFloodZones(true);
+    }
+  }, [externalShowFlood]);
 
   const cartoKey = process.env.NEXT_PUBLIC_CARTO_API_KEY || 'cb1_33su_1_683c1b500e92ad8b2069c2d2';
 
@@ -339,12 +354,44 @@ export default function MapCanvas({ onSelectEntity, onMapInstance }) {
       }
       venueGroup.addTo(map);
 
+      // 4. Monsoon Flood Vulnerability Zones Layer Group
+      const floodGroup = Leaflet.geoJSON(floodZonesData, {
+        style: (feature) => ({
+          color: feature.properties?.color || '#EF4444',
+          weight: 6,
+          opacity: 0.85,
+          dashArray: '8, 8',
+          lineJoin: 'round',
+          lineCap: 'round',
+        }),
+        onEachFeature: (feature, layer) => {
+          const p = feature.properties || {};
+          const tooltipContent = `
+            <div style="font-family: inherit; font-size: 11px; max-width: 240px;">
+              <div style="display: flex; items-center; gap: 6px; margin-bottom: 3px;">
+                <span style="background: ${p.color}; color: #FFFFFF; font-size: 8px; font-weight: 900; padding: 1px 5px; border-radius: 4px;">FLOOD HAZARD: ${p.severity}</span>
+                <span style="color: #F8FAFC; font-weight: 700; font-size: 10px;">Depth: ${p.depth_cm}</span>
+              </div>
+              <strong style="color: #F8FAFC; font-size: 12px; display: block;">${p.name}</strong>
+              <div style="color: #94A3B8; font-size: 10px; margin-top: 1px;">${p.name_th || ''}</div>
+              <div style="color: #CBD5E1; font-size: 10px; margin-top: 4px; line-height: 1.3;">${p.description}</div>
+            </div>
+          `;
+          layer.bindTooltip(tooltipContent, {
+            className: 'pattaya-dark-tooltip',
+            sticky: true,
+            direction: 'top',
+          });
+        },
+      });
+
       mapRef.current = map;
       layersRef.current = {
         cctvActiveGroup,
         cctvDormantGroup,
         venueGroup,
         transitGroup,
+        floodGroup,
       };
 
       if (onMapInstance) {
@@ -427,6 +474,50 @@ export default function MapCanvas({ onSelectEntity, onMapInstance }) {
     }
   }, [showTransit]);
 
+  // Flood Zones Toggle
+  useEffect(() => {
+    if (!mapRef.current) return;
+    const { floodGroup } = layersRef.current;
+    if (!floodGroup) return;
+
+    if (showFloodZones) {
+      if (!mapRef.current.hasLayer(floodGroup)) mapRef.current.addLayer(floodGroup);
+    } else {
+      if (mapRef.current.hasLayer(floodGroup)) mapRef.current.removeLayer(floodGroup);
+    }
+  }, [showFloodZones]);
+
+  // Rain Radar Tile Layer Toggle & Frame Updates
+  useEffect(() => {
+    if (!mapRef.current) return;
+    const Leaflet = typeof window !== 'undefined' ? window.L : null;
+    if (!Leaflet) return;
+
+    const tileUrl = radarState.getTileUrl ? radarState.getTileUrl(radarState.currentIdx) : null;
+
+    if (showRadar && tileUrl) {
+      if (!radarTileLayerRef.current) {
+        const layer = Leaflet.tileLayer(tileUrl, {
+          opacity: 0.65,
+          maxNativeZoom: 7,
+          maxZoom: 19,
+          zIndex: 500,
+        });
+        layer.addTo(mapRef.current);
+        radarTileLayerRef.current = layer;
+      } else {
+        radarTileLayerRef.current.setUrl(tileUrl);
+      }
+    } else {
+      if (radarTileLayerRef.current) {
+        if (mapRef.current.hasLayer(radarTileLayerRef.current)) {
+          mapRef.current.removeLayer(radarTileLayerRef.current);
+        }
+        radarTileLayerRef.current = null;
+      }
+    }
+  }, [showRadar, radarState.currentIdx, radarState]);
+
   return (
     <div className="relative w-full h-full overflow-hidden bg-canvas">
       <div ref={mapContainerRef} className="w-full h-full z-0" />
@@ -439,9 +530,15 @@ export default function MapCanvas({ onSelectEntity, onMapInstance }) {
         setShowCams={setShowCams}
         showTransit={showTransit}
         setShowTransit={setShowTransit}
+        showRadar={showRadar}
+        setShowRadar={setShowRadar}
+        showFloodZones={showFloodZones}
+        setShowFloodZones={setShowFloodZones}
+        radarState={radarState}
         venueCount={venuesData.filter(v => streamStatus?.entities?.[`venue-${v.slug}`]?.status !== 'error_404').length}
         camCount={cctvData.length}
         transitCount={busRoutes.features.length}
+        floodCount={floodZonesData.features.length}
         bearing={bearing}
         onRotateLeft={() => handleRotateBy(-45)}
         onRotateRight={() => handleRotateBy(45)}

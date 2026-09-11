@@ -11,6 +11,10 @@ import {
   Sun,
   Moon,
   Navigation,
+  Play,
+  Pause,
+  CloudRain,
+  ShieldAlert,
 } from 'lucide-react';
 
 export default function LayerToggleHUD({
@@ -20,9 +24,15 @@ export default function LayerToggleHUD({
   setShowCams,
   showTransit,
   setShowTransit,
+  showRadar = false,
+  setShowRadar,
+  showFloodZones = false,
+  setShowFloodZones,
+  radarState,
   venueCount = 0,
   camCount = 0,
   transitCount = 3,
+  floodCount = 4,
   bearing = 0,
   onRotateLeft,
   onRotateRight,
@@ -218,6 +228,84 @@ export default function LayerToggleHUD({
                 checked={showTransit}
                 onChange={(e) => setShowTransit(e.target.checked)}
                 className="w-4 h-4 rounded border-borderDark bg-surface text-brandBlue focus:ring-brandBlue focus:ring-offset-0 cursor-pointer accent-brandBlue"
+              />
+            </div>
+          </label>
+
+          {/* Rain Radar (Doppler Precipitation) Toggle */}
+          <div className="flex flex-col gap-1.5 pt-1 border-t border-borderDark/60">
+            <label className="flex items-center justify-between gap-3 cursor-pointer py-1 px-1.5 rounded-lg hover:bg-surfaceLight/50 transition-colors">
+              <div className="flex items-center gap-2">
+                <CloudRain className={`w-3.5 h-3.5 ${showRadar ? 'text-teal-400 animate-pulse' : 'text-slate-400'}`} />
+                <span className="text-slate-200">Rain Radar (Doppler)</span>
+              </div>
+              <input
+                type="checkbox"
+                checked={showRadar}
+                onChange={(e) => setShowRadar && setShowRadar(e.target.checked)}
+                className="w-4 h-4 rounded border-borderDark bg-surface text-teal-400 focus:ring-teal-400 focus:ring-offset-0 cursor-pointer accent-teal-400"
+              />
+            </label>
+
+            {/* Radar Playback Timeline Controls when active */}
+            {showRadar && radarState && (
+              <div className="bg-canvas/90 p-2 rounded-lg border border-teal-500/30 flex flex-col gap-1.5 mt-0.5">
+                <div className="flex items-center justify-between text-[10px] font-mono">
+                  <span className="text-teal-400 font-bold">{radarState.formattedTime || 'Live Doppler'}</span>
+                  <span className="text-slate-400 text-[9px]">
+                    Frame {radarState.currentIdx + 1}/{radarState.frames.length || 1}
+                  </span>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => radarState.setIsPlaying(!radarState.isPlaying)}
+                    className="p-1 rounded bg-teal-950/60 hover:bg-teal-900 border border-teal-500/40 text-teal-300 hover:text-white transition-colors"
+                    title={radarState.isPlaying ? 'Pause Radar Loop' : 'Play Animated Loop'}
+                  >
+                    {radarState.isPlaying ? (
+                      <Pause className="w-3 h-3 fill-teal-300" />
+                    ) : (
+                      <Play className="w-3 h-3 fill-teal-300" />
+                    )}
+                  </button>
+
+                  <input
+                    type="range"
+                    min="0"
+                    max={Math.max(0, radarState.frames.length - 1)}
+                    value={radarState.currentIdx}
+                    onChange={(e) => {
+                      radarState.setIsPlaying(false);
+                      radarState.setCurrentIdx(Number(e.target.value));
+                    }}
+                    className="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-teal-400"
+                  />
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Monsoon Flood Risk Zones Toggle */}
+          <label className="flex items-center justify-between gap-3 cursor-pointer py-1 px-1.5 rounded-lg hover:bg-surfaceLight/50 transition-colors">
+            <div className="flex items-center gap-2">
+              <ShieldAlert className={`w-3.5 h-3.5 ${showFloodZones ? 'text-red-400 animate-pulse' : 'text-slate-400'}`} />
+              <div className="flex flex-col">
+                <span className="text-slate-200">Flood Risk Zones</span>
+                <span className="text-[9px] font-mono text-slate-400 -mt-0.5">
+                  Flash Flood Hazards
+                </span>
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-[10px] font-mono text-red-400 bg-red-950/40 border border-red-500/30 px-1.5 py-0.5 rounded">
+                {floodCount}
+              </span>
+              <input
+                type="checkbox"
+                checked={showFloodZones}
+                onChange={(e) => setShowFloodZones && setShowFloodZones(e.target.checked)}
+                className="w-4 h-4 rounded border-borderDark bg-surface text-red-500 focus:ring-red-500 focus:ring-offset-0 cursor-pointer accent-red-500"
               />
             </div>
           </label>

@@ -1,0 +1,91 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "FZ-001",
+        "name": "Sukhumvit Road Flood Corridor",
+        "name_th": "ถนนสุขุมวิท พัทยากลาง-พัทยาใต้",
+        "severity": "CRITICAL",
+        "depth_cm": "40-70cm",
+        "description": "Severe road basin underpass between Central and South Pattaya Sukhumvit. Impassable for small motorbikes & sedans during flash rain.",
+        "color": "#EF4444"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [100.9025, 12.9395],
+          [100.9038, 12.9340],
+          [100.9052, 12.9280],
+          [100.9068, 12.9215],
+          [100.9080, 12.9150]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "FZ-002",
+        "name": "Railway Bypass Road (Liap Thang Rotfai)",
+        "name_th": "ถนนเลียบทางรถไฟ พัทยา",
+        "severity": "SEVERE",
+        "depth_cm": "50-80cm",
+        "description": "Low-lying drainage canal overflow. Water sweeps rapidly across the road from East Pattaya hills toward the coast.",
+        "color": "#F97316"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [100.9140, 12.9460],
+          [100.9155, 12.9380],
+          [100.9172, 12.9300],
+          [100.9190, 12.9220],
+          [100.9205, 12.9140]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "FZ-003",
+        "name": "Third Road & Soi Buakhao Basin",
+        "name_th": "ถนนสาย 3 และ ซอยบัวขาว (ทรีทาวน์)",
+        "severity": "HIGH",
+        "depth_cm": "30-50cm",
+        "description": "Natural depression near Tree Town & Chalermphrakiat Soi 21. Water backs up rapidly within 20 mins of heavy rain.",
+        "color": "#F59E0B"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [100.8872, 12.9360],
+          [100.8878, 12.9315],
+          [100.8885, 12.9265],
+          [100.8890, 12.9220]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "FZ-004",
+        "name": "South Beach Road & Walking Street Entry",
+        "name_th": "ถนนเลียบชายหาดตอนใต้ - ทางเข้าวอล์คกิ้งสตรีท",
+        "severity": "MODERATE",
+        "depth_cm": "20-40cm",
+        "description": "Stormwater runoff meets high tide near Bali Hai / Walking Street entrance. Sandbags deployed during monsoons.",
+        "color": "#EAB308"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [100.8735, 12.9285],
+          [100.8720, 12.9260],
+          [100.8710, 12.9240],
+          [100.8695, 12.9225]
+        ]
+      }
+    }
+  ]
+}

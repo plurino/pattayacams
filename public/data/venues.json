@@ -212,5 +212,33 @@
     "google_maps_url": "https://maps.google.com?q=WVVP+33G+Miso+Bar+Pattaya+Soi+6,+Pattaya+Soi+6,+Pattaya+City,+Bang+Lamung+District,+Chon+Buri+20150",
     "description": "Vibrant open-air bar on Soi 6 in North Pattaya broadcasting nightly interactive YouTube live streams and guest chats.",
     "is_sponsored": false
+  },
+  {
+    "slug": "royal-varuna-yacht-club",
+    "id": "VN-030",
+    "name": "Royal Varuna Yacht Club Overlook",
+    "zone": "pratamnak",
+    "category": "webcam",
+    "lat": 12.9234,
+    "lng": 100.8601,
+    "snapshot_url": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80",
+    "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Royal+Varuna+Yacht+Club+Pattaya",
+    "description": "Coastal weather snapshot camera overlooking the Gulf of Thailand and Koh Larn from Pratamnak Cliff.",
+    "is_sponsored": false,
+    "is_live": true
+  },
+  {
+    "slug": "windy-emerald-beach",
+    "id": "VN-031",
+    "name": "Emerald Beach & Pratamnak Hill (Windy)",
+    "zone": "pratamnak",
+    "category": "webcam",
+    "lat": 12.9189,
+    "lng": 100.8612,
+    "webcam_id": "1606830739",
+    "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Emerald+Beach+Pratamnak+Pattaya",
+    "description": "Open live panoramic webcam on Pratamnak Hill facing southwest over the Gulf of Thailand.",
+    "is_sponsored": false,
+    "is_live": true
   }
 ]

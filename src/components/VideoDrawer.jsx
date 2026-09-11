@@ -23,6 +23,7 @@ import {
 import HlsPlayer from './common/HlsPlayer';
 import YouTubePlayer from './common/YouTubePlayer';
 import KickPlayer from './common/KickPlayer';
+import UniversalPlayer from './common/UniversalPlayer';
 import EmojiReactionGroup from './common/EmojiReactionGroup';
 import hotelsData from '@/public/data/hotels.json';
 import { FEATURES } from '@/src/config/features';
@@ -120,7 +121,54 @@ export default function VideoDrawer({ entity, onClose }) {
       );
     }
 
-    if (entity.platform === 'kick') {
+    if (isCctv) {
+      return (
+        <HlsPlayer streamUrl={entity.stream_url} title={entity.name} cameraCode={entity.camera_code || entity.id} />
+      );
+    }
+
+    if (entity.source?.type === 'snapshot' || entity.snapshot_url) {
+      return (
+        <UniversalPlayer
+          source={{
+            type: 'snapshot',
+            url: entity.snapshot_url || entity.source?.url,
+            refreshIntervalMs: entity.refreshIntervalMs || 5000,
+          }}
+          title={entity.name}
+          autoMount={true}
+        />
+      );
+    }
+
+    if (entity.source?.type === 'windy' || entity.webcam_id) {
+      return (
+        <UniversalPlayer
+          source={{
+            type: 'windy',
+            webcam_id: entity.webcam_id || entity.source?.webcam_id,
+          }}
+          title={entity.name}
+          autoMount={true}
+        />
+      );
+    }
+
+    if (entity.platform === 'twitch' || entity.source?.type === 'twitch') {
+      return (
+        <UniversalPlayer
+          source={{
+            type: 'twitch',
+            channel: entity.twitch_channel || entity.channel_id || entity.slug,
+          }}
+          title={entity.name}
+          isLive={entity.is_live ?? true}
+          autoMount={true}
+        />
+      );
+    }
+
+    if (entity.platform === 'kick' || entity.source?.type === 'kick') {
       return (
         <KickPlayer
           channelSlug={entity.channel_id || entity.slug || entity.handle}
@@ -128,12 +176,6 @@ export default function VideoDrawer({ entity, onClose }) {
           isLive={entity.is_live ?? true}
           badgeText="KICK LIVE STREAM"
         />
-      );
-    }
-
-    if (isCctv) {
-      return (
-        <HlsPlayer streamUrl={entity.stream_url} title={entity.name} cameraCode={entity.camera_code || entity.id} />
       );
     }
 

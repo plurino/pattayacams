@@ -3,8 +3,10 @@
 import React, { useState, useEffect } from 'react';
 import { Grid2X2, Grid3X3, Video, X, Maximize2, RefreshCw, Radio } from 'lucide-react';
 import YouTubePlayer from './common/YouTubePlayer';
+import UniversalPlayer from './common/UniversalPlayer';
 import venuesData from '@/public/data/venues.json';
 import streamersData from '@/public/data/roaming_streamers.json';
+import { COASTAL_AND_WEATHER_CAMS } from '@/src/config/coastalCams';
 import { useStreamStatus } from '@/src/hooks/useStreamStatus';
 import { getSavedGridConfig, saveGridConfig } from '@/src/utils/storage';
 
@@ -42,14 +44,19 @@ export default function MultiCamGrid({ onSelectEntity }) {
   // Find entity by id or slug (strictly venues & streamers, NO CCTVs)
   const resolveEntity = (val) => {
     if (!val) return null;
+    const coastal = COASTAL_AND_WEATHER_CAMS.find((c) => c.id === val);
+    if (coastal) {
+      return coastal;
+    }
     const venue = activeVenues.find((v) => v.slug === val || v.id === val);
     if (venue) {
       const statusInfo = streamStatus?.entities?.[`venue-${venue.slug}`];
+      const isWebcam = Boolean(venue.webcam_id || venue.snapshot_url);
       return {
         ...venue,
-        type: 'venue',
+        type: venue.webcam_id ? 'windy' : (venue.snapshot_url ? 'snapshot' : 'venue'),
         video_id: statusInfo?.video_id || venue.video_id,
-        is_live: statusInfo ? statusInfo.is_live : !!venue.video_id,
+        is_live: isWebcam ? true : (statusInfo ? statusInfo.is_live : !!venue.video_id),
       };
     }
     const streamer = activeStreamers.find((s) => s.id === val || s.slug === val);
@@ -224,6 +231,13 @@ export default function MultiCamGrid({ onSelectEntity }) {
                         );
                       })}
                     </optgroup>
+                    <optgroup label="🌊 Panoramic & Weather Cams">
+                      {COASTAL_AND_WEATHER_CAMS.map((c) => (
+                        <option key={c.id} value={c.id}>
+                          📹 {c.name}
+                        </option>
+                      ))}
+                    </optgroup>
                     <optgroup label="🚶 Live Streamers & Creators">
                       {activeStreamers.map((s) => {
                         const isLive = streamStatus?.entities?.[`streamer-${s.id}`]?.is_live;
@@ -251,14 +265,28 @@ export default function MultiCamGrid({ onSelectEntity }) {
               {/* Slot Video Content */}
               <div className="flex-1 relative bg-black flex items-center justify-center overflow-hidden">
                 {entity ? (
-                  entity.is_live && (entity.video_id || entity.youtube_channel_id) ? (
-                    <YouTubePlayer
-                      channelId={entity.youtube_channel_id}
-                      videoId={entity.video_id}
+                  entity.webcam_id || entity.snapshot_url || entity.type === 'windy' || entity.type === 'snapshot' ? (
+                    <UniversalPlayer
+                      source={{
+                        type: entity.webcam_id ? 'windy' : (entity.snapshot_url ? 'snapshot' : entity.type),
+                        webcam_id: entity.webcam_id,
+                        url: entity.snapshot_url || entity.url,
+                        refreshIntervalMs: entity.refreshIntervalMs || 5000,
+                      }}
                       title={entity.name}
-                      handle={entity.youtube_handle || '@PattayaOhBar'}
-                      type={entity.type}
+                      autoMount={false}
+                    />
+                  ) : entity.is_live && (entity.video_id || entity.youtube_channel_id || entity.platform === 'kick' || entity.platform === 'twitch') ? (
+                    <UniversalPlayer
+                      source={{
+                        type: entity.platform || 'youtube',
+                        video_id: entity.video_id,
+                        youtube_channel_id: entity.youtube_channel_id,
+                        channel: entity.channel_id || entity.handle || entity.slug,
+                      }}
+                      title={entity.name}
                       isLive={entity.is_live}
+                      autoMount={false}
                     />
                   ) : (
                     <div className="w-full h-full flex flex-col items-center justify-center p-6 bg-gradient-to-b from-surface to-canvas text-center gap-3 select-none">
