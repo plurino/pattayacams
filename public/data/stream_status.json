@@ -1,9 +1,9 @@
 {
-  "last_check": "2026-09-11T02:52:26.922Z",
+  "last_check": "2026-09-11T02:59:41.447Z",
   "entities": {
     "venue-pattaya-oh-bar": {
-      "is_live": true,
-      "video_id": "7oQETDBk_s8",
+      "is_live": false,
+      "video_id": null,
       "last_live_at": "2026-09-11T02:52:26.922Z",
       "status": "active",
       "name": "Pattaya Oh Bar",
@@ -74,8 +74,8 @@
       "handle": "@udthailand6560"
     },
     "venue-nine-star-restaurant-bar": {
-      "is_live": true,
-      "video_id": "mgTChsJzH3Q",
+      "is_live": false,
+      "video_id": null,
       "last_live_at": "2026-09-11T02:52:26.922Z",
       "status": "active",
       "name": "Nine Star Restaurant & Bar",
@@ -110,8 +110,8 @@
       "handle": "@LasVegasBeerGarden-PKBar"
     },
     "venue-gold-bar-soi-6": {
-      "is_live": true,
-      "video_id": "ODensH9FL5o",
+      "is_live": false,
+      "video_id": null,
       "last_live_at": "2026-09-11T02:52:26.922Z",
       "status": "active",
       "name": "Gold Bar Soi 6",
@@ -119,8 +119,8 @@
       "handle": "@GoldBarSoi6"
     },
     "venue-s3xy-bar-pattaya": {
-      "is_live": true,
-      "video_id": "hs3ODqDmeCw",
+      "is_live": false,
+      "video_id": null,
       "last_live_at": "2026-09-11T02:52:26.922Z",
       "status": "active",
       "name": "S3xy Bar Pattaya",
@@ -254,8 +254,8 @@
       "handle": "@slyman6666"
     },
     "streamer-RS-010": {
-      "is_live": true,
-      "video_id": "IwWzOYyLw9E",
+      "is_live": false,
+      "video_id": null,
       "last_live_at": "2026-09-11T02:52:26.922Z",
       "status": "active",
       "name": "Pattaya Beach Live",
@@ -398,7 +398,7 @@
       "handle": "@slyman6666"
     },
     "creator-pattaya-beach-live": {
-      "is_live": true,
+      "is_live": false,
       "video_id": "IwWzOYyLw9E",
       "last_live_at": "2026-09-11T02:52:26.922Z",
       "status": "active",
@@ -497,7 +497,7 @@
       "handle": "@BangkokPat"
     },
     "creator-thailand-rob": {
-      "is_live": true,
+      "is_live": false,
       "video_id": "1OPNxFj6t5w",
       "last_live_at": "2026-09-11T02:52:26.922Z",
       "status": "active",

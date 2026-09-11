@@ -237,20 +237,29 @@ export default function MapCanvas({ onSelectEntity, onMapInstance }) {
       });
 
       activeVenues.forEach((venue) => {
-        const isSponsor = venue.is_sponsored;
+        const isSponsor = Boolean(venue.is_sponsored);
         const iconEmoji = getCategoryIcon(venue.category, isSponsor);
         const statusInfo = streamStatus?.entities?.[`venue-${venue.slug}`];
-        const isLive = statusInfo ? statusInfo.is_live : (venue.video_id != null);
+        const isLive = statusInfo ? Boolean(statusInfo.is_live) : false;
 
         let htmlIcon;
         if (isLive) {
           htmlIcon = `
-            <div style="position: relative; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+            <div style="position: relative; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: ${isSponsor ? 50 : 20};">
               <span style="position: absolute; width: 34px; height: 34px; border-radius: 50%; background: ${isSponsor ? '#EAB308' : '#FF2A6D'}; opacity: 0.7; animation: ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;"></span>
-              <div style="position: relative; width: 32px; height: 32px; border-radius: 50%; background: ${isSponsor ? 'linear-gradient(135deg, #FACC15, #CA8A04)' : 'linear-gradient(135deg, #FF2A6D, #BE185D)'}; border: 2px solid #FFFFFF; box-shadow: 0 0 16px ${isSponsor ? '#EAB308' : '#FF2A6D'}; display: flex; align-items: center; justify-content: center; color: white; font-size: 14px;">
+              <div style="position: relative; width: 32px; height: 32px; border-radius: 50%; background: ${isSponsor ? 'linear-gradient(135deg, #FACC15, #CA8A04)' : 'linear-gradient(135deg, #FF2A6D, #BE185D)'}; border: 2px solid #FFFFFF; box-shadow: 0 0 18px ${isSponsor ? '#EAB308' : '#FF2A6D'}; display: flex; align-items: center; justify-content: center; color: white; font-size: 14px;">
                 ${iconEmoji}
               </div>
-              <span style="position: absolute; top: -6px; right: -8px; background: #FF2A6D; color: white; font-size: 8px; font-weight: 900; font-family: monospace; padding: 1px 4px; border-radius: 4px; box-shadow: 0 0 8px #FF2A6D; border: 1px solid rgba(255,255,255,0.6); z-index: 10;">LIVE</span>
+              <span style="position: absolute; top: -6px; right: -8px; background: ${isSponsor ? '#EAB308' : '#FF2A6D'}; color: ${isSponsor ? '#0B0F17' : '#FFFFFF'}; font-size: 8px; font-weight: 900; font-family: monospace; padding: 1px 4px; border-radius: 4px; box-shadow: 0 0 8px ${isSponsor ? '#EAB308' : '#FF2A6D'}; border: 1px solid rgba(255,255,255,0.7); z-index: 10;">LIVE</span>
+            </div>
+          `;
+        } else if (isSponsor) {
+          htmlIcon = `
+            <div style="position: relative; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 45;">
+              <div style="width: 32px; height: 32px; border-radius: 50%; background: #161F30; border: 2px solid #EAB308; box-shadow: 0 0 14px rgba(234, 179, 8, 0.6); display: flex; align-items: center; justify-content: center; color: #FACC15; font-size: 14px;">
+                ${iconEmoji}
+              </div>
+              <span style="position: absolute; -bottom: 2px; background: #EAB308; color: #0B0F17; font-size: 7.5px; font-weight: 900; font-family: monospace; padding: 0.5px 3.5px; border-radius: 3px; box-shadow: 0 1px 4px rgba(0,0,0,0.5);">STAR</span>
             </div>
           `;
         } else {
@@ -263,16 +272,18 @@ export default function MapCanvas({ onSelectEntity, onMapInstance }) {
           `;
         }
 
+        const iconDimension = isLive ? [38, 38] : (isSponsor ? [36, 36] : [30, 30]);
         const venueIcon = Leaflet.divIcon({
           className: 'custom-venue-marker-container',
-          iconSize: isLive ? [38, 38] : [30, 30],
-          iconAnchor: isLive ? [19, 19] : [15, 15],
+          iconSize: iconDimension,
+          iconAnchor: [iconDimension[0] / 2, iconDimension[1] / 2],
           html: htmlIcon,
         });
 
+        // Featured venues always render on top of regular venues
         const marker = Leaflet.marker([venue.lat, venue.lng], {
           icon: venueIcon,
-          zIndexOffset: isLive ? 1200 : 800,
+          zIndexOffset: isSponsor ? 3000 : (isLive ? 1200 : 800),
         });
 
         const categoryLabel = venue.category ? venue.category.toUpperCase().replace('_', ' ') : 'VENUE';

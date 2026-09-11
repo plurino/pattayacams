@@ -22,16 +22,27 @@ async function main() {
   await page.goto('http://localhost:3001', { waitUntil: 'networkidle' });
   await page.waitForTimeout(2000);
 
-  // Hover over the new logo to capture radiant neon glow effect
-  const logoImg = page.locator('img[alt="PattayaCams Logo"]').first();
-  if (await logoImg.isVisible()) {
-    console.log('Hovering over new logo...');
-    await logoImg.hover();
-    await page.waitForTimeout(600);
+  // Quick jump to Soi Buakhao to inspect featured venue pin layering
+  const soiBuakhaoButton = page.locator('button:has-text("Soi Buakhao")').first();
+  if (await soiBuakhaoButton.isVisible()) {
+    console.log('Clicking Soi Buakhao Quick Jump to inspect featured venue...');
+    await soiBuakhaoButton.click();
+    await page.waitForTimeout(1500);
   }
 
-  await page.screenshot({ path: path.join(outDir, 'navbar_new_logo_hover.png') });
-  console.log('Saved navbar_new_logo_hover.png');
+  await page.screenshot({ path: path.join(outDir, 'desktop_map_featured_ontop.png') });
+  console.log('Saved desktop_map_featured_ontop.png');
+
+  // Click on a venue pin to test offline standby card
+  const venueMarker = page.locator('.custom-venue-marker-container').first();
+  if (await venueMarker.isVisible()) {
+    console.log('Clicking venue marker to verify Offline Standby card...');
+    await venueMarker.click();
+    await page.waitForTimeout(1000);
+  }
+
+  await page.screenshot({ path: path.join(outDir, 'venue_standby_card_verified.png') });
+  console.log('Saved venue_standby_card_verified.png');
 
   // 2. Creators Hub - Live Venues Filter Test
   console.log('Testing Creators Hub & Live Venues Filter...');

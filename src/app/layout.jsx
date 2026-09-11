@@ -40,6 +40,15 @@ export const metadata = {
     title: 'PattayaCams | Live Street Webcams & Transit Radar',
     description: 'Explore live webcams and Songthaew routes in Pattaya, Thailand.',
   },
+  icons: {
+    icon: [
+      { url: '/favicon.ico' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/icon.png', sizes: '192x192', type: 'image/png' },
+    ],
+    shortcut: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
+  },
 };
 
 export default function RootLayout({ children }) {

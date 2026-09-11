@@ -59,10 +59,17 @@ async function checkYouTubeChannel(handle, fallbackVideoId) {
       return { is_live: false, video_id: null, status: 'error_404', platform: 'youtube' };
     }
 
-    // Check if the final destination has a live video
     const watchMatch = res.url.match(/watch\?v=([a-zA-Z0-9_-]{11})/);
     const videoIdMatch = html.match(/"videoId":"([a-zA-Z0-9_-]{11})"/);
     const videoId = watchMatch ? watchMatch[1] : (videoIdMatch ? videoIdMatch[1] : null);
+
+    const isUpcoming = html.includes('"isUpcoming":true') || 
+                       html.includes('"status":"UPCOMING"') || 
+                       html.includes('"upcomingEventData"') || 
+                       html.includes('Waiting for ') || 
+                       html.includes('waiting for ') ||
+                       html.includes('Premieres in ') ||
+                       html.includes('Scheduled for ');
 
     const hasLiveBadge = html.includes('"isLive":true') || 
                          html.includes('"isLiveNow":true') || 
@@ -71,7 +78,8 @@ async function checkYouTubeChannel(handle, fallbackVideoId) {
 
     const isEnded = html.includes('Streamed live') || html.includes('"isLive":false');
 
-    const isLive = Boolean(hasLiveBadge && !isEnded && videoId);
+    // Only genuine live stream (not in waiting room / upcoming scheduled state)
+    const isLive = Boolean(hasLiveBadge && !isUpcoming && !isEnded && videoId);
 
     return {
       is_live: isLive,
