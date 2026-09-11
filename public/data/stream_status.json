@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-09-11T11:50:12.342Z",
+  "last_check": "2026-09-11T15:37:55.505Z",
   "entities": {
     "venue-pattaya-oh-bar": {
       "is_live": false,
@@ -128,22 +128,20 @@
       "handle": "@MisoBarPattaya"
     },
     "venue-royal-varuna-yacht-club": {
-      "is_live": true,
+      "is_live": false,
       "video_id": null,
       "last_live_at": "2026-09-11T12:00:00.000Z",
-      "status": "active",
+      "status": "error_404",
       "name": "Royal Varuna Yacht Club Overlook",
-      "platform": "snapshot",
-      "handle": "@RoyalVaruna"
+      "platform": "youtube"
     },
     "venue-windy-emerald-beach": {
-      "is_live": true,
+      "is_live": false,
       "video_id": null,
       "last_live_at": "2026-09-11T12:00:00.000Z",
-      "status": "active",
+      "status": "error_404",
       "name": "Emerald Beach & Pratamnak Hill (Windy)",
-      "platform": "windy",
-      "handle": "@WindyWebcams"
+      "platform": "youtube"
     },
     "streamer-RS-001": {
       "is_live": false,
@@ -354,7 +352,7 @@
     },
     "creator-pattaya-beach-live": {
       "is_live": false,
-      "video_id": "Tv58VVA4HzI",
+      "video_id": "0bGNCCBXAKI",
       "last_live_at": null,
       "status": "active",
       "name": "Pattaya Beach Live",
