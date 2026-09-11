@@ -49,6 +49,17 @@ export default function VideoDrawer({ entity, onClose }) {
     }
   };
 
+  const handleLaunchCityPortal = (code) => {
+    if (typeof navigator !== 'undefined' && navigator.clipboard) {
+      navigator.clipboard.writeText(code);
+      setCopiedCode(true);
+      setTimeout(() => setCopiedCode(false), 3000);
+    }
+    if (typeof window !== 'undefined') {
+      window.open('https://livestream.pattaya.go.th/', '_blank', 'noopener,noreferrer');
+    }
+  };
+
   const isCctv = entity.type === 'cctv';
   const isVenue = entity.type === 'venue';
   const isStreamer = entity.type === 'streamer';
@@ -251,7 +262,7 @@ export default function VideoDrawer({ entity, onClose }) {
 
       {/* Municipal Portal Verification Badge (for CCTV) */}
       {isCctv && (
-        <div className="p-3.5 rounded-xl bg-cyan-950/20 border border-brandCyan/30 flex flex-col gap-2.5 shadow-md">
+        <div className="p-3.5 rounded-xl bg-cyan-950/20 border border-brandCyan/30 flex flex-col gap-3 shadow-md">
           <div className="flex items-center justify-between">
             <span className="text-[11px] font-mono text-slate-300 font-bold flex items-center gap-1.5">
               <Radio className="w-3.5 h-3.5 text-brandCyan" />
@@ -264,34 +275,37 @@ export default function VideoDrawer({ entity, onClose }) {
           <p className="text-[11px] text-slate-300 leading-relaxed">
             Pattaya City operates 600+ municipal surveillance cameras for public safety and traffic monitoring. Live WebRTC video is hosted directly on the City Hall streaming portal.
           </p>
-          <div className="flex items-center justify-between p-2 rounded-lg bg-black/40 border border-borderDark text-xs font-mono">
-            <div className="flex items-center gap-2 min-w-0">
-              <span className="text-slate-400 text-[11px]">Search Code:</span>
-              <span className="text-brandCyan font-bold text-xs truncate">{entity.camera_code || entity.id}</span>
+
+          {/* 1 Single Prominent Command Button */}
+          <div className="flex flex-col gap-2">
+            <div className="flex items-center justify-between p-2 rounded-lg bg-black/50 border border-borderDark text-xs font-mono">
+              <span className="text-slate-400 text-[11px]">Camera Code:</span>
+              <span className="text-brandCyan font-bold text-xs">{entity.camera_code || entity.id}</span>
+              <button
+                onClick={() => handleCopyCode(entity.camera_code || entity.id)}
+                className="text-[10px] text-slate-400 hover:text-white px-2 py-0.5 rounded hover:bg-surfaceLight transition-colors"
+                title="Copy code only"
+              >
+                {copiedCode ? '✓ Copied' : 'Copy'}
+              </button>
             </div>
+
             <button
-              onClick={() => handleCopyCode(entity.camera_code || entity.id)}
-              className="flex items-center gap-1 px-2.5 py-1 rounded bg-brandCyan/20 hover:bg-brandCyan/30 text-brandCyan border border-brandCyan/40 text-[10px] font-bold transition-all shrink-0"
+              onClick={() => handleLaunchCityPortal(entity.camera_code || entity.id)}
+              className="flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-cyan-500 via-teal-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-canvas font-extrabold text-xs transition-all shadow-[0_0_16px_rgba(0,229,255,0.4)] hover:shadow-[0_0_24px_rgba(0,229,255,0.6)] active:scale-98 cursor-pointer"
             >
-              {copiedCode ? (
-                <>
-                  <Check className="w-3 h-3 text-brandGreen" />
-                  <span className="text-brandGreen">✓ Copied to Clipboard</span>
-                </>
-              ) : (
-                <span>Copy Code</span>
-              )}
+              <Radio className="w-4 h-4 text-canvas animate-pulse shrink-0" />
+              <span>
+                {copiedCode
+                  ? '✓ Code Copied! Opening City Hall Stream...'
+                  : 'Launch Official City Hall Stream'}
+              </span>
+              <ExternalLink className="w-3.5 h-3.5 shrink-0" />
             </button>
+            <span className="text-[10px] text-center text-slate-400 font-mono">
+              Auto-copies code <strong>{entity.camera_code || entity.id}</strong> to clipboard on click
+            </span>
           </div>
-          <a
-            href="https://livestream.pattaya.go.th/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center gap-1.5 w-full py-2 px-3 rounded-lg bg-brandCyan hover:bg-cyan-400 text-canvas text-xs font-bold transition-all shadow-[0_0_12px_rgba(0,229,255,0.3)]"
-          >
-            <span>Launch Official City Hall Stream</span>
-            <ExternalLink className="w-3.5 h-3.5" />
-          </a>
         </div>
       )}
 

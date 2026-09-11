@@ -6,7 +6,6 @@ import YouTubePlayer from './common/YouTubePlayer';
 import UniversalPlayer from './common/UniversalPlayer';
 import venuesData from '@/public/data/venues.json';
 import streamersData from '@/public/data/roaming_streamers.json';
-import { COASTAL_AND_WEATHER_CAMS } from '@/src/config/coastalCams';
 import { useStreamStatus } from '@/src/hooks/useStreamStatus';
 import { getSavedGridConfig, saveGridConfig } from '@/src/utils/storage';
 
@@ -44,10 +43,6 @@ export default function MultiCamGrid({ onSelectEntity }) {
   // Find entity by id or slug (strictly venues & streamers, NO CCTVs)
   const resolveEntity = (val) => {
     if (!val) return null;
-    const coastal = COASTAL_AND_WEATHER_CAMS.find((c) => c.id === val);
-    if (coastal) {
-      return coastal;
-    }
     const venue = activeVenues.find((v) => v.slug === val || v.id === val);
     if (venue) {
       const statusInfo = streamStatus?.entities?.[`venue-${venue.slug}`];
@@ -230,13 +225,6 @@ export default function MultiCamGrid({ onSelectEntity }) {
                           </option>
                         );
                       })}
-                    </optgroup>
-                    <optgroup label="🌊 Panoramic & Weather Cams">
-                      {COASTAL_AND_WEATHER_CAMS.map((c) => (
-                        <option key={c.id} value={c.id}>
-                          📹 {c.name}
-                        </option>
-                      ))}
                     </optgroup>
                     <optgroup label="🚶 Live Streamers & Creators">
                       {activeStreamers.map((s) => {

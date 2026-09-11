@@ -115,73 +115,75 @@ export default function Navbar({
         </div>
       </div>
 
-      {/* 2. Center: Zone Navigation (Desktop Bar & Mobile/Tablet Dropdown) */}
-      <div className="flex items-center">
-        {/* Desktop Quick Jump Zone Pills (xl+ screens) */}
-        <nav aria-label="Zone Quick Jumps" className="hidden xl:flex items-center gap-1 bg-canvas/60 p-1 rounded-xl border border-borderDark/80">
-          {QUICK_JUMP_TARGETS.map((target) => {
-            const isActive = activeZone === target.label;
-            return (
-              <button
-                key={target.label}
-                onClick={() => handleJump(target)}
-                className={`px-2.5 py-1 text-xs font-medium rounded-lg transition-all duration-150 flex items-center gap-1.5 ${
-                  isActive
-                    ? 'bg-surfaceLight text-brandPink shadow-sm border border-brandPink/40 font-bold'
-                    : 'text-slate-300 hover:text-white hover:bg-surfaceLight/50'
-                }`}
-              >
-                <span
-                  className="w-1.5 h-1.5 rounded-full"
-                  style={{ backgroundColor: target.color }}
-                ></span>
-                {target.label}
-              </button>
-            );
-          })}
-        </nav>
-
-        {/* Compact Zone Dropdown for Mobile & Tablet (< xl screens) */}
-        <div className="relative xl:hidden" ref={zoneMenuRef}>
-          <button
-            onClick={() => setIsZoneMenuOpen(!isZoneMenuOpen)}
-            className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-surfaceLight/70 hover:bg-surfaceLight border border-borderDark text-xs font-mono text-slate-300 hover:text-white transition-colors"
-            title="Jump to City Zones"
-          >
-            <span className="w-2 h-2 rounded-full bg-brandPink"></span>
-            <span className="text-[11px] font-semibold">{activeZone || 'Zones'}</span>
-            <ChevronDown className={`w-3 h-3 transition-transform ${isZoneMenuOpen ? 'rotate-180' : ''}`} />
-          </button>
-
-          {isZoneMenuOpen && (
-            <div className="absolute left-0 mt-1 w-44 rounded-xl bg-surface border border-borderDark shadow-2xl p-1.5 z-50 flex flex-col gap-1 backdrop-blur-md">
-              <div className="text-[9px] font-mono uppercase text-slate-400 px-2 py-1 border-b border-borderDark/60">
-                Quick Jump Zones
-              </div>
-              {QUICK_JUMP_TARGETS.map((target) => (
+      {/* 2. Center: Zone Navigation (Only displayed in Live Map mode) */}
+      {viewMode === 'map' && (
+        <div className="flex items-center">
+          {/* Desktop Quick Jump Zone Pills (xl+ screens) */}
+          <nav aria-label="Zone Quick Jumps" className="hidden xl:flex items-center gap-1 bg-canvas/60 p-1 rounded-xl border border-borderDark/80">
+            {QUICK_JUMP_TARGETS.map((target) => {
+              const isActive = activeZone === target.label;
+              return (
                 <button
                   key={target.label}
                   onClick={() => handleJump(target)}
-                  className="w-full text-left px-2.5 py-1.5 rounded-lg text-xs font-medium text-slate-200 hover:text-white hover:bg-brandPink/20 flex items-center gap-2 transition-colors"
+                  className={`px-2.5 py-1 text-xs font-medium rounded-lg transition-all duration-150 flex items-center gap-1.5 ${
+                    isActive
+                      ? 'bg-surfaceLight text-brandPink shadow-sm border border-brandPink/40 font-bold'
+                      : 'text-slate-300 hover:text-white hover:bg-surfaceLight/50'
+                  }`}
                 >
                   <span
-                    className="w-2 h-2 rounded-full shrink-0"
+                    className="w-1.5 h-1.5 rounded-full"
                     style={{ backgroundColor: target.color }}
                   ></span>
-                  <span>{target.label}</span>
+                  {target.label}
                 </button>
-              ))}
-            </div>
-          )}
+              );
+            })}
+          </nav>
+
+          {/* Compact Zone Dropdown for Mobile & Tablet (< xl screens) */}
+          <div className="relative xl:hidden" ref={zoneMenuRef}>
+            <button
+              onClick={() => setIsZoneMenuOpen(!isZoneMenuOpen)}
+              className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-surfaceLight/70 hover:bg-surfaceLight border border-borderDark text-xs font-mono text-slate-300 hover:text-white transition-colors"
+              title="Jump to City Zones"
+            >
+              <span className="w-2 h-2 rounded-full bg-brandPink"></span>
+              <span className="text-[11px] font-semibold">{activeZone || 'Zones'}</span>
+              <ChevronDown className={`w-3 h-3 transition-transform ${isZoneMenuOpen ? 'rotate-180' : ''}`} />
+            </button>
+
+            {isZoneMenuOpen && (
+              <div className="absolute left-0 mt-1 w-44 rounded-xl bg-surface border border-borderDark shadow-2xl p-1.5 z-50 flex flex-col gap-1 backdrop-blur-md">
+                <div className="text-[9px] font-mono uppercase text-slate-400 px-2 py-1 border-b border-borderDark/60">
+                  Quick Jump Zones
+                </div>
+                {QUICK_JUMP_TARGETS.map((target) => (
+                  <button
+                    key={target.label}
+                    onClick={() => handleJump(target)}
+                    className="w-full text-left px-2.5 py-1.5 rounded-lg text-xs font-medium text-slate-200 hover:text-white hover:bg-brandPink/20 flex items-center gap-2 transition-colors"
+                  >
+                    <span
+                      className="w-2 h-2 rounded-full shrink-0"
+                      style={{ backgroundColor: target.color }}
+                    ></span>
+                    <span>{target.label}</span>
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
-      </div>
+      )}
 
       {/* 3. Right: View Switcher & Trip Countdown */}
       <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
 
         {/* View Mode Switcher: 4 Distinct Thematic Colors in Matching Style */}
         <div className="flex items-center bg-canvas/90 p-0.5 rounded-xl border border-borderDark/90 shadow-inner">
-          {/* 1. Radar (Electric Cyan) */}
+          {/* 1. Live Map (Electric Cyan) */}
           {setViewMode ? (
             <button
               onClick={() => handleViewChange('map')}
@@ -190,10 +192,10 @@ export default function Navbar({
                   ? 'bg-gradient-to-r from-cyan-500 via-teal-500 to-blue-600 text-white shadow-[0_0_14px_rgba(0,229,255,0.45)] border border-cyan-300/30'
                   : 'text-cyan-400 hover:text-cyan-200 hover:bg-cyan-500/15'
               }`}
-              title="Interactive Live Map & Surveillance Radar"
+              title="Interactive Live Map & City Overview"
             >
               <MapIcon className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">Radar</span>
+              <span className="hidden sm:inline">Live Map</span>
             </button>
           ) : (
             <Link
@@ -203,14 +205,14 @@ export default function Navbar({
                   ? 'bg-gradient-to-r from-cyan-500 via-teal-500 to-blue-600 text-white shadow-[0_0_14px_rgba(0,229,255,0.45)] border border-cyan-300/30'
                   : 'text-cyan-400 hover:text-cyan-200 hover:bg-cyan-500/15'
               }`}
-              title="Interactive Live Map & Surveillance Radar"
+              title="Interactive Live Map & City Overview"
             >
               <MapIcon className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">Radar</span>
+              <span className="hidden sm:inline">Live Map</span>
             </Link>
           )}
 
-          {/* 2. Multi-Cam (Neon Amber / Gold) */}
+          {/* 2. Multi Cam (Neon Amber / Gold) */}
           {setViewMode ? (
             <button
               onClick={() => handleViewChange('grid')}
@@ -219,10 +221,10 @@ export default function Navbar({
                   ? 'bg-gradient-to-r from-amber-500 via-orange-500 to-yellow-500 text-white shadow-[0_0_14px_rgba(245,158,11,0.45)] border border-amber-300/30'
                   : 'text-amber-400 hover:text-amber-200 hover:bg-amber-500/15'
               }`}
-              title="Multi-Cam Command Grid (4-up Quad View)"
+              title="Multi Cam Command Grid (4-up Quad View)"
             >
               <Grid className="w-3.5 h-3.5" />
-              <span className="hidden md:inline">Multi-Cam</span>
+              <span className="hidden md:inline">Multi Cam</span>
             </button>
           ) : (
             <Link
@@ -232,14 +234,14 @@ export default function Navbar({
                   ? 'bg-gradient-to-r from-amber-500 via-orange-500 to-yellow-500 text-white shadow-[0_0_14px_rgba(245,158,11,0.45)] border border-amber-300/30'
                   : 'text-amber-400 hover:text-amber-200 hover:bg-amber-500/15'
               }`}
-              title="Multi-Cam Command Grid (4-up Quad View)"
+              title="Multi Cam Command Grid (4-up Quad View)"
             >
               <Grid className="w-3.5 h-3.5" />
-              <span className="hidden md:inline">Multi-Cam</span>
+              <span className="hidden md:inline">Multi Cam</span>
             </Link>
           )}
 
-          {/* 3. PattayaVids (Hot Pink / Rose) */}
+          {/* 3. Videos (Hot Pink / Rose) */}
           {setViewMode ? (
             <button
               onClick={() => handleViewChange('vids')}
@@ -248,11 +250,11 @@ export default function Navbar({
                   ? 'bg-gradient-to-r from-brandPink via-rose-600 to-pink-600 text-white shadow-[0_0_14px_rgba(255,42,109,0.45)] border border-rose-300/30'
                   : 'text-brandPink hover:text-pink-200 hover:bg-brandPink/15'
               }`}
-              title="PattayaVids: Curated 4K Street Walks, Nightlife Highlights & Expat Guides"
+              title="Curated 4K Street Walks, Nightlife Highlights & Expat Guides"
             >
               <Film className="w-3.5 h-3.5 shrink-0" />
-              <span className="hidden sm:inline">Pattaya<span className={isVidsActive ? 'text-white' : 'font-extrabold'}>Vids</span></span>
-              <span className="sm:hidden font-bold text-[11px]">Vids</span>
+              <span className="hidden sm:inline">Videos</span>
+              <span className="sm:hidden font-bold text-[11px]">Videos</span>
             </button>
           ) : (
             <Link
@@ -262,11 +264,11 @@ export default function Navbar({
                   ? 'bg-gradient-to-r from-brandPink via-rose-600 to-pink-600 text-white shadow-[0_0_14px_rgba(255,42,109,0.45)] border border-rose-300/30'
                   : 'text-brandPink hover:text-pink-200 hover:bg-brandPink/15'
               }`}
-              title="PattayaVids: Curated 4K Street Walks, Nightlife Highlights & Expat Guides"
+              title="Curated 4K Street Walks, Nightlife Highlights & Expat Guides"
             >
               <Film className="w-3.5 h-3.5 shrink-0" />
-              <span className="hidden sm:inline">Pattaya<span className={isVidsActive ? 'text-white' : 'font-extrabold'}>Vids</span></span>
-              <span className="sm:hidden font-bold text-[11px]">Vids</span>
+              <span className="hidden sm:inline">Videos</span>
+              <span className="sm:hidden font-bold text-[11px]">Videos</span>
             </Link>
           )}
 

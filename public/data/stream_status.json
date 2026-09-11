@@ -127,22 +127,6 @@
       "platform": "youtube",
       "handle": "@MisoBarPattaya"
     },
-    "venue-royal-varuna-yacht-club": {
-      "is_live": false,
-      "video_id": null,
-      "last_live_at": "2026-09-11T12:00:00.000Z",
-      "status": "error_404",
-      "name": "Royal Varuna Yacht Club Overlook",
-      "platform": "youtube"
-    },
-    "venue-windy-emerald-beach": {
-      "is_live": false,
-      "video_id": null,
-      "last_live_at": "2026-09-11T12:00:00.000Z",
-      "status": "error_404",
-      "name": "Emerald Beach & Pratamnak Hill (Windy)",
-      "platform": "youtube"
-    },
     "streamer-RS-001": {
       "is_live": false,
       "video_id": null,

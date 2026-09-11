@@ -113,19 +113,6 @@ export default function HlsPlayer({ streamUrl, title = 'City CCTV Stream', camId
         <span className="text-slate-300 hidden sm:inline">{clock}</span>
       </div>
 
-      {/* City Hall Direct Portal Button */}
-      <a
-        href="https://livestream.pattaya.go.th/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="absolute top-2 right-2 z-20 flex items-center gap-1.5 px-2.5 py-1 rounded bg-brandCyan/90 hover:bg-brandCyan text-canvas border border-cyan-300/40 text-[10px] font-mono font-bold transition-all shadow-md"
-        title="Open Pattaya City Hall Livestream Portal"
-      >
-        <Radio className="w-3 h-3" />
-        <span>City Portal</span>
-        <ExternalLink className="w-2.5 h-2.5" />
-      </a>
-
       {/* Player View */}
       {hasError ? (
         <div className="flex-1 p-4 sm:p-5 text-center flex flex-col items-center justify-center gap-2 bg-gradient-to-b from-[#0a1220] via-[#070b14] to-black w-full h-full relative">
@@ -162,21 +149,8 @@ export default function HlsPlayer({ streamUrl, title = 'City CCTV Stream', camId
             </div>
           )}
 
-          <div className="z-10 mt-1 flex flex-col items-center gap-1">
-            <a
-              href="https://livestream.pattaya.go.th/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-lg bg-brandCyan hover:bg-cyan-400 text-canvas text-xs font-bold transition-all shadow-[0_0_14px_rgba(0,229,255,0.35)] hover:shadow-[0_0_20px_rgba(0,229,255,0.5)]"
-            >
-              <span>Launch Official City Hall Stream</span>
-              <ExternalLink className="w-3.5 h-3.5" />
-            </a>
-            {resolvedCode && (
-              <span className="text-[10px] text-slate-400 font-mono">
-                Paste <strong>{resolvedCode}</strong> into portal search bar
-              </span>
-            )}
+          <div className="z-10 mt-1 flex items-center gap-1 text-[10px] text-slate-400 font-mono">
+            <span>Use command button below to launch portal feed</span>
           </div>
 
           {/* Bottom Telemetry Info */}

@@ -201,6 +201,14 @@ export default function KohLarnModal({ isOpen, onClose }) {
                   <p>• <strong>Tien Beach & Samae Beach:</strong> Crystal clear water with gentle slope, great for swimming all day.</p>
                   <p>• <strong>Ta Yai Beach:</strong> Cozy secluded cove on the northern tip with reef marine life.</p>
                 </div>
+
+                {/* Hydrographic Authority Citation */}
+                <div className="p-2.5 rounded-lg bg-surface border border-borderDark/80 text-[10px] text-slate-400 space-y-0.5">
+                  <span className="font-semibold text-cyan-400 block">⚓ Data Authority & Hydrographic Reference:</span>
+                  <p>
+                    Hydrographic Department, Royal Thai Navy (กรมอุทกศาสตร์ กองทัพเรือ) — Station Pattaya / Ko Sichang Amphidromic Reference Datum. Average variance: 0.8m (neap low) to 2.4m (spring high).
+                  </p>
+                </div>
               </div>
             </div>
           )}

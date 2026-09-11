@@ -1,31 +1,45 @@
 'use client';
 
-import React, { useState } from 'react';
-import { Youtube, Star, Play, Radio, ChevronRight, ChevronDown } from 'lucide-react';
+import React, { useState, useMemo, useCallback } from 'react';
+import { Youtube, Star, Play, Radio, ChevronRight } from 'lucide-react';
 import streamersData from '@/public/data/roaming_streamers.json';
 import { useStreamStatus } from '@/src/hooks/useStreamStatus';
 import { FEATURES } from '@/src/config/features';
 
 export default function RoamingTray({ onSelectStreamer, onOpenSponsorModal }) {
   const streamStatus = useStreamStatus();
-  const [showAllChannels, setShowAllChannels] = useState(false);
+  const [filterMode, setFilterMode] = useState('all'); // 'all' | 'live' | 'walks'
 
-  const getStreamerStatus = (streamer) => {
+  const getStreamerStatus = useCallback((streamer) => {
     return (
       streamStatus?.entities?.[`streamer-${streamer.id}`] ||
       streamStatus?.entities?.[`streamer-${streamer.id.toLowerCase()}`]
     );
-  };
+  }, [streamStatus]);
 
-  const liveStreamers = streamersData.filter((streamer) => {
-    const status = getStreamerStatus(streamer);
-    return status?.is_live === true;
-  });
+  const liveStreamers = useMemo(() => {
+    return streamersData.filter((streamer) => {
+      const status = getStreamerStatus(streamer);
+      return status?.is_live === true;
+    });
+  }, [getStreamerStatus]);
+
+  const displayedStreamers = useMemo(() => {
+    if (filterMode === 'live') {
+      return liveStreamers;
+    }
+    if (filterMode === 'walks') {
+      return streamersData.filter(
+        (s) =>
+          s.name.toLowerCase().includes('walk') ||
+          s.current_route.toLowerCase().includes('walk') ||
+          s.youtube_handle.toLowerCase().includes('walk')
+      );
+    }
+    return streamersData;
+  }, [filterMode, liveStreamers]);
 
   const hasLiveStreamers = liveStreamers.length > 0;
-  const displayedStreamers = showAllChannels
-    ? streamersData
-    : (hasLiveStreamers ? liveStreamers : []);
 
   return (
     <aside
@@ -35,31 +49,63 @@ export default function RoamingTray({ onSelectStreamer, onOpenSponsorModal }) {
       {/* Streamers Section */}
       <div className="flex items-center gap-3 overflow-x-auto py-1 scrollbar-none flex-1 mr-3">
         {/* Dock Header */}
-        <div className="flex items-center gap-1.5 shrink-0 pr-2 border-r border-borderDark">
-          <Youtube className="w-4 h-4 text-red-500" />
-          <span className="text-[11px] font-bold font-mono text-slate-200 uppercase tracking-wider hidden sm:inline flex items-center gap-1.5">
+        <div className="flex items-center gap-2 shrink-0 pr-2 border-r border-borderDark">
+          <Youtube className="w-4 h-4 text-red-500 shrink-0" />
+          <span className="text-[11px] font-bold font-mono text-slate-200 uppercase tracking-wider hidden lg:inline flex items-center gap-1.5">
             {hasLiveStreamers ? (
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
               </span>
             ) : null}
-            Pattaya Live Streamers:
+            Pattaya Streamers:
           </span>
+
+          {/* Quick Filter Pills */}
+          <div className="flex items-center bg-canvas/80 p-0.5 rounded-lg border border-borderDark/80 text-[10px] font-mono shrink-0">
+            <button
+              onClick={() => setFilterMode('all')}
+              className={`px-2 py-0.5 rounded transition-colors ${
+                filterMode === 'all'
+                  ? 'bg-surfaceLight text-white font-bold'
+                  : 'text-slate-400 hover:text-slate-200'
+              }`}
+            >
+              All ({streamersData.length})
+            </button>
+            <button
+              onClick={() => setFilterMode('live')}
+              className={`px-2 py-0.5 rounded transition-colors flex items-center gap-1 ${
+                filterMode === 'live'
+                  ? 'bg-red-950/80 text-red-400 border border-red-500/40 font-bold'
+                  : 'text-slate-400 hover:text-slate-200'
+              }`}
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-red-500"></span>
+              Live ({liveStreamers.length})
+            </button>
+            <button
+              onClick={() => setFilterMode('walks')}
+              className={`px-2 py-0.5 rounded transition-colors ${
+                filterMode === 'walks'
+                  ? 'bg-indigo-950/80 text-indigo-400 border border-indigo-500/40 font-bold'
+                  : 'text-slate-400 hover:text-slate-200'
+              }`}
+            >
+              4K Walks
+            </button>
+          </div>
         </div>
 
-        {/* If 0 streamers live and not expanded, show auto-collapsed minimal status pill */}
-        {!hasLiveStreamers && !showAllChannels ? (
-          <div className="flex items-center gap-2">
+        {/* Empty state for 'live' filter when 0 are live */}
+        {displayedStreamers.length === 0 && filterMode === 'live' ? (
+          <div className="flex items-center gap-2 text-xs font-mono text-slate-400">
+            <span>No streamers live right now.</span>
             <button
-              onClick={() => setShowAllChannels(true)}
-              className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-surfaceLight/60 hover:bg-surfaceLight border border-borderDark hover:border-slate-500 text-xs font-mono text-slate-400 hover:text-slate-200 transition-all cursor-pointer"
-              title="Click to browse Pattaya live streamers"
+              onClick={() => setFilterMode('all')}
+              className="text-brandPink hover:underline font-bold"
             >
-              <span className="w-2 h-2 rounded-full bg-slate-500"></span>
-              <span className="font-semibold text-slate-300">0 Streamers Live</span>
-              <span className="text-[10px] text-slate-400 hidden sm:inline">• Browse Live Streamers</span>
-              <ChevronRight className="w-3 h-3 text-slate-400" />
+              Browse all {streamersData.length} creators ➔
             </button>
           </div>
         ) : (
@@ -138,16 +184,6 @@ export default function RoamingTray({ onSelectStreamer, onOpenSponsorModal }) {
                 </div>
               );
             })}
-
-            {/* Collapse button when expanded */}
-            {showAllChannels && (
-              <button
-                onClick={() => setShowAllChannels(false)}
-                className="px-2.5 py-1 rounded-full bg-surfaceLight hover:bg-borderDark border border-borderDark text-[10px] font-mono text-slate-400 hover:text-white transition-colors cursor-pointer shrink-0"
-              >
-                Collapse
-              </button>
-            )}
           </div>
         )}
       </div>

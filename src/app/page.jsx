@@ -17,7 +17,45 @@ import { useLiveAlerts } from '@/src/hooks/useLiveAlerts';
 import TickerBar from '@/src/components/TickerBar';
 import KohLarnModal from '@/src/components/KohLarnModal';
 import EventRadarModal from '@/src/components/EventRadarModal';
-import FlashFloodAdvisory from '@/src/components/FlashFloodAdvisory';
+import WeatherModal from '@/src/components/WeatherModal';
+
+function playShuffleChime() {
+  if (typeof window === 'undefined') return;
+  try {
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if (!AudioCtx) return;
+    const ctx = new AudioCtx();
+    const now = ctx.currentTime;
+
+    // Series of mechanical roulette ticks
+    for (let i = 0; i < 5; i++) {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(320 + i * 90, now + i * 0.04);
+      gain.gain.setValueAtTime(0.08, now + i * 0.04);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.04 + 0.035);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now + i * 0.04);
+      osc.stop(now + i * 0.04 + 0.04);
+    }
+
+    // Victory chime
+    const bellOsc = ctx.createOscillator();
+    const bellGain = ctx.createGain();
+    bellOsc.type = 'sine';
+    bellOsc.frequency.setValueAtTime(880, now + 0.25);
+    bellGain.gain.setValueAtTime(0.12, now + 0.25);
+    bellGain.gain.exponentialRampToValueAtTime(0.001, now + 0.75);
+    bellOsc.connect(bellGain);
+    bellGain.connect(ctx.destination);
+    bellOsc.start(now + 0.25);
+    bellOsc.stop(now + 0.8);
+  } catch {
+    // Silent fail if audio is not allowed without user gesture
+  }
+}
 
 export default function AppRoot() {
   const [viewMode, setViewMode] = useState('map'); // 'map' | 'grid' | 'vids'
@@ -26,13 +64,12 @@ export default function AppRoot() {
   const [isSponsorModalOpen, setIsSponsorModalOpen] = useState(false);
   const [isKohLarnModalOpen, setIsKohLarnModalOpen] = useState(false);
   const [isEventsModalOpen, setIsEventsModalOpen] = useState(false);
-  const [isFloodDismissed, setIsFloodDismissed] = useState(false);
-  const [highlightFloodZones, setHighlightFloodZones] = useState(false);
+  const [isWeatherModalOpen, setIsWeatherModalOpen] = useState(false);
   const [isBannerDismissed, setIsBannerDismissed] = useState(false);
   const mapInstanceRef = useRef(null);
 
   const streamStatus = useStreamStatus();
-  const { isHeavyRain, rainRate } = useTickerData();
+  const { weather } = useTickerData();
   const { isEnabled: hasLiveAlerts, toggleLiveAlerts } = useLiveAlerts(streamStatus);
   const activeLiveCount = useMemo(() => {
     const entities = streamStatus?.entities || {};
@@ -71,8 +108,10 @@ export default function AppRoot() {
     setSelectedEntity(null);
   }, []);
 
-  // 🎲 Live Shuffle (City Roulette): Filter active live streams, smooth flyTo([lat, lng], 17), and open drawer
+  // 🎲 Live Shuffle (City Roulette): Filter active live streams, play chime, smooth flyTo([lat, lng], 17), and open drawer
   const handleLiveShuffle = useCallback(() => {
+    playShuffleChime();
+
     const liveVenues = venuesData.filter((v) => {
       const statusInfo = streamStatus?.entities?.[`venue-${v.slug}`];
       return statusInfo?.is_live === true || (statusInfo?.status === 'active' && statusInfo?.video_id);
@@ -152,39 +191,29 @@ export default function AppRoot() {
     }
   }, [viewMode]);
 
+  // Listen for custom video-select event from CreatorVODFeed retention strip
   useEffect(() => {
-    function handleLocationSync() {
-      if (typeof window === 'undefined') return;
-      const params = new URLSearchParams(window.location.search);
-      const v = params.get('view');
-      if (v === 'vids' || v === 'pulse') setViewMode('vids');
-      else if (v === 'grid') setViewMode('grid');
-      else if (v === 'map' || !v) setViewMode('map');
+    const handleSelectCustomVideo = (event) => {
+      const video = event.detail;
+      if (!video) return;
 
-      const jumpParam = params.get('jump');
-      if (jumpParam) {
-        import('@/src/utils/zones').then(({ QUICK_JUMP_TARGETS }) => {
-          const target = QUICK_JUMP_TARGETS.find(t => t.label.toLowerCase() === jumpParam.toLowerCase());
-          if (target) {
-            setTimeout(() => {
-              handleQuickJump(target.center, target.zoom);
-            }, 600);
-          }
-        });
-      }
+      setSelectedEntity({
+        name: video.title,
+        channel_name: video.channel_title,
+        video_id: video.video_id,
+        category: video.category || 'Nightlife & Walking',
+        zone: video.zone || 'Pattaya',
+        type: 'vod',
+        is_live: false,
+        platform: video.platform || 'youtube',
+      });
+    };
 
-      const shuffleParam = params.get('shuffle');
-      if (shuffleParam) {
-        setTimeout(() => {
-          handleLiveShuffle();
-        }, 800);
-      }
-    }
-
-    handleLocationSync();
-    window.addEventListener('popstate', handleLocationSync);
-    return () => window.removeEventListener('popstate', handleLocationSync);
-  }, [handleQuickJump, handleLiveShuffle]);
+    window.addEventListener('pattayacams:select-video', handleSelectCustomVideo);
+    return () => {
+      window.removeEventListener('pattayacams:select-video', handleSelectCustomVideo);
+    };
+  }, []);
 
   return (
     <div className="flex flex-col h-screen w-screen overflow-hidden bg-canvas">
@@ -202,29 +231,17 @@ export default function AppRoot() {
       <TickerBar
         onOpenKohLarn={() => setIsKohLarnModalOpen(true)}
         onOpenEvents={() => setIsEventsModalOpen(true)}
+        onOpenWeather={() => setIsWeatherModalOpen(true)}
         onToggleAlerts={toggleLiveAlerts}
         hasLiveAlerts={hasLiveAlerts}
       />
 
       {/* 2. Main Content Canvas */}
       <main className="flex-1 relative overflow-hidden">
-        {/* Automated Flash Flood Hazard Advisory Banner */}
-        {isHeavyRain && !isFloodDismissed && (
-          <FlashFloodAdvisory
-            rainRate={rainRate}
-            onHighlightFloodZones={() => {
-              if (viewMode !== 'map') setViewMode('map');
-              setHighlightFloodZones(true);
-            }}
-            onDismiss={() => setIsFloodDismissed(true)}
-          />
-        )}
-
         <div className={`w-full h-full ${viewMode === 'map' ? 'block' : 'hidden'}`}>
           <MapCanvasWrapper
             onSelectEntity={handleSelectEntity}
             onMapInstance={handleMapInstance}
-            externalShowFlood={highlightFloodZones}
           />
         </div>
         {viewMode === 'grid' && (
@@ -245,12 +262,12 @@ export default function AppRoot() {
               <div className="flex items-center gap-2.5 text-slate-200">
                 <span className="text-base animate-pulse">🌙</span>
                 <span className="leading-snug">
-                  <strong className="text-white font-semibold">Pattaya is resting.</strong> No streams are live right now. Watch latest 4K street walks & nightlife episodes on{' '}
+                  <strong className="text-white font-semibold">Pattaya is resting.</strong> No streams are live right now. Watch latest 4K street walks & nightlife episodes in{' '}
                   <button
                     onClick={() => setViewMode('vids')}
                     className="text-brandPink font-bold hover:underline inline-flex items-center gap-0.5 ml-0.5"
                   >
-                    <span>PattayaVids</span>
+                    <span>Videos</span>
                     <span className="text-[10px]">➔</span>
                   </button>
                 </span>
@@ -334,6 +351,12 @@ export default function AppRoot() {
       <EventRadarModal
         isOpen={isEventsModalOpen}
         onClose={() => setIsEventsModalOpen(false)}
+      />
+
+      <WeatherModal
+        isOpen={isWeatherModalOpen}
+        onClose={() => setIsWeatherModalOpen(false)}
+        currentWeather={weather}
       />
     </div>
   );
