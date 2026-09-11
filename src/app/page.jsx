@@ -12,6 +12,7 @@ import TripModal from '@/src/components/TripModal';
 import SponsorModal from '@/src/components/SponsorModal';
 import venuesData from '@/public/data/venues.json';
 import liveCamsData from '@/public/data/live_cams.json';
+import creatorsData from '@/public/data/creators.json';
 import { useStreamStatus } from '@/src/hooks/useStreamStatus';
 import { useTickerData } from '@/src/hooks/useTickerData';
 import { useLiveAlerts } from '@/src/hooks/useLiveAlerts';
@@ -72,9 +73,23 @@ export default function AppRoot() {
   const streamStatus = useStreamStatus();
   const { weather } = useTickerData();
   const { isEnabled: hasLiveAlerts, toggleLiveAlerts } = useLiveAlerts(streamStatus);
-  const activeLiveCount = useMemo(() => {
-    const entities = streamStatus?.entities || {};
-    return Object.values(entities).filter((e) => e.is_live === true).length;
+    const activeLiveCount = useMemo(() => {
+    const liveVenues = venuesData.filter((v) => {
+      const statusInfo = streamStatus?.entities?.[v.slug] || streamStatus?.entities?.[v.slug ? `venue-${v.slug}` : ''];
+      return statusInfo?.is_live === true || (statusInfo?.status === 'active' && statusInfo?.video_id);
+    }).length;
+
+    const liveCams = liveCamsData.filter((c) => {
+      const statusInfo = streamStatus?.entities?.[c.slug] || streamStatus?.entities?.[c.slug ? `livecam-${c.slug}` : ''];
+      return statusInfo?.status !== 'error_404' && statusInfo?.is_live !== false;
+    }).length;
+
+    const liveCreators = creatorsData.filter((c) => {
+      const statusInfo = streamStatus?.entities?.[c.slug] || streamStatus?.entities?.[c.slug ? `creator-${c.slug}` : ''];
+      return statusInfo?.is_live === true;
+    }).length;
+
+    return liveVenues + liveCams + liveCreators;
   }, [streamStatus]);
 
   const handleMapInstance = useCallback((map) => {
@@ -141,7 +156,27 @@ export default function AppRoot() {
       };
     });
 
-    const allLiveCandidates = [...liveVenues, ...liveCams];
+        const liveCreators = creatorsData.filter((c) => {
+      const statusInfo = streamStatus?.entities?.[c.slug] || streamStatus?.entities?.[c.slug ? `creator-${c.slug}` : ''];
+      return statusInfo?.is_live === true;
+    }).map((c) => {
+      const statusInfo = streamStatus?.entities?.[c.slug] || streamStatus?.entities?.[c.slug ? `creator-${c.slug}` : ''];
+      let lat = 12.9262, lng = 100.8735;
+      if (c.primary_zone === 'buakhao') { lat = 12.9323; lng = 100.8861; }
+      else if (c.primary_zone === 'soi_6') { lat = 12.9423; lng = 100.8860; }
+      else if (c.primary_zone === 'jomtien') { lat = 12.8950; lng = 100.8710; }
+      return {
+        ...c,
+        lat,
+        lng,
+        type: 'creator',
+        is_live: true,
+        video_id: statusInfo?.video_id || null,
+        active_platform: statusInfo?.platform || c.platform,
+      };
+    });
+
+    const allLiveCandidates = [...liveVenues, ...liveCams, ...liveCreators];
     if (allLiveCandidates.length === 0) return;
 
     let candidates = allLiveCandidates;

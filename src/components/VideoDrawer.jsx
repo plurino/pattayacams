@@ -18,7 +18,15 @@ import {
   Maximize2,
   Minimize2,
   Bell,
-  AlertCircle
+  AlertCircle,
+  Share2,
+  Camera,
+  ChevronLeft,
+  ChevronRight,
+  Smartphone,
+  Navigation,
+  Clock,
+  Bus
 } from 'lucide-react';
 import HlsPlayer from './common/HlsPlayer';
 import YouTubePlayer from './common/YouTubePlayer';
@@ -31,13 +39,13 @@ import {
   getUpcomingWeekendDates,
   buildAgodaHotelUrl,
   build12GoTransferUrl,
-  buildAiraloEsimUrl,
-  getTelegramCommunityUrl,
 } from '@/src/utils/affiliate';
 
 export default function VideoDrawer({ entity, onClose }) {
   const [copiedCode, setCopiedCode] = useState(false);
+  const [copiedShare, setCopiedShare] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [activePhotoIdx, setActivePhotoIdx] = useState(0);
 
   if (!entity) return null;
 
@@ -46,6 +54,14 @@ export default function VideoDrawer({ entity, onClose }) {
       navigator.clipboard.writeText(code);
       setCopiedCode(true);
       setTimeout(() => setCopiedCode(false), 2000);
+    }
+  };
+
+  const handleCopyShare = (url) => {
+    if (typeof navigator !== 'undefined' && navigator.clipboard) {
+      navigator.clipboard.writeText(url);
+      setCopiedShare(true);
+      setTimeout(() => setCopiedShare(false), 2500);
     }
   };
 
@@ -63,7 +79,7 @@ export default function VideoDrawer({ entity, onClose }) {
   const isCctv = entity.type === 'cctv';
   const isLiveCam = entity.type === 'livecam' || entity.category === 'live_cam';
   const isVenue = entity.type === 'venue';
-  const isStreamer = entity.type === 'streamer';
+  const isStreamer = entity.type === 'streamer' || entity.type === 'creator';
   const isVenueOffline = isVenue && (entity.is_live === false);
 
   const formatRelativeTime = (timestamp) => {
@@ -86,7 +102,10 @@ export default function VideoDrawer({ entity, onClose }) {
 
   const permalink = isCctv
     ? `/cams/${entity.slug}/`
-    : `/venues/${entity.slug}/`;
+    : (isStreamer ? `/creators/${entity.slug}/` : `/venues/${entity.slug}/`);
+
+  const photos = entity.photos && entity.photos.length > 0 ? entity.photos : null;
+  const currentPhoto = photos ? (photos[activePhotoIdx] || photos[0]) : null;
 
   // Render video stage or offline standby card
   const renderVideoStage = () => {
@@ -100,35 +119,94 @@ export default function VideoDrawer({ entity, onClose }) {
             : `https://www.youtube.com/channel/${entity.youtube_channel_id}`);
 
       return (
-        <div className="w-full aspect-video bg-surfaceLight/70 border border-borderDark rounded-xl p-6 flex flex-col items-center justify-center text-center gap-3 shadow-lg">
-          <div className="w-12 h-12 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-400 shadow-inner">
-            <Radio className="w-6 h-6 text-slate-400" />
-          </div>
-          <div className="space-y-1">
-            <div className="flex items-center justify-center gap-1.5 text-xs font-mono font-bold text-slate-300">
-              <span className="w-2 h-2 rounded-full bg-slate-400" />
-              <span>Currently Offline</span>
+        <div className="flex flex-col gap-3 w-full">
+          {/* Photo Showcase (if venue has photos) */}
+          {photos && currentPhoto ? (
+            <div className="relative w-full aspect-video rounded-xl overflow-hidden bg-black border border-borderDark shadow-lg group">
+              <img
+                src={currentPhoto.url}
+                alt={currentPhoto.caption || entity.name}
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent pointer-events-none" />
+
+              {/* Status Badge */}
+              <div className="absolute top-2.5 left-2.5 flex items-center gap-1.5 px-2 py-0.5 rounded bg-black/80 backdrop-blur-md border border-white/10 text-[10px] font-mono text-slate-300">
+                <span className="w-1.5 h-1.5 rounded-full bg-slate-400" />
+                <span>Currently Offline</span>
+              </div>
+
+              {/* Photo Navigation Arrows */}
+              {photos.length > 1 && (
+                <>
+                  <button
+                    onClick={() => setActivePhotoIdx((prev) => (prev - 1 + photos.length) % photos.length)}
+                    className="absolute left-1.5 top-1/2 -translate-y-1/2 p-1.5 rounded-full bg-black/60 hover:bg-black/90 text-white transition-colors"
+                  >
+                    <ChevronLeft className="w-4 h-4" />
+                  </button>
+                  <button
+                    onClick={() => setActivePhotoIdx((prev) => (prev + 1) % photos.length)}
+                    className="absolute right-1.5 top-1/2 -translate-y-1/2 p-1.5 rounded-full bg-black/60 hover:bg-black/90 text-white transition-colors"
+                  >
+                    <ChevronRight className="w-4 h-4" />
+                  </button>
+                </>
+              )}
+
+              {/* Caption and Channel Action */}
+              <div className="absolute bottom-2.5 inset-x-2.5 flex items-center justify-between gap-2 z-10">
+                <span className="text-[11px] text-white drop-shadow truncate">
+                  {currentPhoto.caption}
+                </span>
+                <a
+                  href={channelUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`shrink-0 flex items-center gap-1 px-2.5 py-1 rounded-lg text-[10px] font-bold transition-all shadow-md ${
+                    isKick
+                      ? 'bg-[#53FC18] hover:bg-[#46d614] text-black'
+                      : 'bg-red-600 hover:bg-red-500 text-white'
+                  }`}
+                >
+                  <Bell className="w-3 h-3" />
+                  <span>Channel</span>
+                  <ExternalLink className="w-2.5 h-2.5" />
+                </a>
+              </div>
             </div>
-            <p className="text-xs text-slate-400 font-mono">
-              {entity.last_live_at
-                ? `Last broadcast ${formatRelativeTime(entity.last_live_at)}`
-                : 'Standby • Check Channel for Streams'}
-            </p>
-          </div>
-          <a
-            href={channelUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`mt-1 flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold transition-all shadow-md ${
-              isKick
-                ? 'bg-[#53FC18] hover:bg-[#46d614] text-black'
-                : 'bg-red-600 hover:bg-red-500 text-white'
-            }`}
-          >
-            {isKick ? <Radio className="w-3.5 h-3.5" /> : <Bell className="w-3.5 h-3.5" />}
-            <span>{isKick ? 'Open Kick Channel' : 'Open YouTube Channel'}</span>
-            <ExternalLink className="w-3 h-3" />
-          </a>
+          ) : (
+            <div className="w-full aspect-video bg-surfaceLight/70 border border-borderDark rounded-xl p-6 flex flex-col items-center justify-center text-center gap-3 shadow-lg">
+              <div className="w-12 h-12 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-400 shadow-inner">
+                <Radio className="w-6 h-6 text-slate-400" />
+              </div>
+              <div className="space-y-1">
+                <div className="flex items-center justify-center gap-1.5 text-xs font-mono font-bold text-slate-300">
+                  <span className="w-2 h-2 rounded-full bg-slate-400" />
+                  <span>Currently Offline</span>
+                </div>
+                <p className="text-xs text-slate-400 font-mono">
+                  {entity.last_live_at
+                    ? `Last broadcast ${formatRelativeTime(entity.last_live_at)}`
+                    : 'Standby • Check Channel for Streams'}
+                </p>
+              </div>
+              <a
+                href={channelUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`mt-1 flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold transition-all shadow-md ${
+                  isKick
+                    ? 'bg-[#53FC18] hover:bg-[#46d614] text-black'
+                    : 'bg-red-600 hover:bg-red-500 text-white'
+                }`}
+              >
+                {isKick ? <Radio className="w-3.5 h-3.5" /> : <Bell className="w-3.5 h-3.5" />}
+                <span>{isKick ? 'Open Kick Channel' : 'Open YouTube Channel'}</span>
+                <ExternalLink className="w-3 h-3" />
+              </a>
+            </div>
+          )}
         </div>
       );
     }
@@ -166,17 +244,50 @@ export default function VideoDrawer({ entity, onClose }) {
       );
     }
 
-    if (entity.platform === 'twitch' || entity.source?.type === 'twitch') {
+    // Smartphone Frame Live Streamer Mode for IRL Streamers / Creators
+    if (isStreamer) {
       return (
-        <UniversalPlayer
-          source={{
-            type: 'twitch',
-            channel: entity.twitch_channel || entity.channel_id || entity.slug,
-          }}
-          title={entity.name}
-          isLive={entity.is_live ?? true}
-          autoMount={true}
-        />
+        <div className="w-full flex flex-col items-center">
+          {/* Smartphone Frame */}
+          <div className="relative w-full rounded-2xl p-1.5 sm:p-2 bg-gradient-to-b from-neutral-800 to-neutral-900 border border-neutral-700 shadow-[0_0_24px_rgba(0,0,0,0.9)] animate-in fade-in zoom-in-95 duration-200">
+            {/* Phone Top Notch / Dynamic Island Telemetry Bar */}
+            <div className="h-5 sm:h-6 bg-black rounded-t-xl px-3 flex items-center justify-between text-[9px] sm:text-[10px] font-mono text-slate-400 select-none mb-1">
+              <div className="flex items-center gap-1.5 text-red-400 font-bold">
+                <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
+                <span>LIVE FEED</span>
+              </div>
+              {/* Center Camera Punch Hole */}
+              <div className="w-12 h-3.5 bg-neutral-900 rounded-full border border-neutral-800 flex items-center justify-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-neutral-950 border border-neutral-700" />
+              </div>
+              <div className="flex items-center gap-1.5 text-slate-300">
+                <span>5G 📶</span>
+                <span>100% 🔋</span>
+              </div>
+            </div>
+
+            {/* Live Video Player Stage */}
+            <div className="rounded-xl overflow-hidden bg-black aspect-video relative">
+              <UniversalPlayer
+                source={{
+                  type: entity.platform || 'youtube',
+                  video_id: entity.video_id,
+                  youtube_channel_id: entity.channel_id || entity.youtube_channel_id,
+                  channel: entity.kick_channel || entity.handle || entity.slug,
+                }}
+                title={entity.name}
+                isLive={entity.is_live ?? true}
+                autoMount={true}
+                badgeText="MOBILE IRL STREAM"
+              />
+            </div>
+
+            {/* Smartphone Bottom Home Bar */}
+            <div className="h-3 flex items-center justify-center mt-1">
+              <div className="w-16 h-1 rounded-full bg-slate-600/70" />
+            </div>
+          </div>
+        </div>
       );
     }
 
@@ -199,68 +310,23 @@ export default function VideoDrawer({ entity, onClose }) {
         handle={entity.youtube_handle || entity.handle || '@PattayaOhBar'}
         type={entity.type}
         isLive={entity.is_live ?? (isVenue || isLiveCam)}
-        badgeText={isLiveCam ? '24/7 LIVE WEBCAM' : (isStreamer ? '4K WALKING TOUR' : (isVenue ? 'LIVE STREAM BROADCAST' : undefined))}
+        badgeText={isLiveCam ? '24/7 LIVE WEBCAM' : (isVenue ? 'LIVE STREAM BROADCAST' : undefined)}
       />
     );
   };
 
-  // Render auxiliary cards (Telemetries, Google Maps, Affiliate & Hotels)
+  // Google Maps Coordinates & Quick Share logic
+  const lat = entity.lat;
+  const lng = entity.lng;
+  const hasCoordinates = typeof lat === 'number' && typeof lng === 'number';
+  const googleMapsUrl = entity.google_maps_url || (hasCoordinates ? `https://www.google.com/maps/search/?api=1&query=${lat},${lng}` : null);
+  const osmEmbedUrl = hasCoordinates
+    ? `https://www.openstreetmap.org/export/embed.html?bbox=${lng - 0.003}%2C${lat - 0.002}%2C${lng + 0.003}%2C${lat + 0.002}&layer=mapnik&marker=${lat}%2C${lng}`
+    : null;
+
+  // Render auxiliary cards
   const renderAuxiliaryCards = () => (
     <>
-      {/* Creator Context Card (for Streamers) */}
-      {isStreamer && (
-        <div className={`p-3 rounded-xl border flex flex-col gap-2 shadow-md ${
-          entity.platform === 'kick'
-            ? 'bg-emerald-950/20 border-emerald-500/30'
-            : 'bg-indigo-950/30 border-indigo-500/30'
-        }`}>
-          <div className="flex items-center justify-between">
-            <div className={`flex items-center gap-1.5 text-xs font-bold font-mono ${
-              entity.platform === 'kick' ? 'text-emerald-300' : 'text-indigo-300'
-            }`}>
-              {entity.platform === 'kick' ? (
-                <Radio className="w-4 h-4 text-emerald-400" />
-              ) : (
-                <Youtube className="w-4 h-4 text-red-500" />
-              )}
-              <span>{entity.platform === 'kick' ? 'Kick Live Broadcast Feed' : 'Recorded 4K Street Walk Episodes'}</span>
-            </div>
-            <span className={`text-[9px] font-mono px-2 py-0.5 rounded border ${
-              entity.platform === 'kick'
-                ? 'text-emerald-300 bg-emerald-900/40 border-emerald-500/30'
-                : 'text-indigo-300 bg-indigo-900/40 border-indigo-500/30'
-            }`}>
-              {entity.platform === 'kick' ? 'Kick Channel' : 'VOD Showcase'}
-            </span>
-          </div>
-          <p className="text-[11px] text-slate-300 leading-relaxed">
-            {entity.platform === 'kick'
-              ? 'This creator broadcasts real-time mobile IRL street walks and live community exploration on Kick. Watch live interactions, crowd walks, and nighttime venues directly in high definition.'
-              : 'This channel features ultra-high-definition 4K pedestrian walking tours and street guides around Pattaya. When the creator is not actively streaming live, this player showcases their latest 4K episodes and route walks.'}
-          </p>
-          <a
-            href={
-              entity.platform === 'kick'
-                ? `https://kick.com/${(entity.channel_id || entity.slug || entity.handle || '').replace(/^@/, '')}`
-                : (entity.youtube_handle
-                    ? `https://www.youtube.com/${entity.youtube_handle.startsWith('@') ? entity.youtube_handle : '@' + entity.youtube_handle}`
-                    : `https://www.youtube.com/channel/${entity.youtube_channel_id}`)
-            }
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`mt-1 flex items-center justify-center gap-1.5 w-full py-2 px-3 rounded-lg text-xs font-semibold transition-colors shadow-sm ${
-              entity.platform === 'kick'
-                ? 'bg-[#53FC18] hover:bg-[#46d614] text-black font-bold'
-                : 'bg-red-600 hover:bg-red-500 text-white'
-            }`}
-          >
-            {entity.platform === 'kick' ? <Radio className="w-3.5 h-3.5" /> : <Youtube className="w-3.5 h-3.5" />}
-            <span>Visit {entity.name} on {entity.platform === 'kick' ? 'Kick' : 'YouTube'}</span>
-            <ExternalLink className="w-3 h-3" />
-          </a>
-        </div>
-      )}
-
       {/* 24/7 Live Webcam Context Card */}
       {isLiveCam && (
         <div className="p-3.5 rounded-xl bg-emerald-950/20 border border-emerald-500/30 flex flex-col gap-2.5 shadow-md">
@@ -276,18 +342,6 @@ export default function VideoDrawer({ entity, onClose }) {
           <p className="text-[11px] text-slate-300 leading-relaxed">
             Continuous real-time exterior live broadcast of Pattaya street, beach, and pedestrian traffic. High-definition feed hosted directly on YouTube by {entity.youtube_handle || '@PattayaCams'}.
           </p>
-          {entity.youtube_handle && (
-            <a
-              href={`https://www.youtube.com/${entity.youtube_handle.startsWith('@') ? entity.youtube_handle : '@' + entity.youtube_handle}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-1 flex items-center justify-center gap-1.5 w-full py-2 px-3 rounded-lg bg-red-600 hover:bg-red-500 text-white text-xs font-semibold transition-colors shadow-sm"
-            >
-              <Youtube className="w-3.5 h-3.5" />
-              <span>Visit {entity.youtube_handle} on YouTube</span>
-              <ExternalLink className="w-3 h-3" />
-            </a>
-          )}
         </div>
       )}
 
@@ -307,7 +361,6 @@ export default function VideoDrawer({ entity, onClose }) {
             Pattaya City operates 600+ municipal surveillance cameras for public safety and traffic monitoring. Live WebRTC video is hosted directly on the City Hall streaming portal.
           </p>
 
-          {/* 1 Single Prominent Command Button */}
           <div className="flex flex-col gap-2">
             <div className="flex items-center justify-between p-2 rounded-lg bg-black/50 border border-borderDark text-xs font-mono">
               <span className="text-slate-400 text-[11px]">Camera Code:</span>
@@ -315,7 +368,6 @@ export default function VideoDrawer({ entity, onClose }) {
               <button
                 onClick={() => handleCopyCode(entity.camera_code || entity.id)}
                 className="text-[10px] text-slate-400 hover:text-white px-2 py-0.5 rounded hover:bg-surfaceLight transition-colors"
-                title="Copy code only"
               >
                 {copiedCode ? '✓ Copied' : 'Copy'}
               </button>
@@ -323,7 +375,7 @@ export default function VideoDrawer({ entity, onClose }) {
 
             <button
               onClick={() => handleLaunchCityPortal(entity.camera_code || entity.id)}
-              className="flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-cyan-500 via-teal-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-canvas font-extrabold text-xs transition-all shadow-[0_0_16px_rgba(0,229,255,0.4)] hover:shadow-[0_0_24px_rgba(0,229,255,0.6)] active:scale-98 cursor-pointer"
+              className="flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-cyan-500 via-teal-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-canvas font-extrabold text-xs transition-all shadow-[0_0_16px_rgba(0,229,255,0.4)] cursor-pointer"
             >
               <Radio className="w-4 h-4 text-canvas animate-pulse shrink-0" />
               <span>
@@ -333,107 +385,91 @@ export default function VideoDrawer({ entity, onClose }) {
               </span>
               <ExternalLink className="w-3.5 h-3.5 shrink-0" />
             </button>
-            <span className="text-[10px] text-center text-slate-400 font-mono">
-              Auto-copies code <strong>{entity.camera_code || entity.id}</strong> to clipboard on click
-            </span>
           </div>
         </div>
       )}
 
-      {/* Description & Google Maps Location Link */}
-      <div className="p-3 rounded-xl bg-surfaceLight/30 border border-borderDark/60 space-y-2">
+      {/* Description & Transit Tip */}
+      <div className="p-3.5 rounded-xl bg-surfaceLight/30 border border-borderDark/60 space-y-2">
         {entity.description && (
           <p className="text-xs text-slate-300 leading-relaxed">
             {entity.description}
           </p>
         )}
-        {entity.google_maps_url && (
-          <a
-            href={entity.google_maps_url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-xs text-brandCyan hover:text-cyan-300 font-mono transition-colors"
-          >
-            <MapPin className="w-3.5 h-3.5" />
-            <span>View Exact Location on Google Maps</span>
-            <ExternalLink className="w-3 h-3" />
-          </a>
+        {entity.transit_tip && (
+          <div className="flex items-start gap-2 pt-1 text-[11px] text-cyan-300 font-mono">
+            <Bus className="w-3.5 h-3.5 text-brandCyan shrink-0 mt-0.5" />
+            <span>{entity.transit_tip}</span>
+          </div>
+        )}
+        {entity.opening_hours && (
+          <div className="flex items-center gap-1.5 text-[11px] text-amber-300 font-mono">
+            <Clock className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+            <span>{entity.opening_hours}</span>
+          </div>
         )}
       </div>
 
-      {/* High-Intent 12Go Airport Transfer Card (Conditional on FEATURES.SHOW_AFFILIATE_ADS) */}
-      {FEATURES.SHOW_AFFILIATE_ADS && (
-        <div className="p-3 rounded-xl bg-gradient-to-r from-blue-950/40 to-surface border border-brandBlue/30 flex items-center justify-between gap-3 shadow-md">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-brandBlue/20 text-brandBlue flex items-center justify-center shrink-0">
-              <Car className="w-4 h-4" />
-            </div>
-            <div className="flex flex-col">
-              <div className="flex items-center gap-1.5">
-                <span className="text-xs font-bold text-white">Bangkok Airport ➔ Pattaya</span>
-                <span className="text-[10px] font-mono text-brandGreen font-bold bg-brandGreen/10 px-1 rounded">
-                  1,200 THB
-                </span>
-              </div>
-              <span className="text-[10px] text-slate-400">
-                Private Door-to-Door Taxi via 12Go
-              </span>
-            </div>
-          </div>
-          <a
-            href={build12GoTransferUrl()}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="shrink-0 px-2.5 py-1.5 rounded-lg bg-brandBlue hover:bg-blue-600 text-white text-xs font-semibold shadow-sm transition-colors flex items-center gap-1"
-          >
-            <span>Book Taxi</span>
-            <ExternalLink className="w-3 h-3" />
-          </a>
-        </div>
-      )}
-
-      {/* Curated Nearby Hotels (Conditional on FEATURES.SHOW_AFFILIATE_ADS) */}
-      {FEATURES.SHOW_AFFILIATE_ADS && zoneHotels.length > 0 && (
-        <div className="p-3 rounded-xl bg-surfaceLight/30 border border-borderDark/60 space-y-2.5">
+      {/* Embedded Map Preview & Quick Share Location (for all venues/cameras with coordinates) */}
+      {hasCoordinates && (
+        <div className="p-3 rounded-xl bg-surface border border-borderDark flex flex-col gap-2.5 shadow-md">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-1.5">
-              <Hotel className="w-3.5 h-3.5 text-brandAmber" />
-              <span className="text-xs font-bold text-slate-200">
-                Hotels Near {entity.zone ? entity.zone.replace('_', ' ').toUpperCase() : 'PATTAYA'}
-              </span>
-            </div>
+            <span className="text-xs font-bold font-mono text-white flex items-center gap-1.5">
+              <MapPin className="w-3.5 h-3.5 text-brandCyan" />
+              <span>Exact Location</span>
+            </span>
             <span className="text-[10px] font-mono text-slate-400">
-              {weekendDates.formattedLabel}
+              {lat.toFixed(4)}, {lng.toFixed(4)}
             </span>
           </div>
 
-          <div className="grid grid-cols-1 gap-2">
-            {zoneHotels.map((hotel) => (
-              <div
-                key={hotel.id}
-                className="p-2 rounded-lg bg-surface border border-borderDark flex items-center justify-between gap-2 hover:border-slate-500 transition-colors"
+          {/* Embedded Mini-Map Frame */}
+          {osmEmbedUrl && (
+            <div className="relative w-full h-36 rounded-lg overflow-hidden border border-borderDark bg-black">
+              <iframe
+                src={osmEmbedUrl}
+                title="Location Map"
+                className="w-full h-full border-0 pointer-events-auto"
+                loading="lazy"
+              />
+            </div>
+          )}
+
+          {/* Action Buttons: Quick Share & Google Maps */}
+          <div className="grid grid-cols-2 gap-2">
+            <button
+              onClick={() => handleCopyShare(googleMapsUrl)}
+              className={`flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg text-xs font-bold transition-all shadow-sm cursor-pointer ${
+                copiedShare
+                  ? 'bg-emerald-600 text-white'
+                  : 'bg-gradient-to-r from-brandPink to-rose-600 text-white hover:brightness-110'
+              }`}
+            >
+              {copiedShare ? (
+                <>
+                  <Check className="w-3.5 h-3.5" />
+                  <span>✓ Copied!</span>
+                </>
+              ) : (
+                <>
+                  <Share2 className="w-3.5 h-3.5" />
+                  <span>Quick Share</span>
+                </>
+              )}
+            </button>
+
+            {googleMapsUrl && (
+              <a
+                href={googleMapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-surfaceLight hover:bg-slate-700 text-slate-200 text-xs font-semibold border border-borderDark transition-colors shadow-sm"
               >
-                <div className="flex flex-col min-w-0">
-                  <span className="text-xs font-semibold text-white truncate">
-                    {hotel.name}
-                  </span>
-                  <div className="flex items-center gap-2 text-[10px] text-slate-400 font-mono">
-                    <span className="text-brandGold font-bold">★ {hotel.rating}</span>
-                    <span>•</span>
-                    <span>{hotel.distance}</span>
-                  </div>
-                </div>
-                <a
-                  href={buildAgodaHotelUrl(hotel.agoda_hotel_id)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="shrink-0 flex items-center gap-1 px-2.5 py-1 rounded bg-brandAmber/15 hover:bg-brandAmber/25 border border-brandAmber/40 text-brandAmber text-xs font-semibold transition-colors"
-                >
-                  <span>~${hotel.typical_price_usd}</span>
-                  <ExternalLink className="w-3 h-3" />
-                </a>
-              </div>
-            ))}
+                <Compass className="w-3.5 h-3.5 text-brandCyan" />
+                <span>Google Maps</span>
+                <ExternalLink className="w-3 h-3 text-slate-400" />
+              </a>
+            )}
           </div>
         </div>
       )}
@@ -441,137 +477,53 @@ export default function VideoDrawer({ entity, onClose }) {
   );
 
   return (
-    <div className={`fixed inset-0 z-[2000] flex ${isExpanded ? 'items-center justify-center' : 'justify-end'} pointer-events-none`}>
-      {/* Backdrop */}
-      <div
-        onClick={onClose}
-        className="fixed inset-0 bg-black/70 backdrop-blur-sm pointer-events-auto transition-opacity animate-fade-in"
-      />
-
-      {/* Drawer / Theater Command View */}
-      <aside
-        aria-label="Live Stream Command Console"
-        className={`relative bg-surface border-borderDark flex flex-col pointer-events-auto shadow-2xl z-10 overflow-hidden transition-all duration-300 ${
-          isExpanded
-            ? 'w-full h-full md:m-4 md:rounded-2xl border bg-surface/98 backdrop-blur-xl animate-fade-in'
-            : 'w-full sm:max-w-md lg:max-w-lg h-full border-l animate-slide-left'
-        }`}
-      >
-        {/* Header */}
-        <div className="h-14 border-b border-borderDark px-4 sm:px-6 flex items-center justify-between bg-surfaceLight/50 shrink-0">
-          <div className="flex items-center gap-2 overflow-hidden">
-            <span
-              className={`w-2.5 h-2.5 rounded-full shrink-0 ${
-                isCctv
-                  ? 'bg-brandCyan shadow-[0_0_8px_#00E5FF]'
-                  : isLiveCam
-                    ? 'bg-emerald-400 shadow-[0_0_8px_#10B981]'
-                    : isStreamer
-                      ? 'bg-indigo-400 shadow-[0_0_8px_rgba(129,140,248,0.5)]'
-                      : isVenueOffline
-                        ? 'bg-slate-400'
-                        : 'bg-brandPink shadow-[0_0_8px_#FF2A6D]'
-              }`}
-            />
-            <div className="flex flex-col min-w-0">
-              <h2 className="text-sm sm:text-base font-bold text-white truncate">
-                {entity.name}
-              </h2>
-              <span className="text-[10px] font-mono text-slate-400 truncate">
-                {entity.name_th || entity.id || entity.current_route || 'Pattaya City'}
-              </span>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-2 shrink-0">
-            {isLiveCam ? (
-              <span className="text-[10px] uppercase font-bold font-mono px-2 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-500/30">
-                24/7 Live Cam
-              </span>
-            ) : isStreamer ? (
-              <span className="text-[10px] uppercase font-bold font-mono px-2 py-0.5 rounded bg-indigo-950/60 text-indigo-300 border border-indigo-500/30">
-                4K Walking Tour
-              </span>
-            ) : entity.category ? (
-              <span className="text-[10px] uppercase font-bold font-mono px-2 py-0.5 rounded bg-surfaceLight text-brandPink border border-brandPink/30">
-                {entity.category.replace('_', ' ')}
-              </span>
-            ) : isCctv ? (
-              <span className="text-[10px] uppercase font-bold font-mono px-2 py-0.5 rounded bg-cyan-950/60 text-brandCyan border border-cyan-500/30">
-                Municipal CCTV
-              </span>
-            ) : null}
-
-            {/* Desktop Expand / Theater Mode Toggle */}
-            {FEATURES.ENABLE_THEATER_MODE && (
-              <button
-                onClick={() => setIsExpanded(!isExpanded)}
-                className="hidden md:flex p-1.5 rounded-lg bg-surface hover:bg-borderDark text-slate-400 hover:text-white transition-colors cursor-pointer"
-                title={isExpanded ? 'Exit Theater Mode' : 'Expand to Fullscreen Theater Mode'}
-              >
-                {isExpanded ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
-              </button>
-            )}
-
-            {/* Close Button */}
-            <button
-              onClick={onClose}
-              className="p-1.5 rounded-lg bg-surface hover:bg-borderDark text-slate-400 hover:text-white transition-colors cursor-pointer"
-              title="Close Drawer"
-            >
-              <X className="w-4 h-4" />
-            </button>
-          </div>
-        </div>
-
-        {/* Content Area */}
-        <div className="flex-1 overflow-y-auto p-4 sm:p-6">
-          {isExpanded ? (
-            /* 2-Column Desktop Theater Command Layout */
-            <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-              <div className="lg:col-span-8 space-y-4">
-                <div className="w-full">
-                  {renderVideoStage()}
-                </div>
-                {!isCctv && <EmojiReactionGroup entitySlug={entity.slug} />}
-                <div className="p-4 rounded-xl bg-surfaceLight/30 border border-borderDark space-y-2">
-                  <h3 className="text-xs font-bold uppercase font-mono tracking-wider text-slate-400">
-                    Location & Area Overview
-                  </h3>
-                  <p className="text-sm text-slate-300 leading-relaxed">
-                    {entity.description || 'Live entertainment and scenic webcam coverage in Pattaya, Thailand.'}
-                  </p>
-                  {entity.google_maps_url && (
-                    <a
-                      href={entity.google_maps_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-xs text-brandCyan hover:text-cyan-300 font-mono transition-colors pt-1"
-                    >
-                      <MapPin className="w-3.5 h-3.5" />
-                      <span>View Location on Google Maps</span>
-                      <ExternalLink className="w-3 h-3" />
-                    </a>
-                  )}
-                </div>
-              </div>
-
-              <div className="lg:col-span-4 space-y-4">
-                {renderAuxiliaryCards()}
-              </div>
-            </div>
+    <div
+      className={`fixed inset-y-0 right-0 z-50 bg-surface/95 backdrop-blur-xl border-l border-borderDark shadow-2xl flex flex-col transition-all duration-300 ease-out ${
+        isExpanded ? 'w-full lg:w-[850px]' : 'w-full sm:w-[460px]'
+      }`}
+    >
+      {/* Top Header Bar */}
+      <div className="h-14 border-b border-borderDark px-4 sm:px-5 flex items-center justify-between shrink-0 bg-surface/80">
+        <div className="flex items-center gap-2.5 min-w-0 pr-2">
+          {entity.is_live ? (
+            <span className="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse shrink-0 shadow-[0_0_8px_#EF4444]" />
           ) : (
-            /* Standard Vertical Drawer Stack */
-            <div className="space-y-4">
-              <div className="w-full">
-                {renderVideoStage()}
-              </div>
-              {!isCctv && <EmojiReactionGroup entitySlug={entity.slug} />}
-              {renderAuxiliaryCards()}
-            </div>
+            <span className="w-2.5 h-2.5 rounded-full bg-slate-500 shrink-0" />
           )}
+          <h2 className="text-sm sm:text-base font-bold text-white tracking-tight truncate">
+            {entity.name}
+          </h2>
         </div>
-      </aside>
+
+        <div className="flex items-center gap-1.5 shrink-0">
+          <button
+            onClick={() => setIsExpanded(!isExpanded)}
+            className="hidden sm:flex p-2 rounded-lg text-slate-400 hover:text-white hover:bg-surfaceLight transition-colors"
+            title={isExpanded ? 'Collapse Drawer' : 'Expand Drawer'}
+          >
+            {isExpanded ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
+          </button>
+          <button
+            onClick={onClose}
+            className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-surfaceLight transition-colors"
+            title="Close Drawer"
+          >
+            <X className="w-5 h-5" />
+          </button>
+        </div>
+      </div>
+
+      {/* Drawer Scrollable Content */}
+      <div className="flex-1 overflow-y-auto p-4 sm:p-5 space-y-4">
+        {/* 1. Video Player Stage or Standby Card */}
+        {renderVideoStage()}
+
+        {/* 2. Emoji Telemetry Reactions */}
+        <EmojiReactionGroup entitySlug={entity.slug || entity.id} />
+
+        {/* 3. Auxiliary Location, Maps & Guides */}
+        {renderAuxiliaryCards()}
+      </div>
     </div>
   );
 }

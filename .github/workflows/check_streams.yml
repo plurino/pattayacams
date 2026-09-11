@@ -1,11 +1,9 @@
-name: Live Stream Health Check (Peak & Off-Peak)
+name: Live Stream Health Check (Continuous 24/7)
 
 on:
   schedule:
-    # Peak Pattaya Nightlife (18:00 - 04:00 ICT = 11:00 - 21:00 UTC): Run every 10 minutes
-    - cron: '*/10 11-21 * * *'
-    # Daytime & Morning Off-Peak (04:00 - 18:00 ICT = 21:00 - 11:00 UTC): Run every 30 minutes
-    - cron: '*/30 0-10,22-23 * * *'
+    # Check all live streams every 5 minutes 24/7 (standard GitHub Actions minimum interval)
+    - cron: '*/5 * * * *'
   workflow_dispatch:
 
 permissions:

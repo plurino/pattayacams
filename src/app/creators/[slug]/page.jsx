@@ -18,7 +18,7 @@ import {
   Film,
   Sparkles
 } from 'lucide-react';
-import Navbar from '@/src/components/Navbar';
+import SiteHeaderWithModals from '@/src/components/SiteHeaderWithModals';
 import CreatorAvatar from '@/src/components/common/CreatorAvatar';
 import creatorsData from '@/public/data/creators.json';
 import streamStatus from '@/public/data/stream_status.json';
@@ -154,8 +154,8 @@ export default async function CreatorProfilePage({ params }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      {/* 1. Unified Site Header */}
-      <Navbar viewMode="creators" />
+      {/* 1. Unified Site Header with Navbar, TickerBar, and Modals */}
+      <SiteHeaderWithModals viewMode="creators" />
 
       {/* Main Container */}
       <main className="max-w-5xl w-full mx-auto p-4 sm:p-6 md:p-8 flex flex-col gap-8 flex-1">

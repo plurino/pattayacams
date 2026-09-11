@@ -9,7 +9,7 @@ import LayerToggleHUD from './LayerToggleHUD';
 import { useStreamStatus } from '@/src/hooks/useStreamStatus';
 import { useRainViewer } from '@/src/hooks/useRainViewer';
 
-export default function MapCanvas({ onSelectEntity, onMapInstance }) {
+export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn }) {
   const streamStatus = useStreamStatus();
   const mapContainerRef = useRef(null);
   const mapRef = useRef(null);

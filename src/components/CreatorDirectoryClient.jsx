@@ -19,7 +19,7 @@ import {
   Grid,
   ArrowUpDown,
 } from 'lucide-react';
-import Navbar from '@/src/components/Navbar';
+import SiteHeaderWithModals from '@/src/components/SiteHeaderWithModals';
 import CreatorAvatar from '@/src/components/common/CreatorAvatar';
 import { useStreamStatus } from '@/src/hooks/useStreamStatus';
 
@@ -179,8 +179,8 @@ export default function CreatorDirectoryClient({ creators = [], venues = [], str
 
   return (
     <div className="min-h-screen w-full bg-canvas text-slate-100 flex flex-col">
-      {/* 1. Unified Site-wide Navigation Header */}
-      <Navbar viewMode="creators" />
+      {/* 1. Unified Site Header with Navbar, TickerBar, and Modals */}
+      <SiteHeaderWithModals viewMode="creators" />
 
       {/* 2. Hero Section */}
       <section className="border-b border-borderDark bg-surface/40 px-4 py-8 sm:py-12 md:px-8 text-center relative overflow-hidden">
