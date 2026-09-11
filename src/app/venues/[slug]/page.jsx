@@ -78,8 +78,67 @@ export default function VenuePage({ params }) {
   const weekendDates = getUpcomingWeekendDates();
   const categoryLabel = venue.category ? venue.category.toUpperCase().replace('_', ' ') : 'VENUE';
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'BarOrPub',
+        '@id': `https://pattayacams.com/venues/${venue.slug}/#business`,
+        name: venue.name,
+        description: venue.description,
+        url: `https://pattayacams.com/venues/${venue.slug}/`,
+        geo: {
+          '@type': 'GeoCoordinates',
+          latitude: venue.lat,
+          longitude: venue.lng,
+        },
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'Pattaya',
+          addressRegion: 'Chon Buri',
+          addressCountry: 'TH',
+        },
+      },
+      {
+        '@type': 'VideoObject',
+        name: `${venue.name} Live Webcam Feed`,
+        description: `Live video stream from ${venue.name}, Pattaya.`,
+        thumbnailUrl: `https://img.youtube.com/vi/${videoId || 'default'}/hqdefault.jpg`,
+        uploadDate: lastLiveAt || '2024-01-01T00:00:00Z',
+        embedUrl: videoId ? `https://www.youtube.com/embed/${videoId}` : channelUrl,
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Home',
+            item: 'https://pattayacams.com/',
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Creators & Venues',
+            item: 'https://pattayacams.com/creators/',
+          },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: venue.name,
+            item: `https://pattayacams.com/venues/${venue.slug}/`,
+          },
+        ],
+      },
+    ],
+  };
+
   return (
     <div className="min-h-screen w-full bg-canvas text-slate-100 flex flex-col">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Universal Site-Wide Navbar */}
       <Navbar viewMode="creators" />
 

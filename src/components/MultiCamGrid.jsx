@@ -5,10 +5,11 @@ import { Grid2X2, Grid3X3, Video, X, Maximize2, RefreshCw, Radio } from 'lucide-
 import YouTubePlayer from './common/YouTubePlayer';
 import venuesData from '@/public/data/venues.json';
 import streamersData from '@/public/data/roaming_streamers.json';
-import streamStatus from '@/public/data/stream_status.json';
+import { useStreamStatus } from '@/src/hooks/useStreamStatus';
 import { getSavedGridConfig, saveGridConfig } from '@/src/utils/storage';
 
 export default function MultiCamGrid({ onSelectEntity }) {
+  const streamStatus = useStreamStatus();
   const [gridMode, setGridMode] = useState('2x2'); // '2x2' or '3x3'
   const [slots, setSlots] = useState([null, null, null, null]);
   const [isClientLoaded, setIsClientLoaded] = useState(false);
@@ -249,14 +250,58 @@ export default function MultiCamGrid({ onSelectEntity }) {
               {/* Slot Video Content */}
               <div className="flex-1 relative bg-black flex items-center justify-center overflow-hidden">
                 {entity ? (
-                  <YouTubePlayer
-                    channelId={entity.youtube_channel_id}
-                    videoId={entity.video_id}
-                    title={entity.name}
-                    handle={entity.youtube_handle || '@PattayaOhBar'}
-                    type={entity.type}
-                    isLive={entity.is_live}
-                  />
+                  entity.is_live && (entity.video_id || entity.youtube_channel_id) ? (
+                    <YouTubePlayer
+                      channelId={entity.youtube_channel_id}
+                      videoId={entity.video_id}
+                      title={entity.name}
+                      handle={entity.youtube_handle || '@PattayaOhBar'}
+                      type={entity.type}
+                      isLive={entity.is_live}
+                    />
+                  ) : (
+                    <div className="w-full h-full flex flex-col items-center justify-center p-6 bg-gradient-to-b from-surface to-canvas text-center gap-3 select-none">
+                      <div className="relative">
+                        <div className="w-14 h-14 rounded-full bg-surfaceLight border border-borderDark flex items-center justify-center text-xl font-bold text-brandPink shadow-inner">
+                          {entity.name?.charAt(0) || 'P'}
+                        </div>
+                        <span className="absolute -bottom-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-slate-800 border border-slate-600">
+                          <Radio className="w-2.5 h-2.5 text-slate-400" />
+                        </span>
+                      </div>
+
+                      <div className="flex flex-col items-center gap-1">
+                        <span className="text-sm font-bold text-white tracking-wide">
+                          {entity.name}
+                        </span>
+                        <div className="flex items-center gap-1.5 text-[10px] font-mono text-slate-400">
+                          <span className="px-1.5 py-0.5 rounded bg-surfaceLight border border-borderDark text-slate-400">
+                            {entity.category ? entity.category.toUpperCase().replace('_', ' ') : (entity.type || 'STANDBY')}
+                          </span>
+                          <span>•</span>
+                          <span className="text-slate-400">Currently Offline</span>
+                        </div>
+                      </div>
+
+                      <p className="text-[11px] text-slate-400 max-w-[220px] line-clamp-2">
+                        Live stream is on standby. The feed will activate when broadcast begins.
+                      </p>
+
+                      <div className="flex items-center gap-2 mt-1">
+                        {entity.youtube_handle ? (
+                          <a
+                            href={`https://www.youtube.com/${entity.youtube_handle.startsWith('@') ? entity.youtube_handle : '@' + entity.youtube_handle}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="px-3 py-1.5 rounded-lg bg-surfaceLight hover:bg-slate-700 text-white text-[11px] font-mono font-semibold transition-colors flex items-center gap-1 border border-borderDark"
+                          >
+                            <span>Open Channel</span>
+                            <span className="text-[10px]">↗</span>
+                          </a>
+                        ) : null}
+                      </div>
+                    </div>
+                  )
                 ) : (
                   <div className="flex flex-col items-center justify-center p-6 text-center text-slate-500 gap-2">
                     <Video className="w-8 h-8 text-slate-600 animate-pulse" />

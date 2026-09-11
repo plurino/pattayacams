@@ -31,6 +31,7 @@ export default function LayerToggleHUD({
   onToggleTheme,
 }) {
   const [toastMessage, setToastMessage] = useState(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleCctvToggle = (checked) => {
     setShowCams(checked);
@@ -106,7 +107,7 @@ export default function LayerToggleHUD({
       </div>
 
       {/* 2. Bottom-Left Map Layer Controller */}
-      <aside aria-label="Map Layer Controls" className="absolute bottom-6 left-6 z-[1000] flex flex-col gap-2 pointer-events-auto select-none">
+      <aside aria-label="Map Layer Controls" className="absolute bottom-4 sm:bottom-6 left-3 sm:left-6 z-[1000] flex flex-col gap-2 pointer-events-auto select-none">
         {/* CCTV Disclaimer Toast */}
         {toastMessage && (
           <div className="bg-surface/95 backdrop-blur-md border border-brandPink/50 text-slate-200 text-xs px-3 py-2 rounded-xl shadow-2xl flex items-center gap-2 max-w-[280px] animate-fade-in">
@@ -121,15 +122,36 @@ export default function LayerToggleHUD({
           </div>
         )}
 
-        <div className="bg-surface/90 backdrop-blur-md border border-borderDark rounded-xl p-3 shadow-2xl flex flex-col gap-2 min-w-[220px] text-xs font-medium">
+        {/* Collapsed Floating Pill on Mobile (< sm) */}
+        {!isMobileMenuOpen && (
+          <button
+            onClick={() => setIsMobileMenuOpen(true)}
+            className="sm:hidden flex items-center gap-1.5 px-3 py-2 rounded-xl bg-surface/95 backdrop-blur-md border border-brandPink/60 text-brandPink shadow-xl active:scale-95 transition-all text-xs font-bold"
+            title="Toggle Map Layers"
+          >
+            <Layers className="w-4 h-4 text-brandPink" />
+            <span className="font-mono text-[11px]">Layers</span>
+          </button>
+        )}
+
+        <div className={`bg-surface/90 backdrop-blur-md border border-borderDark rounded-xl p-3 shadow-2xl flex-col gap-2 min-w-[220px] text-xs font-medium ${isMobileMenuOpen ? 'flex' : 'hidden sm:flex'}`}>
           <div className="flex items-center justify-between pb-1.5 border-b border-borderDark/60 text-slate-400 font-mono text-[10px]">
             <div className="flex items-center gap-1.5 uppercase tracking-wider">
               <Layers className="w-3.5 h-3.5 text-brandPink" />
               <span>Map Layers</span>
             </div>
-            <span className="text-[9px] text-slate-400 uppercase">
-              {mapTheme === 'dark' ? 'Dark Matter' : 'Light Map'}
-            </span>
+            <div className="flex items-center gap-2">
+              <span className="text-[9px] text-slate-400 uppercase">
+                {mapTheme === 'dark' ? 'Dark Matter' : 'Light Map'}
+              </span>
+              <button
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="sm:hidden text-slate-400 hover:text-white p-0.5"
+                title="Close Layers Panel"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+            </div>
           </div>
 
           {/* Venues Toggle */}

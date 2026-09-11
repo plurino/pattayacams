@@ -72,13 +72,6 @@ export default function Navbar({
     }
   };
 
-  const handleShuffleClick = () => {
-    if (onLiveShuffle) {
-      onLiveShuffle();
-    } else {
-      window.location.href = '/?shuffle=1';
-    }
-  };
 
   const handleTripClick = () => {
     if (onOpenTripModal) {
@@ -183,19 +176,8 @@ export default function Navbar({
         </div>
       </div>
 
-      {/* 3. Right: View Switcher, Live Shuffle & Trip Countdown */}
+      {/* 3. Right: View Switcher & Trip Countdown */}
       <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
-        {/* City Roulette: Live Shuffle Button (Shown on sm+ screens) */}
-        {FEATURES.ENABLE_ROULETTE && (
-          <button
-            onClick={handleShuffleClick}
-            className="hidden sm:flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl bg-gradient-to-r from-brandPink/20 via-purple-600/20 to-brandRed/20 hover:from-brandPink/30 hover:to-brandRed/30 border border-brandPink/60 hover:border-brandPink text-white text-xs font-bold transition-all shadow-[0_0_12px_rgba(255,42,109,0.25)] cursor-pointer shrink-0 active:scale-95"
-            title="City Roulette: Fly to a random live stream"
-          >
-            <span className="text-sm">🎲</span>
-            <span className="hidden md:inline font-mono tracking-wide">Live Shuffle</span>
-          </button>
-        )}
 
         {/* View Mode Switcher: 4 Distinct Thematic Colors in Matching Style */}
         <div className="flex items-center bg-canvas/90 p-0.5 rounded-xl border border-borderDark/90 shadow-inner">

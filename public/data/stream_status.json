@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-09-11T02:59:41.447Z",
+  "last_check": "2026-09-11T04:01:25.983Z",
   "entities": {
     "venue-pattaya-oh-bar": {
       "is_live": false,
@@ -19,24 +19,6 @@
       "platform": "youtube",
       "handle": "@ismannen"
     },
-    "venue-i-rovers-sports-bar": {
-      "is_live": false,
-      "video_id": null,
-      "last_live_at": null,
-      "status": "error_404",
-      "name": "i-Rovers Sports Bar & Restaurant",
-      "platform": "youtube",
-      "handle": "@iroverssportsbarpattaya"
-    },
-    "venue-fat-coco-beach-club": {
-      "is_live": false,
-      "video_id": null,
-      "last_live_at": null,
-      "status": "error_404",
-      "name": "Fat Coco Seafood Club & Beach Bar",
-      "platform": "youtube",
-      "handle": "@FatCocoPattaya"
-    },
     "venue-green-stop-cannabis": {
       "is_live": false,
       "video_id": null,
@@ -54,15 +36,6 @@
       "name": "Smoky Bar & Cannabis Lounge",
       "platform": "youtube",
       "handle": "@smokybar"
-    },
-    "venue-siris-beach-cafe": {
-      "is_live": false,
-      "video_id": null,
-      "last_live_at": null,
-      "status": "error_404",
-      "name": "Siri’s Beach Café, Wine Bar & Rooftop",
-      "platform": "youtube",
-      "handle": "@SirisBeachCafe"
     },
     "venue-ud-restaurant-shokudo": {
       "is_live": false,
@@ -90,15 +63,6 @@
       "name": "X Club Pattaya",
       "platform": "youtube",
       "handle": "@XClubPattayaSoiChaiapoon"
-    },
-    "venue-the-wet-spot": {
-      "is_live": false,
-      "video_id": null,
-      "last_live_at": null,
-      "status": "error_404",
-      "name": "The Wet Spot Lounge",
-      "platform": "youtube",
-      "handle": "@PattayaNightlifeLive"
     },
     "venue-las-vegas-beer-garden": {
       "is_live": false,
@@ -135,15 +99,6 @@
       "name": "Mafia Bar (The Godfather)",
       "platform": "youtube",
       "handle": "@MafiaBarPattaya"
-    },
-    "venue-oasis-cocktail-lounge": {
-      "is_live": false,
-      "video_id": null,
-      "last_live_at": null,
-      "status": "error_404",
-      "name": "Oasis Cocktail Lounge",
-      "platform": "youtube",
-      "handle": "@oasis-cocktail-lounge"
     },
     "venue-luckynana-bar": {
       "is_live": false,
@@ -352,24 +307,6 @@
       "platform": "kick",
       "handle": "rikasian"
     },
-    "creator-mac-tv-pattaya": {
-      "is_live": false,
-      "video_id": null,
-      "last_live_at": null,
-      "status": "error_404",
-      "name": "Mac TV Pattaya",
-      "platform": "youtube",
-      "handle": "@mactvpattaya"
-    },
-    "creator-bernies-thailand": {
-      "is_live": false,
-      "video_id": null,
-      "last_live_at": null,
-      "status": "error_404",
-      "name": "Bernie's Thailand",
-      "platform": "youtube",
-      "handle": "@BerniesThailand"
-    },
     "creator-vespa-life-thailand": {
       "is_live": false,
       "video_id": "F_fpnQgoLoM",
@@ -568,42 +505,6 @@
       "platform": "youtube",
       "handle": "@DSPattaya"
     },
-    "creator-geordie-in-pattaya": {
-      "is_live": false,
-      "video_id": null,
-      "last_live_at": null,
-      "status": "error_404",
-      "name": "Geordie in Pattaya",
-      "platform": "youtube",
-      "handle": "@geordieinpattaya"
-    },
-    "creator-thailand-footwork": {
-      "is_live": false,
-      "video_id": null,
-      "last_live_at": null,
-      "status": "error_404",
-      "name": "Thailand Footwork",
-      "platform": "youtube",
-      "handle": "@ThailandFootwork"
-    },
-    "creator-brian-jacks-superstar": {
-      "is_live": false,
-      "video_id": null,
-      "last_live_at": null,
-      "status": "error_404",
-      "name": "Brian Jacks Superstar",
-      "platform": "youtube",
-      "handle": "@BrianJacksSuperstar"
-    },
-    "creator-always-pattaya": {
-      "is_live": false,
-      "video_id": null,
-      "last_live_at": null,
-      "status": "error_404",
-      "name": "Always Pattaya",
-      "platform": "youtube",
-      "handle": "@AlwaysPattaya"
-    },
     "creator-trevor-in-thailand": {
       "is_live": false,
       "video_id": "LVaUgldEBZs",
@@ -613,15 +514,6 @@
       "platform": "youtube",
       "handle": "@TrevorInThailand"
     },
-    "creator-the-expat-life-thailand": {
-      "is_live": false,
-      "video_id": null,
-      "last_live_at": null,
-      "status": "error_404",
-      "name": "The Expat Life Thailand",
-      "platform": "youtube",
-      "handle": "@TheExpatLifeThailand"
-    },
     "creator-walking-in-paradise": {
       "is_live": false,
       "video_id": "9l0onQBkfTM",
@@ -630,15 +522,6 @@
       "name": "Walking In Paradise",
       "platform": "youtube",
       "handle": "@WalkingInParadise"
-    },
-    "creator-farang-life-in-thailand": {
-      "is_live": false,
-      "video_id": null,
-      "last_live_at": null,
-      "status": "error_404",
-      "name": "Farang Life in Thailand",
-      "platform": "youtube",
-      "handle": "@FarangLifeInThailand"
     },
     "creator-look-at-thailand": {
       "is_live": false,
@@ -658,60 +541,6 @@
       "platform": "youtube",
       "handle": "@WalkingTheWorld4K"
     },
-    "creator-nomad-in-thailand": {
-      "is_live": false,
-      "video_id": null,
-      "last_live_at": null,
-      "status": "error_404",
-      "name": "Nomad in Thailand",
-      "platform": "youtube",
-      "handle": "@NomadInThailand"
-    },
-    "creator-pattaya-food-and-life": {
-      "is_live": false,
-      "video_id": null,
-      "last_live_at": null,
-      "status": "error_404",
-      "name": "Pattaya Food & Life",
-      "platform": "youtube",
-      "handle": "@PattayaFoodAndLife"
-    },
-    "creator-soi-buakhao-stories": {
-      "is_live": false,
-      "video_id": null,
-      "last_live_at": null,
-      "status": "error_404",
-      "name": "Soi Buakhao Stories",
-      "platform": "youtube",
-      "handle": "@SoiBuakhaoStories"
-    },
-    "creator-greg-in-pattaya": {
-      "is_live": false,
-      "video_id": null,
-      "last_live_at": null,
-      "status": "error_404",
-      "name": "Greg in Pattaya",
-      "platform": "youtube",
-      "handle": "@GregInPattaya"
-    },
-    "creator-garys-pattaya-days": {
-      "is_live": false,
-      "video_id": null,
-      "last_live_at": null,
-      "status": "error_404",
-      "name": "Gary's Pattaya Days",
-      "platform": "youtube",
-      "handle": "@GarysPattayaDays"
-    },
-    "creator-pattaya-night-walk-4k": {
-      "is_live": false,
-      "video_id": null,
-      "last_live_at": null,
-      "status": "error_404",
-      "name": "Pattaya Night Walk 4K",
-      "platform": "youtube",
-      "handle": "@PattayaNightWalk4K"
-    },
     "creator-steve-in-thailand": {
       "is_live": false,
       "video_id": "kjCJWiDskNo",
@@ -721,24 +550,6 @@
       "platform": "youtube",
       "handle": "@SteveInThailand"
     },
-    "creator-keith-in-pattaya": {
-      "is_live": false,
-      "video_id": null,
-      "last_live_at": null,
-      "status": "error_404",
-      "name": "Keith in Pattaya",
-      "platform": "youtube",
-      "handle": "@KeithInPattaya"
-    },
-    "creator-siam-sunrise-vlogs": {
-      "is_live": false,
-      "video_id": null,
-      "last_live_at": null,
-      "status": "error_404",
-      "name": "Siam Sunrise Vlogs",
-      "platform": "youtube",
-      "handle": "@SiamSunriseVlogs"
-    },
     "creator-thailand-street-view": {
       "is_live": false,
       "video_id": "bKK5H0D2gsE",
@@ -747,33 +558,6 @@
       "name": "Thailand Street View",
       "platform": "youtube",
       "handle": "@ThailandStreetView"
-    },
-    "creator-sunshine-pattaya": {
-      "is_live": false,
-      "video_id": null,
-      "last_live_at": null,
-      "status": "error_404",
-      "name": "Sunshine Pattaya",
-      "platform": "youtube",
-      "handle": "@SunshinePattaya"
-    },
-    "creator-jomtien-living": {
-      "is_live": false,
-      "video_id": null,
-      "last_live_at": null,
-      "status": "error_404",
-      "name": "Jomtien Living",
-      "platform": "youtube",
-      "handle": "@JomtienLiving"
-    },
-    "creator-pattaya-real-estate-living": {
-      "is_live": false,
-      "video_id": null,
-      "last_live_at": null,
-      "status": "error_404",
-      "name": "Pattaya Real Estate & Living",
-      "platform": "youtube",
-      "handle": "@PattayaRealEstateLiving"
     }
   }
 }

@@ -11,7 +11,7 @@ import RoamingTray from '@/src/components/RoamingTray';
 import TripModal from '@/src/components/TripModal';
 import SponsorModal from '@/src/components/SponsorModal';
 import venuesData from '@/public/data/venues.json';
-import streamStatus from '@/public/data/stream_status.json';
+import { useStreamStatus } from '@/src/hooks/useStreamStatus';
 
 export default function AppRoot() {
   const [viewMode, setViewMode] = useState('map'); // 'map' | 'grid' | 'vids'
@@ -21,10 +21,11 @@ export default function AppRoot() {
   const [isBannerDismissed, setIsBannerDismissed] = useState(false);
   const mapInstanceRef = useRef(null);
 
-  const entities = streamStatus?.entities || {};
+  const streamStatus = useStreamStatus();
   const activeLiveCount = useMemo(() => {
+    const entities = streamStatus?.entities || {};
     return Object.values(entities).filter((e) => e.is_live === true).length;
-  }, [entities]);
+  }, [streamStatus]);
 
   const handleMapInstance = useCallback((map) => {
     mapInstanceRef.current = map;
@@ -110,7 +111,7 @@ export default function AppRoot() {
         setSelectedEntity(venuePayload);
       }
     }, needsViewSwitch ? 150 : 0);
-  }, [viewMode, selectedEntity]);
+  }, [viewMode, selectedEntity, streamStatus]);
 
   // Force Leaflet to recalculate container geometry and render tiles whenever returning to map mode
   useEffect(() => {
@@ -229,6 +230,39 @@ export default function AppRoot() {
                 <X className="w-3.5 h-3.5" />
               </button>
             </div>
+          </div>
+        )}
+
+        {/* Floating Live Shuffle Popup in Bottom Right Corner of Map */}
+        {viewMode === 'map' && (
+          <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 z-30 pointer-events-auto">
+            {activeLiveCount > 0 ? (
+              <button
+                onClick={handleLiveShuffle}
+                className="flex items-center gap-2 px-3.5 py-2 rounded-2xl bg-surface/95 backdrop-blur-md border border-brandPink/70 hover:border-brandPink text-white text-xs font-bold transition-all shadow-[0_0_20px_rgba(255,42,109,0.35)] hover:shadow-[0_0_28px_rgba(255,42,109,0.6)] cursor-pointer group hover:scale-105 active:scale-95"
+                title="City Roulette: Fly to a random live stream"
+              >
+                <span className="text-base group-hover:rotate-12 transition-transform">🎲</span>
+                <span className="font-mono tracking-wide font-extrabold text-brandPink group-hover:text-white transition-colors">
+                  Live Shuffle
+                </span>
+                <span className="text-[10px] font-mono font-bold bg-brandPink text-white px-1.5 py-0.5 rounded-full shadow-[0_0_8px_#FF2A6D]">
+                  {activeLiveCount} Live
+                </span>
+              </button>
+            ) : (
+              <button
+                disabled
+                className="flex items-center gap-2 px-3.5 py-2 rounded-2xl bg-surface/80 backdrop-blur-md border border-borderDark/80 text-slate-500 text-xs font-bold cursor-not-allowed opacity-60 shadow-lg"
+                title="No live streams currently broadcasting. Shuffle is unavailable."
+              >
+                <span className="text-base grayscale opacity-50">🎲</span>
+                <span className="font-mono tracking-wide">Live Shuffle</span>
+                <span className="text-[10px] font-mono text-slate-500 bg-surfaceLight px-1.5 py-0.5 rounded-full">
+                  0 Live
+                </span>
+              </button>
+            )}
           </div>
         )}
       </main>

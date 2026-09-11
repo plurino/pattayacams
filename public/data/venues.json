@@ -36,34 +36,6 @@
     "is_sponsored": false
   },
   {
-    "slug": "i-rovers-sports-bar",
-    "id": "VN-003",
-    "name": "i-Rovers Sports Bar & Restaurant",
-    "zone": "soi_buakhao",
-    "category": "sports_bar",
-    "lat": 12.9288,
-    "lng": 100.8835,
-    "youtube_channel_id": "UCirovers",
-    "youtube_handle": "@iroverssportsbarpattaya",
-    "google_maps_url": "https://www.google.com/maps/search/?api=1&query=I-Rovers+Sports+Bar+Soi+LK+Metro+Pattaya",
-    "description": "Famous 24-hour sports tavern on the corner of Soi LK Metro and Soi Diana, maintaining continuous live webcams of street traffic.",
-    "is_sponsored": false
-  },
-  {
-    "slug": "fat-coco-beach-club",
-    "id": "VN-004",
-    "name": "Fat Coco Seafood Club & Beach Bar",
-    "zone": "beach_road",
-    "category": "beach_club",
-    "lat": 12.9465,
-    "lng": 100.8855,
-    "youtube_channel_id": "UCfatcoco",
-    "youtube_handle": "@FatCocoPattaya",
-    "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Fat+Coco+Seafood+Club+Beach+Road+Pattaya",
-    "description": "Large open-air tropical beachfront seafood restaurant, day club, and pool lounge on Beach Road with a live streaming webcam overlooking the promenade.",
-    "is_sponsored": false
-  },
-  {
     "slug": "green-stop-cannabis",
     "id": "VN-005",
     "name": "Green Stop Dispensary & Bar",
@@ -90,20 +62,6 @@
     "youtube_handle": "@smokybar",
     "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Smoky+Bar+129+5+Soi+Pattaya+Klang+12+Pattaya",
     "description": "Chill-out lounge and dispensary bar operating along the Central Pattaya nightlife corridor with social live feeds and music.",
-    "is_sponsored": false
-  },
-  {
-    "slug": "siris-beach-cafe",
-    "id": "VN-007",
-    "name": "Siri’s Beach Café, Wine Bar & Rooftop",
-    "zone": "jomtien",
-    "category": "cafe",
-    "lat": 12.845,
-    "lng": 100.908,
-    "youtube_channel_id": "UCsirisbeach",
-    "youtube_handle": "@SirisBeachCafe",
-    "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Siri's+Beach+Cafe+Soi+Na+Jomtien+10+Sattahip+Chon+Buri",
-    "description": "Coastal sunset cafe, wine terrace, and bistro on Na Jomtien Beach featuring live streaming webcams of the Gulf of Thailand.",
     "is_sponsored": false
   },
   {
@@ -148,20 +106,6 @@
     "youtube_handle": "@XClubPattayaSoiChaiapoon",
     "google_maps_url": "https://www.google.com/maps/search/?api=1&query=X+Club+Pattaya+Soi+Chaiyapoon",
     "description": "Open-front entertainment lounge on Soi Chaiyapoon running live streams on YouTube featuring music and customer interactions.",
-    "is_sponsored": false
-  },
-  {
-    "slug": "the-wet-spot",
-    "id": "VN-011",
-    "name": "The Wet Spot Lounge",
-    "zone": "soi_buakhao",
-    "category": "bar",
-    "lat": 12.9295,
-    "lng": 100.8882,
-    "youtube_channel_id": "UCthewetspot",
-    "youtube_handle": "@PattayaNightlifeLive",
-    "google_maps_url": "https://www.google.com/maps/search/?api=1&query=The+Wet+Spot+Soi+Chaiyapoon+Pattaya",
-    "description": "Long-standing open-air bar on Soi Chaiyapoon with frequent live streaming sessions and active social coverage.",
     "is_sponsored": false
   },
   {
@@ -225,20 +169,6 @@
     "is_sponsored": false
   },
   {
-    "slug": "oasis-cocktail-lounge",
-    "id": "VN-016",
-    "name": "Oasis Cocktail Lounge",
-    "zone": "soi_buakhao",
-    "category": "lounge",
-    "lat": 12.9284,
-    "lng": 100.8838,
-    "youtube_channel_id": "UCoasis-cocktail-lounge",
-    "youtube_handle": "@oasis-cocktail-lounge",
-    "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Oasis+Cocktail+Lounge+LK+Metro+Pattaya",
-    "description": "Cocktail lounge on Soi LK Metro running ambient video feeds and live streams through local platforms.",
-    "is_sponsored": false
-  },
-  {
     "slug": "luckynana-bar",
     "id": "VN-017",
     "name": "LuckyNaNa Bar Pattaya",
@@ -281,21 +211,6 @@
     "youtube_handle": "@MisoBarPattaya",
     "google_maps_url": "https://maps.google.com?q=WVVP+33G+Miso+Bar+Pattaya+Soi+6,+Pattaya+Soi+6,+Pattaya+City,+Bang+Lamung+District,+Chon+Buri+20150",
     "description": "Vibrant open-air bar on Soi 6 in North Pattaya broadcasting nightly interactive YouTube live streams and guest chats.",
-    "is_sponsored": false
-  },
-  {
-    "slug": "s3xy-bar-pattaya",
-    "id": "VN-020",
-    "name": "S3xy Bar Pattaya",
-    "zone": "soi_buakhao",
-    "category": "bar",
-    "lat": 12.9318,
-    "lng": 100.8858,
-    "video_id": "hs3ODqDmeCw",
-    "youtube_channel_id": "UCs3xybarpattayalivestream333",
-    "youtube_handle": "@s3xybarpattayalivestream333",
-    "google_maps_url": "https://www.google.com/maps/search/?api=1&query=S3xy+Bar+Soi+Buakhao+Pattaya",
-    "description": "High-energy beer bar on Soi Buakhao broadcasting continuous interactive live webcams of evening nightlife and pedestrian streets.",
     "is_sponsored": false
   }
 ]

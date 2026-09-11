@@ -21,17 +21,20 @@ import {
 } from 'lucide-react';
 import Navbar from '@/src/components/Navbar';
 import CreatorAvatar from '@/src/components/common/CreatorAvatar';
+import { useStreamStatus } from '@/src/hooks/useStreamStatus';
 
 const ITEMS_PER_PAGE = 24;
 
-export default function CreatorDirectoryClient({ creators = [], venues = [], streamStatus = {} }) {
+export default function CreatorDirectoryClient({ creators = [], venues = [], streamStatus: initialStatus = {} }) {
+  const liveStatus = useStreamStatus();
+  const streamStatus = liveStatus || initialStatus;
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedPlatform, setSelectedPlatform] = useState('all');
   const [sortBy, setSortBy] = useState('featured'); // 'featured' | 'name-asc' | 'name-desc' | 'platform'
   const [currentPage, setCurrentPage] = useState(1);
   const gridTopRef = useRef(null);
 
-  const entities = streamStatus?.entities || {};
+  const entities = useMemo(() => streamStatus?.entities || {}, [streamStatus]);
 
   // Enrich creators with real-time live status from stream_status.json
   const enrichedCreators = useMemo(() => {
@@ -311,7 +314,7 @@ export default function CreatorDirectoryClient({ creators = [], venues = [], str
             <Users className="w-10 h-10 text-slate-600" />
             <h2 className="text-sm font-bold text-slate-300">No Listings Found</h2>
             <p className="text-xs text-slate-500 font-mono max-w-sm">
-              We couldn't find any creators or live venues matching your search.
+              We couldn&apos;t find any creators or live venues matching your search.
             </p>
             <button
               onClick={() => { setSelectedPlatform('all'); setSearchQuery(''); setCurrentPage(1); }}

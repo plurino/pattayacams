@@ -102,8 +102,50 @@ export default function CreatorProfilePage({ params }) {
         ? `https://www.youtube.com/${creator.handle.startsWith('@') ? creator.handle : '@' + creator.handle}`
         : `https://www.youtube.com/channel/${creator.channel_id}`);
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'Person',
+        '@id': `https://pattayacams.com/creators/${creator.slug}/#person`,
+        name: creator.name,
+        description: creator.bio_seo || `Content creator covering Pattaya, Thailand.`,
+        url: `https://pattayacams.com/creators/${creator.slug}/`,
+        sameAs: [channelUrl],
+        knowsAbout: ['Pattaya', 'Thailand Tourism', 'Nightlife', 'Travel Vlogging'],
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Home',
+            item: 'https://pattayacams.com/',
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Creators Directory',
+            item: 'https://pattayacams.com/creators/',
+          },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: creator.name,
+            item: `https://pattayacams.com/creators/${creator.slug}/`,
+          },
+        ],
+      },
+    ],
+  };
+
   return (
     <div className="min-h-screen w-full bg-canvas text-slate-100 flex flex-col">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* 1. Unified Site Header */}
       <Navbar viewMode="creators" />
 

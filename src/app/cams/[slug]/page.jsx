@@ -50,8 +50,66 @@ export default function CamPage({ params }) {
   const zoneHotels = (hotelsData[cam.zone] || hotelsData.default || []).slice(0, 2);
   const weekendDates = getUpcomingWeekendDates();
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'Place',
+        '@id': `https://pattayacams.com/cams/${cam.slug}/#place`,
+        name: cam.name,
+        description: `Traffic and weather monitoring camera at ${cam.name} (${cam.name_th}), Pattaya.`,
+        geo: {
+          '@type': 'GeoCoordinates',
+          latitude: cam.lat,
+          longitude: cam.lng,
+        },
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'Pattaya',
+          addressRegion: 'Chon Buri',
+          addressCountry: 'TH',
+        },
+      },
+      {
+        '@type': 'VideoObject',
+        name: `${cam.name} Live CCTV Feed`,
+        description: `Official municipal CCTV live surveillance feed from ${cam.name}, Pattaya, Thailand.`,
+        thumbnailUrl: 'https://pattayacams.com/og-image.jpg',
+        uploadDate: '2024-01-01T00:00:00Z',
+        contentUrl: cam.stream_url,
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Home',
+            item: 'https://pattayacams.com/',
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'CCTV Surveillance',
+            item: 'https://pattayacams.com/?view=map',
+          },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: cam.name,
+            item: `https://pattayacams.com/cams/${cam.slug}/`,
+          },
+        ],
+      },
+    ],
+  };
+
   return (
     <div className="min-h-screen w-full bg-canvas text-slate-100 flex flex-col overflow-y-auto">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Universal Site-Wide Navbar */}
       <Navbar viewMode="map" />
 

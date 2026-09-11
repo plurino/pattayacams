@@ -3,10 +3,11 @@
 import React, { useState } from 'react';
 import { Youtube, Star, Play, Radio, ChevronRight, ChevronDown } from 'lucide-react';
 import streamersData from '@/public/data/roaming_streamers.json';
-import streamStatus from '@/public/data/stream_status.json';
+import { useStreamStatus } from '@/src/hooks/useStreamStatus';
 import { FEATURES } from '@/src/config/features';
 
 export default function RoamingTray({ onSelectStreamer, onOpenSponsorModal }) {
+  const streamStatus = useStreamStatus();
   const [showAllChannels, setShowAllChannels] = useState(false);
 
   const getStreamerStatus = (streamer) => {

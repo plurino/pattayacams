@@ -29,22 +29,21 @@ It aggregates live municipal CCTV feeds from Pattaya City Hall and commercial ve
 
 ## ⚡ Key Features
 
-- **Interactive Dark Map Engine**: Powered by Leaflet and licensed CartoDB Dark Matter tiles (`cb1_33su_1_683c1b500e92ad8b2069c2d2`) with zero watermarks and zero client-side fetch waterfall.
-- **Municipal CCTV Network**: 600 unclustered individual 8px cyan dots (`#00E5FF`) along all city streets and junctions. Disabled by default (`cctv: false`) for maximum performance, with an informative municipal network disclaimer toast on activation.
-- **Hero Entertainment Venues**: High-visibility neon pink pulsing pins (`🔴 LIVE`) with active live stream radar pings vs dim slate pins (`⚪ OFFLINE`) for offline venues.
-- **Automated Stream Health-Checker**: Quota-free 15-minute GitHub Actions automation (`scripts/check_streams.mjs` + `.github/workflows/check_streams.yml`) probing YouTube handle redirects without burning API quota.
-- **Multi-Cam Command Grid**: 2x2 multi-screen grid wall with municipal CCTVs completely excluded from the dropdown selector and slots auto-populated with active live YouTube feeds.
+- **Interactive Dark & Light Map Engine**: Powered by Leaflet and licensed CartoDB Dark Matter / Positron tiles (`cb1_33su_1_683c1b500e92ad8b2069c2d2`) with smooth 45° step rotation, interactive compass rose reset, and theme toggling with zero watermarks.
+- **Municipal CCTV Network & City Hall Integration**: 600 unclustered surveillance dots along all Pattaya arterial corridors. Displays official municipal telemetry, camera code, and direct link to the official Pattaya City Hall surveillance portal (`https://livestream.pattaya.go.th/`).
+- **Real-Time Client Hydration (`useStreamStatus`)**: Overcomes Cloudflare Pages static JSON bundling by rendering compile-time baseline data for instant 0-layout-shift, then immediately hydrating and polling `/data/stream_status.json?t=<timestamp>` over HTTP every 60s.
+- **Hero Entertainment Venues**: High-visibility neon pink pulsing pins (`🔴 LIVE`) with active live stream radar pings vs dim slate pins (`⚪ OFFLINE`) for offline venues. Verified and pruned against live YouTube channel endpoints.
+- **Automated Stream Health-Checker**: Quota-free 15-minute GitHub Actions automation (`scripts/check_streams.mjs` + `.github/workflows/check_streams.yml`) probing YouTube handle redirects and live video IDs without burning API quota.
+- **Multi-Cam Command Grid**: 2x2 and 3x3 multi-screen grid wall with slots auto-populated with active live streams, featuring sleek standby cards with channel avatars and links for offline feeds (zero broken YouTube player boxes).
 - **Desktop Theater Mode**: VideoDrawer includes a Maximize/Minimize toggle expanding into an 800px+ 2-column widescreen desktop command console.
-- **Offline Telemetry Standby Card**: Inactive venues render an offline card with radio icon, relative timestamp ("Last live recently"), and YouTube channel CTA (zero broken iframes or black screens).
-- **🎲 Live Shuffle (City Roulette)**: Glowing neon button in the top navbar that randomly selects an active live stream, smoothly flies the map (`zoom: 17`), and opens the VideoDrawer for immediate playback.
-- **Pattaya Live Streamers Dock**: Footer dock tracking active live creators (e.g. *Pattaya Beach Live*), auto-collapsing to a minimal `[ ⚪ 0 Streamers Live ]` pill with optional 4K walking channel expansion.
+- **🎲 Live Shuffle (City Roulette)**: Floating neon widget in the bottom-right corner of the map. When streams are broadcasting, clicks fly the map (`zoom: 17`) to a random live stream and open playback; cleanly disabled and greyed out with tooltip when 0 streams are live.
+- **Pattaya Creators Hub & VOD Aggregator**: 35+ verified Pattaya content creators and 14 authentic live venues indexed on YouTube and Kick with automated RSS VOD ingestion, zero-API video feeds, channel filtering, and high-retention related video strips.
+- **Programmatic SEO & Schema.org JSON-LD**: 651 statically pre-rendered HTML landing pages (`/venues/[slug]`, `/creators/[slug]`, `/cams/[slug]`), full `robots.txt`, dynamic `sitemap.xml`, high-res 1200x630 `og-image.jpg`, and valid Schema.org structured data (`BarOrPub`, `LocalBusiness`, `Person`, `Place`, `VideoObject`, `BreadcrumbList`).
 - **Songthaew (Baht Bus) Transit Vectors**: Road-aligned GeoJSON paths snapped to OpenStreetMap centerlines with interactive tooltips showing loop direction, frequency, and 10 THB fixed fare:
   1. *Beach Rd & Second Rd Circular Loop* (`#3B82F6`)
   2. *South Pattaya to Jomtien Beach Line* (`#10B981`)
   3. *Dolphin Roundabout to Naklua Fish Market* (`#F59E0B`)
 - **Central Feature Flags & Zero Ad Gaps**: Configured via `src/config/features.js` (`FEATURES.SHOW_AFFILIATE_ADS`). All affiliate ad containers (12Go, Agoda, Airalo, Aviasales) gracefully disappear when disabled with zero blank gaps.
-- **Self-Serve B2B Sponsorship**: `⭐ List Venue` button opening the high-conversion pricing modal (30-day and 90-day seasonal tiers with PromptPay QR and Stripe options).
-- **Programmatic SSG SEO**: 623 pre-rendered physical HTML landing pages (`/venues/[slug]/index.html` and `/cams/[slug]/index.html`) generated via Next.js `generateStaticParams()` with `trailingSlash: true`.
 
 ---
 

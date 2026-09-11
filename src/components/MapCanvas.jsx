@@ -5,9 +5,10 @@ import venuesData from '@/public/data/venues.json';
 import cctvData from '@/public/data/cctv_cams.json';
 import busRoutes from '@/public/data/pattaya_baht_bus.geojson';
 import LayerToggleHUD from './LayerToggleHUD';
-import streamStatus from '@/public/data/stream_status.json';
+import { useStreamStatus } from '@/src/hooks/useStreamStatus';
 
 export default function MapCanvas({ onSelectEntity, onMapInstance }) {
+  const streamStatus = useStreamStatus();
   const mapContainerRef = useRef(null);
   const mapRef = useRef(null);
   const tileLayerRef = useRef(null);
@@ -69,6 +70,124 @@ export default function MapCanvas({ onSelectEntity, onMapInstance }) {
       setBearing(0);
     }
   }, []);
+
+  const populateVenueGroup = useCallback((group, Leaflet, currentStatus) => {
+    if (!group || !Leaflet) return;
+    group.clearLayers();
+
+    const getCategoryIcon = (category, isSponsor) => {
+      if (isSponsor) return '⭐';
+      switch (category) {
+        case 'dispensary': return '🌿';
+        case 'webcam': return '📹';
+        case 'sports_bar': return '⚽';
+        case 'restaurant': return '🍜';
+        case 'cafe': return '☕';
+        case 'beach_club': return '🏖️';
+        case 'lounge': return '✨';
+        default: return '🍸';
+      }
+    };
+
+    const activeVenues = venuesData.filter((venue) => {
+      const statusInfo = currentStatus?.entities?.[`venue-${venue.slug}`];
+      return statusInfo?.status !== 'error_404';
+    });
+
+    activeVenues.forEach((venue) => {
+      const isSponsor = Boolean(venue.is_sponsored);
+      const iconEmoji = getCategoryIcon(venue.category, isSponsor);
+      const statusInfo = currentStatus?.entities?.[`venue-${venue.slug}`];
+      const isLive = statusInfo ? Boolean(statusInfo.is_live) : false;
+
+      let htmlIcon;
+      if (isLive) {
+        htmlIcon = `
+          <div style="position: relative; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: ${isSponsor ? 50 : 20};">
+            <span style="position: absolute; width: 34px; height: 34px; border-radius: 50%; background: ${isSponsor ? '#EAB308' : '#FF2A6D'}; opacity: 0.7; animation: ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;"></span>
+            <div style="position: relative; width: 32px; height: 32px; border-radius: 50%; background: ${isSponsor ? 'linear-gradient(135deg, #FACC15, #CA8A04)' : 'linear-gradient(135deg, #FF2A6D, #BE185D)'}; border: 2px solid #FFFFFF; box-shadow: 0 0 18px ${isSponsor ? '#EAB308' : '#FF2A6D'}; display: flex; align-items: center; justify-content: center; color: white; font-size: 14px;">
+              ${iconEmoji}
+            </div>
+            <span style="position: absolute; top: -6px; right: -8px; background: ${isSponsor ? '#EAB308' : '#FF2A6D'}; color: ${isSponsor ? '#0B0F17' : '#FFFFFF'}; font-size: 8px; font-weight: 900; font-family: monospace; padding: 1px 4px; border-radius: 4px; box-shadow: 0 0 8px ${isSponsor ? '#EAB308' : '#FF2A6D'}; border: 1px solid rgba(255,255,255,0.7); z-index: 10;">LIVE</span>
+          </div>
+        `;
+      } else if (isSponsor) {
+        htmlIcon = `
+          <div style="position: relative; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 45;">
+            <div style="width: 28px; height: 28px; border-radius: 50%; background: #161F30; border: 1.5px solid #475569; display: flex; align-items: center; justify-content: center; color: #94A3B8; font-size: 12px; filter: grayscale(50%);">
+              ${iconEmoji}
+            </div>
+            <span style="position: absolute; top: -3px; right: -3px; width: 15px; height: 15px; border-radius: 50%; background: #EAB308; color: #0B0F17; font-size: 10px; font-weight: 900; display: flex; align-items: center; justify-content: center; box-shadow: 0 1px 4px rgba(0,0,0,0.6); border: 1.5px solid #0B0F17; z-index: 50;">★</span>
+          </div>
+        `;
+      } else {
+        htmlIcon = `
+          <div style="position: relative; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0.65;">
+            <div style="width: 28px; height: 28px; border-radius: 50%; background: #161F30; border: 1.5px solid #475569; display: flex; align-items: center; justify-content: center; color: #94A3B8; font-size: 12px; filter: grayscale(50%);">
+              ${iconEmoji}
+            </div>
+          </div>
+        `;
+      }
+
+      const iconDimension = isLive ? [38, 38] : (isSponsor ? [36, 36] : [30, 30]);
+      const venueIcon = Leaflet.divIcon({
+        className: 'custom-venue-marker-container',
+        iconSize: iconDimension,
+        iconAnchor: [iconDimension[0] / 2, iconDimension[1] / 2],
+        html: htmlIcon,
+      });
+
+      // Featured venues always render on top of regular venues
+      const marker = Leaflet.marker([venue.lat, venue.lng], {
+        icon: venueIcon,
+        zIndexOffset: isSponsor ? 3000 : (isLive ? 1200 : 800),
+      });
+
+      const categoryLabel = venue.category ? venue.category.toUpperCase().replace('_', ' ') : 'VENUE';
+      marker.bindTooltip(
+        `<div style="font-family: inherit; font-size: 11px;">
+           <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 2px;">
+             <span style="background: ${isSponsor ? '#EAB308' : (isLive ? '#FF2A6D' : '#475569')}; color: ${isSponsor ? '#0B0F17' : '#FFFFFF'}; font-size: 9px; font-weight: 800; padding: 1px 5px; border-radius: 4px;">${categoryLabel}</span>
+             <span style="color: ${isLive ? '#FF2A6D' : '#94A3B8'}; font-weight: 700; font-size: 10px;">${isLive ? '🔴 LIVE NOW' : '⚪ OFFLINE'}</span>
+           </div>
+           <strong style="color: #FFFFFF; font-size: 12px;">${venue.name}</strong>
+           <div style="color: #94A3B8; font-size: 10px; margin-top: 2px;">Zone: ${venue.zone.replace('_', ' ')}</div>
+         </div>`,
+        { className: 'pattaya-dark-tooltip', direction: 'top', offset: [0, -14] }
+      );
+
+      marker.on('click', () => {
+        if (onSelectEntity) {
+          onSelectEntity({
+            ...venue,
+            type: 'venue',
+            is_live: isLive,
+            video_id: statusInfo?.video_id || venue.video_id,
+            last_live_at: statusInfo?.last_live_at || null,
+          });
+        }
+      });
+      group.addLayer(marker);
+    });
+  }, [onSelectEntity]);
+
+  const streamStatusRef = useRef(streamStatus);
+  useEffect(() => {
+    streamStatusRef.current = streamStatus;
+  }, [streamStatus]);
+
+  const populateVenueGroupRef = useRef(populateVenueGroup);
+  useEffect(() => {
+    populateVenueGroupRef.current = populateVenueGroup;
+  }, [populateVenueGroup]);
+
+  // Update venue markers when streamStatus changes
+  useEffect(() => {
+    if (layersRef.current?.venueGroup && typeof window !== 'undefined' && window.L) {
+      populateVenueGroup(layersRef.current.venueGroup, window.L, streamStatus);
+    }
+  }, [streamStatus, populateVenueGroup]);
 
   useEffect(() => {
     let isMounted = true;
@@ -215,102 +334,9 @@ export default function MapCanvas({ onSelectEntity, onMapInstance }) {
 
       // 3. Hero Venues Layer Group (Live Pulsing vs Offline Dim Pins, 404 Pruned)
       const venueGroup = Leaflet.layerGroup();
-
-      const getCategoryIcon = (category, isSponsor) => {
-        if (isSponsor) return '⭐';
-        switch (category) {
-          case 'dispensary': return '🌿';
-          case 'webcam': return '📹';
-          case 'sports_bar': return '⚽';
-          case 'restaurant': return '🍜';
-          case 'cafe': return '☕';
-          case 'beach_club': return '🏖️';
-          case 'lounge': return '✨';
-          default: return '🍸';
-        }
-      };
-
-      // Prune 404 / broken venues
-      const activeVenues = venuesData.filter((venue) => {
-        const statusInfo = streamStatus?.entities?.[`venue-${venue.slug}`];
-        return statusInfo?.status !== 'error_404';
-      });
-
-      activeVenues.forEach((venue) => {
-        const isSponsor = Boolean(venue.is_sponsored);
-        const iconEmoji = getCategoryIcon(venue.category, isSponsor);
-        const statusInfo = streamStatus?.entities?.[`venue-${venue.slug}`];
-        const isLive = statusInfo ? Boolean(statusInfo.is_live) : false;
-
-        let htmlIcon;
-        if (isLive) {
-          htmlIcon = `
-            <div style="position: relative; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: ${isSponsor ? 50 : 20};">
-              <span style="position: absolute; width: 34px; height: 34px; border-radius: 50%; background: ${isSponsor ? '#EAB308' : '#FF2A6D'}; opacity: 0.7; animation: ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;"></span>
-              <div style="position: relative; width: 32px; height: 32px; border-radius: 50%; background: ${isSponsor ? 'linear-gradient(135deg, #FACC15, #CA8A04)' : 'linear-gradient(135deg, #FF2A6D, #BE185D)'}; border: 2px solid #FFFFFF; box-shadow: 0 0 18px ${isSponsor ? '#EAB308' : '#FF2A6D'}; display: flex; align-items: center; justify-content: center; color: white; font-size: 14px;">
-                ${iconEmoji}
-              </div>
-              <span style="position: absolute; top: -6px; right: -8px; background: ${isSponsor ? '#EAB308' : '#FF2A6D'}; color: ${isSponsor ? '#0B0F17' : '#FFFFFF'}; font-size: 8px; font-weight: 900; font-family: monospace; padding: 1px 4px; border-radius: 4px; box-shadow: 0 0 8px ${isSponsor ? '#EAB308' : '#FF2A6D'}; border: 1px solid rgba(255,255,255,0.7); z-index: 10;">LIVE</span>
-            </div>
-          `;
-        } else if (isSponsor) {
-          htmlIcon = `
-            <div style="position: relative; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 45;">
-              <div style="width: 28px; height: 28px; border-radius: 50%; background: #161F30; border: 1.5px solid #475569; display: flex; align-items: center; justify-content: center; color: #94A3B8; font-size: 12px; filter: grayscale(50%);">
-                ${iconEmoji}
-              </div>
-              <span style="position: absolute; top: -3px; right: -3px; width: 15px; height: 15px; border-radius: 50%; background: #EAB308; color: #0B0F17; font-size: 10px; font-weight: 900; display: flex; align-items: center; justify-content: center; box-shadow: 0 1px 4px rgba(0,0,0,0.6); border: 1.5px solid #0B0F17; z-index: 50;">★</span>
-            </div>
-          `;
-        } else {
-          htmlIcon = `
-            <div style="position: relative; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0.65;">
-              <div style="width: 28px; height: 28px; border-radius: 50%; background: #161F30; border: 1.5px solid #475569; display: flex; align-items: center; justify-content: center; color: #94A3B8; font-size: 12px; filter: grayscale(50%);">
-                ${iconEmoji}
-              </div>
-            </div>
-          `;
-        }
-
-        const iconDimension = isLive ? [38, 38] : (isSponsor ? [36, 36] : [30, 30]);
-        const venueIcon = Leaflet.divIcon({
-          className: 'custom-venue-marker-container',
-          iconSize: iconDimension,
-          iconAnchor: [iconDimension[0] / 2, iconDimension[1] / 2],
-          html: htmlIcon,
-        });
-
-        // Featured venues always render on top of regular venues
-        const marker = Leaflet.marker([venue.lat, venue.lng], {
-          icon: venueIcon,
-          zIndexOffset: isSponsor ? 3000 : (isLive ? 1200 : 800),
-        });
-
-        const categoryLabel = venue.category ? venue.category.toUpperCase().replace('_', ' ') : 'VENUE';
-        marker.bindTooltip(
-          `<div style="font-family: inherit; font-size: 11px;">
-             <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 2px;">
-               <span style="background: ${isSponsor ? '#EAB308' : (isLive ? '#FF2A6D' : '#475569')}; color: ${isSponsor ? '#0B0F17' : '#FFFFFF'}; font-size: 9px; font-weight: 800; padding: 1px 5px; border-radius: 4px;">${categoryLabel}</span>
-               <span style="color: ${isLive ? '#FF2A6D' : '#94A3B8'}; font-weight: 700; font-size: 10px;">${isLive ? '🔴 LIVE NOW' : '⚪ OFFLINE'}</span>
-             </div>
-             <strong style="color: #FFFFFF; font-size: 12px;">${venue.name}</strong>
-             <div style="color: #94A3B8; font-size: 10px; margin-top: 2px;">Zone: ${venue.zone.replace('_', ' ')}</div>
-           </div>`,
-          { className: 'pattaya-dark-tooltip', direction: 'top', offset: [0, -14] }
-        );
-
-        marker.on('click', () => {
-          if (onSelectEntity) {
-            onSelectEntity({
-              ...venue,
-              type: 'venue',
-              is_live: isLive,
-              last_live_at: statusInfo?.last_live_at || null,
-            });
-          }
-        });
-        venueGroup.addLayer(marker);
-      });
+      if (populateVenueGroupRef.current) {
+        populateVenueGroupRef.current(venueGroup, Leaflet, streamStatusRef.current);
+      }
       venueGroup.addTo(map);
 
       mapRef.current = map;
