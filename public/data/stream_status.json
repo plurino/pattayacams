@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-09-11T04:01:25.983Z",
+  "last_check": "2026-09-11T06:33:01.277Z",
   "entities": {
     "venue-pattaya-oh-bar": {
       "is_live": false,
@@ -87,7 +87,7 @@
       "video_id": null,
       "last_live_at": null,
       "status": "active",
-      "name": "S3xy Bar Pattaya",
+      "name": "S3XY Bar Pattaya",
       "platform": "youtube",
       "handle": "@s3xybarpattayalivestream333"
     },
@@ -336,7 +336,7 @@
     },
     "creator-pattaya-beach-live": {
       "is_live": false,
-      "video_id": "IwWzOYyLw9E",
+      "video_id": "0bGNCCBXAKI",
       "last_live_at": null,
       "status": "active",
       "name": "Pattaya Beach Live",
