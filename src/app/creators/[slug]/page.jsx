@@ -116,16 +116,15 @@ export default function CreatorProfilePage({ params }) {
         : `https://www.youtube.com/channel/${creator.channel_id}`);
 
   return (
-    <div className="min-h-screen w-full bg-canvas text-slate-100 flex flex-col overflow-y-auto">
+    <div className="min-h-screen w-full bg-canvas text-slate-100 flex flex-col">
       {/* Top Header */}
       <header className="h-14 border-b border-borderDark bg-surface/95 backdrop-blur-md flex items-center justify-between px-3 sm:px-5 sticky top-0 z-50 shadow-md">
-        <Link href="/" className="flex items-center gap-2 group">
-          <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-brandPink to-purple-600 flex items-center justify-center shadow-[0_0_14px_rgba(255,42,109,0.5)] group-hover:scale-105 transition-transform duration-200">
-            <Video className="w-4 h-4 text-white" />
-          </div>
-          <span className="font-black text-base tracking-tight text-white group-hover:text-pink-300 transition-colors">
-            Pattaya<span className="text-brandPink">Cams</span>
-          </span>
+        <Link href="/" className="flex items-center gap-2 group shrink-0" title="PattayaCams">
+          <img
+            src="/images/logo-dark.png"
+            alt="PattayaCams Logo"
+            className="h-8 sm:h-9 w-auto object-contain transition-all duration-300 group-hover:scale-105 group-hover:brightness-110 group-hover:drop-shadow-[0_0_12px_rgba(255,42,109,0.7)]"
+          />
         </Link>
 
         {/* Unified Navigation Switcher */}

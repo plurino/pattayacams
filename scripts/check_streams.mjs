@@ -59,36 +59,23 @@ async function checkYouTubeChannel(handle, fallbackVideoId) {
       return { is_live: false, video_id: null, status: 'error_404', platform: 'youtube' };
     }
 
-    // Check if the final destination is a watch page or has a live video
-    const watchMatch = html.match(/watch\?v=([a-zA-Z0-9_-]{11})/);
+    // Check if the final destination has a live video
+    const watchMatch = res.url.match(/watch\?v=([a-zA-Z0-9_-]{11})/);
     const videoIdMatch = html.match(/"videoId":"([a-zA-Z0-9_-]{11})"/);
-    const isLiveMatch = html.includes('"isLive":true') || html.includes('"isLiveNow":true') || html.includes('{"text":"LIVE"}');
-
     const videoId = watchMatch ? watchMatch[1] : (videoIdMatch ? videoIdMatch[1] : null);
 
-    // If redirected to /watch?v= or page asserts isLive
-    if (res.url.includes('/watch?v=') || (isLiveMatch && videoId)) {
-      return {
-        is_live: true,
-        video_id: videoId || fallbackVideoId,
-        status: 'active',
-        platform: 'youtube'
-      };
-    }
+    const hasLiveBadge = html.includes('"isLive":true') || 
+                         html.includes('"isLiveNow":true') || 
+                         html.includes('{"text":"LIVE"}') ||
+                         html.includes('"label":"LIVE"');
 
-    // If fallback videoId was supplied (e.g. from seed data), check if it's live
-    if (fallbackVideoId) {
-      return {
-        is_live: true,
-        video_id: fallbackVideoId,
-        status: 'active',
-        platform: 'youtube'
-      };
-    }
+    const isEnded = html.includes('Streamed live') || html.includes('"isLive":false');
+
+    const isLive = Boolean(hasLiveBadge && !isEnded && videoId);
 
     return {
-      is_live: false,
-      video_id: null,
+      is_live: isLive,
+      video_id: videoId || fallbackVideoId || null,
       status: 'active',
       platform: 'youtube'
     };
@@ -160,15 +147,21 @@ async function run() {
 
   // 1. Check Venues (YouTube)
   console.log('\n--- Checking Venues ---');
+  let venuesUpdated = false;
   for (const venue of venues) {
     const entityKey = `venue-${venue.slug}`;
     const prev = nextEntities[entityKey] || {};
     const result = await checkYouTubeChannel(venue.youtube_handle, venue.video_id);
 
+    if (result.is_live && result.video_id && result.video_id !== venue.video_id) {
+      venue.video_id = result.video_id;
+      venuesUpdated = true;
+    }
+
     nextEntities[entityKey] = {
       is_live: result.is_live,
       video_id: result.is_live ? result.video_id : null,
-      last_live_at: result.is_live ? nowIso : (prev.last_live_at || (venue.video_id ? nowIso : null)),
+      last_live_at: result.is_live ? nowIso : (prev.last_live_at || null),
       status: result.status,
       name: venue.name,
       platform: 'youtube',
@@ -176,6 +169,11 @@ async function run() {
     };
 
     console.log(`[${venue.name}] ${result.is_live ? '🔴 LIVE' : '⚪ Offline'} (${result.status})`);
+  }
+
+  if (venuesUpdated) {
+    fs.writeFileSync(venuesPath, JSON.stringify(venues, null, 2), 'utf8');
+    console.log('✓ Synced updated live video IDs to venues.json');
   }
 
   // 2. Check Roaming Streamers (YouTube)

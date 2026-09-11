@@ -53,16 +53,15 @@ export default function VenuePage({ params }) {
   const categoryLabel = venue.category ? venue.category.toUpperCase().replace('_', ' ') : 'VENUE';
 
   return (
-    <div className="min-h-screen w-full bg-canvas text-slate-100 flex flex-col overflow-y-auto">
+    <div className="min-h-screen w-full bg-canvas text-slate-100 flex flex-col">
       {/* Top Brand Header */}
       <header className="h-14 border-b border-borderDark bg-surface flex items-center justify-between px-4 sm:px-6 sticky top-0 z-40">
-        <Link href="/" className="flex items-center gap-2 group">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-brandCyan to-brandBlue flex items-center justify-center shadow-md">
-            <Video className="w-4 h-4 text-canvas" />
-          </div>
-          <span className="font-bold text-base tracking-tight text-white group-hover:text-brandCyan transition-colors">
-            Pattaya<span className="text-brandCyan">Cams</span>
-          </span>
+        <Link href="/" className="flex items-center gap-2 group shrink-0" title="PattayaCams">
+          <img
+            src="/images/logo-dark.png"
+            alt="PattayaCams Logo"
+            className="h-8 sm:h-9 w-auto object-contain transition-all duration-300 group-hover:scale-105 group-hover:brightness-110 group-hover:drop-shadow-[0_0_12px_rgba(255,42,109,0.7)]"
+          />
         </Link>
 
         <Link

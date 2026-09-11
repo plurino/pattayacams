@@ -9,7 +9,7 @@
     "lng": 100.8861,
     "youtube_channel_id": "UCuRdgfA3P-cDPmcK804cnuQ",
     "youtube_handle": "@PattayaOhBar",
-    "video_id": "k8zVyL8mk74",
+    "video_id": "7oQETDBk_s8",
     "google_maps_url": "https://share.google/CQWjLTLvTlpQScyf3",
     "description": "Popular open-air entertainment beer bar in the R-Con complex along Soi Made In Thailand near Soi Buakhao, broadcasting daily live streams from Central Pattaya.",
     "is_sponsored": true,
@@ -132,7 +132,8 @@
     "youtube_handle": "@SUGARBxPATTAYA",
     "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Nine+Star+Restaurant+and+Bar+Pattaya",
     "description": "Kitchen and bar near Soi Made In Thailand running regular evening interactive YouTube live broadcasts with staff, music, and food reviews.",
-    "is_sponsored": false
+    "is_sponsored": false,
+    "video_id": "mgTChsJzH3Q"
   },
   {
     "slug": "x-club-pattaya",
@@ -186,7 +187,7 @@
     "category": "bar",
     "lat": 12.9432,
     "lng": 100.8872,
-    "video_id": "IrZRKZyyg3Q",
+    "video_id": "ODensH9FL5o",
     "youtube_channel_id": "UCR3mw6b5_BlD3h82O7Rdq-Q",
     "youtube_handle": "@GoldBarSoi6",
     "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Gold+Bar+Pattaya+Soi+6",
@@ -201,7 +202,7 @@
     "category": "bar",
     "lat": 12.9328,
     "lng": 100.8858,
-    "video_id": "DMsLKTEaSic",
+    "video_id": "hs3ODqDmeCw",
     "youtube_channel_id": "UCZvcBYqt86GnHgW_NRKAr2Q",
     "youtube_handle": "@s3xybarpattayalivestream333",
     "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Sexy+Bar+Soi+Made+in+Thailand+Pattaya",
@@ -280,6 +281,21 @@
     "youtube_handle": "@MisoBarPattaya",
     "google_maps_url": "https://maps.google.com?q=WVVP+33G+Miso+Bar+Pattaya+Soi+6,+Pattaya+Soi+6,+Pattaya+City,+Bang+Lamung+District,+Chon+Buri+20150",
     "description": "Vibrant open-air bar on Soi 6 in North Pattaya broadcasting nightly interactive YouTube live streams and guest chats.",
+    "is_sponsored": false
+  },
+  {
+    "slug": "s3xy-bar-pattaya",
+    "id": "VN-020",
+    "name": "S3xy Bar Pattaya",
+    "zone": "soi_buakhao",
+    "category": "bar",
+    "lat": 12.9318,
+    "lng": 100.8858,
+    "video_id": "hs3ODqDmeCw",
+    "youtube_channel_id": "UCs3xybarpattayalivestream333",
+    "youtube_handle": "@s3xybarpattayalivestream333",
+    "google_maps_url": "https://www.google.com/maps/search/?api=1&query=S3xy+Bar+Soi+Buakhao+Pattaya",
+    "description": "High-energy beer bar on Soi Buakhao broadcasting continuous interactive live webcams of evening nightlife and pedestrian streets.",
     "is_sponsored": false
   }
 ]

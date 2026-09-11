@@ -45,7 +45,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`dark ${inter.variable} ${jetbrainsMono.variable}`}>
-      <body className="bg-canvas text-slate-100 antialiased min-h-screen w-full flex flex-col">
+      <body className="bg-canvas text-slate-100 antialiased min-h-screen w-full flex flex-col overflow-x-hidden selection:bg-brandPink selection:text-white">
         {children}
       </body>
     </html>

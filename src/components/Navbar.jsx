@@ -71,18 +71,12 @@ export default function Navbar({
     <header className="h-14 border-b border-borderDark bg-surface/95 backdrop-blur-md flex items-center justify-between px-2.5 sm:px-4 md:px-5 shrink-0 z-50 select-none shadow-lg">
       {/* 1. Left: Brand Logo & Sexy Hover */}
       <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-        <a href="/" className="flex items-center gap-2 group">
-          <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-brandPink to-purple-600 flex items-center justify-center shadow-[0_0_14px_rgba(255,42,109,0.5)] group-hover:scale-105 transition-transform duration-200">
-            <Video className="w-4 h-4 text-white" />
-          </div>
-          <div className="flex flex-col">
-            <span className="font-black text-base tracking-tight text-white group-hover:text-pink-300 transition-colors">
-              Pattaya<span className="text-brandPink">Cams</span>
-            </span>
-            <span className="hidden sm:inline-block text-[8px] font-mono text-slate-400 -mt-0.5 tracking-wider uppercase">
-              Live Streams & Cameras
-            </span>
-          </div>
+        <a href="/" className="flex items-center gap-2 group shrink-0" title="PattayaCams - The city that never sleeps">
+          <img
+            src="/images/logo-dark.png"
+            alt="PattayaCams Logo"
+            className="h-8 sm:h-9 md:h-10 w-auto object-contain transition-all duration-300 group-hover:scale-105 group-hover:brightness-110 group-hover:drop-shadow-[0_0_14px_rgba(255,42,109,0.7)]"
+          />
         </a>
 
         {/* Live Network Status Indicator */}
