@@ -96,6 +96,7 @@ export default function MultiCamGrid({ onSelectEntity }) {
     setGridMode(mode);
     setSlots(initialSlots);
     setIsClientLoaded(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleModeChange = (newMode) => {

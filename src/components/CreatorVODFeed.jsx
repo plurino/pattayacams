@@ -58,7 +58,7 @@ export default function CreatorVODFeed({ onSelectVideo }) {
   const channelMenuRef = useRef(null);
   const feedScrollRef = useRef(null);
 
-  const allVideos = vodData?.videos || [];
+  const allVideos = useMemo(() => vodData?.videos || [], []);
 
   // Close channel multi-select on outside click
   useEffect(() => {
