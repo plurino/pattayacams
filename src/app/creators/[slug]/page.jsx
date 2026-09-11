@@ -88,7 +88,10 @@ export default async function CreatorProfilePage({ params }) {
     notFound();
   }
 
-  const isKick = creator.platform === 'kick';
+  const isBoth = creator.platform === 'both';
+  const isKickOnly = creator.platform === 'kick';
+  const hasKick = creator.platform === 'kick' || creator.platform === 'both' || Boolean(creator.kick_channel);
+  const hasYouTube = creator.platform === 'youtube' || creator.platform === 'both' || Boolean(creator.handle || creator.channel_id);
 
   // Recent videos for this creator
   const allVideos = vodData?.videos || [];
@@ -98,11 +101,14 @@ export default async function CreatorProfilePage({ params }) {
 
   const latestVideo = creatorVideos[0] || null;
 
-  const channelUrl = isKick
-    ? `https://kick.com/${(creator.channel_id || creator.slug || creator.handle).replace(/^@/, '')}`
-    : (creator.handle
-        ? `https://www.youtube.com/${creator.handle.startsWith('@') ? creator.handle : '@' + creator.handle}`
-        : `https://www.youtube.com/channel/${creator.channel_id}`);
+  const youtubeUrl = creator.handle
+    ? `https://www.youtube.com/${creator.handle.startsWith('@') ? creator.handle : '@' + creator.handle}`
+    : (creator.channel_id ? `https://www.youtube.com/channel/${creator.channel_id}` : null);
+
+  const kickSlug = (creator.kick_channel || (isKickOnly ? (creator.channel_id || creator.slug || creator.handle) : '')).replace(/^@/, '');
+  const kickUrl = kickSlug ? `https://kick.com/${kickSlug}` : null;
+
+  const primaryChannelUrl = isKickOnly ? kickUrl : (youtubeUrl || kickUrl);
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -113,7 +119,7 @@ export default async function CreatorProfilePage({ params }) {
         name: creator.name,
         description: creator.bio_seo || `Content creator covering Pattaya, Thailand.`,
         url: `https://pattayacams.com/creators/${creator.slug}/`,
-        sameAs: [channelUrl],
+        sameAs: [primaryChannelUrl].filter(Boolean),
         knowsAbout: ['Pattaya', 'Thailand Tourism', 'Nightlife', 'Travel Vlogging'],
       },
       {
@@ -184,18 +190,27 @@ export default async function CreatorProfilePage({ params }) {
                   {creator.name}
                 </h1>
                 {/* Platform Pill */}
-                <span className={`px-2 py-0.5 rounded text-[10px] font-mono font-bold flex items-center gap-1 ${
-                  isKick
-                    ? 'bg-emerald-950/50 text-[#53FC18] border border-emerald-500/40'
-                    : 'bg-red-950/50 text-red-400 border border-red-500/40'
-                }`}>
-                  {isKick ? <Radio className="w-3 h-3" /> : <Youtube className="w-3 h-3" />}
-                  <span>{isKick ? 'Kick Creator' : 'YouTube Channel'}</span>
-                </span>
+                {isBoth ? (
+                  <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold flex items-center gap-1.5 bg-purple-950/60 text-purple-300 border border-purple-500/40">
+                    <Youtube className="w-3 h-3 text-red-400" />
+                    <span>+</span>
+                    <Radio className="w-3 h-3 text-[#53FC18]" />
+                    <span>YouTube & Kick</span>
+                  </span>
+                ) : (
+                  <span className={`px-2 py-0.5 rounded text-[10px] font-mono font-bold flex items-center gap-1 ${
+                    isKickOnly
+                      ? 'bg-emerald-950/50 text-[#53FC18] border border-emerald-500/40'
+                      : 'bg-red-950/50 text-red-400 border border-red-500/40'
+                  }`}>
+                    {isKickOnly ? <Radio className="w-3 h-3" /> : <Youtube className="w-3 h-3" />}
+                    <span>{isKickOnly ? 'Kick Creator' : 'YouTube Channel'}</span>
+                  </span>
+                )}
               </div>
 
               <p className="text-xs sm:text-sm font-mono text-slate-400">
-                {creator.handle}
+                {creator.handle}{kickSlug && isBoth ? ` • Kick: ${kickSlug}` : ''}
               </p>
 
               <div className="flex flex-wrap items-center gap-2 mt-1 text-xs font-mono">
@@ -217,20 +232,31 @@ export default async function CreatorProfilePage({ params }) {
 
           {/* Action CTAs: Direct Channel Link */}
           <div className="flex flex-col sm:flex-row md:flex-col items-stretch sm:items-center gap-2.5 w-full md:w-auto shrink-0">
-            <a
-              href={channelUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`py-3 px-5 rounded-xl text-xs font-mono font-bold transition-all shadow-md flex items-center justify-center gap-2 ${
-                isKick
-                  ? 'bg-[#53FC18] hover:bg-[#46d614] text-black font-black shadow-[0_0_16px_rgba(83,252,24,0.3)]'
-                  : 'bg-red-600 hover:bg-red-500 text-white shadow-[0_0_16px_rgba(239,68,68,0.3)]'
-              }`}
-            >
-              {isKick ? <Radio className="w-4 h-4" /> : <Youtube className="w-4 h-4" />}
-              <span>Visit {isKick ? 'Kick Channel' : 'YouTube Channel'}</span>
-              <ExternalLink className="w-3.5 h-3.5" />
-            </a>
+            {hasYouTube && youtubeUrl && (
+              <a
+                href={youtubeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="py-2.5 px-4 rounded-xl text-xs font-mono font-bold transition-all shadow-md flex items-center justify-center gap-2 bg-red-600 hover:bg-red-500 text-white shadow-[0_0_16px_rgba(239,68,68,0.3)]"
+              >
+                <Youtube className="w-4 h-4" />
+                <span>Visit YouTube</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+            )}
+
+            {hasKick && kickUrl && (
+              <a
+                href={kickUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="py-2.5 px-4 rounded-xl text-xs font-mono font-bold transition-all shadow-md flex items-center justify-center gap-2 bg-[#53FC18] hover:bg-[#46d614] text-black font-black shadow-[0_0_16px_rgba(83,252,24,0.3)]"
+              >
+                <Radio className="w-4 h-4" />
+                <span>Watch on Kick</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+            )}
 
             <Link
               href="/?view=vids"

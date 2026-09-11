@@ -196,7 +196,7 @@ export default function VideoDrawer({ entity, onClose }) {
         channelId={entity.youtube_channel_id}
         videoId={entity.video_id}
         title={entity.name}
-        handle={entity.youtube_handle || '@PattayaOhBar'}
+        handle={entity.youtube_handle || entity.handle || '@PattayaOhBar'}
         type={entity.type}
         isLive={entity.is_live ?? (isVenue || isLiveCam)}
         badgeText={isLiveCam ? '24/7 LIVE WEBCAM' : (isStreamer ? '4K WALKING TOUR' : (isVenue ? 'LIVE STREAM BROADCAST' : undefined))}

@@ -89,9 +89,9 @@ export default function CreatorDirectoryClient({ creators = [], venues = [], str
       if (selectedPlatform === 'venues') {
         matchesPlatform = item.item_type === 'venue';
       } else if (selectedPlatform === 'youtube') {
-        matchesPlatform = item.item_type === 'creator' && item.platform === 'youtube';
+        matchesPlatform = item.item_type === 'creator' && (item.platform === 'youtube' || item.platform === 'both' || Boolean(item.handle || item.channel_id));
       } else if (selectedPlatform === 'kick') {
-        matchesPlatform = item.item_type === 'creator' && item.platform === 'kick';
+        matchesPlatform = item.item_type === 'creator' && (item.platform === 'kick' || item.platform === 'both' || Boolean(item.kick_channel));
       }
 
       const query = searchQuery.toLowerCase().trim();
@@ -369,6 +369,13 @@ export default function CreatorDirectoryClient({ creators = [], venues = [], str
                           <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold flex items-center gap-1 bg-brandPink/15 text-brandPink border border-brandPink/30 shadow-sm">
                             <MapPin className="w-2.5 h-2.5" />
                             <span>Live Venue</span>
+                          </span>
+                        ) : item.platform === 'both' ? (
+                          <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold flex items-center gap-1 bg-purple-950/40 text-purple-300 border border-purple-500/30">
+                            <Youtube className="w-2.5 h-2.5 text-red-400" />
+                            <span>+</span>
+                            <Radio className="w-2.5 h-2.5 text-[#53FC18]" />
+                            <span>YT & Kick</span>
                           </span>
                         ) : (
                           <span className={`px-2 py-0.5 rounded text-[10px] font-mono font-bold flex items-center gap-1 ${

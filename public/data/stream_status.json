@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-09-11T21:46:31.707Z",
+  "last_check": "2026-09-11T22:36:34.083Z",
   "entities": {
     "venue-pattaya-oh-bar": {
       "is_live": false,
@@ -13,14 +13,14 @@
     "livecam-pattaya-beach-road-live-cam": {
       "is_live": true,
       "video_id": "WgSrfstUvIc",
-      "last_live_at": "2026-09-11T20:16:37.300Z",
+      "last_live_at": "2026-09-11T22:36:34.083Z",
       "status": "active",
       "name": "Pattaya Beach Road Live Cam",
       "platform": "youtube",
       "handle": "@pattayabob"
     },
     "livecam-soi-buakhao-live-cam-ismannen": {
-      "is_live": true,
+      "is_live": false,
       "video_id": "GQnjaPRYHsU",
       "last_live_at": "2026-09-11T20:16:37.300Z",
       "status": "active",
@@ -260,7 +260,9 @@
       "status": "active",
       "name": "Buzzin Pattaya",
       "platform": "youtube",
-      "handle": "@Buzzinpattaya"
+      "handle": "@Buzzinpattaya",
+      "kick_channel": null,
+      "avatar_url": "https://yt3.googleusercontent.com/ytc/AIdro_nUp8SB8KN3NvJvUA_3DilXu6v2Qp_M0Tb3AL54jjLlPm0=s900-c-k-c0x00ffffff-no-rj"
     },
     "creator-walk-east": {
       "is_live": false,
@@ -269,7 +271,9 @@
       "status": "active",
       "name": "Walk East",
       "platform": "youtube",
-      "handle": "@WalkEast"
+      "handle": "@WalkEast",
+      "kick_channel": null,
+      "avatar_url": "https://yt3.googleusercontent.com/ZYTU0Rr4aTNKKi6XWjBMk38_Qb13ULfXgM2JxgZo6N6mKNUff6YP13-dogqXUM-unjcy6TJeUA8=s900-c-k-c0x00ffffff-no-rj"
     },
     "creator-pattaya-4k-walker": {
       "is_live": false,
@@ -278,7 +282,9 @@
       "status": "active",
       "name": "Pattaya 4K Walker",
       "platform": "youtube",
-      "handle": "@Pattaya4KWalker"
+      "handle": "@Pattaya4KWalker",
+      "kick_channel": null,
+      "avatar_url": "https://yt3.googleusercontent.com/q5kKsHGR7OGmXcSnkbb_fNiFDSIuZZxz-geKO_M_fF8s5n9gAZ2U07BVG746s_VB38MVRQ9whA=s900-c-k-c0x00ffffff-no-rj"
     },
     "creator-ndtvi-thailand": {
       "is_live": false,
@@ -287,7 +293,9 @@
       "status": "active",
       "name": "NDtvi Thailand",
       "platform": "youtube",
-      "handle": "@NDtviThailand"
+      "handle": "@NDtviThailand",
+      "kick_channel": null,
+      "avatar_url": "https://yt3.googleusercontent.com/3Y-8EvHSWFMADaSoarlgl9npq8T4FTiU8c7gAsoVAIBfLsSggo0c5TT5mA1A_UhdNlc5pFPnmDs=s900-c-k-c0x00ffffff-no-rj"
     },
     "creator-everything-pattaya": {
       "is_live": false,
@@ -296,7 +304,9 @@
       "status": "active",
       "name": "Everything Pattaya",
       "platform": "youtube",
-      "handle": "@EverythingPattaya"
+      "handle": "@EverythingPattaya",
+      "kick_channel": null,
+      "avatar_url": "https://yt3.googleusercontent.com/ytc/AIdro_m4uLkSA24Sg_pCFTDGGu77nuKXc5CcWM6ipNH-TPtmIQ=s900-c-k-c0x00ffffff-no-rj"
     },
     "creator-live-love-thailand": {
       "is_live": false,
@@ -305,7 +315,9 @@
       "status": "active",
       "name": "Live Love Thailand",
       "platform": "youtube",
-      "handle": "@LiveLoveThailand"
+      "handle": "@LiveLoveThailand",
+      "kick_channel": null,
+      "avatar_url": "https://yt3.googleusercontent.com/4o7Zbm4j-zSzkZsFc0Ksb12zXwtPZmCerD_dfcZ_zoNOy0Rf-jBU1XdjwevLwWj_ZxdKIfHU4Q=s900-c-k-c0x00ffffff-no-rj"
     },
     "creator-rikasian": {
       "is_live": false,
@@ -314,7 +326,9 @@
       "status": "active",
       "name": "RikAsian",
       "platform": "kick",
-      "handle": "rikasian"
+      "handle": "rikasian",
+      "kick_channel": null,
+      "avatar_url": null
     },
     "creator-vespa-life-thailand": {
       "is_live": false,
@@ -323,7 +337,9 @@
       "status": "active",
       "name": "Vespa Life Thailand",
       "platform": "youtube",
-      "handle": "@Vespa_Life_Thailand"
+      "handle": "@Vespa_Life_Thailand",
+      "kick_channel": null,
+      "avatar_url": "https://yt3.googleusercontent.com/_0ocieqX7Bpx3CZLLsmLCQpq7TMttO_TCmaiSI8z75xbWgW7Q7N9NeHHt8yGUPoEjQwEA19c7hs=s900-c-k-c0x00ffffff-no-rj"
     },
     "creator-4k-pimmy": {
       "is_live": false,
@@ -332,7 +348,9 @@
       "status": "active",
       "name": "4K Pimmy",
       "platform": "youtube",
-      "handle": "@4kpimmy"
+      "handle": "@4kpimmy",
+      "kick_channel": null,
+      "avatar_url": "https://yt3.googleusercontent.com/xev2kobBOzB5Nt0_oSvlWjf_FKWZNY3JtXeAY7nY_EceMZmHxKzmrPuDH4NN_jyUdLLc4RqWmg=s900-c-k-c0x00ffffff-no-rj"
     },
     "creator-slyman-travels": {
       "is_live": false,
@@ -341,7 +359,9 @@
       "status": "active",
       "name": "SLYMAN TRAVELS",
       "platform": "youtube",
-      "handle": "@slyman6666"
+      "handle": "@slyman6666",
+      "kick_channel": null,
+      "avatar_url": "https://yt3.googleusercontent.com/ABt-AgPlwBy2SB-QMz8SIHPi0B1IOUC5mDMuwhj1cw8TY80-n3qos4fjSd463wKNguj4EVJMRA=s900-c-k-c0x00ffffff-no-rj"
     },
     "creator-pattaya-beach-live": {
       "is_live": false,
@@ -350,7 +370,9 @@
       "status": "active",
       "name": "Pattaya Beach Live",
       "platform": "youtube",
-      "handle": "@williamgilday"
+      "handle": "@williamgilday",
+      "kick_channel": null,
+      "avatar_url": "https://yt3.googleusercontent.com/crUO73O1pFG6HIRAdN1bXIB1VKv3qRVUalTghYGIW0nwNGBeowXkb3jwBpJ-j0yZLBV9032--qQ=s900-c-k-c0x00ffffff-no-rj"
     },
     "creator-jwinthai": {
       "is_live": false,
@@ -359,7 +381,9 @@
       "status": "active",
       "name": "JWINTHAI",
       "platform": "youtube",
-      "handle": "@jwinthai"
+      "handle": "@jwinthai",
+      "kick_channel": null,
+      "avatar_url": "https://yt3.googleusercontent.com/vrDpU7p6Kfk6gy37xaRu9ovhYrpaRR4vkNKoc0K84Q2A0HYi5mvSju7BOFA_KwbJKoRctumoT7w=s900-c-k-c0x00ffffff-no-rj"
     },
     "creator-global-street-walk": {
       "is_live": false,
@@ -368,7 +392,9 @@
       "status": "active",
       "name": "Global Street Walk",
       "platform": "youtube",
-      "handle": "@GlobalStreetWalk"
+      "handle": "@GlobalStreetWalk",
+      "kick_channel": null,
+      "avatar_url": "https://yt3.googleusercontent.com/pntr3Y54gPYF7YpWYnMyz3NduwnUaw8VJ1-5jkx6Yy5lVJEfaaJySQIRnSljnRw697_MJ14J=s900-c-k-c0x00ffffff-no-rj"
     },
     "creator-bryan-flowers": {
       "is_live": false,
@@ -377,7 +403,9 @@
       "status": "active",
       "name": "Bryan Flowers",
       "platform": "youtube",
-      "handle": "@BryanFlowers"
+      "handle": "@BryanFlowers",
+      "kick_channel": null,
+      "avatar_url": "https://yt3.googleusercontent.com/ytc/AIdro_l5ZIbBEgwtZgFkpa5rNV02u-8Vx6YggfmL2j0PeAXobTQsCm2wmmfwdUlmilBjHqr4mA=s900-c-k-c0x00ffffff-no-rj"
     },
     "creator-the-pattaya-news": {
       "is_live": false,
@@ -386,7 +414,9 @@
       "status": "active",
       "name": "The Pattaya News",
       "platform": "youtube",
-      "handle": "@ThePattayaNews"
+      "handle": "@ThePattayaNews",
+      "kick_channel": null,
+      "avatar_url": "https://yt3.googleusercontent.com/ED2V0oAQI1iJpeAFvbuEi0wj97DQIsDXma7rxuSOhPxt4wfxf_-hmIINVdUbCWQnBAmfyHavxw=s900-c-k-c0x00ffffff-no-rj"
     },
     "creator-dan-about-thailand": {
       "is_live": false,
@@ -395,7 +425,9 @@
       "status": "active",
       "name": "Dan About Thailand",
       "platform": "youtube",
-      "handle": "@DanAboutThailand"
+      "handle": "@DanAboutThailand",
+      "kick_channel": null,
+      "avatar_url": "https://yt3.googleusercontent.com/Yyj8-Dsl31kWZGfIFv8KbVT9BfXbzvKHKNyE8VddmTPXz4bpUB1t8iXSU4KJKZFdyME1bzhjkOk=s900-c-k-c0x00ffffff-no-rj"
     },
     "creator-dean-in-thailand": {
       "is_live": false,
@@ -404,7 +436,9 @@
       "status": "active",
       "name": "Dean in Thailand",
       "platform": "youtube",
-      "handle": "@DeanInThailand"
+      "handle": "@DeanInThailand",
+      "kick_channel": null,
+      "avatar_url": "https://yt3.googleusercontent.com/ytc/AIdro_nKOyQ_9-y06QgfYh-FkUjI8igpv8YV00RYCD0orSQ=s900-c-k-c0x00ffffff-no-rj"
     },
     "creator-kev-in-thailand": {
       "is_live": false,
@@ -413,7 +447,9 @@
       "status": "active",
       "name": "Kev-in-Thailand",
       "platform": "youtube",
-      "handle": "@KevInThailand"
+      "handle": "@KevInThailand",
+      "kick_channel": null,
+      "avatar_url": "https://yt3.googleusercontent.com/Codtgbm9LDBrbLC95y7zvMjRtzxDlXnfuUXWjjxT1lwR4W-wvYLHHfSBIbKtfifePAbfeDww=s900-c-k-c0x00ffffff-no-rj"
     },
     "creator-ride-with-joel": {
       "is_live": false,
@@ -422,7 +458,9 @@
       "status": "active",
       "name": "Ride with Joel",
       "platform": "youtube",
-      "handle": "@RideWithJoel"
+      "handle": "@RideWithJoel",
+      "kick_channel": null,
+      "avatar_url": "https://yt3.googleusercontent.com/ytc/AIdro_lkvQhjZDYSNj8SXW05AimhtkOE-zbiK-hI5wxQHrxhMQ=s900-c-k-c0x00ffffff-no-rj"
     },
     "creator-travel-with-luke": {
       "is_live": false,
@@ -431,7 +469,9 @@
       "status": "active",
       "name": "Travel with Luke",
       "platform": "youtube",
-      "handle": "@TravelWithLuke"
+      "handle": "@TravelWithLuke",
+      "kick_channel": null,
+      "avatar_url": "https://yt3.googleusercontent.com/VIraMTslQT6EWzZOKNUyU9AglSeXGcu0prY6Q3VWaMXX_tm8mSLcXDLvjguMx9P7UVjpj3NA=s900-c-k-c0x00ffffff-no-rj"
     },
     "creator-bangkok-pat": {
       "is_live": false,
@@ -440,7 +480,9 @@
       "status": "active",
       "name": "Bangkok Pat",
       "platform": "youtube",
-      "handle": "@BangkokPat"
+      "handle": "@BangkokPat",
+      "kick_channel": null,
+      "avatar_url": "https://yt3.googleusercontent.com/lsLR1m_capz7QvX1AGgxg08iOQ7NtdlFijeBXpB_R-cXunMCqT-r6swbIQNTSiue5LoI_g4Pnkg=s900-c-k-c0x00ffffff-no-rj"
     },
     "creator-thailand-rob": {
       "is_live": false,
@@ -449,7 +491,9 @@
       "status": "active",
       "name": "Thailand Rob",
       "platform": "youtube",
-      "handle": "@ThailandRob"
+      "handle": "@ThailandRob",
+      "kick_channel": null,
+      "avatar_url": "https://yt3.googleusercontent.com/ytc/AIdro_lACxUgHiSVBCZnxB3y0AiiOJr0gopsUA7ediB7uV_UEBY=s900-c-k-c0x00ffffff-no-rj"
     },
     "creator-fabulous-pattaya": {
       "is_live": false,
@@ -458,7 +502,9 @@
       "status": "active",
       "name": "Fabulous Pattaya",
       "platform": "youtube",
-      "handle": "@FabulousPattaya"
+      "handle": "@FabulousPattaya",
+      "kick_channel": null,
+      "avatar_url": "https://yt3.googleusercontent.com/ytc/AIdro_kPG_DbiOWTBNwUUiepocpGOBrtTV781UaES92xL50vPxg=s900-c-k-c0x00ffffff-no-rj"
     },
     "creator-pattaya-city-walk-4k": {
       "is_live": false,
@@ -467,7 +513,9 @@
       "status": "active",
       "name": "Pattaya City Walk 4K",
       "platform": "youtube",
-      "handle": "@4KWalking7"
+      "handle": "@4KWalking7",
+      "kick_channel": null,
+      "avatar_url": "https://yt3.googleusercontent.com/Gx1l7ov_ghpoZ92MN3FECPRVYmvtwcHCRXSy40y7B8_ZhoRjYzo_3wHZwjY-XHX6pTQsRf9Jmg=s900-c-k-c0x00ffffff-no-rj"
     },
     "creator-thaivibelive": {
       "is_live": false,
@@ -476,7 +524,9 @@
       "status": "active",
       "name": "ThaiVibeLive",
       "platform": "kick",
-      "handle": "thaivibelive"
+      "handle": "thaivibelive",
+      "kick_channel": null,
+      "avatar_url": null
     },
     "creator-icecoldkick": {
       "is_live": false,
@@ -485,7 +535,9 @@
       "status": "active",
       "name": "IceColdKick",
       "platform": "kick",
-      "handle": "icecoldkick"
+      "handle": "icecoldkick",
+      "kick_channel": null,
+      "avatar_url": null
     },
     "creator-pattayairl": {
       "is_live": false,
@@ -494,7 +546,9 @@
       "status": "active",
       "name": "PattayaIRL",
       "platform": "kick",
-      "handle": "pattayairl"
+      "handle": "pattayairl",
+      "kick_channel": null,
+      "avatar_url": null
     },
     "creator-paulpattaya": {
       "is_live": false,
@@ -503,7 +557,9 @@
       "status": "active",
       "name": "PaulPattaya",
       "platform": "kick",
-      "handle": "paulpattaya"
+      "handle": "paulpattaya",
+      "kick_channel": null,
+      "avatar_url": null
     },
     "creator-david-strachan-pattaya": {
       "is_live": false,
@@ -512,7 +568,9 @@
       "status": "active",
       "name": "David Strachan Pattaya",
       "platform": "youtube",
-      "handle": "@DSPattaya"
+      "handle": "@DSPattaya",
+      "kick_channel": null,
+      "avatar_url": "https://yt3.googleusercontent.com/OO0mpFyUuBKI5W2ft-lnTYPzfY1jPy2ps2JL0LbuLZhSTRRXcEzMz_LnKZFwgVEwEuCoFoGO=s900-c-k-c0x00ffffff-no-rj"
     },
     "creator-trevor-in-thailand": {
       "is_live": false,
@@ -521,7 +579,9 @@
       "status": "active",
       "name": "Trevor in Thailand",
       "platform": "youtube",
-      "handle": "@TrevorInThailand"
+      "handle": "@TrevorInThailand",
+      "kick_channel": null,
+      "avatar_url": "https://yt3.googleusercontent.com/Islv3EbNauvUwUbGlT6yeEW1pQLP3uKALdByjS3-PjcKEr0Mqwd7tvl4JSbg49C1AZ3ZKr_k=s900-c-k-c0x00ffffff-no-rj"
     },
     "creator-walking-in-paradise": {
       "is_live": false,
@@ -530,7 +590,9 @@
       "status": "active",
       "name": "Walking In Paradise",
       "platform": "youtube",
-      "handle": "@WalkingInParadise"
+      "handle": "@WalkingInParadise",
+      "kick_channel": null,
+      "avatar_url": "https://yt3.googleusercontent.com/ow7rytUm1tbrVA-4vzkMqftrpAU2psZ_LhMkEhi08Oe70fJrgZleasKoK9v7NtMSDTfOTiI_=s900-c-k-c0x00ffffff-no-rj"
     },
     "creator-look-at-thailand": {
       "is_live": false,
@@ -539,7 +601,9 @@
       "status": "active",
       "name": "Look at Thailand",
       "platform": "youtube",
-      "handle": "@LookAtThailand"
+      "handle": "@LookAtThailand",
+      "kick_channel": null,
+      "avatar_url": "https://yt3.googleusercontent.com/oK7VhO9e6xGLoHFnWG0RJFWsk0ZyiOH5gdQA_YPqzgJ2dEJQUgy9shgRbTtuzkaSlIaugpH6JQ=s900-c-k-c0x00ffffff-no-rj"
     },
     "creator-walking-the-world-4k": {
       "is_live": false,
@@ -548,7 +612,9 @@
       "status": "active",
       "name": "Walking The World 4K",
       "platform": "youtube",
-      "handle": "@WalkingTheWorld4K"
+      "handle": "@WalkingTheWorld4K",
+      "kick_channel": null,
+      "avatar_url": "https://yt3.googleusercontent.com/ytc/AIdro_mZc4zmVJypLMNHULLyrOLIH5j4ROdhNY4GzlNL_IBrxVgUQS4IT_UqjXMrykjAWMs9HA=s900-c-k-c0x00ffffff-no-rj"
     },
     "creator-steve-in-thailand": {
       "is_live": false,
@@ -557,7 +623,9 @@
       "status": "active",
       "name": "Steve in Thailand",
       "platform": "youtube",
-      "handle": "@SteveInThailand"
+      "handle": "@SteveInThailand",
+      "kick_channel": null,
+      "avatar_url": "https://yt3.googleusercontent.com/ytc/AIdro_mXAsQHHTtVYKoo9wC9q0CqAPYEABRGXE5gfkDZbVwgRnh4=s900-c-k-c0x00ffffff-no-rj"
     },
     "creator-thailand-street-view": {
       "is_live": false,
@@ -566,7 +634,135 @@
       "status": "active",
       "name": "Thailand Street View",
       "platform": "youtube",
-      "handle": "@ThailandStreetView"
+      "handle": "@ThailandStreetView",
+      "kick_channel": null,
+      "avatar_url": "https://yt3.googleusercontent.com/6GS7T_pCqHAsewQtNL6Guf0LC1cJadn2zRElCZH52RlIJczk5TLwlpTv7MRD7LoinFyVD41H_ZI=s900-c-k-c0x00ffffff-no-rj"
+    },
+    "venue-smile-bar-pattaya": {
+      "is_live": false,
+      "video_id": null,
+      "last_live_at": null,
+      "status": "active",
+      "name": "Smile Bar Pattaya",
+      "platform": "youtube",
+      "handle": "@smilebarpattayathailand467"
+    },
+    "venue-true-blue-aussie-bar": {
+      "is_live": false,
+      "video_id": null,
+      "last_live_at": null,
+      "status": "active",
+      "name": "True Blue Aussie Bar & Boomerang Bar",
+      "platform": "youtube",
+      "handle": "@Trueblueaussiebar"
+    },
+    "livecam-soi-buakhao-live-cam": {
+      "is_live": true,
+      "video_id": "hAdvVQDiTS4",
+      "last_live_at": "2026-09-11T22:36:34.083Z",
+      "status": "active",
+      "name": "Soi Buakhao Live Cam",
+      "platform": "youtube",
+      "handle": "@ismannen"
+    },
+    "creator-mac-tv": {
+      "is_live": false,
+      "video_id": "jP8fzeeJlV4",
+      "last_live_at": null,
+      "status": "active",
+      "name": "Mac TV",
+      "platform": "youtube",
+      "handle": "@mactvtravel",
+      "kick_channel": "imactv",
+      "avatar_url": "https://yt3.googleusercontent.com/oSFiARQTu2FbqFOLPVtIROpM-sPXcE_g-T8hrfJXj0QO-ATDEtOcUIsFaq0B-_fPeAMBR1A-FxQ=s900-c-k-c0x00ffffff-no-rj"
+    },
+    "creator-trae-badd-tv": {
+      "is_live": true,
+      "video_id": "Oz5d_ph2MU0",
+      "last_live_at": "2026-09-11T22:36:34.083Z",
+      "status": "active",
+      "name": "Trae Badd TV",
+      "platform": "youtube",
+      "handle": "@TraeBaddTV",
+      "kick_channel": null,
+      "avatar_url": "https://yt3.googleusercontent.com/YnO5xc6T7pk1Q_nnG5ruJbMOBqHi_YBRWLsAxO_4de-xBE_Dr1qoDnJ407dfBd2m_0CBLYL5yg=s900-c-k-c0x00ffffff-no-rj"
+    },
+    "creator-welsh-boy-webby": {
+      "is_live": false,
+      "video_id": "tdqCsGx_-ss",
+      "last_live_at": null,
+      "status": "active",
+      "name": "Welsh Boy Webby",
+      "platform": "youtube",
+      "handle": "@welshboywebby",
+      "kick_channel": null,
+      "avatar_url": "https://yt3.googleusercontent.com/1wL2fKxZy6Mxi5KZgy_5FU09HIwBXyr-AMsXIlo5C5buRKPJoGor75e_KNbzqD4oyP4n6Qqr=s900-c-k-c0x00ffffff-no-rj"
+    },
+    "creator-travel-glitch": {
+      "is_live": false,
+      "video_id": "Z-xaMfyoNNU",
+      "last_live_at": null,
+      "status": "active",
+      "name": "Travel Glitch",
+      "platform": "youtube",
+      "handle": "@TravelGlitch",
+      "kick_channel": null,
+      "avatar_url": "https://yt3.googleusercontent.com/WyZQSOhd2hSV4WHhxEVosiqiPpzVbwo25D67oCIQKr3_Ga2fd9E_8TDyJ7Yv8TuG_DcZKaHJwg=s900-c-k-c0x00ffffff-no-rj"
+    },
+    "creator-settled-in-siam": {
+      "is_live": false,
+      "video_id": "Zci40qwkhD0",
+      "last_live_at": null,
+      "status": "active",
+      "name": "Settled in SIAM",
+      "platform": "youtube",
+      "handle": "@settledinSIAM",
+      "kick_channel": null,
+      "avatar_url": "https://yt3.googleusercontent.com/hUjrQt2-RhdItsiQsjbsSAKEJIv1tpwpxtB3D-k1GmjsXVdFG20FWwBTLDW6gLQufYZCDiQjmnc=s900-c-k-c0x00ffffff-no-rj"
+    },
+    "creator-the-tysin-show": {
+      "is_live": false,
+      "video_id": "1MpkyX-RUXI",
+      "last_live_at": null,
+      "status": "active",
+      "name": "The Tysin Show",
+      "platform": "youtube",
+      "handle": "@TheTysinShow",
+      "kick_channel": null,
+      "avatar_url": "https://yt3.googleusercontent.com/3tMHDr_3VQy3AXy0yW7XsFwHJWBAJj66W8dqKHYTQ3JB9vEX8LbKVhHWjEodtG8TbCcIy9aV0w=s900-c-k-c0x00ffffff-no-rj"
+    },
+    "creator-beach-road-channel": {
+      "is_live": false,
+      "video_id": "CFgUIer19us",
+      "last_live_at": null,
+      "status": "active",
+      "name": "BEACH ROAD",
+      "platform": "youtube",
+      "handle": "@BEACHROADchannel",
+      "kick_channel": null,
+      "avatar_url": "https://yt3.googleusercontent.com/CWW0rQ6f5ZKIE2_T9vOK3Km3eiBJEAdih3hwx_POm5n_uuG8EDZcL7IK7BLoEnWL0F5f7pnm=s900-c-k-c0x00ffffff-no-rj"
+    },
+    "creator-pattaya-joker-tv": {
+      "is_live": false,
+      "video_id": "cvF0fpyMxcU",
+      "last_live_at": null,
+      "status": "active",
+      "name": "Pattaya Joker TV",
+      "platform": "youtube",
+      "handle": "@PattayaJokerTV",
+      "kick_channel": null,
+      "avatar_url": "https://yt3.googleusercontent.com/g1UFe8UV9XnO9syJa2Ayq2Knbg88D0ukIHS4wjd9o0AGwuHNZcPyWLSWAf1oqqkSS7HA6Vcw=s900-c-k-c0x00ffffff-no-rj"
+    },
+    "creator-dv-media-pattaya": {
+      "is_live": false,
+      "video_id": "z8Ma5z1njSU",
+      "last_live_at": null,
+      "status": "active",
+      "name": "DV Media Pattaya",
+      "platform": "youtube",
+      "handle": "@dvmedia6309",
+      "kick_channel": null,
+      "avatar_url": "https://yt3.googleusercontent.com/ugj2a216u5s5JhG4iireKvsOCK9lky14pZHt1tGGRm4I9na4HTsC7_8QRPb6xinI7mb8u4ZD=s900-c-k-c0x00ffffff-no-rj"
     }
   }
 }

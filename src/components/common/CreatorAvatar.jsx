@@ -69,6 +69,7 @@ export default function CreatorAvatar({
     <img
       src={src}
       alt={alt || name}
+      referrerPolicy="no-referrer"
       onError={() => setHasError(true)}
       className={`${className} shrink-0 object-cover border-2 border-borderDark shadow-md bg-slate-900`}
       loading="lazy"

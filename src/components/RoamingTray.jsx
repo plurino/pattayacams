@@ -1,184 +1,159 @@
 'use client';
 
-import React, { useState, useMemo, useCallback } from 'react';
-import { Youtube, Star, Play, Radio, ChevronRight } from 'lucide-react';
+import React, { useMemo, useCallback } from 'react';
+import Link from 'next/link';
+import { Youtube, Star, Play, Radio, Users } from 'lucide-react';
 import streamersData from '@/public/data/roaming_streamers.json';
+import creatorsData from '@/public/data/creators.json';
 import { useStreamStatus } from '@/src/hooks/useStreamStatus';
 import { FEATURES } from '@/src/config/features';
 
 export default function RoamingTray({ onSelectStreamer, onOpenSponsorModal }) {
   const streamStatus = useStreamStatus();
-  const [filterMode, setFilterMode] = useState('all'); // 'all' | 'live' | 'walks'
 
-  const getStreamerStatus = useCallback((streamer) => {
+  // Combine both roaming streamers and full creators pool
+  const allPool = useMemo(() => {
+    const map = new Map();
+    // Add creators first
+    creatorsData.forEach((c) => {
+      map.set(c.slug, {
+        id: c.slug,
+        slug: c.slug,
+        name: c.name,
+        handle: c.handle,
+        avatar_url: c.avatar_url,
+        platform: c.platform,
+        channel_id: c.channel_id,
+        kick_channel: c.kick_channel,
+        type: 'creator',
+      });
+    });
+    // Add roaming streamers if not already present
+    streamersData.forEach((s) => {
+      const key = s.id.toLowerCase();
+      if (!map.has(key)) {
+        map.set(key, {
+          id: s.id,
+          slug: s.id.toLowerCase(),
+          name: s.name,
+          handle: s.youtube_handle,
+          avatar_url: s.avatar_url,
+          platform: 'youtube',
+          channel_id: s.youtube_channel_id,
+          type: 'streamer',
+        });
+      }
+    });
+    return Array.from(map.values());
+  }, []);
+
+  const getEntityStatus = useCallback((item) => {
     return (
-      streamStatus?.entities?.[`streamer-${streamer.id}`] ||
-      streamStatus?.entities?.[`streamer-${streamer.id.toLowerCase()}`]
+      streamStatus?.entities?.[`creator-${item.slug}`] ||
+      streamStatus?.entities?.[`streamer-${item.id}`] ||
+      streamStatus?.entities?.[`streamer-${item.id.toLowerCase()}`]
     );
   }, [streamStatus]);
 
-  const liveStreamers = useMemo(() => {
-    return streamersData.filter((streamer) => {
-      const status = getStreamerStatus(streamer);
+  // Filter ONLY active live creators
+  const liveCreators = useMemo(() => {
+    return allPool.filter((item) => {
+      const status = getEntityStatus(item);
       return status?.is_live === true;
+    }).map((item) => {
+      const status = getEntityStatus(item);
+      return {
+        ...item,
+        is_live: true,
+        video_id: status?.video_id || null,
+        active_platform: status?.platform || item.platform,
+      };
     });
-  }, [getStreamerStatus]);
+  }, [allPool, getEntityStatus]);
 
-  const displayedStreamers = useMemo(() => {
-    if (filterMode === 'live') {
-      return liveStreamers;
-    }
-    if (filterMode === 'walks') {
-      return streamersData.filter(
-        (s) =>
-          s.name.toLowerCase().includes('walk') ||
-          s.current_route.toLowerCase().includes('walk') ||
-          s.youtube_handle.toLowerCase().includes('walk')
-      );
-    }
-    return streamersData;
-  }, [filterMode, liveStreamers]);
-
-  const hasLiveStreamers = liveStreamers.length > 0;
+  const hasLive = liveCreators.length > 0;
 
   return (
     <aside
-      aria-label="Pattaya Live Streamers and Venue Sponsorship"
+      aria-label="Live in Pattaya"
       className="h-16 border-t border-borderDark bg-surface flex items-center justify-between px-3 md:px-5 shrink-0 z-40 select-none shadow-lg"
     >
-      {/* Streamers Section */}
       <div className="flex items-center gap-3 overflow-x-auto py-1 scrollbar-none flex-1 mr-3">
         {/* Dock Header */}
-        <div className="flex items-center gap-2 shrink-0 pr-2 border-r border-borderDark">
-          <Youtube className="w-4 h-4 text-red-500 shrink-0" />
-          <span className="text-[11px] font-bold font-mono text-slate-200 uppercase tracking-wider hidden lg:inline flex items-center gap-1.5">
-            {hasLiveStreamers ? (
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
-              </span>
-            ) : null}
-            Pattaya Streamers:
-          </span>
+        <div className="flex items-center gap-2 shrink-0 pr-3 border-r border-borderDark">
+          {hasLive ? (
+            <span className="relative flex h-2.5 w-2.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span>
+            </span>
+          ) : (
+            <Radio className="w-3.5 h-3.5 text-slate-400" />
+          )}
 
-          {/* Quick Filter Pills */}
-          <div className="flex items-center bg-canvas/80 p-0.5 rounded-lg border border-borderDark/80 text-[10px] font-mono shrink-0">
-            <button
-              onClick={() => setFilterMode('all')}
-              className={`px-2 py-0.5 rounded transition-colors ${
-                filterMode === 'all'
-                  ? 'bg-surfaceLight text-white font-bold'
-                  : 'text-slate-400 hover:text-slate-200'
-              }`}
-            >
-              All ({streamersData.length})
-            </button>
-            <button
-              onClick={() => setFilterMode('live')}
-              className={`px-2 py-0.5 rounded transition-colors flex items-center gap-1 ${
-                filterMode === 'live'
-                  ? 'bg-red-950/80 text-red-400 border border-red-500/40 font-bold'
-                  : 'text-slate-400 hover:text-slate-200'
-              }`}
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-red-500"></span>
-              Live ({liveStreamers.length})
-            </button>
-            <button
-              onClick={() => setFilterMode('walks')}
-              className={`px-2 py-0.5 rounded transition-colors ${
-                filterMode === 'walks'
-                  ? 'bg-indigo-950/80 text-indigo-400 border border-indigo-500/40 font-bold'
-                  : 'text-slate-400 hover:text-slate-200'
-              }`}
-            >
-              4K Walks
-            </button>
+          <div className="flex items-center gap-1.5 font-mono text-[11px] font-bold">
+            <span className="text-white uppercase tracking-wider">Live in Pattaya</span>
+            {hasLive ? (
+              <span className="px-1.5 py-0.5 rounded-full bg-red-600 text-white text-[9px] font-extrabold shadow-[0_0_8px_#EF4444]">
+                {liveCreators.length} Live
+              </span>
+            ) : (
+              <span className="px-1.5 py-0.5 rounded-full bg-surfaceLight border border-borderDark text-slate-400 text-[9px]">
+                0 Online
+              </span>
+            )}
           </div>
         </div>
 
-        {/* Empty state for 'live' filter when 0 are live */}
-        {displayedStreamers.length === 0 && filterMode === 'live' ? (
-          <div className="flex items-center gap-2 text-xs font-mono text-slate-400">
-            <span>No streamers live right now.</span>
-            <button
-              onClick={() => setFilterMode('all')}
-              className="text-brandPink hover:underline font-bold"
+        {/* When NO creators are live: Clean elegant standby state */}
+        {!hasLive ? (
+          <div className="flex items-center gap-2 sm:gap-3 text-xs font-mono text-slate-400 overflow-x-auto">
+            <span className="hidden sm:inline">No creators currently broadcasting live.</span>
+            <span className="sm:hidden">No creators live.</span>
+            <span className="text-slate-600">•</span>
+            <Link
+              href="/creators"
+              className="text-brandPink hover:text-pink-300 font-bold transition-colors flex items-center gap-1 shrink-0"
             >
-              Browse all {streamersData.length} creators ➔
-            </button>
+              <Users className="w-3.5 h-3.5" />
+              <span>Explore 60+ Channels in Creators Hub ↗</span>
+            </Link>
           </div>
         ) : (
-          /* Streamer Channel Cards */
-          <div className="flex items-center gap-2">
-            {displayedStreamers.map((streamer) => {
-              const status = getStreamerStatus(streamer);
-              const isLive = status?.is_live === true;
-
+          /* When creators ARE live: Display ONLY active live cards */
+          <div className="flex items-center gap-2.5">
+            {liveCreators.map((creator) => {
               return (
                 <div
-                  key={streamer.id}
-                  className={`flex items-center gap-2 p-1 pl-1.5 pr-2.5 rounded-full border transition-all shrink-0 ${
-                    isLive
-                      ? 'bg-red-950/20 hover:bg-red-950/40 border-red-500/40 hover:border-red-500/80 shadow-[0_0_10px_rgba(239,68,68,0.2)]'
-                      : 'bg-surfaceLight/60 hover:bg-surfaceLight border-borderDark hover:border-slate-500'
-                  }`}
+                  key={creator.id}
+                  className="flex items-center gap-2 p-1 pl-1.5 pr-2 rounded-full border bg-red-950/30 hover:bg-red-950/50 border-red-500/50 hover:border-red-500 shadow-[0_0_12px_rgba(239,68,68,0.25)] transition-all shrink-0"
                 >
                   <div className="relative shrink-0">
                     <img
-                      src={streamer.avatar_url}
-                      alt={streamer.name}
-                      className={`w-7 h-7 rounded-full object-cover border shrink-0 ${
-                        isLive ? 'border-red-500' : 'border-slate-600'
-                      }`}
+                      src={creator.avatar_url}
+                      alt={creator.name}
+                      className="w-7 h-7 rounded-full object-cover border border-red-500 shrink-0"
                       onError={(e) => {
                         e.target.src =
                           'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&fit=crop&q=60';
                       }}
                     />
-                    {isLive && (
-                      <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-red-500 border border-surface animate-pulse" />
-                    )}
+                    <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-red-500 border border-surface animate-pulse" />
                   </div>
-                  <div className="flex flex-col min-w-0">
-                    <div className="flex items-center gap-1.5">
-                      <span className="text-xs font-bold text-white truncate max-w-[120px]">
-                        {streamer.name}
-                      </span>
-                      {isLive ? (
-                        <span className="text-[9px] font-mono font-bold text-red-400 bg-red-950/60 px-1 py-0.2 rounded border border-red-500/30">
-                          LIVE
-                        </span>
-                      ) : (
-                        <span className="text-[9px] font-mono text-slate-400 bg-surface px-1 rounded">
-                          {streamer.youtube_handle}
-                        </span>
-                      )}
-                    </div>
-                    <span className="text-[9px] font-mono text-slate-400 truncate max-w-[140px]">
-                      {streamer.current_route}
+
+                  <div className="flex flex-col pr-1">
+                    <span className="text-xs font-bold font-mono text-white leading-tight max-w-[120px] truncate">
+                      {creator.name}
+                    </span>
+                    <span className="text-[10px] font-mono text-slate-300 leading-tight">
+                      {creator.handle || `@${creator.slug}`}
                     </span>
                   </div>
+
                   <button
-                    onClick={() =>
-                      onSelectStreamer({
-                        slug: streamer.id.toLowerCase(),
-                        name: streamer.name,
-                        youtube_channel_id: streamer.youtube_channel_id,
-                        youtube_handle: streamer.youtube_handle,
-                        description: `Live street stream and 4K walking tours around Pattaya by ${streamer.name} (${streamer.youtube_handle}).`,
-                        type: 'streamer',
-                        is_live: isLive,
-                        video_id: isLive ? status?.video_id : null,
-                      })
-                    }
-                    className={`ml-1 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase transition-colors flex items-center gap-1 shadow-sm cursor-pointer ${
-                      isLive
-                        ? 'bg-red-600 hover:bg-red-500 text-white'
-                        : 'bg-indigo-600 hover:bg-indigo-500 text-white'
-                    }`}
+                    onClick={() => onSelectStreamer(creator)}
+                    className="flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-mono font-bold bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 text-white shadow-[0_0_8px_rgba(239,68,68,0.5)] transition-all cursor-pointer"
                   >
-                    <span>{isLive ? 'Watch Live' : 'Channel'}</span>
+                    <span>Watch Live</span>
                     <Play className="w-2.5 h-2.5 fill-white" />
                   </button>
                 </div>

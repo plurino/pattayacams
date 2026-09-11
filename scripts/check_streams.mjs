@@ -68,8 +68,6 @@ async function checkYouTubeChannel(handle, fallbackVideoId) {
     const isUpcoming = html.includes('"isUpcoming":true') || 
                        html.includes('"status":"UPCOMING"') || 
                        html.includes('"upcomingEventData"') || 
-                       html.includes('Waiting for ') || 
-                       html.includes('waiting for ') ||
                        html.includes('Premieres in ') ||
                        html.includes('Scheduled for ');
 
@@ -245,9 +243,23 @@ async function run() {
 
     let result;
     if (creator.platform === 'kick') {
-      const kickSlug = creator.channel_id || creator.slug || creator.handle;
+      const kickSlug = creator.kick_channel || creator.channel_id || creator.slug || creator.handle;
       result = await checkKickChannel(kickSlug);
       console.log(`[Kick: ${creator.name}] ${result.is_live ? '🟢 LIVE' : '⚪ Offline'} (${result.status})`);
+    } else if (creator.platform === 'both' || creator.kick_channel) {
+      result = await checkYouTubeChannel(creator.handle, null);
+      if (result.is_live) {
+        console.log(`[YouTube (Both): ${creator.name}] 🔴 LIVE (${result.status})`);
+      } else {
+        const kickSlug = creator.kick_channel || creator.channel_id || creator.slug;
+        const kickResult = await checkKickChannel(kickSlug);
+        if (kickResult.is_live) {
+          result = kickResult;
+          console.log(`[Kick (Both): ${creator.name}] 🟢 LIVE on Kick!`);
+        } else {
+          console.log(`[Both: ${creator.name}] ⚪ Offline on both YouTube & Kick`);
+        }
+      }
     } else {
       result = await checkYouTubeChannel(creator.handle, null);
       console.log(`[YouTube: ${creator.name}] ${result.is_live ? '🔴 LIVE' : '⚪ Offline'} (${result.status})`);
@@ -259,8 +271,10 @@ async function run() {
       last_live_at: result.is_live ? nowIso : (prev.last_live_at || null),
       status: result.status,
       name: creator.name,
-      platform: creator.platform,
-      handle: creator.handle
+      platform: result.platform || creator.platform,
+      handle: creator.handle,
+      kick_channel: creator.kick_channel || null,
+      avatar_url: creator.avatar_url || result.avatar_url || null
     };
   }
 

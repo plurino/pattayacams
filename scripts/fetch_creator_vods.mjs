@@ -19,7 +19,7 @@ if (!fs.existsSync(creatorsPath)) {
 }
 
 const creators = JSON.parse(fs.readFileSync(creatorsPath, 'utf8'));
-const youtubeCreators = creators.filter(c => c.platform === 'youtube' && c.channel_id && c.channel_id.startsWith('UC'));
+const youtubeCreators = creators.filter(c => (c.platform === 'youtube' || c.platform === 'both' || c.handle?.startsWith('@')) && c.channel_id && c.channel_id.startsWith('UC'));
 
 console.log(`Found ${youtubeCreators.length} YouTube creators with valid channel IDs.`);
 

@@ -197,5 +197,35 @@
     "google_maps_url": "https://maps.google.com?q=WVVP+33G+Miso+Bar+Pattaya+Soi+6,+Pattaya+Soi+6,+Pattaya+City,+Bang+Lamung+District,+Chon+Buri+20150",
     "description": "Vibrant open-air bar on Soi 6 in North Pattaya broadcasting nightly interactive YouTube live streams and guest chats.",
     "is_sponsored": false
+  },
+  {
+    "slug": "smile-bar-pattaya",
+    "id": "VN-020",
+    "name": "Smile Bar Pattaya",
+    "zone": "buakhao",
+    "category": "bar",
+    "lat": 12.9321461,
+    "lng": 100.8864198,
+    "video_id": null,
+    "youtube_channel_id": "UCbx45biSBonUqzkSF9_aPBg",
+    "youtube_handle": "@smilebarpattayathailand467",
+    "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Smile+Bar+Soi+Made+in+Thailand+Pattaya",
+    "description": "High-energy beer bar in the heart of Soi Made in Thailand connecting Second Road and Soi Buakhao, broadcasting regular live streams, guest interactions, and vibrant evening entertainment.",
+    "is_sponsored": false
+  },
+  {
+    "slug": "true-blue-aussie-bar",
+    "id": "VN-021",
+    "name": "True Blue Aussie Bar & Boomerang Bar",
+    "zone": "buakhao",
+    "category": "bar",
+    "lat": 12.9279432,
+    "lng": 100.8836641,
+    "video_id": null,
+    "youtube_channel_id": "UC6lUliNly5P9-WhqksPj5Ag",
+    "youtube_handle": "@Trueblueaussiebar",
+    "google_maps_url": "https://www.google.com/maps/search/?api=1&query=True+Blue+Aussie+Bar+Pattaya",
+    "description": "Iconic Australian sports and entertainment bar broadcasting two daily live stream sessions covering both True Blue Aussie Bar and Boomerang Bar in Central Pattaya.",
+    "is_sponsored": false
   }
 ]

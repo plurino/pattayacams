@@ -558,5 +558,150 @@
       "City Layout"
     ],
     "bio_seo": "Thailand Street View produces comprehensive 4K walking guides of public promenades, retail avenues, and beach boardwalks in Pattaya and Jomtien. Without commentary, the videos offer a clear, unhurried visual layout of major roads and pedestrian zones. The footage helps travelers understand distances between key landmarks, the placement of pedestrian crossings, and the accessibility of Songthaew bus stops along Beach and Second Roads. It serves as an invaluable orientation tool for vacationers wishing to familiarize themselves with Pattaya's geography before arriving on holiday. Pattaya Beach Road runs parallel to the scenic curve of Pattaya Bay, featuring an expansive sandy shoreline and a tree-shaded pedestrian promenade popular among morning joggers, evening strollers, and sunset photographers. The coastal avenue is anchored by premier shopping centers including Central Festival Pattaya Beach and Terminal 21, as well as luxury beachfront resorts, rooftop cocktail lounges, and diverse international seaside cafes. Visitors can enjoy water sport activities including parasailing, jet skiing, and windsurfing along the designated coastal swimming zones, all while benefiting from cool marine breezes blowing off the eastern seaboard."
+  },
+  {
+    "name": "Mac TV",
+    "slug": "mac-tv",
+    "platform": "both",
+    "channel_id": "UCTNBUdtzTMbpKnXujGHOA4w",
+    "handle": "@mactvtravel",
+    "kick_channel": "imactv",
+    "avatar_url": "https://yt3.googleusercontent.com/oSFiARQTu2FbqFOLPVtIROpM-sPXcE_g-T8hrfJXj0QO-ATDEtOcUIsFaq0B-_fPeAMBR1A-FxQ=s900-c-k-c0x00ffffff-no-rj",
+    "primary_zone": "buakhao",
+    "content_tags": [
+      "IRL Streaming",
+      "Nightlife",
+      "Travel Vlogs",
+      "Soi Buakhao"
+    ],
+    "bio_seo": "Mac TV, hosted by Mac, is one of Pattaya's most engaging travel vloggers and IRL live streamers, broadcasting energetic community adventures, bar reviews, and daytime street scenes across both YouTube and Kick. Known for his candid interactions and neighborhood explorations across Soi Buakhao, Tree Town, and Walking Street, Mac TV offers an unfiltered look at eastern Thailand travel and nightlife."
+  },
+  {
+    "name": "Trae Badd TV",
+    "slug": "trae-badd-tv",
+    "platform": "youtube",
+    "channel_id": "UCAozjhbaRaxfcvDF_rDAeeg",
+    "handle": "@TraeBaddTV",
+    "avatar_url": "https://yt3.googleusercontent.com/YnO5xc6T7pk1Q_nnG5ruJbMOBqHi_YBRWLsAxO_4de-xBE_Dr1qoDnJ407dfBd2m_0CBLYL5yg=s900-c-k-c0x00ffffff-no-rj",
+    "primary_zone": "walking_street",
+    "content_tags": [
+      "Live Streams",
+      "Walking Street",
+      "Nightlife",
+      "Street Banter"
+    ],
+    "bio_seo": "Trae Badd TV brings charismatic, late-night street commentary and regular live streams across Pattaya's hottest nightlife corridors, including Walking Street, Soi 6, and LK Metro. Featuring authentic viewer interaction and lively street banter, Trae captures the genuine energy of the city after dark."
+  },
+  {
+    "name": "Welsh Boy Webby",
+    "slug": "welsh-boy-webby",
+    "platform": "youtube",
+    "channel_id": "UC2XF3DU6E3Kx8LMem-SZhwg",
+    "handle": "@welshboywebby",
+    "avatar_url": "https://yt3.googleusercontent.com/1wL2fKxZy6Mxi5KZgy_5FU09HIwBXyr-AMsXIlo5C5buRKPJoGor75e_KNbzqD4oyP4n6Qqr=s900-c-k-c0x00ffffff-no-rj",
+    "primary_zone": "buakhao",
+    "content_tags": [
+      "Live Streaming",
+      "Soi Buakhao",
+      "Nightlife",
+      "Expat Life"
+    ],
+    "bio_seo": "Welsh Boy Webby documents authentic nightlife, social adventures, and daily expat explorations throughout Pattaya. With regular live streams and video dispatches focusing on Soi Buakhao, LK Metro, and local expat hubs, Webby delivers a fun, unpretentious view of eastern seaboard living."
+  },
+  {
+    "name": "Travel Glitch",
+    "slug": "travel-glitch",
+    "platform": "youtube",
+    "channel_id": "UCzjFekRRCJlAeJUZehV8D-g",
+    "handle": "@TravelGlitch",
+    "avatar_url": "https://yt3.googleusercontent.com/WyZQSOhd2hSV4WHhxEVosiqiPpzVbwo25D67oCIQKr3_Ga2fd9E_8TDyJ7Yv8TuG_DcZKaHJwg=s900-c-k-c0x00ffffff-no-rj",
+    "primary_zone": "beach_road",
+    "content_tags": [
+      "Travel Vlogs",
+      "Walking Tours",
+      "Nightlife",
+      "City Guides"
+    ],
+    "bio_seo": "Travel Glitch produces immersive travel documentaries, street explorations, and candid nightlife walkthroughs capturing the evolving pulse of Pattaya. Highlighting changing streetscapes, hotel developments, and entertainment precincts, the channel is a premier guide for prospective tourists."
+  },
+  {
+    "name": "Settled in SIAM",
+    "slug": "settled-in-siam",
+    "platform": "youtube",
+    "channel_id": "UCVCwK31yurD7W9RSfxfFTPw",
+    "handle": "@settledinSIAM",
+    "avatar_url": "https://yt3.googleusercontent.com/hUjrQt2-RhdItsiQsjbsSAKEJIv1tpwpxtB3D-k1GmjsXVdFG20FWwBTLDW6gLQufYZCDiQjmnc=s900-c-k-c0x00ffffff-no-rj",
+    "primary_zone": "expat_guide",
+    "content_tags": [
+      "Expat Living",
+      "Retirement",
+      "Cost of Living",
+      "Pattaya Advice"
+    ],
+    "bio_seo": "Settled in SIAM focuses on realistic, practical insights into living, renting, and retiring comfortably in Pattaya and Thailand. From monthly living budget breakdowns to healthcare and visa advice, the channel offers invaluable guidance for digital nomads and retirees."
+  },
+  {
+    "name": "The Tysin Show",
+    "slug": "the-tysin-show",
+    "platform": "youtube",
+    "channel_id": "UCJrR5_4WqpWtF7AnocX__0w",
+    "handle": "@TheTysinShow",
+    "avatar_url": "https://yt3.googleusercontent.com/3tMHDr_3VQy3AXy0yW7XsFwHJWBAJj66W8dqKHYTQ3JB9vEX8LbKVhHWjEodtG8TbCcIy9aV0w=s900-c-k-c0x00ffffff-no-rj",
+    "primary_zone": "buakhao",
+    "content_tags": [
+      "Nightlife",
+      "Interviews",
+      "IRL Vlogs",
+      "Pattaya Bars"
+    ],
+    "bio_seo": "The Tysin Show features high-energy on-the-street interviews, nightlife explorations, and candid travel perspectives across Pattaya's bustling entertainment districts."
+  },
+  {
+    "name": "BEACH ROAD",
+    "slug": "beach-road-channel",
+    "platform": "youtube",
+    "channel_id": "UCdPb8GtUuttEcywbZxTYzNQ",
+    "handle": "@BEACHROADchannel",
+    "avatar_url": "https://yt3.googleusercontent.com/CWW0rQ6f5ZKIE2_T9vOK3Km3eiBJEAdih3hwx_POm5n_uuG8EDZcL7IK7BLoEnWL0F5f7pnm=s900-c-k-c0x00ffffff-no-rj",
+    "primary_zone": "beach_road",
+    "content_tags": [
+      "4K Walks",
+      "Beach Road",
+      "Promenade",
+      "Scenic Pattaya"
+    ],
+    "bio_seo": "BEACH ROAD produces ultra-crisp 4K video walkthroughs and ambient footage highlighting Pattaya's famous coastal promenade, beach scenery, sunset horizons, and seaside avenues."
+  },
+  {
+    "name": "Pattaya Joker TV",
+    "slug": "pattaya-joker-tv",
+    "platform": "youtube",
+    "channel_id": "UCTBmXM12GlpMw3x9W372OHQ",
+    "handle": "@PattayaJokerTV",
+    "avatar_url": "https://yt3.googleusercontent.com/g1UFe8UV9XnO9syJa2Ayq2Knbg88D0ukIHS4wjd9o0AGwuHNZcPyWLSWAf1oqqkSS7HA6Vcw=s900-c-k-c0x00ffffff-no-rj",
+    "primary_zone": "buakhao",
+    "content_tags": [
+      "Pattaya Vlogs",
+      "Nightlife",
+      "Local Humor",
+      "Street Scenes"
+    ],
+    "bio_seo": "Pattaya Joker TV captures humorous, raw, and unvarnished video episodes documenting the quirky, vibrant character of Pattaya nightlife and expat camaraderie."
+  },
+  {
+    "name": "DV Media Pattaya",
+    "slug": "dv-media-pattaya",
+    "platform": "youtube",
+    "channel_id": "UCoQzfPEVccGU-hrKxEA-hEA",
+    "handle": "@dvmedia6309",
+    "avatar_url": "https://yt3.googleusercontent.com/ugj2a216u5s5JhG4iireKvsOCK9lky14pZHt1tGGRm4I9na4HTsC7_8QRPb6xinI7mb8u4ZD=s900-c-k-c0x00ffffff-no-rj",
+    "primary_zone": "jomtien",
+    "content_tags": [
+      "Documentaries",
+      "Pattaya Events",
+      "Local News",
+      "City Developments"
+    ],
+    "bio_seo": "DV Media Pattaya provides crisp, documentary-style video coverage of Pattaya festivals, bar developments, community events, and scenic coastal locations across the city."
   }
 ]
