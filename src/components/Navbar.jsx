@@ -194,7 +194,7 @@ export default function Navbar({
               onClick={() => setViewMode('map')}
               className={`flex items-center gap-1 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-lg text-xs font-semibold transition-all ${
                 viewMode === 'map'
-                  ? 'bg-gradient-to-r from-brandPink to-rose-600 text-white shadow-[0_0_12px_rgba(255,42,109,0.4)]'
+                  ? 'bg-gradient-to-r from-brandPink via-purple-600 to-rose-600 text-white shadow-[0_0_14px_rgba(255,42,109,0.5)] border border-white/20'
                   : 'text-slate-300 hover:text-white hover:bg-surfaceLight/50'
               }`}
               title="Interactive Live Map & Surveillance Radar"
@@ -207,7 +207,7 @@ export default function Navbar({
               href="/?view=map"
               className={`flex items-center gap-1 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-lg text-xs font-semibold transition-all ${
                 viewMode === 'map'
-                  ? 'bg-gradient-to-r from-brandPink to-rose-600 text-white shadow-[0_0_12px_rgba(255,42,109,0.4)]'
+                  ? 'bg-gradient-to-r from-brandPink via-purple-600 to-rose-600 text-white shadow-[0_0_14px_rgba(255,42,109,0.5)] border border-white/20'
                   : 'text-slate-300 hover:text-white hover:bg-surfaceLight/50'
               }`}
               title="Interactive Live Map & Surveillance Radar"
@@ -222,7 +222,7 @@ export default function Navbar({
               onClick={() => setViewMode('grid')}
               className={`flex items-center gap-1 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-lg text-xs font-semibold transition-all ${
                 viewMode === 'grid'
-                  ? 'bg-gradient-to-r from-brandPink to-rose-600 text-white shadow-[0_0_12px_rgba(255,42,109,0.4)]'
+                  ? 'bg-gradient-to-r from-brandPink via-purple-600 to-rose-600 text-white shadow-[0_0_14px_rgba(255,42,109,0.5)] border border-white/20'
                   : 'text-slate-300 hover:text-white hover:bg-surfaceLight/50'
               }`}
               title="Multi-Cam Command Grid (4-up Quad View)"
@@ -235,7 +235,7 @@ export default function Navbar({
               href="/?view=grid"
               className={`flex items-center gap-1 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-lg text-xs font-semibold transition-all ${
                 viewMode === 'grid'
-                  ? 'bg-gradient-to-r from-brandPink to-rose-600 text-white shadow-[0_0_12px_rgba(255,42,109,0.4)]'
+                  ? 'bg-gradient-to-r from-brandPink via-purple-600 to-rose-600 text-white shadow-[0_0_14px_rgba(255,42,109,0.5)] border border-white/20'
                   : 'text-slate-300 hover:text-white hover:bg-surfaceLight/50'
               }`}
               title="Multi-Cam Command Grid (4-up Quad View)"

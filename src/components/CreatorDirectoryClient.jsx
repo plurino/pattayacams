@@ -22,7 +22,7 @@ import {
 import Navbar from '@/src/components/Navbar';
 import CreatorAvatar from '@/src/components/common/CreatorAvatar';
 
-const ITEMS_PER_PAGE = 18;
+const ITEMS_PER_PAGE = 24;
 
 export default function CreatorDirectoryClient({ creators = [], venues = [], streamStatus = {} }) {
   const [searchQuery, setSearchQuery] = useState('');

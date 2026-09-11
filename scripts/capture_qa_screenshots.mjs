@@ -17,7 +17,7 @@ async function main() {
 
   // 1. Radar Map View: Resting Banner & Star Pin
   console.log('1. Testing Desktop Radar Map & Resting Banner...');
-  await page.goto('http://localhost:3000', { waitUntil: 'networkidle' });
+  await page.goto('http://localhost:3000', { waitUntil: 'load' });
   await page.waitForTimeout(2500);
 
   // Jump to Soi Buakhao to center on Oh Bar
@@ -41,7 +41,7 @@ async function main() {
 
   // 2. PattayaVids View: Multi-Select Filter & Pagination
   console.log('2. Testing PattayaVids Multi-Select Dropdown & Pagination...');
-  await page.goto('http://localhost:3000/?view=vids', { waitUntil: 'networkidle' });
+  await page.goto('http://localhost:3000/?view=vids', { waitUntil: 'load' });
   await page.waitForTimeout(1500);
 
   // Open multi-select creator dropdown
@@ -56,7 +56,7 @@ async function main() {
 
   // 3. Creators Hub: Unified Navbar, Sorting, Styled Initial Avatars, Pagination
   console.log('3. Testing Creators Hub Directory (Unified Navbar, Avatars & Pagination)...');
-  await page.goto('http://localhost:3000/creators', { waitUntil: 'networkidle' });
+  await page.goto('http://localhost:3000/creators', { waitUntil: 'load' });
   await page.waitForTimeout(1500);
 
   await page.screenshot({ path: path.join(outDir, 'creators_hub_unified_page1.png') });
@@ -73,7 +73,7 @@ async function main() {
 
   // 4. Creator Profile Page: Buzzin Pattaya
   console.log('4. Testing Creator Profile Page (buzzin-pattaya)...');
-  await page.goto('http://localhost:3000/creators/buzzin-pattaya', { waitUntil: 'networkidle' });
+  await page.goto('http://localhost:3000/creators/buzzin-pattaya', { waitUntil: 'load' });
   await page.waitForTimeout(1500);
 
   await page.screenshot({ path: path.join(outDir, 'creator_profile_buzzin.png') });
@@ -81,7 +81,7 @@ async function main() {
 
   // 5. Creator Profile Page: RikAsian (Kick Streamer)
   console.log('5. Testing Creator Profile Page (rikasian - Kick)...');
-  await page.goto('http://localhost:3000/creators/rikasian', { waitUntil: 'networkidle' });
+  await page.goto('http://localhost:3000/creators/rikasian', { waitUntil: 'load' });
   await page.waitForTimeout(1500);
 
   await page.screenshot({ path: path.join(outDir, 'creator_profile_rikasian_kick.png') });

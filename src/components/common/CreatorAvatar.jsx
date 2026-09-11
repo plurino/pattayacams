@@ -3,16 +3,9 @@
 import React, { useState } from 'react';
 
 function getInitials(name = '') {
-  if (!name) return 'PC';
+  if (!name) return 'P';
   const clean = name.replace(/[^\w\s]/gi, '').trim();
-  const parts = clean.split(/\s+/).filter(Boolean);
-  if (parts.length >= 2) {
-    return (parts[0][0] + parts[1][0]).toUpperCase();
-  }
-  if (clean.length >= 2) {
-    return clean.slice(0, 2).toUpperCase();
-  }
-  return clean.toUpperCase() || 'PC';
+  return (clean[0] || 'P').toUpperCase();
 }
 
 export default function CreatorAvatar({

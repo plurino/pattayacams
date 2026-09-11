@@ -53,11 +53,11 @@ export default function RoamingTray({ onSelectStreamer, onOpenSponsorModal }) {
             <button
               onClick={() => setShowAllChannels(true)}
               className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-surfaceLight/60 hover:bg-surfaceLight border border-borderDark hover:border-slate-500 text-xs font-mono text-slate-400 hover:text-slate-200 transition-all cursor-pointer"
-              title="Click to browse recorded 4K walking channels"
+              title="Click to browse Pattaya live streamers"
             >
               <span className="w-2 h-2 rounded-full bg-slate-500"></span>
               <span className="font-semibold text-slate-300">0 Streamers Live</span>
-              <span className="text-[10px] text-slate-400 hidden sm:inline">• Browse 4K Walkers</span>
+              <span className="text-[10px] text-slate-400 hidden sm:inline">• Browse Live Streamers</span>
               <ChevronRight className="w-3 h-3 text-slate-400" />
             </button>
           </div>

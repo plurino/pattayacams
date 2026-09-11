@@ -255,8 +255,8 @@ export default function MapCanvas({ onSelectEntity, onMapInstance }) {
           `;
         } else if (isSponsor) {
           htmlIcon = `
-            <div style="position: relative; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 45;">
-              <div style="width: 32px; height: 32px; border-radius: 50%; background: #161F30; border: 2px solid #EAB308; box-shadow: 0 0 14px rgba(234, 179, 8, 0.6); display: flex; align-items: center; justify-content: center; color: #FACC15; font-size: 14px;">
+            <div style="position: relative; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 45;">
+              <div style="width: 28px; height: 28px; border-radius: 50%; background: #161F30; border: 1.5px solid #475569; display: flex; align-items: center; justify-content: center; color: #94A3B8; font-size: 12px; filter: grayscale(50%);">
                 ${iconEmoji}
               </div>
               <span style="position: absolute; top: -3px; right: -3px; width: 15px; height: 15px; border-radius: 50%; background: #EAB308; color: #0B0F17; font-size: 10px; font-weight: 900; display: flex; align-items: center; justify-content: center; box-shadow: 0 1px 4px rgba(0,0,0,0.6); border: 1.5px solid #0B0F17; z-index: 50;">★</span>

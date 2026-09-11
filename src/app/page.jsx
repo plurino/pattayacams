@@ -179,7 +179,7 @@ export default function AppRoot() {
               <div className="flex items-center gap-2.5 text-slate-200">
                 <span className="text-base animate-pulse">🌙</span>
                 <span className="leading-snug">
-                  <strong className="text-white font-semibold">Pattaya is resting.</strong> No streams are live right now. Watch latest 4K walks & night highlights on{' '}
+                  <strong className="text-white font-semibold">Pattaya is resting.</strong> No streams are live right now. Watch latest videos & nightlife highlights on{' '}
                   <button
                     onClick={() => setViewMode('vids')}
                     className="text-brandPink font-bold hover:underline inline-flex items-center gap-0.5 ml-0.5"

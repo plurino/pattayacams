@@ -21,7 +21,7 @@ import {
 } from 'lucide-react';
 import vodData from '@/public/data/creator_videos.json';
 
-const VIDEOS_PER_PAGE = 18;
+const VIDEOS_PER_PAGE = 24;
 
 function formatRelativeTime(isoString) {
   if (!isoString) return 'Recently';
