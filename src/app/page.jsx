@@ -112,13 +112,41 @@ export default function AppRoot() {
     }, needsViewSwitch ? 150 : 0);
   }, [viewMode, selectedEntity]);
 
+  // Force Leaflet to recalculate container geometry and render tiles whenever returning to map mode
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (viewMode === 'map') {
+      const map = mapInstanceRef.current;
+      if (map) {
+        const refreshMap = () => {
+          try {
+            if (typeof map.invalidateSize === 'function') {
+              map.invalidateSize();
+            }
+          } catch (e) {
+            console.warn('Map refresh warning', e);
+          }
+        };
+        refreshMap();
+        const t1 = setTimeout(refreshMap, 60);
+        const t2 = setTimeout(refreshMap, 200);
+        const t3 = setTimeout(refreshMap, 450);
+        return () => {
+          clearTimeout(t1);
+          clearTimeout(t2);
+          clearTimeout(t3);
+        };
+      }
+    }
+  }, [viewMode]);
+
+  useEffect(() => {
+    function handleLocationSync() {
+      if (typeof window === 'undefined') return;
       const params = new URLSearchParams(window.location.search);
       const v = params.get('view');
       if (v === 'vids' || v === 'pulse') setViewMode('vids');
       else if (v === 'grid') setViewMode('grid');
-      else if (v === 'map') setViewMode('map');
+      else if (v === 'map' || !v) setViewMode('map');
 
       const jumpParam = params.get('jump');
       if (jumpParam) {
@@ -139,6 +167,10 @@ export default function AppRoot() {
         }, 800);
       }
     }
+
+    handleLocationSync();
+    window.addEventListener('popstate', handleLocationSync);
+    return () => window.removeEventListener('popstate', handleLocationSync);
   }, [handleQuickJump, handleLiveShuffle]);
 
   return (

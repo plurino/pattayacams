@@ -1,11 +1,13 @@
 import React from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { Video, MapPin, ArrowLeft, Car, Hotel, ExternalLink, Star, Compass, MessageCircle, Send } from 'lucide-react';
+import { Video, MapPin, ArrowLeft, Car, Hotel, ExternalLink, Star, Compass, MessageCircle, Send, Radio, Bell } from 'lucide-react';
 import YouTubePlayer from '@/src/components/common/YouTubePlayer';
 import EmojiReactionGroup from '@/src/components/common/EmojiReactionGroup';
+import Navbar from '@/src/components/Navbar';
 import venuesData from '@/public/data/venues.json';
 import hotelsData from '@/public/data/hotels.json';
+import streamStatus from '@/public/data/stream_status.json';
 import {
   getUpcomingWeekendDates,
   buildAgodaHotelUrl,
@@ -13,6 +15,21 @@ import {
   getTelegramCommunityUrl,
 } from '@/src/utils/affiliate';
 import { FEATURES } from '@/src/config/features';
+
+function formatRelativeTime(timestamp) {
+  if (!timestamp) return 'recently';
+  try {
+    const diffMs = Date.now() - new Date(timestamp).getTime();
+    const diffMinutes = Math.floor(diffMs / (1000 * 60));
+    const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+    if (diffMinutes < 60) return `${Math.max(1, diffMinutes)} minute${diffMinutes === 1 ? '' : 's'} ago`;
+    if (diffHours < 24) return `${diffHours} hour${diffHours === 1 ? '' : 's'} ago`;
+    const diffDays = Math.floor(diffHours / 24);
+    return `${diffDays} day${diffDays === 1 ? '' : 's'} ago`;
+  } catch {
+    return 'recently';
+  }
+}
 
 export async function generateStaticParams() {
   return venuesData.map((venue) => ({
@@ -48,40 +65,54 @@ export default function VenuePage({ params }) {
     notFound();
   }
 
+  const statusInfo = streamStatus?.entities?.[`venue-${venue.slug}`];
+  const isLive = statusInfo ? statusInfo.is_live === true : false;
+  const videoId = statusInfo?.video_id || venue.video_id;
+  const lastLiveAt = statusInfo?.last_live_at || null;
+
+  const channelUrl = venue.youtube_handle
+    ? `https://www.youtube.com/${venue.youtube_handle.startsWith('@') ? venue.youtube_handle : '@' + venue.youtube_handle}`
+    : `https://www.youtube.com/channel/${venue.youtube_channel_id}`;
+
   const zoneHotels = (hotelsData[venue.zone] || hotelsData.default || []).slice(0, 2);
   const weekendDates = getUpcomingWeekendDates();
   const categoryLabel = venue.category ? venue.category.toUpperCase().replace('_', ' ') : 'VENUE';
 
   return (
     <div className="min-h-screen w-full bg-canvas text-slate-100 flex flex-col">
-      {/* Top Brand Header */}
-      <header className="h-14 border-b border-borderDark bg-surface flex items-center justify-between px-4 sm:px-6 sticky top-0 z-40">
-        <Link href="/" className="flex items-center gap-2 group shrink-0" title="PattayaCams">
-          <img
-            src="/images/logo-dark.png"
-            alt="PattayaCams Logo"
-            className="h-8 sm:h-9 w-auto object-contain transition-all duration-300 group-hover:scale-105 group-hover:brightness-110 group-hover:drop-shadow-[0_0_12px_rgba(255,42,109,0.7)]"
-          />
-        </Link>
-
-        <Link
-          href="/"
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surfaceLight hover:bg-borderDark text-xs font-medium text-slate-300 transition-colors border border-borderDark"
-        >
-          <ArrowLeft className="w-3.5 h-3.5" />
-          <span>Back to Radar Map</span>
-        </Link>
-      </header>
+      {/* Universal Site-Wide Navbar */}
+      <Navbar viewMode="creators" />
 
       {/* Main Container */}
       <main className="flex-1 max-w-4xl w-full mx-auto p-4 sm:p-6 space-y-6">
+        {/* Breadcrumb Navigation */}
+        <div className="flex items-center gap-2 text-xs font-mono text-slate-400">
+          <Link href="/creators" className="hover:text-brandPink transition-colors flex items-center gap-1">
+            <ArrowLeft className="w-3.5 h-3.5" />
+            <span>Creators & Venues Directory</span>
+          </Link>
+          <span>/</span>
+          <span className="text-white font-medium">{venue.name}</span>
+        </div>
+
         {/* Venue Title & Badges */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-borderDark">
           <div>
-            <div className="flex items-center gap-2 mb-1.5">
+            <div className="flex items-center gap-2 mb-1.5 flex-wrap">
               <span className="px-2.5 py-0.5 rounded text-[10px] font-bold font-mono bg-brandPink/15 text-brandPink border border-brandPink/30 uppercase">
                 {categoryLabel}
               </span>
+              {isLive ? (
+                <span className="flex items-center gap-1.5 px-2.5 py-0.5 rounded text-[10px] font-bold font-mono bg-red-950/60 text-red-400 border border-red-500/50 uppercase shadow-[0_0_10px_rgba(239,68,68,0.3)]">
+                  <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+                  Live Stream
+                </span>
+              ) : (
+                <span className="flex items-center gap-1.5 px-2.5 py-0.5 rounded text-[10px] font-bold font-mono bg-slate-800/80 text-slate-400 border border-slate-700 uppercase">
+                  <span className="w-1.5 h-1.5 rounded-full bg-slate-500" />
+                  Currently Offline
+                </span>
+              )}
               {venue.is_sponsored && (
                 <span className="flex items-center gap-1 px-2.5 py-0.5 rounded text-[10px] font-bold font-mono bg-brandGold/20 text-brandGold border border-brandGold/40 uppercase">
                   <Star className="w-3 h-3 fill-brandGold" />
@@ -109,16 +140,45 @@ export default function VenuePage({ params }) {
           </Link>
         </div>
 
-        {/* Live Stream Player */}
+        {/* Live Stream Player OR Offline Standby Card */}
         <div className="w-full">
-          <YouTubePlayer
-            channelId={venue.youtube_channel_id}
-            videoId={venue.video_id}
-            title={`${venue.name} Live Stream`}
-            handle={venue.youtube_handle}
-            type="venue"
-            isLive={true}
-          />
+          {isLive && videoId ? (
+            <YouTubePlayer
+              channelId={venue.youtube_channel_id}
+              videoId={videoId}
+              title={`${venue.name} Live Stream`}
+              handle={venue.youtube_handle}
+              type="venue"
+              isLive={true}
+            />
+          ) : (
+            <div className="w-full aspect-video bg-surfaceLight/70 border border-borderDark rounded-xl p-6 sm:p-8 flex flex-col items-center justify-center text-center gap-3 sm:gap-4 shadow-lg">
+              <div className="w-14 h-14 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-400 shadow-inner">
+                <Radio className="w-7 h-7 text-slate-400" />
+              </div>
+              <div className="space-y-1">
+                <div className="flex items-center justify-center gap-1.5 text-sm font-mono font-bold text-slate-200">
+                  <span className="w-2 h-2 rounded-full bg-slate-400" />
+                  <span>Currently Offline</span>
+                </div>
+                <p className="text-xs text-slate-400 font-mono">
+                  {lastLiveAt
+                    ? `Last broadcast ${formatRelativeTime(lastLiveAt)}`
+                    : 'Standby • Check Channel for Streams'}
+                </p>
+              </div>
+              <a
+                href={channelUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-1 flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold transition-all shadow-md bg-red-600 hover:bg-red-500 text-white"
+              >
+                <Bell className="w-4 h-4" />
+                <span>Open YouTube Channel</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+            </div>
+          )}
         </div>
 
         {/* Description */}

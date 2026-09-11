@@ -5,6 +5,7 @@ import { Video, MapPin, ArrowLeft, Car, Hotel, ExternalLink, Compass } from 'luc
 import HlsPlayer from '@/src/components/common/HlsPlayer';
 import YouTubePlayer from '@/src/components/common/YouTubePlayer';
 import EmojiReactionGroup from '@/src/components/common/EmojiReactionGroup';
+import Navbar from '@/src/components/Navbar';
 import cctvData from '@/public/data/cctv_cams.json';
 import hotelsData from '@/public/data/hotels.json';
 import {
@@ -51,25 +52,8 @@ export default function CamPage({ params }) {
 
   return (
     <div className="min-h-screen w-full bg-canvas text-slate-100 flex flex-col overflow-y-auto">
-      {/* Top Brand Header */}
-      <header className="h-14 border-b border-borderDark bg-surface flex items-center justify-between px-4 sm:px-6 sticky top-0 z-40">
-        <Link href="/" className="flex items-center gap-2 group">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-brandCyan to-brandBlue flex items-center justify-center shadow-md">
-            <Video className="w-4 h-4 text-canvas" />
-          </div>
-          <span className="font-bold text-base tracking-tight text-white group-hover:text-brandCyan transition-colors">
-            Pattaya<span className="text-brandCyan">Cams</span>
-          </span>
-        </Link>
-
-        <Link
-          href="/"
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surfaceLight hover:bg-borderDark text-xs font-medium text-slate-300 transition-colors border border-borderDark"
-        >
-          <ArrowLeft className="w-3.5 h-3.5" />
-          <span>Back to Radar Map</span>
-        </Link>
-      </header>
+      {/* Universal Site-Wide Navbar */}
+      <Navbar viewMode="map" />
 
       {/* Main Container */}
       <main className="flex-1 max-w-4xl w-full mx-auto p-4 sm:p-6 space-y-6">

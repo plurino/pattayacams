@@ -101,7 +101,7 @@
     "platform": "kick",
     "channel_id": "rikasian",
     "handle": "rikasian",
-    "avatar_url": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=200&auto=format&fit=crop&q=80",
+    "avatar_url": null,
     "primary_zone": "walking_street",
     "content_tags": [
       "Kick Streaming",
@@ -421,7 +421,7 @@
     "platform": "kick",
     "channel_id": "thaivibelive",
     "handle": "thaivibelive",
-    "avatar_url": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=200&auto=format&fit=crop&q=80",
+    "avatar_url": null,
     "primary_zone": "beach_road",
     "content_tags": [
       "Kick Live",
@@ -437,7 +437,7 @@
     "platform": "kick",
     "channel_id": "icecoldkick",
     "handle": "icecoldkick",
-    "avatar_url": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=200&auto=format&fit=crop&q=80",
+    "avatar_url": null,
     "primary_zone": "walking_street",
     "content_tags": [
       "Kick Streaming",
@@ -453,7 +453,7 @@
     "platform": "kick",
     "channel_id": "pattayairl",
     "handle": "pattayairl",
-    "avatar_url": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=200&auto=format&fit=crop&q=80",
+    "avatar_url": null,
     "primary_zone": "buakhao",
     "content_tags": [
       "Kick Streamer",
@@ -469,7 +469,7 @@
     "platform": "kick",
     "channel_id": "paulpattaya",
     "handle": "paulpattaya",
-    "avatar_url": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=200&auto=format&fit=crop&q=80",
+    "avatar_url": null,
     "primary_zone": "walking_street",
     "content_tags": [
       "Kick Live",

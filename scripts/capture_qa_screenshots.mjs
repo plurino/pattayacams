@@ -4,9 +4,9 @@ import path from 'path';
 const outDir = 'C:\\Users\\K\\.gemini\\antigravity\\brain\\8371e47a-cffe-4f09-818d-2be11531c2a6';
 
 async function main() {
-  console.log('Launching Playwright Chrome...');
+  console.log('Launching Playwright Chrome QA Suite...');
   const browser = await chromium.launch({ channel: 'chrome', headless: true });
-  const context = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+  const context = await browser.newContext({ viewport: { width: 1280, height: 850 } });
   const page = await context.newPage();
 
   const pageErrors = [];
@@ -15,77 +15,78 @@ async function main() {
     pageErrors.push(err.message);
   });
 
-  // 1. Radar Map View: Resting Banner & Star Pin
-  console.log('1. Testing Desktop Radar Map & Resting Banner...');
+  // 1. Navbar 4 Distinct Colors & Multi-Cam <-> Radar Transition
+  console.log('1. Testing Navbar 4 distinct colors and Radar/Multi-Cam transitions...');
   await page.goto('http://localhost:3000', { waitUntil: 'load' });
-  await page.waitForTimeout(2500);
+  await page.waitForTimeout(2000);
 
-  // Jump to Soi Buakhao to center on Oh Bar
-  const soiBuakhaoButton = page.locator('button:has-text("Soi Buakhao")').first();
-  if (await soiBuakhaoButton.isVisible()) {
-    await soiBuakhaoButton.click();
-    await page.waitForTimeout(1500);
-  }
+  await page.screenshot({ path: path.join(outDir, 'navbar_4_colors_radar_active.png') });
+  console.log('Saved navbar_4_colors_radar_active.png');
 
-  await page.screenshot({ path: path.join(outDir, 'radar_resting_banner_star.png') });
-  console.log('Saved radar_resting_banner_star.png');
+  // Click Multi-Cam
+  console.log('Clicking Multi-Cam button in navbar...');
+  const multiCamBtn = page.locator('button:has-text("Multi-Cam")').first();
+  await multiCamBtn.click();
+  await page.waitForTimeout(1200);
 
-  // Click on Pattaya Oh Bar to verify Standby card message
-  const venueMarker = page.locator('.custom-venue-marker-container').first();
-  if (await venueMarker.isVisible()) {
-    await venueMarker.click();
-    await page.waitForTimeout(1000);
-  }
-  await page.screenshot({ path: path.join(outDir, 'radar_standby_card_checked.png') });
-  console.log('Saved radar_standby_card_checked.png');
+  await page.screenshot({ path: path.join(outDir, 'multicam_active_view.png') });
+  console.log('Saved multicam_active_view.png');
 
-  // 2. PattayaVids View: Multi-Select Filter & Pagination
-  console.log('2. Testing PattayaVids Multi-Select Dropdown & Pagination...');
-  await page.goto('http://localhost:3000/?view=vids', { waitUntil: 'load' });
-  await page.waitForTimeout(1500);
+  // Click Radar to return to map
+  console.log('Clicking Radar button in navbar to return to map...');
+  const radarBtn = page.locator('button:has-text("Radar")').first();
+  await radarBtn.click();
+  await page.waitForTimeout(1200);
 
-  // Open multi-select creator dropdown
-  const filterBtn = page.locator('button[title="Filter by multiple creators"]').first();
-  if (await filterBtn.isVisible()) {
-    await filterBtn.click();
-    await page.waitForTimeout(600);
-  }
+  const mapEl = page.locator('.leaflet-container');
+  const isMapVisible = await mapEl.isVisible();
+  console.log('Is Leaflet map container visible after return from Multi-Cam?', isMapVisible);
 
-  await page.screenshot({ path: path.join(outDir, 'vids_multiselect_dropdown.png') });
-  console.log('Saved vids_multiselect_dropdown.png');
+  await page.screenshot({ path: path.join(outDir, 'radar_returned_from_multicam.png') });
+  console.log('Saved radar_returned_from_multicam.png');
 
-  // 3. Creators Hub: Unified Navbar, Sorting, Styled Initial Avatars, Pagination
-  console.log('3. Testing Creators Hub Directory (Unified Navbar, Avatars & Pagination)...');
+  // 2. Creators Hub: Kick Streamers Initial Badges (No placeholder images)
+  console.log('2. Testing Creators Hub Kick streamers with emerald initial badges...');
   await page.goto('http://localhost:3000/creators', { waitUntil: 'load' });
   await page.waitForTimeout(1500);
 
-  await page.screenshot({ path: path.join(outDir, 'creators_hub_unified_page1.png') });
-  console.log('Saved creators_hub_unified_page1.png');
-
-  // Click page 2 on Creators Hub
-  const page2Btn = page.locator('button:has-text("2")').last();
-  if (await page2Btn.isVisible()) {
-    await page2Btn.click();
+  const kickFilter = page.locator('button:has-text("Kick")').first();
+  if (await kickFilter.isVisible()) {
+    await kickFilter.click();
     await page.waitForTimeout(800);
-    await page.screenshot({ path: path.join(outDir, 'creators_hub_page2.png') });
-    console.log('Saved creators_hub_page2.png');
   }
 
-  // 4. Creator Profile Page: Buzzin Pattaya
-  console.log('4. Testing Creator Profile Page (buzzin-pattaya)...');
-  await page.goto('http://localhost:3000/creators/buzzin-pattaya', { waitUntil: 'load' });
+  await page.screenshot({ path: path.join(outDir, 'creators_hub_kick_initials.png') });
+  console.log('Saved creators_hub_kick_initials.png');
+
+  // 3. Venue Page: Pattaya Oh Bar (Offline Standby Card & Zeroed Vibe Check)
+  console.log('3. Testing /venues/pattaya-oh-bar (Standby Card & Zeroed Vibe Check)...');
+  await page.goto('http://localhost:3000/venues/pattaya-oh-bar', { waitUntil: 'load' });
   await page.waitForTimeout(1500);
 
-  await page.screenshot({ path: path.join(outDir, 'creator_profile_buzzin.png') });
-  console.log('Saved creator_profile_buzzin.png');
+  const vibeCountsBefore = await page.locator('.grid.grid-cols-4 button span.font-mono').allInnerTexts();
+  console.log('Vibe check counts on load (should all be 0):', vibeCountsBefore);
 
-  // 5. Creator Profile Page: RikAsian (Kick Streamer)
-  console.log('5. Testing Creator Profile Page (rikasian - Kick)...');
-  await page.goto('http://localhost:3000/creators/rikasian', { waitUntil: 'load' });
+  // Click Vibe (🍻) reaction emoji
+  const vibeBtn = page.locator('button[title*="Vibe"]').first();
+  if (await vibeBtn.isVisible()) {
+    await vibeBtn.click();
+    await page.waitForTimeout(500);
+  }
+
+  const vibeCountsAfter = await page.locator('.grid.grid-cols-4 button span.font-mono').allInnerTexts();
+  console.log('Vibe check counts after user vote (Vibe should be 1):', vibeCountsAfter);
+
+  await page.screenshot({ path: path.join(outDir, 'venue_pattaya_oh_bar_standby.png') });
+  console.log('Saved venue_pattaya_oh_bar_standby.png');
+
+  // 4. Venue Page: Green Stop Dispensary & Bar (Standby Card, No Broken Video)
+  console.log('4. Testing /venues/green-stop-cannabis (Standby Card, No Broken Video)...');
+  await page.goto('http://localhost:3000/venues/green-stop-cannabis', { waitUntil: 'load' });
   await page.waitForTimeout(1500);
 
-  await page.screenshot({ path: path.join(outDir, 'creator_profile_rikasian_kick.png') });
-  console.log('Saved creator_profile_rikasian_kick.png');
+  await page.screenshot({ path: path.join(outDir, 'venue_green_stop_standby.png') });
+  console.log('Saved venue_green_stop_standby.png');
 
   await browser.close();
 

@@ -12,10 +12,10 @@ const REACTIONS = [
 
 export default function EmojiReactionGroup({ entitySlug }) {
   const [reactions, setReactions] = useState({
-    busy: 8,
-    quiet: 2,
+    busy: 0,
+    quiet: 0,
     flood: 0,
-    vibe: 15,
+    vibe: 0,
     userVoted: null,
   });
 

@@ -324,6 +324,19 @@ export default function MapCanvas({ onSelectEntity, onMapInstance }) {
       if (onMapInstance) {
         onMapInstance(map);
       }
+
+      // Automatic container size observation for immediate tile recovery when unhiding
+      if (typeof ResizeObserver !== 'undefined' && mapContainerRef.current) {
+        const resizeObserver = new ResizeObserver(() => {
+          if (mapRef.current && typeof mapRef.current.invalidateSize === 'function') {
+            try {
+              mapRef.current.invalidateSize();
+            } catch (e) {}
+          }
+        });
+        resizeObserver.observe(mapContainerRef.current);
+        map._resizeObserver = resizeObserver;
+      }
     }
 
     initLeaflet();
@@ -331,6 +344,9 @@ export default function MapCanvas({ onSelectEntity, onMapInstance }) {
     return () => {
       isMounted = false;
       if (mapRef.current) {
+        if (mapRef.current._resizeObserver) {
+          mapRef.current._resizeObserver.disconnect();
+        }
         mapRef.current.remove();
         mapRef.current = null;
       }

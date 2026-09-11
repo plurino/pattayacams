@@ -81,14 +81,14 @@ export function clearTripDate() {
  * }
  */
 const DEFAULT_BASE_COUNTS = {
-  busy: 8,
-  quiet: 2,
+  busy: 0,
+  quiet: 0,
   flood: 0,
-  vibe: 15,
+  vibe: 0,
 };
 
 export function getEntityReactions(slug) {
-  if (!isClient() || !slug) return { busy: 8, quiet: 2, flood: 0, vibe: 15, userVoted: null };
+  if (!isClient() || !slug) return { busy: 0, quiet: 0, flood: 0, vibe: 0, userVoted: null };
   try {
     const raw = localStorage.getItem(TELEMETRY_KEY);
     const allData = raw ? JSON.parse(raw) : {};
@@ -102,14 +102,14 @@ export function getEntityReactions(slug) {
     const base = entityData.baseCounts || { ...DEFAULT_BASE_COUNTS };
 
     return {
-      busy: base.busy + (userVoted === 'busy' ? 1 : 0),
-      quiet: base.quiet + (userVoted === 'quiet' ? 1 : 0),
-      flood: base.flood + (userVoted === 'flood' ? 1 : 0),
-      vibe: base.vibe + (userVoted === 'vibe' ? 1 : 0),
+      busy: (base.busy || 0) + (userVoted === 'busy' ? 1 : 0),
+      quiet: (base.quiet || 0) + (userVoted === 'quiet' ? 1 : 0),
+      flood: (base.flood || 0) + (userVoted === 'flood' ? 1 : 0),
+      vibe: (base.vibe || 0) + (userVoted === 'vibe' ? 1 : 0),
       userVoted,
     };
   } catch (e) {
-    return { busy: 8, quiet: 2, flood: 0, vibe: 15, userVoted: null };
+    return { busy: 0, quiet: 0, flood: 0, vibe: 0, userVoted: null };
   }
 }
 

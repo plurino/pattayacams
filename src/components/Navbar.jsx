@@ -88,6 +88,16 @@ export default function Navbar({
     }
   };
 
+  const handleViewChange = (mode) => {
+    if (setViewMode) {
+      setViewMode(mode);
+      if (typeof window !== 'undefined' && window.history) {
+        const path = mode === 'map' ? '/' : `/?view=${mode}`;
+        window.history.replaceState(null, '', path);
+      }
+    }
+  };
+
   const isVidsActive = viewMode === 'vids' || viewMode === 'pulse';
   const isCreatorsActive = viewMode === 'creators' || viewMode === 'hub';
 
@@ -187,15 +197,16 @@ export default function Navbar({
           </button>
         )}
 
-        {/* View Mode Switcher: Radar vs Multi-Cam vs PattayaVids vs Creators Hub */}
+        {/* View Mode Switcher: 4 Distinct Thematic Colors in Matching Style */}
         <div className="flex items-center bg-canvas/90 p-0.5 rounded-xl border border-borderDark/90 shadow-inner">
+          {/* 1. Radar (Electric Cyan) */}
           {setViewMode ? (
             <button
-              onClick={() => setViewMode('map')}
-              className={`flex items-center gap-1 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-lg text-xs font-semibold transition-all ${
+              onClick={() => handleViewChange('map')}
+              className={`flex items-center gap-1 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-lg text-xs font-bold transition-all ${
                 viewMode === 'map'
-                  ? 'bg-gradient-to-r from-brandPink via-purple-600 to-rose-600 text-white shadow-[0_0_14px_rgba(255,42,109,0.5)] border border-white/20'
-                  : 'text-slate-300 hover:text-white hover:bg-surfaceLight/50'
+                  ? 'bg-gradient-to-r from-cyan-500 via-teal-500 to-blue-600 text-white shadow-[0_0_14px_rgba(0,229,255,0.45)] border border-cyan-300/30'
+                  : 'text-cyan-400 hover:text-cyan-200 hover:bg-cyan-500/15'
               }`}
               title="Interactive Live Map & Surveillance Radar"
             >
@@ -205,10 +216,10 @@ export default function Navbar({
           ) : (
             <Link
               href="/?view=map"
-              className={`flex items-center gap-1 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-lg text-xs font-semibold transition-all ${
+              className={`flex items-center gap-1 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-lg text-xs font-bold transition-all ${
                 viewMode === 'map'
-                  ? 'bg-gradient-to-r from-brandPink via-purple-600 to-rose-600 text-white shadow-[0_0_14px_rgba(255,42,109,0.5)] border border-white/20'
-                  : 'text-slate-300 hover:text-white hover:bg-surfaceLight/50'
+                  ? 'bg-gradient-to-r from-cyan-500 via-teal-500 to-blue-600 text-white shadow-[0_0_14px_rgba(0,229,255,0.45)] border border-cyan-300/30'
+                  : 'text-cyan-400 hover:text-cyan-200 hover:bg-cyan-500/15'
               }`}
               title="Interactive Live Map & Surveillance Radar"
             >
@@ -217,13 +228,14 @@ export default function Navbar({
             </Link>
           )}
 
+          {/* 2. Multi-Cam (Neon Amber / Gold) */}
           {setViewMode ? (
             <button
-              onClick={() => setViewMode('grid')}
-              className={`flex items-center gap-1 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-lg text-xs font-semibold transition-all ${
+              onClick={() => handleViewChange('grid')}
+              className={`flex items-center gap-1 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-lg text-xs font-bold transition-all ${
                 viewMode === 'grid'
-                  ? 'bg-gradient-to-r from-brandPink via-purple-600 to-rose-600 text-white shadow-[0_0_14px_rgba(255,42,109,0.5)] border border-white/20'
-                  : 'text-slate-300 hover:text-white hover:bg-surfaceLight/50'
+                  ? 'bg-gradient-to-r from-amber-500 via-orange-500 to-yellow-500 text-white shadow-[0_0_14px_rgba(245,158,11,0.45)] border border-amber-300/30'
+                  : 'text-amber-400 hover:text-amber-200 hover:bg-amber-500/15'
               }`}
               title="Multi-Cam Command Grid (4-up Quad View)"
             >
@@ -233,10 +245,10 @@ export default function Navbar({
           ) : (
             <Link
               href="/?view=grid"
-              className={`flex items-center gap-1 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-lg text-xs font-semibold transition-all ${
+              className={`flex items-center gap-1 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-lg text-xs font-bold transition-all ${
                 viewMode === 'grid'
-                  ? 'bg-gradient-to-r from-brandPink via-purple-600 to-rose-600 text-white shadow-[0_0_14px_rgba(255,42,109,0.5)] border border-white/20'
-                  : 'text-slate-300 hover:text-white hover:bg-surfaceLight/50'
+                  ? 'bg-gradient-to-r from-amber-500 via-orange-500 to-yellow-500 text-white shadow-[0_0_14px_rgba(245,158,11,0.45)] border border-amber-300/30'
+                  : 'text-amber-400 hover:text-amber-200 hover:bg-amber-500/15'
               }`}
               title="Multi-Cam Command Grid (4-up Quad View)"
             >
@@ -245,43 +257,44 @@ export default function Navbar({
             </Link>
           )}
 
+          {/* 3. PattayaVids (Hot Pink / Rose) */}
           {setViewMode ? (
             <button
-              onClick={() => setViewMode('vids')}
-              className={`flex items-center gap-1 px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg text-xs font-bold transition-all ${
+              onClick={() => handleViewChange('vids')}
+              className={`flex items-center gap-1 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-lg text-xs font-bold transition-all ${
                 isVidsActive
-                  ? 'bg-gradient-to-r from-brandPink via-purple-600 to-rose-600 text-white shadow-[0_0_14px_rgba(255,42,109,0.5)] border border-white/20'
-                  : 'text-brandPink hover:text-white hover:bg-brandPink/10'
+                  ? 'bg-gradient-to-r from-brandPink via-rose-600 to-pink-600 text-white shadow-[0_0_14px_rgba(255,42,109,0.45)] border border-rose-300/30'
+                  : 'text-brandPink hover:text-pink-200 hover:bg-brandPink/15'
               }`}
               title="PattayaVids: Curated 4K Street Walks, Nightlife Highlights & Expat Guides"
             >
               <Film className="w-3.5 h-3.5 shrink-0" />
-              <span className="hidden sm:inline">Pattaya<span className={isVidsActive ? 'text-white' : 'text-brandPink font-extrabold'}>Vids</span></span>
+              <span className="hidden sm:inline">Pattaya<span className={isVidsActive ? 'text-white' : 'font-extrabold'}>Vids</span></span>
               <span className="sm:hidden font-bold text-[11px]">Vids</span>
             </button>
           ) : (
             <Link
               href="/?view=vids"
-              className={`flex items-center gap-1 px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg text-xs font-bold transition-all ${
+              className={`flex items-center gap-1 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-lg text-xs font-bold transition-all ${
                 isVidsActive
-                  ? 'bg-gradient-to-r from-brandPink via-purple-600 to-rose-600 text-white shadow-[0_0_14px_rgba(255,42,109,0.5)] border border-white/20'
-                  : 'text-brandPink hover:text-white hover:bg-brandPink/10'
+                  ? 'bg-gradient-to-r from-brandPink via-rose-600 to-pink-600 text-white shadow-[0_0_14px_rgba(255,42,109,0.45)] border border-rose-300/30'
+                  : 'text-brandPink hover:text-pink-200 hover:bg-brandPink/15'
               }`}
               title="PattayaVids: Curated 4K Street Walks, Nightlife Highlights & Expat Guides"
             >
               <Film className="w-3.5 h-3.5 shrink-0" />
-              <span className="hidden sm:inline">Pattaya<span className={isVidsActive ? 'text-white' : 'text-brandPink font-extrabold'}>Vids</span></span>
+              <span className="hidden sm:inline">Pattaya<span className={isVidsActive ? 'text-white' : 'font-extrabold'}>Vids</span></span>
               <span className="sm:hidden font-bold text-[11px]">Vids</span>
             </Link>
           )}
 
-          {/* Creators Hub Link */}
+          {/* 4. Creators Hub (Electric Purple / Violet) */}
           <Link
             href="/creators"
             className={`flex items-center gap-1 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-lg text-xs font-bold transition-all ${
               isCreatorsActive
-                ? 'bg-gradient-to-r from-brandPink via-purple-600 to-rose-600 text-white shadow-[0_0_14px_rgba(255,42,109,0.5)] border border-white/20'
-                : 'text-slate-300 hover:text-white hover:bg-surfaceLight/50'
+                ? 'bg-gradient-to-r from-purple-600 via-fuchsia-600 to-indigo-600 text-white shadow-[0_0_14px_rgba(168,85,247,0.45)] border border-purple-300/30'
+                : 'text-purple-400 hover:text-purple-200 hover:bg-purple-500/15'
             }`}
             title="Pattaya Creators & Live Venues Directory"
           >

@@ -22,7 +22,8 @@ export default function CreatorAvatar({
     src === '/og-image.jpg' ||
     src.endsWith('/a') ||
     src === 'https://yt3.googleusercontent.com/a' ||
-    src.includes('example.com');
+    src.includes('example.com') ||
+    src.includes('images.unsplash.com');
 
   const initials = getInitials(name || alt);
   const isKick = platform === 'kick';
