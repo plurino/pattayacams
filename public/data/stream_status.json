@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-09-11T10:20:28.714Z",
+  "last_check": "2026-09-11T11:50:12.342Z",
   "entities": {
     "venue-pattaya-oh-bar": {
       "is_live": false,
@@ -336,7 +336,7 @@
     },
     "creator-pattaya-beach-live": {
       "is_live": false,
-      "video_id": "0bGNCCBXAKI",
+      "video_id": "Tv58VVA4HzI",
       "last_live_at": null,
       "status": "active",
       "name": "Pattaya Beach Live",
@@ -498,7 +498,7 @@
     },
     "creator-david-strachan-pattaya": {
       "is_live": false,
-      "video_id": "X0pwL6gFRaE",
+      "video_id": "xEhM0Qp28vg",
       "last_live_at": null,
       "status": "active",
       "name": "David Strachan Pattaya",
