@@ -51,7 +51,7 @@ export default function LayerToggleHUD({
           onClick={onResetNorth}
           className={`w-9 h-9 rounded-xl bg-surface/90 backdrop-blur-md border transition-all flex items-center justify-center relative shadow-xl group ${
             isRotated
-              ? 'border-brandCyan text-brandCyan shadow-[0_0_12px_rgba(0,229,255,0.4)]'
+              ? 'border-brandPink text-brandPink shadow-[0_0_12px_rgba(255,42,109,0.4)]'
               : 'border-borderDark text-slate-300 hover:text-white hover:border-slate-500'
           }`}
           title={isRotated ? `Bearing: ${bearing}° • Click to Reset North (0°)` : 'Facing North (0°)'}
@@ -61,13 +61,13 @@ export default function LayerToggleHUD({
             className="w-5 h-5 transition-transform duration-200 ease-out flex items-center justify-center relative"
             style={{ transform: `rotate(${-bearing}deg)` }}
           >
-            <Navigation className="w-4 h-4 fill-brandPink text-brandCyan drop-shadow" />
+            <Navigation className="w-4 h-4 fill-brandPink text-rose-500 drop-shadow" />
             <span className="absolute -top-1.5 text-[7px] font-black text-brandPink font-mono">N</span>
           </div>
 
           {/* Rotated Angle Badge */}
           {isRotated && (
-            <span className="absolute -bottom-1 -right-1 px-1 py-0.2 rounded bg-brandCyan text-canvas font-mono font-black text-[8px]">
+            <span className="absolute -bottom-1 -right-1 px-1 py-0.2 rounded bg-brandPink text-white font-mono font-black text-[8px]">
               {bearing}°
             </span>
           )}
@@ -77,14 +77,14 @@ export default function LayerToggleHUD({
         <div className="flex flex-col rounded-xl bg-surface/90 backdrop-blur-md border border-borderDark shadow-xl overflow-hidden divide-y divide-borderDark/60">
           <button
             onClick={onRotateLeft}
-            className="w-9 h-8 flex items-center justify-center text-slate-300 hover:text-brandCyan hover:bg-surfaceLight/60 transition-colors"
+            className="w-9 h-8 flex items-center justify-center text-slate-300 hover:text-brandPink hover:bg-surfaceLight/60 transition-colors"
             title="Rotate Left 45° (↶)"
           >
             <RotateCcw className="w-3.5 h-3.5" />
           </button>
           <button
             onClick={onRotateRight}
-            className="w-9 h-8 flex items-center justify-center text-slate-300 hover:text-brandCyan hover:bg-surfaceLight/60 transition-colors"
+            className="w-9 h-8 flex items-center justify-center text-slate-300 hover:text-brandPink hover:bg-surfaceLight/60 transition-colors"
             title="Rotate Right 45° (↷)"
           >
             <RotateCw className="w-3.5 h-3.5" />
@@ -109,8 +109,8 @@ export default function LayerToggleHUD({
       <aside aria-label="Map Layer Controls" className="absolute bottom-6 left-6 z-[1000] flex flex-col gap-2 pointer-events-auto select-none">
         {/* CCTV Disclaimer Toast */}
         {toastMessage && (
-          <div className="bg-surface/95 backdrop-blur-md border border-brandCyan/50 text-slate-200 text-xs px-3 py-2 rounded-xl shadow-2xl flex items-center gap-2 max-w-[280px] animate-fade-in">
-            <AlertCircle className="w-4 h-4 text-brandCyan shrink-0" />
+          <div className="bg-surface/95 backdrop-blur-md border border-brandPink/50 text-slate-200 text-xs px-3 py-2 rounded-xl shadow-2xl flex items-center gap-2 max-w-[280px] animate-fade-in">
+            <AlertCircle className="w-4 h-4 text-brandPink shrink-0" />
             <span className="leading-tight text-[11px]">{toastMessage}</span>
             <button
               onClick={() => setToastMessage(null)}
@@ -124,7 +124,7 @@ export default function LayerToggleHUD({
         <div className="bg-surface/90 backdrop-blur-md border border-borderDark rounded-xl p-3 shadow-2xl flex flex-col gap-2 min-w-[220px] text-xs font-medium">
           <div className="flex items-center justify-between pb-1.5 border-b border-borderDark/60 text-slate-400 font-mono text-[10px]">
             <div className="flex items-center gap-1.5 uppercase tracking-wider">
-              <Layers className="w-3.5 h-3.5 text-brandCyan" />
+              <Layers className="w-3.5 h-3.5 text-brandPink" />
               <span>Map Layers</span>
             </div>
             <span className="text-[9px] text-slate-400 uppercase">

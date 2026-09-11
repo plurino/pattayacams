@@ -15,7 +15,9 @@ import {
   Compass,
   Map as MapIcon,
   Tag,
-  ShieldCheck
+  ShieldCheck,
+  Grid,
+  Film
 } from 'lucide-react';
 import YouTubePlayer from '@/src/components/common/YouTubePlayer';
 import KickPlayer from '@/src/components/common/KickPlayer';
@@ -116,34 +118,52 @@ export default function CreatorProfilePage({ params }) {
   return (
     <div className="min-h-screen w-full bg-canvas text-slate-100 flex flex-col overflow-y-auto">
       {/* Top Header */}
-      <header className="h-14 border-b border-borderDark bg-surface flex items-center justify-between px-4 sm:px-6 sticky top-0 z-40">
+      <header className="h-14 border-b border-borderDark bg-surface/95 backdrop-blur-md flex items-center justify-between px-3 sm:px-5 sticky top-0 z-50 shadow-md">
         <Link href="/" className="flex items-center gap-2 group">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-brandCyan to-brandBlue flex items-center justify-center shadow-md">
-            <Video className="w-4 h-4 text-canvas" />
+          <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-brandPink to-purple-600 flex items-center justify-center shadow-[0_0_14px_rgba(255,42,109,0.5)] group-hover:scale-105 transition-transform duration-200">
+            <Video className="w-4 h-4 text-white" />
           </div>
-          <span className="font-bold text-base tracking-tight text-white group-hover:text-brandCyan transition-colors">
-            Pattaya<span className="text-brandCyan">Cams</span>
+          <span className="font-black text-base tracking-tight text-white group-hover:text-pink-300 transition-colors">
+            Pattaya<span className="text-brandPink">Cams</span>
           </span>
         </Link>
 
-        <div className="flex items-center gap-2 sm:gap-3">
+        {/* Unified Navigation Switcher */}
+        <nav aria-label="Site Navigation" className="flex items-center bg-canvas/90 p-0.5 sm:p-1 rounded-xl border border-borderDark/90 shadow-inner">
           <Link
-            href="/creators"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surfaceLight hover:bg-surfaceLight/80 border border-borderDark text-xs font-mono text-slate-300 transition-colors"
-          >
-            <ArrowLeft className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">All Creators</span>
-            <span className="sm:hidden">Directory</span>
-          </Link>
-          <Link
-            href="/"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-brandCyan/20 hover:bg-brandCyan/30 border border-brandCyan/50 text-xs font-mono text-brandCyan font-semibold transition-all shadow-[0_0_10px_rgba(0,229,255,0.2)]"
+            href="/?view=map"
+            className="flex items-center gap-1 sm:gap-1.5 px-2.5 py-1 sm:py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white hover:bg-surfaceLight/50 transition-all"
+            title="Interactive Live Radar Map"
           >
             <MapIcon className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">Live Radar</span>
-            <span className="sm:hidden">Radar</span>
+            <span className="hidden sm:inline">Radar</span>
           </Link>
-        </div>
+          <Link
+            href="/?view=grid"
+            className="flex items-center gap-1 sm:gap-1.5 px-2.5 py-1 sm:py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white hover:bg-surfaceLight/50 transition-all"
+            title="Multi-Cam Command Grid"
+          >
+            <Grid className="w-3.5 h-3.5" />
+            <span className="hidden md:inline">Multi-Cam</span>
+          </Link>
+          <Link
+            href="/?view=vids"
+            className="flex items-center gap-1 sm:gap-1.5 px-2.5 py-1 sm:py-1.5 rounded-lg text-xs font-bold text-brandPink hover:text-white hover:bg-brandPink/10 transition-all"
+            title="PattayaVids: Daily 4K VOD Hub"
+          >
+            <Film className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">PattayaVids</span>
+            <span className="sm:hidden">Vids</span>
+          </Link>
+          <Link
+            href="/creators"
+            className="flex items-center gap-1 sm:gap-1.5 px-2.5 py-1 sm:py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white hover:bg-surfaceLight/50 transition-all"
+            title="Back to Creators Directory"
+          >
+            <ArrowLeft className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">Directory</span>
+          </Link>
+        </nav>
       </header>
 
       {/* Main Container */}

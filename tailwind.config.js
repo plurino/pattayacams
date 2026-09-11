@@ -15,10 +15,13 @@ module.exports = {
         borderDark: '#26354A',
         brandCyan: '#00E5FF',
         brandPink: '#FF2A6D',
+        brandRed: '#FF1355',
+        brandRose: '#F43F5E',
         brandGold: '#EAB308',
         brandAmber: '#F59E0B',
         brandGreen: '#10B981',
         brandBlue: '#3B82F6',
+        brandPurple: '#A855F7',
       },
       fontFamily: {
         sans: ['var(--font-inter)', 'Inter', 'sans-serif'],

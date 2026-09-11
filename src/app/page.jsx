@@ -34,11 +34,22 @@ export default function AppRoot() {
   }, []);
 
   const handleQuickJump = useCallback((center, zoom) => {
-    if (mapInstanceRef.current) {
-      mapInstanceRef.current.flyTo(center, zoom, {
-        duration: 1.4,
-        easeLinearity: 0.25,
-      });
+    const map = mapInstanceRef.current;
+    if (!map) return;
+    try {
+      if (typeof map.invalidateSize === 'function') {
+        map.invalidateSize();
+      }
+      if (typeof map.flyTo === 'function' && map._loaded && map.getContainer()) {
+        map.flyTo(center, zoom, {
+          duration: 1.4,
+          easeLinearity: 0.25,
+        });
+      } else if (typeof map.setView === 'function') {
+        map.setView(center, zoom);
+      }
+    } catch (err) {
+      console.warn('Map flyTo warning:', err);
     }
   }, []);
 
@@ -74,21 +85,34 @@ export default function AppRoot() {
       last_live_at: statusInfo?.last_live_at || null,
     };
 
-    if (viewMode !== 'map') {
+    const needsViewSwitch = viewMode !== 'map';
+    if (needsViewSwitch) {
       setViewMode('map');
     }
 
-    if (mapInstanceRef.current) {
-      mapInstanceRef.current.flyTo([chosen.lat, chosen.lng], 17, {
-        duration: 1.5,
-        easeLinearity: 0.25,
-      });
-      setTimeout(() => {
+    setTimeout(() => {
+      const map = mapInstanceRef.current;
+      if (map) {
+        try {
+          if (typeof map.invalidateSize === 'function') {
+            map.invalidateSize();
+          }
+          if (typeof map.flyTo === 'function' && map._loaded && map.getContainer()) {
+            map.flyTo([chosen.lat, chosen.lng], 17, {
+              duration: 1.5,
+              easeLinearity: 0.25,
+            });
+          }
+        } catch (e) {
+          console.warn('Shuffle flyTo warning', e);
+        }
+        setTimeout(() => {
+          setSelectedEntity(venuePayload);
+        }, 700);
+      } else {
         setSelectedEntity(venuePayload);
-      }, 1000);
-    } else {
-      setSelectedEntity(venuePayload);
-    }
+      }
+    }, needsViewSwitch ? 150 : 0);
   }, [viewMode, selectedEntity]);
 
   return (
@@ -105,17 +129,21 @@ export default function AppRoot() {
 
       {/* 2. Main Content Canvas */}
       <main className="flex-1 relative overflow-hidden">
-        {viewMode === 'map' && (
+        <div className={`w-full h-full ${viewMode === 'map' ? 'block' : 'hidden'}`}>
           <MapCanvasWrapper
             onSelectEntity={handleSelectEntity}
             onMapInstance={handleMapInstance}
           />
-        )}
+        </div>
         {viewMode === 'grid' && (
-          <MultiCamGrid onSelectEntity={handleSelectEntity} />
+          <div className="w-full h-full">
+            <MultiCamGrid onSelectEntity={handleSelectEntity} />
+          </div>
         )}
         {(viewMode === 'vids' || viewMode === 'pulse') && (
-          <CreatorVODFeed />
+          <div className="w-full h-full">
+            <CreatorVODFeed />
+          </div>
         )}
       </main>
 
