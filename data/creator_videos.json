@@ -1,7 +1,27 @@
 {
-  "last_updated": "2026-09-11T15:37:50.312Z",
+  "last_updated": "2026-09-11T20:16:31.845Z",
   "total_videos": 63,
   "videos": [
+    {
+      "id": "KG6uJvE7ju8",
+      "title": "Flood Yesterday, Gone Today | Soi Buakhao, Tree Town, LK Metro & Soi Pothole Night Walk – 11 Sep 8pm",
+      "channel_name": "Vespa Life Thailand",
+      "channel_slug": "vespa-life-thailand",
+      "channel_avatar": "https://yt3.googleusercontent.com/_0ocieqX7Bpx3CZLLsmLCQpq7TMttO_TCmaiSI8z75xbWgW7Q7N9NeHHt8yGUPoEjQwEA19c7hs=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i4.ytimg.com/vi/KG6uJvE7ju8/hqdefault.jpg",
+      "published_at": "2026-09-11T19:54:47+00:00",
+      "url": "https://www.youtube.com/watch?v=KG6uJvE7ju8"
+    },
+    {
+      "id": "IwWzOYyLw9E",
+      "title": "Pattaya Beach Live Thailand",
+      "channel_name": "Pattaya Beach Live",
+      "channel_slug": "pattaya-beach-live",
+      "channel_avatar": "https://yt3.googleusercontent.com/crUO73O1pFG6HIRAdN1bXIB1VKv3qRVUalTghYGIW0nwNGBeowXkb3jwBpJ-j0yZLBV9032--qQ=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i2.ytimg.com/vi/IwWzOYyLw9E/hqdefault.jpg",
+      "published_at": "2026-09-11T16:57:20+00:00",
+      "url": "https://www.youtube.com/watch?v=IwWzOYyLw9E"
+    },
     {
       "id": "kWBB3yfeVwE",
       "title": "Pattaya Beach Live Thailand",
@@ -61,16 +81,6 @@
       "thumbnail_url": "https://i2.ytimg.com/vi/MsF5p-BpL_o/hqdefault.jpg",
       "published_at": "2026-09-11T02:00:14+00:00",
       "url": "https://www.youtube.com/watch?v=MsF5p-BpL_o"
-    },
-    {
-      "id": "IwWzOYyLw9E",
-      "title": "Pattaya Beach Live Thailand",
-      "channel_name": "Pattaya Beach Live",
-      "channel_slug": "pattaya-beach-live",
-      "channel_avatar": "https://yt3.googleusercontent.com/crUO73O1pFG6HIRAdN1bXIB1VKv3qRVUalTghYGIW0nwNGBeowXkb3jwBpJ-j0yZLBV9032--qQ=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i2.ytimg.com/vi/IwWzOYyLw9E/hqdefault.jpg",
-      "published_at": "2026-09-11T01:41:36+00:00",
-      "url": "https://www.youtube.com/watch?v=IwWzOYyLw9E"
     },
     {
       "id": "wpjiyDFoN0Q",
@@ -621,16 +631,6 @@
       "thumbnail_url": "https://i4.ytimg.com/vi/CF-swrQyEYg/hqdefault.jpg",
       "published_at": "2026-09-04T21:34:43+00:00",
       "url": "https://www.youtube.com/watch?v=CF-swrQyEYg"
-    },
-    {
-      "id": "kL4tQ0aEjnY",
-      "title": "Pattaya Soi 6 Walk 🇹🇭 | Friday Sep 2026 at 8PM",
-      "channel_name": "Vespa Life Thailand",
-      "channel_slug": "vespa-life-thailand",
-      "channel_avatar": "https://yt3.googleusercontent.com/_0ocieqX7Bpx3CZLLsmLCQpq7TMttO_TCmaiSI8z75xbWgW7Q7N9NeHHt8yGUPoEjQwEA19c7hs=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i4.ytimg.com/vi/kL4tQ0aEjnY/hqdefault.jpg",
-      "published_at": "2026-09-04T16:41:34+00:00",
-      "url": "https://www.youtube.com/watch?v=kL4tQ0aEjnY"
     }
   ]
 }
