@@ -9,11 +9,13 @@ const __dirname = path.dirname(__filename);
 const rootDir = path.join(__dirname, '..');
 
 const venuesPath = path.join(rootDir, 'public', 'data', 'venues.json');
+const liveCamsPath = path.join(rootDir, 'public', 'data', 'live_cams.json');
 const streamersPath = path.join(rootDir, 'public', 'data', 'roaming_streamers.json');
 const creatorsPath = path.join(rootDir, 'public', 'data', 'creators.json');
 const statusPath = path.join(rootDir, 'public', 'data', 'stream_status.json');
 
 const venues = fs.existsSync(venuesPath) ? JSON.parse(fs.readFileSync(venuesPath, 'utf8')) : [];
+const liveCams = fs.existsSync(liveCamsPath) ? JSON.parse(fs.readFileSync(liveCamsPath, 'utf8')) : [];
 const streamers = fs.existsSync(streamersPath) ? JSON.parse(fs.readFileSync(streamersPath, 'utf8')) : [];
 const creators = fs.existsSync(creatorsPath) ? JSON.parse(fs.readFileSync(creatorsPath, 'utf8')) : [];
 
@@ -182,6 +184,37 @@ async function run() {
   if (venuesUpdated) {
     fs.writeFileSync(venuesPath, JSON.stringify(venues, null, 2), 'utf8');
     console.log('✓ Synced updated live video IDs to venues.json');
+  }
+
+  // 1b. Check 24/7 Live Webcams (YouTube)
+  console.log('\n--- Checking 24/7 Live Webcams ---');
+  let liveCamsUpdated = false;
+  for (const cam of liveCams) {
+    const entityKey = `livecam-${cam.slug}`;
+    const prev = nextEntities[entityKey] || {};
+    const result = await checkYouTubeChannel(cam.youtube_handle, cam.video_id);
+
+    if (result.is_live && result.video_id && result.video_id !== cam.video_id) {
+      cam.video_id = result.video_id;
+      liveCamsUpdated = true;
+    }
+
+    nextEntities[entityKey] = {
+      is_live: result.is_live,
+      video_id: result.is_live ? result.video_id : cam.video_id,
+      last_live_at: result.is_live ? nowIso : (prev.last_live_at || null),
+      status: result.status,
+      name: cam.name,
+      platform: 'youtube',
+      handle: cam.youtube_handle
+    };
+
+    console.log(`[${cam.name}] ${result.is_live ? '🔴 LIVE' : '⚪ Offline'} (${result.status})`);
+  }
+
+  if (liveCamsUpdated) {
+    fs.writeFileSync(liveCamsPath, JSON.stringify(liveCams, null, 2), 'utf8');
+    console.log('✓ Synced updated live video IDs to live_cams.json');
   }
 
   // 2. Check Roaming Streamers (YouTube)

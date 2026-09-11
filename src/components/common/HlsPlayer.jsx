@@ -2,15 +2,14 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import Hls from 'hls.js';
-import { ExternalLink, Video, ShieldCheck, Radio, Copy, Check } from 'lucide-react';
+import { Video, ShieldCheck } from 'lucide-react';
 
 export default function HlsPlayer({ streamUrl, title = 'City CCTV Stream', camId = 'CC-001', cameraCode }) {
   const videoRef = useRef(null);
   const hlsRef = useRef(null);
   const [hasError, setHasError] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [, setIsLoading] = useState(true);
   const [clock, setClock] = useState('');
-  const [copied, setCopied] = useState(false);
 
   const resolvedCode = cameraCode || camId;
   const isPortalUrl = !streamUrl || streamUrl.endsWith('.th/') || streamUrl.endsWith('.th') || !streamUrl.includes('.m3u8');
@@ -95,14 +94,6 @@ export default function HlsPlayer({ streamUrl, title = 'City CCTV Stream', camId
     };
   }, [streamUrl, isPortalUrl]);
 
-  const handleCopyCode = () => {
-    if (resolvedCode) {
-      navigator.clipboard.writeText(resolvedCode);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2500);
-    }
-  };
-
   return (
     <div className="relative w-full aspect-video bg-black rounded-xl overflow-hidden border border-borderDark flex flex-col group shadow-lg">
       {/* CCTV Top Status Bar */}
@@ -133,24 +124,8 @@ export default function HlsPlayer({ streamUrl, title = 'City CCTV Stream', camId
             </p>
           </div>
 
-          {/* 1-Click Copyable Camera Code Pill */}
-          {resolvedCode && (
-            <div className="z-10 flex items-center gap-2 bg-black/70 border border-brandCyan/40 rounded-lg px-3 py-1 shadow-inner">
-              <span className="text-slate-400 text-[11px] font-mono">Camera:</span>
-              <strong className="text-brandCyan font-mono font-bold text-xs">{resolvedCode}</strong>
-              <button
-                onClick={handleCopyCode}
-                className="ml-1 inline-flex items-center gap-1 px-2 py-0.5 rounded bg-brandCyan/20 hover:bg-brandCyan/30 text-brandCyan border border-brandCyan/40 text-[10px] font-mono font-semibold transition-colors"
-                title="Copy camera code to clipboard"
-              >
-                {copied ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
-                <span>{copied ? 'Copied!' : 'Copy'}</span>
-              </button>
-            </div>
-          )}
-
-          <div className="z-10 mt-1 flex items-center gap-1 text-[10px] text-slate-400 font-mono">
-            <span>Use command button below to launch portal feed</span>
+          <div className="z-10 mt-1 flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-950/40 border border-brandCyan/30 text-[10px] text-brandCyan font-mono">
+            <span>Use official command launcher below to launch City Hall stream</span>
           </div>
 
           {/* Bottom Telemetry Info */}

@@ -5,6 +5,7 @@ import { Grid2X2, Grid3X3, Video, X, Maximize2, RefreshCw, Radio } from 'lucide-
 import YouTubePlayer from './common/YouTubePlayer';
 import UniversalPlayer from './common/UniversalPlayer';
 import venuesData from '@/public/data/venues.json';
+import liveCamsData from '@/public/data/live_cams.json';
 import streamersData from '@/public/data/roaming_streamers.json';
 import { useStreamStatus } from '@/src/hooks/useStreamStatus';
 import { getSavedGridConfig, saveGridConfig } from '@/src/utils/storage';
@@ -19,11 +20,14 @@ export default function MultiCamGrid({ onSelectEntity }) {
   const activeVenues = venuesData.filter(
     (v) => streamStatus?.entities?.[`venue-${v.slug}`]?.status !== 'error_404'
   );
+  const activeLiveCams = liveCamsData.filter(
+    (c) => streamStatus?.entities?.[`livecam-${c.slug}`]?.status !== 'error_404'
+  );
   const activeStreamers = streamersData.filter(
     (s) => streamStatus?.entities?.[`streamer-${s.id}`]?.status !== 'error_404'
   );
 
-  // Auto-populate prioritized candidate list: live venues first, then live creators, then top venues
+  // Auto-populate prioritized candidate list: live webcams & live venues first, then live creators, then offline venues
   const liveVenues = activeVenues.filter(
     (v) => streamStatus?.entities?.[`venue-${v.slug}`]?.is_live
   );
@@ -35,14 +39,25 @@ export default function MultiCamGrid({ onSelectEntity }) {
   );
 
   const prioritizedCandidates = [
+    ...activeLiveCams.map((c) => `livecam-${c.slug}`),
     ...liveVenues.map((v) => v.slug),
     ...liveStreamers.map((s) => s.id),
     ...offlineVenues.map((v) => v.slug),
   ];
 
-  // Find entity by id or slug (strictly venues & streamers, NO CCTVs)
+  // Find entity by id or slug (strictly venues, 24/7 live cams & streamers, NO CCTVs)
   const resolveEntity = (val) => {
     if (!val) return null;
+    const liveCam = activeLiveCams.find((c) => c.slug === val || `livecam-${c.slug}` === val || c.id === val);
+    if (liveCam) {
+      const statusInfo = streamStatus?.entities?.[`livecam-${liveCam.slug}`];
+      return {
+        ...liveCam,
+        type: 'livecam',
+        video_id: statusInfo?.video_id || liveCam.video_id,
+        is_live: statusInfo ? statusInfo.is_live : true,
+      };
+    }
     const venue = activeVenues.find((v) => v.slug === val || v.id === val);
     if (venue) {
       const statusInfo = streamStatus?.entities?.[`venue-${venue.slug}`];
@@ -216,6 +231,16 @@ export default function MultiCamGrid({ onSelectEntity }) {
                     className="bg-canvas border border-borderDark text-[11px] font-mono text-slate-300 rounded px-2 py-1 focus:outline-none focus:border-brandCyan max-w-[150px] truncate"
                   >
                     <option value="">-- Choose Live Feed --</option>
+                    <optgroup label="🎥 24/7 Live Cams">
+                      {activeLiveCams.map((c) => {
+                        const isLive = streamStatus?.entities?.[`livecam-${c.slug}`]?.is_live ?? true;
+                        return (
+                          <option key={c.slug} value={`livecam-${c.slug}`}>
+                            {isLive ? '🔴 ' : '⚪ '}{c.name}
+                          </option>
+                        );
+                      })}
+                    </optgroup>
                     <optgroup label="✨ Live Venues">
                       {activeVenues.map((v) => {
                         const isLive = streamStatus?.entities?.[`venue-${v.slug}`]?.is_live;

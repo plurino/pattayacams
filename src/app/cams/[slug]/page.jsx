@@ -3,8 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Video, MapPin, ArrowLeft, Car, Hotel, ExternalLink, Compass } from 'lucide-react';
 import HlsPlayer from '@/src/components/common/HlsPlayer';
-import YouTubePlayer from '@/src/components/common/YouTubePlayer';
-import EmojiReactionGroup from '@/src/components/common/EmojiReactionGroup';
+import CctvLaunchCard from '@/src/components/common/CctvLaunchCard';
 import Navbar from '@/src/components/Navbar';
 import cctvData from '@/public/data/cctv_cams.json';
 import hotelsData from '@/public/data/hotels.json';
@@ -157,6 +156,13 @@ export default function CamPage({ params }) {
           />
         </div>
 
+        {/* 1 Single Official City Hall Stream Launcher */}
+        <CctvLaunchCard
+          cameraCode={cam.camera_code || cam.id}
+          cameraType={cam.type || 'Fix'}
+          cameraBrand={cam.brand || 'AXIS'}
+        />
+
         {/* Camera Description */}
         <div className="p-4 rounded-xl bg-surface border border-borderDark space-y-2">
           <h2 className="text-sm font-bold text-white uppercase font-mono tracking-wider text-slate-400">
@@ -166,9 +172,6 @@ export default function CamPage({ params }) {
             {cam.description}
           </p>
         </div>
-
-        {/* 1-Click Emoji Telemetry */}
-        <EmojiReactionGroup entitySlug={cam.slug} />
 
         {/* High-Intent 12Go Airport Transfer Card (Conditional on FEATURES.SHOW_AFFILIATE_ADS) */}
         {FEATURES.SHOW_AFFILIATE_ADS && (

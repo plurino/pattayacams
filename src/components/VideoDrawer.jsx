@@ -61,6 +61,7 @@ export default function VideoDrawer({ entity, onClose }) {
   };
 
   const isCctv = entity.type === 'cctv';
+  const isLiveCam = entity.type === 'livecam' || entity.category === 'live_cam';
   const isVenue = entity.type === 'venue';
   const isStreamer = entity.type === 'streamer';
   const isVenueOffline = isVenue && (entity.is_live === false);
@@ -197,8 +198,8 @@ export default function VideoDrawer({ entity, onClose }) {
         title={entity.name}
         handle={entity.youtube_handle || '@PattayaOhBar'}
         type={entity.type}
-        isLive={entity.is_live ?? isVenue}
-        badgeText={isStreamer ? '4K WALKING TOUR' : (isVenue ? 'LIVE STREAM BROADCAST' : undefined)}
+        isLive={entity.is_live ?? (isVenue || isLiveCam)}
+        badgeText={isLiveCam ? '24/7 LIVE WEBCAM' : (isStreamer ? '4K WALKING TOUR' : (isVenue ? 'LIVE STREAM BROADCAST' : undefined))}
       />
     );
   };
@@ -257,6 +258,36 @@ export default function VideoDrawer({ entity, onClose }) {
             <span>Visit {entity.name} on {entity.platform === 'kick' ? 'Kick' : 'YouTube'}</span>
             <ExternalLink className="w-3 h-3" />
           </a>
+        </div>
+      )}
+
+      {/* 24/7 Live Webcam Context Card */}
+      {isLiveCam && (
+        <div className="p-3.5 rounded-xl bg-emerald-950/20 border border-emerald-500/30 flex flex-col gap-2.5 shadow-md">
+          <div className="flex items-center justify-between">
+            <span className="text-[11px] font-mono text-slate-300 font-bold flex items-center gap-1.5">
+              <Radio className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
+              <span>24/7 Pattaya Street & Beach Webcam</span>
+            </span>
+            <span className="text-[9px] font-mono text-emerald-300 bg-emerald-900/40 px-2 py-0.5 rounded border border-emerald-500/30">
+              Live Feed • YouTube
+            </span>
+          </div>
+          <p className="text-[11px] text-slate-300 leading-relaxed">
+            Continuous real-time exterior live broadcast of Pattaya street, beach, and pedestrian traffic. High-definition feed hosted directly on YouTube by {entity.youtube_handle || '@PattayaCams'}.
+          </p>
+          {entity.youtube_handle && (
+            <a
+              href={`https://www.youtube.com/${entity.youtube_handle.startsWith('@') ? entity.youtube_handle : '@' + entity.youtube_handle}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-1 flex items-center justify-center gap-1.5 w-full py-2 px-3 rounded-lg bg-red-600 hover:bg-red-500 text-white text-xs font-semibold transition-colors shadow-sm"
+            >
+              <Youtube className="w-3.5 h-3.5" />
+              <span>Visit {entity.youtube_handle} on YouTube</span>
+              <ExternalLink className="w-3 h-3" />
+            </a>
+          )}
         </div>
       )}
 
@@ -433,11 +464,13 @@ export default function VideoDrawer({ entity, onClose }) {
               className={`w-2.5 h-2.5 rounded-full shrink-0 ${
                 isCctv
                   ? 'bg-brandCyan shadow-[0_0_8px_#00E5FF]'
-                  : isStreamer
-                    ? 'bg-indigo-400 shadow-[0_0_8px_rgba(129,140,248,0.5)]'
-                    : isVenueOffline
-                      ? 'bg-slate-400'
-                      : 'bg-brandPink shadow-[0_0_8px_#FF2A6D]'
+                  : isLiveCam
+                    ? 'bg-emerald-400 shadow-[0_0_8px_#10B981]'
+                    : isStreamer
+                      ? 'bg-indigo-400 shadow-[0_0_8px_rgba(129,140,248,0.5)]'
+                      : isVenueOffline
+                        ? 'bg-slate-400'
+                        : 'bg-brandPink shadow-[0_0_8px_#FF2A6D]'
               }`}
             />
             <div className="flex flex-col min-w-0">
@@ -451,7 +484,11 @@ export default function VideoDrawer({ entity, onClose }) {
           </div>
 
           <div className="flex items-center gap-2 shrink-0">
-            {isStreamer ? (
+            {isLiveCam ? (
+              <span className="text-[10px] uppercase font-bold font-mono px-2 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-500/30">
+                24/7 Live Cam
+              </span>
+            ) : isStreamer ? (
               <span className="text-[10px] uppercase font-bold font-mono px-2 py-0.5 rounded bg-indigo-950/60 text-indigo-300 border border-indigo-500/30">
                 4K Walking Tour
               </span>
@@ -496,7 +533,7 @@ export default function VideoDrawer({ entity, onClose }) {
                 <div className="w-full">
                   {renderVideoStage()}
                 </div>
-                <EmojiReactionGroup entitySlug={entity.slug} />
+                {!isCctv && <EmojiReactionGroup entitySlug={entity.slug} />}
                 <div className="p-4 rounded-xl bg-surfaceLight/30 border border-borderDark space-y-2">
                   <h3 className="text-xs font-bold uppercase font-mono tracking-wider text-slate-400">
                     Location & Area Overview
@@ -529,7 +566,7 @@ export default function VideoDrawer({ entity, onClose }) {
               <div className="w-full">
                 {renderVideoStage()}
               </div>
-              <EmojiReactionGroup entitySlug={entity.slug} />
+              {!isCctv && <EmojiReactionGroup entitySlug={entity.slug} />}
               {renderAuxiliaryCards()}
             </div>
           )}

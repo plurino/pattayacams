@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import venuesData from '@/public/data/venues.json';
+import liveCamsData from '@/public/data/live_cams.json';
 import cctvData from '@/public/data/cctv_cams.json';
 import busRoutes from '@/public/data/pattaya_baht_bus.geojson';
 import LayerToggleHUD from './LayerToggleHUD';
@@ -18,10 +19,12 @@ export default function MapCanvas({ onSelectEntity, onMapInstance }) {
     cctvActiveGroup: null,
     cctvDormantGroup: null,
     venueGroup: null,
+    liveCamGroup: null,
     transitGroup: null,
   });
 
   const [showVenues, setShowVenues] = useState(true);
+  const [showLiveCams, setShowLiveCams] = useState(true);
   const [showCams, setShowCams] = useState(false);
   const [showTransit, setShowTransit] = useState(true);
   const [showRadar, setShowRadar] = useState(true);
@@ -177,6 +180,75 @@ export default function MapCanvas({ onSelectEntity, onMapInstance }) {
     });
   }, [onSelectEntity]);
 
+  const populateLiveCamGroup = useCallback((group, Leaflet, currentStatus) => {
+    if (!group || !Leaflet) return;
+    group.clearLayers();
+
+    liveCamsData.forEach((cam) => {
+      const statusInfo = currentStatus?.entities?.[`livecam-${cam.slug}`];
+      const isLive = statusInfo ? Boolean(statusInfo.is_live) : true;
+
+      let htmlIcon;
+      if (isLive) {
+        htmlIcon = `
+          <div style="position: relative; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 40;">
+            <span style="position: absolute; width: 34px; height: 34px; border-radius: 50%; background: #10B981; opacity: 0.75; animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;"></span>
+            <div style="position: relative; width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, #10B981, #059669); border: 2px solid #FFFFFF; box-shadow: 0 0 16px #10B981; display: flex; align-items: center; justify-content: center; color: white; font-size: 14px;">
+              📹
+            </div>
+            <span style="position: absolute; top: -6px; right: -8px; background: #10B981; color: #FFFFFF; font-size: 8px; font-weight: 900; font-family: monospace; padding: 1px 4px; border-radius: 4px; box-shadow: 0 0 8px #10B981; border: 1px solid rgba(255,255,255,0.7); z-index: 10;">LIVE</span>
+          </div>
+        `;
+      } else {
+        htmlIcon = `
+          <div style="position: relative; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0.7;">
+            <div style="width: 28px; height: 28px; border-radius: 50%; background: #161F30; border: 1.5px solid #10B981; display: flex; align-items: center; justify-content: center; color: #10B981; font-size: 12px;">
+              📹
+            </div>
+          </div>
+        `;
+      }
+
+      const iconDimension = isLive ? [38, 38] : [30, 30];
+      const camIcon = Leaflet.divIcon({
+        className: 'custom-livecam-marker-container',
+        iconSize: iconDimension,
+        iconAnchor: [iconDimension[0] / 2, iconDimension[1] / 2],
+        html: htmlIcon,
+      });
+
+      const marker = Leaflet.marker([cam.lat, cam.lng], {
+        icon: camIcon,
+        zIndexOffset: isLive ? 1500 : 900,
+      });
+
+      marker.bindTooltip(
+        `<div style="font-family: inherit; font-size: 11px;">
+           <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 2px;">
+             <span style="background: #10B981; color: #FFFFFF; font-size: 9px; font-weight: 800; padding: 1px 5px; border-radius: 4px;">24/7 LIVE CAM</span>
+             <span style="color: ${isLive ? '#10B981' : '#94A3B8'}; font-weight: 700; font-size: 10px;">${isLive ? '🔴 LIVE NOW' : '⚪ OFFLINE'}</span>
+           </div>
+           <strong style="color: #FFFFFF; font-size: 12px;">${cam.name}</strong>
+           <div style="color: #94A3B8; font-size: 10px; margin-top: 2px;">Channel: ${cam.youtube_handle}</div>
+         </div>`,
+        { className: 'pattaya-dark-tooltip', direction: 'top', offset: [0, -14] }
+      );
+
+      marker.on('click', () => {
+        if (onSelectEntity) {
+          onSelectEntity({
+            ...cam,
+            type: 'livecam',
+            is_live: isLive,
+            video_id: statusInfo?.video_id || cam.video_id,
+            last_live_at: statusInfo?.last_live_at || null,
+          });
+        }
+      });
+      group.addLayer(marker);
+    });
+  }, [onSelectEntity]);
+
   const streamStatusRef = useRef(streamStatus);
   useEffect(() => {
     streamStatusRef.current = streamStatus;
@@ -187,12 +259,20 @@ export default function MapCanvas({ onSelectEntity, onMapInstance }) {
     populateVenueGroupRef.current = populateVenueGroup;
   }, [populateVenueGroup]);
 
-  // Update venue markers when streamStatus changes
+  const populateLiveCamGroupRef = useRef(populateLiveCamGroup);
+  useEffect(() => {
+    populateLiveCamGroupRef.current = populateLiveCamGroup;
+  }, [populateLiveCamGroup]);
+
+  // Update venue and live cam markers when streamStatus changes
   useEffect(() => {
     if (layersRef.current?.venueGroup && typeof window !== 'undefined' && window.L) {
       populateVenueGroup(layersRef.current.venueGroup, window.L, streamStatus);
     }
-  }, [streamStatus, populateVenueGroup]);
+    if (layersRef.current?.liveCamGroup && typeof window !== 'undefined' && window.L) {
+      populateLiveCamGroup(layersRef.current.liveCamGroup, window.L, streamStatus);
+    }
+  }, [streamStatus, populateVenueGroup, populateLiveCamGroup]);
 
   useEffect(() => {
     let isMounted = true;
@@ -344,11 +424,19 @@ export default function MapCanvas({ onSelectEntity, onMapInstance }) {
       }
       venueGroup.addTo(map);
 
+      // 4. 24/7 Live Webcams Layer Group (@pattayabob Beach Road & @ismannen Soi Buakhao)
+      const liveCamGroup = Leaflet.layerGroup();
+      if (populateLiveCamGroupRef.current) {
+        populateLiveCamGroupRef.current(liveCamGroup, Leaflet, streamStatusRef.current);
+      }
+      liveCamGroup.addTo(map);
+
       mapRef.current = map;
       layersRef.current = {
         cctvActiveGroup,
         cctvDormantGroup,
         venueGroup,
+        liveCamGroup,
         transitGroup,
       };
 
@@ -396,6 +484,19 @@ export default function MapCanvas({ onSelectEntity, onMapInstance }) {
       if (mapRef.current.hasLayer(venueGroup)) mapRef.current.removeLayer(venueGroup);
     }
   }, [showVenues]);
+
+  // 24/7 Live Cams Visibility Toggle
+  useEffect(() => {
+    if (!mapRef.current) return;
+    const { liveCamGroup } = layersRef.current;
+    if (!liveCamGroup) return;
+
+    if (showLiveCams) {
+      if (!mapRef.current.hasLayer(liveCamGroup)) mapRef.current.addLayer(liveCamGroup);
+    } else {
+      if (mapRef.current.hasLayer(liveCamGroup)) mapRef.current.removeLayer(liveCamGroup);
+    }
+  }, [showLiveCams]);
 
   // CCTV Toggle: Swap between Dormant subtle dots and Active cyan surveillance markers
   useEffect(() => {
@@ -471,6 +572,8 @@ export default function MapCanvas({ onSelectEntity, onMapInstance }) {
       <LayerToggleHUD
         showVenues={showVenues}
         setShowVenues={setShowVenues}
+        showLiveCams={showLiveCams}
+        setShowLiveCams={setShowLiveCams}
         showCams={showCams}
         setShowCams={setShowCams}
         showTransit={showTransit}
@@ -479,6 +582,7 @@ export default function MapCanvas({ onSelectEntity, onMapInstance }) {
         setShowRadar={setShowRadar}
         radarState={radarState}
         venueCount={venuesData.filter(v => streamStatus?.entities?.[`venue-${v.slug}`]?.status !== 'error_404').length}
+        liveCamCount={liveCamsData.length}
         camCount={cctvData.length}
         transitCount={busRoutes.features.length}
         bearing={bearing}

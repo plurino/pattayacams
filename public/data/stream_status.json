@@ -10,12 +10,21 @@
       "platform": "youtube",
       "handle": "@PattayaOhBar"
     },
-    "venue-kares-partybar-ismannen": {
-      "is_live": false,
-      "video_id": null,
-      "last_live_at": null,
+    "livecam-pattaya-beach-road-live-cam": {
+      "is_live": true,
+      "video_id": "WgSrfstUvIc",
+      "last_live_at": "2026-09-11T20:16:37.300Z",
       "status": "active",
-      "name": "Kåres Party Bar & Guesthouse (Ismannen)",
+      "name": "Pattaya Beach Road Live Cam",
+      "platform": "youtube",
+      "handle": "@pattayabob"
+    },
+    "livecam-soi-buakhao-live-cam-ismannen": {
+      "is_live": true,
+      "video_id": "GQnjaPRYHsU",
+      "last_live_at": "2026-09-11T20:16:37.300Z",
+      "status": "active",
+      "name": "Soi Buakhao Live Cam (Ismannen)",
       "platform": "youtube",
       "handle": "@ismannen"
     },

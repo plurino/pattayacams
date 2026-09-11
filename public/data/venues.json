@@ -21,21 +21,6 @@
     }
   },
   {
-    "slug": "kares-partybar-ismannen",
-    "id": "VN-002",
-    "name": "Kåres Party Bar & Guesthouse (Ismannen)",
-    "zone": "soi_buakhao",
-    "category": "bar",
-    "lat": 12.9305387,
-    "lng": 100.8859971,
-    "youtube_channel_id": "UCd0Aa89g9hbSQC-APdXWNNg",
-    "youtube_handle": "@ismannen",
-    "video_id": "GQnjaPRYHsU",
-    "google_maps_url": "https://www.google.com/maps/place/K%C3%A5res+Party+Bar+%26+Guesthouse/@12.9305439,100.8834222,17z/data=!4m6!3m5!1s0x3102960e564919dd:0xe333a891dcbe6fbb!8m2!3d12.9305387!4d100.8859971!16s%2Fg%2F11b6jdhqy8",
-    "description": "Operates a legendary, long-running 24/7 exterior street webcam pointing out over real-time pedestrian activity on Soi Buakhao.",
-    "is_sponsored": false
-  },
-  {
     "slug": "green-stop-cannabis",
     "id": "VN-005",
     "name": "Green Stop Dispensary & Bar",

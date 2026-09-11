@@ -11,6 +11,7 @@ import RoamingTray from '@/src/components/RoamingTray';
 import TripModal from '@/src/components/TripModal';
 import SponsorModal from '@/src/components/SponsorModal';
 import venuesData from '@/public/data/venues.json';
+import liveCamsData from '@/public/data/live_cams.json';
 import { useStreamStatus } from '@/src/hooks/useStreamStatus';
 import { useTickerData } from '@/src/hooks/useTickerData';
 import { useLiveAlerts } from '@/src/hooks/useLiveAlerts';
@@ -115,24 +116,40 @@ export default function AppRoot() {
     const liveVenues = venuesData.filter((v) => {
       const statusInfo = streamStatus?.entities?.[`venue-${v.slug}`];
       return statusInfo?.is_live === true || (statusInfo?.status === 'active' && statusInfo?.video_id);
+    }).map((v) => {
+      const statusInfo = streamStatus?.entities?.[`venue-${v.slug}`];
+      return {
+        ...v,
+        type: 'venue',
+        is_live: true,
+        video_id: statusInfo?.video_id || v.video_id,
+        last_live_at: statusInfo?.last_live_at || null,
+      };
     });
 
-    if (liveVenues.length === 0) return;
+    const liveCams = liveCamsData.filter((c) => {
+      const statusInfo = streamStatus?.entities?.[`livecam-${c.slug}`];
+      return statusInfo?.status !== 'error_404';
+    }).map((c) => {
+      const statusInfo = streamStatus?.entities?.[`livecam-${c.slug}`];
+      return {
+        ...c,
+        type: 'livecam',
+        is_live: true,
+        video_id: statusInfo?.video_id || c.video_id,
+        last_live_at: statusInfo?.last_live_at || null,
+      };
+    });
 
-    let candidates = liveVenues;
-    if (selectedEntity && liveVenues.length > 1) {
-      candidates = liveVenues.filter((v) => v.slug !== selectedEntity.slug);
+    const allLiveCandidates = [...liveVenues, ...liveCams];
+    if (allLiveCandidates.length === 0) return;
+
+    let candidates = allLiveCandidates;
+    if (selectedEntity && allLiveCandidates.length > 1) {
+      candidates = allLiveCandidates.filter((c) => c.slug !== selectedEntity.slug);
     }
     const chosen = candidates[Math.floor(Math.random() * candidates.length)];
-    const statusInfo = streamStatus?.entities?.[`venue-${chosen.slug}`];
-
-    const venuePayload = {
-      ...chosen,
-      type: 'venue',
-      is_live: true,
-      video_id: statusInfo?.video_id || chosen.video_id,
-      last_live_at: statusInfo?.last_live_at || null,
-    };
+    const entityPayload = { ...chosen };
 
     const needsViewSwitch = viewMode !== 'map';
     if (needsViewSwitch) {
@@ -156,10 +173,10 @@ export default function AppRoot() {
           console.warn('Shuffle flyTo warning', e);
         }
         setTimeout(() => {
-          setSelectedEntity(venuePayload);
+          setSelectedEntity(entityPayload);
         }, 700);
       } else {
-        setSelectedEntity(venuePayload);
+        setSelectedEntity(entityPayload);
       }
     }, needsViewSwitch ? 150 : 0);
   }, [viewMode, selectedEntity, streamStatus]);
