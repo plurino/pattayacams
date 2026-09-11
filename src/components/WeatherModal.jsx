@@ -265,42 +265,6 @@ export default function WeatherModal({ isOpen, onClose, currentWeather }) {
                   </div>
                 ))}
               </div>
-
-              {/* 24-Hour Day Planning Activity Guide */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
-                <div className="p-3 rounded-xl bg-canvas/60 border border-borderDark space-y-1">
-                  <div className="flex items-center gap-1.5 text-amber-400 font-bold text-xs">
-                    <span>🌅 Morning (06:00 - 12:00)</span>
-                  </div>
-                  <p className="text-[11px] text-slate-400 leading-relaxed">
-                    Optimal window for Bali Hai Pier ferries to Koh Larn, Beach Road morning runs, and water sports before peak tropical midday humidity.
-                  </p>
-                </div>
-                <div className="p-3 rounded-xl bg-canvas/60 border border-borderDark space-y-1">
-                  <div className="flex items-center gap-1.5 text-orange-400 font-bold text-xs">
-                    <span>☀️ Afternoon (12:00 - 17:00)</span>
-                  </div>
-                  <p className="text-[11px] text-slate-400 leading-relaxed">
-                    Highest daily temperatures; perfect for air-conditioned shopping malls (Terminal 21, Central Festival), Thai massages, or covered beach cafes.
-                  </p>
-                </div>
-                <div className="p-3 rounded-xl bg-canvas/60 border border-borderDark space-y-1">
-                  <div className="flex items-center gap-1.5 text-brandPink font-bold text-xs">
-                    <span>🌇 Sunset (17:00 - 19:00)</span>
-                  </div>
-                  <p className="text-[11px] text-slate-400 leading-relaxed">
-                    Refreshing Gulf of Thailand sea breeze returns. Golden hour viewing along Pratumnak Hill viewpoints and Beach Road promenade bars.
-                  </p>
-                </div>
-                <div className="p-3 rounded-xl bg-canvas/60 border border-borderDark space-y-1">
-                  <div className="flex items-center gap-1.5 text-indigo-400 font-bold text-xs">
-                    <span>🌙 Nightlife (19:00 - 04:00)</span>
-                  </div>
-                  <p className="text-[11px] text-slate-400 leading-relaxed">
-                    Pleasant evening temperatures across Soi Buakhao, Walking Street, and Tree Town open-air nightlife bars and live music venues.
-                  </p>
-                </div>
-              </div>
             </div>
           )}
 

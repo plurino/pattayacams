@@ -21,7 +21,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }) {
-  const cam = cctvData.find((c) => c.slug === params.slug);
+  const resolvedParams = await params;
+  const cam = cctvData.find((c) => c.slug === resolvedParams?.slug);
   if (!cam) {
     return {
       title: 'Camera Not Found | PattayaCams.com',
@@ -40,8 +41,9 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default function CamPage({ params }) {
-  const cam = cctvData.find((c) => c.slug === params.slug);
+export default async function CamPage({ params }) {
+  const resolvedParams = await params;
+  const cam = cctvData.find((c) => c.slug === resolvedParams?.slug);
   if (!cam) {
     notFound();
   }

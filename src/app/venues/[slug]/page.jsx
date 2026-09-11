@@ -38,7 +38,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }) {
-  const venue = venuesData.find((v) => v.slug === params.slug);
+  const resolvedParams = await params;
+  const venue = venuesData.find((v) => v.slug === resolvedParams?.slug);
   if (!venue) {
     return {
       title: 'Venue Not Found | PattayaCams.com',
@@ -59,8 +60,9 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default function VenuePage({ params }) {
-  const venue = venuesData.find((v) => v.slug === params.slug);
+export default async function VenuePage({ params }) {
+  const resolvedParams = await params;
+  const venue = venuesData.find((v) => v.slug === resolvedParams?.slug);
   if (!venue) {
     notFound();
   }

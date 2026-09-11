@@ -41,7 +41,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }) {
-  const creator = creatorsData.find((c) => c.slug === params.slug);
+  const resolvedParams = await params;
+  const creator = creatorsData.find((c) => c.slug === resolvedParams?.slug);
   if (!creator) {
     return {
       title: 'Creator Not Found | PattayaCams.com',
@@ -80,8 +81,9 @@ function formatRelativeTime(isoString) {
   return `${Math.floor(diffDays / 7)} weeks ago`;
 }
 
-export default function CreatorProfilePage({ params }) {
-  const creator = creatorsData.find((c) => c.slug === params.slug);
+export default async function CreatorProfilePage({ params }) {
+  const resolvedParams = await params;
+  const creator = creatorsData.find((c) => c.slug === resolvedParams?.slug);
   if (!creator) {
     notFound();
   }

@@ -98,13 +98,13 @@ export default function Navbar({
     <header className="h-14 border-b border-borderDark bg-surface/95 backdrop-blur-md flex items-center justify-between px-2.5 sm:px-4 md:px-5 shrink-0 z-50 select-none shadow-lg">
       {/* 1. Left: Brand Logo & Sexy Hover */}
       <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-        <a href="/" className="flex items-center gap-2 group shrink-0" title="PattayaCams - The city that never sleeps">
+        <Link href="/" className="flex items-center gap-2 group shrink-0" title="PattayaCams - The city that never sleeps">
           <img
             src="/images/logo-dark.png"
             alt="PattayaCams Logo"
             className="h-8 sm:h-9 md:h-10 w-auto object-contain transition-all duration-300 group-hover:scale-105 group-hover:brightness-110 group-hover:drop-shadow-[0_0_14px_rgba(255,42,109,0.7)]"
           />
-        </a>
+        </Link>
 
         {/* Live Network Status Indicator */}
         <div className="hidden lg:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surfaceLight border border-borderDark text-[10px] font-mono text-slate-300">

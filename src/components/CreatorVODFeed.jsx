@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useMemo, useRef, useEffect } from 'react';
+import Link from 'next/link';
 import {
   Play,
   Search,
@@ -322,7 +323,7 @@ export default function CreatorVODFeed({ onSelectVideo }) {
             </div>
 
             {/* Link to Creators Hub */}
-            <a
+            <Link
               href="/creators"
               className="px-3 py-1.5 rounded-xl text-xs font-mono font-bold bg-gradient-to-r from-brandPink/20 to-purple-600/20 hover:from-brandPink/30 hover:to-purple-600/30 text-pink-200 border border-brandPink/50 transition-all whitespace-nowrap flex items-center gap-1.5 shrink-0 shadow-sm"
               title="Explore 70+ Pattaya Content Creators & Live Venues"
@@ -330,7 +331,7 @@ export default function CreatorVODFeed({ onSelectVideo }) {
               <User className="w-3.5 h-3.5 text-brandPink" />
               <span className="hidden sm:inline">Creators Hub ↗</span>
               <span className="sm:hidden">Hub ↗</span>
-            </a>
+            </Link>
           </div>
         </div>
       </div>

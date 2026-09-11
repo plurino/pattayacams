@@ -4,6 +4,8 @@ import cctvData from '@/public/data/cctv_cams.json';
 
 const BASE_URL = 'https://pattayacams.com';
 
+export const dynamic = 'force-static';
+
 export default function sitemap() {
   const now = new Date();
 

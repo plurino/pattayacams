@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState, useCallback } from 'react';
 import venuesData from '@/public/data/venues.json';
 import liveCamsData from '@/public/data/live_cams.json';
 import cctvData from '@/public/data/cctv_cams.json';
-import busRoutes from '@/public/data/pattaya_baht_bus.geojson';
+import busRoutes from '@/public/data/pattaya_baht_bus.json';
 import LayerToggleHUD from './LayerToggleHUD';
 import { useStreamStatus } from '@/src/hooks/useStreamStatus';
 import { useRainViewer } from '@/src/hooks/useRainViewer';
@@ -122,7 +122,7 @@ export default function MapCanvas({ onSelectEntity, onMapInstance }) {
       } else if (isSponsor) {
         htmlIcon = `
           <div style="position: relative; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 45;">
-            <div style="width: 28px; height: 28px; border-radius: 50%; background: #161F30; border: 1.5px solid #475569; display: flex; align-items: center; justify-content: center; color: #94A3B8; font-size: 12px; filter: grayscale(50%);">
+            <div style="width: 28px; height: 28px; border-radius: 50%; background: #161F30; border: 1.5px solid #475569; display: flex; align-items: center; justify-content: center; color: #94A3B8; font-size: 12px; filter: grayscale(50%); opacity: 0.65;">
               ${iconEmoji}
             </div>
             <span style="position: absolute; top: -3px; right: -3px; width: 15px; height: 15px; border-radius: 50%; background: #EAB308; color: #0B0F17; font-size: 10px; font-weight: 900; display: flex; align-items: center; justify-content: center; box-shadow: 0 1px 4px rgba(0,0,0,0.6); border: 1.5px solid #0B0F17; z-index: 50;">★</span>
