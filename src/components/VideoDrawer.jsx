@@ -97,7 +97,9 @@ export default function VideoDrawer({ entity, onClose }) {
               <span>Currently Offline</span>
             </div>
             <p className="text-xs text-slate-400 font-mono">
-              Last live {formatRelativeTime(entity.last_live_at)}
+              {entity.last_live_at
+                ? `Last broadcast ${formatRelativeTime(entity.last_live_at)}`
+                : 'Standby • Check Channel for Streams'}
             </p>
           </div>
           <a

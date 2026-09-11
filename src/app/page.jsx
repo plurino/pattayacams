@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback, useMemo, useEffect } from 'react';
+import { X } from 'lucide-react';
 import Navbar from '@/src/components/Navbar';
 import MapCanvasWrapper from '@/src/components/MapCanvasWrapper';
 import MultiCamGrid from '@/src/components/MultiCamGrid';
@@ -17,17 +18,13 @@ export default function AppRoot() {
   const [selectedEntity, setSelectedEntity] = useState(null);
   const [isTripModalOpen, setIsTripModalOpen] = useState(false);
   const [isSponsorModalOpen, setIsSponsorModalOpen] = useState(false);
+  const [isBannerDismissed, setIsBannerDismissed] = useState(false);
   const mapInstanceRef = useRef(null);
 
-  React.useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const params = new URLSearchParams(window.location.search);
-      const v = params.get('view');
-      if (v === 'vids' || v === 'pulse') setViewMode('vids');
-      else if (v === 'grid') setViewMode('grid');
-      else if (v === 'map') setViewMode('map');
-    }
-  }, []);
+  const entities = streamStatus?.entities || {};
+  const activeLiveCount = useMemo(() => {
+    return Object.values(entities).filter((e) => e.is_live === true).length;
+  }, [entities]);
 
   const handleMapInstance = useCallback((map) => {
     mapInstanceRef.current = map;
@@ -115,6 +112,35 @@ export default function AppRoot() {
     }, needsViewSwitch ? 150 : 0);
   }, [viewMode, selectedEntity]);
 
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const v = params.get('view');
+      if (v === 'vids' || v === 'pulse') setViewMode('vids');
+      else if (v === 'grid') setViewMode('grid');
+      else if (v === 'map') setViewMode('map');
+
+      const jumpParam = params.get('jump');
+      if (jumpParam) {
+        import('@/src/utils/zones').then(({ QUICK_JUMP_TARGETS }) => {
+          const target = QUICK_JUMP_TARGETS.find(t => t.label.toLowerCase() === jumpParam.toLowerCase());
+          if (target) {
+            setTimeout(() => {
+              handleQuickJump(target.center, target.zoom);
+            }, 600);
+          }
+        });
+      }
+
+      const shuffleParam = params.get('shuffle');
+      if (shuffleParam) {
+        setTimeout(() => {
+          handleLiveShuffle();
+        }, 800);
+      }
+    }
+  }, [handleQuickJump, handleLiveShuffle]);
+
   return (
     <div className="flex flex-col h-screen w-screen overflow-hidden bg-canvas">
       {/* 1. Top Navigation Bar */}
@@ -143,6 +169,34 @@ export default function AppRoot() {
         {(viewMode === 'vids' || viewMode === 'pulse') && (
           <div className="w-full h-full">
             <CreatorVODFeed />
+          </div>
+        )}
+
+        {/* Subtle Floating Banner when No Streams are Currently Live */}
+        {viewMode === 'map' && activeLiveCount === 0 && !isBannerDismissed && (
+          <div className="absolute bottom-16 sm:bottom-20 left-1/2 -translate-x-1/2 z-30 max-w-lg w-[92%] sm:w-auto pointer-events-auto">
+            <div className="bg-surface/90 backdrop-blur-md border border-brandPink/50 shadow-[0_0_24px_rgba(255,42,109,0.3)] rounded-2xl px-4 py-2.5 flex items-center justify-between gap-3 text-xs">
+              <div className="flex items-center gap-2.5 text-slate-200">
+                <span className="text-base animate-pulse">🌙</span>
+                <span className="leading-snug">
+                  <strong className="text-white font-semibold">Pattaya is resting.</strong> No streams are live right now. Watch latest 4K walks & night highlights on{' '}
+                  <button
+                    onClick={() => setViewMode('vids')}
+                    className="text-brandPink font-bold hover:underline inline-flex items-center gap-0.5 ml-0.5"
+                  >
+                    <span>PattayaVids</span>
+                    <span className="text-[10px]">➔</span>
+                  </button>
+                </span>
+              </div>
+              <button
+                onClick={() => setIsBannerDismissed(true)}
+                className="w-6 h-6 rounded-full bg-surfaceLight/80 hover:bg-surfaceLight flex items-center justify-center text-slate-400 hover:text-white shrink-0 transition-colors"
+                title="Dismiss"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+            </div>
           </div>
         )}
       </main>

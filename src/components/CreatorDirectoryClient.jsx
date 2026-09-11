@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useRef } from 'react';
 import Link from 'next/link';
 import {
   Video,
@@ -13,14 +13,23 @@ import {
   Film,
   Map as MapIcon,
   ChevronRight,
+  ChevronLeft,
   Sparkles,
   X,
-  Grid
+  Grid,
+  ArrowUpDown,
 } from 'lucide-react';
+import Navbar from '@/src/components/Navbar';
+import CreatorAvatar from '@/src/components/common/CreatorAvatar';
+
+const ITEMS_PER_PAGE = 18;
 
 export default function CreatorDirectoryClient({ creators = [], venues = [], streamStatus = {} }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedPlatform, setSelectedPlatform] = useState('all');
+  const [sortBy, setSortBy] = useState('featured'); // 'featured' | 'name-asc' | 'name-desc' | 'platform'
+  const [currentPage, setCurrentPage] = useState(1);
+  const gridTopRef = useRef(null);
 
   const entities = streamStatus?.entities || {};
 
@@ -51,10 +60,11 @@ export default function CreatorDirectoryClient({ creators = [], venues = [], str
         handle: venue.youtube_handle || `@${venue.slug}`,
         platform: 'venue',
         item_type: 'venue',
-        avatar_url: activeVideoId ? `https://i.ytimg.com/vi/${activeVideoId}/hqdefault.jpg` : '/og-image.jpg',
+        avatar_url: activeVideoId ? `https://i.ytimg.com/vi/${activeVideoId}/hqdefault.jpg` : null,
         category: venue.category,
         zone: venue.zone,
         is_live: isLive,
+        is_sponsored: Boolean(venue.is_sponsored),
         video_id: activeVideoId,
         content_tags: ['Live Venue', 'Bar & Nightlife', venue.category ? venue.category.replace('_', ' ') : 'Pattaya'],
         bio_seo: venue.description,
@@ -79,7 +89,7 @@ export default function CreatorDirectoryClient({ creators = [], venues = [], str
         matchesPlatform = item.item_type === 'creator' && item.platform === 'youtube';
       } else if (selectedPlatform === 'kick') {
         matchesPlatform = item.item_type === 'creator' && item.platform === 'kick';
-      } // 'all' matches everything
+      }
 
       const query = searchQuery.toLowerCase().trim();
       const matchesQuery = !query ||
@@ -91,6 +101,63 @@ export default function CreatorDirectoryClient({ creators = [], venues = [], str
       return matchesPlatform && matchesQuery;
     });
   }, [allDirectoryItems, selectedPlatform, searchQuery]);
+
+  // Sort items based on chosen sorting criteria
+  const sortedItems = useMemo(() => {
+    const list = [...filteredItems];
+    if (sortBy === 'name-asc') {
+      return list.sort((a, b) => a.name.localeCompare(b.name));
+    }
+    if (sortBy === 'name-desc') {
+      return list.sort((a, b) => b.name.localeCompare(a.name));
+    }
+    if (sortBy === 'platform') {
+      return list.sort((a, b) => {
+        const platA = a.platform || '';
+        const platB = b.platform || '';
+        return platA.localeCompare(platB);
+      });
+    }
+    // Default 'featured': live first, sponsored first, then default
+    return list.sort((a, b) => {
+      if (a.is_live && !b.is_live) return -1;
+      if (!a.is_live && b.is_live) return 1;
+      if (a.is_sponsored && !b.is_sponsored) return -1;
+      if (!a.is_sponsored && b.is_sponsored) return 1;
+      return 0;
+    });
+  }, [filteredItems, sortBy]);
+
+  // Pagination calculation
+  const totalPages = Math.max(1, Math.ceil(sortedItems.length / ITEMS_PER_PAGE));
+  const safeCurrentPage = Math.min(currentPage, totalPages);
+
+  const paginatedItems = useMemo(() => {
+    const start = (safeCurrentPage - 1) * ITEMS_PER_PAGE;
+    return sortedItems.slice(start, start + ITEMS_PER_PAGE);
+  }, [sortedItems, safeCurrentPage]);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+    if (gridTopRef.current) {
+      gridTopRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
+  const handlePlatformChange = (p) => {
+    setSelectedPlatform(p);
+    setCurrentPage(1);
+  };
+
+  const handleSearchChange = (val) => {
+    setSearchQuery(val);
+    setCurrentPage(1);
+  };
+
+  const handleSortChange = (val) => {
+    setSortBy(val);
+    setCurrentPage(1);
+  };
 
   const liveCount = useMemo(() => {
     return allDirectoryItems.filter(c => c.is_live).length;
@@ -104,55 +171,13 @@ export default function CreatorDirectoryClient({ creators = [], venues = [], str
     return enrichedCreators.filter(c => c.platform === 'kick').length;
   }, [enrichedCreators]);
 
+  const startIndex = (safeCurrentPage - 1) * ITEMS_PER_PAGE + 1;
+  const endIndex = Math.min(safeCurrentPage * ITEMS_PER_PAGE, sortedItems.length);
+
   return (
     <div className="min-h-screen w-full bg-canvas text-slate-100 flex flex-col">
-      {/* 1. Unified Navigation Header */}
-      <header className="h-14 border-b border-borderDark bg-surface/95 backdrop-blur-md flex items-center justify-between px-3 sm:px-5 sticky top-0 z-50 shadow-md">
-        <Link href="/" className="flex items-center gap-2 group shrink-0" title="PattayaCams - The city that never sleeps">
-          <img
-            src="/images/logo-dark.png"
-            alt="PattayaCams Logo"
-            className="h-8 sm:h-9 w-auto object-contain transition-all duration-300 group-hover:scale-105 group-hover:brightness-110 group-hover:drop-shadow-[0_0_12px_rgba(255,42,109,0.7)]"
-          />
-        </Link>
-
-        {/* Unified Mode Switcher: Radar vs Multi-Cam vs PattayaVids vs Creators */}
-        <nav aria-label="Site View Navigation" className="flex items-center bg-canvas/90 p-0.5 sm:p-1 rounded-xl border border-borderDark/90 shadow-inner">
-          <Link
-            href="/?view=map"
-            className="flex items-center gap-1 sm:gap-1.5 px-2.5 py-1 sm:py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white hover:bg-surfaceLight/50 transition-all"
-            title="Interactive Live Radar Map"
-          >
-            <MapIcon className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">Radar</span>
-          </Link>
-          <Link
-            href="/?view=grid"
-            className="flex items-center gap-1 sm:gap-1.5 px-2.5 py-1 sm:py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white hover:bg-surfaceLight/50 transition-all"
-            title="Multi-Cam Command Grid"
-          >
-            <Grid className="w-3.5 h-3.5" />
-            <span className="hidden md:inline">Multi-Cam</span>
-          </Link>
-          <Link
-            href="/?view=vids"
-            className="flex items-center gap-1 sm:gap-1.5 px-2.5 py-1 sm:py-1.5 rounded-lg text-xs font-bold text-brandPink hover:text-white hover:bg-brandPink/10 transition-all"
-            title="PattayaVids: Daily 4K VOD Hub"
-          >
-            <Film className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">PattayaVids</span>
-            <span className="sm:hidden">Vids</span>
-          </Link>
-          <Link
-            href="/creators"
-            className="flex items-center gap-1 sm:gap-1.5 px-2.5 py-1 sm:py-1.5 rounded-lg text-xs font-bold bg-gradient-to-r from-brandPink to-purple-600 text-white shadow-[0_0_12px_rgba(255,42,109,0.4)] transition-all"
-            title="Creator & Venue Hub"
-          >
-            <Users className="w-3.5 h-3.5" />
-            <span>Hub</span>
-          </Link>
-        </nav>
-      </header>
+      {/* 1. Unified Site-wide Navigation Header */}
+      <Navbar viewMode="creators" />
 
       {/* 2. Hero Section */}
       <section className="border-b border-borderDark bg-surface/40 px-4 py-8 sm:py-12 md:px-8 text-center relative overflow-hidden">
@@ -182,13 +207,13 @@ export default function CreatorDirectoryClient({ creators = [], venues = [], str
             <input
               type="text"
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              onChange={(e) => handleSearchChange(e.target.value)}
               placeholder="Search creators & venues (e.g. Oh Bar, Buzzin, Vespa Life, S3xy Bar)..."
               className="w-full pl-10 pr-10 py-2.5 rounded-xl bg-surface border border-borderDark focus:border-brandPink/60 text-xs sm:text-sm text-slate-100 placeholder-slate-500 focus:outline-none transition-colors shadow-lg font-mono"
             />
             {searchQuery && (
               <button
-                onClick={() => setSearchQuery('')}
+                onClick={() => handleSearchChange('')}
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white"
               >
                 <X className="w-4 h-4" />
@@ -198,63 +223,90 @@ export default function CreatorDirectoryClient({ creators = [], venues = [], str
         </div>
       </section>
 
-      {/* 3. Filter Toolbar with Live Venues filter option */}
-      <div className="border-b border-borderDark bg-surfaceLight/30 px-4 py-3 sm:px-8 flex flex-wrap items-center justify-between gap-3 sticky top-14 z-30 backdrop-blur-md">
+      {/* 3. Filter & Sort Toolbar */}
+      <div
+        ref={gridTopRef}
+        className="border-b border-borderDark bg-surfaceLight/30 px-4 py-3 sm:px-8 flex flex-wrap items-center justify-between gap-3 sticky top-14 z-30 backdrop-blur-md"
+      >
         <p className="text-xs font-mono text-slate-400">
-          Showing <strong className="text-white font-bold">{filteredItems.length}</strong> of {allDirectoryItems.length} listings
+          {sortedItems.length === 0 ? (
+            '0 listings found'
+          ) : (
+            <>
+              Showing <strong className="text-white font-bold">{startIndex}–{endIndex}</strong> of {sortedItems.length} listings
+            </>
+          )}
         </p>
 
-        {/* Platform & Venue Type Selector */}
-        <div className="flex flex-wrap items-center gap-1 bg-surface p-1 rounded-xl border border-borderDark text-xs shrink-0">
-          <button
-            onClick={() => setSelectedPlatform('all')}
-            className={`px-3 py-1 rounded-lg font-mono transition-all ${
-              selectedPlatform === 'all'
-                ? 'bg-brandPink text-white font-bold shadow-sm'
-                : 'text-slate-400 hover:text-slate-200'
-            }`}
-          >
-            All ({allDirectoryItems.length})
-          </button>
-          <button
-            onClick={() => setSelectedPlatform('venues')}
-            className={`px-3 py-1 rounded-lg font-mono flex items-center gap-1 transition-all ${
-              selectedPlatform === 'venues'
-                ? 'bg-gradient-to-r from-brandPink to-rose-600 text-white font-bold shadow-sm'
-                : 'text-slate-400 hover:text-slate-200'
-            }`}
-          >
-            <MapPin className="w-3 h-3 text-brandPink" />
-            <span>Live Venues ({venues.length})</span>
-          </button>
-          <button
-            onClick={() => setSelectedPlatform('youtube')}
-            className={`px-3 py-1 rounded-lg font-mono flex items-center gap-1 transition-all ${
-              selectedPlatform === 'youtube'
-                ? 'bg-red-600 text-white font-bold shadow-sm'
-                : 'text-slate-400 hover:text-slate-200'
-            }`}
-          >
-            <Youtube className="w-3 h-3 text-red-400" />
-            <span>YouTube ({youtubeCount})</span>
-          </button>
-          <button
-            onClick={() => setSelectedPlatform('kick')}
-            className={`px-3 py-1 rounded-lg font-mono flex items-center gap-1 transition-all ${
-              selectedPlatform === 'kick'
-                ? 'bg-emerald-500 text-black font-bold shadow-sm'
-                : 'text-slate-400 hover:text-slate-200'
-            }`}
-          >
-            <Radio className="w-3 h-3 text-black" />
-            <span>Kick ({kickCount})</span>
-          </button>
+        <div className="flex flex-wrap items-center gap-2.5">
+          {/* Sort By Dropdown */}
+          <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-surface border border-borderDark text-xs font-mono text-slate-300">
+            <ArrowUpDown className="w-3.5 h-3.5 text-brandPink shrink-0" />
+            <span className="hidden sm:inline text-slate-400">Sort:</span>
+            <select
+              value={sortBy}
+              onChange={(e) => handleSortChange(e.target.value)}
+              className="bg-transparent text-xs text-slate-200 focus:outline-none cursor-pointer pr-1"
+            >
+              <option value="featured" className="bg-surface text-slate-200">Featured & Live</option>
+              <option value="name-asc" className="bg-surface text-slate-200">Name (A–Z)</option>
+              <option value="name-desc" className="bg-surface text-slate-200">Name (Z–A)</option>
+              <option value="platform" className="bg-surface text-slate-200">Platform</option>
+            </select>
+          </div>
+
+          {/* Platform & Venue Type Selector */}
+          <div className="flex flex-wrap items-center gap-1 bg-surface p-1 rounded-xl border border-borderDark text-xs shrink-0">
+            <button
+              onClick={() => handlePlatformChange('all')}
+              className={`px-3 py-1 rounded-lg font-mono transition-all ${
+                selectedPlatform === 'all'
+                  ? 'bg-brandPink text-white font-bold shadow-sm'
+                  : 'text-slate-400 hover:text-slate-200'
+              }`}
+            >
+              All ({allDirectoryItems.length})
+            </button>
+            <button
+              onClick={() => handlePlatformChange('venues')}
+              className={`px-3 py-1 rounded-lg font-mono flex items-center gap-1 transition-all ${
+                selectedPlatform === 'venues'
+                  ? 'bg-gradient-to-r from-brandPink to-rose-600 text-white font-bold shadow-sm'
+                  : 'text-slate-400 hover:text-slate-200'
+              }`}
+            >
+              <MapPin className="w-3 h-3 text-brandPink" />
+              <span>Live Venues ({venues.length})</span>
+            </button>
+            <button
+              onClick={() => handlePlatformChange('youtube')}
+              className={`px-3 py-1 rounded-lg font-mono flex items-center gap-1 transition-all ${
+                selectedPlatform === 'youtube'
+                  ? 'bg-red-600 text-white font-bold shadow-sm'
+                  : 'text-slate-400 hover:text-slate-200'
+              }`}
+            >
+              <Youtube className="w-3 h-3 text-red-400" />
+              <span>YouTube ({youtubeCount})</span>
+            </button>
+            <button
+              onClick={() => handlePlatformChange('kick')}
+              className={`px-3 py-1 rounded-lg font-mono flex items-center gap-1 transition-all ${
+                selectedPlatform === 'kick'
+                  ? 'bg-emerald-500 text-black font-bold shadow-sm'
+                  : 'text-slate-400 hover:text-slate-200'
+              }`}
+            >
+              <Radio className="w-3 h-3 text-black" />
+              <span>Kick ({kickCount})</span>
+            </button>
+          </div>
         </div>
       </div>
 
       {/* 4. Main Scrollable Grid */}
       <main className="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 md:p-8">
-        {filteredItems.length === 0 ? (
+        {paginatedItems.length === 0 ? (
           <div className="w-full py-20 flex flex-col items-center justify-center text-center gap-3 bg-surface/30 rounded-2xl border border-borderDark">
             <Users className="w-10 h-10 text-slate-600" />
             <h2 className="text-sm font-bold text-slate-300">No Listings Found</h2>
@@ -262,7 +314,7 @@ export default function CreatorDirectoryClient({ creators = [], venues = [], str
               We couldn't find any creators or live venues matching your search.
             </p>
             <button
-              onClick={() => { setSelectedPlatform('all'); setSearchQuery(''); }}
+              onClick={() => { setSelectedPlatform('all'); setSearchQuery(''); setCurrentPage(1); }}
               className="px-3 py-1.5 rounded-lg bg-surfaceLight hover:bg-surfaceLight/80 text-xs font-mono text-brandPink border border-borderDark mt-2"
             >
               Reset Search
@@ -270,7 +322,7 @@ export default function CreatorDirectoryClient({ creators = [], venues = [], str
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredItems.map((item) => {
+            {paginatedItems.map((item) => {
               const isVenue = item.item_type === 'venue';
               const isKick = item.platform === 'kick';
               const targetUrl = isVenue ? `/venues/${item.slug}` : `/creators/${item.slug}`;
@@ -281,14 +333,15 @@ export default function CreatorDirectoryClient({ creators = [], venues = [], str
                   className="group bg-surface border border-borderDark hover:border-brandPink/60 rounded-2xl overflow-hidden transition-all duration-200 hover:shadow-[0_8px_28px_rgba(255,42,109,0.15)] flex flex-col justify-between"
                 >
                   <div className="p-5 flex flex-col gap-4">
-                    {/* Header: Real Avatar / Thumbnail, Platform, Live Badge */}
+                    {/* Header: Real Avatar / Styled Initials Fallback, Platform, Live Badge */}
                     <div className="flex items-start justify-between gap-3">
                       <div className="relative shrink-0">
-                        <img
+                        <CreatorAvatar
                           src={item.avatar_url}
                           alt={item.name}
-                          className="w-14 h-14 rounded-2xl object-cover border-2 border-borderDark group-hover:border-brandPink/50 group-hover:scale-105 transition-all shadow-md bg-slate-900"
-                          loading="lazy"
+                          name={item.name}
+                          platform={item.platform}
+                          className="w-14 h-14 rounded-2xl group-hover:scale-105 transition-transform"
                         />
                         {item.is_live && (
                           <span className="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full bg-red-500 border-2 border-surface animate-ping" />
@@ -371,6 +424,52 @@ export default function CreatorDirectoryClient({ creators = [], venues = [], str
                 </div>
               );
             })}
+          </div>
+        )}
+
+        {/* 5. Pagination Controls */}
+        {totalPages > 1 && (
+          <div className="mt-10 pt-6 border-t border-borderDark flex flex-wrap items-center justify-between gap-4">
+            <p className="text-xs font-mono text-slate-400">
+              Page <span className="text-white font-bold">{safeCurrentPage}</span> of {totalPages}
+            </p>
+
+            <div className="flex items-center gap-1.5">
+              <button
+                onClick={() => handlePageChange(safeCurrentPage - 1)}
+                disabled={safeCurrentPage <= 1}
+                className="flex items-center gap-1 px-3 py-1.5 rounded-xl bg-surface border border-borderDark text-xs font-mono text-slate-300 hover:text-white hover:border-brandPink/50 disabled:opacity-30 disabled:pointer-events-none transition-all"
+              >
+                <ChevronLeft className="w-4 h-4" />
+                <span>Prev</span>
+              </button>
+
+              {/* Numbered Page Pills */}
+              <div className="flex items-center gap-1">
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+                  <button
+                    key={p}
+                    onClick={() => handlePageChange(p)}
+                    className={`w-8 h-8 rounded-xl text-xs font-mono font-bold transition-all ${
+                      safeCurrentPage === p
+                        ? 'bg-gradient-to-r from-brandPink to-rose-600 text-white shadow-[0_0_12px_rgba(255,42,109,0.4)]'
+                        : 'bg-surface border border-borderDark text-slate-400 hover:text-white hover:bg-surfaceLight'
+                    }`}
+                  >
+                    {p}
+                  </button>
+                ))}
+              </div>
+
+              <button
+                onClick={() => handlePageChange(safeCurrentPage + 1)}
+                disabled={safeCurrentPage >= totalPages}
+                className="flex items-center gap-1 px-3 py-1.5 rounded-xl bg-surface border border-borderDark text-xs font-mono text-slate-300 hover:text-white hover:border-brandPink/50 disabled:opacity-30 disabled:pointer-events-none transition-all"
+              >
+                <span>Next</span>
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
           </div>
         )}
       </main>

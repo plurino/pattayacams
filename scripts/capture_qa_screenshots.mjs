@@ -4,93 +4,88 @@ import path from 'path';
 const outDir = 'C:\\Users\\K\\.gemini\\antigravity\\brain\\8371e47a-cffe-4f09-818d-2be11531c2a6';
 
 async function main() {
-  console.log('Launching browser with Playwright (system Chrome)...');
+  console.log('Launching Playwright Chrome...');
   const browser = await chromium.launch({ channel: 'chrome', headless: true });
-  const context = await browser.newContext();
+  const context = await browser.newContext({ viewport: { width: 1280, height: 800 } });
   const page = await context.newPage();
 
-  // Listen for console and errors
   const pageErrors = [];
   page.on('pageerror', err => {
     console.error('Page error detected:', err.message);
     pageErrors.push(err.message);
   });
 
-  // 1. Desktop Map View & New Logo Hover
-  console.log('Testing Desktop View & New Logo (1280x800)...');
-  await page.setViewportSize({ width: 1280, height: 800 });
-  await page.goto('http://localhost:3001', { waitUntil: 'networkidle' });
-  await page.waitForTimeout(2000);
+  // 1. Radar Map View: Resting Banner & Star Pin
+  console.log('1. Testing Desktop Radar Map & Resting Banner...');
+  await page.goto('http://localhost:3000', { waitUntil: 'networkidle' });
+  await page.waitForTimeout(2500);
 
-  // Quick jump to Soi Buakhao to inspect featured venue pin layering
+  // Jump to Soi Buakhao to center on Oh Bar
   const soiBuakhaoButton = page.locator('button:has-text("Soi Buakhao")').first();
   if (await soiBuakhaoButton.isVisible()) {
-    console.log('Clicking Soi Buakhao Quick Jump to inspect featured venue...');
     await soiBuakhaoButton.click();
     await page.waitForTimeout(1500);
   }
 
-  await page.screenshot({ path: path.join(outDir, 'desktop_map_featured_ontop.png') });
-  console.log('Saved desktop_map_featured_ontop.png');
+  await page.screenshot({ path: path.join(outDir, 'radar_resting_banner_star.png') });
+  console.log('Saved radar_resting_banner_star.png');
 
-  // Click on a venue pin to test offline standby card
+  // Click on Pattaya Oh Bar to verify Standby card message
   const venueMarker = page.locator('.custom-venue-marker-container').first();
   if (await venueMarker.isVisible()) {
-    console.log('Clicking venue marker to verify Offline Standby card...');
     await venueMarker.click();
     await page.waitForTimeout(1000);
   }
+  await page.screenshot({ path: path.join(outDir, 'radar_standby_card_checked.png') });
+  console.log('Saved radar_standby_card_checked.png');
 
-  await page.screenshot({ path: path.join(outDir, 'venue_standby_card_verified.png') });
-  console.log('Saved venue_standby_card_verified.png');
-
-  // 2. Creators Hub - Live Venues Filter Test
-  console.log('Testing Creators Hub & Live Venues Filter...');
-  await page.goto('http://localhost:3001/creators', { waitUntil: 'networkidle' });
+  // 2. PattayaVids View: Multi-Select Filter & Pagination
+  console.log('2. Testing PattayaVids Multi-Select Dropdown & Pagination...');
+  await page.goto('http://localhost:3000/?view=vids', { waitUntil: 'networkidle' });
   await page.waitForTimeout(1500);
 
-  // Click on "Live Venues" filter button
-  const liveVenuesFilterBtn = page.locator('button:has-text("Live Venues")').first();
-  if (await liveVenuesFilterBtn.isVisible()) {
-    console.log('Clicking Live Venues filter button...');
-    await liveVenuesFilterBtn.click();
-    await page.waitForTimeout(1000);
+  // Open multi-select creator dropdown
+  const filterBtn = page.locator('button[title="Filter by multiple creators"]').first();
+  if (await filterBtn.isVisible()) {
+    await filterBtn.click();
+    await page.waitForTimeout(600);
   }
 
-  await page.screenshot({ path: path.join(outDir, 'creators_hub_live_venues_filter.png') });
-  console.log('Saved creators_hub_live_venues_filter.png');
+  await page.screenshot({ path: path.join(outDir, 'vids_multiselect_dropdown.png') });
+  console.log('Saved vids_multiselect_dropdown.png');
 
-  // 3. Creators Hub - Deep Scroll Test
-  console.log('Testing Creators Hub Full Scroll (All Listings)...');
-  const allFilterBtn = page.locator('button:has-text("All")').first();
-  if (await allFilterBtn.isVisible()) {
-    await allFilterBtn.click();
+  // 3. Creators Hub: Unified Navbar, Sorting, Styled Initial Avatars, Pagination
+  console.log('3. Testing Creators Hub Directory (Unified Navbar, Avatars & Pagination)...');
+  await page.goto('http://localhost:3000/creators', { waitUntil: 'networkidle' });
+  await page.waitForTimeout(1500);
+
+  await page.screenshot({ path: path.join(outDir, 'creators_hub_unified_page1.png') });
+  console.log('Saved creators_hub_unified_page1.png');
+
+  // Click page 2 on Creators Hub
+  const page2Btn = page.locator('button:has-text("2")').last();
+  if (await page2Btn.isVisible()) {
+    await page2Btn.click();
     await page.waitForTimeout(800);
+    await page.screenshot({ path: path.join(outDir, 'creators_hub_page2.png') });
+    console.log('Saved creators_hub_page2.png');
   }
 
-  // Scroll down 1800px
-  const scrollYBefore = await page.evaluate(() => window.scrollY);
-  await page.evaluate(() => window.scrollTo(0, 1800));
-  await page.waitForTimeout(1000);
-  const scrollYAfter = await page.evaluate(() => window.scrollY);
-  console.log(`Scroll Test: Before=${scrollYBefore}px -> After=${scrollYAfter}px`);
-
-  await page.screenshot({ path: path.join(outDir, 'creators_hub_scrolled_deep.png') });
-  console.log('Saved creators_hub_scrolled_deep.png');
-
-  // 4. Creator Profile Page - Scroll Test
-  console.log('Testing Creator Profile Page (buzzin-pattaya) Scrolling...');
-  await page.goto('http://localhost:3001/creators/buzzin-pattaya', { waitUntil: 'networkidle' });
+  // 4. Creator Profile Page: Buzzin Pattaya
+  console.log('4. Testing Creator Profile Page (buzzin-pattaya)...');
+  await page.goto('http://localhost:3000/creators/buzzin-pattaya', { waitUntil: 'networkidle' });
   await page.waitForTimeout(1500);
 
-  // Scroll down 1200px
-  await page.evaluate(() => window.scrollTo(0, 1200));
-  await page.waitForTimeout(1000);
-  const profileScrollY = await page.evaluate(() => window.scrollY);
-  console.log(`Profile Page Scroll Test: Y=${profileScrollY}px`);
+  await page.screenshot({ path: path.join(outDir, 'creator_profile_buzzin.png') });
+  console.log('Saved creator_profile_buzzin.png');
 
-  await page.screenshot({ path: path.join(outDir, 'creator_profile_page_scrolled.png') });
-  console.log('Saved creator_profile_page_scrolled.png');
+  // 5. Creator Profile Page: RikAsian (Kick Streamer)
+  console.log('5. Testing Creator Profile Page (rikasian - Kick)...');
+  await page.goto('http://localhost:3000/creators/rikasian', { waitUntil: 'networkidle' });
+  await page.waitForTimeout(1500);
+
+  await page.screenshot({ path: path.join(outDir, 'creator_profile_rikasian_kick.png') });
+  console.log('Saved creator_profile_rikasian_kick.png');
 
   await browser.close();
 
@@ -98,8 +93,9 @@ async function main() {
   console.log('Total unhandled page errors:', pageErrors.length);
   if (pageErrors.length > 0) {
     console.error('Errors encountered:', pageErrors);
+    process.exit(1);
   } else {
-    console.log('All tests passed with ZERO page errors!');
+    console.log('All QA tests passed with ZERO page errors!');
   }
 }
 

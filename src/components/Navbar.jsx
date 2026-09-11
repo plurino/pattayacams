@@ -1,10 +1,12 @@
 'use client';
 
 import React, { useEffect, useState, useRef } from 'react';
-import { Video, Map as MapIcon, Grid, Calendar, Wifi, Film, ChevronDown, Sparkles } from 'lucide-react';
+import Link from 'next/link';
+import { Video, Map as MapIcon, Grid, Calendar, Wifi, Film, ChevronDown, Sparkles, Users } from 'lucide-react';
 import { QUICK_JUMP_TARGETS } from '@/src/utils/zones';
 import { getSavedTripDate } from '@/src/utils/storage';
 import { FEATURES } from '@/src/config/features';
+import TripModal from '@/src/components/TripModal';
 
 export default function Navbar({
   viewMode = 'map',
@@ -17,6 +19,7 @@ export default function Navbar({
   const [tripDays, setTripDays] = useState(null);
   const [activeZone, setActiveZone] = useState('');
   const [isZoneMenuOpen, setIsZoneMenuOpen] = useState(false);
+  const [isInternalTripOpen, setIsInternalTripOpen] = useState(false);
   const zoneMenuRef = useRef(null);
 
   useEffect(() => {
@@ -55,17 +58,38 @@ export default function Navbar({
   const handleJump = (target) => {
     setActiveZone(target.label);
     setIsZoneMenuOpen(false);
-    if (viewMode !== 'map') {
-      setViewMode('map');
-      setTimeout(() => {
-        if (onQuickJump) onQuickJump(target.center, target.zoom);
-      }, 120);
+    if (onQuickJump) {
+      if (viewMode !== 'map' && setViewMode) {
+        setViewMode('map');
+        setTimeout(() => {
+          onQuickJump(target.center, target.zoom);
+        }, 120);
+      } else {
+        onQuickJump(target.center, target.zoom);
+      }
     } else {
-      if (onQuickJump) onQuickJump(target.center, target.zoom);
+      window.location.href = `/?jump=${encodeURIComponent(target.label)}`;
+    }
+  };
+
+  const handleShuffleClick = () => {
+    if (onLiveShuffle) {
+      onLiveShuffle();
+    } else {
+      window.location.href = '/?shuffle=1';
+    }
+  };
+
+  const handleTripClick = () => {
+    if (onOpenTripModal) {
+      onOpenTripModal();
+    } else {
+      setIsInternalTripOpen(true);
     }
   };
 
   const isVidsActive = viewMode === 'vids' || viewMode === 'pulse';
+  const isCreatorsActive = viewMode === 'creators' || viewMode === 'hub';
 
   return (
     <header className="h-14 border-b border-borderDark bg-surface/95 backdrop-blur-md flex items-center justify-between px-2.5 sm:px-4 md:px-5 shrink-0 z-50 select-none shadow-lg">
@@ -154,7 +178,7 @@ export default function Navbar({
         {/* City Roulette: Live Shuffle Button (Shown on sm+ screens) */}
         {FEATURES.ENABLE_ROULETTE && (
           <button
-            onClick={onLiveShuffle}
+            onClick={handleShuffleClick}
             className="hidden sm:flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl bg-gradient-to-r from-brandPink/20 via-purple-600/20 to-brandRed/20 hover:from-brandPink/30 hover:to-brandRed/30 border border-brandPink/60 hover:border-brandPink text-white text-xs font-bold transition-all shadow-[0_0_12px_rgba(255,42,109,0.25)] cursor-pointer shrink-0 active:scale-95"
             title="City Roulette: Fly to a random live stream"
           >
@@ -163,57 +187,113 @@ export default function Navbar({
           </button>
         )}
 
-        {/* View Mode Switcher: Radar vs Multi-Cam vs PattayaVids */}
+        {/* View Mode Switcher: Radar vs Multi-Cam vs PattayaVids vs Creators Hub */}
         <div className="flex items-center bg-canvas/90 p-0.5 rounded-xl border border-borderDark/90 shadow-inner">
-          <button
-            onClick={() => setViewMode('map')}
-            className={`flex items-center gap-1 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-lg text-xs font-semibold transition-all ${
-              viewMode === 'map'
-                ? 'bg-gradient-to-r from-brandPink to-rose-600 text-white shadow-[0_0_12px_rgba(255,42,109,0.4)]'
-                : 'text-slate-300 hover:text-white hover:bg-surfaceLight/50'
-            }`}
-            title="Interactive Live Map & Surveillance Radar"
-          >
-            <MapIcon className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">Radar</span>
-          </button>
-          <button
-            onClick={() => setViewMode('grid')}
-            className={`flex items-center gap-1 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-lg text-xs font-semibold transition-all ${
-              viewMode === 'grid'
-                ? 'bg-gradient-to-r from-brandPink to-rose-600 text-white shadow-[0_0_12px_rgba(255,42,109,0.4)]'
-                : 'text-slate-300 hover:text-white hover:bg-surfaceLight/50'
-            }`}
-            title="Multi-Cam Command Grid (4-up Quad View)"
-          >
-            <Grid className="w-3.5 h-3.5" />
-            <span className="hidden md:inline">Multi-Cam</span>
-          </button>
-          <button
-            onClick={() => setViewMode('vids')}
-            className={`flex items-center gap-1 px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg text-xs font-bold transition-all ${
-              isVidsActive
+          {setViewMode ? (
+            <button
+              onClick={() => setViewMode('map')}
+              className={`flex items-center gap-1 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                viewMode === 'map'
+                  ? 'bg-gradient-to-r from-brandPink to-rose-600 text-white shadow-[0_0_12px_rgba(255,42,109,0.4)]'
+                  : 'text-slate-300 hover:text-white hover:bg-surfaceLight/50'
+              }`}
+              title="Interactive Live Map & Surveillance Radar"
+            >
+              <MapIcon className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Radar</span>
+            </button>
+          ) : (
+            <Link
+              href="/?view=map"
+              className={`flex items-center gap-1 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                viewMode === 'map'
+                  ? 'bg-gradient-to-r from-brandPink to-rose-600 text-white shadow-[0_0_12px_rgba(255,42,109,0.4)]'
+                  : 'text-slate-300 hover:text-white hover:bg-surfaceLight/50'
+              }`}
+              title="Interactive Live Map & Surveillance Radar"
+            >
+              <MapIcon className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Radar</span>
+            </Link>
+          )}
+
+          {setViewMode ? (
+            <button
+              onClick={() => setViewMode('grid')}
+              className={`flex items-center gap-1 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                viewMode === 'grid'
+                  ? 'bg-gradient-to-r from-brandPink to-rose-600 text-white shadow-[0_0_12px_rgba(255,42,109,0.4)]'
+                  : 'text-slate-300 hover:text-white hover:bg-surfaceLight/50'
+              }`}
+              title="Multi-Cam Command Grid (4-up Quad View)"
+            >
+              <Grid className="w-3.5 h-3.5" />
+              <span className="hidden md:inline">Multi-Cam</span>
+            </button>
+          ) : (
+            <Link
+              href="/?view=grid"
+              className={`flex items-center gap-1 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                viewMode === 'grid'
+                  ? 'bg-gradient-to-r from-brandPink to-rose-600 text-white shadow-[0_0_12px_rgba(255,42,109,0.4)]'
+                  : 'text-slate-300 hover:text-white hover:bg-surfaceLight/50'
+              }`}
+              title="Multi-Cam Command Grid (4-up Quad View)"
+            >
+              <Grid className="w-3.5 h-3.5" />
+              <span className="hidden md:inline">Multi-Cam</span>
+            </Link>
+          )}
+
+          {setViewMode ? (
+            <button
+              onClick={() => setViewMode('vids')}
+              className={`flex items-center gap-1 px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg text-xs font-bold transition-all ${
+                isVidsActive
+                  ? 'bg-gradient-to-r from-brandPink via-purple-600 to-rose-600 text-white shadow-[0_0_14px_rgba(255,42,109,0.5)] border border-white/20'
+                  : 'text-brandPink hover:text-white hover:bg-brandPink/10'
+              }`}
+              title="PattayaVids: Curated 4K Street Walks, Nightlife Highlights & Expat Guides"
+            >
+              <Film className="w-3.5 h-3.5 shrink-0" />
+              <span className="hidden sm:inline">Pattaya<span className={isVidsActive ? 'text-white' : 'text-brandPink font-extrabold'}>Vids</span></span>
+              <span className="sm:hidden font-bold text-[11px]">Vids</span>
+            </button>
+          ) : (
+            <Link
+              href="/?view=vids"
+              className={`flex items-center gap-1 px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg text-xs font-bold transition-all ${
+                isVidsActive
+                  ? 'bg-gradient-to-r from-brandPink via-purple-600 to-rose-600 text-white shadow-[0_0_14px_rgba(255,42,109,0.5)] border border-white/20'
+                  : 'text-brandPink hover:text-white hover:bg-brandPink/10'
+              }`}
+              title="PattayaVids: Curated 4K Street Walks, Nightlife Highlights & Expat Guides"
+            >
+              <Film className="w-3.5 h-3.5 shrink-0" />
+              <span className="hidden sm:inline">Pattaya<span className={isVidsActive ? 'text-white' : 'text-brandPink font-extrabold'}>Vids</span></span>
+              <span className="sm:hidden font-bold text-[11px]">Vids</span>
+            </Link>
+          )}
+
+          {/* Creators Hub Link */}
+          <Link
+            href="/creators"
+            className={`flex items-center gap-1 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-lg text-xs font-bold transition-all ${
+              isCreatorsActive
                 ? 'bg-gradient-to-r from-brandPink via-purple-600 to-rose-600 text-white shadow-[0_0_14px_rgba(255,42,109,0.5)] border border-white/20'
-                : 'text-brandPink hover:text-white hover:bg-brandPink/10'
+                : 'text-slate-300 hover:text-white hover:bg-surfaceLight/50'
             }`}
-            title="PattayaVids: Curated 4K Street Walks, Nightlife Highlights & Expat Guides"
+            title="Pattaya Creators & Live Venues Directory"
           >
-            <Film className="w-3.5 h-3.5 shrink-0" />
-            <span className="hidden sm:inline">Pattaya<span className={isVidsActive ? 'text-white' : 'text-brandPink font-extrabold'}>Vids</span></span>
-            <span className="sm:hidden font-bold text-[11px]">Vids</span>
-            <span className={`hidden sm:inline-block text-[9px] px-1 py-0.2 rounded font-mono uppercase font-black ${
-              isVidsActive
-                ? 'bg-white/20 text-white'
-                : 'bg-brandPink/20 text-brandPink border border-brandPink/40'
-            }`}>
-              VOD
-            </span>
-          </button>
+            <Users className="w-3.5 h-3.5 shrink-0" />
+            <span className="hidden sm:inline">Creators</span>
+            <span className="sm:hidden font-bold text-[11px]">Hub</span>
+          </Link>
         </div>
 
         {/* Dynamic Trip Countdown / Date Picker Button (Shown on sm+ screens) */}
         <button
-          onClick={onOpenTripModal}
+          onClick={handleTripClick}
           className="hidden sm:flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-1.5 rounded-xl bg-surfaceLight hover:bg-surfaceLight/80 border border-borderDark text-xs font-mono transition-all text-slate-200 hover:border-brandPink/50 shrink-0"
           title="Click to set your departure date & view countdown clock"
         >
@@ -231,6 +311,14 @@ export default function Navbar({
           )}
         </button>
       </div>
+
+      {/* Internal Trip Modal if opened from page without external state */}
+      {!onOpenTripModal && (
+        <TripModal
+          isOpen={isInternalTripOpen}
+          onClose={() => setIsInternalTripOpen(false)}
+        />
+      )}
     </header>
   );
 }

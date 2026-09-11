@@ -259,7 +259,7 @@ export default function MapCanvas({ onSelectEntity, onMapInstance }) {
               <div style="width: 32px; height: 32px; border-radius: 50%; background: #161F30; border: 2px solid #EAB308; box-shadow: 0 0 14px rgba(234, 179, 8, 0.6); display: flex; align-items: center; justify-content: center; color: #FACC15; font-size: 14px;">
                 ${iconEmoji}
               </div>
-              <span style="position: absolute; -bottom: 2px; background: #EAB308; color: #0B0F17; font-size: 7.5px; font-weight: 900; font-family: monospace; padding: 0.5px 3.5px; border-radius: 3px; box-shadow: 0 1px 4px rgba(0,0,0,0.5);">STAR</span>
+              <span style="position: absolute; top: -3px; right: -3px; width: 15px; height: 15px; border-radius: 50%; background: #EAB308; color: #0B0F17; font-size: 10px; font-weight: 900; display: flex; align-items: center; justify-content: center; box-shadow: 0 1px 4px rgba(0,0,0,0.6); border: 1.5px solid #0B0F17; z-index: 50;">★</span>
             </div>
           `;
         } else {

@@ -13,19 +13,16 @@ import {
   Car,
   Wifi,
   Compass,
-  Map as MapIcon,
   Tag,
   ShieldCheck,
-  Grid,
-  Film
+  Film,
+  Sparkles
 } from 'lucide-react';
-import YouTubePlayer from '@/src/components/common/YouTubePlayer';
-import KickPlayer from '@/src/components/common/KickPlayer';
+import Navbar from '@/src/components/Navbar';
+import CreatorAvatar from '@/src/components/common/CreatorAvatar';
 import creatorsData from '@/public/data/creators.json';
 import streamStatus from '@/public/data/stream_status.json';
 import vodData from '@/public/data/creator_videos.json';
-import { FEATURES } from '@/src/config/features';
-import { build12GoTransferUrl, buildAiraloEsimUrl } from '@/src/utils/affiliate';
 
 const ZONE_LABELS = {
   buakhao: 'Soi Buakhao & Central Pattaya',
@@ -53,23 +50,15 @@ export async function generateMetadata({ params }) {
 
   const cleanBioSnippet = creator.bio_seo
     ? creator.bio_seo.slice(0, 155).trim() + '...'
-    : `Explore latest videos, live streams, and guide dossier for ${creator.name} in Pattaya, Thailand.`;
+    : `Explore latest videos and travel guide for ${creator.name} in Pattaya, Thailand.`;
 
   return {
     title: `${creator.name} | Pattaya Creator Guide & Latest Videos`,
-    description: `${cleanBioSnippet} Watch live broadcasts, 4K street walks, and neighborhood tours across Pattaya.`,
+    description: `${cleanBioSnippet} 4K street walks, nightlife guides, and neighborhood tours across Pattaya.`,
     openGraph: {
       title: `${creator.name} | Pattaya Creator Guide & Latest Videos`,
       description: cleanBioSnippet,
       url: `https://pattayacams.com/creators/${creator.slug}/`,
-      images: [
-        {
-          url: creator.avatar_url,
-          width: 400,
-          height: 400,
-          alt: creator.name,
-        }
-      ],
       type: 'profile',
     },
   };
@@ -98,8 +87,6 @@ export default function CreatorProfilePage({ params }) {
   }
 
   const isKick = creator.platform === 'kick';
-  const entityStatus = streamStatus?.entities?.[`creator-${creator.slug}`] || {};
-  const isLive = entityStatus.is_live === true;
 
   // Recent videos for this creator
   const allVideos = vodData?.videos || [];
@@ -117,76 +104,33 @@ export default function CreatorProfilePage({ params }) {
 
   return (
     <div className="min-h-screen w-full bg-canvas text-slate-100 flex flex-col">
-      {/* Top Header */}
-      <header className="h-14 border-b border-borderDark bg-surface/95 backdrop-blur-md flex items-center justify-between px-3 sm:px-5 sticky top-0 z-50 shadow-md">
-        <Link href="/" className="flex items-center gap-2 group shrink-0" title="PattayaCams">
-          <img
-            src="/images/logo-dark.png"
-            alt="PattayaCams Logo"
-            className="h-8 sm:h-9 w-auto object-contain transition-all duration-300 group-hover:scale-105 group-hover:brightness-110 group-hover:drop-shadow-[0_0_12px_rgba(255,42,109,0.7)]"
-          />
-        </Link>
-
-        {/* Unified Navigation Switcher */}
-        <nav aria-label="Site Navigation" className="flex items-center bg-canvas/90 p-0.5 sm:p-1 rounded-xl border border-borderDark/90 shadow-inner">
-          <Link
-            href="/?view=map"
-            className="flex items-center gap-1 sm:gap-1.5 px-2.5 py-1 sm:py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white hover:bg-surfaceLight/50 transition-all"
-            title="Interactive Live Radar Map"
-          >
-            <MapIcon className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">Radar</span>
-          </Link>
-          <Link
-            href="/?view=grid"
-            className="flex items-center gap-1 sm:gap-1.5 px-2.5 py-1 sm:py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white hover:bg-surfaceLight/50 transition-all"
-            title="Multi-Cam Command Grid"
-          >
-            <Grid className="w-3.5 h-3.5" />
-            <span className="hidden md:inline">Multi-Cam</span>
-          </Link>
-          <Link
-            href="/?view=vids"
-            className="flex items-center gap-1 sm:gap-1.5 px-2.5 py-1 sm:py-1.5 rounded-lg text-xs font-bold text-brandPink hover:text-white hover:bg-brandPink/10 transition-all"
-            title="PattayaVids: Daily 4K VOD Hub"
-          >
-            <Film className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">PattayaVids</span>
-            <span className="sm:hidden">Vids</span>
-          </Link>
-          <Link
-            href="/creators"
-            className="flex items-center gap-1 sm:gap-1.5 px-2.5 py-1 sm:py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white hover:bg-surfaceLight/50 transition-all"
-            title="Back to Creators Directory"
-          >
-            <ArrowLeft className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">Directory</span>
-          </Link>
-        </nav>
-      </header>
+      {/* 1. Unified Site Header */}
+      <Navbar viewMode="creators" />
 
       {/* Main Container */}
-      <main className="max-w-6xl w-full mx-auto p-4 sm:p-6 md:p-8 flex flex-col gap-8">
+      <main className="max-w-5xl w-full mx-auto p-4 sm:p-6 md:p-8 flex flex-col gap-8 flex-1">
+        {/* Breadcrumb Navigation */}
+        <div className="flex items-center gap-2 text-xs font-mono text-slate-400">
+          <Link href="/creators" className="hover:text-brandPink transition-colors flex items-center gap-1">
+            <ArrowLeft className="w-3.5 h-3.5" />
+            <span>Creators Directory</span>
+          </Link>
+          <span>/</span>
+          <span className="text-white font-medium">{creator.name}</span>
+        </div>
+
         {/* 1. Hero Dossier Banner */}
         <section className="bg-surface border border-borderDark rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-xl relative overflow-hidden">
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5">
-            {/* Avatar with Live Pulse */}
+            {/* Real Avatar / Styled Initial Fallback */}
             <div className="relative shrink-0">
-              <img
+              <CreatorAvatar
                 src={creator.avatar_url}
                 alt={creator.name}
-                className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl object-cover border-2 border-borderDark shadow-lg"
+                name={creator.name}
+                platform={creator.platform}
+                className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl shadow-xl"
               />
-              {isLive ? (
-                <span className="absolute -top-1.5 -right-1.5 px-2 py-0.5 rounded-full bg-red-600 text-white text-[9px] font-mono font-bold tracking-wider animate-pulse shadow-md flex items-center gap-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping" />
-                  LIVE
-                </span>
-              ) : (
-                <span className="absolute -bottom-1 -right-1 px-2 py-0.5 rounded-full bg-surfaceLight border border-borderDark text-slate-400 text-[9px] font-mono">
-                  Offline
-                </span>
-              )}
             </div>
 
             {/* Creator Title & Meta */}
@@ -227,69 +171,59 @@ export default function CreatorProfilePage({ params }) {
             </div>
           </div>
 
-          {/* Action CTAs */}
-          <div className="flex flex-row md:flex-col items-center gap-2 w-full md:w-auto shrink-0">
+          {/* Action CTAs: Direct Channel Link */}
+          <div className="flex flex-col sm:flex-row md:flex-col items-stretch sm:items-center gap-2.5 w-full md:w-auto shrink-0">
             <a
               href={channelUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className={`flex-1 md:w-48 py-2.5 px-4 rounded-xl text-xs font-mono font-bold transition-all shadow-md flex items-center justify-center gap-2 ${
+              className={`py-3 px-5 rounded-xl text-xs font-mono font-bold transition-all shadow-md flex items-center justify-center gap-2 ${
                 isKick
-                  ? 'bg-[#53FC18] hover:bg-[#46d614] text-black font-bold'
-                  : 'bg-red-600 hover:bg-red-500 text-white'
+                  ? 'bg-[#53FC18] hover:bg-[#46d614] text-black font-black shadow-[0_0_16px_rgba(83,252,24,0.3)]'
+                  : 'bg-red-600 hover:bg-red-500 text-white shadow-[0_0_16px_rgba(239,68,68,0.3)]'
               }`}
             >
               {isKick ? <Radio className="w-4 h-4" /> : <Youtube className="w-4 h-4" />}
-              <span>Visit {isKick ? 'Kick' : 'YouTube'}</span>
-              <ExternalLink className="w-3 h-3" />
+              <span>Visit {isKick ? 'Kick Channel' : 'YouTube Channel'}</span>
+              <ExternalLink className="w-3.5 h-3.5" />
             </a>
 
             <Link
-              href="/"
-              className="flex-1 md:w-48 py-2.5 px-4 rounded-xl bg-surfaceLight hover:bg-surfaceLight/80 text-xs font-mono font-bold text-slate-200 border border-borderDark transition-all flex items-center justify-center gap-1.5"
+              href="/?view=vids"
+              className="py-2.5 px-4 rounded-xl bg-surfaceLight hover:bg-surfaceLight/80 text-xs font-mono font-bold text-slate-300 hover:text-white border border-borderDark transition-all flex items-center justify-center gap-1.5"
             >
-              <MapIcon className="w-3.5 h-3.5 text-brandCyan" />
-              <span>View On Map</span>
+              <Film className="w-3.5 h-3.5 text-brandPink" />
+              <span>PattayaVids Feed</span>
             </Link>
           </div>
         </section>
 
-        {/* 2. Media Player Stage */}
-        <section className="bg-surface border border-borderDark rounded-2xl p-4 sm:p-6 flex flex-col gap-4 shadow-xl">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <span className={`w-2.5 h-2.5 rounded-full ${isLive ? 'bg-red-500 animate-pulse' : 'bg-indigo-400'}`} />
-              <h2 className="text-sm font-mono font-bold text-white uppercase tracking-wider">
-                {isLive ? '🔴 Live Stream Broadcast' : (latestVideo ? '🎬 Latest Upload / Featured Video' : 'Featured Broadcast')}
-              </h2>
-            </div>
-            {latestVideo && !isLive && (
+        {/* 2. Latest Featured Episode (Clean embed of actual video, NO live stream attempt) */}
+        {latestVideo && (
+          <section className="bg-surface border border-borderDark rounded-2xl p-4 sm:p-6 flex flex-col gap-4 shadow-xl">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-borderDark pb-3">
+              <div className="flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-brandPink" />
+                <h2 className="text-sm font-mono font-bold text-white uppercase tracking-wider">
+                  🎬 Latest Upload: {latestVideo.title}
+                </h2>
+              </div>
               <span className="text-[11px] font-mono text-slate-400">
                 Uploaded {formatRelativeTime(latestVideo.published_at)}
               </span>
-            )}
-          </div>
+            </div>
 
-          <div className="w-full aspect-video bg-black rounded-xl overflow-hidden border border-borderDark shadow-2xl">
-            {isKick ? (
-              <KickPlayer
-                channelSlug={creator.channel_id || creator.slug || creator.handle}
-                title={creator.name}
-                isLive={isLive}
+            <div className="w-full aspect-video bg-black rounded-xl overflow-hidden border border-borderDark shadow-2xl">
+              <iframe
+                src={`https://www.youtube-nocookie.com/embed/${latestVideo.id}?autoplay=0&rel=0&playsinline=1`}
+                title={latestVideo.title}
+                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="w-full h-full border-0"
               />
-            ) : (
-              <YouTubePlayer
-                channelId={creator.channel_id}
-                videoId={isLive ? entityStatus.video_id : (latestVideo?.id || null)}
-                title={creator.name}
-                handle={creator.handle}
-                isLive={isLive}
-                type="streamer"
-                badgeText={isLive ? 'LIVE BROADCAST' : '4K STREET EPISODE'}
-              />
-            )}
-          </div>
-        </section>
+            </div>
+          </section>
+        )}
 
         {/* 3. Comprehensive AI SEO Bio */}
         <section className="bg-surface border border-borderDark rounded-2xl p-6 sm:p-8 flex flex-col gap-4 shadow-md">
@@ -349,9 +283,9 @@ export default function CreatorProfilePage({ params }) {
                     <h3 className="text-xs font-semibold text-slate-200 group-hover:text-brandPink transition-colors line-clamp-2 leading-relaxed">
                       {video.title}
                     </h3>
-                    <div className="flex items-center justify-between text-[10px] font-mono text-slate-400 pt-1 border-t border-borderDark/60">
-                      <span>Watch on YouTube</span>
-                      <ExternalLink className="w-3 h-3 text-brandPink" />
+                    <div className="flex items-center justify-between text-[10px] font-mono text-slate-400">
+                      <span>{video.channel_name}</span>
+                      <span className="text-brandPink group-hover:underline">Watch ↗</span>
                     </div>
                   </div>
                 </a>
@@ -359,90 +293,16 @@ export default function CreatorProfilePage({ params }) {
             </div>
           </section>
         )}
-
-        {/* 5. Contextual Travel Cards (Governed by FEATURES.SHOW_AFFILIATE_ADS) */}
-        {FEATURES.SHOW_AFFILIATE_ADS && (
-          <section className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {/* 12Go Airport Taxi Card */}
-            <a
-              href={build12GoTransferUrl('BKK')}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-4 rounded-xl bg-surface border border-borderDark hover:border-brandGreen/50 transition-all group flex items-start gap-3.5 shadow-md"
-            >
-              <div className="w-10 h-10 rounded-lg bg-emerald-950/40 border border-brandGreen/40 flex items-center justify-center text-brandGreen shrink-0 group-hover:scale-105 transition-transform">
-                <Car className="w-5 h-5" />
-              </div>
-              <div className="flex flex-col gap-1 min-w-0 flex-1">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-white group-hover:text-brandGreen transition-colors">
-                    Bangkok Airport to Pattaya Taxi
-                  </span>
-                  <ExternalLink className="w-3 h-3 text-slate-400 group-hover:text-brandGreen" />
-                </div>
-                <p className="text-[11px] text-slate-300 leading-relaxed">
-                  Book guaranteed private car transfers from Suvarnabhumi (BKK) or Don Mueang (DMK) directly to your Pattaya hotel.
-                </p>
-                <span className="text-[10px] font-mono text-brandGreen font-semibold mt-1">
-                  From 1,200 THB • Instant Confirmation ➔
-                </span>
-              </div>
-            </a>
-
-            {/* Airalo 5G eSIM Card */}
-            <a
-              href={buildAiraloEsimUrl()}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-4 rounded-xl bg-surface border border-borderDark hover:border-brandGold/50 transition-all group flex items-start gap-3.5 shadow-md"
-            >
-              <div className="w-10 h-10 rounded-lg bg-amber-950/40 border border-brandGold/40 flex items-center justify-center text-brandGold shrink-0 group-hover:scale-105 transition-transform">
-                <Wifi className="w-5 h-5" />
-              </div>
-              <div className="flex flex-col gap-1 min-w-0 flex-1">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-white group-hover:text-brandGold transition-colors">
-                    Thailand 5G Tourist eSIM
-                  </span>
-                  <ExternalLink className="w-3 h-3 text-slate-400 group-hover:text-brandGold" />
-                </div>
-                <p className="text-[11px] text-slate-300 leading-relaxed">
-                  Download high-speed 5G mobile data directly to your phone before landing. No physical SIM swap needed.
-                </p>
-                <span className="text-[10px] font-mono text-brandGold font-semibold mt-1">
-                  Starting at $4.50 • Unlimited Data Plans ➔
-                </span>
-              </div>
-            </a>
-          </section>
-        )}
-
-        {/* 6. Prominent Backlink CTA to Live Radar */}
-        <section className="bg-gradient-to-r from-brandCyan/20 via-purple-900/20 to-brandPink/20 border border-brandCyan/40 rounded-2xl p-6 sm:p-8 text-center flex flex-col items-center gap-4 shadow-xl">
-          <h2 className="text-lg sm:text-xl font-bold text-white">
-            Explore Pattaya Live in Real Time
-          </h2>
-          <p className="text-xs sm:text-sm text-slate-300 max-w-xl">
-            Switch to the interactive Pattaya Live Radar to view active venue webcams, municipal surveillance nodes, and the colorful Songthaew transit loops.
-          </p>
-          <Link
-            href="/"
-            className="px-6 py-3 rounded-xl bg-brandCyan hover:bg-cyan-400 text-canvas text-sm font-mono font-bold transition-all shadow-[0_0_16px_rgba(0,229,255,0.4)] flex items-center gap-2 active:scale-95"
-          >
-            <MapIcon className="w-4 h-4" />
-            <span>🗺️ View on Live Pattaya Radar</span>
-          </Link>
-        </section>
       </main>
 
       {/* Footer */}
       <footer className="border-t border-borderDark bg-surface/60 p-6 text-center text-xs font-mono text-slate-500 mt-auto">
-        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p>© {new Date().getFullYear()} PattayaCams.com • Independent Tourism & Webcam Directory</p>
+        <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p>© {new Date().getFullYear()} PattayaCams.com • Independent Pattaya Tourism & Streaming Directory</p>
           <div className="flex items-center gap-4">
-            <Link href="/" className="hover:text-slate-300 transition-colors">Live Radar</Link>
-            <Link href="/?view=vids" className="hover:text-slate-300 transition-colors">PattayaVids</Link>
-            <Link href="/creators" className="hover:text-slate-300 transition-colors">Creators Hub</Link>
+            <Link href="/?view=map" className="hover:text-slate-300 transition-colors">Live Radar</Link>
+            <Link href="/?view=vids" className="hover:text-brandPink transition-colors">PattayaVids</Link>
+            <Link href="/creators" className="text-brandPink font-semibold">Creator Hub</Link>
           </div>
         </div>
       </footer>

@@ -4,7 +4,7 @@
     "venue-pattaya-oh-bar": {
       "is_live": false,
       "video_id": null,
-      "last_live_at": "2026-09-11T02:52:26.922Z",
+      "last_live_at": null,
       "status": "active",
       "name": "Pattaya Oh Bar",
       "platform": "youtube",
@@ -13,7 +13,7 @@
     "venue-kares-partybar-ismannen": {
       "is_live": false,
       "video_id": null,
-      "last_live_at": "2026-09-11T02:19:09.606Z",
+      "last_live_at": null,
       "status": "active",
       "name": "Kåres Party Bar & Guesthouse (Ismannen)",
       "platform": "youtube",
@@ -40,7 +40,7 @@
     "venue-green-stop-cannabis": {
       "is_live": false,
       "video_id": null,
-      "last_live_at": "2026-09-11T02:19:09.606Z",
+      "last_live_at": null,
       "status": "active",
       "name": "Green Stop Dispensary & Bar",
       "platform": "youtube",
@@ -76,7 +76,7 @@
     "venue-nine-star-restaurant-bar": {
       "is_live": false,
       "video_id": null,
-      "last_live_at": "2026-09-11T02:52:26.922Z",
+      "last_live_at": null,
       "status": "active",
       "name": "Nine Star Restaurant & Bar",
       "platform": "youtube",
@@ -85,7 +85,7 @@
     "venue-x-club-pattaya": {
       "is_live": false,
       "video_id": null,
-      "last_live_at": "2026-09-11T02:19:09.606Z",
+      "last_live_at": null,
       "status": "active",
       "name": "X Club Pattaya",
       "platform": "youtube",
@@ -103,7 +103,7 @@
     "venue-las-vegas-beer-garden": {
       "is_live": false,
       "video_id": null,
-      "last_live_at": "2026-09-11T02:19:09.606Z",
+      "last_live_at": null,
       "status": "active",
       "name": "Las Vegas Beer Garden",
       "platform": "youtube",
@@ -112,7 +112,7 @@
     "venue-gold-bar-soi-6": {
       "is_live": false,
       "video_id": null,
-      "last_live_at": "2026-09-11T02:52:26.922Z",
+      "last_live_at": null,
       "status": "active",
       "name": "Gold Bar Soi 6",
       "platform": "youtube",
@@ -121,7 +121,7 @@
     "venue-s3xy-bar-pattaya": {
       "is_live": false,
       "video_id": null,
-      "last_live_at": "2026-09-11T02:52:26.922Z",
+      "last_live_at": null,
       "status": "active",
       "name": "S3xy Bar Pattaya",
       "platform": "youtube",
@@ -130,7 +130,7 @@
     "venue-mafia-bar-pattaya": {
       "is_live": false,
       "video_id": null,
-      "last_live_at": "2026-09-11T02:19:09.606Z",
+      "last_live_at": null,
       "status": "active",
       "name": "Mafia Bar (The Godfather)",
       "platform": "youtube",
@@ -148,7 +148,7 @@
     "venue-luckynana-bar": {
       "is_live": false,
       "video_id": null,
-      "last_live_at": "2026-09-11T02:19:09.606Z",
+      "last_live_at": null,
       "status": "active",
       "name": "LuckyNaNa Bar Pattaya",
       "platform": "youtube",
@@ -157,7 +157,7 @@
     "venue-rum-runner-bar": {
       "is_live": false,
       "video_id": null,
-      "last_live_at": "2026-09-11T02:19:09.606Z",
+      "last_live_at": null,
       "status": "active",
       "name": "Rum Runner Bar (Mr Egg)",
       "platform": "youtube",
@@ -166,7 +166,7 @@
     "venue-miso-bar-pattaya": {
       "is_live": false,
       "video_id": null,
-      "last_live_at": "2026-09-11T02:19:09.606Z",
+      "last_live_at": null,
       "status": "active",
       "name": "Miso Bar Pattaya",
       "platform": "youtube",
@@ -256,7 +256,7 @@
     "streamer-RS-010": {
       "is_live": false,
       "video_id": null,
-      "last_live_at": "2026-09-11T02:52:26.922Z",
+      "last_live_at": null,
       "status": "active",
       "name": "Pattaya Beach Live",
       "platform": "youtube",
@@ -400,7 +400,7 @@
     "creator-pattaya-beach-live": {
       "is_live": false,
       "video_id": "IwWzOYyLw9E",
-      "last_live_at": "2026-09-11T02:52:26.922Z",
+      "last_live_at": null,
       "status": "active",
       "name": "Pattaya Beach Live",
       "platform": "youtube",
@@ -499,7 +499,7 @@
     "creator-thailand-rob": {
       "is_live": false,
       "video_id": "1OPNxFj6t5w",
-      "last_live_at": "2026-09-11T02:52:26.922Z",
+      "last_live_at": null,
       "status": "active",
       "name": "Thailand Rob",
       "platform": "youtube",
