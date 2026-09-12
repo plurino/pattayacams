@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-09-12T06:24:53.776Z",
+  "last_check": "2026-09-12T07:30:10.503Z",
   "entities": {
     "venue-pattaya-oh-bar": {
       "is_live": false,
@@ -12,8 +12,8 @@
     },
     "livecam-pattaya-beach-road-live-cam": {
       "is_live": true,
-      "video_id": "z9_hOB_MsoQ",
-      "last_live_at": "2026-09-12T06:24:53.776Z",
+      "video_id": "Dhddjf_7dPE",
+      "last_live_at": "2026-09-12T07:30:10.503Z",
       "status": "active",
       "name": "Pattaya Beach Road Live Cam",
       "platform": "youtube",
@@ -120,8 +120,8 @@
     },
     "venue-rum-runner-bar": {
       "is_live": true,
-      "video_id": "yTf-oqGpPu4",
-      "last_live_at": "2026-09-12T06:24:53.776Z",
+      "video_id": "z9_hOB_MsoQ",
+      "last_live_at": "2026-09-12T07:30:10.503Z",
       "status": "active",
       "name": "Rum Runner Bar (Mr Egg)",
       "platform": "youtube",
@@ -658,8 +658,8 @@
     },
     "livecam-soi-buakhao-live-cam": {
       "is_live": true,
-      "video_id": "E38Us0sUSi0",
-      "last_live_at": "2026-09-12T06:24:53.776Z",
+      "video_id": "CUlLN5Qjp50",
+      "last_live_at": "2026-09-12T07:30:10.503Z",
       "status": "active",
       "name": "Soi Buakhao Live Cam",
       "platform": "youtube",
@@ -712,7 +712,7 @@
     "creator-settled-in-siam": {
       "is_live": true,
       "video_id": "z9_hOB_MsoQ",
-      "last_live_at": "2026-09-12T06:24:53.776Z",
+      "last_live_at": "2026-09-12T07:30:10.503Z",
       "status": "active",
       "name": "Settled in SIAM",
       "platform": "youtube",
