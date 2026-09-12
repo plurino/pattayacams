@@ -121,7 +121,7 @@
     "venue-rum-runner-bar": {
       "is_live": false,
       "video_id": null,
-      "last_live_at": null,
+      "last_live_at": "2026-09-12T07:30:10.503Z",
       "status": "active",
       "name": "Rum Runner Bar (Mr Egg)",
       "platform": "youtube",
@@ -220,7 +220,7 @@
     "streamer-RS-010": {
       "is_live": false,
       "video_id": null,
-      "last_live_at": null,
+      "last_live_at": "2026-09-12T12:32:07.053Z",
       "status": "active",
       "name": "Pattaya Beach Live",
       "platform": "youtube",
