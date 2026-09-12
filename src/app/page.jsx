@@ -250,13 +250,14 @@ export default function AppRoot() {
       if (!video) return;
 
       setSelectedEntity({
-        name: video.title,
+        ...video,
+        name: video.name || video.title,
         channel_name: video.channel_title,
         video_id: video.video_id,
         category: video.category || 'Nightlife & Walking',
         zone: video.zone || 'Pattaya',
-        type: 'vod',
-        is_live: false,
+        type: video.type || 'vod',
+        is_live: video.is_live ?? false,
         platform: video.platform || 'youtube',
       });
     };
@@ -294,6 +295,7 @@ export default function AppRoot() {
           <MapCanvasWrapper
             onSelectEntity={handleSelectEntity}
             onMapInstance={handleMapInstance}
+            onOpenKohLarn={() => setIsKohLarnModalOpen(true)}
           />
         </div>
         {viewMode === 'grid' && (

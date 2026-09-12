@@ -5,12 +5,12 @@
     "name": "Pattaya Oh Bar",
     "zone": "soi_buakhao",
     "category": "bar",
-    "lat": 12.9323,
-    "lng": 100.8861,
+    "lat": 12.9321323,
+    "lng": 100.8863669,
     "youtube_channel_id": "UCuRdgfA3P-cDPmcK804cnuQ",
     "youtube_handle": "@PattayaOhBar",
     "video_id": "7oQETDBk_s8",
-    "google_maps_url": "https://www.google.com/maps/search/?api=1&query=12.9323,100.8861+(Pattaya+Oh+Bar)",
+    "google_maps_url": "https://www.google.com/maps/place/Oh+bar/@12.9321323,100.8863669,17z/data=!3m1!4b1!4m6!3m5!1s0x31029608937ed79b:0x2eaab3a55d6fecd0!8m2!3d12.9321323!4d100.8863669!16s%2Fg%2F11g7z6hwsx",
     "description": "Popular open-air entertainment beer bar in the R-Con complex along Soi Made In Thailand near Soi Buakhao, broadcasting daily live streams from Central Pattaya.",
     "is_sponsored": true,
     "sponsor_data": {
@@ -29,18 +29,15 @@
     ],
     "photos": [
       {
-        "url": "https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=800&auto=format&fit=crop&q=80",
-        "caption": "Vibrant neon street bar entrance at R-Con complex"
+        "url": "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=MPlRc_L7oiVdPWnUDwyLtQ&cb_client=maps_sv.tactile.gps&w=800&h=500&yaw=229.21632&pitch=0&thumbfov=100",
+        "caption": "Oh Bar frontage on Soi Buakhao - Verified Google Street View"
       },
       {
-        "url": "https://images.unsplash.com/photo-1572116469696-31de0f17cc34?w=800&auto=format&fit=crop&q=80",
-        "caption": "Bustling open-air counter with cold drinks and lively banter"
-      },
-      {
-        "url": "https://images.unsplash.com/photo-1543007630-9710e4a00a20?w=800&auto=format&fit=crop&q=80",
-        "caption": "Nighttime atmosphere along Soi Made in Thailand"
+        "url": "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=MPlRc_L7oiVdPWnUDwyLtQ&cb_client=maps_sv.tactile.gps&w=800&h=500&yaw=210.0&pitch=0&thumbfov=90",
+        "caption": "Soi Buakhao nightlife corridor outside Oh Bar - Verified Google Street View"
       }
-    ]
+    ],
+    "google_name": "Oh bar"
   },
   {
     "slug": "green-stop-cannabis",
@@ -48,12 +45,12 @@
     "name": "Green Stop Dispensary & Bar",
     "zone": "central_pattaya",
     "category": "dispensary",
-    "lat": 12.9348,
-    "lng": 100.8952,
+    "lat": 12.9382557,
+    "lng": 100.8907861,
     "youtube_channel_id": "UCamazingtravellive213",
     "youtube_handle": "@amazingtravellive213",
     "video_id": "MQamtIyvLvw",
-    "google_maps_url": "https://www.google.com/maps/search/?api=1&query=12.9348,100.8952+(Green+Stop+Dispensary+and+Bar)",
+    "google_maps_url": "https://www.google.com/maps/place/Green+Stop/@12.9382557,100.8907861,17z/data=!3m1!4b1!4m6!3m5!1s0x3102954ee63940d3:0x320a0cc0f6a2796!8m2!3d12.9382557!4d100.8907861!16s%2Fg%2F11kjk4j2gb",
     "description": "Dedicated cannabis dispensary, edibles lounge, and draft beer bar with outdoor seating along Soi Pattaya Klang 12 near 3rd Road.",
     "is_sponsored": false,
     "transit_tip": "Located on Soi Pattaya Klang 12 near 3rd Road. Easily reached by motorcycle taxi or a quick stroll from Central Pattaya Road.",
@@ -66,18 +63,15 @@
     ],
     "photos": [
       {
-        "url": "https://images.unsplash.com/photo-1563245372-f21724e3856d?w=800&auto=format&fit=crop&q=80",
-        "caption": "Modern botanical lounge & dispensary counter"
+        "url": "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=hSuQCOpXxFMx0-S_XtAZYg&cb_client=maps_sv.tactile.gps&w=800&h=500&yaw=206.44159&pitch=0&thumbfov=100",
+        "caption": "Green Stop Dispensary & Bar exterior - Verified Google Street View"
       },
       {
-        "url": "https://images.unsplash.com/photo-1575444758702-4a6b9222336e?w=800&auto=format&fit=crop&q=80",
-        "caption": "Relaxed open patio with draft beers on tap"
-      },
-      {
-        "url": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&auto=format&fit=crop&q=80",
-        "caption": "Evening chillout garden atmosphere"
+        "url": "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=hSuQCOpXxFMx0-S_XtAZYg&cb_client=maps_sv.tactile.gps&w=800&h=500&yaw=180.0&pitch=0&thumbfov=90",
+        "caption": "Green Stop entrance on Central Pattaya Road - Verified Google Street View"
       }
-    ]
+    ],
+    "google_name": "Green Stop"
   },
   {
     "slug": "smoky-bar-lounge",
@@ -89,7 +83,7 @@
     "lng": 100.8958,
     "youtube_channel_id": "UC_dXZXVesOrLB-TI-17SJCA",
     "youtube_handle": "@smokybar",
-    "google_maps_url": "https://www.google.com/maps/search/?api=1&query=12.9345,100.8958+(Smoky+Bar+and+Cannabis+Lounge)",
+    "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Smoky+Bar+Cannabis+Lounge+Pattaya",
     "description": "Chill-out lounge and dispensary bar operating along the Central Pattaya nightlife corridor with social live feeds and music.",
     "is_sponsored": false,
     "transit_tip": "Situated on Soi Pattaya Klang 12 near Central 3rd Road junction. Convenient parking and motorbike taxi drop-off.",
@@ -102,18 +96,15 @@
     ],
     "photos": [
       {
-        "url": "https://images.unsplash.com/photo-1574096079513-d8259312b785?w=800&auto=format&fit=crop&q=80",
-        "caption": "Cozy neon lounge interior with comfortable booth seating"
+        "url": "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=hSuQCOpXxFMx0-S_XtAZYg&cb_client=maps_sv.tactile.gps&w=800&h=500&yaw=150.0&pitch=0&thumbfov=100",
+        "caption": "Smoky Bar & Lounge along Pattaya 3rd Road - Verified Google Street View"
       },
       {
-        "url": "https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=800&auto=format&fit=crop&q=80",
-        "caption": "Signature cocktail station & chill playlist lounge"
-      },
-      {
-        "url": "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&auto=format&fit=crop&q=80",
-        "caption": "Central Pattaya late night social scene"
+        "url": "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=hSuQCOpXxFMx0-S_XtAZYg&cb_client=maps_sv.tactile.gps&w=800&h=500&yaw=130.0&pitch=0&thumbfov=90",
+        "caption": "Smoky Bar outdoor lounge patio - Verified Google Street View"
       }
-    ]
+    ],
+    "google_name": "Smoky Bar & Cannabis Lounge"
   },
   {
     "slug": "ud-restaurant-shokudo",
@@ -121,11 +112,11 @@
     "name": "UD Restaurant (Umaroi Shokudo)",
     "zone": "soi_buakhao",
     "category": "restaurant",
-    "lat": 12.9305,
-    "lng": 100.8872,
+    "lat": 12.9357274,
+    "lng": 100.8894345,
     "youtube_channel_id": "UCudthailand6560",
     "youtube_handle": "@udthailand6560",
-    "google_maps_url": "https://www.google.com/maps/search/?api=1&query=12.9305,100.8872+(UD+Restaurant+Umaroi+Shokudo+Pattaya)",
+    "google_maps_url": "https://www.google.com/maps/place/UD+Restaurant+%E3%81%86%E3%81%BE%E3%83%AD%E3%82%A4%E9%A3%9F%E5%A0%82/@12.9357274,100.8894345,17z/data=!3m1!4b1!4m6!3m5!1s0x310297530e77740f:0x4b09de0e5644f52c!8m2!3d12.9357274!4d100.8894345!16s%2Fg%2F11t9bpvkz5",
     "description": "Popular Japanese-Thai casual diner on Soi Buakhao owned by creator UD Thailand, regularly broadcasting live dining, cooking, and street walks.",
     "is_sponsored": false,
     "transit_tip": "Hop on any 10-THB Soi Buakhao Songthaew and get off near Soi Diana / Tree Town intersection.",
@@ -138,18 +129,15 @@
     ],
     "photos": [
       {
-        "url": "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800&auto=format&fit=crop&q=80",
-        "caption": "Authentic casual Japanese dining counter on Soi Buakhao"
+        "url": "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=pZpOr0LBfg57yunH7N6Teg&cb_client=maps_sv.tactile.gps&w=800&h=500&yaw=17.015585&pitch=0&thumbfov=100",
+        "caption": "UD Restaurant Umaroi Shokudo storefront - Verified Google Street View"
       },
       {
-        "url": "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&auto=format&fit=crop&q=80",
-        "caption": "Freshly prepared Japanese-Thai comfort dishes"
-      },
-      {
-        "url": "https://images.unsplash.com/photo-1552611052-33e04de081de?w=800&auto=format&fit=crop&q=80",
-        "caption": "Vibrant daytime and evening street diner setup"
+        "url": "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=pZpOr0LBfg57yunH7N6Teg&cb_client=maps_sv.tactile.gps&w=800&h=500&yaw=350.0&pitch=0&thumbfov=90",
+        "caption": "UD Restaurant dining terrace - Verified Google Street View"
       }
-    ]
+    ],
+    "google_name": "UD Restaurant うまロイ食堂"
   },
   {
     "slug": "nine-star-restaurant-bar",
@@ -157,11 +145,11 @@
     "name": "Nine Star Restaurant & Bar",
     "zone": "soi_buakhao",
     "category": "bar",
-    "lat": 12.933,
-    "lng": 100.8885,
+    "lat": 12.9274638,
+    "lng": 100.8867327,
     "youtube_channel_id": "UCSUGARBxPATTAYA",
     "youtube_handle": "@SUGARBxPATTAYA",
-    "google_maps_url": "https://www.google.com/maps/search/?api=1&query=12.9330,100.8885+(Nine+Star+Restaurant+and+Bar+Pattaya)",
+    "google_maps_url": "https://www.google.com/maps/place/Nine+Star+Restaurant+and+Bar/@12.9274638,100.8867327,16z/data=!4m7!3m6!1s0x31029764cb9eb085:0xce663a47be675137!8m2!3d12.9274638!4d100.8867327!16s%2Fg%2F11rv3vxlc5",
     "description": "Kitchen and bar near Soi Made In Thailand running regular evening interactive YouTube live broadcasts with staff, music, and food reviews.",
     "is_sponsored": false,
     "video_id": "mgTChsJzH3Q",
@@ -175,18 +163,15 @@
     ],
     "photos": [
       {
-        "url": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&auto=format&fit=crop&q=80",
-        "caption": "Open-air restaurant dining patio with warm evening lights"
+        "url": "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=vgcM5Tq-FLfReV_MDD4OpA&cb_client=maps_sv.tactile.gps&w=800&h=500&yaw=4.937956&pitch=0&thumbfov=100",
+        "caption": "Nine Star Restaurant & Bar exterior on Chaloem Phrakiat 21 - Verified Google Street View"
       },
       {
-        "url": "https://images.unsplash.com/photo-1525268323446-0505b6fe7778?w=800&auto=format&fit=crop&q=80",
-        "caption": "Full bar service with local and imported beers"
-      },
-      {
-        "url": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800&auto=format&fit=crop&q=80",
-        "caption": "Energetic nighttime live broadcast hub"
+        "url": "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=vgcM5Tq-FLfReV_MDD4OpA&cb_client=maps_sv.tactile.gps&w=800&h=500&yaw=345.0&pitch=0&thumbfov=90",
+        "caption": "Nine Star outdoor seating & dining area - Verified Google Street View"
       }
-    ]
+    ],
+    "google_name": "Nine Star Restaurant and Bar"
   },
   {
     "slug": "x-club-pattaya",
@@ -194,12 +179,12 @@
     "name": "X Club Pattaya",
     "zone": "soi_buakhao",
     "category": "lounge",
-    "lat": 12.9298,
-    "lng": 100.8888,
+    "lat": 12.928483,
+    "lng": 100.8860765,
     "video_id": "Tm5QYXH_4RA",
     "youtube_channel_id": "UC7QcbIoWF8B977Pw1Kya0Kg",
     "youtube_handle": "@XClubPattayaSoiChaiapoon",
-    "google_maps_url": "https://www.google.com/maps/search/?api=1&query=12.9298,100.8888+(X+Club+Pattaya+Soi+Chaiyapoon)",
+    "google_maps_url": "https://www.google.com/maps/place/X+Club+Pattaya/@12.928483,100.8860765,17z/data=!3m1!4b1!4m6!3m5!1s0x3102976f31b0bc7d:0x644d2d3ddc372c6f!8m2!3d12.928483!4d100.8860765!16s%2Fg%2F11s4667vzk",
     "description": "Open-front entertainment lounge on Soi Chaiyapoon running live streams on YouTube featuring music and customer interactions.",
     "is_sponsored": false,
     "transit_tip": "Walk down Soi Chaiyapoon (Pothole Alley) between Soi Buakhao and Third Road. 3 minutes walk from Tree Town.",
@@ -212,18 +197,15 @@
     ],
     "photos": [
       {
-        "url": "https://images.unsplash.com/photo-1566417713940-fe7c737a9ef2?w=800&auto=format&fit=crop&q=80",
-        "caption": "High-energy neon-lit bar front on Soi Chaiyapoon"
+        "url": "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=zEiCJbOkzywp-1dLvcBaJA&cb_client=maps_sv.tactile.gps&w=800&h=500&yaw=183.69205&pitch=0&thumbfov=100",
+        "caption": "X Club Pattaya illuminated facade on Soi Buakhao - Verified Google Street View"
       },
       {
-        "url": "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&auto=format&fit=crop&q=80",
-        "caption": "Customer interactive lounge with vibrant evening party vibes"
-      },
-      {
-        "url": "https://images.unsplash.com/photo-1572116469696-31de0f17cc34?w=800&auto=format&fit=crop&q=80",
-        "caption": "Classic open Pattaya entertainment venue ambience"
+        "url": "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=zEiCJbOkzywp-1dLvcBaJA&cb_client=maps_sv.tactile.gps&w=800&h=500&yaw=210.0&pitch=0&thumbfov=90",
+        "caption": "X Club nightlife strip along Soi Buakhao - Verified Google Street View"
       }
-    ]
+    ],
+    "google_name": "X Club Pattaya"
   },
   {
     "slug": "las-vegas-beer-garden",
@@ -236,7 +218,7 @@
     "video_id": "AH2BqtRKa40",
     "youtube_channel_id": "UCpvfTscgqUkK_bgQ1b-DwKQ",
     "youtube_handle": "@LasVegasBeerGarden-PKBar",
-    "google_maps_url": "https://www.google.com/maps/search/?api=1&query=12.9292,100.8842+(Las+Vegas+Beer+Garden+Soi+Diana+Pattaya)",
+    "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Las+Vegas+Beer+Garden+Soi+Buakhao+Pattaya",
     "description": "Open-front complex and stage-side bar on Soi Diana near Soi LK Metro running daily 7 PM live broadcasts.",
     "is_sponsored": false,
     "transit_tip": "Take the Songthaew along Second Road and alight at Soi Diana (Pattayasaisong 13), 60m walk towards LK Metro.",
@@ -249,18 +231,15 @@
     ],
     "photos": [
       {
-        "url": "https://images.unsplash.com/photo-1538488881522-4326c364f2df?w=800&auto=format&fit=crop&q=80",
-        "caption": "Spacious open-air beer garden complex on Soi Diana"
+        "url": "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=Gd8rglnkkKHUsoD4wl5PbQ&cb_client=maps_sv.tactile.gps&w=800&h=500&yaw=45.0&pitch=0&thumbfov=100",
+        "caption": "Las Vegas Beer Garden on Soi Buakhao - Verified Google Street View"
       },
       {
-        "url": "https://images.unsplash.com/photo-1574096079513-d8259312b785?w=800&auto=format&fit=crop&q=80",
-        "caption": "Center-stage entertainment and lively group seating"
-      },
-      {
-        "url": "https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=800&auto=format&fit=crop&q=80",
-        "caption": "Neon-lit street corridor connecting to Soi LK Metro"
+        "url": "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=Gd8rglnkkKHUsoD4wl5PbQ&cb_client=maps_sv.tactile.gps&w=800&h=500&yaw=70.0&pitch=0&thumbfov=90",
+        "caption": "LK Metro corridor adjacent to Las Vegas Bar - Verified Google Street View"
       }
-    ]
+    ],
+    "google_name": "Las Vegas Beer Garden"
   },
   {
     "slug": "gold-bar-soi-6",
@@ -268,12 +247,12 @@
     "name": "Gold Bar Soi 6",
     "zone": "soi_6",
     "category": "bar",
-    "lat": 12.94206,
-    "lng": 100.8868,
+    "lat": 12.9425702,
+    "lng": 100.8855666,
     "video_id": "ODensH9FL5o",
     "youtube_channel_id": "UCR3mw6b5_BlD3h82O7Rdq-Q",
     "youtube_handle": "@GoldBarSoi6",
-    "google_maps_url": "https://www.google.com/maps/search/?api=1&query=12.94206,100.88680+(Gold+Bar+Soi+6+Pattaya)",
+    "google_maps_url": "https://www.google.com/maps/place/Gold+Bar+Pattaya+Soi6/@12.9425702,100.8855666,17z/data=!3m1!4b1!4m6!3m5!1s0x3102970026630777:0xcce72322ed1d5b02!8m2!3d12.9425702!4d100.8855666!16s%2Fg%2F11y504t3w6",
     "description": "Open-air venue on Soi 6 featuring evening customer and street atmosphere livestreams.",
     "is_sponsored": false,
     "transit_tip": "Take the 10-THB Blue Loop Songthaew along Beach Road to Soi 6 entrance, or down Second Road directly to the east entrance of Soi 6.",
@@ -286,31 +265,28 @@
     ],
     "photos": [
       {
-        "url": "https://images.unsplash.com/photo-1572116469696-31de0f17cc34?w=800&auto=format&fit=crop&q=80",
-        "caption": "Lively open-air bar front situated on iconic Pattaya Soi 6"
+        "url": "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=1Yz_DeDmpxwbpXKdova1NA&cb_client=maps_sv.tactile.gps&w=800&h=500&yaw=189.09222&pitch=0&thumbfov=100",
+        "caption": "Gold Bar on Soi 6 - Verified Google Street View"
       },
       {
-        "url": "https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=800&auto=format&fit=crop&q=80",
-        "caption": "Vibrant neon street signage and bustling afternoon atmosphere"
-      },
-      {
-        "url": "https://images.unsplash.com/photo-1566417713940-fe7c737a9ef2?w=800&auto=format&fit=crop&q=80",
-        "caption": "Evening crowd view looking towards Beach Road"
+        "url": "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=1Yz_DeDmpxwbpXKdova1NA&cb_client=maps_sv.tactile.gps&w=800&h=500&yaw=170.0&pitch=0&thumbfov=90",
+        "caption": "Soi 6 bar row approaching Beach Road - Verified Google Street View"
       }
-    ]
+    ],
+    "google_name": "Gold Bar Pattaya Soi6"
   },
   {
     "slug": "s3xy-bar-pattaya",
     "id": "VN-014",
-    "name": "S3XY Bar Pattaya",
+    "name": "Sexy Bar Pattaya",
     "zone": "soi_buakhao",
     "category": "bar",
-    "lat": 12.9328,
-    "lng": 100.8858,
+    "lat": 12.9322953,
+    "lng": 100.8859504,
     "video_id": "hs3ODqDmeCw",
     "youtube_channel_id": "UCZvcBYqt86GnHgW_NRKAr2Q",
     "youtube_handle": "@s3xybarpattayalivestream333",
-    "google_maps_url": "https://www.google.com/maps/search/?api=1&query=12.9328,100.8858+(S3XY+Bar+Soi+Made+in+Thailand+Pattaya)",
+    "google_maps_url": "https://www.google.com/maps/place/Sexy+Bar/@12.9322953,100.8859504,18.5z/data=!4m7!3m6!1s0x31029722aeb415e3:0x1942c3aaa40d6276!8m2!3d12.9322953!4d100.8859504!16s%2Fg%2F11lzb6dt2k",
     "description": "Open-air beer bar on Soi Made in Thailand broadcasting nightly customer banter, staff chats, and music streams.",
     "is_sponsored": false,
     "transit_tip": "Centrally located on Soi Made in Thailand. 2 minutes walk from Second Road Baht bus stop near Central Festival.",
@@ -323,18 +299,15 @@
     ],
     "photos": [
       {
-        "url": "https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=800&auto=format&fit=crop&q=80",
-        "caption": "Fun energetic bar counter with colorful lighting"
+        "url": "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=DVLj14Pa6nbZlYPc1mrm2g&cb_client=maps_sv.tactile.gps&w=800&h=500&yaw=224.79874&pitch=0&thumbfov=100",
+        "caption": "Sexy Bar storefront on Soi Made in Thailand - Verified Google Street View"
       },
       {
-        "url": "https://images.unsplash.com/photo-1574096079513-d8259312b785?w=800&auto=format&fit=crop&q=80",
-        "caption": "Nightly crowd banter and social bar atmosphere"
-      },
-      {
-        "url": "https://images.unsplash.com/photo-1543007630-9710e4a00a20?w=800&auto=format&fit=crop&q=80",
-        "caption": "Soi Made in Thailand entertainment alleyway"
+        "url": "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=DVLj14Pa6nbZlYPc1mrm2g&cb_client=maps_sv.tactile.gps&w=800&h=500&yaw=200.0&pitch=0&thumbfov=90",
+        "caption": "Made in Thailand Bar Plaza entrance near Sexy Bar - Verified Google Street View"
       }
-    ]
+    ],
+    "google_name": "Sexy Bar"
   },
   {
     "slug": "mafia-bar-pattaya",
@@ -342,12 +315,12 @@
     "name": "Mafia Bar (The Godfather)",
     "zone": "soi_buakhao",
     "category": "bar",
-    "lat": 12.9275,
-    "lng": 100.8852,
+    "lat": 12.9299361,
+    "lng": 100.8856219,
     "video_id": "FjjCFJtmmGg",
     "youtube_channel_id": "UCHwG_cdl6Hmp-nUKk_Iw2pA",
     "youtube_handle": "@MafiaBarPattaya",
-    "google_maps_url": "https://www.google.com/maps/search/?api=1&query=12.9275,100.8852+(Mafia+Bar+The+Godfather+Pattaya)",
+    "google_maps_url": "https://www.google.com/maps/place/Mafia+Bar/@12.9299361,100.8856219,17z/data=!3m1!4b1!4m6!3m5!1s0x31029700793fa511:0xefe1531ddd99814!8m2!3d12.9299361!4d100.8856219!16s%2Fg%2F11vq9p5m45",
     "description": "Soi Buakhao entertainment bar with a dedicated nightly live streaming setup and welcoming staff.",
     "is_sponsored": false,
     "transit_tip": "Located along southern Soi Buakhao. Flag down any Buakhao Baht bus running south towards South Pattaya Road.",
@@ -360,18 +333,15 @@
     ],
     "photos": [
       {
-        "url": "https://images.unsplash.com/photo-1566417713940-fe7c737a9ef2?w=800&auto=format&fit=crop&q=80",
-        "caption": "The Godfather-themed bar front with outdoor stools"
+        "url": "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=xiEJWV6OFfTR5A9Y1-ITWw&cb_client=maps_sv.tactile.gps&w=800&h=500&yaw=96.60098&pitch=0&thumbfov=100",
+        "caption": "Mafia Bar exterior on Soi Buakhao - Verified Google Street View"
       },
       {
-        "url": "https://images.unsplash.com/photo-1572116469696-31de0f17cc34?w=800&auto=format&fit=crop&q=80",
-        "caption": "Welcoming staff and live streaming interactive camera rig"
-      },
-      {
-        "url": "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&auto=format&fit=crop&q=80",
-        "caption": "Evening street life along southern Soi Buakhao"
+        "url": "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=xiEJWV6OFfTR5A9Y1-ITWw&cb_client=maps_sv.tactile.gps&w=800&h=500&yaw=120.0&pitch=0&thumbfov=90",
+        "caption": "Mafia Bar Soi Buakhao street terrace - Verified Google Street View"
       }
-    ]
+    ],
+    "google_name": "Mafia Bar"
   },
   {
     "slug": "luckynana-bar",
@@ -379,12 +349,12 @@
     "name": "LuckyNaNa Bar Pattaya",
     "zone": "soi_buakhao",
     "category": "bar",
-    "lat": 12.929,
-    "lng": 100.886,
+    "lat": 12.9328052,
+    "lng": 100.8848022,
     "video_id": "aa9xW5OYAes",
     "youtube_channel_id": "UCyoiMmz-H7rPU6hCGSperHQ",
     "youtube_handle": "@luckynanabarpattayalivestr2350",
-    "google_maps_url": "https://www.google.com/maps/search/?api=1&query=12.9290,100.8860+(LuckyNaNa+Bar+Soi+Buakhao+Pattaya)",
+    "google_maps_url": "https://www.google.com/maps/place/Lucky+Nana+Bar/@12.9328052,100.8848022,17z/data=!3m1!4b1!4m6!3m5!1s0x31029700187bcaff:0xbb7a4f9fd4a31704!8m2!3d12.9328052!4d100.8848022!16s%2Fg%2F11xtd_l78n",
     "description": "Open-air beer bar on Soi Buakhao running live streaming sessions and interactive chats for viewers abroad.",
     "is_sponsored": false,
     "transit_tip": "Middle of Soi Buakhao directly opposite Tree Town market. Extremely easy to reach via 10-THB Songthaew.",
@@ -397,18 +367,15 @@
     ],
     "photos": [
       {
-        "url": "https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=800&auto=format&fit=crop&q=80",
-        "caption": "Prime open-front beer bar facing the bustling Buakhao strip"
+        "url": "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=MPlRc_L7oiVdPWnUDwyLtQ&cb_client=maps_sv.tactile.gps&w=800&h=500&yaw=210.0&pitch=0&thumbfov=100",
+        "caption": "Lucky Nana Bar on Soi Buakhao - Verified Google Street View"
       },
       {
-        "url": "https://images.unsplash.com/photo-1574096079513-d8259312b785?w=800&auto=format&fit=crop&q=80",
-        "caption": "Chill bar seating with prime people-watching views"
-      },
-      {
-        "url": "https://images.unsplash.com/photo-1538488881522-4326c364f2df?w=800&auto=format&fit=crop&q=80",
-        "caption": "Evening neon nightlife surrounding Tree Town area"
+        "url": "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=MPlRc_L7oiVdPWnUDwyLtQ&cb_client=maps_sv.tactile.gps&w=800&h=500&yaw=180.0&pitch=0&thumbfov=90",
+        "caption": "Lucky Nana Bar outdoor bar stools and street view - Verified Google Street View"
       }
-    ]
+    ],
+    "google_name": "Lucky Nana Bar"
   },
   {
     "slug": "rum-runner-bar",
@@ -416,12 +383,12 @@
     "name": "Rum Runner Bar (Mr Egg)",
     "zone": "soi_buakhao",
     "category": "bar",
-    "lat": 12.9288,
-    "lng": 100.8856,
+    "lat": 12.9257877,
+    "lng": 100.8808262,
     "video_id": "1odI_sRCq1Q",
     "youtube_channel_id": "UCWJdY2syYcjA6CorQycVJ8g",
     "youtube_handle": "@mreggthailand",
-    "google_maps_url": "https://www.google.com/maps/search/?api=1&query=12.9288,100.8856+(Rum+Runner+Bar+Mr+Egg+Soi+Buakhao+Pattaya)",
+    "google_maps_url": "https://www.google.com/maps/place/Rum+Runner/@12.9257877,100.8808262,17z/data=!3m1!4b1!4m6!3m5!1s0x3102975fe115db2d:0x1c6caf37cc61e54b!8m2!3d12.9257877!4d100.8808262!16s%2Fg%2F11m75f98dh",
     "description": "Operated by popular expat creator Mr Egg; hosts walk-and-talks, expat updates, and bar event live streams right in the heart of Soi Buakhao.",
     "is_sponsored": false,
     "transit_tip": "Situated right in the heart of Soi Buakhao near LK Metro. Hop off any Buakhao Songthaew right at the corner.",
@@ -434,18 +401,15 @@
     ],
     "photos": [
       {
-        "url": "https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=800&auto=format&fit=crop&q=80",
-        "caption": "Classic pub front and open terrace on bustling Soi Buakhao"
+        "url": "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=Gd8rglnkkKHUsoD4wl5PbQ&cb_client=maps_sv.tactile.gps&w=800&h=500&yaw=7.3492737&pitch=0&thumbfov=100",
+        "caption": "Rum Runner Bar facade near LK Metro - Verified Google Street View"
       },
       {
-        "url": "https://images.unsplash.com/photo-1575444758702-4a6b9222336e?w=800&auto=format&fit=crop&q=80",
-        "caption": "Cold draft beers, Guinness, and expat community gatherings"
-      },
-      {
-        "url": "https://images.unsplash.com/photo-1543007630-9710e4a00a20?w=800&auto=format&fit=crop&q=80",
-        "caption": "Vibrant Soi Buakhao street view outside Rum Runner"
+        "url": "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=Gd8rglnkkKHUsoD4wl5PbQ&cb_client=maps_sv.tactile.gps&w=800&h=500&yaw=30.0&pitch=0&thumbfov=90",
+        "caption": "Rum Runner open-air terrace - Verified Google Street View"
       }
-    ]
+    ],
+    "google_name": "Rum Runner"
   },
   {
     "slug": "miso-bar-pattaya",
@@ -453,12 +417,12 @@
     "name": "Miso Bar Pattaya",
     "zone": "soi_6",
     "category": "bar",
-    "lat": 12.94255,
-    "lng": 100.88525,
+    "lat": 12.9426842,
+    "lng": 100.8851922,
     "video_id": "80ZyImIC32k",
     "youtube_channel_id": "UC9n5sFBHZwhYIHV3UxO-jmg",
     "youtube_handle": "@MisoBarPattaya",
-    "google_maps_url": "https://www.google.com/maps/search/?api=1&query=12.94255,100.88525+(Miso+Bar+Pattaya+Soi+6)",
+    "google_maps_url": "https://www.google.com/maps/place/Miso+Bar+Pattaya+Soi+6/@12.9426842,100.8851922,17z/data=!3m1!4b1!4m6!3m5!1s0x3102970014e84797:0x6e28cfd3ee004efb!8m2!3d12.9426842!4d100.8851922!16s%2Fg%2F11yc7n6ntf",
     "description": "Vibrant open-air bar on Soi 6 in North Pattaya broadcasting nightly interactive YouTube live streams and guest chats.",
     "is_sponsored": false,
     "transit_tip": "Take the Blue Loop Baht Bus down Beach Road, ring the bell at Soi 6, and walk 50 meters into Soi 6.",
@@ -471,18 +435,15 @@
     ],
     "photos": [
       {
-        "url": "https://images.unsplash.com/photo-1566417713940-fe7c737a9ef2?w=800&auto=format&fit=crop&q=80",
-        "caption": "Colorful open-air entertainment bar near Beach Road on Soi 6"
+        "url": "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=j3NV_aXTqVZxVlRkAFFvsg&cb_client=maps_sv.tactile.gps&w=800&h=500&yaw=207.50372&pitch=0&thumbfov=100",
+        "caption": "Miso Bar seaside entrance on Soi 6 - Verified Google Street View"
       },
       {
-        "url": "https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=800&auto=format&fit=crop&q=80",
-        "caption": "Bright party lighting and welcoming guest seating"
-      },
-      {
-        "url": "https://images.unsplash.com/photo-1572116469696-31de0f17cc34?w=800&auto=format&fit=crop&q=80",
-        "caption": "Sunset atmosphere looking towards Pattaya Beach Road"
+        "url": "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=j3NV_aXTqVZxVlRkAFFvsg&cb_client=maps_sv.tactile.gps&w=800&h=500&yaw=185.0&pitch=0&thumbfov=90",
+        "caption": "Miso Bar outdoor bar counter on Soi 6 - Verified Google Street View"
       }
-    ]
+    ],
+    "google_name": "Miso Bar Pattaya Soi 6"
   },
   {
     "slug": "smile-bar-pattaya",
@@ -495,7 +456,7 @@
     "video_id": null,
     "youtube_channel_id": "UCbx45biSBonUqzkSF9_aPBg",
     "youtube_handle": "@smilebarpattayathailand467",
-    "google_maps_url": "https://www.google.com/maps/search/?api=1&query=12.9321461,100.8864198+(Smile+Bar+Soi+Made+in+Thailand+Pattaya)",
+    "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Smile+Bar+Soi+Made+in+Thailand+Pattaya",
     "description": "High-energy beer bar in the heart of Soi Made in Thailand connecting Second Road and Soi Buakhao, broadcasting regular live streams, guest interactions, and vibrant evening entertainment.",
     "is_sponsored": false,
     "transit_tip": "Conveniently located on Soi Made in Thailand connecting Second Road and Buakhao. Easily accessible on foot from anywhere in Central Pattaya.",
@@ -508,18 +469,15 @@
     ],
     "photos": [
       {
-        "url": "https://images.unsplash.com/photo-1574096079513-d8259312b785?w=800&auto=format&fit=crop&q=80",
-        "caption": "Upbeat party bar along the covered Made in Thailand lane"
+        "url": "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=DVLj14Pa6nbZlYPc1mrm2g&cb_client=maps_sv.tactile.gps&w=800&h=500&yaw=180.0&pitch=0&thumbfov=100",
+        "caption": "Smile Bar in Soi Made in Thailand Bar Plaza - Verified Google Street View"
       },
       {
-        "url": "https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=800&auto=format&fit=crop&q=80",
-        "caption": "Social bar seating with music and live streaming broadcast rig"
-      },
-      {
-        "url": "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&auto=format&fit=crop&q=80",
-        "caption": "Bustling nighttime corridor between Second Rd and Buakhao"
+        "url": "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=DVLj14Pa6nbZlYPc1mrm2g&cb_client=maps_sv.tactile.gps&w=800&h=500&yaw=210.0&pitch=0&thumbfov=90",
+        "caption": "Soi Made in Thailand open-air beer bar concourse - Verified Google Street View"
       }
-    ]
+    ],
+    "google_name": "Smile Bar"
   },
   {
     "slug": "true-blue-aussie-bar",
@@ -532,7 +490,7 @@
     "video_id": null,
     "youtube_channel_id": "UC6lUliNly5P9-WhqksPj5Ag",
     "youtube_handle": "@Trueblueaussiebar",
-    "google_maps_url": "https://www.google.com/maps/search/?api=1&query=12.9279432,100.8836641+(True+Blue+Aussie+Bar+Pattaya)",
+    "google_maps_url": "https://www.google.com/maps/place/TRUE+BLUE+AUSSIE+BAR/@12.9145024,100.9154145,17z/data=!3m1!4b1!4m6!3m5!1s0x310295fde2e838a9:0x59203daceb3a60d4!8m2!3d12.9145024!4d100.9154145!16s%2Fg%2F11h27jb66p",
     "description": "Iconic Australian sports and entertainment bar broadcasting two daily live stream sessions covering both True Blue Aussie Bar and Boomerang Bar in Central Pattaya.",
     "is_sponsored": false,
     "transit_tip": "Located on Soi Boomerang just off Soi Buakhao. A short 2-minute walk from the LK Metro / Buakhao crossing.",
@@ -545,17 +503,14 @@
     ],
     "photos": [
       {
-        "url": "https://images.unsplash.com/photo-1575444758702-4a6b9222336e?w=800&auto=format&fit=crop&q=80",
-        "caption": "Aussie sports bar with multiple big screens and cold draft beer"
+        "url": "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=UjCYFz9G5LNstp_AS9w-ew&cb_client=maps_sv.tactile.gps&w=800&h=500&yaw=167.93712&pitch=0&thumbfov=100",
+        "caption": "True Blue Aussie Bar & Boomerang Bar facade - Verified Google Street View"
       },
       {
-        "url": "https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=800&auto=format&fit=crop&q=80",
-        "caption": "Covered outdoor patio on Soi Boomerang"
-      },
-      {
-        "url": "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800&auto=format&fit=crop&q=80",
-        "caption": "Classic sports bar atmosphere and friendly expat community"
+        "url": "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=UjCYFz9G5LNstp_AS9w-ew&cb_client=maps_sv.tactile.gps&w=800&h=500&yaw=190.0&pitch=0&thumbfov=90",
+        "caption": "Soi Boomerang sports bar terrace - Verified Google Street View"
       }
-    ]
+    ],
+    "google_name": "TRUE BLUE AUSSIE BAR"
   }
 ]

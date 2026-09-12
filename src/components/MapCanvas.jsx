@@ -431,6 +431,105 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
       }
       liveCamGroup.addTo(map);
 
+      // 5. Koh Larn Ferry Route & Pier Pins (Bali Hai Pier <-> Na Baan Pier & Tawaen Beach)
+      const ferryGroup = Leaflet.layerGroup();
+
+      // Maritime Nautical Dashed Route Line
+      const ferryRouteCoords = [
+        [12.9255, 100.8675], // Bali Hai Pier
+        [12.9200, 100.8200], // Open Sea Waypoint
+        [12.9189, 100.7877], // Na Baan Pier
+        [12.9238, 100.7788], // Tawaen Beach Pier
+      ];
+      const ferryLine = Leaflet.polyline(ferryRouteCoords, {
+        color: '#06B6D4',
+        weight: 3.5,
+        opacity: 0.85,
+        dashArray: '8, 8',
+        lineCap: 'round',
+        lineJoin: 'round',
+      });
+      ferryLine.bindTooltip(
+        `<div style="font-family: inherit; font-size: 11px;">
+           <strong style="color: #22D3EE; font-size: 12px;">⛴️ Koh Larn Ferry Route (30฿)</strong>
+           <div style="color: #94A3B8; font-size: 10px; margin-top: 2px;">Bali Hai Pier ⇄ Koh Larn (45 min voyage)</div>
+           <div style="color: #38BDF8; font-size: 9px; margin-top: 2px; font-weight: 700;">Click to view full timetable & tide tracker</div>
+         </div>`,
+        { className: 'pattaya-dark-tooltip', direction: 'top' }
+      );
+      ferryLine.on('click', () => {
+        if (onOpenKohLarn) onOpenKohLarn();
+      });
+      ferryGroup.addLayer(ferryLine);
+
+      // Ferry Pier Pins with glowing badges
+      const piers = [
+        {
+          name: 'Bali Hai Pier (Pattaya)',
+          sub: 'Main Ferry Terminal to Koh Larn',
+          lat: 12.9255,
+          lng: 100.8675,
+          badge: 'Bali Hai',
+          fare: '30฿',
+        },
+        {
+          name: 'Na Baan Pier (Koh Larn)',
+          sub: 'Koh Larn Village & Main Town Pier',
+          lat: 12.9189,
+          lng: 100.7877,
+          badge: 'Na Baan',
+          fare: '30฿',
+        },
+        {
+          name: 'Tawaen Beach Pier (Koh Larn)',
+          sub: 'Direct Pier to Tawaen Beach & Watersports',
+          lat: 12.9238,
+          lng: 100.7788,
+          badge: 'Tawaen Beach',
+          fare: '30฿',
+        },
+      ];
+
+      piers.forEach((pier) => {
+        const pierIcon = Leaflet.divIcon({
+          className: 'custom-ferry-marker',
+          iconSize: [120, 32],
+          iconAnchor: [60, 16],
+          html: `
+            <div style="cursor: pointer; background: #0B132B; border: 1.5px solid #06B6D4; border-radius: 9999px; padding: 3px 8px; display: flex; align-items: center; justify-content: center; gap: 4px; box-shadow: 0 0 16px rgba(6,182,212,0.65); font-family: monospace; font-size: 11px; font-weight: 800; color: #FFFFFF; white-space: nowrap; transform: translate3d(0,0,0);">
+              <span>⛴️</span>
+              <span style="color: #22D3EE;">${pier.badge}</span>
+              <span style="background: #0891B2; color: #FFFFFF; font-size: 9px; padding: 1px 4px; border-radius: 4px; font-weight: 900;">${pier.fare}</span>
+            </div>
+          `,
+        });
+
+        const marker = Leaflet.marker([pier.lat, pier.lng], {
+          icon: pierIcon,
+          zIndexOffset: 2500,
+        });
+
+        marker.bindTooltip(
+          `<div style="font-family: inherit; font-size: 11px;">
+             <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 2px;">
+               <span style="background: #0891B2; color: #FFFFFF; font-size: 9px; font-weight: 800; padding: 1px 5px; border-radius: 4px;">FERRY PIER • 30฿</span>
+             </div>
+             <strong style="color: #FFFFFF; font-size: 12px;">${pier.name}</strong>
+             <div style="color: #94A3B8; font-size: 10px; margin-top: 2px;">${pier.sub}</div>
+             <div style="color: #22D3EE; font-size: 10px; margin-top: 3px; font-weight: 700;">Click to view 45-min ferry schedule & live tide tracker</div>
+           </div>`,
+          { className: 'pattaya-dark-tooltip', direction: 'top', offset: [0, -14] }
+        );
+
+        marker.on('click', () => {
+          if (onOpenKohLarn) onOpenKohLarn();
+        });
+
+        ferryGroup.addLayer(marker);
+      });
+
+      ferryGroup.addTo(map);
+
       mapRef.current = map;
       layersRef.current = {
         cctvActiveGroup,
@@ -438,6 +537,7 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
         venueGroup,
         liveCamGroup,
         transitGroup,
+        ferryGroup,
       };
 
       if (onMapInstance) {

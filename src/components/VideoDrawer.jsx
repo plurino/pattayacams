@@ -79,8 +79,8 @@ export default function VideoDrawer({ entity, onClose }) {
   const isCctv = entity.type === 'cctv';
   const isLiveCam = entity.type === 'livecam' || entity.category === 'live_cam';
   const isVenue = entity.type === 'venue';
-  const isStreamer = entity.type === 'streamer' || entity.type === 'creator';
-  const isVenueOffline = isVenue && (entity.is_live === false);
+  const isStreamer = entity.type === 'streamer' || entity.type === 'creator' || entity.category === 'streamer' || entity.slug?.startsWith('streamer-') || entity.slug?.startsWith('creator-') || entity.platform === 'kick' || (!entity.type && !!entity.handle);
+  const isVenueOffline = (isVenue || (!isCctv && !isLiveCam && !isStreamer)) && (entity.is_live === false || !entity.video_id);
 
   const formatRelativeTime = (timestamp) => {
     if (!timestamp) return 'recently';
@@ -410,8 +410,35 @@ export default function VideoDrawer({ entity, onClose }) {
         )}
       </div>
 
-      {/* Embedded Map Preview & Quick Share Location (for all venues/cameras with coordinates) */}
-      {hasCoordinates && (
+      {/* IRL Streamer Context Card (Streamers have no static location) */}
+      {isStreamer && (
+        <div className="p-3.5 rounded-xl bg-purple-950/20 border border-purple-500/30 flex flex-col gap-2.5 shadow-md">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-mono text-purple-300 font-bold flex items-center gap-1.5">
+              <Radio className="w-3.5 h-3.5 text-purple-400 animate-pulse" />
+              <span>IRL Roaming Streamer</span>
+            </span>
+            <span className="text-[9px] font-mono text-purple-300 bg-purple-900/40 px-2 py-0.5 rounded border border-purple-500/30">
+              Mobile Broadcast • Live in Pattaya
+            </span>
+          </div>
+          <p className="text-xs text-slate-300 leading-relaxed">
+            This creator broadcasts live walks and nightlife events throughout Pattaya. Because they are on the move across nightlife zones, they do not have a static venue location.
+          </p>
+          <div className="flex items-center gap-2 pt-1">
+            <a
+              href={`/creators/${entity.slug?.replace(/^creator-|^streamer-/, '') || ''}`}
+              className="flex items-center justify-center gap-1.5 w-full py-2 px-3 rounded-lg bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold text-xs transition-all shadow-md"
+            >
+              <span>View Creator Dossier & Recent VODs</span>
+              <ExternalLink className="w-3.5 h-3.5" />
+            </a>
+          </div>
+        </div>
+      )}
+
+      {/* Embedded Map Preview & Quick Share Location (Only for static venues and stationary cams) */}
+      {!isStreamer && hasCoordinates && (
         <div className="p-3 rounded-xl bg-surface border border-borderDark flex flex-col gap-2.5 shadow-md">
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold font-mono text-white flex items-center gap-1.5">
@@ -478,7 +505,7 @@ export default function VideoDrawer({ entity, onClose }) {
 
   return (
     <div
-      className={`fixed inset-y-0 right-0 z-50 bg-surface/95 backdrop-blur-xl border-l border-borderDark shadow-2xl flex flex-col transition-all duration-300 ease-out ${
+      className={`fixed inset-y-0 right-0 z-[2000] bg-surface/95 backdrop-blur-xl border-l border-borderDark shadow-2xl flex flex-col transition-all duration-300 ease-out ${
         isExpanded ? 'w-full lg:w-[850px]' : 'w-full sm:w-[460px]'
       }`}
     >

@@ -1,8 +1,9 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Clock, Droplets, Wind, TrendingUp, Ship, Sparkles, Bell, ChevronRight } from 'lucide-react';
+import { Clock, Droplets, Wind, TrendingUp, Ship, Sparkles, Bell, ChevronRight, Calculator } from 'lucide-react';
 import { useTickerData } from '@/src/hooks/useTickerData';
+import CurrencyConverterModal from './CurrencyConverterModal';
 
 const CURRENCIES = [
   { code: 'USD', flag: '🇺🇸', symbol: '$1=' },
@@ -20,6 +21,7 @@ export default function TickerBar({
 }) {
   const { ictTime, weather, rates } = useTickerData();
   const [currencyIndex, setCurrencyIndex] = useState(0);
+  const [isConverterOpen, setIsConverterOpen] = useState(false);
 
   const activeCurrency = CURRENCIES[currencyIndex];
 
@@ -68,10 +70,10 @@ export default function TickerBar({
         )}
       </div>
 
-      {/* 2. Center: Thai Baht (THB) Exchange Ticker */}
+      {/* 2. Center: Thai Baht (THB) Exchange Ticker & Interactive Converter */}
       <div className="shrink-0 flex items-center">
-        {/* Mobile: 1-Tap Currency Cycler (USD -> GBP -> EUR -> AUD) */}
-        <div className="flex sm:hidden items-center">
+        {/* Mobile: 1-Tap Currency Cycler & Converter Launcher */}
+        <div className="flex sm:hidden items-center gap-1">
           <button
             onClick={cycleCurrency}
             className="flex items-center gap-1 px-1.5 py-0.5 rounded bg-canvas/60 hover:bg-canvas border border-borderDark/60 hover:border-amber-400/50 text-[10px] font-mono text-slate-300 hover:text-white transition-colors"
@@ -84,37 +86,49 @@ export default function TickerBar({
             </strong>
             <ChevronRight className="w-2.5 h-2.5 text-slate-500" />
           </button>
+          <button
+            onClick={() => setIsConverterOpen(true)}
+            className="p-1 rounded bg-amber-500/20 hover:bg-amber-500/30 border border-amber-400/40 text-amber-300 transition-colors"
+            title="Open Thai Baht Converter"
+          >
+            <Calculator className="w-2.5 h-2.5" />
+          </button>
         </div>
 
-        {/* Desktop / Tablet: Full Multi-Currency Ticker */}
-        <div className="hidden sm:flex items-center gap-2.5 px-3 py-0.5 mx-2 rounded-md bg-canvas/40 border border-borderDark/40 text-[10px]">
-          <div className="flex items-center gap-1 text-amber-400 font-bold">
+        {/* Desktop / Tablet: Clickable Full Multi-Currency Ticker */}
+        <button
+          onClick={() => setIsConverterOpen(true)}
+          className="hidden sm:flex items-center gap-2.5 px-3 py-0.5 mx-2 rounded-md bg-canvas/50 hover:bg-canvas border border-borderDark/50 hover:border-amber-400/60 text-[10px] transition-all cursor-pointer group shadow-sm"
+          title="Click to Open Interactive Thai Baht Currency Converter & Pattaya Street Exchange Guide"
+        >
+          <div className="flex items-center gap-1 text-amber-400 font-bold group-hover:scale-105 transition-transform">
             <TrendingUp className="w-3 h-3" />
             <span>THB FX:</span>
           </div>
 
           {rates ? (
             <div className="flex items-center gap-2.5 text-slate-300 font-mono">
-              <span title="US Dollar to Thai Baht" className="hover:text-white transition-colors">
+              <span title="US Dollar to Thai Baht" className="group-hover:text-white transition-colors">
                 <span className="mr-0.5">🇺🇸</span> $1=<strong className="text-amber-300">{rates.USD}฿</strong>
               </span>
               <span className="text-slate-600">•</span>
-              <span title="British Pound to Thai Baht" className="hover:text-white transition-colors">
+              <span title="British Pound to Thai Baht" className="group-hover:text-white transition-colors">
                 <span className="mr-0.5">🇬🇧</span> £1=<strong className="text-amber-300">{rates.GBP}฿</strong>
               </span>
               <span className="text-slate-600 hidden md:inline">•</span>
-              <span title="Euro to Thai Baht" className="hidden md:inline hover:text-white transition-colors">
+              <span title="Euro to Thai Baht" className="hidden md:inline group-hover:text-white transition-colors">
                 <span className="mr-0.5">🇪🇺</span> €1=<strong className="text-amber-300">{rates.EUR}฿</strong>
               </span>
               <span className="text-slate-600 hidden lg:inline">•</span>
-              <span title="Australian Dollar to Thai Baht" className="hidden lg:inline hover:text-white transition-colors">
+              <span title="Australian Dollar to Thai Baht" className="hidden lg:inline group-hover:text-white transition-colors">
                 <span className="mr-0.5">🇦🇺</span> A$1=<strong className="text-amber-300">{rates.AUD}฿</strong>
               </span>
+              <Calculator className="w-3 h-3 text-amber-400/80 group-hover:text-amber-300 ml-1 shrink-0" />
             </div>
           ) : (
             <span className="text-slate-500 text-[10px]">Updating Baht rates...</span>
           )}
-        </div>
+        </button>
       </div>
 
       {/* 3. Right: Visitor Utilities (Koh Larn Ferry, Events, Alerts) */}
@@ -155,6 +169,13 @@ export default function TickerBar({
           <span className="sm:hidden">{hasLiveAlerts ? 'ON' : 'Alerts'}</span>
         </button>
       </div>
+
+      {/* Currency Converter Interactive Popover / Modal */}
+      <CurrencyConverterModal
+        isOpen={isConverterOpen}
+        onClose={() => setIsConverterOpen(false)}
+        rates={rates}
+      />
     </div>
   );
 }

@@ -54,7 +54,7 @@ export default function LayerToggleHUD({
   return (
     <>
       {/* 1. Top-Right Floating Controls: Compass, Quick Rotation & Theme Switcher */}
-      <div className="absolute top-24 right-3 z-[1000] flex flex-col items-center gap-1.5 pointer-events-auto select-none">
+      <div className="absolute top-24 right-3 z-30 flex flex-col items-center gap-1.5 pointer-events-auto select-none">
         {/* Compass Needle Rose Button (Click to reset to North) */}
         <button
           onClick={onResetNorth}
@@ -115,7 +115,7 @@ export default function LayerToggleHUD({
       </div>
 
       {/* 2. Bottom-Left Map Layer Controller */}
-      <aside aria-label="Map Layer Controls" className="absolute bottom-4 sm:bottom-6 left-3 sm:left-6 z-[1000] flex flex-col gap-2 pointer-events-auto select-none">
+      <aside aria-label="Map Layer Controls" className="absolute bottom-4 sm:bottom-6 left-3 sm:left-6 z-30 flex flex-col gap-2 pointer-events-auto select-none">
         {/* CCTV Disclaimer Toast */}
         {toastMessage && (
           <div className="bg-surface/95 backdrop-blur-md border border-brandPink/50 text-slate-200 text-xs px-3 py-2 rounded-xl shadow-2xl flex items-center gap-2 max-w-[280px] animate-fade-in">
