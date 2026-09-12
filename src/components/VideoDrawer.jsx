@@ -545,8 +545,8 @@ export default function VideoDrawer({ entity, onClose }) {
         {/* 1. Video Player Stage or Standby Card */}
         {renderVideoStage()}
 
-        {/* 2. Emoji Telemetry Reactions */}
-        <EmojiReactionGroup entitySlug={entity.slug || entity.id} />
+        {/* 2. Emoji Telemetry Reactions (Venues & Live Streamers only - hidden on municipal CCTV) */}
+        {!isCctv && <EmojiReactionGroup entitySlug={entity.slug || entity.id} />}
 
         {/* 3. Auxiliary Location, Maps & Guides */}
         {renderAuxiliaryCards()}

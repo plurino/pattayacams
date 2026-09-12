@@ -9,7 +9,6 @@ const CATEGORIES = [
   { id: 'advertising', label: 'Commercial Promotion & Sponsorship Inquiry', icon: Sparkles },
   { id: 'geo_correction', label: 'Report Inaccurate Map Location or Transit Route', icon: MapPin },
   { id: 'bug_report', label: 'Report a Broken Stream or Technical Bug', icon: AlertTriangle },
-  { id: 'general', label: 'Press, Media & General Cooperation', icon: MessageSquare },
 ];
 
 export default function ContactModal({ isOpen, onClose, initialTab = 'contact' }) {
@@ -230,7 +229,7 @@ export default function ContactModal({ isOpen, onClose, initialTab = 'contact' }
             </div>
 
             <div className="pt-2 text-center text-[10px] text-slate-400 border-t border-borderDark/60">
-              Direct inbox: <span className="text-brandPink font-mono font-bold">contact@pattayacams.com</span> • Average response time under 12 hours.
+              Direct inbox: <span className="text-brandPink font-mono font-bold">contact@pattayacams.com</span>
             </div>
           </form>
         )}
@@ -283,7 +282,7 @@ export default function ContactModal({ isOpen, onClose, initialTab = 'contact' }
             <div className="p-3 rounded-xl bg-surfaceLight/60 border border-borderDark">
               <h3 className="font-bold text-white text-sm mb-1">4. Creator Attribution & Removal Requests</h3>
               <p className="text-slate-400 text-[11px]">
-                All streams and videos remain the copyrighted intellectual property of their respective creators and broadcasters. If you are a creator or venue owner and wish to modify your listing details or request delisting, use our Contact Desk tab or email <span className="text-brandPink font-mono">contact@pattayacams.com</span>. Requests are processed within 24 hours.
+                All streams and videos remain the copyrighted intellectual property of their respective creators and broadcasters. If you are a creator or venue owner and wish to modify your listing details or request delisting, use our Contact Desk tab or email <span className="text-brandPink font-mono">contact@pattayacams.com</span>.
               </p>
             </div>
           </div>

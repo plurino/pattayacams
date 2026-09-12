@@ -139,7 +139,6 @@ export default function PrivacyPage() {
                 <span className="text-slate-400">Contact Desk:</span>{' '}
                 <span className="text-brandPink font-bold">contact@pattayacams.com</span>
               </div>
-              <span className="text-slate-500 text-[11px]">SLA: &lt; 24h</span>
             </div>
           </section>
         </div>
