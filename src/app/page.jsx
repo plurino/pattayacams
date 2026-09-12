@@ -20,6 +20,8 @@ import TickerBar from '@/src/components/TickerBar';
 import KohLarnModal from '@/src/components/KohLarnModal';
 import EventRadarModal from '@/src/components/EventRadarModal';
 import WeatherModal from '@/src/components/WeatherModal';
+import NewsletterModal from '@/src/components/NewsletterModal';
+import CookieConsentBanner from '@/src/components/CookieConsentBanner';
 
 function playShuffleChime() {
   if (typeof window === 'undefined') return;
@@ -67,6 +69,7 @@ export default function AppRoot() {
   const [isKohLarnModalOpen, setIsKohLarnModalOpen] = useState(false);
   const [isEventsModalOpen, setIsEventsModalOpen] = useState(false);
   const [isWeatherModalOpen, setIsWeatherModalOpen] = useState(false);
+  const [isNewsletterOpen, setIsNewsletterOpen] = useState(false);
   const [isBannerDismissed, setIsBannerDismissed] = useState(false);
   const mapInstanceRef = useRef(null);
 
@@ -285,6 +288,7 @@ export default function AppRoot() {
         onOpenKohLarn={() => setIsKohLarnModalOpen(true)}
         onOpenEvents={() => setIsEventsModalOpen(true)}
         onOpenWeather={() => setIsWeatherModalOpen(true)}
+        onOpenNewsletter={() => setIsNewsletterOpen(true)}
         onToggleAlerts={toggleLiveAlerts}
         hasLiveAlerts={hasLiveAlerts}
       />
@@ -412,6 +416,14 @@ export default function AppRoot() {
         onClose={() => setIsWeatherModalOpen(false)}
         currentWeather={weather}
       />
+
+      <NewsletterModal
+        isOpen={isNewsletterOpen}
+        onClose={() => setIsNewsletterOpen(false)}
+      />
+
+      {/* 7. Privacy & Analytics Cookie Consent Banner */}
+      <CookieConsentBanner />
     </div>
   );
 }

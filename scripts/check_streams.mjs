@@ -1,5 +1,5 @@
 // scripts/check_streams.mjs
-// Lightweight, quota-free YouTube & Kick live stream health checker
+// Lightweight, quota-free YouTube & Kick live stream health checker with strict channel verification
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -28,7 +28,22 @@ if (fs.existsSync(statusPath)) {
   }
 }
 
-async function checkYouTubeChannel(handle, fallbackVideoId) {
+// Blocked authors from trending/homepage redirects when datacenter bot checks fail
+const BLOCKED_AUTHORS = [
+  'tucker carlson',
+  'paypal',
+  'cnn',
+  'fox news',
+  'msnbc',
+  'jacksepticeye',
+  'mrbeast',
+  'pewdiepie',
+  'acc digital network',
+  'espn',
+  'sky news'
+];
+
+async function checkYouTubeChannel(handle, fallbackVideoId, expectedChannelId = null, expectedName = null) {
   if (!handle) {
     return { is_live: false, video_id: null, status: 'error_404', platform: 'youtube' };
   }
@@ -61,9 +76,30 @@ async function checkYouTubeChannel(handle, fallbackVideoId) {
       return { is_live: false, video_id: null, status: 'error_404', platform: 'youtube' };
     }
 
-    const watchMatch = res.url.match(/watch\?v=([a-zA-Z0-9_-]{11})/);
-    const videoIdMatch = html.match(/"videoId":"([a-zA-Z0-9_-]{11})"/);
-    const videoId = watchMatch ? watchMatch[1] : (videoIdMatch ? videoIdMatch[1] : null);
+    // 1. Check canonical link: MUST be a video watch page (not a redirect to the YouTube homepage or explore feed)
+    const canonicalMatch = html.match(/<link rel="canonical" href="([^"]+)"/);
+    const canonicalUrl = canonicalMatch ? canonicalMatch[1] : res.url;
+    const watchMatch = canonicalUrl.match(/watch\?v=([a-zA-Z0-9_-]{11})/);
+
+    if (!watchMatch) {
+      return { is_live: false, video_id: null, status: 'active', platform: 'youtube' };
+    }
+
+    const videoId = watchMatch[1];
+
+    // 2. Channel ID verification: If channelId is in page, it must match expected channel ID
+    const pageChannelIdMatch = html.match(/"externalChannelId":"([^"]+)"/) || html.match(/"channelId":"([^"]+)"/);
+    const pageChannelId = pageChannelIdMatch ? pageChannelIdMatch[1] : null;
+
+    if (expectedChannelId && pageChannelId && pageChannelId !== expectedChannelId) {
+      console.warn(`[REJECTED] Channel mismatch for ${cleanHandle}: found ${pageChannelId}, expected ${expectedChannelId}`);
+      return { is_live: false, video_id: null, status: 'active', platform: 'youtube' };
+    }
+
+    // 3. Specific live stream indicators on the video
+    const isLiveBroadcast = html.includes('"liveBroadcastDetails":{"isLiveNow":true') ||
+                           html.includes('"isLive":true') ||
+                           html.includes('"isLiveNow":true');
 
     const isUpcoming = html.includes('"isUpcoming":true') || 
                        html.includes('"status":"UPCOMING"') || 
@@ -71,19 +107,30 @@ async function checkYouTubeChannel(handle, fallbackVideoId) {
                        html.includes('Premieres in ') ||
                        html.includes('Scheduled for ');
 
-    const hasLiveBadge = html.includes('"isLive":true') || 
-                         html.includes('"isLiveNow":true') || 
-                         html.includes('{"text":"LIVE"}') ||
-                         html.includes('"label":"LIVE"');
-
     const isEnded = html.includes('Streamed live') || html.includes('"isLive":false');
 
-    // Only genuine live stream (not in waiting room / upcoming scheduled state)
-    const isLive = Boolean(hasLiveBadge && !isUpcoming && !isEnded && videoId);
+    if (!isLiveBroadcast || isUpcoming || isEnded) {
+      return { is_live: false, video_id: null, status: 'active', platform: 'youtube' };
+    }
+
+    // 4. Double-check with lightweight oEmbed to verify author
+    try {
+      const oembedRes = await fetch(`https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${videoId}&format=json`);
+      if (oembedRes.ok) {
+        const oembedData = await oembedRes.json();
+        const author = (oembedData.author_name || '').toLowerCase();
+        if (BLOCKED_AUTHORS.some(b => author.includes(b))) {
+          console.warn(`[BLOCKED HIJACK] Video ${videoId} by ${oembedData.author_name} is in blocked authors list!`);
+          return { is_live: false, video_id: null, status: 'active', platform: 'youtube' };
+        }
+      }
+    } catch (e) {
+      // Ignore oEmbed fetch errors
+    }
 
     return {
-      is_live: isLive,
-      video_id: videoId || fallbackVideoId || null,
+      is_live: true,
+      video_id: videoId,
       status: 'active',
       platform: 'youtube'
     };
@@ -91,7 +138,7 @@ async function checkYouTubeChannel(handle, fallbackVideoId) {
     console.warn(`Error checking YouTube ${cleanHandle}:`, err.message);
     return {
       is_live: false,
-      video_id: fallbackVideoId || null,
+      video_id: null,
       status: 'active',
       platform: 'youtube'
     };
@@ -159,7 +206,7 @@ async function run() {
   for (const venue of venues) {
     const entityKey = `venue-${venue.slug}`;
     const prev = nextEntities[entityKey] || {};
-    const result = await checkYouTubeChannel(venue.youtube_handle, venue.video_id);
+    const result = await checkYouTubeChannel(venue.youtube_handle, venue.video_id, venue.youtube_channel_id, venue.name);
 
     if (result.is_live && result.video_id && result.video_id !== venue.video_id) {
       venue.video_id = result.video_id;
@@ -176,7 +223,7 @@ async function run() {
       handle: venue.youtube_handle
     };
 
-    console.log(`[${venue.name}] ${result.is_live ? '🔴 LIVE' : '⚪ Offline'} (${result.status})`);
+    console.log(`[${venue.name}] ${result.is_live ? '🔴 LIVE (' + result.video_id + ')' : '⚪ Offline'} (${result.status})`);
   }
 
   if (venuesUpdated) {
@@ -190,7 +237,7 @@ async function run() {
   for (const cam of liveCams) {
     const entityKey = `livecam-${cam.slug}`;
     const prev = nextEntities[entityKey] || {};
-    const result = await checkYouTubeChannel(cam.youtube_handle, cam.video_id);
+    const result = await checkYouTubeChannel(cam.youtube_handle, cam.video_id, cam.youtube_channel_id, cam.name);
 
     if (result.is_live && result.video_id && result.video_id !== cam.video_id) {
       cam.video_id = result.video_id;
@@ -207,7 +254,7 @@ async function run() {
       handle: cam.youtube_handle
     };
 
-    console.log(`[${cam.name}] ${result.is_live ? '🔴 LIVE' : '⚪ Offline'} (${result.status})`);
+    console.log(`[${cam.name}] ${result.is_live ? '🔴 LIVE (' + result.video_id + ')' : '⚪ Offline'} (${result.status})`);
   }
 
   if (liveCamsUpdated) {
@@ -220,7 +267,7 @@ async function run() {
   for (const streamer of streamers) {
     const entityKey = `streamer-${streamer.id}`;
     const prev = nextEntities[entityKey] || {};
-    const result = await checkYouTubeChannel(streamer.youtube_handle, null);
+    const result = await checkYouTubeChannel(streamer.youtube_handle, null, streamer.youtube_channel_id, streamer.name);
 
     nextEntities[entityKey] = {
       is_live: result.is_live,
@@ -232,7 +279,7 @@ async function run() {
       handle: streamer.youtube_handle
     };
 
-    console.log(`[${streamer.name}] ${result.is_live ? '🔴 LIVE' : '⚪ Offline'} (${result.status})`);
+    console.log(`[${streamer.name}] ${result.is_live ? '🔴 LIVE (' + result.video_id + ')' : '⚪ Offline'} (${result.status})`);
   }
 
   // 3. Check Creators (YouTube & Kick)
@@ -247,7 +294,7 @@ async function run() {
       result = await checkKickChannel(kickSlug);
       console.log(`[Kick: ${creator.name}] ${result.is_live ? '🟢 LIVE' : '⚪ Offline'} (${result.status})`);
     } else if (creator.platform === 'both' || creator.kick_channel) {
-      result = await checkYouTubeChannel(creator.handle, null);
+      result = await checkYouTubeChannel(creator.handle, null, creator.channel_id, creator.name);
       if (result.is_live) {
         console.log(`[YouTube (Both): ${creator.name}] 🔴 LIVE (${result.status})`);
       } else {
@@ -261,8 +308,8 @@ async function run() {
         }
       }
     } else {
-      result = await checkYouTubeChannel(creator.handle, null);
-      console.log(`[YouTube: ${creator.name}] ${result.is_live ? '🔴 LIVE' : '⚪ Offline'} (${result.status})`);
+      result = await checkYouTubeChannel(creator.handle, null, creator.channel_id, creator.name);
+      console.log(`[YouTube: ${creator.name}] ${result.is_live ? '🔴 LIVE (' + result.video_id + ')' : '⚪ Offline'} (${result.status})`);
     }
 
     nextEntities[entityKey] = {

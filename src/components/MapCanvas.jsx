@@ -434,7 +434,7 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
       // 5. Koh Larn Ferry Route & Pier Pins (Bali Hai Pier <-> Na Baan Pier & Tawaen Beach)
       const ferryGroup = Leaflet.layerGroup();
 
-      // Maritime Nautical Dashed Route Line
+      // Subtle Maritime Nautical Dashed Route Line
       const ferryRouteCoords = [
         [12.9255, 100.8675], // Bali Hai Pier
         [12.9200, 100.8200], // Open Sea Waypoint
@@ -443,9 +443,9 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
       ];
       const ferryLine = Leaflet.polyline(ferryRouteCoords, {
         color: '#06B6D4',
-        weight: 3.5,
-        opacity: 0.85,
-        dashArray: '8, 8',
+        weight: 2,
+        opacity: 0.45,
+        dashArray: '5, 8',
         lineCap: 'round',
         lineJoin: 'round',
       });
@@ -462,44 +462,36 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
       });
       ferryGroup.addLayer(ferryLine);
 
-      // Ferry Pier Pins with glowing badges
+      // Ferry Pier Pins with discreet boat emoji icon
       const piers = [
         {
           name: 'Bali Hai Pier (Pattaya)',
           sub: 'Main Ferry Terminal to Koh Larn',
           lat: 12.9255,
           lng: 100.8675,
-          badge: 'Bali Hai',
-          fare: '30฿',
         },
         {
           name: 'Na Baan Pier (Koh Larn)',
           sub: 'Koh Larn Village & Main Town Pier',
           lat: 12.9189,
           lng: 100.7877,
-          badge: 'Na Baan',
-          fare: '30฿',
         },
         {
           name: 'Tawaen Beach Pier (Koh Larn)',
           sub: 'Direct Pier to Tawaen Beach & Watersports',
           lat: 12.9238,
           lng: 100.7788,
-          badge: 'Tawaen Beach',
-          fare: '30฿',
         },
       ];
 
       piers.forEach((pier) => {
         const pierIcon = Leaflet.divIcon({
           className: 'custom-ferry-marker',
-          iconSize: [120, 32],
-          iconAnchor: [60, 16],
+          iconSize: [26, 26],
+          iconAnchor: [13, 13],
           html: `
-            <div style="cursor: pointer; background: #0B132B; border: 1.5px solid #06B6D4; border-radius: 9999px; padding: 3px 8px; display: flex; align-items: center; justify-content: center; gap: 4px; box-shadow: 0 0 16px rgba(6,182,212,0.65); font-family: monospace; font-size: 11px; font-weight: 800; color: #FFFFFF; white-space: nowrap; transform: translate3d(0,0,0);">
+            <div style="cursor: pointer; width: 26px; height: 26px; background: rgba(11, 19, 43, 0.85); border: 1.5px solid rgba(6, 182, 212, 0.7); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.5); font-size: 13px; transition: transform 0.2s ease, border-color 0.2s ease;" onmouseenter="this.style.transform='scale(1.25)'; this.style.borderColor='#22D3EE';" onmouseleave="this.style.transform='scale(1)'; this.style.borderColor='rgba(6, 182, 212, 0.7)';">
               <span>⛴️</span>
-              <span style="color: #22D3EE;">${pier.badge}</span>
-              <span style="background: #0891B2; color: #FFFFFF; font-size: 9px; padding: 1px 4px; border-radius: 4px; font-weight: 900;">${pier.fare}</span>
             </div>
           `,
         });

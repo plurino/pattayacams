@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Clock, Droplets, Wind, TrendingUp, Ship, Sparkles, Bell, ChevronRight, Calculator } from 'lucide-react';
+import { Clock, Droplets, Wind, TrendingUp, Ship, Sparkles, Bell, ChevronRight, Calculator, Mail } from 'lucide-react';
 import { useTickerData } from '@/src/hooks/useTickerData';
 import CurrencyConverterModal from './CurrencyConverterModal';
 
@@ -16,6 +16,7 @@ export default function TickerBar({
   onOpenKohLarn,
   onOpenEvents,
   onOpenWeather,
+  onOpenNewsletter,
   onToggleAlerts,
   hasLiveAlerts = false,
 }) {
@@ -152,6 +153,16 @@ export default function TickerBar({
         >
           <Sparkles className="w-2.5 h-2.5 text-purple-400" />
           <span>Events</span>
+        </button>
+
+        {/* VIP Newsletter Dispatch */}
+        <button
+          onClick={onOpenNewsletter}
+          className="flex items-center gap-1 px-1.5 sm:px-2 py-0.5 rounded bg-pink-950/40 hover:bg-pink-900/60 border border-brandPink/40 text-brandPink hover:text-white transition-colors text-[10px] font-semibold"
+          title="Join Pattaya Pulse VIP Dispatch (Weekly Live Cam & Nightlife Alerts)"
+        >
+          <Mail className="w-2.5 h-2.5 text-brandPink" />
+          <span className="hidden sm:inline">VIP Club</span>
         </button>
 
         {/* Alerts Toggle */}
