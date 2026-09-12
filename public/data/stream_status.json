@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-09-12T07:30:10.503Z",
+  "last_check": "2026-09-12T11:00:37.149Z",
   "entities": {
     "venue-pattaya-oh-bar": {
       "is_live": false,
@@ -12,8 +12,8 @@
     },
     "livecam-pattaya-beach-road-live-cam": {
       "is_live": true,
-      "video_id": "Dhddjf_7dPE",
-      "last_live_at": "2026-09-12T07:30:10.503Z",
+      "video_id": "kO_xYhZpkjk",
+      "last_live_at": "2026-09-12T11:00:37.149Z",
       "status": "active",
       "name": "Pattaya Beach Road Live Cam",
       "platform": "youtube",
@@ -119,8 +119,8 @@
       "handle": "@luckynanabarpattayalivestr2350"
     },
     "venue-rum-runner-bar": {
-      "is_live": true,
-      "video_id": "z9_hOB_MsoQ",
+      "is_live": false,
+      "video_id": null,
       "last_live_at": "2026-09-12T07:30:10.503Z",
       "status": "active",
       "name": "Rum Runner Bar (Mr Egg)",
@@ -128,9 +128,9 @@
       "handle": "@mreggthailand"
     },
     "venue-miso-bar-pattaya": {
-      "is_live": false,
-      "video_id": null,
-      "last_live_at": null,
+      "is_live": true,
+      "video_id": "flzpBfeHFGU",
+      "last_live_at": "2026-09-12T11:00:37.149Z",
       "status": "active",
       "name": "Miso Bar Pattaya",
       "platform": "youtube",
@@ -218,9 +218,9 @@
       "handle": "@slyman6666"
     },
     "streamer-RS-010": {
-      "is_live": false,
-      "video_id": null,
-      "last_live_at": "2026-09-12T02:22:52.005Z",
+      "is_live": true,
+      "video_id": "Dhddjf_7dPE",
+      "last_live_at": "2026-09-12T11:00:37.149Z",
       "status": "active",
       "name": "Pattaya Beach Live",
       "platform": "youtube",
@@ -364,9 +364,9 @@
       "avatar_url": "https://yt3.googleusercontent.com/ABt-AgPlwBy2SB-QMz8SIHPi0B1IOUC5mDMuwhj1cw8TY80-n3qos4fjSd463wKNguj4EVJMRA=s900-c-k-c0x00ffffff-no-rj"
     },
     "creator-pattaya-beach-live": {
-      "is_live": false,
-      "video_id": "0bGNCCBXAKI",
-      "last_live_at": "2026-09-12T02:22:52.005Z",
+      "is_live": true,
+      "video_id": "D_rAHBWidjI",
+      "last_live_at": "2026-09-12T11:00:37.149Z",
       "status": "active",
       "name": "Pattaya Beach Live",
       "platform": "youtube",
@@ -442,7 +442,7 @@
     },
     "creator-kev-in-thailand": {
       "is_live": false,
-      "video_id": "ULeVS1TCE-g",
+      "video_id": "u_fI2g1SPxw",
       "last_live_at": null,
       "status": "active",
       "name": "Kev-in-Thailand",
@@ -658,8 +658,8 @@
     },
     "livecam-soi-buakhao-live-cam": {
       "is_live": true,
-      "video_id": "CUlLN5Qjp50",
-      "last_live_at": "2026-09-12T07:30:10.503Z",
+      "video_id": "5arQ_-HuUlQ",
+      "last_live_at": "2026-09-12T11:00:37.149Z",
       "status": "active",
       "name": "Soi Buakhao Live Cam",
       "platform": "youtube",
@@ -677,9 +677,9 @@
       "avatar_url": "https://yt3.googleusercontent.com/oSFiARQTu2FbqFOLPVtIROpM-sPXcE_g-T8hrfJXj0QO-ATDEtOcUIsFaq0B-_fPeAMBR1A-FxQ=s900-c-k-c0x00ffffff-no-rj"
     },
     "creator-trae-badd-tv": {
-      "is_live": false,
-      "video_id": "29FGbzYccL4",
-      "last_live_at": "2026-09-11T22:36:34.083Z",
+      "is_live": true,
+      "video_id": "mMLFJGSc1lo",
+      "last_live_at": "2026-09-12T11:00:37.149Z",
       "status": "active",
       "name": "Trae Badd TV",
       "platform": "youtube",
@@ -710,8 +710,8 @@
       "avatar_url": "https://yt3.googleusercontent.com/WyZQSOhd2hSV4WHhxEVosiqiPpzVbwo25D67oCIQKr3_Ga2fd9E_8TDyJ7Yv8TuG_DcZKaHJwg=s900-c-k-c0x00ffffff-no-rj"
     },
     "creator-settled-in-siam": {
-      "is_live": true,
-      "video_id": "z9_hOB_MsoQ",
+      "is_live": false,
+      "video_id": "QOkU0_F0lkA",
       "last_live_at": "2026-09-12T07:30:10.503Z",
       "status": "active",
       "name": "Settled in SIAM",
