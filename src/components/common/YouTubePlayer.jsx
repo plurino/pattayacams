@@ -54,23 +54,6 @@ export default function YouTubePlayer({
           </div>
         )}
 
-        {/* Direct Action Link */}
-        <a
-          href={liveChannelUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={`absolute top-2 right-2 z-20 flex items-center gap-1 px-2.5 py-1 rounded text-white text-[10px] font-mono font-bold transition-all shadow-md ${
-            isVenue
-              ? 'bg-red-600/90 hover:bg-red-600 border border-red-400/40'
-              : 'bg-indigo-600/90 hover:bg-indigo-500 border border-indigo-400/40'
-          }`}
-          title={isVenue ? 'Open live stream on YouTube' : 'Open creator channel on YouTube'}
-        >
-          <Youtube className="w-3 h-3" />
-          <span>{isVenue ? 'Open Live' : 'Open YouTube'}</span>
-          <ExternalLink className="w-2.5 h-2.5" />
-        </a>
-
         {/* Responsive Iframe Embed */}
         {embedUrl ? (
           <iframe

@@ -139,17 +139,6 @@ export default function UniversalPlayer({
           <span className="font-bold">TWITCH LIVE STREAM</span>
         </div>
 
-        <a
-          href={twitchChannelUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="absolute top-2 right-2 z-20 flex items-center gap-1 px-2.5 py-1 rounded text-white bg-purple-600 hover:bg-purple-500 text-[10px] font-mono font-bold transition-all shadow-md"
-        >
-          <Tv className="w-3 h-3" />
-          <span>Open Twitch</span>
-          <ExternalLink className="w-2.5 h-2.5" />
-        </a>
-
         <iframe
           src={twitchEmbedUrl}
           title={title}
@@ -202,17 +191,6 @@ export default function UniversalPlayer({
           <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
           <span className="font-bold">{badgeText || 'KICK LIVE STREAM'}</span>
         </div>
-
-        <a
-          href={kickChannelUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="absolute top-2 right-2 z-20 flex items-center gap-1 px-2.5 py-1 rounded text-black bg-[#53FC18] hover:bg-[#46d614] text-[10px] font-mono font-bold transition-all shadow-md"
-        >
-          <Radio className="w-3 h-3" />
-          <span>Open Kick</span>
-          <ExternalLink className="w-2.5 h-2.5" />
-        </a>
 
         <iframe
           src={kickEmbedUrl}
@@ -278,16 +256,6 @@ export default function UniversalPlayer({
         <span className="w-2 h-2 rounded-full bg-brandPink animate-ping" />
         <span className="font-bold">{badgeText || 'LIVE BROADCAST'}</span>
       </div>
-
-      <a
-        href={ytChannelUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="absolute top-2 right-2 z-20 flex items-center gap-1 px-2.5 py-1 rounded text-white bg-red-600/90 hover:bg-red-600 text-[10px] font-mono font-bold transition-all shadow-md"
-      >
-        <span>Open YouTube</span>
-        <ExternalLink className="w-2.5 h-2.5" />
-      </a>
 
       {ytEmbedUrl ? (
         <iframe

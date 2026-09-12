@@ -30,6 +30,7 @@ export default function CreatorDirectoryClient({ creators = [], venues = [], str
   const streamStatus = liveStatus || initialStatus;
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedPlatform, setSelectedPlatform] = useState('all');
+  const [showOnlyLive, setShowOnlyLive] = useState(false);
   const [sortBy, setSortBy] = useState('featured'); // 'featured' | 'name-asc' | 'name-desc' | 'platform'
   const [currentPage, setCurrentPage] = useState(1);
   const gridTopRef = useRef(null);
@@ -69,7 +70,7 @@ export default function CreatorDirectoryClient({ creators = [], venues = [], str
         is_live: isLive,
         is_sponsored: Boolean(venue.is_sponsored),
         video_id: activeVideoId,
-        content_tags: ['Live Venue', 'Bar & Nightlife', venue.category ? venue.category.replace('_', ' ') : 'Pattaya'],
+        content_tags: ['Nightlife Venue', 'Bar & Nightlife', venue.category ? venue.category.replace('_', ' ') : 'Pattaya'],
         bio_seo: venue.description,
         status: statusInfo.status || 'active',
         google_maps_url: venue.google_maps_url
@@ -82,9 +83,13 @@ export default function CreatorDirectoryClient({ creators = [], venues = [], str
     return [...enrichedVenues, ...enrichedCreators];
   }, [enrichedVenues, enrichedCreators]);
 
-  // Filter items by search and platform/venue selection
+  // Filter items by live toggle, search, and platform/venue selection
   const filteredItems = useMemo(() => {
     return allDirectoryItems.filter(item => {
+      if (showOnlyLive && !item.is_live) {
+        return false;
+      }
+
       let matchesPlatform = true;
       if (selectedPlatform === 'venues') {
         matchesPlatform = item.item_type === 'venue';
@@ -103,7 +108,7 @@ export default function CreatorDirectoryClient({ creators = [], venues = [], str
 
       return matchesPlatform && matchesQuery;
     });
-  }, [allDirectoryItems, selectedPlatform, searchQuery]);
+  }, [allDirectoryItems, showOnlyLive, selectedPlatform, searchQuery]);
 
   // Sort items based on chosen sorting criteria
   const sortedItems = useMemo(() => {
@@ -188,7 +193,7 @@ export default function CreatorDirectoryClient({ creators = [], venues = [], str
         <div className="max-w-4xl mx-auto flex flex-col items-center gap-4 relative z-10">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surfaceLight border border-borderDark text-xs font-mono text-slate-300">
             <Users className="w-3.5 h-3.5 text-brandPink" />
-            <span>{allDirectoryItems.length} Creators & Live Venues</span>
+            <span>{allDirectoryItems.length} Creators & Venues</span>
             <span className="text-slate-600">|</span>
             <span className="text-red-400 font-bold flex items-center gap-1">
               <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
@@ -201,7 +206,7 @@ export default function CreatorDirectoryClient({ creators = [], venues = [], str
           </h1>
 
           <p className="text-xs sm:text-sm md:text-base text-slate-300 max-w-2xl leading-relaxed">
-            The definitive directory of Pattaya nightlife live venues, 4K street walk filmmakers, expat commentators, and mobile IRL streamers documenting the city that never sleeps.
+            The definitive directory of Pattaya nightlife venues, 4K street walk filmmakers, expat commentators, and mobile IRL streamers documenting the city that never sleeps.
           </p>
 
           {/* Search Bar */}
@@ -242,6 +247,26 @@ export default function CreatorDirectoryClient({ creators = [], venues = [], str
         </p>
 
         <div className="flex flex-wrap items-center gap-2.5">
+          {/* Live Only Filter Toggle */}
+          <button
+            onClick={() => {
+              setShowOnlyLive(prev => !prev);
+              setCurrentPage(1);
+            }}
+            className={`px-3 py-1.5 rounded-xl border text-xs font-mono font-bold flex items-center gap-2 transition-all cursor-pointer ${
+              showOnlyLive
+                ? 'bg-red-500/20 text-red-400 border-red-500/60 shadow-[0_0_12px_rgba(239,68,68,0.3)]'
+                : 'bg-surface text-slate-400 border-borderDark hover:text-slate-200 hover:border-slate-600'
+            }`}
+            title="Toggle Live Only"
+          >
+            <span className={`w-2 h-2 rounded-full ${showOnlyLive ? 'bg-red-500 animate-ping' : (liveCount > 0 ? 'bg-red-500' : 'bg-slate-500')}`} />
+            <span>Live Only</span>
+            <span className={`px-1.5 py-0.5 text-[10px] rounded ${showOnlyLive ? 'bg-red-500 text-white' : 'bg-surfaceLight text-slate-400'}`}>
+              {liveCount}
+            </span>
+          </button>
+
           {/* Sort By Dropdown */}
           <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-surface border border-borderDark text-xs font-mono text-slate-300">
             <ArrowUpDown className="w-3.5 h-3.5 text-brandPink shrink-0" />
@@ -262,7 +287,7 @@ export default function CreatorDirectoryClient({ creators = [], venues = [], str
           <div className="flex flex-wrap items-center gap-1 bg-surface p-1 rounded-xl border border-borderDark text-xs shrink-0">
             <button
               onClick={() => handlePlatformChange('all')}
-              className={`px-3 py-1 rounded-lg font-mono transition-all ${
+              className={`px-3 py-1 rounded-lg font-mono transition-all cursor-pointer ${
                 selectedPlatform === 'all'
                   ? 'bg-brandPink text-white font-bold shadow-sm'
                   : 'text-slate-400 hover:text-slate-200'
@@ -272,35 +297,35 @@ export default function CreatorDirectoryClient({ creators = [], venues = [], str
             </button>
             <button
               onClick={() => handlePlatformChange('venues')}
-              className={`px-3 py-1 rounded-lg font-mono flex items-center gap-1 transition-all ${
+              className={`px-3 py-1 rounded-lg font-mono flex items-center gap-1.5 transition-all cursor-pointer ${
                 selectedPlatform === 'venues'
-                  ? 'bg-gradient-to-r from-brandPink to-rose-600 text-white font-bold shadow-sm'
+                  ? 'bg-emerald-600 text-white font-bold shadow-sm'
                   : 'text-slate-400 hover:text-slate-200'
               }`}
             >
-              <MapPin className="w-3 h-3 text-brandPink" />
-              <span>Live Venues ({venues.length})</span>
+              <MapPin className={`w-3.5 h-3.5 ${selectedPlatform === 'venues' ? 'text-white' : 'text-emerald-400'}`} />
+              <span>Venues ({venues.length})</span>
             </button>
             <button
               onClick={() => handlePlatformChange('youtube')}
-              className={`px-3 py-1 rounded-lg font-mono flex items-center gap-1 transition-all ${
+              className={`px-3 py-1 rounded-lg font-mono flex items-center gap-1.5 transition-all cursor-pointer ${
                 selectedPlatform === 'youtube'
                   ? 'bg-red-600 text-white font-bold shadow-sm'
                   : 'text-slate-400 hover:text-slate-200'
               }`}
             >
-              <Youtube className="w-3 h-3 text-red-400" />
+              <Youtube className={`w-3.5 h-3.5 ${selectedPlatform === 'youtube' ? 'text-white' : 'text-red-500'}`} />
               <span>YouTube ({youtubeCount})</span>
             </button>
             <button
               onClick={() => handlePlatformChange('kick')}
-              className={`px-3 py-1 rounded-lg font-mono flex items-center gap-1 transition-all ${
+              className={`px-3 py-1 rounded-lg font-mono flex items-center gap-1.5 transition-all cursor-pointer ${
                 selectedPlatform === 'kick'
                   ? 'bg-emerald-500 text-black font-bold shadow-sm'
                   : 'text-slate-400 hover:text-slate-200'
               }`}
             >
-              <Radio className="w-3 h-3 text-black" />
+              <Radio className={`w-3.5 h-3.5 ${selectedPlatform === 'kick' ? 'text-black' : 'text-[#53FC18]'}`} />
               <span>Kick ({kickCount})</span>
             </button>
           </div>
@@ -314,7 +339,7 @@ export default function CreatorDirectoryClient({ creators = [], venues = [], str
             <Users className="w-10 h-10 text-slate-600" />
             <h2 className="text-sm font-bold text-slate-300">No Listings Found</h2>
             <p className="text-xs text-slate-500 font-mono max-w-sm">
-              We couldn&apos;t find any creators or live venues matching your search.
+              We couldn&apos;t find any creators or venues matching your search.
             </p>
             <button
               onClick={() => { setSelectedPlatform('all'); setSearchQuery(''); setCurrentPage(1); }}
@@ -366,13 +391,13 @@ export default function CreatorDirectoryClient({ creators = [], venues = [], str
 
                         {/* Platform / Venue Badge */}
                         {isVenue ? (
-                          <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold flex items-center gap-1 bg-brandPink/15 text-brandPink border border-brandPink/30 shadow-sm">
-                            <MapPin className="w-2.5 h-2.5" />
-                            <span>Live Venue</span>
+                          <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold flex items-center gap-1 bg-emerald-950/40 text-emerald-400 border border-emerald-500/30 shadow-sm">
+                            <MapPin className="w-2.5 h-2.5 text-emerald-400" />
+                            <span>Venue</span>
                           </span>
                         ) : item.platform === 'both' ? (
                           <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold flex items-center gap-1 bg-purple-950/40 text-purple-300 border border-purple-500/30">
-                            <Youtube className="w-2.5 h-2.5 text-red-400" />
+                            <Youtube className="w-2.5 h-2.5 text-red-500" />
                             <span>+</span>
                             <Radio className="w-2.5 h-2.5 text-[#53FC18]" />
                             <span>YT & Kick</span>
@@ -383,7 +408,7 @@ export default function CreatorDirectoryClient({ creators = [], venues = [], str
                               ? 'bg-emerald-950/40 text-[#53FC18] border border-emerald-500/30'
                               : 'bg-red-950/40 text-red-400 border border-red-500/30'
                           }`}>
-                            {isKick ? <Radio className="w-2.5 h-2.5" /> : <Youtube className="w-2.5 h-2.5" />}
+                            {isKick ? <Radio className="w-2.5 h-2.5 text-[#53FC18]" /> : <Youtube className="w-2.5 h-2.5 text-red-500" />}
                             <span>{isKick ? 'Kick' : 'YouTube'}</span>
                           </span>
                         )}

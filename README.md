@@ -3,7 +3,7 @@
 > **Live Street Webcams, Beach Feeds & Interactive City Transit Radar**  
 > *Tourism Information Service & Regional Transit Guide for Pattaya, Thailand*
 
-[![Next.js](https://img.shields.io/badge/Next.js-14.2-black?logo=next.js)](https://nextjs.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-16.0-black?logo=next.js)](https://nextjs.org/)
 [![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-3.4-38B2AC?logo=tailwind-css)](https://tailwindcss.com/)
 [![Leaflet](https://img.shields.io/badge/Leaflet-1.9-199900?logo=leaflet)](https://leafletjs.com/)
 [![Deployment](https://img.shields.io/badge/Deploy-Cloudflare%20Pages-F38020?logo=cloudflare)](https://pages.cloudflare.com/)
@@ -15,212 +15,137 @@
 
 **PattayaCams.com** is a high-performance, real-time map, multi-cam surveillance command dashboard, transit radar, and programmatic SEO engine for Pattaya, Chonburi, Thailand.
 
-It aggregates live municipal CCTV feeds from Pattaya City Hall and commercial venue live streams from YouTube, paired with Songthaew (Baht Bus) public transit vectors, high-intent travel conversion cards (private airport transfers, dynamic weekend hotel rates, eSIMs), and crowd telemetry.
+It aggregates live municipal CCTV feeds from Pattaya City Hall, 24/7 beach webcams, and authentic nightlife venue live streams from YouTube & Kick, paired with turn-by-turn Songthaew (Baht Bus) public transit loops, real-time Doppler rain radar, Koh Larn ferry nautical tracks, and an automated VOD portal (**PattayaVids**).
 
 ---
 
-## 🗺️ Map Tiles & API Key FAQ
+## 📸 Platform Previews
 
-**Q: Does PattayaCams.com require an API key or paid Google Maps subscription?**  
-**A: NO.** The map engine uses **Leaflet** paired with **CartoDB Dark Matter / OpenStreetMap tiles**, which are **100% free with NO API key, credit card, or billing required**.  
-*(Note: If you see an API key warning when clicking external City Hall links, that is because Pattaya City Hall's third-party government portal has an unconfigured Google Maps key on their own server. PattayaCams itself does not require any API keys).*
+| Interactive Weather Radar & Map Canvas | PattayaVids VOD Portal |
+| :---: | :---: |
+| ![PattayaCams Weather Radar](/images/docs/pattayacams-weather-radar.png) | ![PattayaVids VOD Portal](/images/docs/pattayavids-vod-portal.png) |
 
 ---
 
 ## ⚡ Key Features
 
-- **Interactive Dark & Light Map Engine**: Powered by Leaflet and licensed CartoDB Dark Matter / Positron tiles (`cb1_33su_1_683c1b500e92ad8b2069c2d2`) with smooth 45° step rotation, interactive compass rose reset, and theme toggling with zero watermarks.
+- **Interactive Dark & Light Map Engine**: Powered by Leaflet and licensed CartoDB Dark Matter / Positron basemaps (`cb1_33su_1_683c1b500e92ad8b2069c2d2`) with smooth 45° step rotation, interactive compass rose reset, and theme toggling with zero watermarks or paid API dependencies.
 - **Municipal CCTV Network & City Hall Integration**: 600 unclustered surveillance dots along all Pattaya arterial corridors. Displays official municipal telemetry, camera code, and direct link to the official Pattaya City Hall surveillance portal (`https://livestream.pattaya.go.th/`).
-- **Real-Time Client Hydration (`useStreamStatus`)**: Overcomes Cloudflare Pages static JSON bundling by rendering compile-time baseline data for instant 0-layout-shift, then immediately hydrating and polling `/data/stream_status.json?t=<timestamp>` over HTTP every 60s.
-- **Hero Entertainment Venues**: High-visibility neon pink pulsing pins (`🔴 LIVE`) with active live stream radar pings vs dim slate pins (`⚪ OFFLINE`) for offline venues. Verified and pruned against live YouTube channel endpoints.
-- **Automated Stream Health-Checker**: Quota-free 15-minute GitHub Actions automation (`scripts/check_streams.mjs` + `.github/workflows/check_streams.yml`) probing YouTube handle redirects and live video IDs without burning API quota.
-- **Multi-Cam Command Grid**: 2x2 and 3x3 multi-screen grid wall with slots auto-populated with active live streams, featuring sleek standby cards with channel avatars and links for offline feeds (zero broken YouTube player boxes).
+- **Real-Time Doppler Rain Radar**: Embedded RainViewer API layer with 10-minute past history and 30-minute forward precipitation forecasts, interactive timeline scrubber, and rain overlay toggle.
+- **Hero Entertainment Venues**: High-visibility neon pink pulsing pins (`🔴 LIVE`) with active live stream radar pings vs dim slate pins (`⚪ OFFLINE`) for offline venues.
+- **Automated Stream Health-Checker**: Quota-free GitHub Actions automation (`scripts/check_streams.mjs` + `.github/workflows/check_streams.yml`) probing YouTube handle redirects and Kick API v2 endpoints without consuming paid API credits.
+- **Multi-Cam Command Grid**: 2x2 and 3x3 multi-screen grid wall with slots auto-populated with active live streams, featuring sleek standby cards with channel avatars and links for offline feeds (zero broken player boxes).
 - **Desktop Theater Mode**: VideoDrawer includes a Maximize/Minimize toggle expanding into an 800px+ 2-column widescreen desktop command console.
-- **🎲 Live Shuffle (City Roulette)**: Floating neon widget in the bottom-right corner of the map. When streams are broadcasting, clicks fly the map (`zoom: 17`) to a random live stream and open playback; cleanly disabled and greyed out with tooltip when 0 streams are live.
-- **Pattaya Creators Hub & VOD Aggregator**: 35+ verified Pattaya content creators and 14 authentic live venues indexed on YouTube and Kick with automated RSS VOD ingestion, zero-API video feeds, channel filtering, and high-retention related video strips.
-- **Programmatic SEO & Schema.org JSON-LD**: 651 statically pre-rendered HTML landing pages (`/venues/[slug]`, `/creators/[slug]`, `/cams/[slug]`), full `robots.txt`, dynamic `sitemap.xml`, high-res 1200x630 `og-image.jpg`, and valid Schema.org structured data (`BarOrPub`, `LocalBusiness`, `Person`, `Place`, `VideoObject`, `BreadcrumbList`).
-- **Songthaew (Baht Bus) Transit Vectors**: Road-aligned GeoJSON paths snapped to OpenStreetMap centerlines with interactive tooltips showing loop direction, frequency, and 10 THB fixed fare:
-  1. *Beach Rd & Second Rd Circular Loop* (`#3B82F6`)
-  2. *South Pattaya to Jomtien Beach Line* (`#10B981`)
-  3. *Dolphin Roundabout to Naklua Fish Market* (`#F59E0B`)
-- **Central Feature Flags & Zero Ad Gaps**: Configured via `src/config/features.js` (`FEATURES.SHOW_AFFILIATE_ADS`). All affiliate ad containers (12Go, Agoda, Airalo, Aviasales) gracefully disappear when disabled with zero blank gaps.
+- **🎲 Live Shuffle (City Roulette)**: Floating neon widget in the bottom-right corner of the map. Flies the map to an active live stream venue or displays interactive mobile phone viewer when dropping into an IRL creator's broadcast.
+- **Pattaya Creators & Venues Hub**: 54+ verified Pattaya creators and nightlife venues indexed on YouTube and Kick with a "Live Only" toggle, green Venue pins (`#10B981`), red YouTube badges (`#EF4444`), and bright green Kick badges (`#53FC18`).
+- **PattayaVids VOD Portal**: Zero-quota RSS video scraper displaying completed episodes with automated exclusion of scheduled waiting rooms, live cams, and upcoming countdowns.
+- **Koh Larn Ferry Maritime Routes**: Turn-by-turn sea navigation tracks connecting Bali Hai Pier to Na Baan Pier and Tawaen Beach Pier, with complete timetable and 30 THB fare details.
+- **Programmatic SEO & Schema.org JSON-LD**: 660+ statically pre-rendered HTML landing pages (`/venues/[slug]`, `/creators/[slug]`, `/cams/[slug]`), full `robots.txt`, dynamic `sitemap.xml`, high-res 1200x630 `og-image.jpg`, and valid Schema.org structured data.
 
 ---
 
-## 🛠️ Tech Stack
+## 🚌 Verified 2026 Songthaew (Baht Bus) Network
 
-- **Framework**: Next.js 14 (App Router, Static HTML Export `output: 'export'`)
+The transit layer reflects the **Official June 2026 Pattaya Songthaew Network Map**:
+
+![Verified 2026 Pattaya Transit Map](/images/docs/pattaya-transit-map-2026.jpg)
+
+### Fare Structure (Updated 2026)
+- **Standard Fare (1–10 km)**: **15 THB** (increased from historic 10 THB baseline due to fuel & operating costs).
+- **Extended Distance / Inter-Zone Routes**: **20 THB**.
+
+### 4 Full Turn-by-Turn Round-Trip Routes
+1. **Beach Road & Second Road Circular Route (`#EF4444` Red)**:
+   - *Direction*: Clockwise Round-Trip Loop (Beach Rd South ➔ Second Rd North).
+   - *Path*: Dolphin Roundabout (Terminal 21) ➔ Beach Rd ➔ Walking Street ➔ South Pattaya Rd ➔ Second Rd ➔ Dolphin Roundabout.
+   - *Frequency*: Every 1–2 minutes (24/7 continuous).
+2. **Naklua Round-Trip Loop (`#0284C7` Sky Blue)**:
+   - *Direction*: Full Two-Way Round-Trip Corridor.
+   - *Path*: Terminal 21 / Dolphin Roundabout ⇄ Pattaya-Naklua Road ⇄ Lan Pho Fish Market & Sawang Fa Old Town Loop.
+   - *Frequency*: Every 5–8 minutes (06:00 – 23:00).
+3. **Jomtien Beach Round-Trip Loop (`#22C55E` Green)**:
+   - *Direction*: Full Round-Trip Coastline Loop.
+   - *Path*: South Pattaya Rd (Walking St station) ➔ Thappraya Rd ➔ Jomtien Beach Rd ➔ Chaiyapruek turnaround ➔ Jomtien Second Rd ➔ Thappraya Rd ➔ South Pattaya.
+   - *Frequency*: Every 3–5 minutes (06:00 – 02:00).
+4. **Soi Buakhao Transit Corridor (`#1E3A8A` Dark Navy Blue)**:
+   - *Direction*: Full Two-Way Corridor.
+   - *Path*: Central Pattaya Rd (Klang) ⇄ Tree Town ⇄ LK Metro ⇄ South Pattaya Rd (Tai).
+   - *Frequency*: Every 3–5 minutes (06:00 – 03:00).
+
+---
+
+## 🛠️ Tech Stack & Architecture
+
+- **Framework**: Next.js 16 with Turbopack (App Router, Static HTML Export `output: 'export'`)
 - **Styling**: Tailwind CSS, PostCSS, Autoprefixer
-- **Mapping**: Leaflet 1.9, Leaflet.markercluster (dynamically imported with client lifecycle isolation)
-- **Tiles**: CartoDB Dark Matter
-- **Video Players**: `hls.js` for municipal CCTV, responsive YouTube embeds for venues
+- **Mapping**: Leaflet 1.9, `leaflet-rotate`, `leaflet.markercluster` (dynamically imported with client lifecycle isolation)
+- **Tiles**: CartoDB Dark Matter & Positron (Licensed API Key)
+- **Radar**: RainViewer Global Weather Radar API
+- **Video Players**: Responsive YouTube Live embeds, Kick.com iFrame player, `hls.js` municipal stream wrapper
 - **Icons**: `lucide-react`
-- **State Persistence**: Browser `localStorage` (no server database required)
-- **Edge Proxy**: Cloudflare Worker (`proxy/worker.js`)
-- **Hosting Target**: Cloudflare Pages
+- **State Persistence**: Browser `localStorage` (Zero server database needed)
+- **Hosting Target**: Cloudflare Pages (Direct Git integration)
 
 ---
 
-## 📁 Directory Structure
+## 🤖 Live Pipeline & GitHub Actions Automation
 
-```
-pattayaCams/
-├── public/
-│   └── data/
-│       ├── cctv_cams.json              # 25 seed high-priority municipal cameras
-│       ├── venues.json                 # Hero venues (Soi 6, Buakhao, Walking St, Beach Rd)
-│       ├── roaming_streamers.json      # Active IRL mobile creators
-│       ├── hotels.json                 # Curated hotels by zone with Agoda IDs
-│       └── pattaya_baht_bus.geojson    # 3 Songthaew transit routes (GeoJSON)
-├── src/
-│   ├── app/
-│   │   ├── globals.css                 # Tailwind directives, Leaflet dark styles, marker animations
-│   │   ├── layout.jsx                  # Root layout, Inter & JetBrains Mono fonts, SEO metadata
-│   │   ├── page.jsx                    # Root page (MapCanvas + MultiCamGrid + Drawers)
-│   │   ├── venues/[slug]/page.jsx      # Static SSG route for venues
-│   │   └── cams/[slug]/page.jsx        # Static SSG route for CCTV cameras
-│   ├── components/
-│   │   ├── Navbar.jsx                  # Top header, quick jumps, mode switch, trip countdown
-│   │   ├── MapCanvasWrapper.jsx        # Dynamic client wrapper for Leaflet (ssr: false)
-│   │   ├── MapCanvas.jsx               # Core map engine with CartoDB Dark & clustering
-│   │   ├── LayerToggleHUD.jsx          # Bottom-left floating layer toggle panel
-│   │   ├── VideoDrawer.jsx             # Slide-over video drawer with affiliate cards
-│   │   ├── MultiCamGrid.jsx            # 2x2 and 3x3 multi-cam command center
-│   │   ├── RoamingTray.jsx             # Bottom bar for IRL streamers & venue listing CTA
-│   │   ├── TripModal.jsx               # Arrival countdown and flight/taxi/eSIM modal
-│   │   ├── SponsorModal.jsx            # Self-serve B2B pricing modal
-│   │   └── common/
-│   │       ├── HlsPlayer.jsx           # HLS player with municipal offline error recovery
-│   │       ├── YouTubePlayer.jsx       # Responsive YouTube live embed
-│   │       └── EmojiReactionGroup.jsx  # 4-emoji telemetry with 2h sliding window
-│   └── utils/
-│       ├── affiliate.js                # Dynamic weekend date calculator & affiliate link builders
-│       ├── storage.js                  # Safe localStorage accessors
-│       └── zones.js                    # Pattaya zones and quick-jump coordinates
-├── proxy/
-│   └── worker.js                       # Cloudflare Worker proxying .m3u8 manifests only (blocks .ts)
-├── scripts/
-│   ├── audit.js                        # Production audit: compliance, schemas, affiliate, SSG
-│   └── generate_all_cams.js            # Automated generator for 600+ CCTV nodes
-├── next.config.mjs                     # static export (output: 'export', trailingSlash: true)
-├── tailwind.config.js                  # Custom color tokens (canvas, surface, brand colors)
-└── package.json
-```
+The repository runs automated background workflows that update stream statuses without exceeding GitHub free tier quotas:
+
+1. **Peak Pattaya Nightlife (18:00 – 04:00 ICT = 11:00 – 21:00 UTC)**:
+   - Runs stream health check every 10 minutes (`*/10 11-21 * * *`).
+2. **Off-Peak Daytime (04:00 – 18:00 ICT = 21:00 – 11:00 UTC)**:
+   - Runs stream health check every 30 minutes (`*/30 0-10,22-23 * * *`).
+3. **PattayaVids RSS Scraper**:
+   - Runs every 3 hours pulling fresh video releases from 50+ Pattaya creators, sanitizing content and filtering out scheduled waiting rooms.
 
 ---
 
-## 💻 1. How to Run Locally
+## 🚀 Local Development Setup
 
 ### Prerequisites
-- Node.js 18.x or 20.x or 22.x
-- npm 9+ or 10+
+- Node.js 18.17+ or 20+
+- npm or pnpm
 
-### Step-by-Step Instructions
+### Installation
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/plurino/pattayacams.git
-   cd pattayacams
-   ```
-
-2. **Install dependencies:**
-   ```bash
-   npm install
-   ```
-
-3. **Start the development server:**
-   ```bash
-   npm run dev
-   ```
-   Open [http://localhost:3000](http://localhost:3000) in your browser.
-
-4. **Verify the static export build:**
-   ```bash
-   npm run build
-   ```
-   This compiles the project and generates a fully static export in the `out/` directory with 41 pre-rendered HTML landing pages.
-
-5. **Run the production audit check:**
-   ```bash
-   node scripts/audit.js
-   ```
-
----
-
-## 🚀 2. How to Deploy to Cloudflare Pages & Connect Namecheap Domain
-
-Deploying to **Cloudflare Pages** takes under 5 minutes and offers blazing-fast global edge delivery with free SSL.
-
-### Step 2.1: Deploy Static Site to Cloudflare Pages
-
-#### Method A: Git Integration (Recommended)
-1. Log in to your [Cloudflare Dashboard](https://dash.cloudflare.com/).
-2. Navigate to **Workers & Pages** ➔ **Create application** ➔ **Pages** ➔ **Connect to Git**.
-3. Select your private GitHub repository: `plurino/pattayacams`.
-4. Configure the build settings:
-   - **Project name**: `pattayacams`
-   - **Production branch**: `main`
-   - **Framework preset**: `Next.js (Static HTML Export)` or `None`
-   - **Build command**: `npm run build`
-   - **Build output directory**: `out`
-5. Click **Save and Deploy**. Cloudflare will automatically build and publish your site at `pattayacams.pages.dev`.
-
-#### Method B: Direct CLI Deployment via Wrangler
-If you prefer deploying directly from your terminal:
 ```bash
+# Clone repository
+git clone https://github.com/plurino/pattayacams.git
+cd pattayacams
+
+# Install dependencies
+npm install
+
+# Start development server with Turbopack
+npm run dev
+```
+
+Visit `http://localhost:3000` to view the application.
+
+### Production Build
+
+```bash
+# Compile and export static bundle
 npm run build
-npx wrangler pages deploy out --project-name=pattayacams
 ```
 
----
-
-### Step 2.2: Deploy the M3U8 Manifest Proxy Worker
-
-To proxy City Hall `.m3u8` playlists and enforce the `.ts` segment egress blocker:
-```bash
-npx wrangler deploy proxy/worker.js --name pattayacams-m3u8-proxy
-```
-This deploys a serverless edge worker at `https://pattayacams-m3u8-proxy.<your-subdomain>.workers.dev`.
+This generates a fully pre-rendered static distribution in the `/out` directory with 660+ HTML pages ready for Cloudflare Pages or AWS S3.
 
 ---
 
-### Step 2.3: Configure Custom Domain on Namecheap
+## 🌐 Custom Domain & Cloudflare Pages Configuration
 
-Because you purchased your domain on **Namecheap**, connect it to Cloudflare to enable DDoS protection, CDN caching, and automatic SSL:
-
-#### Part 1: Add the Domain to Cloudflare
-1. In your Cloudflare Dashboard, click **Add a Domain** (or **Websites** ➔ **Add a Site**).
-2. Enter `pattayacams.com` and choose the **Free** plan.
-3. Cloudflare will scan existing DNS records and provide two **Cloudflare Nameservers**, for example:
-   - `alec.ns.cloudflare.com`
-   - `vera.ns.cloudflare.com`
-
-#### Part 2: Point Namecheap Nameservers to Cloudflare
-1. Log in to [Namecheap.com](https://www.namecheap.com/) and go to your **Domain List**.
-2. Click **Manage** next to `pattayacams.com`.
-3. Under the **Nameservers** section:
-   - Change from *Namecheap BasicDNS* to **Custom DNS**.
-   - Enter the two Cloudflare nameservers provided in Part 1.
-   - Click the green checkmark (Save).
-4. *Note: DNS propagation usually takes 5–30 minutes.*
-
-#### Part 3: Bind Custom Domain in Cloudflare Pages
-1. Go back to your Cloudflare Dashboard ➔ **Workers & Pages** ➔ Select `pattayacams`.
-2. Go to the **Custom domains** tab.
-3. Click **Set up a custom domain**.
-4. Enter `pattayacams.com` and click **Continue**.
-5. Cloudflare will automatically configure the `CNAME` / apex record and issue a free Universal SSL/TLS certificate.
-6. (Optional) Add `www.pattayacams.com` as a second custom domain following the same step.
-
----
-
-## 🔒 Legal Safe Harbor & Compliance
-
-- **No In-App Freeform Chat**: Complies with Thailand Computer Crimes Act and criminal defamation statutes by using structured 1-click emoji reactions only. Community discussion is directed to external Telegram groups.
-- **Payment & AdSense Family-Safe Policy**: All commercial listings are strictly classified under standard tourism categories: `Bar`, `Lounge`, `Beach Club`, `Restaurant`, `Cafe`, or `Complex`. Zero adult terminology is permitted in code, metadata, or UI copy.
+### Connecting Namecheap Domain to Cloudflare Pages
+1. In Cloudflare Pages dashboard, navigate to **PattayaCams > Custom domains**.
+2. Add `pattayacams.com` and `www.pattayacams.com`.
+3. In your Namecheap DNS management console:
+   - **Type**: `CNAME Record` | **Host**: `@` | **Target**: `pattayacams.pages.dev` | **TTL**: Automatic
+   - **Type**: `CNAME Record` | **Host**: `www` | **Target**: `pattayacams.pages.dev` | **TTL**: Automatic
+4. Cloudflare automatically provisions a free Universal SSL certificate.
 
 ---
 
 ## 📄 License
 
-Proprietary © PattayaCams.com. All rights reserved.
+Proprietary. All rights reserved. PattayaCams.com

@@ -72,6 +72,47 @@ function isCompliant(title) {
   return !forbiddenKeywords.some(kw => lower.includes(kw));
 }
 
+const liveOnlyChannels = ['pattaya-beach-live', 'pattayabob', 'ismannen'];
+
+const scheduledOrLivePatterns = [
+  /getting ready to go live/i,
+  /going live/i,
+  /is live\b/i,
+  /are live\b/i,
+  /live stream/i,
+  /livestream/i,
+  /live now/i,
+  /live tonight/i,
+  /sunday live/i,
+  /midweek live/i,
+  /night live/i,
+  /members area live/i,
+  /irl live/i,
+  /irl stream/i,
+  /the stream\b/i,
+  /restart the stream/i,
+  /miss the stream/i,
+  /join our.*stream/i,
+  /live from/i,
+  /🔴/,
+  /\blive\s*!/i,
+  /\|\s*live\b/i,
+  /-\s*live\b/i,
+  /\[live\]/i,
+  /\(live\)/i,
+  /\bnew condo live\b/i,
+  /\blive\s*$/i,
+  /waiting room/i,
+  /premiere in/i,
+  /starts in \d+/i
+];
+
+function isScheduledOrLive(title, channelSlug) {
+  if (liveOnlyChannels.includes(channelSlug)) return true;
+  const t = (title || '').trim();
+  return scheduledOrLivePatterns.some(p => p.test(t));
+}
+
 function parseEntries(xml, creator) {
   const entries = [];
   const entryRegex = /<entry>([\s\S]*?)<\/entry>/g;
@@ -90,6 +131,11 @@ function parseEntries(xml, creator) {
       const title = decodeHtmlEntities(titleMatch[1]);
 
       if (!isCompliant(title)) {
+        continue;
+      }
+
+      // Filter out live streams, scheduled waiting rooms, and 24/7 webcams from VOD feed
+      if (isScheduledOrLive(title, creator.slug)) {
         continue;
       }
 

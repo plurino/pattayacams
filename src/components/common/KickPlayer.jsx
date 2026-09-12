@@ -26,19 +26,6 @@ export default function KickPlayer({
           <span className="font-bold">{badgeText}</span>
         </div>
 
-        {/* External Kick Action Link */}
-        <a
-          href={channelUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="absolute top-2 right-2 z-20 flex items-center gap-1 px-2.5 py-1 rounded text-black bg-[#53FC18] hover:bg-[#46d614] text-[10px] font-mono font-bold transition-all shadow-md"
-          title="Open live stream on Kick.com"
-        >
-          <Play className="w-3 h-3 fill-black" />
-          <span>Open Kick</span>
-          <ExternalLink className="w-2.5 h-2.5" />
-        </a>
-
         {/* Responsive Kick Iframe Embed */}
         {embedUrl ? (
           <iframe

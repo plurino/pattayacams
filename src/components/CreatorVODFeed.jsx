@@ -47,6 +47,49 @@ const POPULAR_FEATURED_IDS = [
   'XT-U7iKRRxE', // Everything Pattaya - Condo Rentals
 ];
 
+// Filter out live streams, scheduled waiting rooms, and 24/7 webcams from VOD feed
+const LIVE_ONLY_CHANNELS = ['pattaya-beach-live', 'pattayabob', 'ismannen'];
+
+const SCHEDULED_OR_LIVE_PATTERNS = [
+  /getting ready to go live/i,
+  /going live/i,
+  /is live\b/i,
+  /are live\b/i,
+  /live stream/i,
+  /livestream/i,
+  /live now/i,
+  /live tonight/i,
+  /sunday live/i,
+  /midweek live/i,
+  /night live/i,
+  /members area live/i,
+  /irl live/i,
+  /irl stream/i,
+  /the stream\b/i,
+  /restart the stream/i,
+  /miss the stream/i,
+  /join our.*stream/i,
+  /live from/i,
+  /🔴/,
+  /\blive\s*!/i,
+  /\|\s*live\b/i,
+  /-\s*live\b/i,
+  /\[live\]/i,
+  /\(live\)/i,
+  /\bnew condo live\b/i,
+  /\blive\s*$/i,
+  /waiting room/i,
+  /premiere in/i,
+  /starts in \d+/i
+];
+
+function isScheduledOrLive(video) {
+  if (!video) return false;
+  if (LIVE_ONLY_CHANNELS.includes(video.channel_slug)) return true;
+  const title = (video.title || '').trim();
+  return SCHEDULED_OR_LIVE_PATTERNS.some(p => p.test(title));
+}
+
 export default function CreatorVODFeed({ onSelectVideo }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedChannels, setSelectedChannels] = useState([]); // array of channel slugs; empty = all
@@ -59,7 +102,10 @@ export default function CreatorVODFeed({ onSelectVideo }) {
   const channelMenuRef = useRef(null);
   const feedScrollRef = useRef(null);
 
-  const allVideos = useMemo(() => vodData?.videos || [], []);
+  const allVideos = useMemo(() => {
+    const raw = vodData?.videos || [];
+    return raw.filter(v => !isScheduledOrLive(v));
+  }, []);
 
   // Close channel multi-select on outside click
   useEffect(() => {
