@@ -1,17 +1,17 @@
 {
-  "last_check": "2026-09-12T19:55:36.938Z",
+  "last_check": "2026-09-12T21:00:48.403Z",
   "entities": {
     "venue-pattaya-oh-bar": {
       "is_live": true,
       "video_id": "jjTA1FDnYZM",
-      "last_live_at": "2026-09-12T17:06:58.644Z",
+      "last_live_at": "2026-09-12T21:00:48.403Z",
       "status": "active",
       "name": "Pattaya Oh Bar",
       "platform": "youtube",
       "handle": "@PattayaOhBar"
     },
     "livecam-pattaya-beach-road-live-cam": {
-      "is_live": true,
+      "is_live": false,
       "video_id": "WgSrfstUvIc",
       "last_live_at": "2026-09-12T17:06:58.644Z",
       "status": "active",
@@ -65,7 +65,7 @@
       "handle": "@SUGARBxPATTAYA"
     },
     "venue-x-club-pattaya": {
-      "is_live": true,
+      "is_live": false,
       "video_id": "LziQlJcBDu8",
       "last_live_at": "2026-09-12T17:06:58.644Z",
       "status": "active",
@@ -74,7 +74,7 @@
       "handle": "@XClubPattayaSoiChaiapoon"
     },
     "venue-las-vegas-beer-garden": {
-      "is_live": true,
+      "is_live": false,
       "video_id": "lZLhXNJxMtI",
       "last_live_at": "2026-09-12T17:06:58.644Z",
       "status": "active",
@@ -83,7 +83,7 @@
       "handle": "@LasVegasBeerGarden-PKBar"
     },
     "venue-gold-bar-soi-6": {
-      "is_live": true,
+      "is_live": false,
       "video_id": "yI6CsVU2Glk",
       "last_live_at": "2026-09-12T17:06:58.644Z",
       "status": "active",
@@ -92,7 +92,7 @@
       "handle": "@GoldBarSoi6"
     },
     "venue-s3xy-bar-pattaya": {
-      "is_live": true,
+      "is_live": false,
       "video_id": "_F-5h60llzI",
       "last_live_at": "2026-09-12T17:06:58.644Z",
       "status": "active",
@@ -101,7 +101,7 @@
       "handle": "@s3xybarpattayalivestream333"
     },
     "venue-mafia-bar-pattaya": {
-      "is_live": true,
+      "is_live": false,
       "video_id": "E3ak-ZetbRk",
       "last_live_at": "2026-09-12T17:06:58.644Z",
       "status": "active",
@@ -110,7 +110,7 @@
       "handle": "@MafiaBarPattaya"
     },
     "venue-luckynana-bar": {
-      "is_live": true,
+      "is_live": false,
       "video_id": "CXWea42Gj9A",
       "last_live_at": "2026-09-12T17:06:58.644Z",
       "status": "active",
@@ -128,7 +128,7 @@
       "handle": "@mreggthailand"
     },
     "venue-miso-bar-pattaya": {
-      "is_live": true,
+      "is_live": false,
       "video_id": "MJHDQXsBa74",
       "last_live_at": "2026-09-12T17:06:58.644Z",
       "status": "active",
@@ -639,7 +639,7 @@
       "avatar_url": "https://yt3.googleusercontent.com/6GS7T_pCqHAsewQtNL6Guf0LC1cJadn2zRElCZH52RlIJczk5TLwlpTv7MRD7LoinFyVD41H_ZI=s900-c-k-c0x00ffffff-no-rj"
     },
     "venue-smile-bar-pattaya": {
-      "is_live": true,
+      "is_live": false,
       "video_id": "_VSF6zVVyuQ",
       "last_live_at": "2026-09-12T17:06:58.644Z",
       "status": "active",
@@ -648,7 +648,7 @@
       "handle": "@smilebarpattayathailand467"
     },
     "venue-true-blue-aussie-bar": {
-      "is_live": true,
+      "is_live": false,
       "video_id": "r5j6Yin4pT4",
       "last_live_at": "2026-09-12T17:06:58.644Z",
       "status": "active",
@@ -657,7 +657,7 @@
       "handle": "@Trueblueaussiebar"
     },
     "livecam-soi-buakhao-live-cam": {
-      "is_live": true,
+      "is_live": false,
       "video_id": "hAdvVQDiTS4",
       "last_live_at": "2026-09-12T17:06:58.644Z",
       "status": "active",
