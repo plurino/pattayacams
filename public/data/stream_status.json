@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-09-12T02:22:52.005Z",
+  "last_check": "2026-09-12T06:24:53.776Z",
   "entities": {
     "venue-pattaya-oh-bar": {
       "is_live": false,
@@ -13,7 +13,7 @@
     "livecam-pattaya-beach-road-live-cam": {
       "is_live": true,
       "video_id": "z9_hOB_MsoQ",
-      "last_live_at": "2026-09-12T02:22:52.005Z",
+      "last_live_at": "2026-09-12T06:24:53.776Z",
       "status": "active",
       "name": "Pattaya Beach Road Live Cam",
       "platform": "youtube",
@@ -119,9 +119,9 @@
       "handle": "@luckynanabarpattayalivestr2350"
     },
     "venue-rum-runner-bar": {
-      "is_live": false,
-      "video_id": null,
-      "last_live_at": null,
+      "is_live": true,
+      "video_id": "yTf-oqGpPu4",
+      "last_live_at": "2026-09-12T06:24:53.776Z",
       "status": "active",
       "name": "Rum Runner Bar (Mr Egg)",
       "platform": "youtube",
@@ -218,8 +218,8 @@
       "handle": "@slyman6666"
     },
     "streamer-RS-010": {
-      "is_live": true,
-      "video_id": "Pmel8y-cQ3o",
+      "is_live": false,
+      "video_id": null,
       "last_live_at": "2026-09-12T02:22:52.005Z",
       "status": "active",
       "name": "Pattaya Beach Live",
@@ -364,8 +364,8 @@
       "avatar_url": "https://yt3.googleusercontent.com/ABt-AgPlwBy2SB-QMz8SIHPi0B1IOUC5mDMuwhj1cw8TY80-n3qos4fjSd463wKNguj4EVJMRA=s900-c-k-c0x00ffffff-no-rj"
     },
     "creator-pattaya-beach-live": {
-      "is_live": true,
-      "video_id": "D9oH8skIZw0",
+      "is_live": false,
+      "video_id": "0bGNCCBXAKI",
       "last_live_at": "2026-09-12T02:22:52.005Z",
       "status": "active",
       "name": "Pattaya Beach Live",
@@ -658,8 +658,8 @@
     },
     "livecam-soi-buakhao-live-cam": {
       "is_live": true,
-      "video_id": "z9_hOB_MsoQ",
-      "last_live_at": "2026-09-12T02:22:52.005Z",
+      "video_id": "E38Us0sUSi0",
+      "last_live_at": "2026-09-12T06:24:53.776Z",
       "status": "active",
       "name": "Soi Buakhao Live Cam",
       "platform": "youtube",
@@ -710,9 +710,9 @@
       "avatar_url": "https://yt3.googleusercontent.com/WyZQSOhd2hSV4WHhxEVosiqiPpzVbwo25D67oCIQKr3_Ga2fd9E_8TDyJ7Yv8TuG_DcZKaHJwg=s900-c-k-c0x00ffffff-no-rj"
     },
     "creator-settled-in-siam": {
-      "is_live": false,
-      "video_id": "Zci40qwkhD0",
-      "last_live_at": null,
+      "is_live": true,
+      "video_id": "z9_hOB_MsoQ",
+      "last_live_at": "2026-09-12T06:24:53.776Z",
       "status": "active",
       "name": "Settled in SIAM",
       "platform": "youtube",
@@ -722,7 +722,7 @@
     },
     "creator-the-tysin-show": {
       "is_live": false,
-      "video_id": "1MpkyX-RUXI",
+      "video_id": "Y1xB5KvdjCw",
       "last_live_at": null,
       "status": "active",
       "name": "The Tysin Show",
