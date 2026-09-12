@@ -349,14 +349,16 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
         onEachFeature: (feature, layer) => {
           const p = feature.properties || {};
           const tooltipContent = `
-            <div style="font-family: inherit; font-size: 11px;">
+            <div style="font-family: inherit; font-size: 11px; max-width: 260px;">
               <div style="font-weight: 700; color: ${p.color}; margin-bottom: 2px;">${p.name}</div>
               <div style="color: #94A3B8; margin-bottom: 4px;">${p.name_th || ''}</div>
-              <div style="display: flex; gap: 8px; font-family: monospace;">
+              <div style="display: flex; gap: 8px; font-family: monospace; margin-bottom: 4px;">
                 <span style="background: #26354A; padding: 2px 6px; border-radius: 4px; color: #10B981; font-weight: 700;">${p.fare_thb} THB</span>
                 <span style="color: #E2E8F0;">${p.frequency || ''}</span>
               </div>
-              <div style="margin-top: 4px; color: #CBD5E1; font-size: 10px;">${p.direction || ''}</div>
+              <div style="color: #CBD5E1; font-size: 10px; margin-bottom: 3px;">${p.direction || ''}</div>
+              ${p.description ? `<div style="color: #94A3B8; font-size: 10px; line-height: 1.3;">${p.description}</div>` : ''}
+              ${p.streets ? `<div style="color: #64748B; font-size: 9px; margin-top: 3px; font-family: monospace;">Streets: ${p.streets}</div>` : ''}
             </div>
           `;
           layer.bindTooltip(tooltipContent, {

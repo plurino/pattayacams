@@ -54,23 +54,27 @@ The transit layer reflects the **Official June 2026 Pattaya Songthaew Network Ma
 - **Standard Fare (1–10 km)**: **15 THB** (increased from historic 10 THB baseline due to fuel & operating costs).
 - **Extended Distance / Inter-Zone Routes**: **20 THB**.
 
-### 4 Full Turn-by-Turn Round-Trip Routes
-1. **Beach Road & Second Road Circular Route (`#EF4444` Red)**:
-   - *Direction*: Clockwise Round-Trip Loop (Beach Rd South ➔ Second Rd North).
-   - *Path*: Dolphin Roundabout (Terminal 21) ➔ Beach Rd ➔ Walking Street ➔ South Pattaya Rd ➔ Second Rd ➔ Dolphin Roundabout.
+### 4 Main Songthaew Transit Routes
+1. **Beach Road Route (`#EF4444` Red)**:
+   - *Description*: The easiest route for first-time visitors, running along Beach Road and Second Road through central Pattaya.
+   - *Streets*: Dolphin Roundabout (Terminal 21) ➔ Beach Road (Southbound) ➔ South Pattaya Road ➔ Second Road (Northbound) ➔ Dolphin Roundabout.
+   - *Direction*: Clockwise Loop (Beach Rd South ➔ Second Rd North).
    - *Frequency*: Every 1–2 minutes (24/7 continuous).
-2. **Naklua Round-Trip Loop (`#0284C7` Sky Blue)**:
-   - *Direction*: Full Two-Way Round-Trip Corridor.
-   - *Path*: Terminal 21 / Dolphin Roundabout ⇄ Pattaya-Naklua Road ⇄ Lan Pho Fish Market & Sawang Fa Old Town Loop.
-   - *Frequency*: Every 5–8 minutes (06:00 – 23:00).
-3. **Jomtien Beach Round-Trip Loop (`#22C55E` Green)**:
-   - *Direction*: Full Round-Trip Coastline Loop.
-   - *Path*: South Pattaya Rd (Walking St station) ➔ Thappraya Rd ➔ Jomtien Beach Rd ➔ Chaiyapruek turnaround ➔ Jomtien Second Rd ➔ Thappraya Rd ➔ South Pattaya.
+2. **Naklua Route (`#0284C7` Sky Blue)**:
+   - *Description*: Connects central Pattaya with the Naklua area and local attractions such as Naklua Market.
+   - *Streets*: Terminal 21 / Dolphin Roundabout ⇄ Pattaya-Naklua Road ⇄ Lan Pho Naklua Market.
+   - *Direction*: Two-Way Corridor: Dolphin Roundabout ⇄ Naklua Market.
+   - *Frequency*: Every 5–8 minutes (06:00 – 22:00).
+3. **Jomtien Route (`#22C55E` Green)**:
+   - *Description*: Runs south from Pattaya toward Jomtien Beach, making it easy to reach the beach area.
+   - *Streets*: South Pattaya Road (Second Rd junction) ➔ Thappraya Road ➔ Jomtien Beach Road (to Chaiyapruek).
+   - *Direction*: Two-Way Corridor: South Pattaya ⇄ Thappraya Rd ⇄ Jomtien Beach.
    - *Frequency*: Every 3–5 minutes (06:00 – 02:00).
-4. **Soi Buakhao Transit Corridor (`#1E3A8A` Dark Navy Blue)**:
-   - *Direction*: Full Two-Way Corridor.
-   - *Path*: Central Pattaya Rd (Klang) ⇄ Tree Town ⇄ LK Metro ⇄ South Pattaya Rd (Tai).
-   - *Frequency*: Every 3–5 minutes (06:00 – 03:00).
+4. **Soi Buakhao Route (`#2563EB` Navy Blue)**:
+   - *Description*: Connects Pattaya Klang and Pattaya Tai through the Soi Buakhao area, popular with long-stay visitors and local residents.
+   - *Streets*: Central Pattaya Road (Klang) ⇄ Soi Buakhao ⇄ South Pattaya Road (Tai).
+   - *Direction*: Two-Way Corridor: Central Pattaya Rd ⇄ LK Metro ⇄ South Pattaya Rd.
+   - *Frequency*: Every 2–3 minutes (24/7 continuous).
 
 ---
 
