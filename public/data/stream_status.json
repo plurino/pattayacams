@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-09-11T22:36:34.083Z",
+  "last_check": "2026-09-12T01:32:33.897Z",
   "entities": {
     "venue-pattaya-oh-bar": {
       "is_live": false,
@@ -12,8 +12,8 @@
     },
     "livecam-pattaya-beach-road-live-cam": {
       "is_live": true,
-      "video_id": "WgSrfstUvIc",
-      "last_live_at": "2026-09-11T22:36:34.083Z",
+      "video_id": "b9ExF5KSbNg",
+      "last_live_at": "2026-09-12T01:32:33.897Z",
       "status": "active",
       "name": "Pattaya Beach Road Live Cam",
       "platform": "youtube",
@@ -96,7 +96,7 @@
       "video_id": null,
       "last_live_at": null,
       "status": "active",
-      "name": "S3XY Bar Pattaya",
+      "name": "Sexy Bar Pattaya",
       "platform": "youtube",
       "handle": "@s3xybarpattayalivestream333"
     },
@@ -218,9 +218,9 @@
       "handle": "@slyman6666"
     },
     "streamer-RS-010": {
-      "is_live": false,
-      "video_id": null,
-      "last_live_at": null,
+      "is_live": true,
+      "video_id": "z9_hOB_MsoQ",
+      "last_live_at": "2026-09-12T01:32:33.897Z",
       "status": "active",
       "name": "Pattaya Beach Live",
       "platform": "youtube",
@@ -364,9 +364,9 @@
       "avatar_url": "https://yt3.googleusercontent.com/ABt-AgPlwBy2SB-QMz8SIHPi0B1IOUC5mDMuwhj1cw8TY80-n3qos4fjSd463wKNguj4EVJMRA=s900-c-k-c0x00ffffff-no-rj"
     },
     "creator-pattaya-beach-live": {
-      "is_live": false,
-      "video_id": "0bGNCCBXAKI",
-      "last_live_at": null,
+      "is_live": true,
+      "video_id": "yTf-oqGpPu4",
+      "last_live_at": "2026-09-12T01:32:33.897Z",
       "status": "active",
       "name": "Pattaya Beach Live",
       "platform": "youtube",
@@ -658,8 +658,8 @@
     },
     "livecam-soi-buakhao-live-cam": {
       "is_live": true,
-      "video_id": "hAdvVQDiTS4",
-      "last_live_at": "2026-09-11T22:36:34.083Z",
+      "video_id": "yTf-oqGpPu4",
+      "last_live_at": "2026-09-12T01:32:33.897Z",
       "status": "active",
       "name": "Soi Buakhao Live Cam",
       "platform": "youtube",
@@ -677,8 +677,8 @@
       "avatar_url": "https://yt3.googleusercontent.com/oSFiARQTu2FbqFOLPVtIROpM-sPXcE_g-T8hrfJXj0QO-ATDEtOcUIsFaq0B-_fPeAMBR1A-FxQ=s900-c-k-c0x00ffffff-no-rj"
     },
     "creator-trae-badd-tv": {
-      "is_live": true,
-      "video_id": "Oz5d_ph2MU0",
+      "is_live": false,
+      "video_id": "29FGbzYccL4",
       "last_live_at": "2026-09-11T22:36:34.083Z",
       "status": "active",
       "name": "Trae Badd TV",
