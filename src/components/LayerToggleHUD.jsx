@@ -268,17 +268,17 @@ export default function LayerToggleHUD({
             {showRadar && radarState && (
               <div className="bg-canvas/90 p-2 rounded-lg border border-teal-500/30 flex flex-col gap-1.5 mt-0.5">
                 <div className="flex items-center justify-between text-[10px] font-mono">
-                  <span className="text-teal-400 font-bold">{radarState.formattedTime || 'Live Rain Radar'}</span>
-                  <span className="text-slate-400 text-[9px]">
-                    Frame {radarState.currentIdx + 1}/{radarState.frames.length || 1}
+                  <span className="text-teal-400 font-bold truncate max-w-[140px]">{radarState.frameLabel || radarState.formattedTime || 'Live Rain Radar'}</span>
+                  <span className={`text-[8.5px] px-1 py-0.5 rounded font-bold flex items-center gap-1 ${radarState.currentFrame?.isForecast ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40' : 'bg-teal-500/20 text-teal-300 border border-teal-500/30'}`}>
+                    {radarState.currentFrame?.isForecast ? '🔮 Forecast' : '🛰️ Live Radar'}
                   </span>
                 </div>
 
                 <div className="flex items-center gap-2">
                   <button
-                    onClick={() => radarState.setIsPlaying(!radarState.isPlaying)}
+                    onClick={radarState.handleTogglePlay || (() => radarState.setIsPlaying(!radarState.isPlaying))}
                     className="p-1 rounded bg-teal-950/60 hover:bg-teal-900 border border-teal-500/40 text-teal-300 hover:text-white transition-colors"
-                    title={radarState.isPlaying ? 'Pause Radar Loop' : 'Play Animated Loop'}
+                    title={radarState.isPlaying ? 'Pause Radar Loop' : 'Play Radar (Plays once to end)'}
                   >
                     {radarState.isPlaying ? (
                       <Pause className="w-3 h-3 fill-teal-300" />
@@ -298,6 +298,12 @@ export default function LayerToggleHUD({
                     }}
                     className="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-teal-400"
                   />
+                </div>
+
+                <div className="flex justify-between items-center text-[8px] text-slate-400 font-mono px-0.5">
+                  <span>-2 Hours</span>
+                  <span className="text-slate-300 font-semibold">Now</span>
+                  <span className="text-amber-400 font-semibold">+30m Forecast</span>
                 </div>
               </div>
             )}

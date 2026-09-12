@@ -42,7 +42,10 @@ export default function CookieConsentBanner() {
         </div>
         <div className="flex-1 text-xs">
           <p className="leading-snug text-slate-200 font-medium">
-            We use cookies to save your custom multi-cam layout, preferred currency, and map filters.
+            We use cookies to save your custom multi-cam layout, preferred currency, and map filters.{' '}
+            <a href="/privacy" className="text-brandPink hover:underline">
+              Privacy Policy
+            </a>
           </p>
           <div className="flex items-center gap-2 mt-2.5">
             <button

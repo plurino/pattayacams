@@ -9,10 +9,10 @@
         "name": "Beach Road & Second Road Circular Loop",
         "name_th": "สายรอบเมือง ถนนเลียบชายหาด - สายสอง",
         "color": "#3B82F6",
-        "fare_thb": 10,
+        "fare_thb": "15–20",
         "direction": "Clockwise Loop (Beach Rd Southbound ➔ Second Rd Northbound)",
         "frequency": "Every 1-2 minutes (24/7 continuous)",
-        "description": "The standard 10-THB Songthaew loop. Runs south on Beach Road from Dolphin Roundabout to Walking Street, cuts east along South Pattaya Road, and runs north up Pattaya Second Road back to Terminal 21."
+        "description": "The standard Songthaew loop. Runs south on Beach Road from Dolphin Roundabout to Walking Street, cuts east along South Pattaya Road, and runs north up Pattaya Second Road back to Terminal 21. Standard fare: 15฿ (1-10 km)."
       },
       "geometry": {
         "type": "LineString",
@@ -988,10 +988,10 @@
         "name": "South Pattaya to Jomtien Beach Line",
         "name_th": "สายพัทยาใต้ - ชายหาดจอมเทียน",
         "color": "#10B981",
-        "fare_thb": 10,
+        "fare_thb": "15–20",
         "direction": "Bi-directional: Wat Chai Mongkhon ⇄ South Jomtien Beach",
         "frequency": "Every 3-5 minutes (06:00 - 02:00)",
-        "description": "Standard 10-THB route connecting Central/South Pattaya with Jomtien Beach. Boards outside Wat Chai Mongkhon school on South Pattaya Road, heads down Thappraya Road, and runs the entire length of Jomtien Beach Road."
+        "description": "Direct route connecting Central/South Pattaya with Jomtien Beach. Boards outside Wat Chai Mongkhon on South Pattaya Road, heads down Thappraya Road, and runs the entire length of Jomtien Beach Road. Fare: 15฿ local, 20฿ for longer distances."
       },
       "geometry": {
         "type": "LineString",
@@ -1415,10 +1415,10 @@
         "name": "Dolphin Roundabout to Naklua Fish Market",
         "name_th": "สายวงเวียนปลาโลมา - ตลาดลานโพธิ์นาเกลือ",
         "color": "#F59E0B",
-        "fare_thb": 10,
+        "fare_thb": "15–20",
         "direction": "Bi-directional: Dolphin Roundabout ⇄ Lan Pho Naklua Market",
         "frequency": "Every 5-8 minutes (06:00 - 22:00)",
-        "description": "Northern 10-THB commuter route linking the North Pattaya hotel district and Terminal 21 with historic Naklua Old Town and Lan Pho fresh seafood pier."
+        "description": "Northern commuter route linking the North Pattaya hotel district and Terminal 21 with historic Naklua Old Town and Lan Pho fresh seafood market. Fare: 15–20฿."
       },
       "geometry": {
         "type": "LineString",
@@ -1890,6 +1890,337 @@
           [
             100.9055,
             12.9738
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "route-buakhao-line",
+      "properties": {
+        "route_id": "buakhao-line",
+        "name": "Soi Buakhao Transit Route",
+        "name_th": "สายซอยบัวขาว (พัทยากลาง - พัทยาใต้)",
+        "color": "#6366F1",
+        "fare_thb": "15",
+        "direction": "Bi-directional (Central Pattaya Rd ⇄ South Pattaya Rd)",
+        "frequency": "Every 2-3 minutes (24/7 continuous)",
+        "description": "Vital nightlife corridor route running the entire 2 km length of Soi Buakhao between Central Pattaya Road (Klang) and South Pattaya Road (Tai) past Tree Town and LK Metro. Fare: 15฿ standard."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            100.889381,
+            12.935648
+          ],
+          [
+            100.888876,
+            12.935823
+          ],
+          [
+            100.888769,
+            12.93586
+          ],
+          [
+            100.888737,
+            12.935871
+          ],
+          [
+            100.888705,
+            12.935882
+          ],
+          [
+            100.888604,
+            12.935917
+          ],
+          [
+            100.888539,
+            12.935939
+          ],
+          [
+            100.888251,
+            12.935326
+          ],
+          [
+            100.888146,
+            12.935032
+          ],
+          [
+            100.888052,
+            12.934739
+          ],
+          [
+            100.888035,
+            12.934685
+          ],
+          [
+            100.887973,
+            12.934472
+          ],
+          [
+            100.887959,
+            12.934425
+          ],
+          [
+            100.887904,
+            12.934235
+          ],
+          [
+            100.887827,
+            12.933988
+          ],
+          [
+            100.887811,
+            12.933937
+          ],
+          [
+            100.887707,
+            12.933614
+          ],
+          [
+            100.887656,
+            12.933449
+          ],
+          [
+            100.887542,
+            12.933107
+          ],
+          [
+            100.887489,
+            12.933059
+          ],
+          [
+            100.887409,
+            12.933035
+          ],
+          [
+            100.887369,
+            12.933017
+          ],
+          [
+            100.887301,
+            12.932987
+          ],
+          [
+            100.887241,
+            12.932936
+          ],
+          [
+            100.887155,
+            12.932819
+          ],
+          [
+            100.887023,
+            12.932583
+          ],
+          [
+            100.887198,
+            12.932496
+          ],
+          [
+            100.887636,
+            12.932277
+          ],
+          [
+            100.887764,
+            12.932213
+          ],
+          [
+            100.888085,
+            12.932046
+          ],
+          [
+            100.88823,
+            12.931968
+          ],
+          [
+            100.888121,
+            12.931678
+          ],
+          [
+            100.888123,
+            12.931685
+          ],
+          [
+            100.88823,
+            12.931968
+          ],
+          [
+            100.888085,
+            12.932046
+          ],
+          [
+            100.887764,
+            12.932213
+          ],
+          [
+            100.887636,
+            12.932277
+          ],
+          [
+            100.887198,
+            12.932496
+          ],
+          [
+            100.887023,
+            12.932583
+          ],
+          [
+            100.886981,
+            12.932504
+          ],
+          [
+            100.886902,
+            12.932333
+          ],
+          [
+            100.886785,
+            12.932079
+          ],
+          [
+            100.88668,
+            12.931866
+          ],
+          [
+            100.886456,
+            12.931455
+          ],
+          [
+            100.886437,
+            12.931419
+          ],
+          [
+            100.886147,
+            12.930908
+          ],
+          [
+            100.886095,
+            12.930826
+          ],
+          [
+            100.885984,
+            12.93065
+          ],
+          [
+            100.885744,
+            12.930242
+          ],
+          [
+            100.885687,
+            12.93015
+          ],
+          [
+            100.885542,
+            12.929939
+          ],
+          [
+            100.885328,
+            12.92962
+          ],
+          [
+            100.88499,
+            12.929097
+          ],
+          [
+            100.884802,
+            12.928811
+          ],
+          [
+            100.884777,
+            12.928768
+          ],
+          [
+            100.884443,
+            12.928279
+          ],
+          [
+            100.884326,
+            12.928127
+          ],
+          [
+            100.88424,
+            12.928026
+          ],
+          [
+            100.884173,
+            12.927947
+          ],
+          [
+            100.883856,
+            12.92769
+          ],
+          [
+            100.883675,
+            12.927542
+          ],
+          [
+            100.883598,
+            12.927416
+          ],
+          [
+            100.883552,
+            12.927363
+          ],
+          [
+            100.883302,
+            12.927138
+          ],
+          [
+            100.883004,
+            12.926906
+          ],
+          [
+            100.882987,
+            12.926893
+          ],
+          [
+            100.882628,
+            12.926588
+          ],
+          [
+            100.882385,
+            12.926404
+          ],
+          [
+            100.882256,
+            12.926355
+          ],
+          [
+            100.882121,
+            12.926322
+          ],
+          [
+            100.881974,
+            12.926291
+          ],
+          [
+            100.881695,
+            12.92607
+          ],
+          [
+            100.881559,
+            12.92596
+          ],
+          [
+            100.881748,
+            12.925713
+          ],
+          [
+            100.8815,
+            12.925538
+          ],
+          [
+            100.881418,
+            12.924889
+          ],
+          [
+            100.881387,
+            12.924643
+          ],
+          [
+            100.881186,
+            12.924663
           ]
         ]
       }

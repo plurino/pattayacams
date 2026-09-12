@@ -21,6 +21,7 @@ import KohLarnModal from '@/src/components/KohLarnModal';
 import EventRadarModal from '@/src/components/EventRadarModal';
 import WeatherModal from '@/src/components/WeatherModal';
 import NewsletterModal from '@/src/components/NewsletterModal';
+import ContactModal from '@/src/components/ContactModal';
 import CookieConsentBanner from '@/src/components/CookieConsentBanner';
 
 function playShuffleChime() {
@@ -70,6 +71,7 @@ export default function AppRoot() {
   const [isEventsModalOpen, setIsEventsModalOpen] = useState(false);
   const [isWeatherModalOpen, setIsWeatherModalOpen] = useState(false);
   const [isNewsletterOpen, setIsNewsletterOpen] = useState(false);
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const [isBannerDismissed, setIsBannerDismissed] = useState(false);
   const mapInstanceRef = useRef(null);
 
@@ -289,6 +291,7 @@ export default function AppRoot() {
         onOpenEvents={() => setIsEventsModalOpen(true)}
         onOpenWeather={() => setIsWeatherModalOpen(true)}
         onOpenNewsletter={() => setIsNewsletterOpen(true)}
+        onOpenContact={() => setIsContactModalOpen(true)}
         onToggleAlerts={toggleLiveAlerts}
         hasLiveAlerts={hasLiveAlerts}
       />
@@ -380,6 +383,7 @@ export default function AppRoot() {
         <RoamingTray
           onSelectStreamer={handleSelectEntity}
           onOpenSponsorModal={() => setIsSponsorModalOpen(true)}
+          onOpenContact={() => setIsContactModalOpen(true)}
         />
       )}
 
@@ -420,6 +424,11 @@ export default function AppRoot() {
       <NewsletterModal
         isOpen={isNewsletterOpen}
         onClose={() => setIsNewsletterOpen(false)}
+      />
+
+      <ContactModal
+        isOpen={isContactModalOpen}
+        onClose={() => setIsContactModalOpen(false)}
       />
 
       {/* 7. Privacy & Analytics Cookie Consent Banner */}

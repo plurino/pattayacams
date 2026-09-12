@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Clock, Droplets, Wind, TrendingUp, Ship, Sparkles, Bell, ChevronRight, Calculator, Mail } from 'lucide-react';
+import { Clock, Droplets, Wind, TrendingUp, Ship, Sparkles, Bell, ChevronRight, Calculator, Mail, MessageSquare } from 'lucide-react';
 import { useTickerData } from '@/src/hooks/useTickerData';
 import CurrencyConverterModal from './CurrencyConverterModal';
 
@@ -17,6 +17,7 @@ export default function TickerBar({
   onOpenEvents,
   onOpenWeather,
   onOpenNewsletter,
+  onOpenContact,
   onToggleAlerts,
   hasLiveAlerts = false,
 }) {
@@ -163,6 +164,16 @@ export default function TickerBar({
         >
           <Mail className="w-2.5 h-2.5 text-brandPink" />
           <span className="hidden sm:inline">VIP Club</span>
+        </button>
+
+        {/* Contact / Partner Desk */}
+        <button
+          onClick={onOpenContact}
+          className="flex items-center gap-1 px-1.5 sm:px-2 py-0.5 rounded bg-emerald-950/40 hover:bg-emerald-900/60 border border-emerald-600/40 text-emerald-300 hover:text-white transition-colors text-[10px] font-semibold"
+          title="Contact Desk: Add Venue/Cam, Creator Verification, Advertising, or Bug Report"
+        >
+          <MessageSquare className="w-2.5 h-2.5 text-emerald-400" />
+          <span className="hidden sm:inline">Contact</span>
         </button>
 
         {/* Alerts Toggle */}

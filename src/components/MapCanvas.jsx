@@ -431,36 +431,67 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
       }
       liveCamGroup.addTo(map);
 
-      // 5. Koh Larn Ferry Route & Pier Pins (Bali Hai Pier <-> Na Baan Pier & Tawaen Beach)
+      // 5. Koh Larn Ferry Routes & Pier Pins (Two authentic sea routes: Bali Hai <-> Na Baan & Bali Hai <-> Tawaen)
       const ferryGroup = Leaflet.layerGroup();
 
-      // Subtle Maritime Nautical Dashed Route Line
-      const ferryRouteCoords = [
+      // Maritime Route 1: Bali Hai Pier ⇄ Na Baan Pier (Main Village Port - 100% Sea Navigation)
+      const naBaanRouteCoords = [
         [12.9255, 100.8675], // Bali Hai Pier
-        [12.9200, 100.8200], // Open Sea Waypoint
-        [12.9189, 100.7877], // Na Baan Pier
-        [12.9238, 100.7788], // Tawaen Beach Pier
+        [12.9285, 100.8630], // Harbor mouth waypoint
+        [12.9270, 100.8400], // Open Pattaya Bay corridor
+        [12.9220, 100.8100], // Deep water channel
+        [12.9189, 100.7877], // Na Baan Pier (East Koh Larn)
       ];
-      const ferryLine = Leaflet.polyline(ferryRouteCoords, {
+      const naBaanLine = Leaflet.polyline(naBaanRouteCoords, {
         color: '#06B6D4',
         weight: 2,
-        opacity: 0.45,
+        opacity: 0.5,
         dashArray: '5, 8',
         lineCap: 'round',
         lineJoin: 'round',
       });
-      ferryLine.bindTooltip(
+      naBaanLine.bindTooltip(
         `<div style="font-family: inherit; font-size: 11px;">
-           <strong style="color: #22D3EE; font-size: 12px;">⛴️ Koh Larn Ferry Route (30฿)</strong>
-           <div style="color: #94A3B8; font-size: 10px; margin-top: 2px;">Bali Hai Pier ⇄ Koh Larn (45 min voyage)</div>
+           <strong style="color: #22D3EE; font-size: 12px;">⛴️ Bali Hai ⇄ Na Baan Port (30฿)</strong>
+           <div style="color: #94A3B8; font-size: 10px; margin-top: 2px;">Main Village Ferry • 45 min crossing</div>
            <div style="color: #38BDF8; font-size: 9px; margin-top: 2px; font-weight: 700;">Click to view full timetable & tide tracker</div>
          </div>`,
         { className: 'pattaya-dark-tooltip', direction: 'top' }
       );
-      ferryLine.on('click', () => {
+      naBaanLine.on('click', () => {
         if (onOpenKohLarn) onOpenKohLarn();
       });
-      ferryGroup.addLayer(ferryLine);
+      ferryGroup.addLayer(naBaanLine);
+
+      // Maritime Route 2: Bali Hai Pier ⇄ Tawaen Beach Pier (North Beach Port - Arcs around North Cape in Sea)
+      const tawaenRouteCoords = [
+        [12.9255, 100.8675], // Bali Hai Pier
+        [12.9295, 100.8610], // Harbor exit
+        [12.9350, 100.8350], // Northern bay open sea corridor
+        [12.9370, 100.8000], // North of Koh Larn sea waypoint
+        [12.9340, 100.7760], // Clearing cape in open waters
+        [12.9238, 100.7788], // Tawaen Beach Pier
+      ];
+      const tawaenLine = Leaflet.polyline(tawaenRouteCoords, {
+        color: '#06B6D4',
+        weight: 2,
+        opacity: 0.5,
+        dashArray: '5, 8',
+        lineCap: 'round',
+        lineJoin: 'round',
+      });
+      tawaenLine.bindTooltip(
+        `<div style="font-family: inherit; font-size: 11px;">
+           <strong style="color: #22D3EE; font-size: 12px;">⛴️ Bali Hai ⇄ Tawaen Beach (30฿)</strong>
+           <div style="color: #94A3B8; font-size: 10px; margin-top: 2px;">White Sand Beach Ferry • 45 min crossing</div>
+           <div style="color: #38BDF8; font-size: 9px; margin-top: 2px; font-weight: 700;">Click to view full timetable & tide tracker</div>
+         </div>`,
+        { className: 'pattaya-dark-tooltip', direction: 'top' }
+      );
+      tawaenLine.on('click', () => {
+        if (onOpenKohLarn) onOpenKohLarn();
+      });
+      ferryGroup.addLayer(tawaenLine);
 
       // Ferry Pier Pins with discreet boat emoji icon
       const piers = [

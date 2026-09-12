@@ -191,7 +191,7 @@ export default function VenueDetailsClient({ venue }) {
             <span>How to Get There (Songthaew)</span>
           </div>
           <p className="text-xs text-slate-300 leading-relaxed">
-            {venue.transit_tip || 'Hop on the local 10-THB Songthaew Baht Bus along Beach Road or Second Road to reach this venue.'}
+            {venue.transit_tip || 'Hop on the local 15–20 THB Songthaew Baht Bus along Beach Road or Second Road to reach this venue.'}
           </p>
         </div>
 

@@ -2,13 +2,13 @@
 
 import React, { useMemo, useCallback } from 'react';
 import Link from 'next/link';
-import { Youtube, Star, Play, Radio, Users } from 'lucide-react';
+import { Youtube, Star, Play, Radio, Users, Mail } from 'lucide-react';
 import streamersData from '@/public/data/roaming_streamers.json';
 import creatorsData from '@/public/data/creators.json';
 import { useStreamStatus } from '@/src/hooks/useStreamStatus';
 import { FEATURES } from '@/src/config/features';
 
-export default function RoamingTray({ onSelectStreamer, onOpenSponsorModal }) {
+export default function RoamingTray({ onSelectStreamer, onOpenSponsorModal, onOpenContact }) {
   const streamStatus = useStreamStatus();
 
   // Combine both roaming streamers and full creators pool
@@ -167,9 +167,20 @@ export default function RoamingTray({ onSelectStreamer, onOpenSponsorModal }) {
         )}
       </div>
 
-      {/* B2B Self-Serve List Venue Button (Compact icon on mobile when a stream is live) */}
-      {FEATURES.SHOW_B2B_SPONSOR_MODAL && (
-        <div className="shrink-0">
+      {/* Action Buttons: Contact Desk & B2B Self-Serve List Venue */}
+      <div className="flex items-center gap-1.5 shrink-0">
+        {onOpenContact && (
+          <button
+            onClick={onOpenContact}
+            className="hidden md:flex items-center gap-1 px-2.5 py-1 sm:py-1.5 rounded-lg bg-surfaceLight hover:bg-borderDark border border-borderDark text-slate-300 hover:text-white text-xs font-semibold transition-all cursor-pointer"
+            title="Submit Live Stream, Feature Venue, or Report Bug"
+          >
+            <Mail className="w-3.5 h-3.5 text-brandPink" />
+            <span>Contact</span>
+          </button>
+        )}
+
+        {FEATURES.SHOW_B2B_SPONSOR_MODAL && (
           <button
             onClick={onOpenSponsorModal}
             className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-gradient-to-r from-brandGold/20 to-brandAmber/20 hover:from-brandGold/30 hover:to-brandAmber/30 border border-brandGold/60 text-brandGold text-xs font-bold transition-all shadow-[0_0_12px_rgba(234,179,8,0.25)] hover:shadow-[0_0_16px_rgba(234,179,8,0.4)] cursor-pointer"
@@ -178,8 +189,8 @@ export default function RoamingTray({ onSelectStreamer, onOpenSponsorModal }) {
             <Star className="w-3.5 h-3.5 fill-brandGold" />
             <span className="hidden sm:inline whitespace-nowrap">List Venue</span>
           </button>
-        </div>
-      )}
+        )}
+      </div>
     </aside>
   );
 }
