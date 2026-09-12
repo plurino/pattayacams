@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-09-12T01:32:33.897Z",
+  "last_check": "2026-09-12T02:22:52.005Z",
   "entities": {
     "venue-pattaya-oh-bar": {
       "is_live": false,
@@ -12,8 +12,8 @@
     },
     "livecam-pattaya-beach-road-live-cam": {
       "is_live": true,
-      "video_id": "b9ExF5KSbNg",
-      "last_live_at": "2026-09-12T01:32:33.897Z",
+      "video_id": "z9_hOB_MsoQ",
+      "last_live_at": "2026-09-12T02:22:52.005Z",
       "status": "active",
       "name": "Pattaya Beach Road Live Cam",
       "platform": "youtube",
@@ -219,8 +219,8 @@
     },
     "streamer-RS-010": {
       "is_live": true,
-      "video_id": "z9_hOB_MsoQ",
-      "last_live_at": "2026-09-12T01:32:33.897Z",
+      "video_id": "Pmel8y-cQ3o",
+      "last_live_at": "2026-09-12T02:22:52.005Z",
       "status": "active",
       "name": "Pattaya Beach Live",
       "platform": "youtube",
@@ -365,8 +365,8 @@
     },
     "creator-pattaya-beach-live": {
       "is_live": true,
-      "video_id": "yTf-oqGpPu4",
-      "last_live_at": "2026-09-12T01:32:33.897Z",
+      "video_id": "D9oH8skIZw0",
+      "last_live_at": "2026-09-12T02:22:52.005Z",
       "status": "active",
       "name": "Pattaya Beach Live",
       "platform": "youtube",
@@ -658,8 +658,8 @@
     },
     "livecam-soi-buakhao-live-cam": {
       "is_live": true,
-      "video_id": "yTf-oqGpPu4",
-      "last_live_at": "2026-09-12T01:32:33.897Z",
+      "video_id": "z9_hOB_MsoQ",
+      "last_live_at": "2026-09-12T02:22:52.005Z",
       "status": "active",
       "name": "Soi Buakhao Live Cam",
       "platform": "youtube",
