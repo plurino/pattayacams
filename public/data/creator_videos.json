@@ -1,7 +1,17 @@
 {
-  "last_updated": "2026-09-12T17:34:03.907Z",
-  "total_videos": 90,
+  "last_updated": "2026-09-12T19:55:30.460Z",
+  "total_videos": 89,
   "videos": [
+    {
+      "id": "X8N9GTiC6tg",
+      "title": "My Bar Got FLOODED in Thailand! (This is NOT Good...)",
+      "channel_name": "Mac TV",
+      "channel_slug": "mac-tv",
+      "channel_avatar": "https://yt3.googleusercontent.com/oSFiARQTu2FbqFOLPVtIROpM-sPXcE_g-T8hrfJXj0QO-ATDEtOcUIsFaq0B-_fPeAMBR1A-FxQ=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i1.ytimg.com/vi/X8N9GTiC6tg/hqdefault.jpg",
+      "published_at": "2026-09-12T19:04:22+00:00",
+      "url": "https://www.youtube.com/watch?v=X8N9GTiC6tg"
+    },
     {
       "id": "Yt9Su963jMI",
       "title": "NEW GIRL IN THE CONDO! 🇹🇭🔥 Cooking, Games & CRAZY Challenges — YOU PICK!",
@@ -623,16 +633,6 @@
       "url": "https://www.youtube.com/watch?v=Jbqa8SeWZyQ"
     },
     {
-      "id": "ydtFJQ27zNU",
-      "title": "What Thai Bar Girls ACTUALLY want from you",
-      "channel_name": "Mac TV",
-      "channel_slug": "mac-tv",
-      "channel_avatar": "https://yt3.googleusercontent.com/oSFiARQTu2FbqFOLPVtIROpM-sPXcE_g-T8hrfJXj0QO-ATDEtOcUIsFaq0B-_fPeAMBR1A-FxQ=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i2.ytimg.com/vi/ydtFJQ27zNU/hqdefault.jpg",
-      "published_at": "2026-09-08T19:00:22+00:00",
-      "url": "https://www.youtube.com/watch?v=ydtFJQ27zNU"
-    },
-    {
       "id": "ym4QEQHiEiU",
       "title": "9PM Pattaya Walk | Soi Buakhao, Soi Honey, Second Road, LK Metro, Soi Lengkee",
       "channel_name": "Vespa Life Thailand",
@@ -891,16 +891,6 @@
       "thumbnail_url": "https://i4.ytimg.com/vi/G1RTX6dWHLI/hqdefault.jpg",
       "published_at": "2026-09-06T00:00:24+00:00",
       "url": "https://www.youtube.com/watch?v=G1RTX6dWHLI"
-    },
-    {
-      "id": "eccievAlBdQ",
-      "title": "Walking Street Packed 11:30PM | Last Night of Navy Shore Leave — Sat 5 Sep 🇹🇭",
-      "channel_name": "Vespa Life Thailand",
-      "channel_slug": "vespa-life-thailand",
-      "channel_avatar": "https://yt3.googleusercontent.com/_0ocieqX7Bpx3CZLLsmLCQpq7TMttO_TCmaiSI8z75xbWgW7Q7N9NeHHt8yGUPoEjQwEA19c7hs=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i2.ytimg.com/vi/eccievAlBdQ/hqdefault.jpg",
-      "published_at": "2026-09-05T18:25:13+00:00",
-      "url": "https://www.youtube.com/watch?v=eccievAlBdQ"
     }
   ]
 }
