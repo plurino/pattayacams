@@ -57,9 +57,9 @@ async function checkYouTubeChannel(handle, fallbackVideoId, expectedChannelId = 
 
     const res = await fetch(liveUrl, {
       headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36',
         'Accept-Language': 'en-US,en;q=0.9',
-        'Cookie': 'CONSENT=YES+cb.20210328-17-p0.en+FX+478'
+        'Cookie': 'SOCS=CAESEwgDEgk2MTQ3MzI4MzQaAmVuIAEaBgiA_LyaBg; CONSENT=YES+cb.20210328-17-p0.en+FX+478'
       },
       redirect: 'follow',
       signal: controller.signal
@@ -71,6 +71,12 @@ async function checkYouTubeChannel(handle, fallbackVideoId, expectedChannelId = 
     }
 
     const html = await res.text();
+
+    // Detect EU / Datacenter cookie consent wall
+    if (res.url.includes('consent.youtube.com') || html.includes('consent.youtube.com')) {
+      console.warn(`[CONSENT WALL DETECTED] YouTube redirected ${cleanHandle} to consent page on this IP.`);
+      return { is_live: false, is_consent_block: true, video_id: fallbackVideoId || null, status: 'active', platform: 'youtube' };
+    }
 
     if (html.includes("This page isn't available") || html.includes('This channel does not exist')) {
       return { is_live: false, video_id: null, status: 'error_404', platform: 'youtube' };
@@ -213,17 +219,20 @@ async function run() {
       venuesUpdated = true;
     }
 
+    const isLive = result.is_consent_block ? Boolean(prev.is_live) : result.is_live;
+    const activeVideoId = result.is_live ? result.video_id : (prev.video_id || venue.video_id || null);
+
     nextEntities[entityKey] = {
-      is_live: result.is_live,
-      video_id: result.is_live ? result.video_id : null,
-      last_live_at: result.is_live ? nowIso : (prev.last_live_at || null),
+      is_live: isLive,
+      video_id: activeVideoId,
+      last_live_at: isLive ? nowIso : (prev.last_live_at || null),
       status: result.status,
       name: venue.name,
       platform: 'youtube',
       handle: venue.youtube_handle
     };
 
-    console.log(`[${venue.name}] ${result.is_live ? '🔴 LIVE (' + result.video_id + ')' : '⚪ Offline'} (${result.status})`);
+    console.log(`[${venue.name}] ${isLive ? '🔴 LIVE (' + activeVideoId + ')' : '⚪ Offline'} (${result.status})`);
   }
 
   if (venuesUpdated) {
@@ -244,17 +253,20 @@ async function run() {
       liveCamsUpdated = true;
     }
 
+    const isLive = result.is_consent_block ? (prev.is_live !== undefined ? prev.is_live : true) : result.is_live;
+    const activeVideoId = result.video_id || prev.video_id || cam.video_id;
+
     nextEntities[entityKey] = {
-      is_live: result.is_live,
-      video_id: result.is_live ? result.video_id : cam.video_id,
-      last_live_at: result.is_live ? nowIso : (prev.last_live_at || null),
+      is_live: isLive,
+      video_id: activeVideoId,
+      last_live_at: isLive ? nowIso : (prev.last_live_at || null),
       status: result.status,
       name: cam.name,
       platform: 'youtube',
       handle: cam.youtube_handle
     };
 
-    console.log(`[${cam.name}] ${result.is_live ? '🔴 LIVE (' + result.video_id + ')' : '⚪ Offline'} (${result.status})`);
+    console.log(`[${cam.name}] ${isLive ? '🔴 LIVE (' + activeVideoId + ')' : '⚪ Offline'} (${result.status})`);
   }
 
   if (liveCamsUpdated) {
@@ -269,17 +281,20 @@ async function run() {
     const prev = nextEntities[entityKey] || {};
     const result = await checkYouTubeChannel(streamer.youtube_handle, null, streamer.youtube_channel_id, streamer.name);
 
+    const isLive = result.is_consent_block ? Boolean(prev.is_live) : result.is_live;
+    const activeVideoId = result.is_live ? result.video_id : (prev.video_id || null);
+
     nextEntities[entityKey] = {
-      is_live: result.is_live,
-      video_id: result.is_live ? result.video_id : null,
-      last_live_at: result.is_live ? nowIso : (prev.last_live_at || null),
+      is_live: isLive,
+      video_id: activeVideoId,
+      last_live_at: isLive ? nowIso : (prev.last_live_at || null),
       status: result.status,
       name: streamer.name,
       platform: 'youtube',
       handle: streamer.youtube_handle
     };
 
-    console.log(`[${streamer.name}] ${result.is_live ? '🔴 LIVE (' + result.video_id + ')' : '⚪ Offline'} (${result.status})`);
+    console.log(`[${streamer.name}] ${isLive ? '🔴 LIVE (' + activeVideoId + ')' : '⚪ Offline'} (${result.status})`);
   }
 
   // 3. Check Creators (YouTube & Kick)
@@ -312,10 +327,13 @@ async function run() {
       console.log(`[YouTube: ${creator.name}] ${result.is_live ? '🔴 LIVE (' + result.video_id + ')' : '⚪ Offline'} (${result.status})`);
     }
 
+    const isLive = result.is_consent_block ? Boolean(prev.is_live) : result.is_live;
+    const activeVideoId = result.is_live ? result.video_id : (prev.video_id || null);
+
     nextEntities[entityKey] = {
-      is_live: result.is_live,
-      video_id: result.video_id || null,
-      last_live_at: result.is_live ? nowIso : (prev.last_live_at || null),
+      is_live: isLive,
+      video_id: activeVideoId,
+      last_live_at: isLive ? nowIso : (prev.last_live_at || null),
       status: result.status,
       name: creator.name,
       platform: result.platform || creator.platform,
@@ -323,6 +341,20 @@ async function run() {
       kick_channel: creator.kick_channel || null,
       avatar_url: creator.avatar_url || result.avatar_url || null
     };
+  }
+
+  // Circuit breaker protection against false datacenter blackouts
+  const prevLiveCount = Object.values(previousStatus?.entities || {}).filter(e => e.is_live).length;
+  const currentLiveCount = Object.values(nextEntities).filter(e => e.is_live).length;
+
+  if (prevLiveCount >= 5 && currentLiveCount === 0) {
+    console.warn(`[CIRCUIT BREAKER ACTIVATED] Live count plummeted from ${prevLiveCount} to 0 in a single run. Preserving previous active states to avoid false city-wide blackout.`);
+    for (const [key, prevEntity] of Object.entries(previousStatus.entities)) {
+      if (prevEntity.is_live && nextEntities[key]) {
+        nextEntities[key].is_live = true;
+        nextEntities[key].video_id = prevEntity.video_id;
+      }
+    }
   }
 
   const payload = {
