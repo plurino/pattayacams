@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-09-12T11:00:37.149Z",
+  "last_check": "2026-09-12T12:32:07.053Z",
   "entities": {
     "venue-pattaya-oh-bar": {
       "is_live": false,
@@ -12,8 +12,8 @@
     },
     "livecam-pattaya-beach-road-live-cam": {
       "is_live": true,
-      "video_id": "kO_xYhZpkjk",
-      "last_live_at": "2026-09-12T11:00:37.149Z",
+      "video_id": "98syxABbUPk",
+      "last_live_at": "2026-09-12T12:32:07.053Z",
       "status": "active",
       "name": "Pattaya Beach Road Live Cam",
       "platform": "youtube",
@@ -65,27 +65,27 @@
       "handle": "@SUGARBxPATTAYA"
     },
     "venue-x-club-pattaya": {
-      "is_live": false,
-      "video_id": null,
-      "last_live_at": null,
+      "is_live": true,
+      "video_id": "98syxABbUPk",
+      "last_live_at": "2026-09-12T12:32:07.053Z",
       "status": "active",
       "name": "X Club Pattaya",
       "platform": "youtube",
       "handle": "@XClubPattayaSoiChaiapoon"
     },
     "venue-las-vegas-beer-garden": {
-      "is_live": false,
-      "video_id": null,
-      "last_live_at": null,
+      "is_live": true,
+      "video_id": "98syxABbUPk",
+      "last_live_at": "2026-09-12T12:32:07.053Z",
       "status": "active",
       "name": "Las Vegas Beer Garden",
       "platform": "youtube",
       "handle": "@LasVegasBeerGarden-PKBar"
     },
     "venue-gold-bar-soi-6": {
-      "is_live": false,
-      "video_id": null,
-      "last_live_at": null,
+      "is_live": true,
+      "video_id": "TLKaUsKOPMg",
+      "last_live_at": "2026-09-12T12:32:07.053Z",
       "status": "active",
       "name": "Gold Bar Soi 6",
       "platform": "youtube",
@@ -129,8 +129,8 @@
     },
     "venue-miso-bar-pattaya": {
       "is_live": true,
-      "video_id": "flzpBfeHFGU",
-      "last_live_at": "2026-09-12T11:00:37.149Z",
+      "video_id": "98syxABbUPk",
+      "last_live_at": "2026-09-12T12:32:07.053Z",
       "status": "active",
       "name": "Miso Bar Pattaya",
       "platform": "youtube",
@@ -219,8 +219,8 @@
     },
     "streamer-RS-010": {
       "is_live": true,
-      "video_id": "Dhddjf_7dPE",
-      "last_live_at": "2026-09-12T11:00:37.149Z",
+      "video_id": "98syxABbUPk",
+      "last_live_at": "2026-09-12T12:32:07.053Z",
       "status": "active",
       "name": "Pattaya Beach Live",
       "platform": "youtube",
@@ -365,8 +365,8 @@
     },
     "creator-pattaya-beach-live": {
       "is_live": true,
-      "video_id": "D_rAHBWidjI",
-      "last_live_at": "2026-09-12T11:00:37.149Z",
+      "video_id": "98syxABbUPk",
+      "last_live_at": "2026-09-12T12:32:07.053Z",
       "status": "active",
       "name": "Pattaya Beach Live",
       "platform": "youtube",
@@ -648,9 +648,9 @@
       "handle": "@smilebarpattayathailand467"
     },
     "venue-true-blue-aussie-bar": {
-      "is_live": false,
-      "video_id": null,
-      "last_live_at": null,
+      "is_live": true,
+      "video_id": "98syxABbUPk",
+      "last_live_at": "2026-09-12T12:32:07.053Z",
       "status": "active",
       "name": "True Blue Aussie Bar & Boomerang Bar",
       "platform": "youtube",
@@ -658,8 +658,8 @@
     },
     "livecam-soi-buakhao-live-cam": {
       "is_live": true,
-      "video_id": "5arQ_-HuUlQ",
-      "last_live_at": "2026-09-12T11:00:37.149Z",
+      "video_id": "TLKaUsKOPMg",
+      "last_live_at": "2026-09-12T12:32:07.053Z",
       "status": "active",
       "name": "Soi Buakhao Live Cam",
       "platform": "youtube",
@@ -677,8 +677,8 @@
       "avatar_url": "https://yt3.googleusercontent.com/oSFiARQTu2FbqFOLPVtIROpM-sPXcE_g-T8hrfJXj0QO-ATDEtOcUIsFaq0B-_fPeAMBR1A-FxQ=s900-c-k-c0x00ffffff-no-rj"
     },
     "creator-trae-badd-tv": {
-      "is_live": true,
-      "video_id": "mMLFJGSc1lo",
+      "is_live": false,
+      "video_id": "UdsYQKTx4ps",
       "last_live_at": "2026-09-12T11:00:37.149Z",
       "status": "active",
       "name": "Trae Badd TV",
@@ -721,9 +721,9 @@
       "avatar_url": "https://yt3.googleusercontent.com/hUjrQt2-RhdItsiQsjbsSAKEJIv1tpwpxtB3D-k1GmjsXVdFG20FWwBTLDW6gLQufYZCDiQjmnc=s900-c-k-c0x00ffffff-no-rj"
     },
     "creator-the-tysin-show": {
-      "is_live": false,
-      "video_id": "Y1xB5KvdjCw",
-      "last_live_at": null,
+      "is_live": true,
+      "video_id": "98syxABbUPk",
+      "last_live_at": "2026-09-12T12:32:07.053Z",
       "status": "active",
       "name": "The Tysin Show",
       "platform": "youtube",
