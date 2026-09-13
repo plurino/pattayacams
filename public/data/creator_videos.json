@@ -1,7 +1,77 @@
 {
-  "last_updated": "2026-09-13T07:50:49.378Z",
-  "total_videos": 89,
+  "last_updated": "2026-09-13T13:33:24.585Z",
+  "total_videos": 93,
   "videos": [
+    {
+      "id": "TIUtQrwEANA",
+      "title": "PATTAYA IN SEPTEMBER 🌴 You Still Don't Want to Leave",
+      "channel_name": "BEACH ROAD",
+      "channel_slug": "beach-road-channel",
+      "channel_avatar": "https://yt3.googleusercontent.com/CWW0rQ6f5ZKIE2_T9vOK3Km3eiBJEAdih3hwx_POm5n_uuG8EDZcL7IK7BLoEnWL0F5f7pnm=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i1.ytimg.com/vi/TIUtQrwEANA/hqdefault.jpg",
+      "published_at": "2026-09-13T13:00:26+00:00",
+      "url": "https://www.youtube.com/watch?v=TIUtQrwEANA"
+    },
+    {
+      "id": "oBVguwyy89c",
+      "title": "🥭 WOULD YOU TRY MANGO STICKY RICE? 🍚 📱",
+      "channel_name": "The Tysin Show",
+      "channel_slug": "the-tysin-show",
+      "channel_avatar": "https://yt3.googleusercontent.com/3tMHDr_3VQy3AXy0yW7XsFwHJWBAJj66W8dqKHYTQ3JB9vEX8LbKVhHWjEodtG8TbCcIy9aV0w=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i4.ytimg.com/vi/oBVguwyy89c/hqdefault.jpg",
+      "published_at": "2026-09-13T11:32:52+00:00",
+      "url": "https://www.youtube.com/watch?v=oBVguwyy89c"
+    },
+    {
+      "id": "E-rR9tkmcg0",
+      "title": "🥭 WOULD YOU TRY MANGO STICKY RICE? 🍚",
+      "channel_name": "The Tysin Show",
+      "channel_slug": "the-tysin-show",
+      "channel_avatar": "https://yt3.googleusercontent.com/3tMHDr_3VQy3AXy0yW7XsFwHJWBAJj66W8dqKHYTQ3JB9vEX8LbKVhHWjEodtG8TbCcIy9aV0w=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i2.ytimg.com/vi/E-rR9tkmcg0/hqdefault.jpg",
+      "published_at": "2026-09-13T11:32:52+00:00",
+      "url": "https://www.youtube.com/watch?v=E-rR9tkmcg0"
+    },
+    {
+      "id": "IJHb9FKuUOM",
+      "title": "I Ditched Pattaya for Bangkok, Here’s Why",
+      "channel_name": "Travel Glitch",
+      "channel_slug": "travel-glitch",
+      "channel_avatar": "https://yt3.googleusercontent.com/WyZQSOhd2hSV4WHhxEVosiqiPpzVbwo25D67oCIQKr3_Ga2fd9E_8TDyJ7Yv8TuG_DcZKaHJwg=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i2.ytimg.com/vi/IJHb9FKuUOM/hqdefault.jpg",
+      "published_at": "2026-09-13T11:00:03+00:00",
+      "url": "https://www.youtube.com/watch?v=IJHb9FKuUOM"
+    },
+    {
+      "id": "Kqfktrch4-o",
+      "title": "🇹🇭 [4K] Soi 7, Second Road, Myth Night Town - Pattaya Thailand 2026",
+      "channel_name": "DV Media Pattaya",
+      "channel_slug": "dv-media-pattaya",
+      "channel_avatar": "https://yt3.googleusercontent.com/ugj2a216u5s5JhG4iireKvsOCK9lky14pZHt1tGGRm4I9na4HTsC7_8QRPb6xinI7mb8u4ZD=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i4.ytimg.com/vi/Kqfktrch4-o/hqdefault.jpg",
+      "published_at": "2026-09-13T10:30:11+00:00",
+      "url": "https://www.youtube.com/watch?v=Kqfktrch4-o"
+    },
+    {
+      "id": "I7mx3u720Tw",
+      "title": "China's Best-Kept Secret: A Cinematic Journey Through Huaihua",
+      "channel_name": "Walk East",
+      "channel_slug": "walk-east",
+      "channel_avatar": "https://yt3.googleusercontent.com/ZYTU0Rr4aTNKKi6XWjBMk38_Qb13ULfXgM2JxgZo6N6mKNUff6YP13-dogqXUM-unjcy6TJeUA8=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i2.ytimg.com/vi/I7mx3u720Tw/hqdefault.jpg",
+      "published_at": "2026-09-13T09:18:06+00:00",
+      "url": "https://www.youtube.com/watch?v=I7mx3u720Tw"
+    },
+    {
+      "id": "8bwlI7Eel3c",
+      "title": "SUNDAY 11am Eastern & 8am Pacific & 10pm Thailand Time!!! #YouTube #Kick #Twitch DON’T MISS IT!",
+      "channel_name": "Trae Badd TV",
+      "channel_slug": "trae-badd-tv",
+      "channel_avatar": "https://yt3.googleusercontent.com/YnO5xc6T7pk1Q_nnG5ruJbMOBqHi_YBRWLsAxO_4de-xBE_Dr1qoDnJ407dfBd2m_0CBLYL5yg=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i1.ytimg.com/vi/8bwlI7Eel3c/hqdefault.jpg",
+      "published_at": "2026-09-13T08:27:50+00:00",
+      "url": "https://www.youtube.com/watch?v=8bwlI7Eel3c"
+    },
     {
       "id": "E1WpkumFVdk",
       "title": "Another Day RETIRED IN PATTAYA",
@@ -743,16 +813,6 @@
       "url": "https://www.youtube.com/watch?v=U3MTRL-eWE4"
     },
     {
-      "id": "JPiGW1XmcB8",
-      "title": "Trae Badd and the Mod Gang Showed Up Deep #thailand #traebadd #pattaya #bangkok #irl #funny #phuket",
-      "channel_name": "Trae Badd TV",
-      "channel_slug": "trae-badd-tv",
-      "channel_avatar": "https://yt3.googleusercontent.com/YnO5xc6T7pk1Q_nnG5ruJbMOBqHi_YBRWLsAxO_4de-xBE_Dr1qoDnJ407dfBd2m_0CBLYL5yg=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i3.ytimg.com/vi/JPiGW1XmcB8/hqdefault.jpg",
-      "published_at": "2026-09-08T10:24:00+00:00",
-      "url": "https://www.youtube.com/watch?v=JPiGW1XmcB8"
-    },
-    {
       "id": "G6O9QVfj6ek",
       "title": "Runway Market Pattaya Night Walk | The View Ferris Wheel, Street Food & Boeing 747 | 10:30pm",
       "channel_name": "Vespa Life Thailand",
@@ -871,26 +931,6 @@
       "thumbnail_url": "https://i4.ytimg.com/vi/_qpEQPPEvOs/hqdefault.jpg",
       "published_at": "2026-09-06T13:56:55+00:00",
       "url": "https://www.youtube.com/watch?v=_qpEQPPEvOs"
-    },
-    {
-      "id": "y-UQr7cuRAc",
-      "title": "THE REAL STREETS OF PATTAYA. Thailand Daytime Life",
-      "channel_name": "BEACH ROAD",
-      "channel_slug": "beach-road-channel",
-      "channel_avatar": "https://yt3.googleusercontent.com/CWW0rQ6f5ZKIE2_T9vOK3Km3eiBJEAdih3hwx_POm5n_uuG8EDZcL7IK7BLoEnWL0F5f7pnm=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i2.ytimg.com/vi/y-UQr7cuRAc/hqdefault.jpg",
-      "published_at": "2026-09-06T13:00:26+00:00",
-      "url": "https://www.youtube.com/watch?v=y-UQr7cuRAc"
-    },
-    {
-      "id": "lkV22CV6t78",
-      "title": "🇹🇭 [4K] Second Road, Tree Town, Myth Night Town, Soi MiT - Pattaya Thailand 2026",
-      "channel_name": "DV Media Pattaya",
-      "channel_slug": "dv-media-pattaya",
-      "channel_avatar": "https://yt3.googleusercontent.com/ugj2a216u5s5JhG4iireKvsOCK9lky14pZHt1tGGRm4I9na4HTsC7_8QRPb6xinI7mb8u4ZD=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i1.ytimg.com/vi/lkV22CV6t78/hqdefault.jpg",
-      "published_at": "2026-09-06T10:15:23+00:00",
-      "url": "https://www.youtube.com/watch?v=lkV22CV6t78"
     }
   ]
 }
