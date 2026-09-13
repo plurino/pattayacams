@@ -1,7 +1,37 @@
 {
-  "last_updated": "2026-09-13T17:48:09.922Z",
-  "total_videos": 93,
+  "last_updated": "2026-09-13T20:03:09.533Z",
+  "total_videos": 92,
   "videos": [
+    {
+      "id": "E-rR9tkmcg0",
+      "title": "🥭 WOULD YOU TRY MANGO STICKY RICE? 🍚",
+      "channel_name": "The Tysin Show",
+      "channel_slug": "the-tysin-show",
+      "channel_avatar": "https://yt3.googleusercontent.com/3tMHDr_3VQy3AXy0yW7XsFwHJWBAJj66W8dqKHYTQ3JB9vEX8LbKVhHWjEodtG8TbCcIy9aV0w=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i2.ytimg.com/vi/E-rR9tkmcg0/hqdefault.jpg",
+      "published_at": "2026-09-13T19:06:14+00:00",
+      "url": "https://www.youtube.com/watch?v=E-rR9tkmcg0"
+    },
+    {
+      "id": "oBVguwyy89c",
+      "title": "🥭 WOULD YOU TRY MANGO STICKY RICE? 🍚 📱",
+      "channel_name": "The Tysin Show",
+      "channel_slug": "the-tysin-show",
+      "channel_avatar": "https://yt3.googleusercontent.com/3tMHDr_3VQy3AXy0yW7XsFwHJWBAJj66W8dqKHYTQ3JB9vEX8LbKVhHWjEodtG8TbCcIy9aV0w=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i4.ytimg.com/vi/oBVguwyy89c/hqdefault.jpg",
+      "published_at": "2026-09-13T19:00:49+00:00",
+      "url": "https://www.youtube.com/watch?v=oBVguwyy89c"
+    },
+    {
+      "id": "mfGv8x8zL0A",
+      "title": "Another Bad Tourist came to my Bar in Pattaya! part 2..",
+      "channel_name": "Mac TV",
+      "channel_slug": "mac-tv",
+      "channel_avatar": "https://yt3.googleusercontent.com/oSFiARQTu2FbqFOLPVtIROpM-sPXcE_g-T8hrfJXj0QO-ATDEtOcUIsFaq0B-_fPeAMBR1A-FxQ=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i2.ytimg.com/vi/mfGv8x8zL0A/hqdefault.jpg",
+      "published_at": "2026-09-13T19:00:28+00:00",
+      "url": "https://www.youtube.com/watch?v=mfGv8x8zL0A"
+    },
     {
       "id": "RbhxiaY8_CI",
       "title": "Pattaya Night Walk – Buakhao 15→ Soi 13/1 & 13/2 → Beach Road Loop",
@@ -41,26 +71,6 @@
       "thumbnail_url": "https://i1.ytimg.com/vi/TIUtQrwEANA/hqdefault.jpg",
       "published_at": "2026-09-13T13:00:26+00:00",
       "url": "https://www.youtube.com/watch?v=TIUtQrwEANA"
-    },
-    {
-      "id": "oBVguwyy89c",
-      "title": "🥭 WOULD YOU TRY MANGO STICKY RICE? 🍚 📱",
-      "channel_name": "The Tysin Show",
-      "channel_slug": "the-tysin-show",
-      "channel_avatar": "https://yt3.googleusercontent.com/3tMHDr_3VQy3AXy0yW7XsFwHJWBAJj66W8dqKHYTQ3JB9vEX8LbKVhHWjEodtG8TbCcIy9aV0w=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i4.ytimg.com/vi/oBVguwyy89c/hqdefault.jpg",
-      "published_at": "2026-09-13T11:32:52+00:00",
-      "url": "https://www.youtube.com/watch?v=oBVguwyy89c"
-    },
-    {
-      "id": "E-rR9tkmcg0",
-      "title": "🥭 WOULD YOU TRY MANGO STICKY RICE? 🍚",
-      "channel_name": "The Tysin Show",
-      "channel_slug": "the-tysin-show",
-      "channel_avatar": "https://yt3.googleusercontent.com/3tMHDr_3VQy3AXy0yW7XsFwHJWBAJj66W8dqKHYTQ3JB9vEX8LbKVhHWjEodtG8TbCcIy9aV0w=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i2.ytimg.com/vi/E-rR9tkmcg0/hqdefault.jpg",
-      "published_at": "2026-09-13T11:32:52+00:00",
-      "url": "https://www.youtube.com/watch?v=E-rR9tkmcg0"
     },
     {
       "id": "IJHb9FKuUOM",
@@ -703,16 +713,6 @@
       "url": "https://www.youtube.com/watch?v=Oowkj2XfDvk"
     },
     {
-      "id": "HqdXDqlXZ5E",
-      "title": "Living in Thailand | New House Upgrades! + BIG Bar Updates?",
-      "channel_name": "Mac TV",
-      "channel_slug": "mac-tv",
-      "channel_avatar": "https://yt3.googleusercontent.com/oSFiARQTu2FbqFOLPVtIROpM-sPXcE_g-T8hrfJXj0QO-ATDEtOcUIsFaq0B-_fPeAMBR1A-FxQ=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i1.ytimg.com/vi/HqdXDqlXZ5E/hqdefault.jpg",
-      "published_at": "2026-09-09T07:00:21+00:00",
-      "url": "https://www.youtube.com/watch?v=HqdXDqlXZ5E"
-    },
-    {
       "id": "_Wsv8jptIg4",
       "title": "Pattaya v Village Life, Is it how you expect or worse? See for yourself!",
       "channel_name": "Buzzin Pattaya",
@@ -921,16 +921,6 @@
       "thumbnail_url": "https://i1.ytimg.com/vi/4P_DwkZgDzI/hqdefault.jpg",
       "published_at": "2026-09-07T02:00:19+00:00",
       "url": "https://www.youtube.com/watch?v=4P_DwkZgDzI"
-    },
-    {
-      "id": "N6AR9zDrTHs",
-      "title": "Indian Tourist detained in Pattaya after picking up taxi driver's wallet and not returning it.",
-      "channel_name": "The Pattaya News",
-      "channel_slug": "the-pattaya-news",
-      "channel_avatar": "https://yt3.googleusercontent.com/ED2V0oAQI1iJpeAFvbuEi0wj97DQIsDXma7rxuSOhPxt4wfxf_-hmIINVdUbCWQnBAmfyHavxw=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i3.ytimg.com/vi/N6AR9zDrTHs/hqdefault.jpg",
-      "published_at": "2026-09-06T19:39:35+00:00",
-      "url": "https://www.youtube.com/watch?v=N6AR9zDrTHs"
     }
   ]
 }
