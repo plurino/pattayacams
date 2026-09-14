@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-09-14T15:30:26.060Z",
-  "total_videos": 95,
+  "last_updated": "2026-09-14T21:13:43.738Z",
+  "total_videos": 93,
   "videos": [
     {
       "id": "sdO9z15DTtU",
@@ -931,26 +931,6 @@
       "thumbnail_url": "https://i3.ytimg.com/vi/vmrcaoNZqMA/hqdefault.jpg",
       "published_at": "2026-09-08T00:00:32+00:00",
       "url": "https://www.youtube.com/watch?v=vmrcaoNZqMA"
-    },
-    {
-      "id": "cDw04fGc958",
-      "title": "Pattaya Soi 6 Walk 🇹🇭 | Monday at 10PM",
-      "channel_name": "Vespa Life Thailand",
-      "channel_slug": "vespa-life-thailand",
-      "channel_avatar": "https://yt3.googleusercontent.com/_0ocieqX7Bpx3CZLLsmLCQpq7TMttO_TCmaiSI8z75xbWgW7Q7N9NeHHt8yGUPoEjQwEA19c7hs=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i4.ytimg.com/vi/cDw04fGc958/hqdefault.jpg",
-      "published_at": "2026-09-07T16:27:15+00:00",
-      "url": "https://www.youtube.com/watch?v=cDw04fGc958"
-    },
-    {
-      "id": "yBt1Y4_DwZ4",
-      "title": "Thepprasit Night Market Food Court 🇹🇭 | Pattaya Street Food Walk",
-      "channel_name": "Vespa Life Thailand",
-      "channel_slug": "vespa-life-thailand",
-      "channel_avatar": "https://yt3.googleusercontent.com/_0ocieqX7Bpx3CZLLsmLCQpq7TMttO_TCmaiSI8z75xbWgW7Q7N9NeHHt8yGUPoEjQwEA19c7hs=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i2.ytimg.com/vi/yBt1Y4_DwZ4/hqdefault.jpg",
-      "published_at": "2026-09-07T15:46:02+00:00",
-      "url": "https://www.youtube.com/watch?v=yBt1Y4_DwZ4"
     }
   ]
 }
