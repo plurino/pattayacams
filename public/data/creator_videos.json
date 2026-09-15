@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-09-15T14:02:52.631Z",
-  "total_videos": 93,
+  "last_updated": "2026-09-15T18:37:47.995Z",
+  "total_videos": 92,
   "videos": [
     {
       "id": "2md_6AXG1fw",
@@ -921,16 +921,6 @@
       "thumbnail_url": "https://i3.ytimg.com/vi/Jbqa8SeWZyQ/hqdefault.jpg",
       "published_at": "2026-09-09T00:00:12+00:00",
       "url": "https://www.youtube.com/watch?v=Jbqa8SeWZyQ"
-    },
-    {
-      "id": "ym4QEQHiEiU",
-      "title": "9PM Pattaya Walk | Soi Buakhao, Soi Honey, Second Road, LK Metro, Soi Lengkee",
-      "channel_name": "Vespa Life Thailand",
-      "channel_slug": "vespa-life-thailand",
-      "channel_avatar": "https://yt3.googleusercontent.com/_0ocieqX7Bpx3CZLLsmLCQpq7TMttO_TCmaiSI8z75xbWgW7Q7N9NeHHt8yGUPoEjQwEA19c7hs=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i2.ytimg.com/vi/ym4QEQHiEiU/hqdefault.jpg",
-      "published_at": "2026-09-08T16:08:56+00:00",
-      "url": "https://www.youtube.com/watch?v=ym4QEQHiEiU"
     }
   ]
 }
