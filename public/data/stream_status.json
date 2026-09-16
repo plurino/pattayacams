@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-09-16T13:56:17.566Z",
+  "last_check": "2026-09-16T16:50:06.408Z",
   "entities": {
     "venue-pattaya-oh-bar": {
       "is_live": false,
@@ -128,9 +128,9 @@
       "handle": "@mreggthailand"
     },
     "venue-miso-bar-pattaya": {
-      "is_live": false,
-      "video_id": "MJHDQXsBa74",
-      "last_live_at": "2026-09-12T17:06:58.644Z",
+      "is_live": true,
+      "video_id": "FYC7ALX94U4",
+      "last_live_at": "2026-09-16T16:50:06.408Z",
       "status": "active",
       "name": "Miso Bar Pattaya",
       "platform": "youtube",
