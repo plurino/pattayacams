@@ -1,0 +1,63 @@
+[
+  {
+    "id": "rain_flood",
+    "name": "Flood & Rain Watch",
+    "icon": "🌧️",
+    "description": "Live precipitation radar overlay & street flood monitoring cameras",
+    "center": [12.9345, 100.8825],
+    "zoom": 14,
+    "layers": {
+      "showRadar": true,
+      "showCams": true,
+      "showVenues": false,
+      "showLiveCams": true,
+      "showTransit": true
+    }
+  },
+  {
+    "id": "nightlife_run",
+    "name": "Nightlife Pulse",
+    "icon": "🔥",
+    "description": "Tree Town, Walking Street & Soi 6 live venues and creator streams",
+    "center": [12.9295, 100.8785],
+    "zoom": 15,
+    "layers": {
+      "showRadar": false,
+      "showCams": false,
+      "showVenues": true,
+      "showLiveCams": true,
+      "showTransit": false
+    }
+  },
+  {
+    "id": "transit_loop",
+    "name": "Baht Bus Loop",
+    "icon": "🚌",
+    "description": "Animated Songthaew transit corridors & stop connections",
+    "center": [12.9360, 100.8880],
+    "zoom": 14,
+    "layers": {
+      "showRadar": false,
+      "showCams": false,
+      "showVenues": true,
+      "showLiveCams": false,
+      "showTransit": true
+    }
+  },
+  {
+    "id": "koh_larn",
+    "name": "Koh Larn Bay",
+    "icon": "🏝️",
+    "description": "Pattaya Bay maritime corridor, ferry piers & marine traffic",
+    "center": [12.9240, 100.8350],
+    "zoom": 13,
+    "layers": {
+      "showRadar": false,
+      "showCams": false,
+      "showVenues": false,
+      "showLiveCams": true,
+      "showTransit": false,
+      "showMarine": true
+    }
+  }
+]

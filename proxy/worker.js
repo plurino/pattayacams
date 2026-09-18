@@ -1,13 +1,15 @@
 /**
  * PattayaCams.com - Cloudflare Worker Edge M3U8 Manifest Proxy
  * 
- * Strict Bandwidth Guard:
- * 1. ONLY proxies lightweight text-based .m3u8 playlist manifests.
- * 2. Explicitly blocks (403 Forbidden) all .ts, .m4s, .mp4, and .aac binary media segments
- *    to guarantee ZERO bandwidth egress fees on Cloudflare. Media segments are pulled directly
- *    by client video players from the upstream CDN.
- * 3. Spoofs Origin and Referer headers to satisfy City Hall streaming server security policies.
- * 4. Injects full CORS headers for browser player compatibility.
+ * Strict Bandwidth & SSRF Guard:
+ * 1. Strict Upstream Allowlist: ONLY proxies from official municipal CCTV domain (livestream.pattaya.go.th).
+ * 2. Hard 4-Second Upstream Connect Timeout to prevent hanging socket exhaustion.
+ * 3. EGRESS GUARD: Explicitly blocks (403 Forbidden) all .ts, .m4s, .mp4, and .aac binary media segments
+ *    to guarantee ZERO bandwidth egress fees on Cloudflare.
+ * 4. Manifest Rewriter: Automatically rewrites relative media segment URLs in .m3u8 playlists to
+ *    absolute upstream CDN URLs, ensuring client video players stream segments directly from Pattaya City Hall.
+ * 5. Spoofs Origin and Referer headers to satisfy City Hall streaming server security policies.
+ * 6. Injects full CORS headers for browser player compatibility.
  */
 
 const CORS_HEADERS = {
@@ -17,7 +19,9 @@ const CORS_HEADERS = {
   'Access-Control-Max-Age': '86400',
 };
 
-const UPSTREAM_ORIGIN = 'https://livestream.pattaya.go.th';
+const ALLOWED_HOSTNAME = 'livestream.pattaya.go.th';
+const UPSTREAM_ORIGIN = `https://${ALLOWED_HOSTNAME}`;
+const FETCH_TIMEOUT_MS = 4000;
 
 export default {
   async fetch(request, env, ctx) {
@@ -30,10 +34,10 @@ export default {
     }
 
     const url = new URL(request.url);
-    const targetPath = url.searchParams.get('url') || url.pathname;
+    const targetParam = url.searchParams.get('url') || url.pathname;
 
     // 2. EGRESS GUARD: Reject all binary video chunks (.ts, .m4s, etc.)
-    const lowerPath = targetPath.toLowerCase();
+    const lowerPath = targetParam.toLowerCase();
     if (
       lowerPath.endsWith('.ts') ||
       lowerPath.endsWith('.m4s') ||
@@ -75,16 +79,43 @@ export default {
       );
     }
 
-    // Determine target URL to fetch
+    // 4. SSRF GUARD: Validate target URL domain strictly against allowlist
     let upstreamUrl;
-    if (targetPath.startsWith('http://') || targetPath.startsWith('https://')) {
-      upstreamUrl = targetPath;
-    } else {
-      upstreamUrl = `${UPSTREAM_ORIGIN}${targetPath.startsWith('/') ? '' : '/'}${targetPath}`;
+    try {
+      if (targetParam.startsWith('http://') || targetParam.startsWith('https://')) {
+        const parsedTarget = new URL(targetParam);
+        if (parsedTarget.hostname.toLowerCase() !== ALLOWED_HOSTNAME) {
+          return new Response(
+            JSON.stringify({
+              error: 'Forbidden: Target upstream domain not permitted.',
+              allowedOrigin: UPSTREAM_ORIGIN,
+              status: 403,
+            }),
+            {
+              status: 403,
+              headers: {
+                'Content-Type': 'application/json',
+                ...CORS_HEADERS,
+              },
+            }
+          );
+        }
+        upstreamUrl = targetParam;
+      } else {
+        upstreamUrl = `${UPSTREAM_ORIGIN}${targetParam.startsWith('/') ? '' : '/'}${targetParam}`;
+      }
+    } catch (e) {
+      return new Response(
+        JSON.stringify({ error: 'Bad Request: Invalid target URL format.', status: 400 }),
+        { status: 400, headers: { 'Content-Type': 'application/json', ...CORS_HEADERS } }
+      );
     }
 
     try {
-      // 4. Forward request with spoofed origin/referer headers
+      // 5. Forward request with 4-second timeout and spoofed origin/referer headers
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
+
       const upstreamResponse = await fetch(upstreamUrl, {
         method: request.method,
         headers: {
@@ -93,28 +124,75 @@ export default {
           'Origin': UPSTREAM_ORIGIN,
           'Accept': '*/*',
         },
+        signal: controller.signal,
       });
+      clearTimeout(timeoutId);
 
-      // 5. Clone headers and attach CORS
-      const newHeaders = new Headers(upstreamResponse.headers);
-      Object.entries(CORS_HEADERS).forEach(([k, v]) => newHeaders.set(k, v));
-      newHeaders.set('Content-Type', 'application/vnd.apple.mpegurl; charset=utf-8');
-      newHeaders.set('Cache-Control', 'public, max-age=2, s-maxage=2'); // Short 2s cache for live manifests
+      if (!upstreamResponse.ok) {
+        return new Response(
+          JSON.stringify({
+            error: `Upstream returned status ${upstreamResponse.status}`,
+            upstream: upstreamUrl,
+          }),
+          {
+            status: upstreamResponse.status,
+            headers: {
+              'Content-Type': 'application/json',
+              ...CORS_HEADERS,
+            },
+          }
+        );
+      }
 
-      return new Response(upstreamResponse.body, {
-        status: upstreamResponse.status,
-        statusText: upstreamResponse.statusText,
-        headers: newHeaders,
+      // 6. Read playlist text and rewrite relative segment URLs to absolute upstream URLs
+      // This ensures HLS players request .ts segments directly from the city server without proxying!
+      const manifestText = await upstreamResponse.text();
+      const baseUrl = new URL(upstreamUrl);
+      const basePath = baseUrl.pathname.substring(0, baseUrl.pathname.lastIndexOf('/') + 1);
+
+      const rewrittenManifest = manifestText
+        .split('\n')
+        .map((line) => {
+          const trimmed = line.trim();
+          // If line is empty or a comment/tag (#EXT...), leave untouched
+          if (!trimmed || trimmed.startsWith('#')) {
+            return line;
+          }
+          // If already absolute URL, leave untouched
+          if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) {
+            return line;
+          }
+          // If root-relative (/live/...)
+          if (trimmed.startsWith('/')) {
+            return `${baseUrl.origin}${trimmed}`;
+          }
+          // Path-relative (chunk1.ts -> https://livestream.pattaya.go.th/live/chunk1.ts)
+          return `${baseUrl.origin}${basePath}${trimmed}`;
+        })
+        .join('\n');
+
+      // 7. Inject full CORS and cache headers
+      const responseHeaders = new Headers();
+      Object.entries(CORS_HEADERS).forEach(([k, v]) => responseHeaders.set(k, v));
+      responseHeaders.set('Content-Type', 'application/vnd.apple.mpegurl; charset=utf-8');
+      responseHeaders.set('Cache-Control', 'public, max-age=2, s-maxage=2');
+
+      return new Response(rewrittenManifest, {
+        status: 200,
+        headers: responseHeaders,
       });
     } catch (err) {
+      const isTimeout = err.name === 'AbortError';
       return new Response(
         JSON.stringify({
-          error: 'Upstream gateway error fetching municipal stream manifest.',
+          error: isTimeout
+            ? `Upstream timeout after ${FETCH_TIMEOUT_MS}ms`
+            : 'Upstream gateway error fetching municipal stream manifest.',
           details: err.message,
           upstream: upstreamUrl,
         }),
         {
-          status: 502,
+          status: isTimeout ? 504 : 502,
           headers: {
             'Content-Type': 'application/json',
             ...CORS_HEADERS,

@@ -1,0 +1,37 @@
+[
+  {
+    "date": "2026-03-03",
+    "name": "Makha Bucha Day",
+    "name_th": "วันมาฆบูชา",
+    "type": "buddhist_holiday",
+    "description": "Nationwide 24-hour alcohol ban. All entertainment venues, bars, and clubs closed. Alcohol sales prohibited in all supermarkets and convenience stores."
+  },
+  {
+    "date": "2026-05-31",
+    "name": "Visakha Bucha Day",
+    "name_th": "วันวิสาขบูชา",
+    "type": "buddhist_holiday",
+    "description": "Nationwide 24-hour alcohol ban. Commemorates the birth, enlightenment, and passing of the Buddha."
+  },
+  {
+    "date": "2026-07-29",
+    "name": "Asahna Bucha Day",
+    "name_th": "วันอาสาฬหบูชา",
+    "type": "buddhist_holiday",
+    "description": "Nationwide 24-hour alcohol ban. First sermon of the Buddha. Bars and clubs closed across Pattaya."
+  },
+  {
+    "date": "2026-07-30",
+    "name": "Khao Phansa (Buddhist Lent)",
+    "name_th": "วันเข้าพรรษา",
+    "type": "buddhist_holiday",
+    "description": "Nationwide 24-hour alcohol ban immediately following Asahna Bucha (Double dry day)."
+  },
+  {
+    "date": "2026-10-26",
+    "name": "Awk Phansa (End of Buddhist Lent)",
+    "name_th": "วันออกพรรษา",
+    "type": "buddhist_holiday",
+    "description": "Nationwide 24-hour alcohol ban. Conclusion of the three-month rains retreat."
+  }
+]

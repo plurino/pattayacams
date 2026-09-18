@@ -23,6 +23,7 @@ import WeatherModal from '@/src/components/WeatherModal';
 import NewsletterModal from '@/src/components/NewsletterModal';
 import ContactModal from '@/src/components/ContactModal';
 import CookieConsentBanner from '@/src/components/CookieConsentBanner';
+import { parseUrlState, syncStateToUrl } from '@/src/utils/urlState';
 
 function playShuffleChime() {
   if (typeof window === 'undefined') return;
@@ -123,11 +124,47 @@ export default function AppRoot() {
 
   const handleSelectEntity = useCallback((entity) => {
     setSelectedEntity(entity);
+    if (entity && typeof entity.lat === 'number' && typeof entity.lng === 'number' && mapInstanceRef.current) {
+      try {
+        const map = mapInstanceRef.current;
+        if (typeof map.flyTo === 'function' && map._loaded) {
+          map.flyTo([entity.lat, entity.lng], Math.max(map.getZoom() || 14, 15), {
+            duration: 1.2,
+            easeLinearity: 0.25,
+          });
+        }
+      } catch (e) {
+        console.warn('Target flyTo warning:', e);
+      }
+    }
   }, []);
 
   const handleCloseDrawer = useCallback(() => {
     setSelectedEntity(null);
   }, []);
+
+  // Deep-linking URL State Engine initialization on boot
+  useEffect(() => {
+    const initialState = parseUrlState();
+    if (initialState) {
+      if (initialState.view && initialState.view !== 'map') {
+        setViewMode(initialState.view);
+      }
+      if (initialState.target) {
+        setSelectedEntity(initialState.target);
+      }
+      if (initialState.loc && mapInstanceRef.current) {
+        try {
+          mapInstanceRef.current.setView([initialState.loc.lat, initialState.loc.lng], initialState.loc.zoom);
+        } catch (e) {}
+      }
+    }
+  }, []);
+
+  // Sync state changes to URL query params without reload
+  useEffect(() => {
+    syncStateToUrl({ target: selectedEntity, view: viewMode });
+  }, [selectedEntity, viewMode]);
 
   // 🎲 Live Shuffle (City Roulette): Filter active live streams, play chime, smooth flyTo([lat, lng], 17), and open drawer
   const handleLiveShuffle = useCallback(() => {
@@ -391,6 +428,7 @@ export default function AppRoot() {
       <VideoDrawer
         entity={selectedEntity}
         onClose={handleCloseDrawer}
+        onSelectEntity={handleSelectEntity}
       />
 
       {/* 5. Conversion Modals */}

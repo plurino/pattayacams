@@ -40,8 +40,10 @@ import {
   buildAgodaHotelUrl,
   build12GoTransferUrl,
 } from '@/src/utils/affiliate';
+import { findNearestCctv } from '@/src/utils/proximity';
+import TargetLockReticle from './common/TargetLockReticle';
 
-export default function VideoDrawer({ entity, onClose }) {
+export default function VideoDrawer({ entity, onClose, onSelectEntity }) {
   const [copiedCode, setCopiedCode] = useState(false);
   const [copiedShare, setCopiedShare] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
@@ -63,6 +65,23 @@ export default function VideoDrawer({ entity, onClose }) {
       setCopiedShare(true);
       setTimeout(() => setCopiedShare(false), 2500);
     }
+  };
+
+  const handleNativeShare = async (url) => {
+    const shareUrl = url || (typeof window !== 'undefined' ? `${window.location.origin}/?target=${entity.type || 'venue'}:${entity.slug || entity.id}` : '');
+    if (typeof navigator !== 'undefined' && navigator.share) {
+      try {
+        await navigator.share({
+          title: `${entity.name} - PattayaCams.com`,
+          text: `Live stream radar and camera view of ${entity.name} in Pattaya, Thailand`,
+          url: shareUrl,
+        });
+        return;
+      } catch (err) {
+        if (err.name === 'AbortError') return;
+      }
+    }
+    handleCopyShare(shareUrl);
   };
 
   const handleLaunchCityPortal = (code) => {
@@ -324,6 +343,9 @@ export default function VideoDrawer({ entity, onClose }) {
     ? `https://www.openstreetmap.org/export/embed.html?bbox=${lng - 0.003}%2C${lat - 0.002}%2C${lng + 0.003}%2C${lat + 0.002}&layer=mapnik&marker=${lat}%2C${lng}`
     : null;
 
+  // Calculate nearest municipal CCTV camera for spatial handoff
+  const nearestCctv = !isCctv && hasCoordinates ? findNearestCctv(lat, lng, 3500) : null;
+
   // Render auxiliary cards
   const renderAuxiliaryCards = () => (
     <>
@@ -465,7 +487,7 @@ export default function VideoDrawer({ entity, onClose }) {
           {/* Action Buttons: Quick Share & Google Maps */}
           <div className="grid grid-cols-2 gap-2">
             <button
-              onClick={() => handleCopyShare(googleMapsUrl)}
+              onClick={() => handleNativeShare(googleMapsUrl)}
               className={`flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg text-xs font-bold transition-all shadow-sm cursor-pointer ${
                 copiedShare
                   ? 'bg-emerald-600 text-white'
@@ -498,8 +520,64 @@ export default function VideoDrawer({ entity, onClose }) {
               </a>
             )}
           </div>
+
+          {/* Tactical Spatial Handoff: Nearest Municipal Street Camera */}
+          {nearestCctv && (
+            <button
+              onClick={() => onSelectEntity && onSelectEntity(nearestCctv.camera)}
+              className="w-full flex items-center justify-between px-3 py-2 rounded-lg bg-cyan-950/40 hover:bg-cyan-900/60 border border-brandCyan/40 text-brandCyan text-xs font-mono font-bold transition-all shadow-sm group cursor-pointer"
+              title={`Switch focus to municipal CCTV camera ${nearestCctv.camera.camera_code || nearestCctv.camera.id}`}
+            >
+              <div className="flex items-center gap-2">
+                <Camera className="w-3.5 h-3.5 text-brandCyan group-hover:scale-110 transition-transform" />
+                <span className="text-[11px] tracking-wide">NEAREST STREET CAM ({nearestCctv.formattedDistance})</span>
+              </div>
+              <span className="text-xs text-cyan-300 group-hover:translate-x-1 transition-transform">➔</span>
+            </button>
+          )}
         </div>
       )}
+
+      {/* Emergency Tourist Hotlines */}
+      <div className="p-3 rounded-xl bg-slate-900/90 border border-borderDark/80 flex flex-col gap-2 shadow-md">
+        <div className="flex items-center justify-between text-[11px] font-mono text-slate-300 font-bold">
+          <span className="flex items-center gap-1.5 text-rose-400">
+            <AlertCircle className="w-3.5 h-3.5 text-rose-400" />
+            <span>Pattaya Tourist Emergency</span>
+          </span>
+          <span className="text-[9px] text-slate-500 font-normal">24/7 Free Hotlines</span>
+        </div>
+        <div className="grid grid-cols-2 gap-1.5 pt-0.5 text-[10px] font-mono">
+          <a
+            href="tel:1155"
+            className="flex items-center justify-between p-2 rounded-lg bg-surface/80 hover:bg-surfaceLight border border-borderDark text-slate-300 hover:text-white transition-colors"
+          >
+            <span>Tourist Police</span>
+            <span className="text-brandCyan font-bold">1155</span>
+          </a>
+          <a
+            href="tel:1337"
+            className="flex items-center justify-between p-2 rounded-lg bg-surface/80 hover:bg-surfaceLight border border-borderDark text-slate-300 hover:text-white transition-colors"
+          >
+            <span>City Hall Help</span>
+            <span className="text-amber-400 font-bold">1337</span>
+          </a>
+          <a
+            href="tel:1719"
+            className="flex items-center justify-between p-2 rounded-lg bg-surface/80 hover:bg-surfaceLight border border-borderDark text-slate-300 hover:text-white transition-colors"
+          >
+            <span>Bkk Hospital ER</span>
+            <span className="text-emerald-400 font-bold">1719</span>
+          </a>
+          <a
+            href="tel:038427667"
+            className="flex items-center justify-between p-2 rounded-lg bg-surface/80 hover:bg-surfaceLight border border-borderDark text-slate-300 hover:text-white transition-colors"
+          >
+            <span>TAC Center</span>
+            <span className="text-purple-400 font-bold">038-427667</span>
+          </a>
+        </div>
+      </div>
     </>
   );
 
@@ -542,6 +620,16 @@ export default function VideoDrawer({ entity, onClose }) {
 
       {/* Drawer Scrollable Content */}
       <div className="flex-1 overflow-y-auto p-4 sm:p-5 space-y-4">
+        {/* Tactical HUD Reticle Header */}
+        <TargetLockReticle
+          name={entity.name}
+          code={entity.camera_code || entity.id || entity.slug}
+          type={isCctv ? 'MUNICIPAL CCTV' : (isLiveCam ? '24/7 WEBCAM' : (isStreamer ? 'IRL STREAMER' : 'HERO VENUE'))}
+          lat={entity.lat}
+          lng={entity.lng}
+          isLive={Boolean(entity.is_live)}
+        />
+
         {/* 1. Video Player Stage or Standby Card */}
         {renderVideoStage()}
 

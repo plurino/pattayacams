@@ -13,6 +13,8 @@ import {
   Play,
   Pause,
   CloudRain,
+  Plane,
+  Ship,
 } from 'lucide-react';
 
 export default function LayerToggleHUD({
@@ -26,11 +28,17 @@ export default function LayerToggleHUD({
   setShowTransit,
   showRadar = true,
   setShowRadar,
+  showFlights = false,
+  setShowFlights,
+  showMarine = false,
+  setShowMarine,
   radarState,
   venueCount = 0,
   liveCamCount = 2,
   camCount = 0,
   transitCount = 3,
+  flightCount = 0,
+  marineCount = 0,
   bearing = 0,
   onRotateLeft,
   onRotateRight,
@@ -245,6 +253,44 @@ export default function LayerToggleHUD({
                 checked={showTransit}
                 onChange={(e) => setShowTransit(e.target.checked)}
                 className="w-4 h-4 rounded border-borderDark bg-surface text-brandBlue focus:ring-brandBlue focus:ring-offset-0 cursor-pointer accent-brandBlue"
+              />
+            </div>
+          </label>
+
+          {/* Live Flights Radar Toggle */}
+          <label className="flex items-center justify-between gap-3 cursor-pointer py-1 px-1.5 rounded-lg hover:bg-surfaceLight/50 transition-colors">
+            <div className="flex items-center gap-2">
+              <Plane className="w-3.5 h-3.5 text-amber-400" />
+              <span className="text-slate-200">Live Flights</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-[10px] font-mono text-slate-400 bg-surfaceLight px-1.5 py-0.5 rounded">
+                {flightCount}
+              </span>
+              <input
+                type="checkbox"
+                checked={showFlights}
+                onChange={(e) => setShowFlights && setShowFlights(e.target.checked)}
+                className="w-4 h-4 rounded border-borderDark bg-surface text-amber-400 focus:ring-amber-400 focus:ring-offset-0 cursor-pointer accent-amber-400"
+              />
+            </div>
+          </label>
+
+          {/* Marine & Ferries Toggle */}
+          <label className="flex items-center justify-between gap-3 cursor-pointer py-1 px-1.5 rounded-lg hover:bg-surfaceLight/50 transition-colors">
+            <div className="flex items-center gap-2">
+              <Ship className="w-3.5 h-3.5 text-sky-400" />
+              <span className="text-slate-200">Marine Traffic</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-[10px] font-mono text-slate-400 bg-surfaceLight px-1.5 py-0.5 rounded">
+                {marineCount}
+              </span>
+              <input
+                type="checkbox"
+                checked={showMarine}
+                onChange={(e) => setShowMarine && setShowMarine(e.target.checked)}
+                className="w-4 h-4 rounded border-borderDark bg-surface text-sky-400 focus:ring-sky-400 focus:ring-offset-0 cursor-pointer accent-sky-400"
               />
             </div>
           </label>

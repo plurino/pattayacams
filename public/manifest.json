@@ -2,12 +2,14 @@
   "name": "PattayaCams - Live Webcams & City Radar",
   "short_name": "PattayaCams",
   "description": "Real-time interactive live webcams, nightlife streams & city transit radar for Pattaya, Thailand",
-  "start_url": "/",
+  "start_url": "/?mode=standalone",
+  "scope": "/",
   "id": "/",
   "display": "standalone",
+  "display_override": ["standalone", "minimal-ui", "window-controls-overlay"],
   "background_color": "#0A0E17",
   "theme_color": "#FF2A6D",
-  "orientation": "portrait-primary",
+  "orientation": "any",
   "icons": [
     {
       "src": "/icon.png",

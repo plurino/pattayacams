@@ -206,3 +206,27 @@ html, body {
 .leaflet-tooltip-bottom.pattaya-dark-tooltip:before {
   border-bottom-color: #26354A !important;
 }
+
+/* Animated Directional Transit Flow for Leaflet SVG Polylines */
+@keyframes dash-flow {
+  to {
+    stroke-dashoffset: -32;
+  }
+}
+
+path.leaflet-transit-flow,
+.leaflet-transit-flow path {
+  stroke-dasharray: 10, 14 !important;
+  animation: dash-flow 1.8s linear infinite !important;
+}
+
+/* Tactical Target Lock Reticle pulse */
+@keyframes tactical-glow {
+  0%, 100% { opacity: 0.85; filter: drop-shadow(0 0 4px rgba(0, 229, 255, 0.6)); }
+  50% { opacity: 1; filter: drop-shadow(0 0 12px rgba(0, 229, 255, 0.9)); }
+}
+
+.animate-tactical-glow {
+  animation: tactical-glow 2s ease-in-out infinite;
+}
+

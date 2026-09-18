@@ -6,8 +6,12 @@ import liveCamsData from '@/public/data/live_cams.json';
 import cctvData from '@/public/data/cctv_cams.json';
 import busRoutes from '@/public/data/pattaya_baht_bus.json';
 import LayerToggleHUD from './LayerToggleHUD';
+import SceneSelector from './SceneSelector';
 import { useStreamStatus } from '@/src/hooks/useStreamStatus';
 import { useRainViewer } from '@/src/hooks/useRainViewer';
+import { useLiveFlights } from '@/src/hooks/useLiveFlights';
+import { useMarineTraffic } from '@/src/hooks/useMarineTraffic';
+import { getFovPolygon } from '@/src/utils/fov';
 
 export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn }) {
   const streamStatus = useStreamStatus();
@@ -21,6 +25,10 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
     venueGroup: null,
     liveCamGroup: null,
     transitGroup: null,
+    ferryGroup: null,
+    flightGroup: null,
+    marineGroup: null,
+    fovGroup: null,
   });
 
   const [showVenues, setShowVenues] = useState(true);
@@ -28,10 +36,16 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
   const [showCams, setShowCams] = useState(false);
   const [showTransit, setShowTransit] = useState(true);
   const [showRadar, setShowRadar] = useState(true);
+  const [showFlights, setShowFlights] = useState(false);
+  const [showMarine, setShowMarine] = useState(false);
+  const [activeSceneId, setActiveSceneId] = useState(null);
+  const [selectedEntityForFov, setSelectedEntityForFov] = useState(null);
   const [bearing, setBearing] = useState(0);
   const [mapTheme, setMapTheme] = useState('dark');
 
   const radarState = useRainViewer(showRadar);
+  const { flights, count: flightCount } = useLiveFlights(showFlights);
+  const { vessels, count: marineCount } = useMarineTraffic(showMarine);
 
   const cartoKey = process.env.NEXT_PUBLIC_CARTO_API_KEY || 'cb1_33su_1_683c1b500e92ad8b2069c2d2';
 
@@ -46,7 +60,38 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
       const savedTheme = localStorage.getItem('pattayacams_map_theme');
       if (savedTheme === 'light' || savedTheme === 'dark') {
         setMapTheme(savedTheme);
+      } else {
+        // Auto Solar Day/Night: 06:00 - 18:00 ICT is daytime
+        const now = new Date();
+        const ictHours = (now.getUTCHours() + 7) % 24;
+        const autoTheme = (ictHours >= 6 && ictHours < 18) ? 'light' : 'dark';
+        setMapTheme(autoTheme);
       }
+    }
+  }, []);
+
+  const handleSelectScene = useCallback((scene) => {
+    setActiveSceneId(scene.id);
+    const map = mapRef.current;
+    if (map) {
+      try {
+        if (typeof map.flyTo === 'function' && map._loaded) {
+          map.flyTo(scene.center, scene.zoom, { duration: 1.5, easeLinearity: 0.25 });
+        } else if (typeof map.setView === 'function') {
+          map.setView(scene.center, scene.zoom);
+        }
+      } catch (e) {
+        console.warn('Scene flyTo warning:', e);
+      }
+    }
+    if (scene.layers) {
+      if (scene.layers.showVenues !== undefined) setShowVenues(scene.layers.showVenues);
+      if (scene.layers.showLiveCams !== undefined) setShowLiveCams(scene.layers.showLiveCams);
+      if (scene.layers.showCams !== undefined) setShowCams(scene.layers.showCams);
+      if (scene.layers.showTransit !== undefined) setShowTransit(scene.layers.showTransit);
+      if (scene.layers.showRadar !== undefined) setShowRadar(scene.layers.showRadar);
+      if (scene.layers.showFlights !== undefined) setShowFlights(scene.layers.showFlights);
+      if (scene.layers.showMarine !== undefined) setShowMarine(scene.layers.showMarine);
     }
   }, []);
 
@@ -166,6 +211,7 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
       );
 
       marker.on('click', () => {
+        setSelectedEntityForFov({ ...venue, bearing: venue.bearing || 235 });
         if (onSelectEntity) {
           onSelectEntity({
             ...venue,
@@ -235,6 +281,7 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
       );
 
       marker.on('click', () => {
+        setSelectedEntityForFov({ ...cam, bearing: cam.bearing || 240 });
         if (onSelectEntity) {
           onSelectEntity({
             ...cam,
@@ -344,6 +391,7 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
             opacity: 0.95,
             lineJoin: 'round',
             lineCap: 'round',
+            className: 'leaflet-transit-flow',
           };
         },
         onEachFeature: (feature, layer) => {
@@ -409,6 +457,7 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
           { className: 'pattaya-dark-tooltip', direction: 'top', offset: [0, -6] }
         );
         marker.on('click', () => {
+          setSelectedEntityForFov({ ...cam, bearing: cam.bearing || 230 });
           if (onSelectEntity) {
             onSelectEntity({ ...cam, type: 'cctv' });
           }
@@ -555,6 +604,11 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
 
       ferryGroup.addTo(map);
 
+      // 6. Telemetry & Tactical Groups: Flights, Marine Traffic, and CCTV FOV
+      const flightGroup = Leaflet.layerGroup().addTo(map);
+      const marineGroup = Leaflet.layerGroup().addTo(map);
+      const fovGroup = Leaflet.layerGroup().addTo(map);
+
       mapRef.current = map;
       layersRef.current = {
         cctvActiveGroup,
@@ -563,6 +617,9 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
         liveCamGroup,
         transitGroup,
         ferryGroup,
+        flightGroup,
+        marineGroup,
+        fovGroup,
       };
 
       if (onMapInstance) {
@@ -689,9 +746,115 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
     }
   }, [showRadar, radarState.currentIdx, radarState]);
 
+  // Live Flights Layer: Render ADS-B Aircraft Vectors
+  useEffect(() => {
+    const group = layersRef.current?.flightGroup;
+    const Leaflet = typeof window !== 'undefined' ? window.L : null;
+    if (!group || !Leaflet) return;
+
+    group.clearLayers();
+    if (!showFlights) return;
+
+    flights.forEach((flight) => {
+      const flightIcon = Leaflet.divIcon({
+        className: 'custom-flight-marker',
+        iconSize: [28, 28],
+        iconAnchor: [14, 14],
+        html: `
+          <div style="transform: rotate(${flight.track}deg); width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; filter: drop-shadow(0 0 6px #F59E0B); cursor: pointer;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="#FBBF24" stroke="#78350F" stroke-width="1.5">
+              <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
+            </svg>
+          </div>
+        `,
+      });
+
+      const marker = Leaflet.marker([flight.lat, flight.lng], { icon: flightIcon, zIndexOffset: 4000 });
+      marker.bindTooltip(
+        `<div style="font-family: monospace; font-size: 11px;">
+          <div style="font-weight: 800; color: #FBBF24;">✈️ ${flight.callsign} (${flight.aircraftType})</div>
+          <div style="color: #CBD5E1; font-size: 10px;">Alt: ${flight.altitudeFeet.toLocaleString()} ft (${flight.altitudeMeters}m)</div>
+          <div style="color: #94A3B8; font-size: 10px;">Speed: ${flight.speedKnots} kts (${flight.speedKmh} km/h) • Hdg: ${flight.track}°</div>
+        </div>`,
+        { className: 'pattaya-dark-tooltip', direction: 'top', offset: [0, -10] }
+      );
+      group.addLayer(marker);
+    });
+  }, [flights, showFlights]);
+
+  // Live Marine Traffic Layer: Render AIS Vessel Corridors
+  useEffect(() => {
+    const group = layersRef.current?.marineGroup;
+    const Leaflet = typeof window !== 'undefined' ? window.L : null;
+    if (!group || !Leaflet) return;
+
+    group.clearLayers();
+    if (!showMarine) return;
+
+    vessels.forEach((vessel) => {
+      const heading = vessel.heading || vessel.cog || 0;
+      const marineIcon = Leaflet.divIcon({
+        className: 'custom-marine-marker',
+        iconSize: [26, 26],
+        iconAnchor: [13, 13],
+        html: `
+          <div style="transform: rotate(${heading}deg); width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; filter: drop-shadow(0 0 6px #0284C7); cursor: pointer;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#38BDF8" stroke="#0369A1" stroke-width="1.5">
+              <polygon points="12,2 20,21 12,17 4,21" />
+            </svg>
+          </div>
+        `,
+      });
+
+      const marker = Leaflet.marker([vessel.lat, vessel.lng], { icon: marineIcon, zIndexOffset: 3500 });
+      marker.bindTooltip(
+        `<div style="font-family: monospace; font-size: 11px;">
+          <div style="font-weight: 800; color: #38BDF8;">🚢 ${vessel.name}</div>
+          <div style="color: #CBD5E1; font-size: 10px;">Type: ${vessel.type}</div>
+          <div style="color: #94A3B8; font-size: 10px;">Speed: ${vessel.sog} kts • Hdg: ${Math.round(heading)}°</div>
+        </div>`,
+        { className: 'pattaya-dark-tooltip', direction: 'top', offset: [0, -10] }
+      );
+      group.addLayer(marker);
+    });
+  }, [vessels, showMarine]);
+
+  // CCTV Tactical Field of View (FOV) Wedge overlay
+  useEffect(() => {
+    const group = layersRef.current?.fovGroup;
+    const Leaflet = typeof window !== 'undefined' ? window.L : null;
+    if (!group || !Leaflet) return;
+
+    group.clearLayers();
+    if (selectedEntityForFov && typeof selectedEntityForFov.lat === 'number' && typeof selectedEntityForFov.lng === 'number') {
+      const bearing = selectedEntityForFov.bearing || 235; // Default southwest coverage towards bay
+      const fovCoords = getFovPolygon(selectedEntityForFov.lat, selectedEntityForFov.lng, bearing, 65, 80);
+      if (fovCoords) {
+        const polygon = Leaflet.polygon(fovCoords, {
+          color: '#00E5FF',
+          weight: 1,
+          opacity: 0.6,
+          fillColor: '#00E5FF',
+          fillOpacity: 0.16,
+          dashArray: '3, 4',
+          interactive: false,
+        });
+        group.addLayer(polygon);
+      }
+    }
+  }, [selectedEntityForFov]);
+
   return (
     <div className="relative w-full h-full overflow-hidden bg-canvas">
       <div ref={mapContainerRef} className="w-full h-full z-0" />
+
+      {/* Curated Mission & Scene Selector (Top Center) */}
+      <div className="absolute top-3 left-1/2 -translate-x-1/2 z-20 pointer-events-auto">
+        <SceneSelector
+          activeSceneId={activeSceneId}
+          onSelectScene={handleSelectScene}
+        />
+      </div>
 
       {/* Floating Map Controls & Layer Toggle HUD */}
       <LayerToggleHUD
@@ -705,11 +868,17 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
         setShowTransit={setShowTransit}
         showRadar={showRadar}
         setShowRadar={setShowRadar}
+        showFlights={showFlights}
+        setShowFlights={setShowFlights}
+        showMarine={showMarine}
+        setShowMarine={setShowMarine}
         radarState={radarState}
         venueCount={venuesData.filter(v => streamStatus?.entities?.[`venue-${v.slug}`]?.status !== 'error_404').length}
         liveCamCount={liveCamsData.length}
         camCount={cctvData.length}
         transitCount={busRoutes.features.length}
+        flightCount={flightCount}
+        marineCount={marineCount}
         bearing={bearing}
         onRotateLeft={() => handleRotateBy(-45)}
         onRotateRight={() => handleRotateBy(45)}

@@ -1,9 +1,13 @@
 'use client';
 
-import React, { useState } from 'react';
-import { Clock, Droplets, Wind, TrendingUp, Ship, Sparkles, Bell, ChevronRight, Calculator, Mail, MessageSquare } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Clock, Droplets, Wind, TrendingUp, Ship, Sparkles, Bell, ChevronRight, Calculator, Mail, MessageSquare, Waves, Compass } from 'lucide-react';
 import { useTickerData } from '@/src/hooks/useTickerData';
+import { usePattayaTelemetry } from '@/src/hooks/usePattayaTelemetry';
+import { getSunsetStatus } from '@/src/utils/suncalc';
 import CurrencyConverterModal from './CurrencyConverterModal';
+import DryDayAlert from './DryDayAlert';
+import AmbientRadioPlayer from './AmbientRadioPlayer';
 
 const CURRENCIES = [
   { code: 'USD', flag: '🇺🇸', symbol: '$1=' },
@@ -22,8 +26,15 @@ export default function TickerBar({
   hasLiveAlerts = false,
 }) {
   const { ictTime, weather, rates } = useTickerData();
+  const telemetry = usePattayaTelemetry();
+  const [sunsetInfo, setSunsetInfo] = useState(() => getSunsetStatus());
   const [currencyIndex, setCurrencyIndex] = useState(0);
   const [isConverterOpen, setIsConverterOpen] = useState(false);
+
+  useEffect(() => {
+    const t = setInterval(() => setSunsetInfo(getSunsetStatus()), 60000);
+    return () => clearInterval(t);
+  }, []);
 
   const activeCurrency = CURRENCIES[currencyIndex];
 
@@ -33,7 +44,7 @@ export default function TickerBar({
 
   return (
     <div className="h-8 bg-surface/95 border-b border-borderDark/70 backdrop-blur-md flex items-center justify-between px-3 sm:px-6 text-[11px] font-mono select-none z-40 w-full max-w-full overflow-x-auto scrollbar-none shadow-inner text-slate-300 gap-2">
-      {/* 1. Left: Digital ICT Clock & Clickable Weather Chip (Opens 7-Day Forecast & Windy Map) */}
+      {/* 1. Left: Digital ICT Clock, Weather, Sunset, Marine Swell & Dry Day Alert */}
       <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
         {/* Indochina Time Clock */}
         <button
@@ -70,6 +81,36 @@ export default function TickerBar({
             <span>🌴 Pattaya Weather...</span>
           </div>
         )}
+
+        {/* Sunset Countdown Chip */}
+        {sunsetInfo && (
+          <div
+            className="hidden md:flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-canvas/50 border border-borderDark/50 text-[10px] text-amber-300 font-mono shrink-0"
+            title={`Sunset over Pattaya Bay & Koh Larn at ${sunsetInfo.sunsetTime} ICT`}
+          >
+            <span>{sunsetInfo.label}</span>
+          </div>
+        )}
+
+        {/* Marine Wave Swell & PM2.5 Chip */}
+        {telemetry && (
+          <div
+            className="hidden 2xl:flex items-center gap-2 px-1.5 py-0.5 rounded-md bg-canvas/40 border border-borderDark/40 text-[10px] text-slate-300 shrink-0"
+            title={`Pattaya Bay Wave Height: ${telemetry.waveHeightMeters}m (${telemetry.waveAdvisory}) • PM2.5 Air: ${telemetry.pm25} µg/m³`}
+          >
+            <span className="flex items-center gap-1 text-cyan-300 font-bold">
+              <Waves className="w-2.5 h-2.5 text-cyan-400" />
+              <span>{telemetry.waveHeightMeters}m Swell</span>
+            </span>
+            <span className="text-slate-600">•</span>
+            <span className="flex items-center gap-1 text-emerald-400">
+              <span>🍃 PM2.5: {telemetry.pm25}</span>
+            </span>
+          </div>
+        )}
+
+        {/* Buddha Day Nationwide Alcohol Ban Alert */}
+        <DryDayAlert />
       </div>
 
       {/* 2. Center: Thai Baht (THB) Exchange Ticker & Interactive Converter */}
@@ -175,6 +216,9 @@ export default function TickerBar({
           <MessageSquare className="w-2.5 h-2.5 text-emerald-400 shrink-0" />
           <span className="hidden lg:inline">Contact</span>
         </button>
+
+        {/* Ambient Radio Player (Fabulous 103 FM Pattaya) */}
+        <AmbientRadioPlayer />
 
         {/* Alerts Toggle */}
         <button
