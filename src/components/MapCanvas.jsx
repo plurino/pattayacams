@@ -143,14 +143,14 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
     };
 
     const activeVenues = venuesData.filter((venue) => {
-      const statusInfo = currentStatus?.entities?.[`venue-${venue.slug}`];
+      const statusInfo = currentStatus?.entities?.[`venue-${venue.slug}`] || currentStatus?.entities?.[venue.slug];
       return statusInfo?.status !== 'error_404';
     });
 
     activeVenues.forEach((venue) => {
       const isSponsor = Boolean(venue.is_sponsored);
       const iconEmoji = getCategoryIcon(venue.category, isSponsor);
-      const statusInfo = currentStatus?.entities?.[`venue-${venue.slug}`];
+      const statusInfo = currentStatus?.entities?.[`venue-${venue.slug}`] || currentStatus?.entities?.[venue.slug];
       const isLive = statusInfo ? Boolean(statusInfo.is_live) : false;
 
       let htmlIcon;
@@ -231,7 +231,7 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
     group.clearLayers();
 
     liveCamsData.forEach((cam) => {
-      const statusInfo = currentStatus?.entities?.[`livecam-${cam.slug}`];
+      const statusInfo = currentStatus?.entities?.[`livecam-${cam.slug}`] || currentStatus?.entities?.[cam.slug];
       const isLive = statusInfo ? Boolean(statusInfo.is_live) : true;
 
       let htmlIcon;

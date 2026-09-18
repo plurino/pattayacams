@@ -65,10 +65,13 @@ export default function DryDayAlert() {
         title="Click to read official nationwide alcohol regulations"
       >
         <AlertTriangle className="w-3.5 h-3.5 shrink-0" />
-        <span className="truncate max-w-[220px] sm:max-w-none">
+        <span className="hidden sm:inline">
           {isDryToday
             ? `🚨 DRY DAY: ${holiday.name} (Bars Closed)`
             : `⚠️ BAN TOMORROW: ${holiday.name} (Bars close midnight)`}
+        </span>
+        <span className="sm:hidden text-[10px] font-bold">
+          {isDryToday ? '🚨 DRY DAY' : '⚠️ DRY SOON'}
         </span>
       </div>
 

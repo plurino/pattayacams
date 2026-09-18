@@ -34,6 +34,30 @@ export default {
     }
 
     const url = new URL(request.url);
+
+    // 1b. Route: ADS-B Live Flights telemetry proxy with CORS headers
+    if (url.pathname === '/api/flights') {
+      try {
+        const flightRes = await fetch('https://api.adsb.lol/v2/point/13.05/100.88/45', {
+          headers: { 'User-Agent': 'PattayaCams-Proxy/1.0' },
+        });
+        const flightData = await flightRes.text();
+        return new Response(flightData, {
+          status: flightRes.status,
+          headers: {
+            'Content-Type': 'application/json',
+            'Cache-Control': 'public, max-age=10',
+            ...CORS_HEADERS,
+          },
+        });
+      } catch (e) {
+        return new Response(JSON.stringify({ error: 'Failed to fetch flights', details: e.message }), {
+          status: 502,
+          headers: { 'Content-Type': 'application/json', ...CORS_HEADERS },
+        });
+      }
+    }
+
     const targetParam = url.searchParams.get('url') || url.pathname;
 
     // 2. EGRESS GUARD: Reject all binary video chunks (.ts, .m4s, etc.)

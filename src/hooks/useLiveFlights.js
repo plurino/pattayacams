@@ -16,8 +16,26 @@ export function useLiveFlights(enabled = false) {
     if (!enabled) return;
     try {
       setIsLoading(true);
-      const res = await fetch('https://api.adsb.lol/v2/point/12.9345/100.8825/25');
-      if (!res.ok) throw new Error(`ADS-B HTTP ${res.status}`);
+      let res = null;
+
+      // 1. Try Cloudflare Worker proxy endpoint with 3.5s timeout
+      try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 3500);
+        res = await fetch('https://pattayacams.plurinoltd.workers.dev/api/flights', {
+          signal: controller.signal,
+        });
+        clearTimeout(timeoutId);
+      } catch (_) {
+        // Worker proxy unreached or timed out
+      }
+
+      // 2. Fallback to local live snapshot
+      if (!res || !res.ok) {
+        res = await fetch(`/data/live_flights.json?t=${Date.now()}`);
+      }
+
+      if (!res || !res.ok) return;
       const data = await res.json();
 
       const rawAc = data?.ac || [];
@@ -43,8 +61,8 @@ export function useLiveFlights(enabled = false) {
 
       setFlights(parsed);
       setLastUpdated(new Date());
-    } catch (err) {
-      console.warn('ADS-B Live Flights telemetry warning:', err);
+    } catch (_) {
+      // Fail silently without console error spam
     } finally {
       setIsLoading(false);
     }

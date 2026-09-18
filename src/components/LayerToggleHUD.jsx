@@ -150,7 +150,7 @@ export default function LayerToggleHUD({
           </button>
         )}
 
-        <div className={`bg-surface/90 backdrop-blur-md border border-borderDark rounded-xl p-3 shadow-2xl flex-col gap-2 min-w-[220px] text-xs font-medium ${isMobileMenuOpen ? 'flex' : 'hidden sm:flex'}`}>
+        <div className={`bg-surface/90 backdrop-blur-md border border-borderDark rounded-xl p-3 shadow-2xl flex-col gap-2 w-[250px] text-xs font-medium ${isMobileMenuOpen ? 'flex' : 'hidden sm:flex'}`}>
           <div className="flex items-center justify-between pb-1.5 border-b border-borderDark/60 text-slate-400 font-mono text-[10px]">
             <div className="flex items-center gap-1.5 uppercase tracking-wider">
               <Layers className="w-3.5 h-3.5 text-brandPink" />
@@ -313,9 +313,9 @@ export default function LayerToggleHUD({
             {/* Radar Playback Timeline Controls when active */}
             {showRadar && radarState && (
               <div className="bg-canvas/90 p-2 rounded-lg border border-teal-500/30 flex flex-col gap-1.5 mt-0.5">
-                <div className="flex items-center justify-between text-[10px] font-mono">
-                  <span className="text-teal-400 font-bold truncate max-w-[140px]">{radarState.frameLabel || radarState.formattedTime || 'Live Rain Radar'}</span>
-                  <span className={`text-[8.5px] px-1 py-0.5 rounded font-bold flex items-center gap-1 ${radarState.currentFrame?.isForecast ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40' : 'bg-teal-500/20 text-teal-300 border border-teal-500/30'}`}>
+                <div className="flex items-center justify-between text-[10px] font-mono h-6">
+                  <span className="text-teal-400 font-bold truncate w-[130px]">{radarState.frameLabel || radarState.formattedTime || 'Live Rain Radar'}</span>
+                  <span className={`text-[8.5px] px-1 py-0.5 rounded font-bold w-[82px] justify-center text-center shrink-0 flex items-center gap-1 ${radarState.currentFrame?.isForecast ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40' : 'bg-teal-500/20 text-teal-300 border border-teal-500/30'}`}>
                     {radarState.currentFrame?.isForecast ? '🔮 Forecast' : '🛰️ Live Radar'}
                   </span>
                 </div>

@@ -176,10 +176,10 @@ export default function TickerBar({
 
       {/* 3. Right: Visitor Utilities (Koh Larn Ferry, Events, VIP Club, Contact, Alerts) */}
       <div className="flex items-center gap-1 sm:gap-1.5 shrink-0">
-        {/* Koh Larn Ferry */}
+        {/* Koh Larn Ferry (Hidden on mobile < sm) */}
         <button
           onClick={onOpenKohLarn}
-          className="flex items-center gap-1 px-1.5 sm:px-2 py-0.5 rounded bg-blue-950/40 hover:bg-blue-900/60 border border-blue-600/40 text-blue-300 hover:text-white transition-colors text-[10px] font-semibold shrink-0"
+          className="hidden sm:flex items-center gap-1 px-1.5 sm:px-2 py-0.5 rounded bg-blue-950/40 hover:bg-blue-900/60 border border-blue-600/40 text-blue-300 hover:text-white transition-colors text-[10px] font-semibold shrink-0"
           title="Koh Larn Bali Hai Ferry Timetable & Tide Tracker"
         >
           <Ship className="w-2.5 h-2.5 text-blue-400 shrink-0" />
@@ -187,34 +187,34 @@ export default function TickerBar({
           <span>Ferry</span>
         </button>
 
-        {/* Events */}
+        {/* Events (Hidden on mobile < md) */}
         <button
           onClick={onOpenEvents}
-          className="flex items-center gap-1 px-1.5 sm:px-2 py-0.5 rounded bg-purple-950/40 hover:bg-purple-900/60 border border-purple-600/40 text-purple-300 hover:text-white transition-colors text-[10px] font-semibold shrink-0"
+          className="hidden md:flex items-center gap-1 px-1.5 sm:px-2 py-0.5 rounded bg-purple-950/40 hover:bg-purple-900/60 border border-purple-600/40 text-purple-300 hover:text-white transition-colors text-[10px] font-semibold shrink-0"
           title="Upcoming Pattaya Events, Festivals & Holidays"
         >
           <Sparkles className="w-2.5 h-2.5 text-purple-400 shrink-0" />
           <span>Events</span>
         </button>
 
-        {/* VIP Newsletter Dispatch */}
+        {/* VIP Newsletter Dispatch (Hidden on tablet/mobile < xl) */}
         <button
           onClick={onOpenNewsletter}
-          className="flex items-center gap-1 px-1.5 sm:px-2 py-0.5 rounded bg-pink-950/40 hover:bg-pink-900/60 border border-brandPink/40 text-brandPink hover:text-white transition-colors text-[10px] font-semibold shrink-0"
+          className="hidden xl:flex items-center gap-1 px-1.5 sm:px-2 py-0.5 rounded bg-pink-950/40 hover:bg-pink-900/60 border border-brandPink/40 text-brandPink hover:text-white transition-colors text-[10px] font-semibold shrink-0"
           title="Join Pattaya Pulse VIP Dispatch (Weekly Live Cam & Nightlife Alerts)"
         >
           <Mail className="w-2.5 h-2.5 text-brandPink shrink-0" />
-          <span className="hidden xl:inline">VIP Club</span>
+          <span>VIP Club</span>
         </button>
 
-        {/* Contact / Partner Desk */}
+        {/* Contact / Partner Desk (Hidden on mobile < lg) */}
         <button
           onClick={onOpenContact}
-          className="flex items-center gap-1 px-1.5 sm:px-2 py-0.5 rounded bg-emerald-950/40 hover:bg-emerald-900/60 border border-emerald-600/40 text-emerald-300 hover:text-white transition-colors text-[10px] font-semibold shrink-0"
+          className="hidden lg:flex items-center gap-1 px-1.5 sm:px-2 py-0.5 rounded bg-emerald-950/40 hover:bg-emerald-900/60 border border-emerald-600/40 text-emerald-300 hover:text-white transition-colors text-[10px] font-semibold shrink-0"
           title="Contact Desk: Add Venue/Cam, Creator Verification, Advertising, or Bug Report"
         >
           <MessageSquare className="w-2.5 h-2.5 text-emerald-400 shrink-0" />
-          <span className="hidden lg:inline">Contact</span>
+          <span>Contact</span>
         </button>
 
         {/* Ambient Radio Player (Fabulous 103 FM Pattaya) */}

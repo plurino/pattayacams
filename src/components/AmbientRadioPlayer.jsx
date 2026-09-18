@@ -3,29 +3,54 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Radio, Play, Pause, Volume2, VolumeX } from 'lucide-react';
 
-const STREAM_URL = 'https://stream.fabulous103.com/live';
+const RADIO_STREAMS = [
+  'https://fabulous.thailandstreaming.net/fabulous.mp3',
+  'https://media.onair.one:8200/stream/1/',
+];
 
 export default function AmbientRadioPlayer() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [streamIdx, setStreamIdx] = useState(0);
   const audioRef = useRef(null);
+
+  const initAudio = (url) => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current = null;
+    }
+    const audio = new Audio(url);
+    audio.preload = 'none';
+    audio.crossOrigin = 'anonymous';
+
+    audio.onplaying = () => {
+      setIsLoading(false);
+      setIsPlaying(true);
+    };
+    audio.onwaiting = () => setIsLoading(true);
+    audio.onerror = () => {
+      // If primary failed, try fallback
+      if (streamIdx + 1 < RADIO_STREAMS.length) {
+        setStreamIdx((prev) => prev + 1);
+        const nextUrl = RADIO_STREAMS[streamIdx + 1];
+        initAudio(nextUrl);
+        audioRef.current.play().catch(() => {
+          setIsLoading(false);
+          setIsPlaying(false);
+        });
+      } else {
+        setIsLoading(false);
+        setIsPlaying(false);
+      }
+    };
+    audioRef.current = audio;
+    return audio;
+  };
 
   const togglePlay = () => {
     if (!audioRef.current) {
-      const audio = new Audio(STREAM_URL);
-      audio.preload = 'none';
-      audioRef.current = audio;
-
-      audio.onplaying = () => {
-        setIsLoading(false);
-        setIsPlaying(true);
-      };
-      audio.onwaiting = () => setIsLoading(true);
-      audio.onerror = () => {
-        setIsLoading(false);
-        setIsPlaying(false);
-      };
+      initAudio(RADIO_STREAMS[streamIdx]);
     }
 
     if (isPlaying) {
@@ -40,8 +65,7 @@ export default function AmbientRadioPlayer() {
           setIsPlaying(true);
           setIsLoading(false);
         })
-        .catch((e) => {
-          console.warn('Radio playback blocked or failed:', e);
+        .catch(() => {
           setIsLoading(false);
           setIsPlaying(false);
         });

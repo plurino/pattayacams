@@ -4,34 +4,8 @@ import { useState, useEffect, useRef } from 'react';
 
 const AISSTREAM_API_KEY = 'f96d25ad0e1aee593008f2c860bbd8dd685407ad';
 
-// Pattaya Bay, Bali Hai, Koh Larn, Sattahip channel bounding box
-const PATTAYA_BBOX = [[[12.75, 100.75], [13.05, 100.95]]];
-
-// Fallback active passenger ferry tracks when AIS station has latency
-const DEFAULT_FERRIES = [
-  {
-    mmsi: '567000101',
-    name: 'KOH LARN EXPRESS 1',
-    type: 'Passenger Ferry',
-    lat: 12.9268,
-    lng: 100.8520,
-    sog: 11.2,
-    cog: 268,
-    lastSeen: Date.now(),
-    isSimulated: true,
-  },
-  {
-    mmsi: '567000102',
-    name: 'BALI HAI RUNNER',
-    type: 'Speedboat / Tender',
-    lat: 12.9230,
-    lng: 100.8210,
-    sog: 18.5,
-    cog: 92,
-    lastSeen: Date.now(),
-    isSimulated: true,
-  }
-];
+// Expanded Pattaya Bay, Koh Larn, Laem Chabang & Sattahip Gulf corridor
+const PATTAYA_BBOX = [[[12.40, 100.50], [13.40, 101.20]]];
 
 export function useMarineTraffic(enabled = false) {
   const [vessels, setVessels] = useState([]);
@@ -42,17 +16,16 @@ export function useMarineTraffic(enabled = false) {
   useEffect(() => {
     if (!enabled) {
       if (socketRef.current) {
-        socketRef.current.close();
+        try {
+          socketRef.current.close();
+        } catch (_) {}
         socketRef.current = null;
       }
       setIsConnected(false);
       setVessels([]);
+      vesselMapRef.current.clear();
       return;
     }
-
-    // Seed with fallback ferries initially
-    DEFAULT_FERRIES.forEach(f => vesselMapRef.current.set(f.mmsi, f));
-    setVessels(Array.from(vesselMapRef.current.values()));
 
     let ws = null;
     let reconnectTimeout = null;
@@ -72,9 +45,10 @@ export function useMarineTraffic(enabled = false) {
           ws.send(JSON.stringify(subMessage));
         };
 
-        ws.onmessage = (event) => {
+        ws.onmessage = async (event) => {
           try {
-            const data = JSON.parse(event.data);
+            const rawText = typeof event.data === 'string' ? event.data : await event.data.text();
+            const data = JSON.parse(rawText);
             const mmsi = data?.MetaData?.MMSI?.toString();
             if (!mmsi) return;
 
@@ -95,31 +69,37 @@ export function useMarineTraffic(enabled = false) {
                 heading: posReport?.TrueHeading ?? existing.heading ?? 0,
                 type: data.Message?.ShipStaticData?.Type || existing.type || 'Marine Vessel',
                 lastSeen: Date.now(),
-                isSimulated: false,
               };
 
               vesselMapRef.current.set(mmsi, updatedVessel);
 
-              // Update vessels state throttled
+              // Prune vessels not seen in 20 minutes
+              const now = Date.now();
+              for (const [id, v] of vesselMapRef.current.entries()) {
+                if (now - v.lastSeen > 20 * 60 * 1000) {
+                  vesselMapRef.current.delete(id);
+                }
+              }
+
               setVessels(Array.from(vesselMapRef.current.values()));
             }
-          } catch (e) {
+          } catch (_) {
             // Ignore parse errors on stream
           }
         };
 
-        ws.onerror = (err) => {
-          console.warn('AISStream WebSocket warning:', err);
+        ws.onerror = () => {
+          // Fail silently without loud console spam
         };
 
         ws.onclose = () => {
           setIsConnected(false);
           if (enabled) {
-            reconnectTimeout = setTimeout(connect, 8000);
+            reconnectTimeout = setTimeout(connect, 10000);
           }
         };
-      } catch (e) {
-        console.warn('AISStream connection failed:', e);
+      } catch (_) {
+        // Handle unexpected connection error
       }
     }
 
@@ -128,7 +108,9 @@ export function useMarineTraffic(enabled = false) {
     return () => {
       if (reconnectTimeout) clearTimeout(reconnectTimeout);
       if (socketRef.current) {
-        socketRef.current.close();
+        try {
+          socketRef.current.close();
+        } catch (_) {}
         socketRef.current = null;
       }
     };

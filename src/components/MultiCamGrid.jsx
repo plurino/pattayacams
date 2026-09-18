@@ -40,7 +40,7 @@ export default function MultiCamGrid({ onSelectEntity }) {
 
     // 1. Live Cams (Pattaya Beach Road, Soi Buakhao, etc.)
     liveCamsData.forEach((c) => {
-      const statusInfo = entities[`livecam-${c.slug}`];
+      const statusInfo = entities[`livecam-${c.slug}`] || entities[c.slug];
       if (statusInfo?.status !== 'error_404' && statusInfo?.is_live !== false) {
         list.push({
           key: `livecam-${c.slug}`,
@@ -59,7 +59,7 @@ export default function MultiCamGrid({ onSelectEntity }) {
 
     // 2. Venues (Only when genuinely live)
     venuesData.forEach((v) => {
-      const statusInfo = entities[`venue-${v.slug}`];
+      const statusInfo = entities[`venue-${v.slug}`] || entities[v.slug];
       if (statusInfo?.is_live === true || (statusInfo?.status === 'active' && statusInfo?.video_id)) {
         list.push({
           key: `venue-${v.slug}`,
@@ -79,7 +79,7 @@ export default function MultiCamGrid({ onSelectEntity }) {
     // 3. Creators & IRL Streamers (Only when genuinely live)
     const creatorMap = new Map();
     creatorsData.forEach((c) => {
-      const statusInfo = entities[`creator-${c.slug}`];
+      const statusInfo = entities[`creator-${c.slug}`] || entities[c.slug];
       if (statusInfo?.is_live === true) {
         creatorMap.set(c.slug, {
           key: `creator-${c.slug}`,
