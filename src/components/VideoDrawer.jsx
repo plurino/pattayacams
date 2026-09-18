@@ -43,7 +43,7 @@ import {
 import { findNearestCctv } from '@/src/utils/proximity';
 import TargetLockReticle from './common/TargetLockReticle';
 
-export default function VideoDrawer({ entity, onClose, onSelectEntity }) {
+export default function VideoDrawer({ entity, onClose, onSelectEntity, onLiveShuffle }) {
   const [copiedCode, setCopiedCode] = useState(false);
   const [copiedShare, setCopiedShare] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
@@ -367,70 +367,28 @@ export default function VideoDrawer({ entity, onClose, onSelectEntity }) {
         </div>
       )}
 
-      {/* Municipal Portal Verification Badge (for CCTV) */}
-      {isCctv && (
-        <div className="p-3.5 rounded-xl bg-cyan-950/20 border border-brandCyan/30 flex flex-col gap-3 shadow-md">
-          <div className="flex items-center justify-between">
-            <span className="text-[11px] font-mono text-slate-300 font-bold flex items-center gap-1.5">
-              <Radio className="w-3.5 h-3.5 text-brandCyan" />
-              <span>Pattaya City Hall CCTV Network</span>
-            </span>
-            <span className="text-[9px] font-mono text-brandCyan bg-cyan-900/40 px-2 py-0.5 rounded border border-cyan-500/30">
-              {entity.type || 'Fix'} • {entity.brand || 'AXIS'}
-            </span>
-          </div>
-          <p className="text-[11px] text-slate-300 leading-relaxed">
-            Pattaya City operates 600+ municipal surveillance cameras for public safety and traffic monitoring. Live WebRTC video is hosted directly on the City Hall streaming portal.
-          </p>
-
-          <div className="flex flex-col gap-2">
-            <div className="flex items-center justify-between p-2 rounded-lg bg-black/50 border border-borderDark text-xs font-mono">
-              <span className="text-slate-400 text-[11px]">Camera Code:</span>
-              <span className="text-brandCyan font-bold text-xs">{entity.camera_code || entity.id}</span>
-              <button
-                onClick={() => handleCopyCode(entity.camera_code || entity.id)}
-                className="text-[10px] text-slate-400 hover:text-white px-2 py-0.5 rounded hover:bg-surfaceLight transition-colors"
-              >
-                {copiedCode ? '✓ Copied' : 'Copy'}
-              </button>
+      {/* Description & Transit Tip (Venues & Custom Points) */}
+      {(!isCctv && (entity.description || entity.transit_tip || entity.opening_hours)) && (
+        <div className="p-3.5 rounded-xl bg-surfaceLight/30 border border-borderDark/60 space-y-2">
+          {entity.description && (
+            <p className="text-xs text-slate-300 leading-relaxed">
+              {entity.description}
+            </p>
+          )}
+          {entity.transit_tip && (
+            <div className="flex items-start gap-2 pt-1 text-[11px] text-cyan-300 font-mono">
+              <Bus className="w-3.5 h-3.5 text-brandCyan shrink-0 mt-0.5" />
+              <span>{entity.transit_tip}</span>
             </div>
-
-            <button
-              onClick={() => handleLaunchCityPortal(entity.camera_code || entity.id)}
-              className="flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-cyan-500 via-teal-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-canvas font-extrabold text-xs transition-all shadow-[0_0_16px_rgba(0,229,255,0.4)] cursor-pointer"
-            >
-              <Radio className="w-4 h-4 text-canvas animate-pulse shrink-0" />
-              <span>
-                {copiedCode
-                  ? '✓ Code Copied! Opening City Hall Stream...'
-                  : 'Launch Official City Hall Stream'}
-              </span>
-              <ExternalLink className="w-3.5 h-3.5 shrink-0" />
-            </button>
-          </div>
+          )}
+          {entity.opening_hours && (
+            <div className="flex items-center gap-1.5 text-[11px] text-amber-300 font-mono">
+              <Clock className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+              <span>{entity.opening_hours}</span>
+            </div>
+          )}
         </div>
       )}
-
-      {/* Description & Transit Tip */}
-      <div className="p-3.5 rounded-xl bg-surfaceLight/30 border border-borderDark/60 space-y-2">
-        {entity.description && (
-          <p className="text-xs text-slate-300 leading-relaxed">
-            {entity.description}
-          </p>
-        )}
-        {entity.transit_tip && (
-          <div className="flex items-start gap-2 pt-1 text-[11px] text-cyan-300 font-mono">
-            <Bus className="w-3.5 h-3.5 text-brandCyan shrink-0 mt-0.5" />
-            <span>{entity.transit_tip}</span>
-          </div>
-        )}
-        {entity.opening_hours && (
-          <div className="flex items-center gap-1.5 text-[11px] text-amber-300 font-mono">
-            <Clock className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-            <span>{entity.opening_hours}</span>
-          </div>
-        )}
-      </div>
 
       {/* IRL Streamer Context Card (Streamers have no static location) */}
       {isStreamer && (
@@ -601,6 +559,16 @@ export default function VideoDrawer({ entity, onClose, onSelectEntity }) {
         </div>
 
         <div className="flex items-center gap-1.5 shrink-0">
+          {onLiveShuffle && (
+            <button
+              onClick={onLiveShuffle}
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-brandPink/20 hover:bg-brandPink/30 border border-brandPink/60 text-brandPink hover:text-white text-xs font-mono font-bold transition-all shadow-[0_0_12px_rgba(255,42,109,0.3)] hover:scale-105 active:scale-95 cursor-pointer"
+              title="Hop to next random live stream"
+            >
+              <span>🎲</span>
+              <span className="hidden xs:inline">Shuffle Next</span>
+            </button>
+          )}
           <button
             onClick={() => setIsExpanded(!isExpanded)}
             className="hidden sm:flex p-2 rounded-lg text-slate-400 hover:text-white hover:bg-surfaceLight transition-colors"

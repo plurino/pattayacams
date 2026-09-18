@@ -60,7 +60,7 @@ export default function MultiCamGrid({ onSelectEntity }) {
     // 2. Venues (Only when genuinely live)
     venuesData.forEach((v) => {
       const statusInfo = entities[`venue-${v.slug}`] || entities[v.slug];
-      if (statusInfo?.is_live === true || (statusInfo?.status === 'active' && statusInfo?.video_id)) {
+      if (statusInfo?.is_live === true) {
         list.push({
           key: `venue-${v.slug}`,
           slug: v.slug,
@@ -326,6 +326,7 @@ export default function MultiCamGrid({ onSelectEntity }) {
                     title={entity.name}
                     isLive={true}
                     autoMount={true}
+                    muted={true}
                     className="w-full h-full"
                   />
                 ) : (

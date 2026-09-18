@@ -11,6 +11,7 @@ export default function UniversalPlayer({
   posterImage,
   isLive = true,
   autoMount = false,
+  muted = false,
   badgeText,
   badgeColor,
   className = '',
@@ -210,10 +211,12 @@ export default function UniversalPlayer({
   const channelId = source?.channel_id || source?.youtube_channel_id;
   const handle = source?.youtube_handle || source?.handle || '@PattayaOhBar';
 
+  const muteParam = muted ? 'mute=1' : 'mute=0';
+
   const ytEmbedUrl = videoId
-    ? `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=1&playsinline=1&rel=0&enablejsapi=1`
+    ? `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&${muteParam}&playsinline=1&rel=0&enablejsapi=1`
     : (channelId
-        ? `https://www.youtube-nocookie.com/embed/live_stream?channel=${channelId}&autoplay=1&mute=1&playsinline=1`
+        ? `https://www.youtube-nocookie.com/embed/live_stream?channel=${channelId}&autoplay=1&${muteParam}&playsinline=1`
         : '');
 
   const resolvedPoster = posterImage || (videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : null);

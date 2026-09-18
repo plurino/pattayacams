@@ -381,9 +381,13 @@ export default function AppRoot() {
           </div>
         )}
 
-        {/* Floating Live Shuffle Popup in Bottom Right Corner of Map */}
+        {/* Floating Live Shuffle Popup in Corner of Map (Repositioned when drawer is open so it is never hidden) */}
         {viewMode === 'map' && (
-          <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 z-30 pointer-events-auto">
+          <div className={`absolute bottom-4 z-30 pointer-events-auto transition-all duration-300 ${
+            selectedEntity
+              ? 'left-4 sm:left-6'
+              : 'right-4 sm:bottom-6 sm:right-6'
+          }`}>
             {activeLiveCount > 0 ? (
               <button
                 onClick={handleLiveShuffle}
@@ -429,6 +433,7 @@ export default function AppRoot() {
         entity={selectedEntity}
         onClose={handleCloseDrawer}
         onSelectEntity={handleSelectEntity}
+        onLiveShuffle={handleLiveShuffle}
       />
 
       {/* 5. Conversion Modals */}

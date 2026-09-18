@@ -1,63 +1,53 @@
 [
   {
-    "id": "rain_flood",
-    "name": "Flood & Rain Watch",
+    "id": "weather",
+    "name": "Weather",
     "icon": "🌧️",
-    "description": "Live precipitation radar overlay & street flood monitoring cameras",
+    "description": "Live precipitation rain radar overlay & cloud forecast",
     "center": [12.9345, 100.8825],
-    "zoom": 14,
-    "layers": {
-      "showRadar": true,
-      "showCams": true,
-      "showVenues": false,
-      "showLiveCams": true,
-      "showTransit": true
-    }
-  },
-  {
-    "id": "nightlife_run",
-    "name": "Nightlife Pulse",
-    "icon": "🔥",
-    "description": "Tree Town, Walking Street & Soi 6 live venues and creator streams",
-    "center": [12.9295, 100.8785],
-    "zoom": 15,
-    "layers": {
-      "showRadar": false,
-      "showCams": false,
-      "showVenues": true,
-      "showLiveCams": true,
-      "showTransit": false
-    }
-  },
-  {
-    "id": "transit_loop",
-    "name": "Baht Bus Loop",
-    "icon": "🚌",
-    "description": "Animated Songthaew transit corridors & stop connections",
-    "center": [12.9360, 100.8880],
-    "zoom": 14,
-    "layers": {
-      "showRadar": false,
-      "showCams": false,
-      "showVenues": true,
-      "showLiveCams": false,
-      "showTransit": true
-    }
-  },
-  {
-    "id": "koh_larn",
-    "name": "Koh Larn Bay",
-    "icon": "🏝️",
-    "description": "Pattaya Bay maritime corridor, ferry piers & marine traffic",
-    "center": [12.9240, 100.8350],
     "zoom": 13,
+    "themeColor": "teal",
     "layers": {
-      "showRadar": false,
-      "showCams": false,
-      "showVenues": false,
-      "showLiveCams": true,
-      "showTransit": false,
+      "showRadar": true
+    }
+  },
+  {
+    "id": "transport",
+    "name": "Transport",
+    "icon": "🚌",
+    "description": "15–20฿ Baht bus transit loop, live ADS-B flights, marine traffic & Koh Larn ferry lines",
+    "center": [12.9280, 100.8550],
+    "zoom": 13,
+    "themeColor": "cyan",
+    "layers": {
+      "showTransit": true,
+      "showFlights": true,
       "showMarine": true
+    }
+  },
+  {
+    "id": "cams",
+    "name": "Cams",
+    "icon": "📹",
+    "description": "24/7 Pattaya street webcams & City Hall municipal CCTV cameras",
+    "center": [12.9325, 100.8820],
+    "zoom": 14,
+    "themeColor": "emerald",
+    "layers": {
+      "showLiveCams": true,
+      "showCams": true
+    }
+  },
+  {
+    "id": "venues",
+    "name": "Venues",
+    "icon": "🍸",
+    "description": "Live entertainment bars, clubs & nightlife venues",
+    "center": [12.9300, 100.8800],
+    "zoom": 14,
+    "themeColor": "pink",
+    "layers": {
+      "showVenues": true
     }
   }
 ]

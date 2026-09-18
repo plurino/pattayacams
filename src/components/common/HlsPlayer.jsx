@@ -114,24 +114,32 @@ export default function HlsPlayer({ streamUrl, title = 'City CCTV Stream', camId
             <Video className="w-5 h-5" />
           </div>
 
-          <div className="flex flex-col gap-0.5 max-w-sm z-10">
+          <div className="flex flex-col items-center gap-1.5 max-w-sm z-10 px-4">
             <div className="flex items-center justify-center gap-1.5 text-white font-bold text-xs sm:text-sm">
               <ShieldCheck className="w-4 h-4 text-brandCyan shrink-0" />
               <span className="truncate">{title}</span>
             </div>
-            <p className="text-[11px] text-slate-300 leading-tight">
-              Official municipal surveillance & traffic node. Live WebRTC feed is hosted on the Pattaya City Hall portal.
-            </p>
+            <div className="flex items-center gap-2 text-[11px] font-mono text-cyan-300">
+              <span>Code: <strong className="text-white">{resolvedCode}</strong></span>
+              <span className="text-slate-600">•</span>
+              <span>City Hall WebRTC</span>
+            </div>
           </div>
 
-          <div className="z-10 mt-1 flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-950/40 border border-brandCyan/30 text-[10px] text-brandCyan font-mono">
-            <span>Use official command launcher below to launch City Hall stream</span>
-          </div>
+          <a
+            href="https://livestream.pattaya.go.th/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="z-10 mt-2 flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 via-teal-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-canvas font-extrabold text-xs transition-all shadow-[0_0_16px_rgba(0,229,255,0.4)] hover:scale-105 active:scale-95"
+          >
+            <Video className="w-4 h-4 text-canvas shrink-0" />
+            <span>Open Live Camera on City Portal ➔</span>
+          </a>
 
           {/* Bottom Telemetry Info */}
           <div className="absolute bottom-1.5 left-2 right-2 flex items-center justify-between text-[9px] font-mono text-slate-500 z-10 px-1">
-            <span>NETWORK: PATTAYA-GOV-INNOPOLIS</span>
-            <span>PROTOCOL: WEBRTC 1080P</span>
+            <span>NETWORK: PATTAYA-GOV</span>
+            <span>NODE: {resolvedCode}</span>
           </div>
         </div>
       ) : (

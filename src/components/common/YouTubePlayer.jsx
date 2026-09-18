@@ -10,6 +10,7 @@ export default function YouTubePlayer({
   handle = '@PattayaOhBar',
   type = 'venue',
   isLive = false,
+  muted = false,
   badgeText,
   badgeColor,
 }) {
@@ -19,14 +20,16 @@ export default function YouTubePlayer({
   const isVenue = type === 'venue' || isLive || !isStreamer;
 
   // Resolve active live video ID:
-  const resolvedVideoId = videoId || (channelId === 'UCuRdgfA3P-cDPmcK804cnuQ' ? 'k8zVyL8mk74' : null);
+  const resolvedVideoId = videoId || (channelId === 'UCuRdgfA3P-cDPmcK804cnuQ' ? 'cG8EAlyY9gQ' : null);
+
+  const muteParam = muted ? 'mute=1' : 'mute=0';
 
   const embedUrl = resolvedVideoId
-    ? `https://www.youtube-nocookie.com/embed/${resolvedVideoId}?autoplay=1&mute=1&playsinline=1&rel=0&enablejsapi=1`
+    ? `https://www.youtube-nocookie.com/embed/${resolvedVideoId}?autoplay=1&${muteParam}&playsinline=1&rel=0&enablejsapi=1`
     : (channelId
         ? (isVenue
-            ? `https://www.youtube-nocookie.com/embed/live_stream?channel=${channelId}&autoplay=1&mute=1&playsinline=1`
-            : `https://www.youtube-nocookie.com/embed/videoseries?list=UU${channelId.slice(2)}&autoplay=1&mute=1&playsinline=1&rel=0`)
+            ? `https://www.youtube-nocookie.com/embed/live_stream?channel=${channelId}&autoplay=1&${muteParam}&playsinline=1`
+            : `https://www.youtube-nocookie.com/embed/videoseries?list=UU${channelId.slice(2)}&autoplay=1&${muteParam}&playsinline=1&rel=0`)
         : '');
 
   const liveChannelUrl = resolvedVideoId

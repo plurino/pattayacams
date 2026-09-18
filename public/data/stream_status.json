@@ -1,10 +1,10 @@
 {
-  "last_check": "2026-09-18T15:27:02.379Z",
+  "last_check": "2026-09-18T15:59:50.159Z",
   "entities": {
     "venue-pattaya-oh-bar": {
-      "is_live": false,
-      "video_id": "jjTA1FDnYZM",
-      "last_live_at": "2026-09-12T21:00:48.403Z",
+      "is_live": true,
+      "video_id": "cG8EAlyY9gQ",
+      "last_live_at": "2026-09-18T15:59:50.159Z",
       "status": "active",
       "name": "Pattaya Oh Bar",
       "platform": "youtube",
@@ -13,7 +13,7 @@
     "livecam-pattaya-beach-road-live-cam": {
       "is_live": true,
       "video_id": "WgSrfstUvIc",
-      "last_live_at": "2026-09-18T15:27:02.379Z",
+      "last_live_at": "2026-09-18T15:59:50.159Z",
       "status": "active",
       "name": "Pattaya Beach Road Live Cam",
       "platform": "youtube",
@@ -67,7 +67,7 @@
     "venue-x-club-pattaya": {
       "is_live": true,
       "video_id": "YdrhAZsm1mQ",
-      "last_live_at": "2026-09-18T15:27:02.379Z",
+      "last_live_at": "2026-09-18T15:59:50.159Z",
       "status": "active",
       "name": "X Club Pattaya",
       "platform": "youtube",
@@ -76,7 +76,7 @@
     "venue-las-vegas-beer-garden": {
       "is_live": true,
       "video_id": "G4b6gTJE8WM",
-      "last_live_at": "2026-09-18T15:27:02.379Z",
+      "last_live_at": "2026-09-18T15:59:50.159Z",
       "status": "active",
       "name": "Las Vegas Beer Garden",
       "platform": "youtube",
@@ -85,7 +85,7 @@
     "venue-gold-bar-soi-6": {
       "is_live": true,
       "video_id": "4IlMNT2Y13k",
-      "last_live_at": "2026-09-18T15:27:02.379Z",
+      "last_live_at": "2026-09-18T15:59:50.159Z",
       "status": "active",
       "name": "Gold Bar Soi 6",
       "platform": "youtube",
@@ -103,7 +103,7 @@
     "venue-mafia-bar-pattaya": {
       "is_live": true,
       "video_id": "oUn-P6Md3gI",
-      "last_live_at": "2026-09-18T15:27:02.379Z",
+      "last_live_at": "2026-09-18T15:59:50.159Z",
       "status": "active",
       "name": "Mafia Bar (The Godfather)",
       "platform": "youtube",
@@ -641,7 +641,7 @@
     "venue-smile-bar-pattaya": {
       "is_live": true,
       "video_id": "e31V5IrODMQ",
-      "last_live_at": "2026-09-18T15:27:02.379Z",
+      "last_live_at": "2026-09-18T15:59:50.159Z",
       "status": "active",
       "name": "Smile Bar Pattaya",
       "platform": "youtube",
@@ -650,7 +650,7 @@
     "venue-true-blue-aussie-bar": {
       "is_live": true,
       "video_id": "gc9QhhfTkw4",
-      "last_live_at": "2026-09-18T15:27:02.379Z",
+      "last_live_at": "2026-09-18T15:59:50.159Z",
       "status": "active",
       "name": "True Blue Aussie Bar & Boomerang Bar",
       "platform": "youtube",
@@ -659,7 +659,7 @@
     "livecam-soi-buakhao-live-cam": {
       "is_live": true,
       "video_id": "gL_CQ8f9mb4",
-      "last_live_at": "2026-09-18T15:27:02.379Z",
+      "last_live_at": "2026-09-18T15:59:50.159Z",
       "status": "active",
       "name": "Soi Buakhao Live Cam",
       "platform": "youtube",
@@ -679,7 +679,7 @@
     "creator-trae-badd-tv": {
       "is_live": true,
       "video_id": "eymJ3qMZAWk",
-      "last_live_at": "2026-09-18T15:27:02.379Z",
+      "last_live_at": "2026-09-18T15:59:50.159Z",
       "status": "active",
       "name": "Trae Badd TV",
       "platform": "youtube",

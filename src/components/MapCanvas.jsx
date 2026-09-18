@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import React, { useEffect, useRef, useState, useCallback, useMemo } from 'react';
 import venuesData from '@/public/data/venues.json';
 import liveCamsData from '@/public/data/live_cams.json';
 import cctvData from '@/public/data/cctv_cams.json';
@@ -33,15 +33,24 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
 
   const [showVenues, setShowVenues] = useState(true);
   const [showLiveCams, setShowLiveCams] = useState(true);
-  const [showCams, setShowCams] = useState(false);
-  const [showTransit, setShowTransit] = useState(true);
-  const [showRadar, setShowRadar] = useState(true);
+  const [showCams, setShowCams] = useState(true);
+  const [showTransit, setShowTransit] = useState(false);
+  const [showRadar, setShowRadar] = useState(false);
   const [showFlights, setShowFlights] = useState(false);
   const [showMarine, setShowMarine] = useState(false);
-  const [activeSceneId, setActiveSceneId] = useState(null);
   const [selectedEntityForFov, setSelectedEntityForFov] = useState(null);
   const [bearing, setBearing] = useState(0);
   const [mapTheme, setMapTheme] = useState('dark');
+
+  // Derive active scenes based on currently enabled layers
+  const activeSceneIds = useMemo(() => {
+    const ids = [];
+    if (showRadar) ids.push('weather');
+    if (showTransit || showFlights || showMarine) ids.push('transport');
+    if (showLiveCams || showCams) ids.push('cams');
+    if (showVenues) ids.push('venues');
+    return ids;
+  }, [showRadar, showTransit, showFlights, showMarine, showLiveCams, showCams, showVenues]);
 
   const radarState = useRainViewer(showRadar);
   const { flights, count: flightCount } = useLiveFlights(showFlights);
@@ -70,30 +79,38 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
     }
   }, []);
 
-  const handleSelectScene = useCallback((scene) => {
-    setActiveSceneId(scene.id);
-    const map = mapRef.current;
-    if (map) {
-      try {
-        if (typeof map.flyTo === 'function' && map._loaded) {
-          map.flyTo(scene.center, scene.zoom, { duration: 1.5, easeLinearity: 0.25 });
-        } else if (typeof map.setView === 'function') {
-          map.setView(scene.center, scene.zoom);
+  const handleToggleScene = useCallback((scene) => {
+    const isCurrentlyActive = activeSceneIds.includes(scene.id);
+    const willActivate = !isCurrentlyActive;
+
+    if (scene.id === 'weather') {
+      setShowRadar(willActivate);
+    } else if (scene.id === 'transport') {
+      setShowTransit(willActivate);
+      setShowFlights(willActivate);
+      setShowMarine(willActivate);
+    } else if (scene.id === 'cams') {
+      setShowLiveCams(willActivate);
+      setShowCams(willActivate);
+    } else if (scene.id === 'venues') {
+      setShowVenues(willActivate);
+    }
+
+    if (willActivate && scene.center && scene.zoom) {
+      const map = mapRef.current;
+      if (map) {
+        try {
+          if (typeof map.flyTo === 'function' && map._loaded) {
+            map.flyTo(scene.center, scene.zoom, { duration: 1.5, easeLinearity: 0.25 });
+          } else if (typeof map.setView === 'function') {
+            map.setView(scene.center, scene.zoom);
+          }
+        } catch (e) {
+          console.warn('Scene flyTo warning:', e);
         }
-      } catch (e) {
-        console.warn('Scene flyTo warning:', e);
       }
     }
-    if (scene.layers) {
-      if (scene.layers.showVenues !== undefined) setShowVenues(scene.layers.showVenues);
-      if (scene.layers.showLiveCams !== undefined) setShowLiveCams(scene.layers.showLiveCams);
-      if (scene.layers.showCams !== undefined) setShowCams(scene.layers.showCams);
-      if (scene.layers.showTransit !== undefined) setShowTransit(scene.layers.showTransit);
-      if (scene.layers.showRadar !== undefined) setShowRadar(scene.layers.showRadar);
-      if (scene.layers.showFlights !== undefined) setShowFlights(scene.layers.showFlights);
-      if (scene.layers.showMarine !== undefined) setShowMarine(scene.layers.showMarine);
-    }
-  }, []);
+  }, [activeSceneIds]);
 
   const handleToggleTheme = useCallback(() => {
     const nextTheme = mapTheme === 'dark' ? 'light' : 'dark';
@@ -416,7 +433,9 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
           });
         },
       });
-      transitGroup.addTo(map);
+      if (showTransit) {
+        transitGroup.addTo(map);
+      }
 
       // 2. Municipal CCTV Layer Groups:
       // A) Dormant Subtle Radar Dots (Default unselected view: 5px subtle dots, non-clickable, no clutter)
@@ -465,8 +484,11 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
         cctvActiveGroup.addLayer(marker);
       });
 
-      // Add dormant group initially since showCams is false by default
-      cctvDormantGroup.addTo(map);
+      if (showCams) {
+        cctvActiveGroup.addTo(map);
+      } else {
+        cctvDormantGroup.addTo(map);
+      }
 
       // 3. Hero Venues Layer Group (Live Pulsing vs Offline Dim Pins, 404 Pruned)
       const venueGroup = Leaflet.layerGroup();
@@ -602,7 +624,9 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
         ferryGroup.addLayer(marker);
       });
 
-      ferryGroup.addTo(map);
+      if (showTransit) {
+        ferryGroup.addTo(map);
+      }
 
       // 6. Telemetry & Tactical Groups: Flights, Marine Traffic, and CCTV FOV
       const flightGroup = Leaflet.layerGroup().addTo(map);
@@ -705,13 +729,15 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
 
   useEffect(() => {
     if (!mapRef.current) return;
-    const { transitGroup } = layersRef.current;
+    const { transitGroup, ferryGroup } = layersRef.current;
     if (!transitGroup) return;
 
     if (showTransit) {
       if (!mapRef.current.hasLayer(transitGroup)) mapRef.current.addLayer(transitGroup);
+      if (ferryGroup && !mapRef.current.hasLayer(ferryGroup)) mapRef.current.addLayer(ferryGroup);
     } else {
       if (mapRef.current.hasLayer(transitGroup)) mapRef.current.removeLayer(transitGroup);
+      if (ferryGroup && mapRef.current.hasLayer(ferryGroup)) mapRef.current.removeLayer(ferryGroup);
     }
   }, [showTransit]);
 
@@ -851,8 +877,8 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
       {/* Curated Mission & Scene Selector (Top Center) */}
       <div className="absolute top-3 left-1/2 -translate-x-1/2 z-20 pointer-events-auto">
         <SceneSelector
-          activeSceneId={activeSceneId}
-          onSelectScene={handleSelectScene}
+          activeSceneIds={activeSceneIds}
+          onToggleScene={handleToggleScene}
         />
       </div>
 
