@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-09-18T17:58:25.794Z",
-  "total_videos": 85,
+  "last_updated": "2026-09-18T20:31:38.482Z",
+  "total_videos": 83,
   "videos": [
     {
       "id": "0Ombeg2_Xnc",
@@ -831,26 +831,6 @@
       "thumbnail_url": "https://i4.ytimg.com/vi/c4w4d-fyn80/hqdefault.jpg",
       "published_at": "2026-09-12T00:00:17+00:00",
       "url": "https://www.youtube.com/watch?v=c4w4d-fyn80"
-    },
-    {
-      "id": "KG6uJvE7ju8",
-      "title": "Flood Yesterday, Gone Today | Soi Buakhao, Tree Town, LK Metro & Soi Pothole Night Walk – 11 Sep 8pm",
-      "channel_name": "Vespa Life Thailand",
-      "channel_slug": "vespa-life-thailand",
-      "channel_avatar": "https://yt3.googleusercontent.com/_0ocieqX7Bpx3CZLLsmLCQpq7TMttO_TCmaiSI8z75xbWgW7Q7N9NeHHt8yGUPoEjQwEA19c7hs=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i4.ytimg.com/vi/KG6uJvE7ju8/hqdefault.jpg",
-      "published_at": "2026-09-11T19:54:47+00:00",
-      "url": "https://www.youtube.com/watch?v=KG6uJvE7ju8"
-    },
-    {
-      "id": "ogSQpdMIGUo",
-      "title": "The Party is Back on in Deluzion!",
-      "channel_name": "Mac TV",
-      "channel_slug": "mac-tv",
-      "channel_avatar": "https://yt3.googleusercontent.com/oSFiARQTu2FbqFOLPVtIROpM-sPXcE_g-T8hrfJXj0QO-ATDEtOcUIsFaq0B-_fPeAMBR1A-FxQ=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i4.ytimg.com/vi/ogSQpdMIGUo/hqdefault.jpg",
-      "published_at": "2026-09-11T18:32:03+00:00",
-      "url": "https://www.youtube.com/watch?v=ogSQpdMIGUo"
     }
   ]
 }
