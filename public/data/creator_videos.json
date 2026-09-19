@@ -1,7 +1,17 @@
 {
-  "last_updated": "2026-09-19T12:47:36.424Z",
-  "total_videos": 79,
+  "last_updated": "2026-09-19T17:37:13.897Z",
+  "total_videos": 77,
   "videos": [
+    {
+      "id": "KkXOUT3m9oI",
+      "title": "PATTAYA IS HARD TO FORGET ☀️ Real Thailand Street Life",
+      "channel_name": "BEACH ROAD",
+      "channel_slug": "beach-road-channel",
+      "channel_avatar": "https://yt3.googleusercontent.com/CWW0rQ6f5ZKIE2_T9vOK3Km3eiBJEAdih3hwx_POm5n_uuG8EDZcL7IK7BLoEnWL0F5f7pnm=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i4.ytimg.com/vi/KkXOUT3m9oI/hqdefault.jpg",
+      "published_at": "2026-09-19T14:00:21+00:00",
+      "url": "https://www.youtube.com/watch?v=KkXOUT3m9oI"
+    },
     {
       "id": "OZvn1Ap_vJ8",
       "title": "I Found a Hidden Part of Pattaya… Then I Met HER 😳🇹🇭",
@@ -761,36 +771,6 @@
       "thumbnail_url": "https://i1.ytimg.com/vi/X8N9GTiC6tg/hqdefault.jpg",
       "published_at": "2026-09-12T19:04:22+00:00",
       "url": "https://www.youtube.com/watch?v=X8N9GTiC6tg"
-    },
-    {
-      "id": "EG4aVaynM2M",
-      "title": "Pattaya Soi 6, 7 & 8  Saturday 8pm– Had to Rush Before the Rain",
-      "channel_name": "Vespa Life Thailand",
-      "channel_slug": "vespa-life-thailand",
-      "channel_avatar": "https://yt3.googleusercontent.com/_0ocieqX7Bpx3CZLLsmLCQpq7TMttO_TCmaiSI8z75xbWgW7Q7N9NeHHt8yGUPoEjQwEA19c7hs=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i2.ytimg.com/vi/EG4aVaynM2M/hqdefault.jpg",
-      "published_at": "2026-09-12T15:45:11+00:00",
-      "url": "https://www.youtube.com/watch?v=EG4aVaynM2M"
-    },
-    {
-      "id": "dt41UwS6hNM",
-      "title": "Mentally Unhinged Content Creator Terrorises UK Village",
-      "channel_name": "Pattaya Joker TV",
-      "channel_slug": "pattaya-joker-tv",
-      "channel_avatar": "https://yt3.googleusercontent.com/g1UFe8UV9XnO9syJa2Ayq2Knbg88D0ukIHS4wjd9o0AGwuHNZcPyWLSWAf1oqqkSS7HA6Vcw=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i1.ytimg.com/vi/dt41UwS6hNM/hqdefault.jpg",
-      "published_at": "2026-09-12T15:39:56+00:00",
-      "url": "https://www.youtube.com/watch?v=dt41UwS6hNM"
-    },
-    {
-      "id": "4Az29QYRzaI",
-      "title": "The Navy came to My Bar in Pattaya!",
-      "channel_name": "Mac TV",
-      "channel_slug": "mac-tv",
-      "channel_avatar": "https://yt3.googleusercontent.com/oSFiARQTu2FbqFOLPVtIROpM-sPXcE_g-T8hrfJXj0QO-ATDEtOcUIsFaq0B-_fPeAMBR1A-FxQ=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i1.ytimg.com/vi/4Az29QYRzaI/hqdefault.jpg",
-      "published_at": "2026-09-12T14:00:27+00:00",
-      "url": "https://www.youtube.com/watch?v=4Az29QYRzaI"
     }
   ]
 }
