@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-09-20T17:49:26.777Z",
-  "total_videos": 77,
+  "last_updated": "2026-09-20T20:03:01.678Z",
+  "total_videos": 76,
   "videos": [
     {
       "id": "ZTIsZvPjssA",
@@ -761,16 +761,6 @@
       "thumbnail_url": "https://i2.ytimg.com/vi/EGSdpYbk6E4/hqdefault.jpg",
       "published_at": "2026-09-14T00:00:05+00:00",
       "url": "https://www.youtube.com/watch?v=EGSdpYbk6E4"
-    },
-    {
-      "id": "mfGv8x8zL0A",
-      "title": "Another Bad Tourist came to my Bar in Pattaya! part 2..",
-      "channel_name": "Mac TV",
-      "channel_slug": "mac-tv",
-      "channel_avatar": "https://yt3.googleusercontent.com/oSFiARQTu2FbqFOLPVtIROpM-sPXcE_g-T8hrfJXj0QO-ATDEtOcUIsFaq0B-_fPeAMBR1A-FxQ=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i2.ytimg.com/vi/mfGv8x8zL0A/hqdefault.jpg",
-      "published_at": "2026-09-13T19:00:28+00:00",
-      "url": "https://www.youtube.com/watch?v=mfGv8x8zL0A"
     }
   ]
 }
