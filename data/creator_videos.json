@@ -1,7 +1,27 @@
 {
-  "last_updated": "2026-09-20T13:22:08.777Z",
-  "total_videos": 78,
+  "last_updated": "2026-09-20T17:49:26.777Z",
+  "total_videos": 77,
   "videos": [
+    {
+      "id": "ZTIsZvPjssA",
+      "title": "Mr. & Mrs. Smith Of Thailand | Sunday Subathon",
+      "channel_name": "Trae Badd TV",
+      "channel_slug": "trae-badd-tv",
+      "channel_avatar": "https://yt3.googleusercontent.com/YnO5xc6T7pk1Q_nnG5ruJbMOBqHi_YBRWLsAxO_4de-xBE_Dr1qoDnJ407dfBd2m_0CBLYL5yg=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i3.ytimg.com/vi/ZTIsZvPjssA/hqdefault.jpg",
+      "published_at": "2026-09-20T15:22:07+00:00",
+      "url": "https://www.youtube.com/watch?v=ZTIsZvPjssA"
+    },
+    {
+      "id": "Qk2SiD7bkYc",
+      "title": "Rainy Night in Pattaya 🇹🇭… Still Beautiful!",
+      "channel_name": "The Tysin Show",
+      "channel_slug": "the-tysin-show",
+      "channel_avatar": "https://yt3.googleusercontent.com/3tMHDr_3VQy3AXy0yW7XsFwHJWBAJj66W8dqKHYTQ3JB9vEX8LbKVhHWjEodtG8TbCcIy9aV0w=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i2.ytimg.com/vi/Qk2SiD7bkYc/hqdefault.jpg",
+      "published_at": "2026-09-20T14:36:47+00:00",
+      "url": "https://www.youtube.com/watch?v=Qk2SiD7bkYc"
+    },
     {
       "id": "kts3dI1zQdg",
       "title": "泰國將掀起驅逐潮，反以色列情緒高漲；惠譽上調泰國展望，貿易逆差或導致經濟巨變；泰國四大產業告急，倒閉潮近在眼前（泰國週刊 377 期 • 政經）",
@@ -663,16 +683,6 @@
       "url": "https://www.youtube.com/watch?v=XnsvSWzv7Uo"
     },
     {
-      "id": "sdO9z15DTtU",
-      "title": "POOL DAY IN OUR NEW CONDO! 🇹🇭 Come Hang Out & Help Us Reach 20K!",
-      "channel_name": "The Tysin Show",
-      "channel_slug": "the-tysin-show",
-      "channel_avatar": "https://yt3.googleusercontent.com/3tMHDr_3VQy3AXy0yW7XsFwHJWBAJj66W8dqKHYTQ3JB9vEX8LbKVhHWjEodtG8TbCcIy9aV0w=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i4.ytimg.com/vi/sdO9z15DTtU/hqdefault.jpg",
-      "published_at": "2026-09-14T11:07:50+00:00",
-      "url": "https://www.youtube.com/watch?v=sdO9z15DTtU"
-    },
-    {
       "id": "IKbYFEtpUrQ",
       "title": "歐洲人中意泰國遊，曼谷、蘇梅島、芭提雅最受歡迎 #泰國旅遊",
       "channel_name": "Kev-in-Thailand",
@@ -761,26 +771,6 @@
       "thumbnail_url": "https://i2.ytimg.com/vi/mfGv8x8zL0A/hqdefault.jpg",
       "published_at": "2026-09-13T19:00:28+00:00",
       "url": "https://www.youtube.com/watch?v=mfGv8x8zL0A"
-    },
-    {
-      "id": "RbhxiaY8_CI",
-      "title": "Pattaya Night Walk – Buakhao 15→ Soi 13/1 & 13/2 → Beach Road Loop",
-      "channel_name": "Vespa Life Thailand",
-      "channel_slug": "vespa-life-thailand",
-      "channel_avatar": "https://yt3.googleusercontent.com/_0ocieqX7Bpx3CZLLsmLCQpq7TMttO_TCmaiSI8z75xbWgW7Q7N9NeHHt8yGUPoEjQwEA19c7hs=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i3.ytimg.com/vi/RbhxiaY8_CI/hqdefault.jpg",
-      "published_at": "2026-09-13T17:45:02+00:00",
-      "url": "https://www.youtube.com/watch?v=RbhxiaY8_CI"
-    },
-    {
-      "id": "2Of4Rh8HmxY",
-      "title": "Another Bad Tourist came to my Bar in Pattaya!",
-      "channel_name": "Mac TV",
-      "channel_slug": "mac-tv",
-      "channel_avatar": "https://yt3.googleusercontent.com/oSFiARQTu2FbqFOLPVtIROpM-sPXcE_g-T8hrfJXj0QO-ATDEtOcUIsFaq0B-_fPeAMBR1A-FxQ=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i3.ytimg.com/vi/2Of4Rh8HmxY/hqdefault.jpg",
-      "published_at": "2026-09-13T16:17:36+00:00",
-      "url": "https://www.youtube.com/watch?v=2Of4Rh8HmxY"
     }
   ]
 }
