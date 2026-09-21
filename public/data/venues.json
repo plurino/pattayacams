@@ -107,39 +107,6 @@
     "google_name": "Smoky Bar & Cannabis Lounge"
   },
   {
-    "slug": "ud-restaurant-shokudo",
-    "id": "VN-008",
-    "name": "UD Restaurant (Umaroi Shokudo)",
-    "zone": "soi_buakhao",
-    "category": "restaurant",
-    "lat": 12.9357274,
-    "lng": 100.8894345,
-    "youtube_channel_id": "UCudthailand6560",
-    "youtube_handle": "@udthailand6560",
-    "google_maps_url": "https://www.google.com/maps/place/UD+Restaurant+%E3%81%86%E3%81%BE%E3%83%AD%E3%82%A4%E9%A3%9F%E5%A0%82/@12.9357274,100.8894345,17z/data=!3m1!4b1!4m6!3m5!1s0x310297530e77740f:0x4b09de0e5644f52c!8m2!3d12.9357274!4d100.8894345!16s%2Fg%2F11t9bpvkz5",
-    "description": "Popular Japanese-Thai casual diner on Soi Buakhao owned by creator UD Thailand, regularly broadcasting live dining, cooking, and street walks.",
-    "is_sponsored": false,
-    "transit_tip": "Hop on any 15–20 THB Soi Buakhao Songthaew and get off near Soi Diana / Tree Town intersection.",
-    "opening_hours": "11:00 AM – Midnight daily • Peak Vibe: 6:00 PM – 10:00 PM",
-    "tags": [
-      "Japanese Cuisine",
-      "Thai Diner",
-      "Creator Hub",
-      "Street Food"
-    ],
-    "photos": [
-      {
-        "url": "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=pZpOr0LBfg57yunH7N6Teg&cb_client=maps_sv.tactile.gps&w=800&h=500&yaw=17.015585&pitch=0&thumbfov=100",
-        "caption": "UD Restaurant Umaroi Shokudo storefront - Verified Google Street View"
-      },
-      {
-        "url": "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=pZpOr0LBfg57yunH7N6Teg&cb_client=maps_sv.tactile.gps&w=800&h=500&yaw=350.0&pitch=0&thumbfov=90",
-        "caption": "UD Restaurant dining terrace - Verified Google Street View"
-      }
-    ],
-    "google_name": "UD Restaurant うまロイ食堂"
-  },
-  {
     "slug": "nine-star-restaurant-bar",
     "id": "VN-009",
     "name": "Nine Star Restaurant & Bar",
@@ -376,40 +343,6 @@
       }
     ],
     "google_name": "Lucky Nana Bar"
-  },
-  {
-    "slug": "rum-runner-bar",
-    "id": "VN-018",
-    "name": "Rum Runner Bar (Mr Egg)",
-    "zone": "soi_buakhao",
-    "category": "bar",
-    "lat": 12.9257877,
-    "lng": 100.8808262,
-    "video_id": "z9_hOB_MsoQ",
-    "youtube_channel_id": "UCWJdY2syYcjA6CorQycVJ8g",
-    "youtube_handle": "@mreggthailand",
-    "google_maps_url": "https://www.google.com/maps/place/Rum+Runner/@12.9257877,100.8808262,17z/data=!3m1!4b1!4m6!3m5!1s0x3102975fe115db2d:0x1c6caf37cc61e54b!8m2!3d12.9257877!4d100.8808262!16s%2Fg%2F11m75f98dh",
-    "description": "Operated by popular expat creator Mr Egg; hosts walk-and-talks, expat updates, and bar event live streams right in the heart of Soi Buakhao.",
-    "is_sponsored": false,
-    "transit_tip": "Situated right in the heart of Soi Buakhao near LK Metro. Hop off any Buakhao Songthaew right at the corner.",
-    "opening_hours": "2:00 PM – 2:00 AM daily • Peak Vibe: 7:00 PM – Midnight",
-    "tags": [
-      "Mr Egg Expat Bar",
-      "Guinness & Cider",
-      "Soi Buakhao",
-      "Aircon & Patio"
-    ],
-    "photos": [
-      {
-        "url": "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=Gd8rglnkkKHUsoD4wl5PbQ&cb_client=maps_sv.tactile.gps&w=800&h=500&yaw=7.3492737&pitch=0&thumbfov=100",
-        "caption": "Rum Runner Bar facade near LK Metro - Verified Google Street View"
-      },
-      {
-        "url": "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=Gd8rglnkkKHUsoD4wl5PbQ&cb_client=maps_sv.tactile.gps&w=800&h=500&yaw=30.0&pitch=0&thumbfov=90",
-        "caption": "Rum Runner open-air terrace - Verified Google Street View"
-      }
-    ],
-    "google_name": "Rum Runner"
   },
   {
     "slug": "miso-bar-pattaya",

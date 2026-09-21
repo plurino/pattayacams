@@ -46,5 +46,21 @@
     "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Pattaya+City+Viewpoint+Khao+Phra+Tamnak",
     "description": "24/7 panoramic high-definition live streaming webcam positioned atop Khao Phra Tamnak (Pratumnak Hill) at the Pattaya City Viewpoint, overlooking the sweeping crescent of Pattaya Bay, Bali Hai Pier, and coastal shipping lanes.",
     "is_sponsored": false
+  },
+  {
+    "slug": "pattaya-beach-live",
+    "id": "LC-004",
+    "name": "Pattaya Beach Live",
+    "zone": "beach_road",
+    "category": "live_cam",
+    "type": "livecam",
+    "lat": 12.9358,
+    "lng": 100.8812,
+    "youtube_channel_id": "UCF-2VSnNKzQh4qFKCLWRNVA",
+    "youtube_handle": "@williamgilday",
+    "video_id": "wZnJV52i4FI",
+    "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Pattaya+Beach+Road+Central+Pattaya",
+    "description": "24/7 panoramic high-definition live streaming camera overlooking Central Pattaya Beach promenade, beachfront foot traffic, and the waters of the Gulf of Thailand.",
+    "is_sponsored": false
   }
 ]

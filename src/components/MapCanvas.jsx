@@ -225,13 +225,17 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
       );
 
       marker.on('click', () => {
+        const currentLiveStatus = streamStatusRef.current?.entities?.[`venue-${venue.slug}`] || streamStatusRef.current?.entities?.[venue.slug];
+        const isLiveNow = currentLiveStatus ? Boolean(currentLiveStatus.is_live && !currentLiveStatus.is_upcoming) : isLive;
+        const currentVideoId = currentLiveStatus?.video_id || venue.video_id;
+
         if (onSelectEntity) {
           onSelectEntity({
             ...venue,
             type: 'venue',
-            is_live: isLive,
-            video_id: statusInfo?.video_id || venue.video_id,
-            last_live_at: statusInfo?.last_live_at || null,
+            is_live: isLiveNow,
+            video_id: currentVideoId,
+            last_live_at: currentLiveStatus?.last_live_at || statusInfo?.last_live_at || null,
           });
         }
       });
@@ -294,14 +298,17 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
       );
 
       marker.on('click', () => {
-        setSelectedEntityForFov({ ...cam, bearing: cam.bearing || 240 });
+        const currentLiveStatus = streamStatusRef.current?.entities?.[`livecam-${cam.slug}`] || streamStatusRef.current?.entities?.[cam.slug];
+        const isLiveNow = currentLiveStatus ? Boolean(currentLiveStatus.is_live && !currentLiveStatus.is_upcoming) : isLive;
+        const currentVideoId = currentLiveStatus?.video_id || cam.video_id;
+
         if (onSelectEntity) {
           onSelectEntity({
             ...cam,
             type: 'livecam',
-            is_live: isLive,
-            video_id: statusInfo?.video_id || cam.video_id,
-            last_live_at: statusInfo?.last_live_at || null,
+            is_live: isLiveNow,
+            video_id: currentVideoId,
+            last_live_at: currentLiveStatus?.last_live_at || statusInfo?.last_live_at || null,
           });
         }
       });

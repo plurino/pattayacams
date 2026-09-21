@@ -894,5 +894,37 @@
       "Area Overviews"
     ],
     "bio_seo": "Pattaya 101 produces immersive 4K video walking tours capturing the sights, sounds, and vibrant energy of Pattaya's most famous avenues, including Soi Buakhao, Soi Chaiyapoon, Soi Honey, and Beach Road."
+  },
+  {
+    "name": "UD Thailand",
+    "slug": "ud-thailand",
+    "platform": "youtube",
+    "channel_id": "UCniigM7BEawBmASINaSf1SA",
+    "handle": "@udthailand6560",
+    "avatar_url": "https://yt3.googleusercontent.com/ytc/AIdro_k6p2pK8BY9F57E6AD_BXywffZajUAEWVqzS0C5ph-WHA=s900-c-k-c0x00ffffff-no-rj",
+    "primary_zone": "buakhao",
+    "content_tags": [
+      "Street Food",
+      "Nightlife",
+      "Pattaya Vlogs",
+      "Live Walks"
+    ],
+    "bio_seo": "UD Thailand is a popular Pattaya vlogger and live streamer broadcasting street food explorations, nightlife walkabouts, casual dining reviews, and community interactions throughout Central Pattaya and Soi Buakhao."
+  },
+  {
+    "name": "Mr Egg Thailand",
+    "slug": "mr-egg-thailand",
+    "platform": "youtube",
+    "channel_id": "UCWJdY2syYcjA6CorQycVJ8g",
+    "handle": "@mreggthailand",
+    "avatar_url": "https://yt3.googleusercontent.com/C37NsrbPKJp2P8VS8y108GSiXtIaJG6Gi7yhhYnDd7aSJL0ILG1eRza8ojpV5pXvGxQq1Gf1=s900-c-k-c0x00ffffff-no-rj",
+    "primary_zone": "buakhao",
+    "content_tags": [
+      "Expat Life",
+      "Live Walks",
+      "Nightlife",
+      "Pattaya Banter"
+    ],
+    "bio_seo": "Mr Egg Thailand provides candid, engaging walk-and-talks, live Q&A sessions, and local nightlife observations directly from Soi Buakhao and Central Pattaya."
   }
 ]

@@ -81,15 +81,6 @@
     "avatar_url": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=150&auto=format&fit=crop&q=80"
   },
   {
-    "id": "RS-010",
-    "name": "Pattaya Beach Live",
-    "current_route": "Beach Road Promenade Live Feeds",
-    "status": "channel",
-    "youtube_channel_id": "UCF-2VSnNKzQh4qFKCLWRNVA",
-    "youtube_handle": "@williamgilday",
-    "avatar_url": "https://yt3.googleusercontent.com/O61_c-K4oD8UvVp4p1hYkZ1cQ9P5e9F_7B3d_g2n5E-d-f3X6_6f_0b0=s900-c-k-c0x00ffffff-no-rj"
-  },
-  {
     "id": "RS-011",
     "name": "JWINTHAI",
     "current_route": "Walking Street & Bali Hai City Walks",
@@ -124,5 +115,23 @@
     "youtube_channel_id": "UCxbs76GtfhbKRqhiRJxuw_w",
     "youtube_handle": "@BenzieAsiaBabe",
     "avatar_url": "https://yt3.googleusercontent.com/5rhmkpsV871PdyLO4CnmE5BTvKFBEqYbjUg5wU-HWF7Ky-HmdKOhmZXXOh2RebOrXnhmgCNjrQ=s900-c-k-c0x00ffffff-no-rj"
+  },
+  {
+    "id": "RS-015",
+    "name": "UD Thailand",
+    "current_route": "Central Pattaya Street Food & Nightlife",
+    "status": "channel",
+    "youtube_channel_id": "UCniigM7BEawBmASINaSf1SA",
+    "youtube_handle": "@udthailand6560",
+    "avatar_url": "https://yt3.googleusercontent.com/ytc/AIdro_k6p2pK8BY9F57E6AD_BXywffZajUAEWVqzS0C5ph-WHA=s900-c-k-c0x00ffffff-no-rj"
+  },
+  {
+    "id": "RS-016",
+    "name": "Mr Egg Thailand",
+    "current_route": "Soi Buakhao & Expat Street Walks",
+    "status": "channel",
+    "youtube_channel_id": "UCWJdY2syYcjA6CorQycVJ8g",
+    "youtube_handle": "@mreggthailand",
+    "avatar_url": "https://yt3.googleusercontent.com/C37NsrbPKJp2P8VS8y108GSiXtIaJG6Gi7yhhYnDd7aSJL0ILG1eRza8ojpV5pXvGxQq1Gf1=s900-c-k-c0x00ffffff-no-rj"
   }
 ]

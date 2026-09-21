@@ -42,6 +42,7 @@ import {
 } from '@/src/utils/affiliate';
 import { findNearestCctv } from '@/src/utils/proximity';
 import TargetLockReticle from './common/TargetLockReticle';
+import { useStreamStatus } from '@/src/hooks/useStreamStatus';
 
 export default function VideoDrawer({ entity, onClose, onSelectEntity, onLiveShuffle }) {
   const [copiedCode, setCopiedCode] = useState(false);
@@ -95,11 +96,26 @@ export default function VideoDrawer({ entity, onClose, onSelectEntity, onLiveShu
     }
   };
 
+  const streamStatus = useStreamStatus();
+
   const isCctv = entity.type === 'cctv';
   const isLiveCam = entity.type === 'livecam' || entity.category === 'live_cam';
   const isVenue = entity.type === 'venue';
   const isStreamer = entity.type === 'streamer' || entity.type === 'creator' || entity.category === 'streamer' || entity.slug?.startsWith('streamer-') || entity.slug?.startsWith('creator-') || entity.platform === 'kick' || (!entity.type && !!entity.handle);
-  const isVenueOffline = (isVenue || (!isCctv && !isLiveCam && !isStreamer)) && (entity.is_live === false || !entity.video_id);
+
+  // Real-time live status lookup directly from global status store
+  const liveInfo = !isCctv ? (
+    streamStatus?.entities?.[`venue-${entity.slug}`] ||
+    streamStatus?.entities?.[`livecam-${entity.slug}`] ||
+    streamStatus?.entities?.[`creator-${entity.slug}`] ||
+    streamStatus?.entities?.[`streamer-${entity.id}`] ||
+    streamStatus?.entities?.[entity.slug] ||
+    streamStatus?.entities?.[entity.id]
+  ) : null;
+
+  const isTrulyLive = liveInfo ? Boolean(liveInfo.is_live && !liveInfo.is_upcoming) : Boolean(entity.is_live);
+  const activeVideoId = liveInfo?.video_id || entity.video_id;
+  const isVenueOffline = (isVenue || (!isCctv && !isLiveCam && !isStreamer)) && (!isTrulyLive || !activeVideoId);
 
   const formatRelativeTime = (timestamp) => {
     if (!timestamp) return 'recently';
@@ -324,11 +340,11 @@ export default function VideoDrawer({ entity, onClose, onSelectEntity, onLiveShu
     return (
       <YouTubePlayer
         channelId={entity.youtube_channel_id}
-        videoId={entity.video_id}
+        videoId={activeVideoId}
         title={entity.name}
         handle={entity.youtube_handle || entity.handle || '@PattayaOhBar'}
         type={entity.type}
-        isLive={entity.is_live ?? (isVenue || isLiveCam)}
+        isLive={isTrulyLive}
         badgeText={isLiveCam ? '24/7 LIVE WEBCAM' : (isVenue ? 'LIVE STREAM BROADCAST' : undefined)}
       />
     );
@@ -548,7 +564,7 @@ export default function VideoDrawer({ entity, onClose, onSelectEntity, onLiveShu
       {/* Top Header Bar */}
       <div className="h-14 border-b border-borderDark px-4 sm:px-5 flex items-center justify-between shrink-0 bg-surface/80">
         <div className="flex items-center gap-2.5 min-w-0 pr-2">
-          {entity.is_live ? (
+          {isTrulyLive ? (
             <span className="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse shrink-0 shadow-[0_0_8px_#EF4444]" />
           ) : (
             <span className="w-2.5 h-2.5 rounded-full bg-slate-500 shrink-0" />

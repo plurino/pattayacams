@@ -174,7 +174,10 @@ export default function LayerToggleHUD({
           <label className="flex items-center justify-between gap-3 cursor-pointer py-1 px-1.5 rounded-lg hover:bg-surfaceLight/50 transition-colors">
             <div className="flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full bg-brandPink shadow-[0_0_8px_#FF2A6D]"></span>
-              <span className="text-slate-200">Live Venues</span>
+              <div className="flex flex-col">
+                <span className="text-slate-200">Venues</span>
+                <span className="text-[9px] font-mono text-slate-400 -mt-0.5">Bars & Nightlife</span>
+              </div>
             </div>
             <div className="flex items-center gap-2">
               <span className="text-[10px] font-mono text-slate-400 bg-surfaceLight px-1.5 py-0.5 rounded">
@@ -189,11 +192,14 @@ export default function LayerToggleHUD({
             </div>
           </label>
 
-          {/* 24/7 Live Cams Toggle */}
+          {/* 24/7 Webcams Toggle */}
           <label className="flex items-center justify-between gap-3 cursor-pointer py-1 px-1.5 rounded-lg hover:bg-surfaceLight/50 transition-colors">
             <div className="flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#10B981]"></span>
-              <span className="text-slate-200">24/7 Live Cams</span>
+              <div className="flex flex-col">
+                <span className="text-slate-200">Webcams</span>
+                <span className="text-[9px] font-mono text-slate-400 -mt-0.5">Beach & Viewpoint</span>
+              </div>
             </div>
             <div className="flex items-center gap-2">
               <span className="text-[10px] font-mono text-slate-400 bg-surfaceLight px-1.5 py-0.5 rounded">
