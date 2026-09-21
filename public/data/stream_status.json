@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-09-21T14:10:09.114Z",
+  "last_check": "2026-09-21T14:13:07.025Z",
   "entities": {
     "venue-pattaya-oh-bar": {
       "is_live": false,
@@ -702,7 +702,7 @@
     },
     "venue-smile-bar-pattaya": {
       "is_live": true,
-      "is_upcoming": false,
+      "is_upcoming": true,
       "video_id": "KXyP6OqDj6A",
       "last_live_at": "2026-09-21T14:10:09.114Z",
       "status": "active",
@@ -900,7 +900,7 @@
     },
     "livecam-south-pattaya-live-cam": {
       "is_live": true,
-      "is_upcoming": false,
+      "is_upcoming": true,
       "video_id": "5jhgWRQWCgA",
       "last_live_at": "2026-09-21T14:10:09.114Z",
       "status": "active",
