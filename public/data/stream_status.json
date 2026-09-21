@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-09-21T02:35:00.571Z",
+  "last_check": "2026-09-21T07:01:17.683Z",
   "entities": {
     "venue-pattaya-oh-bar": {
       "is_live": true,
@@ -203,7 +203,7 @@
       "is_live": false,
       "video_id": null,
       "last_live_at": null,
-      "status": "active",
+      "status": "error_404",
       "name": "4K Pimmy",
       "platform": "youtube",
       "handle": "@4kpimmy"
@@ -345,7 +345,7 @@
       "is_live": false,
       "video_id": null,
       "last_live_at": null,
-      "status": "active",
+      "status": "error_404",
       "name": "4K Pimmy",
       "platform": "youtube",
       "handle": "@4kpimmy",
