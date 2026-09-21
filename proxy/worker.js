@@ -35,6 +35,172 @@ export default {
 
     const url = new URL(request.url);
 
+    // 1a. Route: Marine vessel telemetry proxy (AISStream WebSocket -> HTTP snapshot)
+    //
+    // Architecture:
+    //   1. Browser polls every 20 s.
+    //   2. Worker checks an in-memory cache (30 s TTL) — second/subsequent polls
+    //      within the window return the previous snapshot instantly.
+    //   3. On cache miss, Worker opens an outbound WebSocket to AISStream, subscribes
+    //      to the Pattaya Bay bbox, collects PositionReport messages for ~6 s, then
+    //      closes the socket and returns the snapshot.
+    //   4. If the upstream is unreachable / auth fails, Worker returns an empty stub
+    //      with source='stub'. The browser hook then falls back to /data/marine_vessels.json.
+    //
+    // The API key is bound as a Worker secret (wrangler secret put AISSTREAM_API_KEY)
+    // and NEVER appears in client JS or git-tracked files.
+    if (url.pathname === '/api/marine') {
+      const cacheKey = '__marineCache';
+      const cacheTtlMs = 30_000;
+      const collectMs = 6_000;
+
+      // Cache hit.
+      const cached = globalThis[cacheKey];
+      if (cached && (Date.now() - cached.fetchedAtMs) < cacheTtlMs) {
+        return new Response(JSON.stringify(cached.payload), {
+          status: 200,
+          headers: {
+            'Content-Type': 'application/json',
+            'Cache-Control': 'public, max-age=15',
+            ...CORS_HEADERS,
+          },
+        });
+      }
+
+      const apiKey = env.AISSTREAM_API_KEY;
+      const fetchedAt = new Date().toISOString();
+
+      // No key bound: return stub so the browser hook knows to use the local snapshot.
+      if (!apiKey) {
+        return new Response(
+          JSON.stringify({
+            vessels: [],
+            count: 0,
+            source: 'stub',
+            fetchedAt,
+            reason: 'AISSTREAM_API_KEY secret not bound to Worker.',
+          }),
+          {
+            status: 200,
+            headers: {
+              'Content-Type': 'application/json',
+              'Cache-Control': 'public, max-age=15',
+              ...CORS_HEADERS,
+            },
+          }
+        );
+      }
+
+      // Subscribe to AISStream via outbound WebSocket and collect vessels.
+      // Architecture mirrors `useLiveFlights.js`'s worker-first pattern:
+      //   1. Open WS, subscribe, collect PositionReport messages for 6 s.
+      //   2. If AISStream disconnects early (e.g. key not yet activated on their
+      //      side, or invalid bbox), we still return a clean stub response so the
+      //      browser hook can fall back to its local snapshot.
+      const vessels = await new Promise((resolve) => {
+        const collected = [];
+
+        const finish = (source, reason) => {
+          const payload = {
+            vessels: collected,
+            count: collected.length,
+            source,
+            fetchedAt,
+            ...(reason ? { reason } : {}),
+          };
+          if (source === 'aisstream') {
+            globalThis[cacheKey] = { payload, fetchedAtMs: Date.now() };
+          }
+          resolve(payload);
+        };
+
+        let timer;
+        fetch('https://stream.aisstream.io/v0/stream', {
+          headers: {
+            Upgrade: 'websocket',
+            Connection: 'Upgrade',
+          },
+        })
+          .then(async (resp) => {
+            const ws = resp.webSocket;
+            if (!ws) {
+              let body = '';
+              try { body = await resp.text(); } catch (_) {}
+              return finish('stub', `no-webSocket status=${resp.status} body=${body.slice(0, 200)}`);
+            }
+            ws.accept();
+
+            // Subscribe to PositionReport messages in the Pattaya Bay corridor bbox.
+            // Send immediately after accept() — Cloudflare Workers supports this
+            // pattern and AISStream expects the subscription at handshake time.
+            try {
+              ws.send(
+                JSON.stringify({
+                  APIKey: apiKey,
+                  BoundingBoxes: [[[12.40, 100.50], [13.40, 101.20]]],
+                  FilterMessageTypes: ['PositionReport'],
+                })
+              );
+            } catch (_) {
+              ws.close(1011, 'subscription-send-failed');
+              return finish('stub', 'subscription-send-failed');
+            }
+
+            timer = setTimeout(() => {
+              try { ws.close(1000, 'collect-window-done'); } catch (_) {}
+              finish(collected.length > 0 ? 'aisstream' : 'stub', 'collect-window-done');
+            }, collectMs);
+
+            ws.addEventListener('message', (event) => {
+              try {
+                const data = JSON.parse(event.data);
+                if (
+                  data?.MessageType === 'PositionReport' &&
+                  data?.Message?.PositionReport
+                ) {
+                  const pr = data.Message.PositionReport;
+                  const meta = data.MetaData || {};
+                  collected.push({
+                    mmsi: pr.UserID ?? meta.MMSI ?? null,
+                    name: (meta.ShipName || '').trim() || 'Unknown',
+                    lat: pr.Latitude,
+                    lng: pr.Longitude,
+                    sog: pr.Sog ?? null,
+                    cog: pr.Cog ?? null,
+                    heading: pr.TrueHeading ?? null,
+                    type: meta.ShipType ?? null,
+                    lastSeen: fetchedAt,
+                  });
+                }
+              } catch (_) {
+                // Ignore malformed frames — AISStream occasionally sends
+                // non-JSON control frames.
+              }
+            });
+
+            const cleanupAndFinish = (reason) => {
+              clearTimeout(timer);
+              finish(collected.length > 0 ? 'aisstream' : 'stub', reason);
+            };
+            ws.addEventListener('error', () => cleanupAndFinish('ws-error'));
+            ws.addEventListener('close', () => cleanupAndFinish('ws-close'));
+          })
+          .catch((err) => {
+            if (timer) clearTimeout(timer);
+            finish('stub', `fetch-error ${err?.message || err}`);
+          });
+      });
+
+      return new Response(JSON.stringify(vessels), {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json',
+          'Cache-Control': 'public, max-age=15',
+          ...CORS_HEADERS,
+        },
+      });
+    }
+
     // 1b. Route: ADS-B Live Flights telemetry proxy with CORS headers
     if (url.pathname === '/api/flights') {
       try {

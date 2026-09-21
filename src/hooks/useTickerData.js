@@ -47,9 +47,39 @@ export function useTickerData() {
       }
     };
 
-    updateTime();
-    const timer = setInterval(updateTime, 1000);
-    return () => clearInterval(timer);
+    let timer = null;
+    const startClock = () => {
+      updateTime();
+      timer = setInterval(updateTime, 1000);
+    };
+    const stopClock = () => {
+      if (timer) {
+        clearInterval(timer);
+        timer = null;
+      }
+    };
+    const onVisibilityChange = () => {
+      if (typeof document === 'undefined') return;
+      if (document.visibilityState === 'visible') {
+        startClock();
+      } else {
+        stopClock();
+      }
+    };
+
+    if (typeof document !== 'undefined' && document.visibilityState === 'visible') {
+      startClock();
+    }
+    if (typeof document !== 'undefined') {
+      document.addEventListener('visibilitychange', onVisibilityChange);
+    }
+
+    return () => {
+      stopClock();
+      if (typeof document !== 'undefined') {
+        document.removeEventListener('visibilitychange', onVisibilityChange);
+      }
+    };
   }, []);
 
   // 2. Open-Meteo Pattaya Weather
@@ -109,9 +139,39 @@ export function useTickerData() {
       }
     }
 
-    fetchWeather();
-    const interval = setInterval(fetchWeather, WEATHER_CACHE_TTL);
-    return () => clearInterval(interval);
+    let interval = null;
+    const startPolling = () => {
+      fetchWeather();
+      interval = setInterval(fetchWeather, WEATHER_CACHE_TTL);
+    };
+    const stopPolling = () => {
+      if (interval) {
+        clearInterval(interval);
+        interval = null;
+      }
+    };
+    const onVisibilityChange = () => {
+      if (typeof document === 'undefined') return;
+      if (document.visibilityState === 'visible') {
+        startPolling();
+      } else {
+        stopPolling();
+      }
+    };
+
+    if (typeof document !== 'undefined' && document.visibilityState === 'visible') {
+      startPolling();
+    }
+    if (typeof document !== 'undefined') {
+      document.addEventListener('visibilitychange', onVisibilityChange);
+    }
+
+    return () => {
+      stopPolling();
+      if (typeof document !== 'undefined') {
+        document.removeEventListener('visibilitychange', onVisibilityChange);
+      }
+    };
   }, []);
 
   // 3. Thai Baht (THB) Currency Rates via open.er-api.com
@@ -160,9 +220,39 @@ export function useTickerData() {
       }
     }
 
-    fetchRates();
-    const interval = setInterval(fetchRates, FX_CACHE_TTL);
-    return () => clearInterval(interval);
+    let interval = null;
+    const startPolling = () => {
+      fetchRates();
+      interval = setInterval(fetchRates, FX_CACHE_TTL);
+    };
+    const stopPolling = () => {
+      if (interval) {
+        clearInterval(interval);
+        interval = null;
+      }
+    };
+    const onVisibilityChange = () => {
+      if (typeof document === 'undefined') return;
+      if (document.visibilityState === 'visible') {
+        startPolling();
+      } else {
+        stopPolling();
+      }
+    };
+
+    if (typeof document !== 'undefined' && document.visibilityState === 'visible') {
+      startPolling();
+    }
+    if (typeof document !== 'undefined') {
+      document.addEventListener('visibilitychange', onVisibilityChange);
+    }
+
+    return () => {
+      stopPolling();
+      if (typeof document !== 'undefined') {
+        document.removeEventListener('visibilitychange', onVisibilityChange);
+      }
+    };
   }, []);
 
   return {

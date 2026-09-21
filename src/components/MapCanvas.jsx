@@ -18,6 +18,7 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
   const mapRef = useRef(null);
   const tileLayerRef = useRef(null);
   const radarTileLayerRef = useRef(null);
+  const zoomControlRef = useRef(null);
   const layersRef = useRef({
     cctvActiveGroup: null,
     cctvDormantGroup: null,
@@ -51,7 +52,9 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
 
   const radarState = useRainViewer(showRadar);
   const { flights, count: flightCount } = useLiveFlights(showFlights);
-  const { vessels, count: marineCount } = useMarineTraffic(showMarine);
+  const { vessels, count: marineCount, isConnected: marineConnected } = useMarineTraffic(showMarine);
+  // Marine layer is "offline" when the user has it enabled but the WebSocket never connected
+  const isMarineOffline = showMarine && !marineConnected;
 
   const cartoKey = process.env.NEXT_PUBLIC_CARTO_API_KEY || 'cb1_33su_1_683c1b500e92ad8b2069c2d2';
 
@@ -434,7 +437,9 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
         shiftKeyRotate: true,
       });
 
-      Leaflet.control.zoom({ position: 'topright' }).addTo(map);
+      // Custom-positioned zoom control (top-left default is disabled via zoomControl:false above)
+      const zoomControl = Leaflet.control.zoom({ position: 'bottomright' }).addTo(map);
+      zoomControlRef.current = zoomControl;
 
       // Listen for rotation changes
       map.on('rotate', () => {
@@ -719,6 +724,12 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
 
     return () => {
       isMounted = false;
+      if (zoomControlRef.current) {
+        try {
+          zoomControlRef.current.remove();
+        } catch (e) {}
+        zoomControlRef.current = null;
+      }
       if (mapRef.current) {
         if (mapRef.current._resizeObserver) {
           mapRef.current._resizeObserver.disconnect();
@@ -900,8 +911,8 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
     <div className="relative w-full h-full overflow-hidden bg-canvas">
       <div ref={mapContainerRef} className="w-full h-full z-0" />
 
-      {/* Curated Mission & Scene Selector (Top Center) */}
-      <div className="absolute top-3 left-1/2 -translate-x-1/2 z-20 pointer-events-auto">
+      {/* Curated Mission & Scene Selector (Top Center on md+, Top Right on mobile to avoid Leaflet zoom overlap) */}
+      <div className="absolute top-3 right-3 md:left-1/2 md:right-auto md:-translate-x-1/2 z-20 pointer-events-auto max-w-[calc(100vw-1.5rem)] md:max-w-none">
         <SceneSelector
           activeSceneIds={activeSceneIds}
           onToggleScene={handleToggleScene}
@@ -939,6 +950,7 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
         onToggleTheme={handleToggleTheme}
         onLocateMe={handleLocateMe}
         onStartTour={onStartTour}
+        marineOffline={isMarineOffline}
       />
     </div>
   );

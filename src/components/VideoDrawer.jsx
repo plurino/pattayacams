@@ -138,6 +138,10 @@ export default function VideoDrawer({ entity, onClose, onSelectEntity, onLiveShu
     ? `/cams/${entity.slug}/`
     : (isStreamer ? `/creators/${entity.slug}/` : `/venues/${entity.slug}/`);
 
+  const pattayaCamsShareUrl = typeof window !== 'undefined'
+    ? `${window.location.origin}${permalink}`
+    : permalink;
+
   const photos = entity.photos && entity.photos.length > 0 ? entity.photos : null;
   const currentPhoto = photos ? (photos[activePhotoIdx] || photos[0]) : null;
 
@@ -460,7 +464,7 @@ export default function VideoDrawer({ entity, onClose, onSelectEntity, onLiveShu
           {/* Action Buttons: Quick Share & Google Maps */}
           <div className="grid grid-cols-2 gap-2">
             <button
-              onClick={() => handleNativeShare(googleMapsUrl)}
+              onClick={() => handleNativeShare(pattayaCamsShareUrl)}
               className={`flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg text-xs font-bold transition-all shadow-sm cursor-pointer ${
                 copiedShare
                   ? 'bg-emerald-600 text-white'

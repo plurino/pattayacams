@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Mail, Shield, ExternalLink, Users, FileText, Phone } from 'lucide-react';
+import { Mail, Users, FileText } from 'lucide-react';
 
 export default function SiteFooter({ onOpenContact }) {
   return (
@@ -22,49 +22,26 @@ export default function SiteFooter({ onOpenContact }) {
 
         {/* Right: Quick Links */}
         <div className="flex items-center gap-3 sm:gap-4 flex-wrap justify-center text-[10px]">
-          {/* Contact Desk */}
+          {/* Contact */}
           {onOpenContact ? (
             <button
               onClick={onOpenContact}
               className="flex items-center gap-1 text-slate-300 hover:text-brandPink transition-colors cursor-pointer"
-              title="Feature Venue, Submit Stream, or Report Issue"
+              title="Get in touch with PattayaCams"
             >
               <Mail className="w-3 h-3 text-brandPink shrink-0" />
-              <span>Contact Desk</span>
+              <span>Contact</span>
             </button>
           ) : (
             <a
               href="mailto:team@pattayacams.com"
               className="flex items-center gap-1 text-slate-300 hover:text-brandPink transition-colors"
-              title="Email PattayaCams Support"
+              title="Get in touch with PattayaCams"
             >
               <Mail className="w-3 h-3 text-brandPink shrink-0" />
-              <span>Contact Desk</span>
+              <span>Contact</span>
             </a>
           )}
-
-          {/* Tourist Police 1155 */}
-          <a
-            href="tel:1155"
-            className="flex items-center gap-1 text-slate-300 hover:text-cyan-400 transition-colors"
-            title="Call Tourist Police Hotline (1155)"
-          >
-            <Phone className="w-3 h-3 text-cyan-400 shrink-0" />
-            <span>Police: 1155</span>
-          </a>
-
-          {/* City Hall CCTV */}
-          <a
-            href="https://livestream.pattaya.go.th/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden md:flex items-center gap-1 text-slate-300 hover:text-amber-300 transition-colors"
-            title="Official Pattaya City Hall CCTV Portal"
-          >
-            <Shield className="w-3 h-3 text-amber-400 shrink-0" />
-            <span>City Hall CCTV</span>
-            <ExternalLink className="w-2.5 h-2.5 text-slate-500" />
-          </a>
 
           {/* Creators Directory */}
           <Link

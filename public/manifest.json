@@ -1,54 +1,15 @@
 {
-  "name": "PattayaCams - Live Webcams & City Radar",
+  "name": "PattayaCams - Live Webcams & Transit Radar",
   "short_name": "PattayaCams",
-  "description": "Real-time interactive live webcams, nightlife streams & city transit radar for Pattaya, Thailand",
-  "start_url": "/?mode=standalone",
-  "scope": "/",
-  "id": "/",
+  "description": "Real-time interactive map, municipal CCTV streams, beachfront live cams, and Songthaew transit radar for Pattaya, Thailand.",
+  "start_url": "/",
   "display": "standalone",
-  "display_override": ["standalone", "minimal-ui", "window-controls-overlay"],
-  "background_color": "#0A0E17",
+  "background_color": "#0B0F17",
   "theme_color": "#FF2A6D",
-  "orientation": "any",
+  "orientation": "portrait-primary",
   "icons": [
-    {
-      "src": "/icon.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "/apple-icon.png",
-      "sizes": "180x180",
-      "type": "image/png"
-    },
-    {
-      "src": "/images/logo-dark.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
-    }
-  ],
-  "categories": [
-    "travel",
-    "navigation",
-    "entertainment"
-  ],
-  "shortcuts": [
-    {
-      "name": "Live Map",
-      "url": "/?view=map",
-      "description": "Interactive Pattaya city radar and webcams"
-    },
-    {
-      "name": "Multi-Cam",
-      "url": "/?view=grid",
-      "description": "Multi-stream live command wall"
-    },
-    {
-      "name": "Creators Hub",
-      "url": "/creators",
-      "description": "Pattaya streamers & content creators"
-    }
+    { "src": "/icon.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "/icon.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
   ]
 }

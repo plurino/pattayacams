@@ -23,12 +23,14 @@ import WeatherModal from '@/src/components/WeatherModal';
 import NewsletterModal from '@/src/components/NewsletterModal';
 import ContactModal from '@/src/components/ContactModal';
 import CookieConsentBanner from '@/src/components/CookieConsentBanner';
+import InstallPrompt from '@/src/components/InstallPrompt';
 import CurrencyConverterModal from '@/src/components/CurrencyConverterModal';
 import TouristEmergencyModal from '@/src/components/TouristEmergencyModal';
 import SiteFooter from '@/src/components/SiteFooter';
 import { parseUrlState, syncStateToUrl } from '@/src/utils/urlState';
 import { getLiveEntities } from '@/src/utils/liveEntities';
 import { TourDirector } from '@/src/utils/tourDirector';
+import { getNextNightlifeHint, formatNightlifeTime } from '@/src/utils/nightlife';
 
 function playShuffleChime() {
   if (typeof window === 'undefined') return;
@@ -68,6 +70,9 @@ function playShuffleChime() {
   }
 }
 
+// Compute the next "PEAK VIBE" expected time (22:00 ICT nightly) via the shared
+// nightlife utility — see src/utils/nightlife.js for the source-of-truth matrix.
+
 export default function AppRoot() {
   const [viewMode, setViewMode] = useState('map'); // 'map' | 'grid' | 'vids'
   const [selectedEntity, setSelectedEntity] = useState(null);
@@ -80,6 +85,10 @@ export default function AppRoot() {
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const [isConverterOpen, setIsConverterOpen] = useState(false);
   const [isEmergencyOpen, setIsEmergencyOpen] = useState(false);
+  // Tracks whether the Map Layers panel is expanded on this page (used to
+  // reposition the Live Shuffle so it doesn't sit on top of the panel).
+  // Inverse of the LayerToggleHUD's `pattayacams_layers_collapsed` flag.
+  const [isLayersPanelOpen, setIsLayersPanelOpen] = useState(false);
   const mapInstanceRef = useRef(null);
 
   const streamStatus = useStreamStatus();
@@ -204,6 +213,34 @@ export default function AppRoot() {
         } catch (e) {}
       }
     }
+  }, []);
+
+  // Hydrate Layers panel open/closed state from localStorage so the
+  // Live Shuffle doesn't have to peek into the Leaflet child component.
+  // We listen for both storage events (cross-tab) and a custom event that
+  // the LayerToggleHUD dispatches on change for same-tab updates.
+  useEffect(() => {
+    const readFromStorage = () => {
+      try {
+        const collapsed = localStorage.getItem('pattayacams_layers_collapsed') === '1';
+        setIsLayersPanelOpen(!collapsed);
+      } catch (e) {
+        // localStorage unavailable; keep default (closed)
+      }
+    };
+    readFromStorage();
+
+    const handleStorage = (event) => {
+      if (event.key === 'pattayacams_layers_collapsed') readFromStorage();
+    };
+    const handleCustom = () => readFromStorage();
+
+    window.addEventListener('storage', handleStorage);
+    window.addEventListener('pattayacams:layers-toggle', handleCustom);
+    return () => {
+      window.removeEventListener('storage', handleStorage);
+      window.removeEventListener('pattayacams:layers-toggle', handleCustom);
+    };
   }, []);
 
   // Sync state changes to URL query params without reload
@@ -345,6 +382,49 @@ export default function AppRoot() {
 
       {/* 2. Main Content Canvas */}
       <main className="flex-1 relative overflow-hidden">
+        {/* Fallback for browsers with JavaScript disabled. Lists the most
+            relevant venues and live cams as plain links so users without JS
+            can still navigate to a permalink. */}
+        <noscript>
+          <div className="absolute inset-0 z-40 overflow-y-auto bg-surface text-slate-100 p-6">
+            <h1 className="text-2xl font-extrabold mb-2 text-brandPink">PattayaCams</h1>
+            <p className="text-slate-300 mb-6 max-w-xl">
+              The interactive map requires JavaScript. You can still browse individual venues and live cams below.
+            </p>
+            <h2 className="text-lg font-bold mb-3 text-slate-200">Top Venues</h2>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-6">
+              {venuesData.slice(0, 6).map((venue) => (
+                <li key={venue.slug}>
+                  <a
+                    href={`/venues/${venue.slug}/`}
+                    className="block px-3 py-2 rounded-lg bg-canvas border border-borderDark hover:border-brandPink/60 text-slate-200 hover:text-white transition-colors"
+                  >
+                    <span className="font-bold">{venue.name}</span>
+                    <span className="ml-2 text-[11px] font-mono text-slate-400 uppercase">{venue.zone}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <h2 className="text-lg font-bold mb-3 text-slate-200">Featured Live Cams</h2>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-6">
+              {liveCamsData.slice(0, 3).map((cam) => (
+                <li key={cam.slug}>
+                  <a
+                    href={`/cams/${cam.slug}/`}
+                    className="block px-3 py-2 rounded-lg bg-canvas border border-borderDark hover:border-emerald-400/60 text-slate-200 hover:text-white transition-colors"
+                  >
+                    <span className="font-bold">{cam.name}</span>
+                    <span className="ml-2 text-[11px] font-mono text-slate-400 uppercase">{cam.zone}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <p className="text-slate-400 text-sm">
+              Enable JavaScript to access the live map, CCTV surveillance layer, transit radar, and other features.
+            </p>
+          </div>
+        </noscript>
+
         {/* Floating Drone Tour HUD Banner */}
         {tourState.isRunning && tourState.currentWaypoint && (
           <aside
@@ -399,10 +479,10 @@ export default function AppRoot() {
 
 
 
-        {/* Floating Live Shuffle Popup in Corner of Map (Repositioned when drawer is open so it is never hidden) */}
+        {/* Floating Live Shuffle Popup in Corner of Map (Repositioned when drawer OR layers panel is open so it is never hidden) */}
         {viewMode === 'map' && (
           <div className={`absolute bottom-4 z-30 pointer-events-auto transition-all duration-300 ${
-            selectedEntity
+            (selectedEntity || isLayersPanelOpen)
               ? 'left-4 sm:left-6'
               : 'right-4 sm:bottom-6 sm:right-6'
           }`}>
@@ -420,19 +500,25 @@ export default function AppRoot() {
                   {activeLiveCount} Live
                 </span>
               </button>
-            ) : (
-              <button
-                disabled
-                className="flex items-center gap-2 px-3.5 py-2 rounded-2xl bg-surface/80 backdrop-blur-md border border-borderDark/80 text-slate-500 text-xs font-bold cursor-not-allowed opacity-60 shadow-lg"
-                title="No live streams currently broadcasting. Shuffle is unavailable."
-              >
-                <span className="text-base grayscale opacity-50">🎲</span>
-                <span className="font-mono tracking-wide">Live Shuffle</span>
-                <span className="text-[10px] font-mono text-slate-500 bg-surfaceLight px-1.5 py-0.5 rounded-full">
-                  0 Live
-                </span>
-              </button>
-            )}
+            ) : (() => {
+              const hint = getNextNightlifeHint();
+              const tipLine = hint.isCurrentPeak
+                ? 'Streams light up again as soon as creators go live — try the Layers panel to follow the radar.'
+                : `Next nightlife vibe (${hint.label}) expected ~${formatNightlifeTime(hint.hour, hint.minute)} ICT.`;
+              return (
+                <button
+                  disabled
+                  className="flex items-center gap-2 px-3.5 py-2 rounded-2xl bg-surface/80 backdrop-blur-md border border-borderDark/80 text-slate-500 text-xs font-bold cursor-not-allowed opacity-60 shadow-lg"
+                  title={`No live streams currently broadcasting. ${tipLine} Shuffle will re-enable as soon as a stream goes live.`}
+                >
+                  <span className="text-base grayscale opacity-50">🎲</span>
+                  <span className="font-mono tracking-wide">Live Shuffle</span>
+                  <span className="text-[10px] font-mono text-slate-500 bg-surfaceLight px-1.5 py-0.5 rounded-full">
+                    0 Live
+                  </span>
+                </button>
+              );
+            })()}
           </div>
         )}
       </main>
@@ -509,6 +595,9 @@ export default function AppRoot() {
 
       {/* 9. Privacy & Analytics Cookie Consent Banner */}
       <CookieConsentBanner />
+
+      {/* 10. PWA Install Prompt (Android / Desktop browsers fire beforeinstallprompt) */}
+      <InstallPrompt />
     </div>
   );
 }

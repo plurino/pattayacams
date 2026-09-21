@@ -14,7 +14,10 @@ export default function SceneSelector({ activeSceneIds = [], onToggleScene }) {
   const activeSet = new Set(Array.isArray(activeSceneIds) ? activeSceneIds : [activeSceneIds]);
 
   return (
-    <div className="flex items-center gap-1 sm:gap-1.5 p-1 rounded-xl bg-surface/90 backdrop-blur-md border border-borderDark/80 shadow-2xl overflow-x-auto scrollbar-none select-none">
+    <div
+      aria-label="Scene filters"
+      className="flex items-center gap-1 sm:gap-1.5 px-2 md:px-2.5 max-h-[44px] md:max-h-none overflow-x-auto overflow-y-hidden snap-x snap-mandatory md:snap-none scrollbar-none select-none p-1 rounded-xl bg-surface/90 backdrop-blur-md border border-borderDark/80 shadow-2xl"
+    >
       <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider px-1.5 font-bold shrink-0 hidden md:inline">
         SCENES:
       </span>
@@ -26,7 +29,7 @@ export default function SceneSelector({ activeSceneIds = [], onToggleScene }) {
           <button
             key={scene.id}
             onClick={() => onToggleScene && onToggleScene(scene)}
-            className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold border transition-all shrink-0 cursor-pointer ${
+            className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold border transition-all shrink-0 snap-start min-h-[44px] cursor-pointer ${
               isActive
                 ? `${activeClass} font-bold scale-105`
                 : 'text-slate-400 hover:text-white border-transparent hover:bg-surfaceLight/80 opacity-75 hover:opacity-100'

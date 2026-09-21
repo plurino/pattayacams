@@ -2,10 +2,9 @@
 
 import React, { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
-import { Video, Map as MapIcon, Grid, Calendar, Wifi, Film, ChevronDown, Sparkles, Users } from 'lucide-react';
+import { Map as MapIcon, Grid, Calendar, Film, ChevronDown, Users } from 'lucide-react';
 import { QUICK_JUMP_TARGETS } from '@/src/utils/zones';
 import { getSavedTripDate } from '@/src/utils/storage';
-import { FEATURES } from '@/src/config/features';
 import TripModal from '@/src/components/TripModal';
 
 export default function Navbar({
@@ -94,6 +93,13 @@ export default function Navbar({
   const isVidsActive = viewMode === 'vids' || viewMode === 'pulse';
   const isCreatorsActive = viewMode === 'creators' || viewMode === 'hub';
 
+  // Monochrome view-switcher styling: lifted (not neon) active state.
+  // Active icon picks up brandPink so each view still has a subtle identity cue.
+  const navBtnClass = (active) =>
+    active
+      ? 'bg-surfaceLight text-white border border-borderDark shadow-sm'
+      : 'text-slate-400 hover:text-white hover:bg-surfaceLight/60 border border-transparent';
+
   return (
     <header className="h-14 border-b border-borderDark bg-surface/95 backdrop-blur-md flex items-center justify-between px-2.5 sm:px-4 md:px-5 shrink-0 z-50 select-none shadow-lg">
       {/* 1. Left: Brand Logo & Sexy Hover */}
@@ -106,11 +112,12 @@ export default function Navbar({
           className="flex items-center gap-1.5 group shrink-0"
           title="PattayaCams - The city that never sleeps"
         >
-          <img
-            src="/images/logo-dark.png"
-            alt="PattayaCams Logo"
-            className="h-7 sm:h-8 md:h-10 w-auto object-contain transition-all duration-300 group-hover:scale-105 group-hover:brightness-110 group-hover:drop-shadow-[0_0_14px_rgba(255,42,109,0.7)]"
-          />
+          <span className="font-wordmark text-[22px] sm:text-[26px] font-extrabold tracking-tight leading-none whitespace-nowrap">
+            <span className="bg-gradient-to-r from-brandPink via-brandCyan to-brandGold bg-clip-text text-transparent transition-[background-position,filter] duration-500 ease-out bg-[length:200%_200%] bg-[position:0%_0%] group-hover:bg-[position:100%_0%] group-hover:drop-shadow-[0_0_18px_rgba(255,42,109,0.55)]">
+              PattayaCams
+            </span>
+          </span>
+          <span className="inline-block w-1.5 h-1.5 rounded-full bg-brandPink align-middle animate-pulse transition-all duration-300 group-hover:scale-150 group-hover:bg-brandCyan group-hover:shadow-[0_0_10px_rgba(0,229,255,0.7)]" />
         </Link>
 
         {/* Live Network Status Indicator */}
@@ -207,106 +214,78 @@ export default function Navbar({
           )}
         </button>
 
-        {/* View Mode Switcher: Map, Multi, Videos, Creators positioned to the RIGHT */}
+        {/* View Mode Switcher: Map, Multi, Videos, Creators — monochrome lifted state, no neon gradients */}
         <div className="flex items-center bg-canvas/90 p-0.5 rounded-xl border border-borderDark/90 shadow-inner">
-          {/* 1. Live Map (Electric Cyan) */}
+          {/* 1. Live Map */}
           {setViewMode ? (
             <button
               onClick={() => handleViewChange('map')}
-              className={`flex items-center gap-1 px-1.5 sm:px-2.5 py-1 sm:py-1.5 rounded-lg text-xs font-bold transition-all whitespace-nowrap shrink-0 ${
-                viewMode === 'map'
-                  ? 'bg-gradient-to-r from-cyan-500 via-teal-500 to-blue-600 text-white shadow-[0_0_14px_rgba(0,229,255,0.45)] border border-cyan-300/30'
-                  : 'text-cyan-400 hover:text-cyan-200 hover:bg-cyan-500/15'
-              }`}
+              className={`flex items-center gap-1 px-1.5 sm:px-2.5 py-1 sm:py-1.5 rounded-lg text-xs font-bold transition-all whitespace-nowrap shrink-0 ${navBtnClass(viewMode === 'map')}`}
               title="Interactive Live Map & City Overview"
             >
-              <MapIcon className="w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0" />
+              <MapIcon className={`w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0 ${viewMode === 'map' ? 'text-brandPink' : ''}`} />
               <span className="text-[11px] sm:text-xs">Map</span>
             </button>
           ) : (
             <Link
               href="/?view=map"
-              className={`flex items-center gap-1 px-1.5 sm:px-2.5 py-1 sm:py-1.5 rounded-lg text-xs font-bold transition-all whitespace-nowrap shrink-0 ${
-                viewMode === 'map'
-                  ? 'bg-gradient-to-r from-cyan-500 via-teal-500 to-blue-600 text-white shadow-[0_0_14px_rgba(0,229,255,0.45)] border border-cyan-300/30'
-                  : 'text-cyan-400 hover:text-cyan-200 hover:bg-cyan-500/15'
-              }`}
+              className={`flex items-center gap-1 px-1.5 sm:px-2.5 py-1 sm:py-1.5 rounded-lg text-xs font-bold transition-all whitespace-nowrap shrink-0 ${navBtnClass(viewMode === 'map')}`}
               title="Interactive Live Map & City Overview"
             >
-              <MapIcon className="w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0" />
+              <MapIcon className={`w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0 ${viewMode === 'map' ? 'text-brandPink' : ''}`} />
               <span className="text-[11px] sm:text-xs">Map</span>
             </Link>
           )}
 
-          {/* 2. Multi Cam (Neon Amber / Gold) */}
+          {/* 2. Multi Cam */}
           {setViewMode ? (
             <button
               onClick={() => handleViewChange('grid')}
-              className={`flex items-center gap-1 px-1.5 sm:px-2.5 py-1 sm:py-1.5 rounded-lg text-xs font-bold transition-all whitespace-nowrap shrink-0 ${
-                viewMode === 'grid'
-                  ? 'bg-gradient-to-r from-amber-500 via-orange-500 to-yellow-500 text-white shadow-[0_0_14px_rgba(245,158,11,0.45)] border border-amber-300/30'
-                  : 'text-amber-400 hover:text-amber-200 hover:bg-amber-500/15'
-              }`}
+              className={`flex items-center gap-1 px-1.5 sm:px-2.5 py-1 sm:py-1.5 rounded-lg text-xs font-bold transition-all whitespace-nowrap shrink-0 ${navBtnClass(viewMode === 'grid')}`}
               title="Multi Cam Command Grid"
             >
-              <Grid className="w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0" />
+              <Grid className={`w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0 ${viewMode === 'grid' ? 'text-brandPink' : ''}`} />
               <span className="text-[11px] sm:text-xs">Multi</span>
             </button>
           ) : (
             <Link
               href="/?view=grid"
-              className={`flex items-center gap-1 px-1.5 sm:px-2.5 py-1 sm:py-1.5 rounded-lg text-xs font-bold transition-all whitespace-nowrap shrink-0 ${
-                viewMode === 'grid'
-                  ? 'bg-gradient-to-r from-amber-500 via-orange-500 to-yellow-500 text-white shadow-[0_0_14px_rgba(245,158,11,0.45)] border border-amber-300/30'
-                  : 'text-amber-400 hover:text-amber-200 hover:bg-amber-500/15'
-              }`}
+              className={`flex items-center gap-1 px-1.5 sm:px-2.5 py-1 sm:py-1.5 rounded-lg text-xs font-bold transition-all whitespace-nowrap shrink-0 ${navBtnClass(viewMode === 'grid')}`}
               title="Multi Cam Command Grid"
             >
-              <Grid className="w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0" />
+              <Grid className={`w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0 ${viewMode === 'grid' ? 'text-brandPink' : ''}`} />
               <span className="text-[11px] sm:text-xs">Multi</span>
             </Link>
           )}
 
-          {/* 3. Videos (Hot Pink / Rose) */}
+          {/* 3. Videos */}
           {setViewMode ? (
             <button
               onClick={() => handleViewChange('vids')}
-              className={`flex items-center gap-1 px-1.5 sm:px-2.5 py-1 sm:py-1.5 rounded-lg text-xs font-bold transition-all whitespace-nowrap shrink-0 ${
-                isVidsActive
-                  ? 'bg-gradient-to-r from-brandPink via-rose-600 to-pink-600 text-white shadow-[0_0_14px_rgba(255,42,109,0.45)] border border-rose-300/30'
-                  : 'text-brandPink hover:text-pink-200 hover:bg-brandPink/15'
-              }`}
+              className={`flex items-center gap-1 px-1.5 sm:px-2.5 py-1 sm:py-1.5 rounded-lg text-xs font-bold transition-all whitespace-nowrap shrink-0 ${navBtnClass(isVidsActive)}`}
               title="Curated 4K Street Walks, Nightlife Highlights & Expat Guides"
             >
-              <Film className="w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0" />
+              <Film className={`w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0 ${isVidsActive ? 'text-brandPink' : ''}`} />
               <span className="text-[11px] sm:text-xs">Videos</span>
             </button>
           ) : (
             <Link
               href="/?view=vids"
-              className={`flex items-center gap-1 px-1.5 sm:px-2.5 py-1 sm:py-1.5 rounded-lg text-xs font-bold transition-all whitespace-nowrap shrink-0 ${
-                isVidsActive
-                  ? 'bg-gradient-to-r from-brandPink via-rose-600 to-pink-600 text-white shadow-[0_0_14px_rgba(255,42,109,0.45)] border border-rose-300/30'
-                  : 'text-brandPink hover:text-pink-200 hover:bg-brandPink/15'
-              }`}
+              className={`flex items-center gap-1 px-1.5 sm:px-2.5 py-1 sm:py-1.5 rounded-lg text-xs font-bold transition-all whitespace-nowrap shrink-0 ${navBtnClass(isVidsActive)}`}
               title="Curated 4K Street Walks, Nightlife Highlights & Expat Guides"
             >
-              <Film className="w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0" />
+              <Film className={`w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0 ${isVidsActive ? 'text-brandPink' : ''}`} />
               <span className="text-[11px] sm:text-xs">Videos</span>
             </Link>
           )}
 
-          {/* 4. Creators (Electric Purple / Violet) */}
+          {/* 4. Creators */}
           <Link
             href="/creators"
-            className={`flex items-center gap-1 px-1.5 sm:px-2.5 py-1 sm:py-1.5 rounded-lg text-xs font-bold transition-all whitespace-nowrap shrink-0 ${
-              isCreatorsActive
-                ? 'bg-gradient-to-r from-purple-600 via-fuchsia-600 to-indigo-600 text-white shadow-[0_0_14px_rgba(168,85,247,0.45)] border border-purple-300/30'
-                : 'text-purple-400 hover:text-purple-200 hover:bg-purple-500/15'
-            }`}
+            className={`flex items-center gap-1 px-1.5 sm:px-2.5 py-1 sm:py-1.5 rounded-lg text-xs font-bold transition-all whitespace-nowrap shrink-0 ${navBtnClass(isCreatorsActive)}`}
             title="Pattaya Creators & Live Venues Directory"
           >
-            <Users className="w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0" />
+            <Users className={`w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0 ${isCreatorsActive ? 'text-brandPink' : ''}`} />
             <span className="text-[11px] sm:text-xs">Creators</span>
           </Link>
         </div>

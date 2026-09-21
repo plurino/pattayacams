@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Layers,
   AlertCircle,
@@ -49,9 +49,43 @@ export default function LayerToggleHUD({
   onToggleTheme,
   onLocateMe,
   onStartTour,
+  marineOffline = false,
 }) {
   const [toastMessage, setToastMessage] = useState(null);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isPanelOpen, setIsPanelOpen] = useState(true);
+  const [announcement, setAnnouncement] = useState('');
+
+  // Hydrate collapsed state from localStorage on mount (true = collapsed)
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem('pattayacams_layers_collapsed');
+      if (stored === '1') {
+        setIsPanelOpen(false);
+      }
+    } catch (e) {
+      // localStorage unavailable; keep default (open)
+    }
+  }, []);
+
+  const updatePanelState = (nextOpen) => {
+    setIsPanelOpen(nextOpen);
+    setAnnouncement(
+      nextOpen
+        ? 'Map layers panel opened.'
+        : 'Map layers panel closed.'
+    );
+    try {
+      localStorage.setItem('pattayacams_layers_collapsed', nextOpen ? '0' : '1');
+    } catch (e) {
+      // localStorage unavailable; ignore
+    }
+    // Notify other components (e.g. page.jsx) on the same tab.
+    if (typeof window !== 'undefined') {
+      try {
+        window.dispatchEvent(new CustomEvent('pattayacams:layers-toggle', { detail: { open: nextOpen } }));
+      } catch (e) {}
+    }
+  };
 
   const handleCctvToggle = (checked) => {
     setShowCams(checked);
@@ -65,6 +99,16 @@ export default function LayerToggleHUD({
 
   return (
     <>
+      {/* SR-only live region: announces open/close state to assistive tech */}
+      <span
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+        className="sr-only"
+      >
+        {announcement}
+      </span>
+
       {/* 1. Top-Right Floating Controls: Compass, Quick Rotation & Theme Switcher */}
       <div className="absolute top-24 right-3 z-30 flex flex-col items-center gap-1.5 pointer-events-auto select-none">
         {/* Compass Needle Rose Button (Click to reset to North) */}
@@ -173,19 +217,23 @@ export default function LayerToggleHUD({
           </div>
         )}
 
-        {/* Collapsed Floating Pill on Mobile (< sm) */}
-        {!isMobileMenuOpen && (
+        {/* Collapsed Floating Pill (visible at ALL sizes when panel is closed) */}
+        {!isPanelOpen && (
           <button
-            onClick={() => setIsMobileMenuOpen(true)}
-            className="sm:hidden flex items-center gap-1.5 px-3 py-2 rounded-xl bg-surface/95 backdrop-blur-md border border-brandPink/60 text-brandPink shadow-xl active:scale-95 transition-all text-xs font-bold"
+            onClick={() => updatePanelState(true)}
+            className={`flex items-center bg-surface/95 backdrop-blur-md border border-brandPink/60 text-brandPink shadow-xl active:scale-95 transition-all text-xs font-bold ${
+              // Mobile (< sm): full pill with label; desktop (>= sm): icon-only square
+              'gap-1.5 px-3 py-2 sm:gap-0 sm:p-0 sm:w-12 sm:h-12 sm:justify-center sm:rounded-xl'
+            }`}
             title="Toggle Map Layers"
+            aria-label="Open Map Layers panel"
           >
-            <Layers className="w-4 h-4 text-brandPink" />
-            <span className="font-mono text-[11px]">Layers</span>
+            <Layers className="w-4 h-4 sm:w-5 sm:h-5 text-brandPink" />
+            <span className="font-mono text-[11px] sm:hidden">Layers</span>
           </button>
         )}
 
-        <div className={`bg-surface/90 backdrop-blur-md border border-borderDark rounded-xl p-3 shadow-2xl flex-col gap-2 w-[250px] text-xs font-medium ${isMobileMenuOpen ? 'flex' : 'hidden sm:flex'}`}>
+        <div className={`bg-surface/90 backdrop-blur-md border border-borderDark rounded-xl p-3 shadow-2xl flex-col gap-2 w-[250px] text-xs font-medium ${isPanelOpen ? 'flex' : 'hidden'}`}>
           <div className="flex items-center justify-between pb-1.5 border-b border-borderDark/60 text-slate-400 font-mono text-[10px]">
             <div className="flex items-center gap-1.5 uppercase tracking-wider">
               <Layers className="w-3.5 h-3.5 text-brandPink" />
@@ -196,9 +244,10 @@ export default function LayerToggleHUD({
                 {mapTheme === 'dark' ? 'Dark Matter' : 'Light Map'}
               </span>
               <button
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="sm:hidden text-slate-400 hover:text-white p-0.5"
+                onClick={() => updatePanelState(false)}
+                className="text-slate-400 hover:text-white p-0.5"
                 title="Close Layers Panel"
+                aria-label="Close Layers Panel"
               >
                 <X className="w-3.5 h-3.5" />
               </button>
@@ -325,6 +374,14 @@ export default function LayerToggleHUD({
             <div className="flex items-center gap-2">
               <Ship className="w-3.5 h-3.5 text-sky-400" />
               <span className="text-slate-200">Marine Traffic</span>
+              {marineOffline && (
+                <span
+                  className="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded-full text-[8px] font-mono font-bold bg-amber-500/20 border border-amber-500/40 text-amber-300"
+                  title="Marine radar feed is offline. Vessels may be stale or missing."
+                >
+                  ⚠ Offline
+                </span>
+              )}
             </div>
             <div className="flex items-center gap-2">
               <span className="text-[10px] font-mono text-slate-400 bg-surfaceLight px-1.5 py-0.5 rounded">
