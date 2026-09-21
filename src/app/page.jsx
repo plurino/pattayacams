@@ -24,6 +24,7 @@ import NewsletterModal from '@/src/components/NewsletterModal';
 import ContactModal from '@/src/components/ContactModal';
 import CookieConsentBanner from '@/src/components/CookieConsentBanner';
 import InstallPrompt from '@/src/components/InstallPrompt';
+import Toast from '@/src/components/Toast';
 import CurrencyConverterModal from '@/src/components/CurrencyConverterModal';
 import TouristEmergencyModal from '@/src/components/TouristEmergencyModal';
 import SiteFooter from '@/src/components/SiteFooter';
@@ -479,10 +480,13 @@ export default function AppRoot() {
 
 
 
-        {/* Floating Live Shuffle Popup in Corner of Map (Repositioned when drawer OR layers panel is open so it is never hidden) */}
-        {viewMode === 'map' && (
+        {/* Floating Live Shuffle Popup in Corner of Map.
+            - Hidden entirely while the Layers panel is open (no room for it without colliding).
+            - Pulled slightly to the left when a drawer is open so it doesn't sit on top of the video.
+            - Otherwise sits at bottom-right (clear of Leaflet zoom at top-left). */}
+        {viewMode === 'map' && !isLayersPanelOpen && (
           <div className={`absolute bottom-4 z-30 pointer-events-auto transition-all duration-300 ${
-            (selectedEntity || isLayersPanelOpen)
+            selectedEntity
               ? 'left-4 sm:left-6'
               : 'right-4 sm:bottom-6 sm:right-6'
           }`}>
@@ -598,6 +602,9 @@ export default function AppRoot() {
 
       {/* 10. PWA Install Prompt (Android / Desktop browsers fire beforeinstallprompt) */}
       <InstallPrompt />
+
+      {/* 11. Global Toast (subscribes to pattayacams:toast window events) */}
+      <Toast />
     </div>
   );
 }

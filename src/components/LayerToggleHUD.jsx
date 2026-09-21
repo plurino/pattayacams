@@ -50,6 +50,7 @@ export default function LayerToggleHUD({
   onLocateMe,
   onStartTour,
   marineOffline = false,
+  flightsStale = false,
 }) {
   const [toastMessage, setToastMessage] = useState(null);
   const [isPanelOpen, setIsPanelOpen] = useState(true);
@@ -355,6 +356,14 @@ export default function LayerToggleHUD({
             <div className="flex items-center gap-2">
               <Plane className="w-3.5 h-3.5 text-amber-400" />
               <span className="text-slate-200">Live Flights</span>
+              {flightsStale && (
+                <span
+                  className="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded-full text-[8px] font-mono font-bold bg-amber-500/20 border border-amber-500/40 text-amber-300"
+                  title="ADS-B upstream is rate-limited; planes shown are from the last successful snapshot."
+                >
+                  ⚠ Stale
+                </span>
+              )}
             </div>
             <div className="flex items-center gap-2">
               <span className="text-[10px] font-mono text-slate-400 bg-surfaceLight px-1.5 py-0.5 rounded">

@@ -5,11 +5,18 @@ import { useState, useEffect, useRef } from 'react';
 /**
  * useLiveFlights - Live Flight Telemetry over Pattaya Bay & U-Tapao (UTP)
  * Powered by adsb.lol open real-time ADS-B point API (25 NM radius)
+ *
+ * Surfaces `isStale` so the UI can warn users when the snapshot is a fallback
+ * (the Worker proxy is often rate-limited by adsb.lol during peak hours —
+ * the local `live_flights.json` is then served, which can be hours/days old).
  */
 export function useLiveFlights(enabled = false) {
   const [flights, setFlights] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isStale, setIsStale] = useState(false);
+  const [source, setSource] = useState(null); // 'worker' | 'local' | null
   const [lastUpdated, setLastUpdated] = useState(null);
+  const [snapshotAgeSeconds, setSnapshotAgeSeconds] = useState(null);
   const timerRef = useRef(null);
 
   const fetchFlights = async () => {
@@ -17,6 +24,7 @@ export function useLiveFlights(enabled = false) {
     try {
       setIsLoading(true);
       let res = null;
+      let fromWorker = false;
 
       // 1. Try Cloudflare Worker proxy endpoint with 3.5s timeout
       try {
@@ -26,13 +34,18 @@ export function useLiveFlights(enabled = false) {
           signal: controller.signal,
         });
         clearTimeout(timeoutId);
+        if (res && res.ok) fromWorker = true;
       } catch (_) {
         // Worker proxy unreached or timed out
       }
 
       // 2. Fallback to local live snapshot
       if (!res || !res.ok) {
-        res = await fetch(`/data/live_flights.json?t=${Date.now()}`);
+        try {
+          res = await fetch(`/data/live_flights.json?t=${Date.now()}`, { cache: 'no-store' });
+        } catch (_) {
+          // even snapshot fetch failed
+        }
       }
 
       if (!res || !res.ok) return;
@@ -60,7 +73,21 @@ export function useLiveFlights(enabled = false) {
         });
 
       setFlights(parsed);
+      setSource(fromWorker ? 'worker' : 'local');
       setLastUpdated(new Date());
+
+      // Estimate snapshot age: adsb.lol snapshots include `snapshot` epoch seconds
+      // when proxied; otherwise fall back to file LastWriteTime (we ship that
+      // as `snapshotWrittenAtMs` via build-time, optional).
+      const nowSec = Date.now() / 1000;
+      const snapSec = typeof data?.snapshot === 'number' ? data.snapshot : null;
+      if (snapSec) {
+        setSnapshotAgeSeconds(Math.max(0, Math.round(nowSec - snapSec)));
+        setIsStale(nowSec - snapSec > 120); // > 2 minutes old = stale
+      } else {
+        setSnapshotAgeSeconds(null);
+        setIsStale(!fromWorker); // local fallback = always consider stale
+      }
     } catch (_) {
       // Fail silently without console error spam
     } finally {
@@ -71,6 +98,8 @@ export function useLiveFlights(enabled = false) {
   useEffect(() => {
     if (!enabled) {
       setFlights([]);
+      setIsStale(false);
+      setSource(null);
       return;
     }
 
@@ -86,6 +115,9 @@ export function useLiveFlights(enabled = false) {
     flights,
     count: flights.length,
     isLoading,
+    isStale,
+    source,
+    snapshotAgeSeconds,
     lastUpdated,
     refresh: fetchFlights,
   };

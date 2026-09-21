@@ -49,6 +49,177 @@ export default {
     //
     // The API key is bound as a Worker secret (wrangler secret put AISSTREAM_API_KEY)
     // and NEVER appears in client JS or git-tracked files.
+
+    // 0. Route: /api/check-live — Real-time YouTube live status verification.
+    // Replaces the failing GH Actions cron (which keeps getting blocked by YouTube's
+    // datacenter IP filter). Frontend polls this for entities whose static status is
+    // unknown or stale. Cache 60s per (platform, id) tuple to avoid rate limits.
+    if (url.pathname === '/api/check-live') {
+      const cacheKey = '__checkLiveCache';
+      const cacheTtlMs = 60_000;
+
+      const videoId = url.searchParams.get('v');
+      const handle = url.searchParams.get('handle');
+      const channelId = url.searchParams.get('channel_id');
+      const cacheId = (videoId || handle || channelId || '').toLowerCase();
+
+      if (!cacheId) {
+        return new Response(
+          JSON.stringify({ is_live: null, source: 'noop', reason: 'missing id' }),
+          { status: 400, headers: { 'Content-Type': 'application/json', ...CORS_HEADERS } }
+        );
+      }
+
+      const cached = globalThis[cacheKey]?.[cacheId];
+      if (cached && (Date.now() - cached.fetchedAtMs) < cacheTtlMs) {
+        return new Response(JSON.stringify(cached.payload), {
+          status: 200,
+          headers: {
+            'Content-Type': 'application/json',
+            'Cache-Control': 'public, max-age=30',
+            ...CORS_HEADERS,
+          },
+        });
+      }
+
+      const YOUTUBE_COOKIES = [
+        'SOCS=CAISNQgDEitib3FfaWRlbnRpdHlmcm9udGVuZHVpc2VydmVyXzIwMjMwODI5LjA3X3AwGgJlbiACGgYIgPzytgY',
+        'PREF=hl=en&gl=US',
+      ].join('; ');
+
+      const commonHeaders = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36',
+        'Accept-Language': 'en-US,en;q=0.9',
+        'Cookie': YOUTUBE_COOKIES,
+      };
+
+      const parsePlayerResponse = (html) => {
+        const match =
+          html.match(/var ytInitialPlayerResponse\s*=\s*({.+?});(?:var|<\/script>)/s) ||
+          html.match(/ytInitialPlayerResponse\s*=\s*({.+?});/s);
+        if (!match) return null;
+        try { return JSON.parse(match[1]); } catch (_) { return null; }
+      };
+
+      const inspectWatchHtml = (html) => {
+        const pr = parsePlayerResponse(html);
+        if (pr) {
+          const playabilityStatus = pr.playabilityStatus?.status;
+          const isLiveDetails = pr.microformat?.playerMicroformatRenderer?.liveBroadcastDetails;
+          const videoDetails = pr.videoDetails;
+          const isLiveNow =
+            isLiveDetails?.isLiveNow === true ||
+            (videoDetails?.isLive === true && playabilityStatus === 'OK');
+          const isUpcoming =
+            playabilityStatus === 'LIVE_STREAM_OFFLINE' ||
+            !!pr.playabilityStatus?.liveStreamability?.liveStreamabilityRenderer?.offlineSlate;
+          const isError = playabilityStatus === 'ERROR' || playabilityStatus === 'LOGIN_REQUIRED';
+          return { is_live: isLiveNow && !isUpcoming, is_upcoming: isUpcoming && !isLiveNow, is_error: isError };
+        }
+        // Fallback string check
+        const hasLiveNow = html.includes('"isLiveNow":true');
+        const hasOffline = html.includes('LIVE_STREAM_OFFLINE') || html.includes('"isUpcoming":true');
+        return {
+          is_live: hasLiveNow && !hasOffline,
+          is_upcoming: hasOffline && !hasLiveNow,
+          is_error: html.includes('"playabilityStatus":{"status":"ERROR"'),
+        };
+      };
+
+      const checkVideoId = async (id) => {
+        const controller = new AbortController();
+        const t = setTimeout(() => controller.abort(), 8000);
+        try {
+          const r = await fetch(`https://www.youtube.com/watch?v=${id}&gl=US&hl=en`, {
+            headers: commonHeaders,
+            signal: controller.signal,
+          });
+          clearTimeout(t);
+          if (r.status === 404) return { is_live: false, is_upcoming: false, is_error: true, source: '404' };
+          const html = await r.text();
+          const verdict = inspectWatchHtml(html);
+          return { ...verdict, source: 'watch' };
+        } catch (e) {
+          clearTimeout(t);
+          return { is_live: null, is_upcoming: null, is_error: true, source: 'fetch_error', reason: e?.message };
+        }
+      };
+
+      const checkChannelHandle = async (h) => {
+        const clean = h.startsWith('@') ? h : `@${h}`;
+        const controller = new AbortController();
+        const t = setTimeout(() => controller.abort(), 8000);
+        try {
+          const r = await fetch(`https://www.youtube.com/${clean}/live?gl=US&hl=en`, {
+            headers: commonHeaders,
+            redirect: 'follow',
+            signal: controller.signal,
+          });
+          clearTimeout(t);
+          const html = await r.text();
+          const canonicalMatch = html.match(/<link rel="canonical" href="([^"]+)"/);
+          const canonicalUrl = canonicalMatch ? canonicalMatch[1] : r.url;
+          const watchMatch = canonicalUrl.match(/watch\?v=([a-zA-Z0-9_-]{11})/);
+          if (!watchMatch) {
+            return { is_live: false, is_upcoming: false, is_error: false, source: 'channel_no_live' };
+          }
+          return { ...(await checkVideoId(watchMatch[1])), video_id: watchMatch[1], source: 'channel_live' };
+        } catch (e) {
+          clearTimeout(t);
+          return { is_live: null, is_upcoming: null, is_error: true, source: 'fetch_error', reason: e?.message };
+        }
+      };
+
+      let result;
+      if (videoId) {
+        result = await checkVideoId(videoId);
+        result.video_id = videoId;
+      } else if (handle) {
+        result = await checkChannelHandle(handle);
+      } else if (channelId) {
+        // Fall back to RSS feed which exposes recent video IDs without scraping watch pages
+        try {
+          const controller = new AbortController();
+          const t = setTimeout(() => controller.abort(), 6000);
+          const r = await fetch(`https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`, {
+            headers: { 'User-Agent': 'Mozilla/5.0' },
+            signal: controller.signal,
+          });
+          clearTimeout(t);
+          if (r.ok) {
+            const xml = await r.text();
+            const ids = [...xml.matchAll(/<yt:videoId>([^<]+)<\/yt:videoId>/g)].map((m) => m[1]);
+            let foundLive = null;
+            for (const id of ids.slice(0, 2)) {
+              const v = await checkVideoId(id);
+              if (v.is_live) { foundLive = { ...v, video_id: id, source: 'rss' }; break; }
+            }
+            result = foundLive || { is_live: false, is_upcoming: false, is_error: false, source: 'rss_none_live' };
+          } else {
+            result = { is_live: null, is_upcoming: null, is_error: true, source: 'rss_failed' };
+          }
+        } catch (e) {
+          result = { is_live: null, is_upcoming: null, is_error: true, source: 'fetch_error', reason: e?.message };
+        }
+      }
+
+      const payload = { ...result, fetchedAt: new Date().toISOString() };
+
+      // Cache the verdict (only on definitive answers — don't cache errors for 60s)
+      if (globalThis[cacheKey] === undefined) globalThis[cacheKey] = {};
+      if (result.is_live !== null) {
+        globalThis[cacheKey][cacheId] = { payload, fetchedAtMs: Date.now() };
+      }
+
+      return new Response(JSON.stringify(payload), {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json',
+          'Cache-Control': 'public, max-age=30',
+          ...CORS_HEADERS,
+        },
+      });
+    }
     if (url.pathname === '/api/marine') {
       const cacheKey = '__marineCache';
       const cacheTtlMs = 30_000;

@@ -43,9 +43,11 @@ import {
 import { findNearestCctv } from '@/src/utils/proximity';
 import TargetLockReticle from './common/TargetLockReticle';
 import { useStreamStatus } from '@/src/hooks/useStreamStatus';
+import { useLiveStatusVerify } from '@/src/hooks/useLiveStatusVerify';
 
 export default function VideoDrawer({ entity, onClose, onSelectEntity, onLiveShuffle }) {
   const streamStatus = useStreamStatus();
+  const { verdicts } = useLiveStatusVerify(entity ? [entity] : [], Boolean(entity));
   const [copiedCode, setCopiedCode] = useState(false);
   const [copiedShare, setCopiedShare] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
@@ -112,8 +114,20 @@ export default function VideoDrawer({ entity, onClose, onSelectEntity, onLiveShu
     streamStatus?.entities?.[entity.id]
   ) : null;
 
-  const isTrulyLive = liveInfo ? Boolean(liveInfo.is_live && !liveInfo.is_upcoming) : Boolean(entity.is_live);
-  const activeVideoId = liveInfo?.video_id || entity.video_id;
+  // Fresh verdict from Worker overrides stale static status when present.
+  const freshVerdict = verdicts?.[entity.key || entity.slug || entity.id];
+  const isTrulyLive = freshVerdict
+    ? freshVerdict.is_live === true
+    : (liveInfo ? Boolean(liveInfo.is_live && !liveInfo.is_upcoming) : Boolean(entity.is_live));
+  const activeVideoId =
+    freshVerdict?.video_id ||
+    liveInfo?.video_id ||
+    entity.video_id;
+  const lastVerifiedAt =
+    freshVerdict?.fetchedAt ||
+    liveInfo?.last_live_at ||
+    streamStatus?.last_check ||
+    null;
   const isVenueOffline = (isVenue || (!isCctv && !isLiveCam && !isStreamer)) && (!isTrulyLive || !activeVideoId);
 
   const formatRelativeTime = (timestamp) => {

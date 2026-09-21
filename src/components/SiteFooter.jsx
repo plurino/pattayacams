@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Mail, Users, FileText } from 'lucide-react';
+import { Mail, FileText } from 'lucide-react';
 
 export default function SiteFooter({ onOpenContact }) {
   return (
@@ -42,16 +42,6 @@ export default function SiteFooter({ onOpenContact }) {
               <span>Contact</span>
             </a>
           )}
-
-          {/* Creators Directory */}
-          <Link
-            href="/creators"
-            className="flex items-center gap-1 text-slate-300 hover:text-white transition-colors"
-            title="Browse all Pattaya creators and live channels"
-          >
-            <Users className="w-3 h-3 text-purple-400 shrink-0" />
-            <span>Creators</span>
-          </Link>
 
           {/* Privacy & Terms */}
           <Link

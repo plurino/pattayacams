@@ -51,7 +51,7 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
   }, [showRadar, showTransit, showFlights, showMarine, showLiveCams, showCams, showVenues]);
 
   const radarState = useRainViewer(showRadar);
-  const { flights, count: flightCount } = useLiveFlights(showFlights);
+  const { flights, count: flightCount, isStale: flightsAreStale } = useLiveFlights(showFlights);
   const { vessels, count: marineCount, isConnected: marineConnected } = useMarineTraffic(showMarine);
   // Marine layer is "offline" when the user has it enabled but the WebSocket never connected
   const isMarineOffline = showMarine && !marineConnected;
@@ -137,13 +137,52 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
 
   const handleLocateMe = useCallback(() => {
     if (typeof navigator === 'undefined' || !navigator.geolocation) {
-      alert('Geolocation is not supported by your browser.');
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(new CustomEvent('pattayacams:toast', {
+          detail: { kind: 'warn', message: 'Geolocation is not supported by your browser.' }
+        }));
+      }
       return;
     }
+
+    // Pattaya + Koh Larn + Sattahip corridor — generous radius (~80 km) so
+    // travellers in Bang Saen / Sattahip / Laem Chabang still get the green light.
+    const PATTAYA_BBOX = { latMin: 12.40, latMax: 13.40, lonMin: 100.50, lonMax: 101.20 };
+    const inPattayaArea = (lat, lon) =>
+      lat >= PATTAYA_BBOX.latMin && lat <= PATTAYA_BBOX.latMax &&
+      lon >= PATTAYA_BBOX.lonMin && lon <= PATTAYA_BBOX.lonMax;
+
+    const dismissOutOfRangeToast = (() => {
+      let handler = null;
+      return () => {
+        if (handler) window.removeEventListener('click', handler);
+        handler = null;
+      };
+    })();
+
+    const showOutOfRangeToast = (lat, lon) => {
+      if (typeof window === 'undefined') return;
+      dismissOutOfRangeToast();
+      window.dispatchEvent(new CustomEvent('pattayacams:toast', {
+        detail: {
+          kind: 'warn',
+          message:
+            `📍 Whoa — you\u2019re at ${lat.toFixed(2)}\u00b0N, ${lon.toFixed(2)}\u00b0E, which is a long way from Pattaya! ` +
+            `This radar only flies you to the action if you\u2019re actually on the Eastern Seaboard. ` +
+            `Book a flight, captain \u2014 the Walking Street neon misses you. \ud83c\uddf9\ud83c\udded`,
+        }
+      }));
+    };
 
     navigator.geolocation.getCurrentPosition(
       (pos) => {
         const { latitude, longitude } = pos.coords;
+
+        if (!inPattayaArea(latitude, longitude)) {
+          showOutOfRangeToast(latitude, longitude);
+          return;
+        }
+
         const map = mapRef.current;
         if (!map) return;
 
@@ -437,8 +476,11 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
         shiftKeyRotate: true,
       });
 
-      // Custom-positioned zoom control (top-left default is disabled via zoomControl:false above)
-      const zoomControl = Leaflet.control.zoom({ position: 'bottomright' }).addTo(map);
+      // Zoom control lives at top-left (Leaflet default) — SceneSelector is at
+      // top-right on mobile and centred on desktop, so no collision. Keeping
+      // zoom at top-left keeps the Live Shuffle (bottom-right) and the Layers
+      // panel (bottom-left) each clear of zoom buttons.
+      const zoomControl = Leaflet.control.zoom({ position: 'topleft' }).addTo(map);
       zoomControlRef.current = zoomControl;
 
       // Listen for rotation changes
@@ -951,6 +993,7 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
         onLocateMe={handleLocateMe}
         onStartTour={onStartTour}
         marineOffline={isMarineOffline}
+        flightsStale={flightsAreStale}
       />
     </div>
   );
