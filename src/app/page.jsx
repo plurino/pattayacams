@@ -25,6 +25,7 @@ import ContactModal from '@/src/components/ContactModal';
 import CookieConsentBanner from '@/src/components/CookieConsentBanner';
 import { parseUrlState, syncStateToUrl } from '@/src/utils/urlState';
 import { getLiveEntities } from '@/src/utils/liveEntities';
+import { TourDirector } from '@/src/utils/tourDirector';
 
 function playShuffleChime() {
   if (typeof window === 'undefined') return;
@@ -109,7 +110,60 @@ export default function AppRoot() {
     }
   }, []);
 
+  const [tourState, setTourState] = useState({
+    isRunning: false,
+    currentWaypoint: null,
+    index: 0,
+    total: 0,
+  });
+  const tourDirectorRef = useRef(null);
+
+  const handleStopTour = useCallback(() => {
+    if (tourDirectorRef.current) {
+      tourDirectorRef.current.stop();
+      tourDirectorRef.current = null;
+    }
+    setTourState({ isRunning: false, currentWaypoint: null, index: 0, total: 0 });
+  }, []);
+
+  const handleStartTour = useCallback(() => {
+    if (viewMode !== 'map') {
+      setViewMode('map');
+    }
+    setSelectedEntity(null);
+
+    const map = mapInstanceRef.current;
+    if (!map) return;
+
+    if (tourDirectorRef.current) {
+      tourDirectorRef.current.stop();
+    }
+
+    const director = new TourDirector(
+      map,
+      (waypoint, index, total) => {
+        setTourState({ isRunning: true, currentWaypoint: waypoint, index, total });
+      },
+      () => {
+        setTourState({ isRunning: false, currentWaypoint: null, index: 0, total: 0 });
+      }
+    );
+    tourDirectorRef.current = director;
+    director.start();
+  }, [viewMode]);
+
+  useEffect(() => {
+    return () => {
+      if (tourDirectorRef.current) {
+        tourDirectorRef.current.stop();
+      }
+    };
+  }, []);
+
   const handleSelectEntity = useCallback((entity) => {
+    if (tourDirectorRef.current?.isRunning) {
+      handleStopTour();
+    }
     setSelectedEntity(entity);
     if (entity && typeof entity.lat === 'number' && typeof entity.lng === 'number' && mapInstanceRef.current) {
       try {
@@ -124,7 +178,7 @@ export default function AppRoot() {
         console.warn('Target flyTo warning:', e);
       }
     }
-  }, []);
+  }, [handleStopTour]);
 
   const handleCloseDrawer = useCallback(() => {
     setSelectedEntity(null);
@@ -282,10 +336,44 @@ export default function AppRoot() {
         onOpenContact={() => setIsContactModalOpen(true)}
         onToggleAlerts={toggleLiveAlerts}
         hasLiveAlerts={hasLiveAlerts}
+        onStartTour={handleStartTour}
       />
 
       {/* 2. Main Content Canvas */}
       <main className="flex-1 relative overflow-hidden">
+        {/* Floating Drone Tour HUD Banner */}
+        {tourState.isRunning && tourState.currentWaypoint && (
+          <aside
+            aria-label="Cinematic Drone Tour Active"
+            className="absolute top-4 left-1/2 -translate-x-1/2 z-30 pointer-events-auto max-w-lg w-[92%] sm:w-auto"
+          >
+            <div className="bg-surface/95 backdrop-blur-md border border-brandPink/60 rounded-2xl px-4 py-2.5 flex items-center justify-between gap-4 shadow-[0_0_28px_rgba(255,42,109,0.35)]">
+              <div className="flex items-center gap-3">
+                <span className="text-xl animate-pulse">🎬</span>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-[10px] font-mono font-extrabold uppercase tracking-wider text-brandPink">
+                      Cinematic Tour [{tourState.index + 1}/{tourState.total}]
+                    </span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-brandPink animate-ping" />
+                  </div>
+                  <div className="text-xs font-bold text-white flex items-center gap-1.5">
+                    <span>{tourState.currentWaypoint.name}</span>
+                    <span className="text-slate-400 font-normal text-[11px] hidden sm:inline">
+                      • {tourState.currentWaypoint.subtitle}
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <button
+                onClick={handleStopTour}
+                className="px-3 py-1 rounded-lg bg-surfaceLight hover:bg-rose-900/70 border border-borderDark hover:border-rose-500/50 text-slate-200 hover:text-white text-xs font-bold transition-all cursor-pointer shadow-sm"
+              >
+                Exit Tour
+              </button>
+            </div>
+          </aside>
+        )}
         <div className={`w-full h-full ${viewMode === 'map' ? 'block' : 'hidden'}`}>
           <MapCanvasWrapper
             onSelectEntity={handleSelectEntity}

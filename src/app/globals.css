@@ -81,9 +81,21 @@ html, body {
 }
 
 .custom-venue-marker-container,
-.custom-cctv-marker-container {
+.custom-cctv-marker-container,
+.custom-livecam-marker-container {
   background: transparent !important;
   border: none !important;
+}
+
+/* Tactical Sensor Presets (Hardware-accelerated CSS filters) */
+.sensor-nvg .leaflet-tile-pane {
+  filter: invert(1) hue-rotate(100deg) brightness(1.1) contrast(1.4) !important;
+}
+.sensor-noir .leaflet-tile-pane {
+  filter: grayscale(100%) contrast(160%) brightness(75%) !important;
+}
+.sensor-thermal .leaflet-tile-pane {
+  filter: invert(1) hue-rotate(200deg) saturate(2) !important;
 }
 
 /* Custom Marker Pin Animations */

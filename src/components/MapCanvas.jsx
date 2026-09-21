@@ -32,10 +32,10 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
   const [showVenues, setShowVenues] = useState(true);
   const [showLiveCams, setShowLiveCams] = useState(true);
   const [showCams, setShowCams] = useState(true);
-  const [showTransit, setShowTransit] = useState(false);
+  const [showTransit, setShowTransit] = useState(true);
   const [showRadar, setShowRadar] = useState(false);
-  const [showFlights, setShowFlights] = useState(false);
-  const [showMarine, setShowMarine] = useState(false);
+  const [showFlights, setShowFlights] = useState(true);
+  const [showMarine, setShowMarine] = useState(true);
   const [bearing, setBearing] = useState(0);
   const [mapTheme, setMapTheme] = useState('dark');
 
@@ -130,6 +130,75 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
     }
   }, []);
 
+  const [sensorMode, setSensorMode] = useState('normal');
+  const userLocationMarkerRef = useRef(null);
+
+  const handleToggleSensorMode = useCallback(() => {
+    const modes = ['normal', 'nvg', 'noir', 'thermal'];
+    setSensorMode((prev) => {
+      const idx = modes.indexOf(prev);
+      return modes[(idx + 1) % modes.length];
+    });
+  }, []);
+
+  useEffect(() => {
+    const el = mapContainerRef.current;
+    if (!el) return;
+    el.classList.remove('sensor-nvg', 'sensor-noir', 'sensor-thermal');
+    if (sensorMode !== 'normal') {
+      el.classList.add(`sensor-${sensorMode}`);
+    }
+  }, [sensorMode]);
+
+  const handleLocateMe = useCallback(() => {
+    if (typeof navigator === 'undefined' || !navigator.geolocation) {
+      alert('Geolocation is not supported by your browser.');
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        const { latitude, longitude } = pos.coords;
+        const map = mapRef.current;
+        if (!map) return;
+
+        map.flyTo([latitude, longitude], 17, { duration: 1.5, easeLinearity: 0.25 });
+
+        if (userLocationMarkerRef.current) {
+          map.removeLayer(userLocationMarkerRef.current);
+        }
+
+        if (window.L) {
+          const userIcon = window.L.divIcon({
+            className: 'custom-user-location-marker',
+            iconSize: [24, 24],
+            iconAnchor: [12, 12],
+            html: `
+              <div style="position: relative; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center;">
+                <span style="position: absolute; width: 22px; height: 22px; border-radius: 50%; background: #00E5FF; opacity: 0.75; animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite; pointer-events: none;"></span>
+                <div style="width: 14px; height: 14px; border-radius: 50%; background: #00E5FF; border: 2.5px solid #FFFFFF; box-shadow: 0 0 12px #00E5FF;"></div>
+              </div>
+            `,
+          });
+          userLocationMarkerRef.current = window.L.marker([latitude, longitude], {
+            icon: userIcon,
+            zIndexOffset: 4000,
+          }).addTo(map);
+
+          userLocationMarkerRef.current.bindTooltip(
+            '<div style="font-family: inherit; font-size: 11px; font-weight: 700; color: #00E5FF;">📍 You are here</div>',
+            { className: 'pattaya-dark-tooltip', direction: 'top', offset: [0, -10] }
+          ).openTooltip();
+        }
+      },
+      (err) => {
+        console.warn('Geolocation error:', err);
+        alert('Could not access your location. Please check browser location permissions.');
+      },
+      { enableHighAccuracy: true, timeout: 10000 }
+    );
+  }, []);
+
   const handleResetNorth = useCallback(() => {
     if (!mapRef.current) return;
     if (typeof mapRef.current.setBearing === 'function') {
@@ -171,7 +240,7 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
       if (isLive) {
         htmlIcon = `
           <div style="position: relative; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: ${isSponsor ? 50 : 20};">
-            <span style="position: absolute; width: 34px; height: 34px; border-radius: 50%; background: ${isSponsor ? '#EAB308' : '#FF2A6D'}; opacity: 0.7; animation: ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;"></span>
+            <span style="position: absolute; width: 34px; height: 34px; border-radius: 50%; background: ${isSponsor ? '#EAB308' : '#FF2A6D'}; opacity: 0.7; animation: ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite; pointer-events: none;"></span>
             <div style="position: relative; width: 32px; height: 32px; border-radius: 50%; background: ${isSponsor ? 'linear-gradient(135deg, #FACC15, #CA8A04)' : 'linear-gradient(135deg, #FF2A6D, #BE185D)'}; border: 2px solid #FFFFFF; box-shadow: 0 0 18px ${isSponsor ? '#EAB308' : '#FF2A6D'}; display: flex; align-items: center; justify-content: center; color: white; font-size: 14px;">
               ${iconEmoji}
             </div>
@@ -255,7 +324,7 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
       if (isLive) {
         htmlIcon = `
           <div style="position: relative; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 40;">
-            <span style="position: absolute; width: 34px; height: 34px; border-radius: 50%; background: #10B981; opacity: 0.75; animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;"></span>
+            <span style="position: absolute; width: 34px; height: 34px; border-radius: 50%; background: #10B981; opacity: 0.75; animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite; pointer-events: none;"></span>
             <div style="position: relative; width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, #10B981, #059669); border: 2px solid #FFFFFF; box-shadow: 0 0 16px #10B981; display: flex; align-items: center; justify-content: center; color: white; font-size: 14px;">
               📹
             </div>
@@ -886,6 +955,9 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
         onResetNorth={handleResetNorth}
         mapTheme={mapTheme}
         onToggleTheme={handleToggleTheme}
+        onLocateMe={handleLocateMe}
+        sensorMode={sensorMode}
+        onToggleSensorMode={handleToggleSensorMode}
       />
     </div>
   );

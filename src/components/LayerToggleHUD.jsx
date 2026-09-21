@@ -15,7 +15,10 @@ import {
   CloudRain,
   Plane,
   Ship,
+  Crosshair,
+  Eye,
 } from 'lucide-react';
+import { playTacticalClick } from '@/src/utils/sfx';
 
 export default function LayerToggleHUD({
   showVenues,
@@ -45,6 +48,9 @@ export default function LayerToggleHUD({
   onResetNorth,
   mapTheme = 'dark',
   onToggleTheme,
+  onLocateMe,
+  sensorMode = 'normal',
+  onToggleSensorMode,
 }) {
   const [toastMessage, setToastMessage] = useState(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -110,7 +116,10 @@ export default function LayerToggleHUD({
 
         {/* Dark / Light Basemap Theme Toggle */}
         <button
-          onClick={onToggleTheme}
+          onClick={() => {
+            playTacticalClick();
+            if (onToggleTheme) onToggleTheme();
+          }}
           className="w-9 h-9 rounded-xl bg-surface/90 backdrop-blur-md border border-borderDark hover:border-brandGold/60 text-slate-300 hover:text-brandGold transition-all flex items-center justify-center shadow-xl group"
           title={mapTheme === 'dark' ? 'Switch to Light Map Mode' : 'Switch to Dark Map Mode'}
         >
@@ -120,6 +129,43 @@ export default function LayerToggleHUD({
             <Moon className="w-4 h-4 group-hover:-rotate-12 transition-transform text-indigo-400" />
           )}
         </button>
+
+        {/* Snap to My Location (Native GPS Geolocation) */}
+        {onLocateMe && (
+          <button
+            onClick={() => {
+              playTacticalClick();
+              onLocateMe();
+            }}
+            className="w-9 h-9 rounded-xl bg-surface/90 backdrop-blur-md border border-borderDark hover:border-brandCyan/80 text-slate-300 hover:text-brandCyan transition-all flex items-center justify-center shadow-xl group cursor-pointer"
+            title="Snap to My Location (GPS Position)"
+          >
+            <Crosshair className="w-4 h-4 group-hover:scale-110 transition-transform text-cyan-400" />
+          </button>
+        )}
+
+        {/* Tactical Sensor Mode Preset Switcher (Normal -> NVG -> Noir -> Thermal) */}
+        {onToggleSensorMode && (
+          <button
+            onClick={() => {
+              playTacticalClick();
+              onToggleSensorMode();
+            }}
+            className={`w-9 h-9 rounded-xl bg-surface/90 backdrop-blur-md border transition-all flex items-center justify-center shadow-xl group cursor-pointer ${
+              sensorMode !== 'normal'
+                ? 'border-emerald-400 text-emerald-400 shadow-[0_0_12px_rgba(16,185,129,0.4)]'
+                : 'border-borderDark text-slate-400 hover:text-emerald-300 hover:border-emerald-500/50'
+            }`}
+            title={`Sensor Lens: ${sensorMode.toUpperCase()} • Click to cycle (Normal / NVG / Noir / Thermal)`}
+          >
+            <Eye className="w-4 h-4 group-hover:scale-110 transition-transform" />
+            {sensorMode !== 'normal' && (
+              <span className="absolute -top-1 -right-1 px-1 py-0.2 rounded bg-emerald-600 text-white font-mono font-black text-[7px] uppercase">
+                {sensorMode}
+              </span>
+            )}
+          </button>
+        )}
       </div>
 
       {/* 2. Bottom-Left Map Layer Controller */}

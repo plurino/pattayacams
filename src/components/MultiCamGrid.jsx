@@ -41,43 +41,97 @@ export default function MultiCamGrid({ onSelectEntity }) {
     return allLiveOptions.find((item) => item.key === key || item.slug === key);
   }, [allLiveOptions]);
 
-  // Initial population: populate with active live feeds
+  // Populate slots: restore from localStorage if exists, or randomly shuffle available live feeds on first load
   useEffect(() => {
     const slotCount = gridMode === '3x3' ? 9 : (gridMode === '1x3' ? 3 : (gridMode === '1x2' ? 2 : 4));
-    const nextSlots = Array(slotCount).fill(null);
+    let initialSlots = Array(slotCount).fill(null);
 
-    allLiveOptions.forEach((opt, idx) => {
-      if (idx < slotCount) {
-        nextSlots[idx] = opt.key;
+    let saved = null;
+    try {
+      const raw = localStorage.getItem('pattayacams_multicam_slots');
+      if (raw) saved = JSON.parse(raw);
+    } catch (e) {}
+
+    if (Array.isArray(saved) && saved.length > 0) {
+      // Restore previously selected feeds if available
+      for (let i = 0; i < slotCount; i++) {
+        if (saved[i] && allLiveOptions.some((opt) => opt.key === saved[i])) {
+          initialSlots[i] = saved[i];
+        }
       }
-    });
+      // Fill remaining empty slots with any remaining live feeds
+      const used = new Set(initialSlots.filter(Boolean));
+      const available = allLiveOptions.filter((opt) => !used.has(opt.key));
+      let availIdx = 0;
+      for (let i = 0; i < slotCount; i++) {
+        if (!initialSlots[i] && availIdx < available.length) {
+          initialSlots[i] = available[availIdx++].key;
+        }
+      }
+    } else if (allLiveOptions.length > 0) {
+      // First visit: randomly shuffle available live feeds so each first visit gets a fresh set of cams
+      const shuffled = [...allLiveOptions].sort(() => Math.random() - 0.5);
+      for (let i = 0; i < slotCount; i++) {
+        if (i < shuffled.length) {
+          initialSlots[i] = shuffled[i].key;
+        }
+      }
+      try {
+        localStorage.setItem('pattayacams_multicam_slots', JSON.stringify(initialSlots));
+      } catch (e) {}
+    }
+
+    setSlots(initialSlots);
+    setIsClientLoaded(true);
+  }, [gridMode, allLiveOptions]);
+
+  // Shuffle button handler: picks a new random selection of live feeds and updates state + localStorage
+  const handleShuffle = useCallback(() => {
+    const slotCount = gridMode === '3x3' ? 9 : (gridMode === '1x3' ? 3 : (gridMode === '1x2' ? 2 : 4));
+    const nextSlots = Array(slotCount).fill(null);
+    const shuffled = [...allLiveOptions].sort(() => Math.random() - 0.5);
+
+    for (let i = 0; i < slotCount; i++) {
+      if (i < shuffled.length) {
+        nextSlots[i] = shuffled[i].key;
+      }
+    }
 
     setSlots(nextSlots);
-    setIsClientLoaded(true);
+    try {
+      localStorage.setItem('pattayacams_multicam_slots', JSON.stringify(nextSlots));
+    } catch (e) {}
   }, [gridMode, allLiveOptions]);
 
   const handleModeChange = (newMode) => {
     const targetCount = newMode === '3x3' ? 9 : (newMode === '1x3' ? 3 : (newMode === '1x2' ? 2 : 4));
     const nextSlots = Array(targetCount).fill(null);
-    allLiveOptions.forEach((opt, idx) => {
-      if (idx < targetCount) {
-        nextSlots[idx] = opt.key;
-      }
-    });
+    for (let i = 0; i < targetCount; i++) {
+      nextSlots[i] = slots[i] || (allLiveOptions[i] ? allLiveOptions[i].key : null);
+    }
     setGridMode(newMode);
     setSlots(nextSlots);
+    try {
+      localStorage.setItem('pattayacams_multicam_slots', JSON.stringify(nextSlots));
+    } catch (e) {}
   };
 
   const handleSelectSlotFeed = (index, value) => {
     const next = [...slots];
     next[index] = value || null;
     setSlots(next);
+    try {
+      localStorage.setItem('pattayacams_multicam_slots', JSON.stringify(next));
+    } catch (e) {}
   };
 
   const handleClearSlot = (index) => {
     const next = [...slots];
     next[index] = null;
     setSlots(next);
+    try {
+      localStorage.setItem('pattayacams_multicam_slots', JSON.stringify(next));
+    } catch (e) {}
   };
 
   if (!isClientLoaded) {
@@ -91,7 +145,7 @@ export default function MultiCamGrid({ onSelectEntity }) {
   return (
     <div className="w-full h-full flex flex-col bg-canvas p-2.5 sm:p-4 overflow-y-auto">
       {/* Grid Controls Header */}
-      <div className="flex items-center justify-between pb-2.5 shrink-0 border-b border-borderDark mb-2.5">
+      <div className="flex items-center justify-between pb-2.5 shrink-0 border-b border-borderDark mb-2.5 gap-2 flex-wrap">
         <div className="flex items-center gap-2">
           <span className="text-xs sm:text-sm font-bold text-white tracking-tight">
             Multi-Cam Live Grid
@@ -101,6 +155,18 @@ export default function MultiCamGrid({ onSelectEntity }) {
             <strong className="text-white">{allLiveOptions.length}</strong> Live Now
           </span>
         </div>
+
+        <div className="flex items-center gap-2">
+          {/* Shuffle Button: Re-randomizes live cams in grid */}
+          <button
+            onClick={handleShuffle}
+            className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl bg-brandPink/20 hover:bg-brandPink/30 border border-brandPink/60 text-white text-xs font-mono font-bold shadow-[0_0_12px_rgba(255,42,109,0.3)] hover:scale-105 active:scale-95 transition-all cursor-pointer"
+            title="Randomly shuffle multi-cam grid to fresh live feeds"
+          >
+            <span>🎲</span>
+            <span className="hidden sm:inline">Shuffle Lives</span>
+            <span className="sm:hidden">Shuffle</span>
+          </button>
 
         {/* Responsive Grid Mode Switcher */}
         <div className="flex items-center gap-1 bg-surface p-1 rounded-xl border border-borderDark shadow-inner">
@@ -159,6 +225,7 @@ export default function MultiCamGrid({ onSelectEntity }) {
           )}
         </div>
       </div>
+    </div>
 
       {/* Grid Slots Layout */}
       <div

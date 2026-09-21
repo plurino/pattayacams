@@ -60,16 +60,19 @@ async function checkVideoIsLive(videoId) {
 
     const html = await res.text();
 
-    const isLive = html.includes('"isLive":true') ||
-                   html.includes('"isLiveNow":true') ||
-                   html.includes('"liveBroadcastDetails":{"isLiveNow":true');
+    const isLive = (html.includes('"isLive":true') ||
+                    html.includes('"isLiveNow":true') ||
+                    html.includes('"liveBroadcastDetails":{"isLiveNow":true')) &&
+                   !html.includes('"isLive":false');
 
     const isUpcoming = html.includes('"isUpcoming":true') || 
                        html.includes('"status":"UPCOMING"') || 
                        html.includes('Premieres in ') || 
                        html.includes('Scheduled for ');
 
-    const isEnded = html.includes('Streamed live') || html.includes('"isLive":false');
+    const isEnded = html.includes('Streamed live') || 
+                    html.includes('Streamed ') || 
+                    html.includes('"isLive":false');
 
     return {
       is_live: Boolean(isLive && !isUpcoming && !isEnded),

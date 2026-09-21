@@ -45,6 +45,7 @@ import TargetLockReticle from './common/TargetLockReticle';
 import { useStreamStatus } from '@/src/hooks/useStreamStatus';
 
 export default function VideoDrawer({ entity, onClose, onSelectEntity, onLiveShuffle }) {
+  const streamStatus = useStreamStatus();
   const [copiedCode, setCopiedCode] = useState(false);
   const [copiedShare, setCopiedShare] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
@@ -95,8 +96,6 @@ export default function VideoDrawer({ entity, onClose, onSelectEntity, onLiveShu
       window.open('https://livestream.pattaya.go.th/', '_blank', 'noopener,noreferrer');
     }
   };
-
-  const streamStatus = useStreamStatus();
 
   const isCctv = entity.type === 'cctv';
   const isLiveCam = entity.type === 'livecam' || entity.category === 'live_cam';

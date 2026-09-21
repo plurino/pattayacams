@@ -29,17 +29,20 @@ It aggregates live municipal CCTV feeds from Pattaya City Hall, 24/7 beach webca
 
 ## ⚡ Key Features
 
-- **Interactive Dark & Light Map Engine**: Powered by Leaflet and licensed CartoDB Dark Matter / Positron basemaps (`cb1_33su_1_683c1b500e92ad8b2069c2d2`) with smooth 45° step rotation, interactive compass rose reset, and theme toggling with zero watermarks or paid API dependencies.
+- **Interactive Dark & Light Map Engine**: Powered by Leaflet and licensed CartoDB Dark Matter / Positron basemaps with smooth 45° step rotation, interactive compass rose reset, theme toggling, and zero watermarks.
+- **Tactical Sensor Overlays & Geolocation**: Instant one-click toggle through NVG (Night Vision Green), High-Contrast Noir, and Thermal FLIR sensor modes, alongside precision GPS geolocation.
 - **Municipal CCTV Network & City Hall Integration**: 600 unclustered surveillance dots along all Pattaya arterial corridors. Displays official municipal telemetry, camera code, and direct link to the official Pattaya City Hall surveillance portal (`https://livestream.pattaya.go.th/`).
 - **Real-Time Doppler Rain Radar**: Embedded RainViewer API layer with 10-minute past history and 30-minute forward precipitation forecasts, interactive timeline scrubber, and rain overlay toggle.
-- **Hero Entertainment Venues**: High-visibility neon pink pulsing pins (`🔴 LIVE`) with active live stream radar pings vs dim slate pins (`⚪ OFFLINE`) for offline venues.
-- **Automated Stream Health-Checker**: Quota-free GitHub Actions automation (`scripts/check_streams.mjs` + `.github/workflows/check_streams.yml`) probing YouTube handle redirects and Kick API v2 endpoints without consuming paid API credits.
-- **Multi-Cam Command Grid**: 2x2 and 3x3 multi-screen grid wall with slots auto-populated with active live streams, featuring sleek standby cards with channel avatars and links for offline feeds (zero broken player boxes).
-- **Desktop Theater Mode**: VideoDrawer includes a Maximize/Minimize toggle expanding into an 800px+ 2-column widescreen desktop command console.
-- **🎲 Live Shuffle (City Roulette)**: Floating neon widget in the bottom-right corner of the map. Flies the map to an active live stream venue or displays interactive mobile phone viewer when dropping into an IRL creator's broadcast.
-- **Pattaya Creators & Venues Hub**: 54+ verified Pattaya creators and nightlife venues indexed on YouTube and Kick with a "Live Only" toggle, green Venue pins (`#10B981`), red YouTube badges (`#EF4444`), and bright green Kick badges (`#53FC18`).
+- **Hero Entertainment Venues & 24/7 Webcams**: 19 physical venues and 24/7 live webcams with high-visibility neon pink pulsing pins (`🔴 LIVE`) with active live stream radar pings vs dim slate pins (`⚪ OFFLINE`) for offline venues.
+- **Automated Stream Health-Checker**: Quota-free GitHub Actions automation (`scripts/check_streams.mjs` + `.github/workflows/check_streams.yml`) probing YouTube handle redirects, verifying live broadcast flags, and strictly rejecting ended broadcasts and upcoming waiting rooms.
+- **Multi-Cam Command Grid**: 2x2 and 3x3 multi-screen grid wall with randomized initial slots on first visit, browser `localStorage` slot persistence, and an interactive `🎲 Shuffle Lives` button to cycle streams.
+- **Desktop Theater Mode**: VideoDrawer includes a Maximize/Minimize toggle expanding into an 800px+ 2-column widescreen desktop command console with unmuted autoplay YouTube audio.
+- **🎲 Live Shuffle (City Roulette)**: Floating neon widget in the bottom corner of the map that dynamically repositions when drawer opens. Flies the map to an active live stream venue or displays interactive mobile phone viewer when dropping into an IRL creator's broadcast.
+- **🎬 Automated Cinematic Drone Tour**: Auto-pilots the camera across Pattaya's primary hotspots (Bali Hai Pier, Walking Street, Soi Buakhao, Central Beach Road, Soi 6, and Pratumnak Hill Viewpoint).
+- **2-Tier Tactical Telemetry Bar**: Permanent dual-tier situational panel featuring Indochina Time (ICT), Pattaya Bay Sunset & Golden Hour countdown, microclimate weather, PM2.5 air quality, wave swell & rip current advisory, nightlife vibe meter, Buddhist Dry Day alcohol ban alerts, and live THB FX rates.
+- **Pattaya Creators & Venues Hub**: 55+ verified Pattaya creators and nightlife venues indexed on YouTube and Kick with a "Live Only" toggle, green Venue pins (`#10B981`), red YouTube badges (`#EF4444`), and bright green Kick badges (`#53FC18`).
 - **PattayaVids VOD Portal**: Zero-quota RSS video scraper displaying completed episodes with automated exclusion of scheduled waiting rooms, live cams, and upcoming countdowns.
-- **Koh Larn Ferry Maritime Routes**: Turn-by-turn sea navigation tracks connecting Bali Hai Pier to Na Baan Pier and Tawaen Beach Pier, with complete timetable and 30 THB fare details.
+- **Default Active Transport Scene**: Automatic startup enablement of Songthaew transit loops, Koh Larn ferry nautical tracks, live ADS-B flight telemetry, and marine traffic.
 - **Programmatic SEO & Schema.org JSON-LD**: 660+ statically pre-rendered HTML landing pages (`/venues/[slug]`, `/creators/[slug]`, `/cams/[slug]`), full `robots.txt`, dynamic `sitemap.xml`, high-res 1200x630 `og-image.jpg`, and valid Schema.org structured data.
 
 ---

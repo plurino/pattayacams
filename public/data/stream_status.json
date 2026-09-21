@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-09-21T12:24:51.659Z",
+  "last_check": "2026-09-21T12:57:49.949Z",
   "entities": {
     "venue-pattaya-oh-bar": {
       "is_live": false,
@@ -15,7 +15,7 @@
       "is_live": true,
       "is_upcoming": false,
       "video_id": "WgSrfstUvIc",
-      "last_live_at": "2026-09-21T12:24:51.659Z",
+      "last_live_at": "2026-09-21T12:57:49.949Z",
       "status": "active",
       "name": "Pattaya Beach Road Live Cam",
       "platform": "youtube",
@@ -71,7 +71,7 @@
       "handle": "@SUGARBxPATTAYA"
     },
     "venue-x-club-pattaya": {
-      "is_live": true,
+      "is_live": false,
       "is_upcoming": false,
       "video_id": "kVrWVKmlN7Y",
       "last_live_at": "2026-09-21T12:24:51.659Z",
@@ -91,7 +91,7 @@
       "handle": "@LasVegasBeerGarden-PKBar"
     },
     "venue-gold-bar-soi-6": {
-      "is_live": true,
+      "is_live": false,
       "is_upcoming": false,
       "video_id": "zXSmhSacxcw",
       "last_live_at": "2026-09-21T12:24:51.659Z",
@@ -401,9 +401,9 @@
       "avatar_url": "https://yt3.googleusercontent.com/ABt-AgPlwBy2SB-QMz8SIHPi0B1IOUC5mDMuwhj1cw8TY80-n3qos4fjSd463wKNguj4EVJMRA=s900-c-k-c0x00ffffff-no-rj"
     },
     "creator-pattaya-beach-live": {
-      "is_live": true,
-      "is_upcoming": false,
-      "video_id": "wZnJV52i4FI",
+      "is_live": false,
+      "is_upcoming": true,
+      "video_id": "0bGNCCBXAKI",
       "last_live_at": "2026-09-21T12:24:51.659Z",
       "status": "active",
       "name": "Pattaya Beach Live",
@@ -714,14 +714,14 @@
       "is_live": true,
       "is_upcoming": false,
       "video_id": "z3JaoXt4QCE",
-      "last_live_at": "2026-09-21T12:24:51.659Z",
+      "last_live_at": "2026-09-21T12:57:49.949Z",
       "status": "active",
       "name": "True Blue Aussie Bar & Boomerang Bar",
       "platform": "youtube",
       "handle": "@Trueblueaussiebar"
     },
     "livecam-soi-buakhao-live-cam": {
-      "is_live": true,
+      "is_live": false,
       "is_upcoming": false,
       "video_id": "gL_CQ8f9mb4",
       "last_live_at": "2026-09-21T12:24:51.659Z",
@@ -839,7 +839,7 @@
       "avatar_url": "https://yt3.googleusercontent.com/ugj2a216u5s5JhG4iireKvsOCK9lky14pZHt1tGGRm4I9na4HTsC7_8QRPb6xinI7mb8u4ZD=s900-c-k-c0x00ffffff-no-rj"
     },
     "venue-lust-on-soi-6": {
-      "is_live": true,
+      "is_live": false,
       "is_upcoming": false,
       "video_id": "2ET6uT8-t7U",
       "last_live_at": "2026-09-21T12:24:51.659Z",
@@ -849,7 +849,7 @@
       "handle": "@LustonSoi6"
     },
     "venue-desire-on-soi-6": {
-      "is_live": true,
+      "is_live": false,
       "is_upcoming": false,
       "video_id": "7CLkn93X2bA",
       "last_live_at": "2026-09-21T12:24:51.659Z",
@@ -861,7 +861,7 @@
     "venue-dolls-a-go-go": {
       "is_live": false,
       "is_upcoming": false,
-      "video_id": "9gAsTQmD5BU",
+      "video_id": "2TLASVmaU7g",
       "last_live_at": null,
       "status": "active",
       "name": "Dolls A Go Go",
@@ -869,7 +869,7 @@
       "handle": "@DOLLSAGOGOSOI6LIVE"
     },
     "venue-maju-bar": {
-      "is_live": true,
+      "is_live": false,
       "is_upcoming": false,
       "video_id": "xP3dqCPj0QY",
       "last_live_at": "2026-09-21T12:24:51.659Z",
@@ -889,7 +889,7 @@
       "handle": "@theelitebar246"
     },
     "venue-bandits-hideout": {
-      "is_live": true,
+      "is_live": false,
       "is_upcoming": false,
       "video_id": "Whk80i2TDNo",
       "last_live_at": "2026-09-21T12:24:51.659Z",
@@ -899,9 +899,9 @@
       "handle": "@BanditsHideout-lm6ho"
     },
     "livecam-south-pattaya-live-cam": {
-      "is_live": true,
-      "is_upcoming": false,
-      "video_id": "5jhgWRQWCgA",
+      "is_live": false,
+      "is_upcoming": true,
+      "video_id": "OtbCY7Juk7w",
       "last_live_at": "2026-09-21T12:24:51.659Z",
       "status": "active",
       "name": "South Pattaya Live Cam",
@@ -943,9 +943,9 @@
       "avatar_url": "https://yt3.googleusercontent.com/lcgGQd_VWXbva3sOEvgXp_eISmaA20LSeUnPFagnga7AK9P6Kz4v06ESJt0mwR-TkJEZoF6l=s900-c-k-c0x00ffffff-no-rj"
     },
     "livecam-pattaya-beach-live": {
-      "is_live": true,
-      "is_upcoming": false,
-      "video_id": "wZnJV52i4FI",
+      "is_live": false,
+      "is_upcoming": true,
+      "video_id": "0bGNCCBXAKI",
       "last_live_at": "2026-09-21T12:24:51.659Z",
       "status": "active",
       "name": "Pattaya Beach Live",
