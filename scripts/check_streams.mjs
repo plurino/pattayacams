@@ -42,6 +42,18 @@ const BLOCKED_AUTHORS = [
   'sky news'
 ];
 
+function parsePlayerResponse(html) {
+  let pr = null;
+  const match = html.match(/var ytInitialPlayerResponse\s*=\s*({.+?});(?:var|<\/script>)/s) ||
+                html.match(/ytInitialPlayerResponse\s*=\s*({.+?});/s);
+  if (match) {
+    try {
+      pr = JSON.parse(match[1]);
+    } catch (e) {}
+  }
+  return pr;
+}
+
 async function checkVideoIsLive(videoId) {
   if (!videoId) return { is_live: false, is_upcoming: false, is_ended: false };
   try {
@@ -59,25 +71,34 @@ async function checkVideoIsLive(videoId) {
     clearTimeout(timeout);
 
     const html = await res.text();
+    const pr = parsePlayerResponse(html);
 
-    const isLive = (html.includes('"isLive":true') ||
-                    html.includes('"isLiveNow":true') ||
-                    html.includes('"liveBroadcastDetails":{"isLiveNow":true')) &&
-                   !html.includes('"isLive":false');
+    if (pr) {
+      const playabilityStatus = pr.playabilityStatus?.status;
+      const isLiveDetails = pr.microformat?.playerMicroformatRenderer?.liveBroadcastDetails;
+      const videoDetails = pr.videoDetails;
 
-    const isUpcoming = html.includes('"isUpcoming":true') || 
-                       html.includes('"status":"UPCOMING"') || 
-                       html.includes('Premieres in ') || 
-                       html.includes('Scheduled for ');
+      const isLiveNow = Boolean(isLiveDetails?.isLiveNow === true || (videoDetails?.isLive === true && playabilityStatus === 'OK'));
+      const isUpcoming = Boolean(playabilityStatus === 'LIVE_STREAM_OFFLINE' || pr.playabilityStatus?.liveStreamability?.liveStreamabilityRenderer?.offlineSlate);
+      const isEnded = Boolean(isLiveDetails?.endTimestamp || (!isLiveNow && !isUpcoming && videoDetails?.isLiveContent));
 
-    const isEnded = html.includes('Streamed live') || 
-                    html.includes('Streamed ') || 
-                    html.includes('"isLive":false');
+      return {
+        is_live: isLiveNow && !isUpcoming,
+        is_upcoming: isUpcoming && !isLiveNow,
+        is_ended: isEnded,
+        title: videoDetails?.title || null
+      };
+    }
+
+    // Fallback if full JSON parse fails
+    const hasLiveNow = html.includes('"isLiveNow":true');
+    const hasOfflineSlate = html.includes('LIVE_STREAM_OFFLINE') || html.includes('"isUpcoming":true');
+    const hasEndTimestamp = html.includes('"endTimestamp":');
 
     return {
-      is_live: Boolean(isLive && !isUpcoming && !isEnded),
-      is_upcoming: Boolean(isUpcoming),
-      is_ended: Boolean(isEnded)
+      is_live: hasLiveNow && !hasOfflineSlate,
+      is_upcoming: hasOfflineSlate && !hasLiveNow,
+      is_ended: hasEndTimestamp
     };
   } catch (e) {
     return { is_live: false, is_upcoming: false, is_ended: false };
@@ -92,32 +113,7 @@ async function checkYouTubeChannel(handle, fallbackVideoId, channelId = null, ex
   const cleanHandle = handle ? (handle.startsWith('@') ? handle : '@' + handle) : null;
   let candidateVideoIds = [];
 
-  // 1. YouTube RSS Feed Check (Unblockable on any IP - Google never shows consent walls on XML RSS)
-  if (channelId) {
-    try {
-      const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), 6000);
-      const rssRes = await fetch(`https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`, {
-        headers: { 'User-Agent': 'Mozilla/5.0' },
-        signal: controller.signal
-      });
-      clearTimeout(timeout);
-
-      if (rssRes.ok) {
-        const xml = await rssRes.text();
-        const matches = [...xml.matchAll(/<yt:videoId>([^<]+)<\/yt:videoId>/g)];
-        if (matches.length > 0) {
-          // Take the top 2 newest video IDs
-          candidateVideoIds.push(matches[0][1]);
-          if (matches.length > 1) candidateVideoIds.push(matches[1][1]);
-        }
-      }
-    } catch (err) {
-      // RSS failover continues to /live
-    }
-  }
-
-  // 2. YouTube /live Endpoint Probe
+  // 1. YouTube /live Endpoint Probe (Always check this first!)
   if (cleanHandle) {
     try {
       const controller = new AbortController();
@@ -145,10 +141,11 @@ async function checkYouTubeChannel(handle, fallbackVideoId, channelId = null, ex
       const watchMatch = canonicalUrl.match(/watch\?v=([a-zA-Z0-9_-]{11})/);
 
       if (watchMatch) {
-        const liveVideoId = watchMatch[1];
-        if (!candidateVideoIds.includes(liveVideoId)) {
-          // /live redirect is primary candidate
-          candidateVideoIds.unshift(liveVideoId);
+        candidateVideoIds.push(watchMatch[1]);
+      } else {
+        const vidMatch = html.match(/"videoId":"([a-zA-Z0-9_-]{11})"/);
+        if (vidMatch) {
+          candidateVideoIds.push(vidMatch[1]);
         }
       }
     } catch (err) {
@@ -156,7 +153,38 @@ async function checkYouTubeChannel(handle, fallbackVideoId, channelId = null, ex
     }
   }
 
-  // 3. Verify Candidates in priority order
+  // 2. YouTube RSS Feed Check (Unblockable on any IP - Google never shows consent walls on XML RSS)
+  if (channelId) {
+    try {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 6000);
+      const rssRes = await fetch(`https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`, {
+        headers: { 'User-Agent': 'Mozilla/5.0' },
+        signal: controller.signal
+      });
+      clearTimeout(timeout);
+
+      if (rssRes.ok) {
+        const xml = await rssRes.text();
+        const matches = [...xml.matchAll(/<yt:videoId>([^<]+)<\/yt:videoId>/g)];
+        for (const m of matches.slice(0, 2)) {
+          if (!candidateVideoIds.includes(m[1])) {
+            candidateVideoIds.push(m[1]);
+          }
+        }
+      }
+    } catch (err) {
+      // RSS failover continues
+    }
+  }
+
+  // 3. Fallback video ID
+  if (fallbackVideoId && !candidateVideoIds.includes(fallbackVideoId)) {
+    candidateVideoIds.push(fallbackVideoId);
+  }
+
+  // 4. Verify Candidates: prioritize finding an active LIVE stream
+  let upcomingCandidate = null;
   for (const videoId of candidateVideoIds) {
     const check = await checkVideoIsLive(videoId);
     if (check.is_live) {
@@ -168,8 +196,8 @@ async function checkYouTubeChannel(handle, fallbackVideoId, channelId = null, ex
         platform: 'youtube'
       };
     }
-    if (check.is_upcoming) {
-      return {
+    if (check.is_upcoming && !upcomingCandidate) {
+      upcomingCandidate = {
         is_live: false,
         is_upcoming: true,
         video_id: videoId,
@@ -179,18 +207,8 @@ async function checkYouTubeChannel(handle, fallbackVideoId, channelId = null, ex
     }
   }
 
-  // If fallback video exists, check if it happens to still be live
-  if (fallbackVideoId && !candidateVideoIds.includes(fallbackVideoId)) {
-    const check = await checkVideoIsLive(fallbackVideoId);
-    if (check.is_live) {
-      return {
-        is_live: true,
-        is_upcoming: false,
-        video_id: fallbackVideoId,
-        status: 'active',
-        platform: 'youtube'
-      };
-    }
+  if (upcomingCandidate) {
+    return upcomingCandidate;
   }
 
   return {
