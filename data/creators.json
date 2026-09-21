@@ -862,5 +862,37 @@
       "Villas"
     ],
     "bio_seo": "Pattaya Real Estate & Living showcases luxury villas, sea-view condominiums, and property investment opportunities throughout Pattaya, Pratumnak, and Wongamat. With video walkthroughs, pricing breakdowns, and legal explanations of foreign freehold titles, the channel equips property buyers with the essential knowledge needed to navigate the Thai real estate market. The hosts explain annual maintenance sinking funds, rental yield expectations, and developer track records, helping investors make secure and profitable decisions on the eastern seaboard. The greater Pattaya metropolitan area is supported by world-class infrastructure including international JCI-accredited hospitals, modern shopping complexes, multilingual legal and visa consultancies, and dependable high-speed fiber internet. With ongoing regional transit modernizations including the Eastern Economic Corridor high-speed airport rail project connecting U-Tapao, Suvarnabhumi, and Don Mueang airports, the resort city continues to mature into an accessible international commercial and leisure destination. Expatriates and long-stay travelers enjoy a high quality of life combining affordable living expenses, welcoming Thai hospitality, tropical sunshine, and an active multinational community throughout the year."
+  },
+  {
+    "name": "Benzie Asia Babe",
+    "slug": "benzie-asia-babe",
+    "platform": "youtube",
+    "channel_id": "UCxbs76GtfhbKRqhiRJxuw_w",
+    "handle": "@BenzieAsiaBabe",
+    "avatar_url": "https://yt3.googleusercontent.com/5rhmkpsV871PdyLO4CnmE5BTvKFBEqYbjUg5wU-HWF7Ky-HmdKOhmZXXOh2RebOrXnhmgCNjrQ=s900-c-k-c0x00ffffff-no-rj",
+    "primary_zone": "buakhao",
+    "content_tags": [
+      "Live Streaming",
+      "Nightlife",
+      "IRL Vlogs",
+      "Bar Culture"
+    ],
+    "bio_seo": "Benzie Asia Babe is a lively Pattaya-based content creator and live streamer broadcasting real-time nightlife experiences, bar camaraderie, social gatherings, and lively street-level interactions primarily around Soi Buakhao and Central Pattaya."
+  },
+  {
+    "name": "Pattaya 101",
+    "slug": "pattaya-101",
+    "platform": "youtube",
+    "channel_id": "UCv83n8UQxQo518neipg84ug",
+    "handle": "@Pattaya101",
+    "avatar_url": "https://yt3.googleusercontent.com/lcgGQd_VWXbva3sOEvgXp_eISmaA20LSeUnPFagnga7AK9P6Kz4v06ESJt0mwR-TkJEZoF6l=s900-c-k-c0x00ffffff-no-rj",
+    "primary_zone": "central_pattaya",
+    "content_tags": [
+      "Walking Tours",
+      "Street Walks",
+      "Nightlife Guides",
+      "Area Overviews"
+    ],
+    "bio_seo": "Pattaya 101 produces immersive 4K video walking tours capturing the sights, sounds, and vibrant energy of Pattaya's most famous avenues, including Soi Buakhao, Soi Chaiyapoon, Soi Honey, and Beach Road."
   }
 ]

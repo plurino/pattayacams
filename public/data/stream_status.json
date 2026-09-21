@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-09-21T11:32:54.975Z",
+  "last_check": "2026-09-21T12:12:48.201Z",
   "entities": {
     "venue-pattaya-oh-bar": {
       "is_live": false,
@@ -15,7 +15,7 @@
       "is_live": true,
       "is_upcoming": false,
       "video_id": "WgSrfstUvIc",
-      "last_live_at": "2026-09-21T11:32:54.975Z",
+      "last_live_at": "2026-09-21T12:12:48.201Z",
       "status": "active",
       "name": "Pattaya Beach Road Live Cam",
       "platform": "youtube",
@@ -74,7 +74,7 @@
       "is_live": true,
       "is_upcoming": false,
       "video_id": "kVrWVKmlN7Y",
-      "last_live_at": "2026-09-21T11:32:54.975Z",
+      "last_live_at": "2026-09-21T12:12:48.201Z",
       "status": "active",
       "name": "X Club Pattaya",
       "platform": "youtube",
@@ -94,7 +94,7 @@
       "is_live": true,
       "is_upcoming": false,
       "video_id": "zXSmhSacxcw",
-      "last_live_at": "2026-09-21T11:32:54.975Z",
+      "last_live_at": "2026-09-21T12:12:48.201Z",
       "status": "active",
       "name": "Gold Bar Soi 6",
       "platform": "youtube",
@@ -244,7 +244,7 @@
       "is_live": true,
       "is_upcoming": false,
       "video_id": "wZnJV52i4FI",
-      "last_live_at": "2026-09-21T11:32:54.975Z",
+      "last_live_at": "2026-09-21T12:12:48.201Z",
       "status": "active",
       "name": "Pattaya Beach Live",
       "platform": "youtube",
@@ -404,7 +404,7 @@
       "is_live": true,
       "is_upcoming": false,
       "video_id": "wZnJV52i4FI",
-      "last_live_at": "2026-09-21T11:32:54.975Z",
+      "last_live_at": "2026-09-21T12:12:48.201Z",
       "status": "active",
       "name": "Pattaya Beach Live",
       "platform": "youtube",
@@ -711,10 +711,10 @@
       "handle": "@smilebarpattayathailand467"
     },
     "venue-true-blue-aussie-bar": {
-      "is_live": false,
-      "is_upcoming": true,
-      "video_id": "-pFdQx7DAJE",
-      "last_live_at": "2026-09-18T15:59:50.159Z",
+      "is_live": true,
+      "is_upcoming": false,
+      "video_id": "z3JaoXt4QCE",
+      "last_live_at": "2026-09-21T12:12:48.201Z",
       "status": "active",
       "name": "True Blue Aussie Bar & Boomerang Bar",
       "platform": "youtube",
@@ -724,7 +724,7 @@
       "is_live": true,
       "is_upcoming": false,
       "video_id": "gL_CQ8f9mb4",
-      "last_live_at": "2026-09-21T11:32:54.975Z",
+      "last_live_at": "2026-09-21T12:12:48.201Z",
       "status": "active",
       "name": "Soi Buakhao Live Cam",
       "platform": "youtube",
@@ -791,9 +791,9 @@
       "avatar_url": "https://yt3.googleusercontent.com/hUjrQt2-RhdItsiQsjbsSAKEJIv1tpwpxtB3D-k1GmjsXVdFG20FWwBTLDW6gLQufYZCDiQjmnc=s900-c-k-c0x00ffffff-no-rj"
     },
     "creator-the-tysin-show": {
-      "is_live": true,
+      "is_live": false,
       "is_upcoming": false,
-      "video_id": "SFLUJuRDvj4",
+      "video_id": "ywtaadxIleg",
       "last_live_at": "2026-09-21T11:32:54.975Z",
       "status": "active",
       "name": "The Tysin Show",
@@ -837,6 +837,110 @@
       "handle": "@dvmedia6309",
       "kick_channel": null,
       "avatar_url": "https://yt3.googleusercontent.com/ugj2a216u5s5JhG4iireKvsOCK9lky14pZHt1tGGRm4I9na4HTsC7_8QRPb6xinI7mb8u4ZD=s900-c-k-c0x00ffffff-no-rj"
+    },
+    "venue-lust-on-soi-6": {
+      "is_live": true,
+      "is_upcoming": false,
+      "video_id": "2ET6uT8-t7U",
+      "last_live_at": "2026-09-21T12:12:48.201Z",
+      "status": "active",
+      "name": "Lust on Soi 6",
+      "platform": "youtube",
+      "handle": "@LustonSoi6"
+    },
+    "venue-desire-on-soi-6": {
+      "is_live": true,
+      "is_upcoming": false,
+      "video_id": "7CLkn93X2bA",
+      "last_live_at": "2026-09-21T12:12:48.201Z",
+      "status": "active",
+      "name": "Desire on Soi 6",
+      "platform": "youtube",
+      "handle": "@DesireonSoi6"
+    },
+    "venue-dolls-a-go-go": {
+      "is_live": false,
+      "is_upcoming": false,
+      "video_id": "9gAsTQmD5BU",
+      "last_live_at": null,
+      "status": "active",
+      "name": "Dolls A Go Go",
+      "platform": "youtube",
+      "handle": "@DOLLSAGOGOSOI6LIVE"
+    },
+    "venue-maju-bar": {
+      "is_live": true,
+      "is_upcoming": false,
+      "video_id": "xP3dqCPj0QY",
+      "last_live_at": "2026-09-21T12:12:48.201Z",
+      "status": "active",
+      "name": "Maju Bar",
+      "platform": "youtube",
+      "handle": "@maju_bar_thailand"
+    },
+    "venue-the-elite-bar": {
+      "is_live": false,
+      "is_upcoming": true,
+      "video_id": "ohv4nH-m50g",
+      "last_live_at": null,
+      "status": "active",
+      "name": "The Elite Bar",
+      "platform": "youtube",
+      "handle": "@theelitebar246"
+    },
+    "venue-bandits-hideout": {
+      "is_live": true,
+      "is_upcoming": false,
+      "video_id": "Whk80i2TDNo",
+      "last_live_at": "2026-09-21T12:12:48.201Z",
+      "status": "active",
+      "name": "Bandits Hideout",
+      "platform": "youtube",
+      "handle": "@BanditsHideout-lm6ho"
+    },
+    "livecam-south-pattaya-live-cam": {
+      "is_live": true,
+      "is_upcoming": false,
+      "video_id": "5jhgWRQWCgA",
+      "last_live_at": "2026-09-21T12:12:48.201Z",
+      "status": "active",
+      "name": "South Pattaya Live Cam",
+      "platform": "youtube",
+      "handle": "@southpattayalivecam"
+    },
+    "streamer-RS-014": {
+      "is_live": false,
+      "is_upcoming": true,
+      "video_id": "RDw3E4i-Mr4",
+      "last_live_at": null,
+      "status": "active",
+      "name": "Benzie Asia Babe",
+      "platform": "youtube",
+      "handle": "@BenzieAsiaBabe"
+    },
+    "creator-benzie-asia-babe": {
+      "is_live": false,
+      "is_upcoming": true,
+      "video_id": "RDw3E4i-Mr4",
+      "last_live_at": null,
+      "status": "active",
+      "name": "Benzie Asia Babe",
+      "platform": "youtube",
+      "handle": "@BenzieAsiaBabe",
+      "kick_channel": null,
+      "avatar_url": "https://yt3.googleusercontent.com/5rhmkpsV871PdyLO4CnmE5BTvKFBEqYbjUg5wU-HWF7Ky-HmdKOhmZXXOh2RebOrXnhmgCNjrQ=s900-c-k-c0x00ffffff-no-rj"
+    },
+    "creator-pattaya-101": {
+      "is_live": false,
+      "is_upcoming": false,
+      "video_id": "2mo2nKu78zc",
+      "last_live_at": null,
+      "status": "active",
+      "name": "Pattaya 101",
+      "platform": "youtube",
+      "handle": "@Pattaya101",
+      "kick_channel": null,
+      "avatar_url": "https://yt3.googleusercontent.com/lcgGQd_VWXbva3sOEvgXp_eISmaA20LSeUnPFagnga7AK9P6Kz4v06ESJt0mwR-TkJEZoF6l=s900-c-k-c0x00ffffff-no-rj"
     }
   }
 }

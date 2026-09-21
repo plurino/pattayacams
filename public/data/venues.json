@@ -487,7 +487,7 @@
     "category": "bar",
     "lat": 12.9279432,
     "lng": 100.8836641,
-    "video_id": "gc9QhhfTkw4",
+    "video_id": "z3JaoXt4QCE",
     "youtube_channel_id": "UC6lUliNly5P9-WhqksPj5Ag",
     "youtube_handle": "@Trueblueaussiebar",
     "google_maps_url": "https://www.google.com/maps/place/TRUE+BLUE+AUSSIE+BAR/@12.9145024,100.9154145,17z/data=!3m1!4b1!4m6!3m5!1s0x310295fde2e838a9:0x59203daceb3a60d4!8m2!3d12.9145024!4d100.9154145!16s%2Fg%2F11h27jb66p",
@@ -512,5 +512,185 @@
       }
     ],
     "google_name": "TRUE BLUE AUSSIE BAR"
+  },
+  {
+    "slug": "lust-on-soi-6",
+    "id": "VN-022",
+    "name": "Lust on Soi 6",
+    "zone": "soi_6",
+    "category": "bar",
+    "lat": 12.9423503,
+    "lng": 100.886496,
+    "youtube_channel_id": "UCYjq7BC03MAiWgCzU4G4-cg",
+    "youtube_handle": "@LustonSoi6",
+    "video_id": "2ET6uT8-t7U",
+    "google_maps_url": "https://www.google.com/maps/place/Lust+on+Soi+6/@12.9423503,100.886496,17z/data=!3m1!4b1!4m6!3m5!1s0x310297a731966d57:0xd3eaf6e91404cc2c!8m2!3d12.9423503!4d100.886496",
+    "description": "Energetic open-front entertainment beer bar located on Pattaya Soi 6, broadcasting high-energy daily live streams, guest interactions, and vibrant party vibes.",
+    "is_sponsored": false,
+    "transit_tip": "Catch a 10 THB Baht Bus heading north along Beach Road or south along Second Road, hop off at Soi 6, and walk 80m into the soi.",
+    "opening_hours": "1:00 PM – 1:00 AM daily • Peak Vibe: 5:00 PM – Midnight",
+    "tags": [
+      "Beer Bar",
+      "Soi 6",
+      "Live Streaming",
+      "Entertainment Bar"
+    ],
+    "photos": [
+      {
+        "url": "https://yt3.googleusercontent.com/ytc/AIdro_m1fV0EacAR-zwpGAu5ySFRYxinCtLPwSW10VGjrNvTsg=s900-c-k-c0x00ffffff-no-rj",
+        "caption": "Lust on Soi 6 official profile"
+      }
+    ],
+    "google_name": "Lust on Soi 6"
+  },
+  {
+    "slug": "desire-on-soi-6",
+    "id": "VN-023",
+    "name": "Desire on Soi 6",
+    "zone": "soi_6",
+    "category": "bar",
+    "lat": 12.9422634,
+    "lng": 100.8867582,
+    "youtube_channel_id": "UCPyO4RYwY8WZxy5RwflKAUA",
+    "youtube_handle": "@DesireonSoi6",
+    "video_id": "7CLkn93X2bA",
+    "google_maps_url": "https://www.google.com/maps/place/Desire+on+Soi+6/@12.9422634,100.8867582,17z/data=!3m1!4b1!4m6!3m5!1s0x3102971a8d4e9885:0xe9057b53e468ab80!8m2!3d12.9422634!4d100.8867582",
+    "description": "Popular, upbeat open-air entertainment bar positioned along Pattaya Soi 6 near 2nd Road, featuring daily afternoon and evening live streams, upbeat music, and friendly staff.",
+    "is_sponsored": false,
+    "transit_tip": "Hop off the Baht Bus at Pattaya Second Road and Soi 6, then take a short 40m walk down Soi 6 on the left-hand side.",
+    "opening_hours": "1:00 PM – 1:00 AM daily • Peak Vibe: 5:00 PM – 11:30 PM",
+    "tags": [
+      "Beer Bar",
+      "Soi 6",
+      "Live Streaming",
+      "Afternoon Party"
+    ],
+    "photos": [
+      {
+        "url": "https://yt3.googleusercontent.com/ytc/AIdro_naNgCWp2cBUoO6j3MyvjSk1Un3-ge5djmY6qYDeUXlgQ=s900-c-k-c0x00ffffff-no-rj",
+        "caption": "Desire on Soi 6 official profile"
+      }
+    ],
+    "google_name": "Desire on Soi 6"
+  },
+  {
+    "slug": "dolls-a-go-go",
+    "id": "VN-024",
+    "name": "Dolls A Go Go",
+    "zone": "soi_6",
+    "category": "bar",
+    "lat": 12.94238,
+    "lng": 100.8863,
+    "youtube_channel_id": "UCcJL5iWHcsDO3PHA-w54Ugg",
+    "youtube_handle": "@DOLLSAGOGOSOI6LIVE",
+    "video_id": "9gAsTQmD5BU",
+    "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Dolls+A+Go+Go+Pattaya+Soi+6",
+    "description": "Legendary Soi 6 A Go Go venue delivering high-energy entertainment, regular live stream broadcasts, and classic Pattaya party atmosphere.",
+    "is_sponsored": false,
+    "transit_tip": "Walk mid-way down Soi 6 from either Beach Road or Second Road, located in the central bustling strip.",
+    "opening_hours": "2:00 PM – 2:00 AM daily • Peak Vibe: 8:00 PM – 1:00 AM",
+    "tags": [
+      "A Go Go",
+      "Soi 6",
+      "Nightlife",
+      "Live Shows"
+    ],
+    "photos": [
+      {
+        "url": "https://yt3.googleusercontent.com/D0fh6PQDjAUS-nClQfhikfStFvpPM1IqEpDeC_WIAHYdWywQk9zy3VlCe5d3hP7wVnIvnQleHg=s900-c-k-c0x00ffffff-no-rj",
+        "caption": "Dolls A Go Go Soi 6"
+      }
+    ],
+    "google_name": "Dolls A Go Go"
+  },
+  {
+    "slug": "maju-bar",
+    "id": "VN-025",
+    "name": "Maju Bar",
+    "zone": "soi_buakhao",
+    "category": "bar",
+    "lat": 12.9257,
+    "lng": 100.8798,
+    "youtube_channel_id": "UCUn77BUlxURCHpoSLoasq_w",
+    "youtube_handle": "@maju_bar_thailand",
+    "video_id": "xP3dqCPj0QY",
+    "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Maju+Bar+Soi+Buakhao+Pattaya",
+    "description": "Lively entertainment bar and guesthouse located on southern Soi Buakhao near Wat Chai Mongkol, featuring regular live streams, creator meetups, and friendly hospitality.",
+    "is_sponsored": false,
+    "transit_tip": "Take the South Pattaya Baht Bus to Wat Chai Mongkol market corner, walk 100m north onto Soi Buakhao.",
+    "opening_hours": "2:00 PM – 2:00 AM daily • Peak Vibe: 7:00 PM – Midnight",
+    "tags": [
+      "Beer Bar",
+      "Soi Buakhao",
+      "Guesthouse",
+      "Live Streams"
+    ],
+    "photos": [
+      {
+        "url": "https://yt3.googleusercontent.com/kaSoaA4i9J5bdazIcaJMAJl9HF7UH3ZqCI6HCdhpEGznIjjVOg373b5duGJSLJc_hQR4qlpr=s900-c-k-c0x00ffffff-no-rj",
+        "caption": "Maju Bar Pattaya"
+      }
+    ],
+    "google_name": "Maju Bar & Guesthouse"
+  },
+  {
+    "slug": "the-elite-bar",
+    "id": "VN-026",
+    "name": "The Elite Bar",
+    "zone": "soi_buakhao",
+    "category": "bar",
+    "lat": 12.9307946,
+    "lng": 100.8856635,
+    "youtube_channel_id": "UCON3F8nkfxTqWO3g7VZhOSg",
+    "youtube_handle": "@theelitebar246",
+    "video_id": "ohv4nH-m50g",
+    "google_maps_url": "https://www.google.com/maps/place/THE+ELITE+BAR/@12.9307946,100.8856635,17z/data=!3m1!4b1!4m6!3m5!1s0x310297002f0628c9:0x8eb8500a6a184530!8m2!3d12.9307946!4d100.8856635",
+    "description": "Popular, high-energy beer and party bar situated in the buzzing Soi Chaiyapoon (Soi Pothole) corridor right off Soi Buakhao, broadcasting interactive nightly live streams.",
+    "is_sponsored": false,
+    "transit_tip": "Ride the Soi Buakhao Baht Bus, hop off at Soi Chaiyapoon (Soi 25 / Pothole), and walk 60m east.",
+    "opening_hours": "3:00 PM – 2:00 AM daily • Peak Vibe: 8:00 PM – 1:30 AM",
+    "tags": [
+      "Beer Bar",
+      "Soi Chaiyapoon",
+      "Nightlife",
+      "Live Chat"
+    ],
+    "photos": [
+      {
+        "url": "https://yt3.googleusercontent.com/A-xXPxDeOIGIvrzHyHJyLXG28n5_920egCNNu-ycd2361NG8j6zmgymEedWO8uLA21-ZQmAE=s900-c-k-c0x00ffffff-no-rj",
+        "caption": "The Elite Bar Pattaya"
+      }
+    ],
+    "google_name": "THE ELITE BAR"
+  },
+  {
+    "slug": "bandits-hideout",
+    "id": "VN-027",
+    "name": "Bandits Hideout",
+    "zone": "soi_6",
+    "category": "bar",
+    "lat": 12.9421559,
+    "lng": 100.8867062,
+    "youtube_channel_id": "UCV9HEvug8gV2F8NeTE3B4Bg",
+    "youtube_handle": "@BanditsHideout-lm6ho",
+    "video_id": "Whk80i2TDNo",
+    "google_maps_url": "https://www.google.com/maps/place/Bandits+Hideout/@12.9421559,100.8867062,17z/data=!3m1!4b1!4m6!3m5!1s0x31029601a7f6da9b:0xabcc2f5e342423de!8m2!3d12.9421559!4d100.8867062",
+    "description": "Lively entertainment beer bar situated mid-soi on Pattaya Soi 6, broadcasting regular daily live streams with vibrant music, games, and cold drinks.",
+    "is_sponsored": false,
+    "transit_tip": "Hop off at Second Road and Soi 6, stroll 50m down the soi on the left-hand side.",
+    "opening_hours": "1:00 PM – 1:00 AM daily • Peak Vibe: 5:00 PM – Midnight",
+    "tags": [
+      "Beer Bar",
+      "Soi 6",
+      "Live Streaming",
+      "Entertainment"
+    ],
+    "photos": [
+      {
+        "url": "https://yt3.googleusercontent.com/5VHL_ETQuDGxfaO6pSynmtLbtxWyySJpXItXp6CZorxGp_j_wWrtk9hAH7uqrJrgWkdUNWuDBA=s900-c-k-c0x00ffffff-no-rj",
+        "caption": "Bandits Hideout Soi 6"
+      }
+    ],
+    "google_name": "Bandits Hideout"
   }
 ]
