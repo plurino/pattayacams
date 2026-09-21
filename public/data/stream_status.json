@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-09-21T13:45:44.951Z",
+  "last_check": "2026-09-21T13:54:35.707Z",
   "entities": {
     "venue-pattaya-oh-bar": {
       "is_live": false,
@@ -12,9 +12,9 @@
       "handle": "@PattayaOhBar"
     },
     "livecam-pattaya-beach-road-live-cam": {
-      "is_live": true,
+      "is_live": false,
       "is_upcoming": false,
-      "video_id": "WgSrfstUvIc",
+      "video_id": "ahC-dOZGCnI",
       "last_live_at": "2026-09-21T13:45:44.951Z",
       "status": "active",
       "name": "Pattaya Beach Road Live Cam",
@@ -71,9 +71,9 @@
       "handle": "@SUGARBxPATTAYA"
     },
     "venue-x-club-pattaya": {
-      "is_live": true,
+      "is_live": false,
       "is_upcoming": false,
-      "video_id": "kVrWVKmlN7Y",
+      "video_id": "pV8FmQa0a5w",
       "last_live_at": "2026-09-21T13:45:44.951Z",
       "status": "active",
       "name": "X Club Pattaya",
@@ -81,9 +81,9 @@
       "handle": "@XClubPattayaSoiChaiapoon"
     },
     "venue-las-vegas-beer-garden": {
-      "is_live": true,
+      "is_live": false,
       "is_upcoming": false,
-      "video_id": "34XJcn0lETI",
+      "video_id": "IG0QVXtgg60",
       "last_live_at": "2026-09-21T13:45:44.951Z",
       "status": "active",
       "name": "Las Vegas Beer Garden",
@@ -91,9 +91,9 @@
       "handle": "@LasVegasBeerGarden-PKBar"
     },
     "venue-gold-bar-soi-6": {
-      "is_live": true,
+      "is_live": false,
       "is_upcoming": false,
-      "video_id": "zXSmhSacxcw",
+      "video_id": "VMifJwoCqxs",
       "last_live_at": "2026-09-21T13:45:44.951Z",
       "status": "active",
       "name": "Gold Bar Soi 6",
@@ -701,9 +701,9 @@
       "avatar_url": "https://yt3.googleusercontent.com/6GS7T_pCqHAsewQtNL6Guf0LC1cJadn2zRElCZH52RlIJczk5TLwlpTv7MRD7LoinFyVD41H_ZI=s900-c-k-c0x00ffffff-no-rj"
     },
     "venue-smile-bar-pattaya": {
-      "is_live": true,
-      "is_upcoming": false,
-      "video_id": "KXyP6OqDj6A",
+      "is_live": false,
+      "is_upcoming": true,
+      "video_id": "2u3qNvJxz4k",
       "last_live_at": "2026-09-21T13:45:44.951Z",
       "status": "active",
       "name": "Smile Bar Pattaya",
@@ -711,9 +711,9 @@
       "handle": "@smilebarpattayathailand467"
     },
     "venue-true-blue-aussie-bar": {
-      "is_live": true,
+      "is_live": false,
       "is_upcoming": false,
-      "video_id": "z3JaoXt4QCE",
+      "video_id": "R9gCyWez3jM",
       "last_live_at": "2026-09-21T13:45:44.951Z",
       "status": "active",
       "name": "True Blue Aussie Bar & Boomerang Bar",
@@ -721,9 +721,9 @@
       "handle": "@Trueblueaussiebar"
     },
     "livecam-soi-buakhao-live-cam": {
-      "is_live": true,
+      "is_live": false,
       "is_upcoming": false,
-      "video_id": "gL_CQ8f9mb4",
+      "video_id": "eGX8OZsubf0",
       "last_live_at": "2026-09-21T13:45:44.951Z",
       "status": "active",
       "name": "Soi Buakhao Live Cam",
@@ -839,9 +839,9 @@
       "avatar_url": "https://yt3.googleusercontent.com/ugj2a216u5s5JhG4iireKvsOCK9lky14pZHt1tGGRm4I9na4HTsC7_8QRPb6xinI7mb8u4ZD=s900-c-k-c0x00ffffff-no-rj"
     },
     "venue-lust-on-soi-6": {
-      "is_live": true,
+      "is_live": false,
       "is_upcoming": false,
-      "video_id": "2ET6uT8-t7U",
+      "video_id": "jqNRzxQLsFg",
       "last_live_at": "2026-09-21T13:45:44.951Z",
       "status": "active",
       "name": "Lust on Soi 6",
@@ -849,9 +849,9 @@
       "handle": "@LustonSoi6"
     },
     "venue-desire-on-soi-6": {
-      "is_live": true,
+      "is_live": false,
       "is_upcoming": false,
-      "video_id": "7CLkn93X2bA",
+      "video_id": "iMHxjSGObf0",
       "last_live_at": "2026-09-21T13:45:44.951Z",
       "status": "active",
       "name": "Desire on Soi 6",
@@ -859,9 +859,9 @@
       "handle": "@DesireonSoi6"
     },
     "venue-dolls-a-go-go": {
-      "is_live": true,
+      "is_live": false,
       "is_upcoming": false,
-      "video_id": "2TLASVmaU7g",
+      "video_id": "R9gCyWez3jM",
       "last_live_at": "2026-09-21T13:45:44.951Z",
       "status": "active",
       "name": "Dolls A Go Go",
@@ -869,9 +869,9 @@
       "handle": "@DOLLSAGOGOSOI6LIVE"
     },
     "venue-maju-bar": {
-      "is_live": true,
+      "is_live": false,
       "is_upcoming": false,
-      "video_id": "xP3dqCPj0QY",
+      "video_id": "R9gCyWez3jM",
       "last_live_at": "2026-09-21T13:45:44.951Z",
       "status": "active",
       "name": "Maju Bar",
@@ -889,9 +889,9 @@
       "handle": "@theelitebar246"
     },
     "venue-bandits-hideout": {
-      "is_live": true,
+      "is_live": false,
       "is_upcoming": false,
-      "video_id": "Whk80i2TDNo",
+      "video_id": "hBNgCuBTyaU",
       "last_live_at": "2026-09-21T13:45:44.951Z",
       "status": "active",
       "name": "Bandits Hideout",
@@ -899,9 +899,9 @@
       "handle": "@BanditsHideout-lm6ho"
     },
     "livecam-south-pattaya-live-cam": {
-      "is_live": true,
-      "is_upcoming": false,
-      "video_id": "5jhgWRQWCgA",
+      "is_live": false,
+      "is_upcoming": true,
+      "video_id": "OtbCY7Juk7w",
       "last_live_at": "2026-09-21T13:45:44.951Z",
       "status": "active",
       "name": "South Pattaya Live Cam",
