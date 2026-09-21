@@ -80,7 +80,6 @@ export default function AppRoot() {
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const [isConverterOpen, setIsConverterOpen] = useState(false);
   const [isEmergencyOpen, setIsEmergencyOpen] = useState(false);
-  const [isBannerDismissed, setIsBannerDismissed] = useState(false);
   const mapInstanceRef = useRef(null);
 
   const streamStatus = useStreamStatus();
@@ -398,33 +397,7 @@ export default function AppRoot() {
           </div>
         )}
 
-        {/* Subtle Floating Banner when No Streams are Currently Live */}
-        {viewMode === 'map' && activeLiveCount === 0 && !isBannerDismissed && (
-          <div className="absolute bottom-16 sm:bottom-20 left-1/2 -translate-x-1/2 z-30 max-w-lg w-[92%] sm:w-auto pointer-events-auto">
-            <div className="bg-surface/90 backdrop-blur-md border border-brandPink/50 shadow-[0_0_24px_rgba(255,42,109,0.3)] rounded-2xl px-4 py-2.5 flex items-center justify-between gap-3 text-xs">
-              <div className="flex items-center gap-2.5 text-slate-200">
-                <span className="text-base animate-pulse">🌙</span>
-                <span className="leading-snug">
-                  <strong className="text-white font-semibold">Pattaya is resting.</strong> No streams are live right now. Watch latest 4K street walks & nightlife episodes in{' '}
-                  <button
-                    onClick={() => setViewMode('vids')}
-                    className="text-brandPink font-bold hover:underline inline-flex items-center gap-0.5 ml-0.5"
-                  >
-                    <span>Videos</span>
-                    <span className="text-[10px]">➔</span>
-                  </button>
-                </span>
-              </div>
-              <button
-                onClick={() => setIsBannerDismissed(true)}
-                className="w-6 h-6 rounded-full bg-surfaceLight/80 hover:bg-surfaceLight flex items-center justify-center text-slate-400 hover:text-white shrink-0 transition-colors"
-                title="Dismiss"
-              >
-                <X className="w-3.5 h-3.5" />
-              </button>
-            </div>
-          </div>
-        )}
+
 
         {/* Floating Live Shuffle Popup in Corner of Map (Repositioned when drawer is open so it is never hidden) */}
         {viewMode === 'map' && (

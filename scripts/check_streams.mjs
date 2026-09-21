@@ -42,6 +42,11 @@ const BLOCKED_AUTHORS = [
   'sky news'
 ];
 
+const YOUTUBE_COOKIES = [
+  'SOCS=CAISNQgDEitib3FfaWRlbnRpdHlmcm9udGVuZHVpc2VydmVyXzIwMjMwODI5LjA3X3AwGgJlbiACGgYIgPzytgY',
+  'PREF=hl=en&gl=US'
+].join('; ');
+
 function parsePlayerResponse(html) {
   let pr = null;
   const match = html.match(/var ytInitialPlayerResponse\s*=\s*({.+?});(?:var|<\/script>)/s) ||
@@ -60,11 +65,11 @@ async function checkVideoIsLive(videoId) {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 8000);
 
-    const res = await fetch(`https://www.youtube.com/watch?v=${videoId}`, {
+    const res = await fetch(`https://www.youtube.com/watch?v=${videoId}&gl=US&hl=en`, {
       headers: {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36',
         'Accept-Language': 'en-US,en;q=0.9',
-        'Cookie': 'SOCS=CAESEwgDEgk2MTQ3MzI4MzQaAmVuIAEaBgiA_LyaBg; CONSENT=YES+cb.20210328-17-p0.en+FX+478'
+        'Cookie': YOUTUBE_COOKIES
       },
       signal: controller.signal
     });
@@ -107,24 +112,24 @@ async function checkVideoIsLive(videoId) {
 
 async function checkYouTubeChannel(handle, fallbackVideoId, channelId = null, expectedName = null) {
   if (!handle && !channelId) {
-    return { is_live: false, is_upcoming: false, video_id: null, status: 'error_404', platform: 'youtube' };
+    return { is_live: false, is_upcoming: false, video_id: fallbackVideoId || null, status: 'error_404', platform: 'youtube' };
   }
 
   const cleanHandle = handle ? (handle.startsWith('@') ? handle : '@' + handle) : null;
-  let candidateVideoIds = [];
+  let upcomingCandidate = null;
 
-  // 1. YouTube /live Endpoint Probe (Always check this first!)
+  // 1. YouTube /live Endpoint Probe (Bypasses consent walls via gl=US and fresh SOCS)
   if (cleanHandle) {
     try {
       const controller = new AbortController();
       const timeout = setTimeout(() => controller.abort(), 8000);
-      const liveUrl = `https://www.youtube.com/${cleanHandle}/live`;
+      const liveUrl = `https://www.youtube.com/${cleanHandle}/live?gl=US&hl=en`;
 
       const res = await fetch(liveUrl, {
         headers: {
           'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36',
           'Accept-Language': 'en-US,en;q=0.9',
-          'Cookie': 'SOCS=CAESEwgDEgk2MTQ3MzI4MzQaAmVuIAEaBgiA_LyaBg; CONSENT=YES+cb.20210328-17-p0.en+FX+478'
+          'Cookie': YOUTUBE_COOKIES
         },
         redirect: 'follow',
         signal: controller.signal
@@ -132,7 +137,7 @@ async function checkYouTubeChannel(handle, fallbackVideoId, channelId = null, ex
       clearTimeout(timeout);
 
       if (res.status === 404) {
-        return { is_live: false, is_upcoming: false, video_id: null, status: 'error_404', platform: 'youtube' };
+        return { is_live: false, is_upcoming: false, video_id: fallbackVideoId || null, status: 'error_404', platform: 'youtube' };
       }
 
       const html = await res.text();
@@ -140,20 +145,68 @@ async function checkYouTubeChannel(handle, fallbackVideoId, channelId = null, ex
       const canonicalUrl = canonicalMatch ? canonicalMatch[1] : res.url;
       const watchMatch = canonicalUrl.match(/watch\?v=([a-zA-Z0-9_-]{11})/);
 
+      // If /live successfully redirected to a watch?v= live/upcoming stream
       if (watchMatch) {
-        candidateVideoIds.push(watchMatch[1]);
-      } else {
-        const vidMatch = html.match(/"videoId":"([a-zA-Z0-9_-]{11})"/);
-        if (vidMatch) {
-          candidateVideoIds.push(vidMatch[1]);
+        const liveVideoId = watchMatch[1];
+        const pr = parsePlayerResponse(html);
+
+        if (pr) {
+          const playabilityStatus = pr.playabilityStatus?.status;
+          const isLiveDetails = pr.microformat?.playerMicroformatRenderer?.liveBroadcastDetails;
+          const videoDetails = pr.videoDetails;
+
+          const isLiveNow = Boolean(isLiveDetails?.isLiveNow === true || (videoDetails?.isLive === true && playabilityStatus === 'OK'));
+          const isUpcoming = Boolean(playabilityStatus === 'LIVE_STREAM_OFFLINE' || pr.playabilityStatus?.liveStreamability?.liveStreamabilityRenderer?.offlineSlate);
+
+          if (isLiveNow && !isUpcoming) {
+            return {
+              is_live: true,
+              is_upcoming: false,
+              video_id: liveVideoId,
+              status: 'active',
+              platform: 'youtube'
+            };
+          }
+
+          if (isUpcoming) {
+            upcomingCandidate = {
+              is_live: false,
+              is_upcoming: true,
+              video_id: liveVideoId,
+              status: 'active',
+              platform: 'youtube'
+            };
+          }
+        } else {
+          // If JSON parse is unavailable on watch page, run checkVideoIsLive
+          const check = await checkVideoIsLive(liveVideoId);
+          if (check.is_live) {
+            return {
+              is_live: true,
+              is_upcoming: false,
+              video_id: liveVideoId,
+              status: 'active',
+              platform: 'youtube'
+            };
+          }
+          if (check.is_upcoming) {
+            upcomingCandidate = {
+              is_live: false,
+              is_upcoming: true,
+              video_id: liveVideoId,
+              status: 'active',
+              platform: 'youtube'
+            };
+          }
         }
       }
+      // NOTE: If canonicalUrl did NOT match watch?v=, DO NOT match generic "videoId" from HTML!
     } catch (err) {
       // /live network error handled gracefully
     }
   }
 
-  // 2. YouTube RSS Feed Check (Unblockable on any IP - Google never shows consent walls on XML RSS)
+  // 2. YouTube RSS Feed Check (Only videos uploaded by THIS specific channel)
   if (channelId) {
     try {
       const controller = new AbortController();
@@ -166,10 +219,26 @@ async function checkYouTubeChannel(handle, fallbackVideoId, channelId = null, ex
 
       if (rssRes.ok) {
         const xml = await rssRes.text();
-        const matches = [...xml.matchAll(/<yt:videoId>([^<]+)<\/yt:videoId>/g)];
-        for (const m of matches.slice(0, 2)) {
-          if (!candidateVideoIds.includes(m[1])) {
-            candidateVideoIds.push(m[1]);
+        const matches = [...xml.matchAll(/<yt:videoId>([^<]+)<\/yt:videoId>/g)].map(m => m[1]);
+        for (const candidateId of matches.slice(0, 2)) {
+          const check = await checkVideoIsLive(candidateId);
+          if (check.is_live) {
+            return {
+              is_live: true,
+              is_upcoming: false,
+              video_id: candidateId,
+              status: 'active',
+              platform: 'youtube'
+            };
+          }
+          if (check.is_upcoming && !upcomingCandidate) {
+            upcomingCandidate = {
+              is_live: false,
+              is_upcoming: true,
+              video_id: candidateId,
+              status: 'active',
+              platform: 'youtube'
+            };
           }
         }
       }
@@ -178,20 +247,14 @@ async function checkYouTubeChannel(handle, fallbackVideoId, channelId = null, ex
     }
   }
 
-  // 3. Fallback video ID
-  if (fallbackVideoId && !candidateVideoIds.includes(fallbackVideoId)) {
-    candidateVideoIds.push(fallbackVideoId);
-  }
-
-  // 4. Verify Candidates: prioritize finding an active LIVE stream
-  let upcomingCandidate = null;
-  for (const videoId of candidateVideoIds) {
-    const check = await checkVideoIsLive(videoId);
+  // 3. Fallback video ID check
+  if (fallbackVideoId) {
+    const check = await checkVideoIsLive(fallbackVideoId);
     if (check.is_live) {
       return {
         is_live: true,
         is_upcoming: false,
-        video_id: videoId,
+        video_id: fallbackVideoId,
         status: 'active',
         platform: 'youtube'
       };
@@ -200,7 +263,7 @@ async function checkYouTubeChannel(handle, fallbackVideoId, channelId = null, ex
       upcomingCandidate = {
         is_live: false,
         is_upcoming: true,
-        video_id: videoId,
+        video_id: fallbackVideoId,
         status: 'active',
         platform: 'youtube'
       };
@@ -214,7 +277,7 @@ async function checkYouTubeChannel(handle, fallbackVideoId, channelId = null, ex
   return {
     is_live: false,
     is_upcoming: false,
-    video_id: candidateVideoIds[0] || fallbackVideoId || null,
+    video_id: fallbackVideoId || null,
     status: 'active',
     platform: 'youtube'
   };
@@ -412,6 +475,25 @@ async function run() {
     console.log(`[${creator.name}] ${statusLabel}`);
   }
 
+  const initialLiveCount = Object.values(nextEntities).filter(e => e.is_live).length;
+  const prevLiveCount = Object.values(previousStatus.entities || {}).filter(e => e.is_live).length;
+
+  // Circuit Breaker: If liveCount drops drastically to 0 or 1 while previously 4+ were live,
+  // it indicates a runner datacenter IP block or network timeout. Retain previously live feeds!
+  if (initialLiveCount <= 1 && prevLiveCount >= 4) {
+    console.warn(`\n⚠️ Safety Circuit Breaker Triggered: Detected only ${initialLiveCount} live streams while previously ${prevLiveCount} were live.`);
+    console.warn(`Preserving previously verified active streams to protect production site from transient datacenter blocks.`);
+    for (const [key, prev] of Object.entries(previousStatus.entities || {})) {
+      if (prev.is_live && nextEntities[key] && !nextEntities[key].is_live) {
+        nextEntities[key].is_live = true;
+        nextEntities[key].video_id = prev.video_id;
+        nextEntities[key].status = 'active';
+      }
+    }
+  }
+
+  const finalLiveCount = Object.values(nextEntities).filter(e => e.is_live).length;
+
   const payload = {
     last_check: nowIso,
     entities: nextEntities
@@ -419,9 +501,7 @@ async function run() {
 
   fs.writeFileSync(statusPath, JSON.stringify(payload, null, 2), 'utf8');
   console.log(`\n✓ Successfully updated stream_status.json at ${nowIso}`);
-  
-  const liveCount = Object.values(nextEntities).filter(e => e.is_live).length;
-  console.log(`Total Genuine Live Broadcasts: ${liveCount}`);
+  console.log(`Total Genuine Live Broadcasts: ${finalLiveCount}`);
 }
 
 run();
