@@ -3,11 +3,8 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { Grid2X2, Grid3X3, Video, X, Smartphone } from 'lucide-react';
 import UniversalPlayer from './common/UniversalPlayer';
-import venuesData from '@/public/data/venues.json';
-import liveCamsData from '@/public/data/live_cams.json';
-import creatorsData from '@/public/data/creators.json';
-import streamersData from '@/public/data/roaming_streamers.json';
 import { useStreamStatus } from '@/src/hooks/useStreamStatus';
+import { getLiveEntities } from '@/src/utils/liveEntities';
 
 export default function MultiCamGrid({ onSelectEntity }) {
   const streamStatus = useStreamStatus();
@@ -33,94 +30,9 @@ export default function MultiCamGrid({ onSelectEntity }) {
     return () => window.removeEventListener('resize', checkScreen);
   }, []);
 
-  // Construct master pool of all entities with unified status
+  // Master pool of all entities with unified status from single source of truth
   const allLiveOptions = useMemo(() => {
-    const list = [];
-    const entities = streamStatus?.entities || {};
-
-    // 1. Live Cams (Pattaya Beach Road, Soi Buakhao, etc.)
-    liveCamsData.forEach((c) => {
-      const statusInfo = entities[`livecam-${c.slug}`] || entities[c.slug];
-      if (statusInfo?.status !== 'error_404' && statusInfo?.is_live !== false) {
-        list.push({
-          key: `livecam-${c.slug}`,
-          slug: c.slug,
-          name: c.name,
-          category: '24/7 Live Cam',
-          platform: statusInfo?.platform || c.platform || 'youtube',
-          video_id: statusInfo?.video_id || c.video_id,
-          youtube_channel_id: c.youtube_channel_id,
-          handle: c.youtube_handle,
-          is_live: true,
-          type: 'livecam',
-        });
-      }
-    });
-
-    // 2. Venues (Only when genuinely live)
-    venuesData.forEach((v) => {
-      const statusInfo = entities[`venue-${v.slug}`] || entities[v.slug];
-      if (statusInfo?.is_live === true) {
-        list.push({
-          key: `venue-${v.slug}`,
-          slug: v.slug,
-          name: v.name,
-          category: v.category ? v.category.replace('_', ' ') : 'Venue',
-          platform: statusInfo?.platform || v.platform || 'youtube',
-          video_id: statusInfo?.video_id || v.video_id,
-          youtube_channel_id: v.youtube_channel_id,
-          handle: v.youtube_handle,
-          is_live: true,
-          type: 'venue',
-        });
-      }
-    });
-
-    // 3. Creators & IRL Streamers (Only when genuinely live)
-    const creatorMap = new Map();
-    creatorsData.forEach((c) => {
-      const statusInfo = entities[`creator-${c.slug}`] || entities[c.slug];
-      if (statusInfo?.is_live === true) {
-        creatorMap.set(c.slug, {
-          key: `creator-${c.slug}`,
-          slug: c.slug,
-          name: c.name,
-          category: 'IRL Streamer',
-          platform: statusInfo?.platform || c.platform || 'youtube',
-          video_id: statusInfo?.video_id || null,
-          youtube_channel_id: c.channel_id,
-          handle: c.handle,
-          kick_channel: c.kick_channel,
-          is_live: true,
-          type: 'creator',
-        });
-      }
-    });
-
-    // Also check roaming streamers
-    streamersData.forEach((s) => {
-      const key = s.id.toLowerCase();
-      if (!creatorMap.has(key)) {
-        const statusInfo = entities[`streamer-${s.id}`];
-        if (statusInfo?.is_live === true) {
-          creatorMap.set(key, {
-            key: `streamer-${s.id}`,
-            slug: s.id,
-            name: s.name,
-            category: 'IRL Streamer',
-            platform: statusInfo?.platform || 'youtube',
-            video_id: statusInfo?.video_id || null,
-            youtube_channel_id: s.youtube_channel_id,
-            handle: s.youtube_handle,
-            is_live: true,
-            type: 'streamer',
-          });
-        }
-      }
-    });
-
-    list.push(...Array.from(creatorMap.values()));
-    return list;
+    return getLiveEntities(streamStatus).allLiveOptions;
   }, [streamStatus]);
 
   // Lookup helper

@@ -238,11 +238,14 @@ export default function LayerToggleHUD({
             </div>
           </label>
 
-          {/* Transit Lines Toggle */}
+          {/* Transport (Baht Bus & Ferry) Toggle */}
           <label className="flex items-center justify-between gap-3 cursor-pointer py-1 px-1.5 rounded-lg hover:bg-surfaceLight/50 transition-colors">
             <div className="flex items-center gap-2">
               <span className="w-2.5 h-1 rounded bg-brandBlue shadow-[0_0_6px_#3B82F6]"></span>
-              <span className="text-slate-200">Baht Bus Transit</span>
+              <div className="flex flex-col">
+                <span className="text-slate-200">Transport</span>
+                <span className="text-[9px] font-mono text-slate-400 -mt-0.5">Baht Bus & Ferry</span>
+              </div>
             </div>
             <div className="flex items-center gap-2">
               <span className="text-[10px] font-mono text-slate-400 bg-surfaceLight px-1.5 py-0.5 rounded">

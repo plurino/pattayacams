@@ -24,6 +24,7 @@ import NewsletterModal from '@/src/components/NewsletterModal';
 import ContactModal from '@/src/components/ContactModal';
 import CookieConsentBanner from '@/src/components/CookieConsentBanner';
 import { parseUrlState, syncStateToUrl } from '@/src/utils/urlState';
+import { getLiveEntities } from '@/src/utils/liveEntities';
 
 function playShuffleChime() {
   if (typeof window === 'undefined') return;
@@ -79,23 +80,9 @@ export default function AppRoot() {
   const streamStatus = useStreamStatus();
   const { weather } = useTickerData();
   const { isEnabled: hasLiveAlerts, toggleLiveAlerts } = useLiveAlerts(streamStatus);
-    const activeLiveCount = useMemo(() => {
-    const liveVenues = venuesData.filter((v) => {
-      const statusInfo = streamStatus?.entities?.[v.slug] || streamStatus?.entities?.[v.slug ? `venue-${v.slug}` : ''];
-      return statusInfo?.is_live === true || (statusInfo?.status === 'active' && statusInfo?.video_id);
-    }).length;
 
-    const liveCams = liveCamsData.filter((c) => {
-      const statusInfo = streamStatus?.entities?.[c.slug] || streamStatus?.entities?.[c.slug ? `livecam-${c.slug}` : ''];
-      return statusInfo?.status !== 'error_404' && statusInfo?.is_live !== false;
-    }).length;
-
-    const liveCreators = creatorsData.filter((c) => {
-      const statusInfo = streamStatus?.entities?.[c.slug] || streamStatus?.entities?.[c.slug ? `creator-${c.slug}` : ''];
-      return statusInfo?.is_live === true;
-    }).length;
-
-    return liveVenues + liveCams + liveCreators;
+  const { totalLiveCount: activeLiveCount } = useMemo(() => {
+    return getLiveEntities(streamStatus);
   }, [streamStatus]);
 
   const handleMapInstance = useCallback((map) => {
@@ -170,60 +157,24 @@ export default function AppRoot() {
   const handleLiveShuffle = useCallback(() => {
     playShuffleChime();
 
-    const liveVenues = venuesData.filter((v) => {
-      const statusInfo = streamStatus?.entities?.[`venue-${v.slug}`];
-      return statusInfo?.is_live === true || (statusInfo?.status === 'active' && statusInfo?.video_id);
-    }).map((v) => {
-      const statusInfo = streamStatus?.entities?.[`venue-${v.slug}`];
-      return {
-        ...v,
-        type: 'venue',
-        is_live: true,
-        video_id: statusInfo?.video_id || v.video_id,
-        last_live_at: statusInfo?.last_live_at || null,
-      };
+    const { allLiveOptions } = getLiveEntities(streamStatus);
+    if (!allLiveOptions || allLiveOptions.length === 0) return;
+
+    // Attach coordinate fallbacks for creators if missing
+    const candidatesWithCoords = allLiveOptions.map((item) => {
+      if (item.type === 'creator' && (!item.lat || !item.lng)) {
+        let lat = 12.9262, lng = 100.8735;
+        if (item.primary_zone === 'buakhao') { lat = 12.9323; lng = 100.8861; }
+        else if (item.primary_zone === 'soi_6') { lat = 12.9423; lng = 100.8860; }
+        else if (item.primary_zone === 'jomtien') { lat = 12.8950; lng = 100.8710; }
+        return { ...item, lat, lng };
+      }
+      return item;
     });
 
-    const liveCams = liveCamsData.filter((c) => {
-      const statusInfo = streamStatus?.entities?.[`livecam-${c.slug}`];
-      return statusInfo?.status !== 'error_404';
-    }).map((c) => {
-      const statusInfo = streamStatus?.entities?.[`livecam-${c.slug}`];
-      return {
-        ...c,
-        type: 'livecam',
-        is_live: true,
-        video_id: statusInfo?.video_id || c.video_id,
-        last_live_at: statusInfo?.last_live_at || null,
-      };
-    });
-
-        const liveCreators = creatorsData.filter((c) => {
-      const statusInfo = streamStatus?.entities?.[c.slug] || streamStatus?.entities?.[c.slug ? `creator-${c.slug}` : ''];
-      return statusInfo?.is_live === true;
-    }).map((c) => {
-      const statusInfo = streamStatus?.entities?.[c.slug] || streamStatus?.entities?.[c.slug ? `creator-${c.slug}` : ''];
-      let lat = 12.9262, lng = 100.8735;
-      if (c.primary_zone === 'buakhao') { lat = 12.9323; lng = 100.8861; }
-      else if (c.primary_zone === 'soi_6') { lat = 12.9423; lng = 100.8860; }
-      else if (c.primary_zone === 'jomtien') { lat = 12.8950; lng = 100.8710; }
-      return {
-        ...c,
-        lat,
-        lng,
-        type: 'creator',
-        is_live: true,
-        video_id: statusInfo?.video_id || null,
-        active_platform: statusInfo?.platform || c.platform,
-      };
-    });
-
-    const allLiveCandidates = [...liveVenues, ...liveCams, ...liveCreators];
-    if (allLiveCandidates.length === 0) return;
-
-    let candidates = allLiveCandidates;
-    if (selectedEntity && allLiveCandidates.length > 1) {
-      candidates = allLiveCandidates.filter((c) => c.slug !== selectedEntity.slug);
+    let candidates = candidatesWithCoords;
+    if (selectedEntity && candidatesWithCoords.length > 1) {
+      candidates = candidatesWithCoords.filter((c) => c.slug !== selectedEntity.slug);
     }
     const chosen = candidates[Math.floor(Math.random() * candidates.length)];
     const entityPayload = { ...chosen };

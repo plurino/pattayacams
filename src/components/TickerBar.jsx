@@ -43,11 +43,11 @@ export default function TickerBar({
   };
 
   return (
-    <div className="bg-surface/95 border-b border-borderDark/70 backdrop-blur-md text-[11px] font-mono select-none z-40 w-full shadow-inner text-slate-300">
-      {/* 1. DESKTOP SINGLE ROW (>= lg screens) */}
-      <div className="hidden lg:flex h-8 items-center justify-between px-4 sm:px-6 text-[11px] font-mono select-none w-full gap-2">
+    <div className="bg-surface/95 border-b border-borderDark/70 backdrop-blur-md text-[11px] font-mono select-none z-40 w-full max-w-full overflow-hidden shadow-inner text-slate-300">
+      {/* 1. DESKTOP SINGLE ROW (>= xl screens, 1280px+) */}
+      <div className="hidden xl:flex h-8 items-center justify-between px-3 sm:px-5 text-[11px] font-mono select-none w-full max-w-full overflow-hidden gap-2">
         {/* Left: Digital ICT Clock, Weather, Sunset, Marine Swell & Dry Day Alert */}
-        <div className="flex items-center gap-2 shrink-0">
+        <div className="flex items-center gap-1.5 shrink-0 overflow-hidden">
           <button
             onClick={onOpenWeather}
             className="flex items-center gap-1 px-2 py-0.5 rounded-md bg-canvas/80 hover:bg-canvas border border-borderDark/80 hover:border-cyan-400/50 text-cyan-400 transition-colors shrink-0 cursor-pointer"
@@ -66,8 +66,8 @@ export default function TickerBar({
             >
               <span className="text-xs group-hover:scale-110 transition-transform">{weather.icon}</span>
               <span className="font-bold text-white">{weather.temp}°C</span>
-              <span className="text-slate-300">{weather.condition}</span>
-              <span className="flex items-center gap-0.5 text-slate-400 text-[10px]">
+              <span className="text-slate-300 truncate max-w-[75px] 2xl:max-w-[130px]">{weather.condition}</span>
+              <span className="hidden 2xl:flex items-center gap-0.5 text-slate-400 text-[10px]">
                 <Droplets className="w-2.5 h-2.5 text-blue-400" />
                 <span>{weather.humidity}%</span>
               </span>
@@ -80,7 +80,7 @@ export default function TickerBar({
 
           {sunsetInfo && (
             <div
-              className="flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-canvas/50 border border-borderDark/50 text-[10px] text-amber-300 font-mono shrink-0"
+              className="hidden 2xl:flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-canvas/50 border border-borderDark/50 text-[10px] text-amber-300 font-mono shrink-0"
               title={`Sunset over Pattaya Bay & Koh Larn at ${sunsetInfo.sunsetTime} ICT`}
             >
               <span>{sunsetInfo.label}</span>
@@ -89,7 +89,7 @@ export default function TickerBar({
 
           {telemetry && (
             <div
-              className="hidden xl:flex items-center gap-2 px-1.5 py-0.5 rounded-md bg-canvas/40 border border-borderDark/40 text-[10px] text-slate-300 shrink-0"
+              className="hidden 2xl:flex items-center gap-2 px-1.5 py-0.5 rounded-md bg-canvas/40 border border-borderDark/40 text-[10px] text-slate-300 shrink-0"
               title={`Pattaya Bay Wave Height: ${telemetry.waveHeightMeters}m (${telemetry.waveAdvisory}) • PM2.5 Air: ${telemetry.pm25} µg/m³`}
             >
               <span className="flex items-center gap-1 text-cyan-300 font-bold">
@@ -127,8 +127,8 @@ export default function TickerBar({
                 <span title="British Pound to Thai Baht" className="group-hover:text-white transition-colors">
                   <span className="mr-0.5">🇬🇧</span> £1=<strong className="text-amber-300">{rates.GBP}฿</strong>
                 </span>
-                <span className="text-slate-600 hidden xl:inline">•</span>
-                <span title="Euro to Thai Baht" className="hidden xl:inline group-hover:text-white transition-colors">
+                <span className="text-slate-600 hidden 2xl:inline">•</span>
+                <span title="Euro to Thai Baht" className="hidden 2xl:inline group-hover:text-white transition-colors">
                   <span className="mr-0.5">🇪🇺</span> €1=<strong className="text-amber-300">{rates.EUR}฿</strong>
                 </span>
                 <Calculator className="w-3 h-3 text-amber-400/80 group-hover:text-amber-300 ml-0.5 shrink-0" />
@@ -161,7 +161,7 @@ export default function TickerBar({
 
           <button
             onClick={onOpenNewsletter}
-            className="flex items-center gap-1 px-2 py-0.5 rounded bg-pink-950/40 hover:bg-pink-900/60 border border-brandPink/40 text-brandPink hover:text-white transition-colors text-[10px] font-semibold shrink-0 cursor-pointer"
+            className="hidden 2xl:flex items-center gap-1 px-2 py-0.5 rounded bg-pink-950/40 hover:bg-pink-900/60 border border-brandPink/40 text-brandPink hover:text-white transition-colors text-[10px] font-semibold shrink-0 cursor-pointer"
             title="Join Pattaya Pulse VIP Dispatch"
           >
             <Mail className="w-2.5 h-2.5 text-brandPink shrink-0" />
@@ -194,8 +194,8 @@ export default function TickerBar({
         </div>
       </div>
 
-      {/* 2. MOBILE & TABLET DEDICATED 2-LINE ROW (< lg screens) */}
-      <div className="flex lg:hidden flex-col py-1.5 px-3 sm:px-4 gap-1 w-full text-[10px] font-mono">
+      {/* 2. DEDICATED 2-LINE ROW (< xl screens: tablet, mobile, resized desktop) */}
+      <div className="flex xl:hidden flex-col py-1.5 px-3 sm:px-4 gap-1 w-full max-w-full overflow-hidden text-[10px] font-mono">
         {/* Line 1: Clock, Weather, Sunset/DryDay, and Alerts */}
         <div className="flex items-center justify-between gap-1 w-full">
           <div className="flex items-center gap-1.5 shrink-0">

@@ -11,7 +11,6 @@ import { useStreamStatus } from '@/src/hooks/useStreamStatus';
 import { useRainViewer } from '@/src/hooks/useRainViewer';
 import { useLiveFlights } from '@/src/hooks/useLiveFlights';
 import { useMarineTraffic } from '@/src/hooks/useMarineTraffic';
-import { getFovPolygon } from '@/src/utils/fov';
 
 export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn }) {
   const streamStatus = useStreamStatus();
@@ -28,7 +27,6 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
     ferryGroup: null,
     flightGroup: null,
     marineGroup: null,
-    fovGroup: null,
   });
 
   const [showVenues, setShowVenues] = useState(true);
@@ -38,7 +36,6 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
   const [showRadar, setShowRadar] = useState(false);
   const [showFlights, setShowFlights] = useState(false);
   const [showMarine, setShowMarine] = useState(false);
-  const [selectedEntityForFov, setSelectedEntityForFov] = useState(null);
   const [bearing, setBearing] = useState(0);
   const [mapTheme, setMapTheme] = useState('dark');
 
@@ -228,7 +225,6 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
       );
 
       marker.on('click', () => {
-        setSelectedEntityForFov({ ...venue, bearing: venue.bearing || 235 });
         if (onSelectEntity) {
           onSelectEntity({
             ...venue,
@@ -476,7 +472,6 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
           { className: 'pattaya-dark-tooltip', direction: 'top', offset: [0, -6] }
         );
         marker.on('click', () => {
-          setSelectedEntityForFov({ ...cam, bearing: cam.bearing || 230 });
           if (onSelectEntity) {
             onSelectEntity({ ...cam, type: 'cctv' });
           }
@@ -628,10 +623,9 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
         ferryGroup.addTo(map);
       }
 
-      // 6. Telemetry & Tactical Groups: Flights, Marine Traffic, and CCTV FOV
+      // 6. Telemetry & Tactical Groups: Flights & Marine Traffic
       const flightGroup = Leaflet.layerGroup().addTo(map);
       const marineGroup = Leaflet.layerGroup().addTo(map);
-      const fovGroup = Leaflet.layerGroup().addTo(map);
 
       mapRef.current = map;
       layersRef.current = {
@@ -643,7 +637,6 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
         ferryGroup,
         flightGroup,
         marineGroup,
-        fovGroup,
       };
 
       if (onMapInstance) {
@@ -844,31 +837,6 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
       group.addLayer(marker);
     });
   }, [vessels, showMarine]);
-
-  // CCTV Tactical Field of View (FOV) Wedge overlay
-  useEffect(() => {
-    const group = layersRef.current?.fovGroup;
-    const Leaflet = typeof window !== 'undefined' ? window.L : null;
-    if (!group || !Leaflet) return;
-
-    group.clearLayers();
-    if (selectedEntityForFov && typeof selectedEntityForFov.lat === 'number' && typeof selectedEntityForFov.lng === 'number') {
-      const bearing = selectedEntityForFov.bearing || 235; // Default southwest coverage towards bay
-      const fovCoords = getFovPolygon(selectedEntityForFov.lat, selectedEntityForFov.lng, bearing, 65, 80);
-      if (fovCoords) {
-        const polygon = Leaflet.polygon(fovCoords, {
-          color: '#00E5FF',
-          weight: 1,
-          opacity: 0.6,
-          fillColor: '#00E5FF',
-          fillOpacity: 0.16,
-          dashArray: '3, 4',
-          interactive: false,
-        });
-        group.addLayer(polygon);
-      }
-    }
-  }, [selectedEntityForFov]);
 
   return (
     <div className="relative w-full h-full overflow-hidden bg-canvas">
