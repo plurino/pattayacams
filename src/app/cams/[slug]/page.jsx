@@ -5,6 +5,7 @@ import { Video, MapPin, ArrowLeft, Car, Hotel, ExternalLink, Compass } from 'luc
 import HlsPlayer from '@/src/components/common/HlsPlayer';
 import CctvLaunchCard from '@/src/components/common/CctvLaunchCard';
 import Navbar from '@/src/components/Navbar';
+import SiteFooter from '@/src/components/SiteFooter';
 import cctvData from '@/public/data/cctv_cams.json';
 import hotelsData from '@/public/data/hotels.json';
 import {
@@ -263,6 +264,9 @@ export default async function CamPage({ params }) {
           </Link>
         </div>
       </main>
+
+      {/* Global Permanent Uniform Footer */}
+      <SiteFooter />
     </div>
   );
 }

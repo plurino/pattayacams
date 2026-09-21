@@ -510,47 +510,6 @@ export default function VideoDrawer({ entity, onClose, onSelectEntity, onLiveShu
           )}
         </div>
       )}
-
-      {/* Emergency Tourist Hotlines */}
-      <div className="p-3 rounded-xl bg-slate-900/90 border border-borderDark/80 flex flex-col gap-2 shadow-md">
-        <div className="flex items-center justify-between text-[11px] font-mono text-slate-300 font-bold">
-          <span className="flex items-center gap-1.5 text-rose-400">
-            <AlertCircle className="w-3.5 h-3.5 text-rose-400" />
-            <span>Pattaya Tourist Emergency</span>
-          </span>
-          <span className="text-[9px] text-slate-500 font-normal">24/7 Free Hotlines</span>
-        </div>
-        <div className="grid grid-cols-2 gap-1.5 pt-0.5 text-[10px] font-mono">
-          <a
-            href="tel:1155"
-            className="flex items-center justify-between p-2 rounded-lg bg-surface/80 hover:bg-surfaceLight border border-borderDark text-slate-300 hover:text-white transition-colors"
-          >
-            <span>Tourist Police</span>
-            <span className="text-brandCyan font-bold">1155</span>
-          </a>
-          <a
-            href="tel:1337"
-            className="flex items-center justify-between p-2 rounded-lg bg-surface/80 hover:bg-surfaceLight border border-borderDark text-slate-300 hover:text-white transition-colors"
-          >
-            <span>City Hall Help</span>
-            <span className="text-amber-400 font-bold">1337</span>
-          </a>
-          <a
-            href="tel:1719"
-            className="flex items-center justify-between p-2 rounded-lg bg-surface/80 hover:bg-surfaceLight border border-borderDark text-slate-300 hover:text-white transition-colors"
-          >
-            <span>Bkk Hospital ER</span>
-            <span className="text-emerald-400 font-bold">1719</span>
-          </a>
-          <a
-            href="tel:038427667"
-            className="flex items-center justify-between p-2 rounded-lg bg-surface/80 hover:bg-surfaceLight border border-borderDark text-slate-300 hover:text-white transition-colors"
-          >
-            <span>TAC Center</span>
-            <span className="text-purple-400 font-bold">038-427667</span>
-          </a>
-        </div>
-      </div>
     </>
   );
 

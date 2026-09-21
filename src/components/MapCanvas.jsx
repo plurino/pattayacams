@@ -12,7 +12,7 @@ import { useRainViewer } from '@/src/hooks/useRainViewer';
 import { useLiveFlights } from '@/src/hooks/useLiveFlights';
 import { useMarineTraffic } from '@/src/hooks/useMarineTraffic';
 
-export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn }) {
+export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn, onStartTour }) {
   const streamStatus = useStreamStatus();
   const mapContainerRef = useRef(null);
   const mapRef = useRef(null);
@@ -130,25 +130,7 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
     }
   }, []);
 
-  const [sensorMode, setSensorMode] = useState('normal');
   const userLocationMarkerRef = useRef(null);
-
-  const handleToggleSensorMode = useCallback(() => {
-    const modes = ['normal', 'nvg', 'noir', 'thermal'];
-    setSensorMode((prev) => {
-      const idx = modes.indexOf(prev);
-      return modes[(idx + 1) % modes.length];
-    });
-  }, []);
-
-  useEffect(() => {
-    const el = mapContainerRef.current;
-    if (!el) return;
-    el.classList.remove('sensor-nvg', 'sensor-noir', 'sensor-thermal');
-    if (sensorMode !== 'normal') {
-      el.classList.add(`sensor-${sensorMode}`);
-    }
-  }, [sensorMode]);
 
   const handleLocateMe = useCallback(() => {
     if (typeof navigator === 'undefined' || !navigator.geolocation) {
@@ -956,8 +938,7 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
         mapTheme={mapTheme}
         onToggleTheme={handleToggleTheme}
         onLocateMe={handleLocateMe}
-        sensorMode={sensorMode}
-        onToggleSensorMode={handleToggleSensorMode}
+        onStartTour={onStartTour}
       />
     </div>
   );

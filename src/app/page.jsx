@@ -23,6 +23,9 @@ import WeatherModal from '@/src/components/WeatherModal';
 import NewsletterModal from '@/src/components/NewsletterModal';
 import ContactModal from '@/src/components/ContactModal';
 import CookieConsentBanner from '@/src/components/CookieConsentBanner';
+import CurrencyConverterModal from '@/src/components/CurrencyConverterModal';
+import TouristEmergencyModal from '@/src/components/TouristEmergencyModal';
+import SiteFooter from '@/src/components/SiteFooter';
 import { parseUrlState, syncStateToUrl } from '@/src/utils/urlState';
 import { getLiveEntities } from '@/src/utils/liveEntities';
 import { TourDirector } from '@/src/utils/tourDirector';
@@ -75,11 +78,13 @@ export default function AppRoot() {
   const [isWeatherModalOpen, setIsWeatherModalOpen] = useState(false);
   const [isNewsletterOpen, setIsNewsletterOpen] = useState(false);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+  const [isConverterOpen, setIsConverterOpen] = useState(false);
+  const [isEmergencyOpen, setIsEmergencyOpen] = useState(false);
   const [isBannerDismissed, setIsBannerDismissed] = useState(false);
   const mapInstanceRef = useRef(null);
 
   const streamStatus = useStreamStatus();
-  const { weather } = useTickerData();
+  const { weather, rates } = useTickerData();
   const { isEnabled: hasLiveAlerts, toggleLiveAlerts } = useLiveAlerts(streamStatus);
 
   const { totalLiveCount: activeLiveCount } = useMemo(() => {
@@ -333,10 +338,10 @@ export default function AppRoot() {
         onOpenEvents={() => setIsEventsModalOpen(true)}
         onOpenWeather={() => setIsWeatherModalOpen(true)}
         onOpenNewsletter={() => setIsNewsletterOpen(true)}
-        onOpenContact={() => setIsContactModalOpen(true)}
+        onOpenConverter={() => setIsConverterOpen(true)}
+        onOpenEmergency={() => setIsEmergencyOpen(true)}
         onToggleAlerts={toggleLiveAlerts}
         hasLiveAlerts={hasLiveAlerts}
-        onStartTour={handleStartTour}
       />
 
       {/* 2. Main Content Canvas */}
@@ -379,6 +384,7 @@ export default function AppRoot() {
             onSelectEntity={handleSelectEntity}
             onMapInstance={handleMapInstance}
             onOpenKohLarn={() => setIsKohLarnModalOpen(true)}
+            onStartTour={handleStartTour}
           />
         </div>
         {viewMode === 'grid' && (
@@ -513,7 +519,22 @@ export default function AppRoot() {
         onClose={() => setIsContactModalOpen(false)}
       />
 
-      {/* 7. Privacy & Analytics Cookie Consent Banner */}
+      {/* 7. Standalone Global Modals (Lifted out of TickerBar to avoid stacking context & clipping issues) */}
+      <CurrencyConverterModal
+        isOpen={isConverterOpen}
+        onClose={() => setIsConverterOpen(false)}
+        rates={rates}
+      />
+
+      <TouristEmergencyModal
+        isOpen={isEmergencyOpen}
+        onClose={() => setIsEmergencyOpen(false)}
+      />
+
+      {/* 8. Global Permanent Uniform Site Footer */}
+      <SiteFooter onOpenContact={() => setIsContactModalOpen(true)} />
+
+      {/* 9. Privacy & Analytics Cookie Consent Banner */}
       <CookieConsentBanner />
     </div>
   );

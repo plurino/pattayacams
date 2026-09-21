@@ -19,6 +19,7 @@ import {
   Sparkles
 } from 'lucide-react';
 import SiteHeaderWithModals from '@/src/components/SiteHeaderWithModals';
+import SiteFooter from '@/src/components/SiteFooter';
 import CreatorAvatar from '@/src/components/common/CreatorAvatar';
 import creatorsData from '@/public/data/creators.json';
 import streamStatus from '@/public/data/stream_status.json';
@@ -365,17 +366,8 @@ export default async function CreatorProfilePage({ params }) {
         )}
       </main>
 
-      {/* Footer */}
-      <footer className="border-t border-borderDark bg-surface/60 p-6 text-center text-xs font-mono text-slate-500 mt-auto">
-        <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p>© {new Date().getFullYear()} PattayaCams.com • Independent Pattaya Tourism & Streaming Directory</p>
-          <div className="flex items-center gap-4">
-            <Link href="/?view=map" className="hover:text-slate-300 transition-colors">Live Radar</Link>
-            <Link href="/?view=vids" className="hover:text-brandPink transition-colors">PattayaVids</Link>
-            <Link href="/creators" className="text-brandPink font-semibold">Creator Hub</Link>
-          </div>
-        </div>
-      </footer>
+      {/* Global Permanent Uniform Footer */}
+      <SiteFooter />
     </div>
   );
 }

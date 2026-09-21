@@ -40,13 +40,6 @@ function formatRelativeTime(isoString) {
   return `${Math.floor(diffDays / 7)} weeks ago`;
 }
 
-// Top curated popular flagship videos for the Trending Tonight strip
-const POPULAR_FEATURED_IDS = [
-  'P7ze3IrwMWA', // Vespa Life Walking Street Night Walk
-  '_Wsv8jptIg4', // Buzzin Pattaya - Pattaya v Village Life
-  'XT-U7iKRRxE', // Everything Pattaya - Condo Rentals
-];
-
 // Filter out live streams, scheduled waiting rooms, and 24/7 webcams from VOD feed
 const LIVE_ONLY_CHANNELS = ['pattaya-beach-live', 'pattayabob', 'ismannen'];
 
@@ -155,17 +148,6 @@ export default function CreatorVODFeed({ onSelectVideo }) {
     setCurrentPage(1);
   };
 
-  // Featured Trending Strip: 3 popular high-interest videos
-  const trendingVideos = useMemo(() => {
-    const featured = allVideos.filter(v => POPULAR_FEATURED_IDS.includes(v.id));
-    if (featured.length === 3) return featured;
-    return allVideos.slice(0, 3);
-  }, [allVideos]);
-
-  const trendingIdSet = useMemo(() => {
-    return new Set(trendingVideos.map(v => v.id));
-  }, [trendingVideos]);
-
   const isFiltering = selectedChannels.length > 0 || Boolean(searchQuery);
 
   // Main filtered & sorted videos
@@ -174,10 +156,6 @@ export default function CreatorVODFeed({ onSelectVideo }) {
     const hasChannels = selectedChannels.length > 0;
 
     let list = allVideos.filter(v => {
-      // Exclude trending strip videos only when viewing standard unfiltered front page
-      if (!isFiltering && trendingIdSet.has(v.id)) {
-        return false;
-      }
       const matchesChannel = !hasChannels || selectedChannels.includes(v.channel_slug);
       const matchesQuery = !query ||
         v.title.toLowerCase().includes(query) ||
@@ -194,7 +172,7 @@ export default function CreatorVODFeed({ onSelectVideo }) {
     }
 
     return list;
-  }, [allVideos, selectedChannels, searchQuery, sortBy, isFiltering, trendingIdSet]);
+  }, [allVideos, selectedChannels, searchQuery, sortBy]);
 
   // Pagination calculation
   const totalPages = Math.max(1, Math.ceil(filteredAndSortedVideos.length / VIDEOS_PER_PAGE));
@@ -384,78 +362,22 @@ export default function CreatorVODFeed({ onSelectVideo }) {
 
       {/* 2. Main Scrollable Content */}
       <div ref={feedScrollRef} className="flex-1 overflow-y-auto p-4 md:p-6 space-y-6">
-        {/* Trending Tonight Spotlight Strip (Only on page 1 when no search or channel filter is active) */}
-        {!isFiltering && safeCurrentPage === 1 && trendingVideos.length > 0 && (
-          <section className="max-w-7xl mx-auto">
-            <div className="flex items-center justify-between mb-3">
-              <div className="flex items-center gap-2">
-                <Flame className="w-4 h-4 text-brandPink animate-pulse" />
-                <h2 className="text-xs md:text-sm font-bold tracking-wide uppercase font-mono text-brandPink">
-                  Trending Tonight in Pattaya
-                </h2>
-              </div>
-              <span className="text-[10px] font-mono text-slate-400">Featured Curations</span>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {trendingVideos.map((video) => (
-                <div
-                  key={`trending-${video.id}`}
-                  onClick={() => handleCardClick(video)}
-                  className="group relative bg-gradient-to-br from-surface to-surfaceLight border border-brandPink/40 hover:border-brandPink rounded-2xl overflow-hidden cursor-pointer transition-all duration-200 hover:shadow-[0_0_24px_rgba(255,42,109,0.3)] flex flex-col"
-                >
-                  <div className="relative aspect-video w-full bg-slate-900 overflow-hidden">
-                    <img
-                      src={video.thumbnail_url}
-                      alt={video.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-center justify-center">
-                      <div className="w-12 h-12 rounded-full bg-gradient-to-r from-brandPink to-rose-600 text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
-                        <Play className="w-5 h-5 fill-white ml-0.5" />
-                      </div>
-                    </div>
-
-                    <div className="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-brandPink text-white text-[9px] font-mono font-black uppercase tracking-wider shadow">
-                      Trending
-                    </div>
-
-                    <div className="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-black/85 backdrop-blur-md border border-white/10 text-[10px] font-mono text-slate-300 flex items-center gap-1">
-                      <Clock className="w-3 h-3 text-brandPink" />
-                      <span>{formatRelativeTime(video.published_at)}</span>
-                    </div>
-                  </div>
-
-                  <div className="p-3 flex flex-col justify-between flex-1 gap-2">
-                    <h3 className="text-xs font-bold text-white group-hover:text-pink-300 transition-colors line-clamp-2 leading-snug">
-                      {video.title}
-                    </h3>
-                    <div className="flex items-center justify-between text-[11px] font-mono text-slate-400 pt-1 border-t border-borderDark/40">
-                      <span className="truncate max-w-[170px]">{video.channel_name}</span>
-                      <span className="text-brandPink font-bold group-hover:underline flex items-center gap-1 text-[10px]">
-                        Watch <ChevronRight className="w-3 h-3" />
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
-
         {/* Responsive Video Wall */}
         <section className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-between mb-3">
-            <h2 className="text-xs font-bold uppercase tracking-wide font-mono text-slate-400">
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-2">
+              <Flame className="w-4 h-4 text-red-500 fill-red-500 animate-pulse drop-shadow-[0_0_8px_rgba(239,68,68,0.6)]" />
+              <h2 className="text-xs md:text-sm font-black uppercase tracking-wider font-mono text-red-500 flex items-center gap-2">
+                <span>Showing latest Pattaya videos</span>
+              </h2>
+            </div>
+            <span className="text-[10px] font-mono text-slate-400">
               {filteredAndSortedVideos.length === 0 ? (
-                '0 MATCHING EPISODES'
+                '0 EPISODES'
               ) : (
-                <>
-                  Showing {startIndex}–{endIndex} of {filteredAndSortedVideos.length} {isFiltering ? 'MATCHING' : 'LATEST'} EPISODES
-                </>
+                `Showing ${startIndex}–${endIndex} of ${filteredAndSortedVideos.length} ${isFiltering ? 'MATCHING' : 'LATEST'} EPISODES`
               )}
-            </h2>
+            </span>
           </div>
 
           {paginatedVideos.length === 0 ? (

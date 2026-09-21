@@ -58,12 +58,21 @@ export const PATTAYA_ZONES = {
     center: [12.9220, 100.8630],
     zoom: 15,
     color: '#3B82F6'
+  },
+  tree_town: {
+    id: 'tree_town',
+    name: 'Tree Town',
+    name_th: 'ทรีทาวน์',
+    center: [12.9320, 100.8872],
+    zoom: 17.5,
+    color: '#10B981'
   }
 };
 
 export const QUICK_JUMP_TARGETS = [
   { label: 'Beach Road', ...PATTAYA_ZONES.beach_road },
   { label: 'Soi 6', ...PATTAYA_ZONES.soi_6 },
+  { label: 'Tree Town', ...PATTAYA_ZONES.tree_town },
   { label: 'Soi Buakhao', ...PATTAYA_ZONES.soi_buakhao },
   { label: 'Walking St', ...PATTAYA_ZONES.walking_street },
   { label: 'Jomtien', ...PATTAYA_ZONES.jomtien },

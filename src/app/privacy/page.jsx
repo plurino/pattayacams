@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import SiteHeaderWithModals from '@/src/components/SiteHeaderWithModals';
+import SiteFooter from '@/src/components/SiteFooter';
 import { ShieldCheck, ArrowLeft, Mail, ExternalLink, Lock, Eye, Database } from 'lucide-react';
 
 export const metadata = {
@@ -142,25 +143,10 @@ export default function PrivacyPage() {
             </div>
           </section>
         </div>
-
-        {/* Footer info */}
-        <div className="mt-12 pt-6 border-t border-borderDark flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-500">
-          <p>© {new Date().getFullYear()} PattayaCams.com. All rights reserved.</p>
-          <div className="flex items-center gap-4">
-            <Link href="/" className="hover:text-brandPink transition-colors">
-              Radar Map
-            </Link>
-            <span>•</span>
-            <Link href="/creators" className="hover:text-brandPink transition-colors">
-              Creators Directory
-            </Link>
-            <span>•</span>
-            <Link href="/privacy" className="text-brandPink font-bold">
-              Privacy Policy
-            </Link>
-          </div>
-        </div>
       </main>
+
+      {/* Global Permanent Uniform Footer */}
+      <SiteFooter />
     </div>
   );
 }

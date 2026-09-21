@@ -16,7 +16,6 @@ import {
   Plane,
   Ship,
   Crosshair,
-  Eye,
 } from 'lucide-react';
 import { playTacticalClick } from '@/src/utils/sfx';
 
@@ -49,8 +48,7 @@ export default function LayerToggleHUD({
   mapTheme = 'dark',
   onToggleTheme,
   onLocateMe,
-  sensorMode = 'normal',
-  onToggleSensorMode,
+  onStartTour,
 }) {
   const [toastMessage, setToastMessage] = useState(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -144,26 +142,17 @@ export default function LayerToggleHUD({
           </button>
         )}
 
-        {/* Tactical Sensor Mode Preset Switcher (Normal -> NVG -> Noir -> Thermal) */}
-        {onToggleSensorMode && (
+        {/* Cinematic Drone Tour Button */}
+        {onStartTour && (
           <button
             onClick={() => {
               playTacticalClick();
-              onToggleSensorMode();
+              onStartTour();
             }}
-            className={`w-9 h-9 rounded-xl bg-surface/90 backdrop-blur-md border transition-all flex items-center justify-center shadow-xl group cursor-pointer ${
-              sensorMode !== 'normal'
-                ? 'border-emerald-400 text-emerald-400 shadow-[0_0_12px_rgba(16,185,129,0.4)]'
-                : 'border-borderDark text-slate-400 hover:text-emerald-300 hover:border-emerald-500/50'
-            }`}
-            title={`Sensor Lens: ${sensorMode.toUpperCase()} • Click to cycle (Normal / NVG / Noir / Thermal)`}
+            className="w-9 h-9 rounded-xl bg-surface/90 backdrop-blur-md border border-brandPink/60 hover:border-brandPink text-brandPink hover:text-white transition-all flex items-center justify-center shadow-xl group cursor-pointer hover:shadow-[0_0_14px_rgba(255,42,109,0.5)] active:scale-95"
+            title="Launch Cinematic Drone Tour across Pattaya Hotspots"
           >
-            <Eye className="w-4 h-4 group-hover:scale-110 transition-transform" />
-            {sensorMode !== 'normal' && (
-              <span className="absolute -top-1 -right-1 px-1 py-0.2 rounded bg-emerald-600 text-white font-mono font-black text-[7px] uppercase">
-                {sensorMode}
-              </span>
-            )}
+            <span className="text-base group-hover:scale-125 transition-transform">🚁</span>
           </button>
         )}
       </div>

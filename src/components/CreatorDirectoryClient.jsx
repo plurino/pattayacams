@@ -2,6 +2,7 @@
 
 import React, { useState, useMemo, useRef } from 'react';
 import Link from 'next/link';
+import SiteFooter from './SiteFooter';
 import {
   Video,
   MapPin,
@@ -510,16 +511,7 @@ export default function CreatorDirectoryClient({ creators = [], venues = [], str
       </main>
 
       {/* Directory Footer */}
-      <footer className="border-t border-borderDark bg-surface/60 p-6 text-center text-xs font-mono text-slate-500 mt-auto">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p>© {new Date().getFullYear()} PattayaCams.com • Independent Pattaya Tourism & Streaming Directory</p>
-          <div className="flex items-center gap-4">
-            <Link href="/?view=map" className="hover:text-slate-300 transition-colors">Live Radar</Link>
-            <Link href="/?view=vids" className="hover:text-brandPink transition-colors">PattayaVids</Link>
-            <Link href="/creators" className="text-brandPink font-semibold">Creator Hub</Link>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }

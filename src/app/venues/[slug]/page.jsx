@@ -5,6 +5,7 @@ import { Video, MapPin, ArrowLeft, ExternalLink, Star, Compass, MessageCircle, S
 import YouTubePlayer from '@/src/components/common/YouTubePlayer';
 import EmojiReactionGroup from '@/src/components/common/EmojiReactionGroup';
 import SiteHeaderWithModals from '@/src/components/SiteHeaderWithModals';
+import SiteFooter from '@/src/components/SiteFooter';
 import VenueDetailsClient from '@/src/components/VenueDetailsClient';
 import venuesData from '@/public/data/venues.json';
 import streamStatus from '@/public/data/stream_status.json';
@@ -291,6 +292,9 @@ export default async function VenuePage({ params }) {
           </Link>
         </div>
       </main>
+
+      {/* Global Permanent Uniform Footer */}
+      <SiteFooter />
     </div>
   );
 }

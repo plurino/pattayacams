@@ -98,7 +98,14 @@ export default function Navbar({
     <header className="h-14 border-b border-borderDark bg-surface/95 backdrop-blur-md flex items-center justify-between px-2.5 sm:px-4 md:px-5 shrink-0 z-50 select-none shadow-lg">
       {/* 1. Left: Brand Logo & Sexy Hover */}
       <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-        <Link href="/" className="flex items-center gap-1.5 group shrink-0" title="PattayaCams - The city that never sleeps">
+        <Link
+          href="/"
+          onClick={() => {
+            if (setViewMode) setViewMode('map');
+          }}
+          className="flex items-center gap-1.5 group shrink-0"
+          title="PattayaCams - The city that never sleeps"
+        >
           <img
             src="/images/logo-dark.png"
             alt="PattayaCams Logo"
