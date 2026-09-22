@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-09-22T06:00:08.278Z",
+  "last_check": "2026-09-22T08:06:15.093Z",
   "entities": {
     "venue-pattaya-oh-bar": {
       "is_live": false,
@@ -122,7 +122,7 @@
     },
     "venue-luckynana-bar": {
       "is_live": false,
-      "is_upcoming": true,
+      "is_upcoming": false,
       "video_id": "eqd3wDMmwbs",
       "last_live_at": "2026-09-12T17:06:58.644Z",
       "status": "active",
