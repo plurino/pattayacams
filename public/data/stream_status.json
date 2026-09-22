@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-09-22T21:59:23.233Z",
+  "last_check": "2026-09-22T23:23:48.693Z",
   "entities": {
     "venue-pattaya-oh-bar": {
       "is_live": false,
@@ -703,7 +703,7 @@
     "venue-smile-bar-pattaya": {
       "is_live": false,
       "is_upcoming": true,
-      "video_id": "2u3qNvJxz4k",
+      "video_id": "dLUfBRNcJW8",
       "last_live_at": "2026-09-21T14:10:09.114Z",
       "status": "active",
       "name": "Smile Bar Pattaya",
@@ -879,10 +879,10 @@
       "handle": "@maju_bar_thailand"
     },
     "venue-the-elite-bar": {
-      "is_live": false,
-      "is_upcoming": true,
-      "video_id": "ohv4nH-m50g",
-      "last_live_at": null,
+      "is_live": true,
+      "is_upcoming": false,
+      "video_id": "dvmC2mv3vP0",
+      "last_live_at": "2026-09-22T23:23:48.693Z",
       "status": "active",
       "name": "The Elite Bar",
       "platform": "youtube",
