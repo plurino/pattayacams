@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-09-22T13:48:13.589Z",
+  "last_check": "2026-09-22T15:32:31.210Z",
   "entities": {
     "venue-pattaya-oh-bar": {
       "is_live": false,
@@ -12,7 +12,7 @@
       "handle": "@PattayaOhBar"
     },
     "livecam-pattaya-beach-road-live-cam": {
-      "is_live": true,
+      "is_live": false,
       "is_upcoming": false,
       "video_id": "WgSrfstUvIc",
       "last_live_at": "2026-09-21T14:10:09.114Z",
@@ -71,7 +71,7 @@
       "handle": "@SUGARBxPATTAYA"
     },
     "venue-x-club-pattaya": {
-      "is_live": true,
+      "is_live": false,
       "is_upcoming": false,
       "video_id": "kVrWVKmlN7Y",
       "last_live_at": "2026-09-21T14:10:09.114Z",
@@ -81,7 +81,7 @@
       "handle": "@XClubPattayaSoiChaiapoon"
     },
     "venue-las-vegas-beer-garden": {
-      "is_live": true,
+      "is_live": false,
       "is_upcoming": false,
       "video_id": "34XJcn0lETI",
       "last_live_at": "2026-09-21T14:10:09.114Z",
@@ -91,7 +91,7 @@
       "handle": "@LasVegasBeerGarden-PKBar"
     },
     "venue-gold-bar-soi-6": {
-      "is_live": true,
+      "is_live": false,
       "is_upcoming": false,
       "video_id": "zXSmhSacxcw",
       "last_live_at": "2026-09-21T14:10:09.114Z",
@@ -701,9 +701,9 @@
       "avatar_url": "https://yt3.googleusercontent.com/6GS7T_pCqHAsewQtNL6Guf0LC1cJadn2zRElCZH52RlIJczk5TLwlpTv7MRD7LoinFyVD41H_ZI=s900-c-k-c0x00ffffff-no-rj"
     },
     "venue-smile-bar-pattaya": {
-      "is_live": true,
+      "is_live": false,
       "is_upcoming": true,
-      "video_id": "KXyP6OqDj6A",
+      "video_id": "2u3qNvJxz4k",
       "last_live_at": "2026-09-21T14:10:09.114Z",
       "status": "active",
       "name": "Smile Bar Pattaya",
@@ -711,7 +711,7 @@
       "handle": "@smilebarpattayathailand467"
     },
     "venue-true-blue-aussie-bar": {
-      "is_live": true,
+      "is_live": false,
       "is_upcoming": false,
       "video_id": "z3JaoXt4QCE",
       "last_live_at": "2026-09-21T14:10:09.114Z",
@@ -721,7 +721,7 @@
       "handle": "@Trueblueaussiebar"
     },
     "livecam-soi-buakhao-live-cam": {
-      "is_live": true,
+      "is_live": false,
       "is_upcoming": false,
       "video_id": "gL_CQ8f9mb4",
       "last_live_at": "2026-09-21T14:10:09.114Z",
@@ -839,7 +839,7 @@
       "avatar_url": "https://yt3.googleusercontent.com/ugj2a216u5s5JhG4iireKvsOCK9lky14pZHt1tGGRm4I9na4HTsC7_8QRPb6xinI7mb8u4ZD=s900-c-k-c0x00ffffff-no-rj"
     },
     "venue-lust-on-soi-6": {
-      "is_live": true,
+      "is_live": false,
       "is_upcoming": false,
       "video_id": "2ET6uT8-t7U",
       "last_live_at": "2026-09-21T14:10:09.114Z",
@@ -849,7 +849,7 @@
       "handle": "@LustonSoi6"
     },
     "venue-desire-on-soi-6": {
-      "is_live": true,
+      "is_live": false,
       "is_upcoming": false,
       "video_id": "7CLkn93X2bA",
       "last_live_at": "2026-09-21T14:10:09.114Z",
@@ -861,15 +861,15 @@
     "venue-dolls-a-go-go": {
       "is_live": true,
       "is_upcoming": false,
-      "video_id": "2TLASVmaU7g",
-      "last_live_at": "2026-09-21T14:10:09.114Z",
+      "video_id": "JqImL1MBIxQ",
+      "last_live_at": "2026-09-22T15:32:31.210Z",
       "status": "active",
       "name": "Dolls A Go Go",
       "platform": "youtube",
       "handle": "@DOLLSAGOGOSOI6LIVE"
     },
     "venue-maju-bar": {
-      "is_live": true,
+      "is_live": false,
       "is_upcoming": false,
       "video_id": "xP3dqCPj0QY",
       "last_live_at": "2026-09-21T14:10:09.114Z",
@@ -889,7 +889,7 @@
       "handle": "@theelitebar246"
     },
     "venue-bandits-hideout": {
-      "is_live": true,
+      "is_live": false,
       "is_upcoming": false,
       "video_id": "Whk80i2TDNo",
       "last_live_at": "2026-09-21T14:10:09.114Z",
@@ -899,9 +899,9 @@
       "handle": "@BanditsHideout-lm6ho"
     },
     "livecam-south-pattaya-live-cam": {
-      "is_live": true,
+      "is_live": false,
       "is_upcoming": true,
-      "video_id": "5jhgWRQWCgA",
+      "video_id": "OtbCY7Juk7w",
       "last_live_at": "2026-09-21T14:10:09.114Z",
       "status": "active",
       "name": "South Pattaya Live Cam",
