@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-09-22T19:03:36.206Z",
+  "last_check": "2026-09-22T21:59:23.233Z",
   "entities": {
     "venue-pattaya-oh-bar": {
       "is_live": false,
@@ -712,8 +712,8 @@
     },
     "venue-true-blue-aussie-bar": {
       "is_live": false,
-      "is_upcoming": false,
-      "video_id": "z3JaoXt4QCE",
+      "is_upcoming": true,
+      "video_id": "-pFdQx7DAJE",
       "last_live_at": "2026-09-21T14:10:09.114Z",
       "status": "active",
       "name": "True Blue Aussie Bar & Boomerang Bar",
