@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-09-22T11:17:48.232Z",
+  "last_check": "2026-09-22T13:48:13.589Z",
   "entities": {
     "venue-pattaya-oh-bar": {
       "is_live": false,
@@ -712,7 +712,7 @@
     },
     "venue-true-blue-aussie-bar": {
       "is_live": true,
-      "is_upcoming": true,
+      "is_upcoming": false,
       "video_id": "z3JaoXt4QCE",
       "last_live_at": "2026-09-21T14:10:09.114Z",
       "status": "active",
