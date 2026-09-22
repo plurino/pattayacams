@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-09-22T18:26:14.840Z",
+  "last_check": "2026-09-22T19:03:36.206Z",
   "entities": {
     "venue-pattaya-oh-bar": {
       "is_live": false,
@@ -92,8 +92,8 @@
     },
     "venue-gold-bar-soi-6": {
       "is_live": false,
-      "is_upcoming": false,
-      "video_id": "zXSmhSacxcw",
+      "is_upcoming": true,
+      "video_id": "ODensH9FL5o",
       "last_live_at": "2026-09-21T14:10:09.114Z",
       "status": "active",
       "name": "Gold Bar Soi 6",
