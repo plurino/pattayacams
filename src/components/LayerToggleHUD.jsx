@@ -13,8 +13,6 @@ import {
   Play,
   Pause,
   CloudRain,
-  Plane,
-  Ship,
   Crosshair,
 } from 'lucide-react';
 import { playTacticalClick } from '@/src/utils/sfx';
@@ -30,17 +28,13 @@ export default function LayerToggleHUD({
   setShowTransit,
   showRadar = true,
   setShowRadar,
-  showFlights = false,
-  setShowFlights,
-  showMarine = false,
-  setShowMarine,
+  showFlights = false, // unused — flights layer removed
+  setShowFlights, // unused
   radarState,
   venueCount = 0,
   liveCamCount = 2,
   camCount = 0,
   transitCount = 3,
-  flightCount = 0,
-  marineCount = 0,
   bearing = 0,
   onRotateLeft,
   onRotateRight,
@@ -49,8 +43,8 @@ export default function LayerToggleHUD({
   onToggleTheme,
   onLocateMe,
   onStartTour,
-  marineOffline = false,
-  flightsStale = false,
+  marineOffline = false, // unused after marine removal — kept as a no-op for parent compat
+  flightsStale = false, // unused after flights removal
 }) {
   const [toastMessage, setToastMessage] = useState(null);
   const [isPanelOpen, setIsPanelOpen] = useState(true);
@@ -347,60 +341,6 @@ export default function LayerToggleHUD({
                 checked={showTransit}
                 onChange={(e) => setShowTransit(e.target.checked)}
                 className="w-4 h-4 rounded border-borderDark bg-surface text-brandBlue focus:ring-brandBlue focus:ring-offset-0 cursor-pointer accent-brandBlue"
-              />
-            </div>
-          </label>
-
-          {/* Live Flights Radar Toggle */}
-          <label className="flex items-center justify-between gap-3 cursor-pointer py-1 px-1.5 rounded-lg hover:bg-surfaceLight/50 transition-colors">
-            <div className="flex items-center gap-2">
-              <Plane className="w-3.5 h-3.5 text-amber-400" />
-              <span className="text-slate-200">Live Flights</span>
-              {flightsStale && (
-                <span
-                  className="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded-full text-[8px] font-mono font-bold bg-amber-500/20 border border-amber-500/40 text-amber-300"
-                  title="ADS-B upstream is rate-limited; planes shown are from the last successful snapshot."
-                >
-                  ⚠ Stale
-                </span>
-              )}
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="text-[10px] font-mono text-slate-400 bg-surfaceLight px-1.5 py-0.5 rounded">
-                {flightCount}
-              </span>
-              <input
-                type="checkbox"
-                checked={showFlights}
-                onChange={(e) => setShowFlights && setShowFlights(e.target.checked)}
-                className="w-4 h-4 rounded border-borderDark bg-surface text-amber-400 focus:ring-amber-400 focus:ring-offset-0 cursor-pointer accent-amber-400"
-              />
-            </div>
-          </label>
-
-          {/* Marine & Ferries Toggle */}
-          <label className="flex items-center justify-between gap-3 cursor-pointer py-1 px-1.5 rounded-lg hover:bg-surfaceLight/50 transition-colors">
-            <div className="flex items-center gap-2">
-              <Ship className="w-3.5 h-3.5 text-sky-400" />
-              <span className="text-slate-200">Marine Traffic</span>
-              {marineOffline && (
-                <span
-                  className="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded-full text-[8px] font-mono font-bold bg-amber-500/20 border border-amber-500/40 text-amber-300"
-                  title="Marine radar feed is offline. Vessels may be stale or missing."
-                >
-                  ⚠ Offline
-                </span>
-              )}
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="text-[10px] font-mono text-slate-400 bg-surfaceLight px-1.5 py-0.5 rounded">
-                {marineCount}
-              </span>
-              <input
-                type="checkbox"
-                checked={showMarine}
-                onChange={(e) => setShowMarine && setShowMarine(e.target.checked)}
-                className="w-4 h-4 rounded border-borderDark bg-surface text-sky-400 focus:ring-sky-400 focus:ring-offset-0 cursor-pointer accent-sky-400"
               />
             </div>
           </label>

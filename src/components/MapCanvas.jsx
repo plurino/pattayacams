@@ -9,8 +9,6 @@ import LayerToggleHUD from './LayerToggleHUD';
 import SceneSelector from './SceneSelector';
 import { useStreamStatus } from '@/src/hooks/useStreamStatus';
 import { useRainViewer } from '@/src/hooks/useRainViewer';
-import { useLiveFlights } from '@/src/hooks/useLiveFlights';
-import { useMarineTraffic } from '@/src/hooks/useMarineTraffic';
 
 export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn, onStartTour }) {
   const streamStatus = useStreamStatus();
@@ -35,8 +33,6 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
   const [showCams, setShowCams] = useState(true);
   const [showTransit, setShowTransit] = useState(true);
   const [showRadar, setShowRadar] = useState(false);
-  const [showFlights, setShowFlights] = useState(true);
-  const [showMarine, setShowMarine] = useState(true);
   const [bearing, setBearing] = useState(0);
   const [mapTheme, setMapTheme] = useState('dark');
 
@@ -44,17 +40,13 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
   const activeSceneIds = useMemo(() => {
     const ids = [];
     if (showRadar) ids.push('weather');
-    if (showTransit || showFlights || showMarine) ids.push('transport');
+    if (showTransit) ids.push('transport');
     if (showLiveCams || showCams) ids.push('cams');
     if (showVenues) ids.push('venues');
     return ids;
-  }, [showRadar, showTransit, showFlights, showMarine, showLiveCams, showCams, showVenues]);
+  }, [showRadar, showTransit, showLiveCams, showCams, showVenues]);
 
   const radarState = useRainViewer(showRadar);
-  const { flights, count: flightCount, isStale: flightsAreStale } = useLiveFlights(showFlights);
-  const { vessels, count: marineCount, isConnected: marineConnected } = useMarineTraffic(showMarine);
-  // Marine layer is "offline" when the user has it enabled but the WebSocket never connected
-  const isMarineOffline = showMarine && !marineConnected;
 
   const cartoKey = process.env.NEXT_PUBLIC_CARTO_API_KEY || 'cb1_33su_1_683c1b500e92ad8b2069c2d2';
 
@@ -87,8 +79,6 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
       setShowRadar(willActivate);
     } else if (scene.id === 'transport') {
       setShowTransit(willActivate);
-      setShowFlights(willActivate);
-      setShowMarine(willActivate);
     } else if (scene.id === 'cams') {
       setShowLiveCams(willActivate);
       setShowCams(willActivate);
@@ -728,8 +718,7 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
         ferryGroup.addTo(map);
       }
 
-      // 6. Telemetry & Tactical Groups: Flights & Marine Traffic
-      const flightGroup = Leaflet.layerGroup().addTo(map);
+      // 6. Telemetry & Tactical Groups
       const marineGroup = Leaflet.layerGroup().addTo(map);
 
       mapRef.current = map;
@@ -740,7 +729,6 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
         liveCamGroup,
         transitGroup,
         ferryGroup,
-        flightGroup,
         marineGroup,
       };
 
@@ -876,79 +864,8 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
     }
   }, [showRadar, radarState.currentIdx, radarState]);
 
-  // Live Flights Layer: Render ADS-B Aircraft Vectors
-  useEffect(() => {
-    const group = layersRef.current?.flightGroup;
-    const Leaflet = typeof window !== 'undefined' ? window.L : null;
-    if (!group || !Leaflet) return;
-
-    group.clearLayers();
-    if (!showFlights) return;
-
-    flights.forEach((flight) => {
-      const flightIcon = Leaflet.divIcon({
-        className: 'custom-flight-marker',
-        iconSize: [28, 28],
-        iconAnchor: [14, 14],
-        html: `
-          <div style="transform: rotate(${flight.track}deg); width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; filter: drop-shadow(0 0 6px #F59E0B); cursor: pointer;">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="#FBBF24" stroke="#78350F" stroke-width="1.5">
-              <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
-            </svg>
-          </div>
-        `,
-      });
-
-      const marker = Leaflet.marker([flight.lat, flight.lng], { icon: flightIcon, zIndexOffset: 4000 });
-      marker.bindTooltip(
-        `<div style="font-family: monospace; font-size: 11px;">
-          <div style="font-weight: 800; color: #FBBF24;">✈️ ${flight.callsign} (${flight.aircraftType})</div>
-          <div style="color: #CBD5E1; font-size: 10px;">Alt: ${flight.altitudeFeet.toLocaleString()} ft (${flight.altitudeMeters}m)</div>
-          <div style="color: #94A3B8; font-size: 10px;">Speed: ${flight.speedKnots} kts (${flight.speedKmh} km/h) • Hdg: ${flight.track}°</div>
-        </div>`,
-        { className: 'pattaya-dark-tooltip', direction: 'top', offset: [0, -10] }
-      );
-      group.addLayer(marker);
-    });
-  }, [flights, showFlights]);
-
-  // Live Marine Traffic Layer: Render AIS Vessel Corridors
-  useEffect(() => {
-    const group = layersRef.current?.marineGroup;
-    const Leaflet = typeof window !== 'undefined' ? window.L : null;
-    if (!group || !Leaflet) return;
-
-    group.clearLayers();
-    if (!showMarine) return;
-
-    vessels.forEach((vessel) => {
-      const heading = vessel.heading || vessel.cog || 0;
-      const marineIcon = Leaflet.divIcon({
-        className: 'custom-marine-marker',
-        iconSize: [26, 26],
-        iconAnchor: [13, 13],
-        html: `
-          <div style="transform: rotate(${heading}deg); width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; filter: drop-shadow(0 0 6px #0284C7); cursor: pointer;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="#38BDF8" stroke="#0369A1" stroke-width="1.5">
-              <polygon points="12,2 20,21 12,17 4,21" />
-            </svg>
-          </div>
-        `,
-      });
-
-      const marker = Leaflet.marker([vessel.lat, vessel.lng], { icon: marineIcon, zIndexOffset: 3500 });
-      marker.bindTooltip(
-        `<div style="font-family: monospace; font-size: 11px;">
-          <div style="font-weight: 800; color: #38BDF8;">🚢 ${vessel.name}</div>
-          <div style="color: #CBD5E1; font-size: 10px;">Type: ${vessel.type}</div>
-          <div style="color: #94A3B8; font-size: 10px;">Speed: ${vessel.sog} kts • Hdg: ${Math.round(heading)}°</div>
-        </div>`,
-        { className: 'pattaya-dark-tooltip', direction: 'top', offset: [0, -10] }
-      );
-      group.addLayer(marker);
-    });
-  }, [vessels, showMarine]);
-
+  // (Live Flights Layer removed — all open ADS-B sources blocked server IPs.
+  //  See PLANS/2026-09-21-header-redesign.md for the architectural rationale.)
   return (
     <div className="relative w-full h-full overflow-hidden bg-canvas">
       <div ref={mapContainerRef} className="w-full h-full z-0" />
@@ -973,17 +890,11 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
         setShowTransit={setShowTransit}
         showRadar={showRadar}
         setShowRadar={setShowRadar}
-        showFlights={showFlights}
-        setShowFlights={setShowFlights}
-        showMarine={showMarine}
-        setShowMarine={setShowMarine}
         radarState={radarState}
         venueCount={venuesData.filter(v => streamStatus?.entities?.[`venue-${v.slug}`]?.status !== 'error_404').length}
         liveCamCount={liveCamsData.length}
         camCount={cctvData.length}
         transitCount={busRoutes.features.length}
-        flightCount={flightCount}
-        marineCount={marineCount}
         bearing={bearing}
         onRotateLeft={() => handleRotateBy(-45)}
         onRotateRight={() => handleRotateBy(45)}
@@ -992,8 +903,6 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
         onToggleTheme={handleToggleTheme}
         onLocateMe={handleLocateMe}
         onStartTour={onStartTour}
-        marineOffline={isMarineOffline}
-        flightsStale={flightsAreStale}
       />
     </div>
   );

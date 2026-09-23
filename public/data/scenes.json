@@ -15,14 +15,12 @@
     "id": "transport",
     "name": "Transport",
     "icon": "🚌",
-    "description": "15–20฿ Baht bus transit loop, live ADS-B flights, marine traffic & Koh Larn ferry lines",
+    "description": "15–20฿ Baht bus transit loop & Koh Larn ferry lines",
     "center": [12.9280, 100.8550],
     "zoom": 13,
     "themeColor": "cyan",
     "layers": {
-      "showTransit": true,
-      "showFlights": true,
-      "showMarine": true
+      "showTransit": true
     }
   },
   {

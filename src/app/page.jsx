@@ -481,10 +481,10 @@ export default function AppRoot() {
 
 
         {/* Floating Live Shuffle Popup in Corner of Map.
-            - Hidden entirely while the Layers panel is open (no room for it without colliding).
-            - Pulled slightly to the left when a drawer is open so it doesn't sit on top of the video.
-            - Otherwise sits at bottom-right (clear of Leaflet zoom at top-left). */}
-        {viewMode === 'map' && !isLayersPanelOpen && (
+            - Always visible on the map (panel-open or not) — bottom-right is clear of
+              both Leaflet zoom (top-left) and the Layers panel (bottom-left).
+            - Slides to the left when a video drawer opens so it doesn't sit on top. */}
+        {viewMode === 'map' && (
           <div className={`absolute bottom-4 z-30 pointer-events-auto transition-all duration-300 ${
             selectedEntity
               ? 'left-4 sm:left-6'
