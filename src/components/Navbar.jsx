@@ -1,9 +1,11 @@
 'use client';
 
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Map as MapIcon, Grid, Calendar, Film, ChevronDown, Users } from 'lucide-react';
-import { QUICK_JUMP_TARGETS } from '@/src/utils/zones';
+import { Map as MapIcon, Grid, Film, Users } from 'lucide-react';
+// QUICK_JUMP_TARGETS is no longer rendered in the navbar — the zone selector
+// has moved into the LayerToggleHUD's panel (Phase 1.3). Importing the
+// constants is no longer required here.
 import { getSavedTripDate } from '@/src/utils/storage';
 import TripModal from '@/src/components/TripModal';
 
@@ -16,10 +18,7 @@ export default function Navbar({
   onLiveShuffle,
 }) {
   const [tripDays, setTripDays] = useState(null);
-  const [activeZone, setActiveZone] = useState('');
-  const [isZoneMenuOpen, setIsZoneMenuOpen] = useState(false);
   const [isInternalTripOpen, setIsInternalTripOpen] = useState(false);
-  const zoneMenuRef = useRef(null);
 
   useEffect(() => {
     function calculateDays() {
@@ -42,34 +41,6 @@ export default function Navbar({
     window.addEventListener('pattayacams_trip_updated', calculateDays);
     return () => window.removeEventListener('pattayacams_trip_updated', calculateDays);
   }, []);
-
-  // Close zone dropdown on outside click
-  useEffect(() => {
-    function handleClickOutside(e) {
-      if (zoneMenuRef.current && !zoneMenuRef.current.contains(e.target)) {
-        setIsZoneMenuOpen(false);
-      }
-    }
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
-
-  const handleJump = (target) => {
-    setActiveZone(target.label);
-    setIsZoneMenuOpen(false);
-    if (onQuickJump) {
-      if (viewMode !== 'map' && setViewMode) {
-        setViewMode('map');
-        setTimeout(() => {
-          onQuickJump(target.center, target.zoom);
-        }, 120);
-      } else {
-        onQuickJump(target.center, target.zoom);
-      }
-    } else {
-      window.location.href = `/?jump=${encodeURIComponent(target.label)}`;
-    }
-  };
 
 
   const handleTripClick = () => {
@@ -102,22 +73,17 @@ export default function Navbar({
 
   return (
     <header className="h-14 border-b border-borderDark bg-surface/95 backdrop-blur-md flex items-center justify-between px-2.5 sm:px-4 md:px-5 shrink-0 z-50 select-none shadow-lg">
-      {/* 1. Left: Brand Logo & Sexy Hover */}
+      {/* 1. Left: Vice City-style Wordmark (Anton font, pink stroke, black drop shadow, pulsing) */}
       <div className="flex items-center gap-2 sm:gap-3 shrink-0">
         <Link
           href="/"
-          onClick={() => {
-            if (setViewMode) setViewMode('map');
-          }}
+          onClick={() => { if (setViewMode) setViewMode('map'); }}
           className="flex items-center gap-1.5 group shrink-0"
           title="PattayaCams - The city that never sleeps"
         >
-          <span className="font-wordmark text-[22px] sm:text-[26px] font-extrabold tracking-tight leading-none whitespace-nowrap">
-            <span className="bg-gradient-to-r from-brandPink via-brandCyan to-brandGold bg-clip-text text-transparent transition-[background-position,filter] duration-500 ease-out bg-[length:200%_200%] bg-[position:0%_0%] group-hover:bg-[position:100%_0%] group-hover:drop-shadow-[0_0_18px_rgba(255,42,109,0.55)]">
-              PattayaCams
-            </span>
+          <span className="font-wordmark text-[28px] sm:text-[34px] leading-none whitespace-nowrap select-none italic text-white [transform:skewX(-8deg)] [paint-order:stroke_fill] [-webkit-text-stroke:2px_#FF2A6D] [text-shadow:2px_2px_0_#000,-1px_-1px_0_#000,2px_-1px_0_#000,-1px_2px_0_#000,3px_3px_0_#000] hover:text-black hover:scale-[1.04] transition-all duration-200 ease-out animate-[vice-pulse_2.5s_ease-in-out_infinite]">
+            PattayaCams
           </span>
-          <span className="inline-block w-1.5 h-1.5 rounded-full bg-brandPink align-middle animate-pulse transition-all duration-300 group-hover:scale-150 group-hover:bg-brandCyan group-hover:shadow-[0_0_10px_rgba(0,229,255,0.7)]" />
         </Link>
 
         {/* Live Network Status Indicator */}
@@ -129,89 +95,30 @@ export default function Navbar({
         </div>
       </div>
 
-      {/* 2. Center: Zone Navigation (Only displayed in Live Map mode) */}
-      {viewMode === 'map' && (
-        <div className="flex items-center shrink-0">
-          {/* Desktop Quick Jump Zone Pills (xl+ screens) */}
-          <nav aria-label="Zone Quick Jumps" className="hidden xl:flex items-center gap-1 bg-canvas/60 p-1 rounded-xl border border-borderDark/80">
-            {QUICK_JUMP_TARGETS.map((target) => {
-              const isActive = activeZone === target.label;
-              return (
-                <button
-                  key={target.label}
-                  onClick={() => handleJump(target)}
-                  className={`px-2.5 py-1 text-xs font-medium rounded-lg transition-all duration-150 flex items-center gap-1.5 whitespace-nowrap ${
-                    isActive
-                      ? 'bg-surfaceLight text-brandPink shadow-sm border border-brandPink/40 font-bold'
-                      : 'text-slate-300 hover:text-white hover:bg-surfaceLight/50'
-                  }`}
-                >
-                  <span
-                    className="w-1.5 h-1.5 rounded-full"
-                    style={{ backgroundColor: target.color }}
-                  ></span>
-                  {target.label}
-                </button>
-              );
-            })}
-          </nav>
-
-          {/* Compact Zone Dropdown for Mobile & Tablet (< xl screens) */}
-          <div className="relative xl:hidden" ref={zoneMenuRef}>
-            <button
-              onClick={() => setIsZoneMenuOpen(!isZoneMenuOpen)}
-              className="flex items-center gap-1 px-2 py-1 sm:px-2.5 sm:py-1.5 rounded-lg bg-surfaceLight/70 hover:bg-surfaceLight border border-borderDark text-xs font-mono text-slate-300 hover:text-white transition-colors whitespace-nowrap"
-              title="Jump to City Zones"
-            >
-              <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-brandPink shrink-0"></span>
-              <span className="text-[10px] sm:text-[11px] font-semibold">{activeZone || 'Zones'}</span>
-              <ChevronDown className={`w-2.5 h-2.5 sm:w-3 sm:h-3 transition-transform ${isZoneMenuOpen ? 'rotate-180' : ''}`} />
-            </button>
-
-            {isZoneMenuOpen && (
-              <div className="absolute left-0 mt-1 w-44 rounded-xl bg-surface border border-borderDark shadow-2xl p-1.5 z-50 flex flex-col gap-1 backdrop-blur-md">
-                <div className="text-[9px] font-mono uppercase text-slate-400 px-2 py-1 border-b border-borderDark/60">
-                  Quick Jump Zones
-                </div>
-                {QUICK_JUMP_TARGETS.map((target) => (
-                  <button
-                    key={target.label}
-                    onClick={() => handleJump(target)}
-                    className="w-full text-left px-2.5 py-1.5 rounded-lg text-xs font-medium text-slate-200 hover:text-white hover:bg-brandPink/20 flex items-center gap-2 transition-colors"
-                  >
-                    <span
-                      className="w-2 h-2 rounded-full shrink-0"
-                      style={{ backgroundColor: target.color }}
-                    ></span>
-                    <span>{target.label}</span>
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
-      )}
+      {/* 2. (Center Zone selector REMOVED in Phase 1.3 — now lives inside LayerToggleHUD's panel) */}
 
       {/* 3. Right: Trip Countdown & View Switcher (Countdown to the LEFT of View Switcher) */}
       <div className="flex items-center gap-1 sm:gap-2 shrink-0">
-        {/* Dynamic Trip Countdown / Date Picker Button (Positioned to the LEFT of the mode options) */}
+        {/* Icon-only Trip Countdown / Date Picker Button — always shows palm + days,
+            never the longer "to Pattaya" text. Wider labels live only inside the modal. */}
         <button
           onClick={handleTripClick}
           className="flex items-center gap-1 px-1.5 sm:px-2.5 py-1 sm:py-1.5 rounded-xl bg-surfaceLight hover:bg-surfaceLight/80 border border-borderDark text-xs font-mono transition-all text-slate-200 hover:border-brandPink/50 shrink-0"
-          title="Click to set your departure date & view countdown clock"
+          title={
+            tripDays !== null
+              ? `${tripDays} day${tripDays === 1 ? '' : 's'} until your trip to Pattaya — click to change`
+              : 'Click to set your departure date & start the countdown'
+          }
+          aria-label={
+            tripDays !== null
+              ? `Trip countdown: ${tripDays} day${tripDays === 1 ? '' : 's'} until Pattaya`
+              : 'Set your trip departure date'
+          }
         >
-          {tripDays !== null ? (
-            <>
-              <span className="text-xs sm:text-sm">🌴</span>
-              <span className="text-brandPink font-bold text-[11px] sm:text-xs">{tripDays}d</span>
-              <span className="hidden lg:inline text-slate-400">to Pattaya</span>
-            </>
-          ) : (
-            <>
-              <Calendar className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-brandPink" />
-              <span className="hidden md:inline font-semibold text-slate-200">Trip</span>
-            </>
-          )}
+          <span aria-hidden="true">{tripDays !== null ? '🌴' : '📅'}</span>
+          <span className="text-brandPink font-bold text-[11px] sm:text-xs">
+            {tripDays !== null ? `${tripDays}d` : 'Trip'}
+          </span>
         </button>
 
         {/* View Mode Switcher: Map, Multi, Videos, Creators — monochrome lifted state, no neon gradients */}

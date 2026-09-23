@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
 
+# Future-proofing: keep admin tools out of search indexes.
+Disallow: /admin/
+
 Sitemap: https://pattayacams.com/sitemap.xml

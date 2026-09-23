@@ -1,4 +1,4 @@
-import { Inter, JetBrains_Mono, Bricolage_Grotesque } from 'next/font/google';
+import { Inter, JetBrains_Mono, Anton } from 'next/font/google';
 import './globals.css';
 
 const inter = Inter({
@@ -13,11 +13,11 @@ const jetbrainsMono = JetBrains_Mono({
   display: 'swap',
 });
 
-const bricolage = Bricolage_Grotesque({
+const anton = Anton({
   subsets: ['latin'],
   variable: '--font-wordmark',
   display: 'swap',
-  weight: ['700', '800'],
+  weight: '400',
 });
 
 export const metadata = {
@@ -66,7 +66,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`dark ${inter.variable} ${jetbrainsMono.variable} ${bricolage.variable}`}>
+    <html lang="en" className={`dark ${inter.variable} ${jetbrainsMono.variable} ${anton.variable}`}>
       <body className="bg-canvas text-slate-100 antialiased min-h-screen w-full flex flex-col overflow-x-hidden selection:bg-brandPink selection:text-white">
         {children}
       </body>

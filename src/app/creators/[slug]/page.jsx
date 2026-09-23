@@ -111,6 +111,13 @@ export default async function CreatorProfilePage({ params }) {
 
   const primaryChannelUrl = isKickOnly ? kickUrl : (youtubeUrl || kickUrl);
 
+  // Live stream status (for VideoObject JSON-LD)
+  const liveEntityKey = `creator-${creator.slug}`;
+  const liveEntity = streamStatus?.entities?.[liveEntityKey] || streamStatus?.entities?.[creator.slug];
+  const isCurrentlyLive = Boolean(liveEntity?.is_live);
+  const liveVideoId = liveEntity?.video_id || null;
+  const liveVideoUrl = liveVideoId ? `https://www.youtube.com/watch?v=${liveVideoId}` : null;
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -121,8 +128,33 @@ export default async function CreatorProfilePage({ params }) {
         description: creator.bio_seo || `Content creator covering Pattaya, Thailand.`,
         url: `https://pattayacams.com/creators/${creator.slug}/`,
         sameAs: [primaryChannelUrl].filter(Boolean),
-        knowsAbout: ['Pattaya', 'Thailand Tourism', 'Nightlife', 'Travel Vlogging'],
+        knowsAbout: ['Pattaya', 'Thailand Tourism', 'Travel Vlogging'],
       },
+      // VideoObject is only emitted when the creator is currently live — keeps
+      // the JSON-LD truthful (no stale entries).
+      ...(isCurrentlyLive && liveVideoId
+        ? [
+            {
+              '@type': 'VideoObject',
+              '@id': `https://pattayacams.com/creators/${creator.slug}/#live`,
+              name: `${creator.name} – Live Stream`,
+              description: creator.bio_seo || `Live broadcast by ${creator.name} from Pattaya, Thailand.`,
+              thumbnailUrl: [
+                `https://i.ytimg.com/vi/${liveVideoId}/hqdefault.jpg`,
+                `https://i.ytimg.com/vi/${liveVideoId}/maxresdefault.jpg`,
+              ],
+              uploadDate: liveEntity?.last_live_at || new Date().toISOString(),
+              contentUrl: liveVideoUrl,
+              embedUrl: `https://www.youtube.com/embed/${liveVideoId}`,
+              isLiveBroadcast: true,
+              publisher: {
+                '@type': 'Person',
+                name: creator.name,
+                url: `https://pattayacams.com/creators/${creator.slug}/`,
+              },
+            },
+          ]
+        : []),
       {
         '@type': 'BreadcrumbList',
         itemListElement: [

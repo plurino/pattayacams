@@ -5,11 +5,11 @@ import SiteFooter from '@/src/components/SiteFooter';
 import { ShieldCheck, ArrowLeft, Mail, ExternalLink, Lock, Eye, Database } from 'lucide-react';
 
 export const metadata = {
-  title: 'Privacy Policy & Terms of Service | PattayaCams',
-  description: 'Privacy Policy, YouTube API Services disclosure, cookie governance, and platform compliance terms for PattayaCams.com.',
+  title: 'Privacy Policy | PattayaCams',
+  description: 'Privacy Policy and YouTube API Services disclosure for PattayaCams.com — a non-commercial tourism directory.',
   openGraph: {
-    title: 'Privacy Policy & Terms | PattayaCams.com',
-    description: 'Privacy Policy, YouTube API Services disclosure, and platform compliance terms.',
+    title: 'Privacy Policy | PattayaCams.com',
+    description: 'Privacy Policy and YouTube API Services disclosure for PattayaCams.com.',
     url: 'https://pattayacams.com/privacy/',
     type: 'website',
   },
@@ -39,7 +39,7 @@ export default function PrivacyPage() {
             <span>Legal Governance & Compliance</span>
           </div>
           <h1 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight mb-2">
-            Privacy Policy & Platform Terms
+            Privacy Policy
           </h1>
           <p className="text-xs sm:text-sm font-mono text-slate-400">
             Effective Date: September 2026 • Platform: PattayaCams.com

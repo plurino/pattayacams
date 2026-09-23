@@ -2,7 +2,7 @@
 
 import React, { useMemo, useCallback } from 'react';
 import Link from 'next/link';
-import { Youtube, Star, Play, Radio, Users, Mail } from 'lucide-react';
+import { Star, Play, Radio, Users, Mail, Tv, MapPin, Video } from 'lucide-react';
 import streamersData from '@/public/data/roaming_streamers.json';
 import creatorsData from '@/public/data/creators.json';
 import venuesData from '@/public/data/venues.json';
@@ -10,11 +10,46 @@ import liveCamsData from '@/public/data/live_cams.json';
 import { useStreamStatus } from '@/src/hooks/useStreamStatus';
 import { FEATURES } from '@/src/config/features';
 
+/**
+ * Resolve the best thumbnail for an entity.
+ * Creators/streamers use avatar_url; venues & livecams fall back to their
+ * first Google Street View photo or a generic icon.
+ */
+function resolveThumbnail(item) {
+  if (item.avatar_url) return item.avatar_url;
+  if (Array.isArray(item.photos) && item.photos.length > 0 && item.photos[0]?.url) {
+    return item.photos[0].url;
+  }
+  return null;
+}
+
+/**
+ * Human label + glyph for an entity's type, used inside the live card.
+ */
+function describeType(item) {
+  switch (item.type) {
+    case 'creator':
+      return { label: 'Creator', Icon: Video };
+    case 'streamer':
+      return { label: 'Roaming', Icon: Video };
+    case 'venue':
+      return { label: item.category || 'Venue', Icon: MapPin };
+    case 'livecam':
+      return { label: '24/7 Cam', Icon: Tv };
+    default:
+      return { label: 'Stream', Icon: Video };
+  }
+}
+
+const FALLBACK_AVATAR =
+  'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&fit=crop&q=60';
+
 export default function RoamingTray({ onSelectStreamer, onOpenSponsorModal, onOpenContact }) {
   const streamStatus = useStreamStatus();
 
   // Index all entities with physical locations on the map (Venues & 24/7 Webcams)
-  // These must NEVER appear in the bottom roaming bar.
+  // We still want venues + livecams to appear in the bottom strip — but we
+  // dedupe against the creator pool so the same channel doesn't show twice.
   const physicalKeys = useMemo(() => {
     const keys = new Set();
     venuesData.forEach((v) => {
@@ -42,20 +77,19 @@ export default function RoamingTray({ onSelectStreamer, onOpenSponsorModal, onOp
     return physicalKeys.has(slug) || physicalKeys.has(handle) || physicalKeys.has(cid) || physicalKeys.has(name);
   }, [physicalKeys]);
 
-  // Combine independent roaming streamers and creators without duplicates
+  // Combine roaming streamers, creators, AND live venues / live cams into one
+  // pool so the bottom strip surfaces every kind of live stream, not just
+  // location-less ones.
   const allPool = useMemo(() => {
     const list = [];
     const seen = new Set();
 
-    const addCreator = (item) => {
-      // Exclude anything that is already displayed as a physical location on the map
-      if (isPhysicalOnMap(item)) return;
-
+    const addItem = (item) => {
       const cid = (item.channel_id || '').toLowerCase();
       const handle = (item.handle || '').toLowerCase().replace(/^@/, '');
       const name = (item.name || '').toLowerCase();
 
-      // Deduplicate so no creator appears twice
+      // Deduplicate so no channel appears twice
       if (cid && seen.has(`cid:${cid}`)) return;
       if (handle && seen.has(`h:${handle}`)) return;
       if (name && seen.has(`n:${name}`)) return;
@@ -67,9 +101,10 @@ export default function RoamingTray({ onSelectStreamer, onOpenSponsorModal, onOp
       list.push(item);
     };
 
-    // 1. Add creators
+    // 1. Creators (skip if already on map as a venue/livecam — but those
+    //    would have been picked up first so dedupe handles this anyway).
     creatorsData.forEach((c) => {
-      addCreator({
+      addItem({
         id: c.slug,
         slug: c.slug,
         name: c.name,
@@ -82,9 +117,9 @@ export default function RoamingTray({ onSelectStreamer, onOpenSponsorModal, onOp
       });
     });
 
-    // 2. Add roaming streamers if not already present
+    // 2. Roaming streamers
     streamersData.forEach((s) => {
-      addCreator({
+      addItem({
         id: s.id,
         slug: s.id.toLowerCase(),
         name: s.name,
@@ -96,123 +131,219 @@ export default function RoamingTray({ onSelectStreamer, onOpenSponsorModal, onOp
       });
     });
 
+    // 3. Venues with YouTube channels (bars, dispensaries, restaurants, etc.)
+    venuesData.forEach((v) => {
+      if (!v.youtube_channel_id && !v.youtube_handle) return;
+      addItem({
+        id: v.slug,
+        slug: v.slug,
+        name: v.name,
+        handle: v.youtube_handle,
+        avatar_url: null,
+        photos: v.photos,
+        category: v.category,
+        platform: 'youtube',
+        channel_id: v.youtube_channel_id,
+        zone: v.zone,
+        lat: v.lat,
+        lng: v.lng,
+        type: 'venue',
+      });
+    });
+
+    // 4. 24/7 Live Cams (already a map entity — but they're the most
+    //    reliable "always broadcasting" source so they belong here too).
+    liveCamsData.forEach((c) => {
+      addItem({
+        id: c.slug,
+        slug: c.slug,
+        name: c.name,
+        handle: c.youtube_handle,
+        avatar_url: null,
+        photos: c.photos,
+        category: 'live_cam',
+        platform: 'youtube',
+        channel_id: c.youtube_channel_id,
+        zone: c.zone,
+        lat: c.lat,
+        lng: c.lng,
+        type: 'livecam',
+      });
+    });
+
     return list;
-  }, [isPhysicalOnMap]);
+  }, []);
 
   const getEntityStatus = useCallback((item) => {
+    // Try every key shape used across the codebase so we pick up status
+    // regardless of where the entity originated.
+    const slug = item.slug;
+    const id = item.id;
     return (
-      streamStatus?.entities?.[item.slug] ||
-      streamStatus?.entities?.[item.id] ||
-      streamStatus?.entities?.[item.id?.toLowerCase()] ||
-      streamStatus?.entities?.[item.slug ? `creator-${item.slug}` : ''] ||
-      streamStatus?.entities?.[item.id ? `streamer-${item.id}` : ''] ||
-      streamStatus?.entities?.[item.id ? `streamer-${item.id.toLowerCase()}` : '']
+      streamStatus?.entities?.[slug] ||
+      streamStatus?.entities?.[id] ||
+      streamStatus?.entities?.[id?.toLowerCase?.()] ||
+      streamStatus?.entities?.[slug ? `creator-${slug}` : ''] ||
+      streamStatus?.entities?.[slug ? `venue-${slug}` : ''] ||
+      streamStatus?.entities?.[slug ? `livecam-${slug}` : ''] ||
+      streamStatus?.entities?.[id ? `streamer-${id}` : ''] ||
+      streamStatus?.entities?.[id ? `streamer-${id?.toLowerCase?.()}` : ''] ||
+      null
     );
   }, [streamStatus]);
 
-  // Filter strictly to ACTIVE live creators (not upcoming)
-  const liveCreators = useMemo(() => {
-    return allPool.filter((item) => {
-      const status = getEntityStatus(item);
-      return status?.is_live === true && !status?.is_upcoming;
-    }).map((item) => {
-      const status = getEntityStatus(item);
-      return {
-        ...item,
-        is_live: true,
-        video_id: status?.video_id || null,
-        active_platform: status?.platform || item.platform,
-      };
-    });
+  // Filter strictly to ACTIVE live entities (not upcoming)
+  const liveStreams = useMemo(() => {
+    return allPool
+      .filter((item) => {
+        const status = getEntityStatus(item);
+        return status?.is_live === true && !status?.is_upcoming;
+      })
+      .map((item) => {
+        const status = getEntityStatus(item);
+        return {
+          ...item,
+          is_live: true,
+          video_id: status?.video_id || null,
+          active_platform: status?.platform || item.platform,
+          concurrent_viewers: status?.concurrent_viewers || null,
+        };
+      })
+      // Keep the most interesting streams up front: venues/livecams first
+      // (they're the most "concrete" — a real place you can visit), then
+      // creators/streamers alphabetically.
+      .sort((a, b) => {
+        const order = { livecam: 0, venue: 1, creator: 2, streamer: 3 };
+        const ao = order[a.type] ?? 9;
+        const bo = order[b.type] ?? 9;
+        if (ao !== bo) return ao - bo;
+        return (a.name || '').localeCompare(b.name || '');
+      });
   }, [allPool, getEntityStatus]);
 
-  const hasLive = liveCreators.length > 0;
+  const liveCount = liveStreams.length;
+  const hasLive = liveCount > 0;
 
   return (
     <aside
-      aria-label="Live in Pattaya"
-      className="h-14 sm:h-16 border-t border-borderDark bg-surface flex items-center justify-between px-2 sm:px-4 md:px-5 shrink-0 z-40 select-none shadow-lg gap-2"
+      aria-label="Currently Broadcasting"
+      className="h-16 sm:h-[72px] border-t border-borderDark bg-surface flex items-center justify-between px-2 sm:px-4 md:px-5 shrink-0 z-40 select-none shadow-[0_-4px_18px_rgba(0,0,0,0.35)] gap-2"
     >
       <div className="flex items-center gap-2 sm:gap-3 overflow-x-auto py-1 scrollbar-none flex-1 min-w-0">
-        {/* Dock Header: Responsive (compact on mobile, full on desktop) */}
+        {/* Dock Header — pulsing live pill + count badge */}
         <div className="flex items-center gap-1.5 sm:gap-2 shrink-0 pr-2 sm:pr-3 border-r border-borderDark">
           {hasLive ? (
-            <span className="relative flex h-2 sm:h-2.5 w-2 sm:w-2.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 sm:h-2.5 w-2 sm:w-2.5 bg-red-500"></span>
-            </span>
+            <>
+              <span className="relative flex h-2.5 sm:h-3 w-2.5 sm:w-3" aria-hidden="true">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2.5 sm:h-3 w-2.5 sm:w-3 bg-red-500 shadow-[0_0_8px_#EF4444]"></span>
+              </span>
+              <div className="flex items-center gap-1 font-mono text-[10px] sm:text-[11px] font-bold">
+                <span className="text-white uppercase tracking-wider hidden sm:inline">
+                  ● LIVE NOW
+                </span>
+                <span className="text-white uppercase tracking-wider sm:hidden">
+                  ● LIVE
+                </span>
+                <span
+                  className="px-1.5 py-0.5 rounded-full bg-red-600 text-white text-[9px] font-extrabold shadow-[0_0_8px_#EF4444]"
+                  aria-label={`${liveCount} streams live`}
+                >
+                  {liveCount} {liveCount === 1 ? 'stream' : 'streams'}
+                </span>
+              </div>
+            </>
           ) : (
-            <Radio className="w-3.5 h-3.5 text-slate-400" />
+            <>
+              <Radio className="w-3.5 h-3.5 text-slate-400" aria-hidden="true" />
+              <span className="font-mono text-[10px] sm:text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+                Standby
+              </span>
+            </>
           )}
-
-          <div className="flex items-center gap-1 font-mono text-[10px] sm:text-[11px] font-bold">
-            <span className="text-white uppercase tracking-wider hidden sm:inline">Live in Pattaya</span>
-            <span className="text-white uppercase tracking-wider sm:hidden">Live</span>
-            {hasLive ? (
-              <span className="px-1.5 py-0.5 rounded-full bg-red-600 text-white text-[9px] font-extrabold shadow-[0_0_8px_#EF4444]">
-                {liveCreators.length} Live
-              </span>
-            ) : (
-              <span className="px-1.5 py-0.5 rounded-full bg-surfaceLight border border-borderDark text-slate-400 text-[9px]">
-                0
-              </span>
-            )}
-          </div>
         </div>
 
-        {/* When NO creators are live: Standby state */}
+        {/* When NO streams are live: quiet "check back later" message + link */}
         {!hasLive ? (
           <div className="flex items-center gap-2 text-xs font-mono text-slate-400 truncate">
-            <span className="hidden sm:inline">No creators broadcasting live right now.</span>
-            <span className="sm:hidden text-[11px]">No creators live.</span>
-            <span className="text-slate-600">•</span>
+            <span className="hidden sm:inline">
+              No live streams at the moment — check back later.
+            </span>
+            <span className="sm:hidden text-[11px]">No streams live.</span>
+            <span className="text-slate-600" aria-hidden="true">•</span>
             <Link
               href="/creators"
               className="text-brandPink hover:text-pink-300 font-bold transition-colors flex items-center gap-1 shrink-0 text-[11px] sm:text-xs"
             >
-              <Users className="w-3.5 h-3.5" />
+              <Users className="w-3.5 h-3.5" aria-hidden="true" />
               <span>Explore 70+ Channels ↗</span>
             </Link>
           </div>
         ) : (
-          /* When creators ARE live: High-visibility, compact chips easily visible without excessive scrolling */
-          <div className="flex items-center gap-2 min-w-0 flex-1 overflow-x-auto no-scrollbar py-0.5">
-            {liveCreators.map((creator) => (
-              <button
-                key={creator.id}
-                type="button"
-                onClick={() => onSelectStreamer(creator)}
-                title={`Watch ${creator.name} live`}
-                className="group flex items-center gap-1.5 pl-1.5 pr-2.5 py-1 rounded-full border bg-red-950/60 hover:bg-red-900/80 border-red-500/60 hover:border-red-400 shadow-[0_0_12px_rgba(239,68,68,0.3)] transition-all cursor-pointer shrink-0 hover:scale-[1.02] active:scale-[0.98]"
-              >
-                <div className="relative shrink-0">
-                  <img
-                    src={creator.avatar_url}
-                    alt={creator.name}
-                    className="w-6 h-6 rounded-full object-cover border border-red-500 shrink-0"
-                    onError={(e) => {
-                      e.target.src =
-                        'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&fit=crop&q=60';
-                    }}
-                  />
-                  <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-red-500 border border-surface animate-pulse" />
-                </div>
+          /* When streams ARE live: horizontal scrollable card strip */
+          <div
+            className="flex items-stretch gap-2 min-w-0 flex-1 overflow-x-auto no-scrollbar py-0.5"
+            role="list"
+            aria-label="Live streams"
+          >
+            {liveStreams.map((stream) => {
+              const thumb = resolveThumbnail(stream);
+              const { label: typeLabel, Icon: TypeIcon } = describeType(stream);
+              const handle = stream.handle || (stream.slug ? `@${stream.slug}` : '');
+              const viewerCount = stream.concurrent_viewers;
 
-                <div className="flex flex-col text-left min-w-0">
-                  <span className="text-xs font-bold font-mono text-white group-hover:text-red-200 leading-tight max-w-[100px] sm:max-w-[140px] truncate">
-                    {creator.name}
-                  </span>
-                  <span className="text-[9px] font-mono text-slate-300 leading-tight truncate">
-                    {creator.handle || `@${creator.slug}`}
-                  </span>
-                </div>
+              return (
+                <button
+                  key={`${stream.type}:${stream.id}`}
+                  type="button"
+                  role="listitem"
+                  onClick={() => onSelectStreamer(stream)}
+                  title={`Watch ${stream.name} live on ${stream.active_platform || stream.platform || 'YouTube'}`}
+                  className="group flex items-center gap-2 pl-1.5 pr-2.5 py-1 rounded-full border bg-red-950/60 hover:bg-red-900/80 border-red-500/60 hover:border-red-400 shadow-[0_0_12px_rgba(239,68,68,0.3)] transition-all cursor-pointer shrink-0 hover:scale-[1.02] active:scale-[0.98]"
+                >
+                  <div className="relative shrink-0">
+                    {thumb ? (
+                      <img
+                        src={thumb}
+                        alt={stream.name}
+                        className="w-7 h-7 rounded-full object-cover border border-red-500 shrink-0"
+                        loading="lazy"
+                        onError={(e) => {
+                          e.currentTarget.src = FALLBACK_AVATAR;
+                        }}
+                      />
+                    ) : (
+                      <span className="w-7 h-7 rounded-full border border-red-500 bg-red-900/80 flex items-center justify-center shrink-0">
+                        <TypeIcon className="w-3.5 h-3.5 text-red-200" aria-hidden="true" />
+                      </span>
+                    )}
+                    <span
+                      className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-red-500 border border-surface animate-pulse"
+                      aria-hidden="true"
+                    />
+                  </div>
 
-                <span className="flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-gradient-to-r from-red-600 to-rose-600 group-hover:from-red-500 group-hover:to-rose-500 text-white text-[9px] font-mono font-bold tracking-wider shrink-0 shadow-[0_0_6px_rgba(239,68,68,0.6)] ml-0.5">
-                  <Play className="w-2.5 h-2.5 fill-white" />
-                  <span className="hidden sm:inline">WATCH</span>
-                </span>
-              </button>
-            ))}
+                  <div className="flex flex-col text-left min-w-0 max-w-[120px] sm:max-w-[160px]">
+                    <span className="text-xs font-bold font-mono text-white group-hover:text-red-200 leading-tight truncate">
+                      {stream.name}
+                    </span>
+                    <span className="text-[9px] font-mono text-slate-300 leading-tight truncate flex items-center gap-1">
+                      <TypeIcon className="w-2.5 h-2.5 shrink-0" aria-hidden="true" />
+                      <span className="truncate">{typeLabel}</span>
+                      {handle ? <span className="truncate opacity-70">· {handle}</span> : null}
+                      {viewerCount ? (
+                        <span className="truncate text-red-300">· {formatViewers(viewerCount)} watching</span>
+                      ) : null}
+                    </span>
+                  </div>
+
+                  <span className="flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-gradient-to-r from-red-600 to-rose-600 group-hover:from-red-500 group-hover:to-rose-500 text-white text-[9px] font-mono font-bold tracking-wider shrink-0 shadow-[0_0_6px_rgba(239,68,68,0.6)] ml-0.5">
+                    <Play className="w-2.5 h-2.5 fill-white" aria-hidden="true" />
+                    <span className="hidden sm:inline">WATCH</span>
+                  </span>
+                </button>
+              );
+            })}
           </div>
         )}
       </div>
@@ -225,7 +356,7 @@ export default function RoamingTray({ onSelectStreamer, onOpenSponsorModal, onOp
             className="hidden md:flex items-center gap-1 px-2.5 py-1 sm:py-1.5 rounded-lg bg-surfaceLight hover:bg-borderDark border border-borderDark text-slate-300 hover:text-white text-xs font-semibold transition-all cursor-pointer"
             title="Submit Live Stream, Feature Venue, or Report Bug"
           >
-            <Mail className="w-3.5 h-3.5 text-brandPink" />
+            <Mail className="w-3.5 h-3.5 text-brandPink" aria-hidden="true" />
             <span>Contact</span>
           </button>
         )}
@@ -236,11 +367,21 @@ export default function RoamingTray({ onSelectStreamer, onOpenSponsorModal, onOp
             className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-gradient-to-r from-brandGold/20 to-brandAmber/20 hover:from-brandGold/30 hover:to-brandAmber/30 border border-brandGold/60 text-brandGold text-xs font-bold transition-all shadow-[0_0_12px_rgba(234,179,8,0.25)] hover:shadow-[0_0_16px_rgba(234,179,8,0.4)] cursor-pointer"
             title="List your Pattaya Venue"
           >
-            <Star className="w-3.5 h-3.5 fill-brandGold" />
+            <Star className="w-3.5 h-3.5 fill-brandGold" aria-hidden="true" />
             <span className="hidden sm:inline whitespace-nowrap">List Venue</span>
           </button>
         )}
       </div>
     </aside>
   );
+}
+
+/**
+ * Compact viewer count formatter — 1234 → "1.2k", 12345 → "12k".
+ */
+function formatViewers(n) {
+  if (typeof n !== 'number' || !isFinite(n) || n <= 0) return null;
+  if (n < 1000) return `${n}`;
+  if (n < 10000) return `${(n / 1000).toFixed(1)}k`;
+  return `${Math.round(n / 1000)}k`;
 }

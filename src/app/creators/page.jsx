@@ -5,11 +5,11 @@ import venuesData from '@/public/data/venues.json';
 import streamStatus from '@/public/data/stream_status.json';
 
 export const metadata = {
-  title: 'Pattaya Creators & Live Venues Directory | 70+ Channels, Bars & Vlogs',
-  description: 'Explore 70+ Pattaya content creators, nightlife live venues, 4K walking tour vloggers, expat guides, and mobile IRL streamers on YouTube and Kick. Watch live broadcasts, latest uploads, and discover authentic local guides.',
+  title: 'Pattaya Creators & Live Venues Directory | PattayaCams.com',
+  description: 'Browse 70+ Pattaya-based YouTube and Kick creators streaming live from beaches, walking streets, and local neighborhoods across the Eastern Seaboard.',
   openGraph: {
     title: 'Pattaya Creators & Live Venues Directory | PattayaCams.com',
-    description: 'Explore 70+ Pattaya content creators, nightlife live venues, 4K walking tour vloggers, expat guides, and mobile IRL streamers on YouTube and Kick.',
+    description: 'Browse 70+ Pattaya-based YouTube and Kick creators streaming live from beaches, walking streets, and local neighborhoods across the Eastern Seaboard.',
     url: 'https://pattayacams.com/creators/',
     type: 'website',
   },

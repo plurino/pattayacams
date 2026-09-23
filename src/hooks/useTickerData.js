@@ -106,21 +106,29 @@ export function useTickerData() {
 
       try {
         const res = await fetch(
-          'https://api.open-meteo.com/v1/forecast?latitude=12.9276&longitude=100.8771&current=temperature_2m,relative_humidity_2m,weather_code,precipitation,wind_speed_10m&timezone=Asia%2FBangkok'
+          'https://api.open-meteo.com/v1/forecast?latitude=12.9276&longitude=100.8771&current=temperature_2m,relative_humidity_2m,weather_code,precipitation,wind_speed_10m,wind_direction_10m,uv_index&daily=uv_index_max,uv_index_clear_sky_max&timezone=Asia%2FBangkok&forecast_days=1'
         );
         if (!res.ok) return;
         const json = await res.json();
         const current = json.current;
+        const daily = json.daily;
         if (!current) return;
 
         const condition = getWeatherCondition(current.weather_code);
+        const uvNow = typeof current.uv_index === 'number' ? current.uv_index : null;
+        const uvMax = daily && Array.isArray(daily.uv_index_max) ? daily.uv_index_max[0] : null;
+        const uvClearSkyMax = daily && Array.isArray(daily.uv_index_clear_sky_max) ? daily.uv_index_clear_sky_max[0] : null;
+        const uvValue = uvNow ?? uvMax ?? uvClearSkyMax ?? null;
+
         const weatherPayload = {
           temp: Math.round(current.temperature_2m),
           humidity: current.relative_humidity_2m,
           wind: Math.round(current.wind_speed_10m),
+          windDirection: typeof current.wind_direction_10m === 'number' ? current.wind_direction_10m : null,
           precipitation: current.precipitation || 0,
           condition: condition.label,
           icon: condition.icon,
+          uvIndex: uvValue !== null ? Math.round(uvValue * 10) / 10 : null,
         };
 
         setWeather(weatherPayload);

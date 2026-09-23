@@ -9,6 +9,7 @@ import {
   RotateCw,
   Sun,
   Moon,
+  CloudSun,
   Navigation,
   Play,
   Pause,
@@ -40,6 +41,7 @@ export default function LayerToggleHUD({
   onRotateRight,
   onResetNorth,
   mapTheme = 'dark',
+  mapThemeEffective, // 'light' | 'dark' (resolved from 'auto')
   onToggleTheme,
   onLocateMe,
   onStartTour,
@@ -151,16 +153,29 @@ export default function LayerToggleHUD({
           </button>
         </div>
 
-        {/* Dark / Light Basemap Theme Toggle */}
+        {/* Dark / Light Basemap Theme Toggle (3-state: auto → light → dark → auto) */}
         <button
           onClick={() => {
             playTacticalClick();
             if (onToggleTheme) onToggleTheme();
           }}
-          className="w-9 h-9 rounded-xl bg-surface/90 backdrop-blur-md border border-borderDark hover:border-brandGold/60 text-slate-300 hover:text-brandGold transition-all flex items-center justify-center shadow-xl group"
-          title={mapTheme === 'dark' ? 'Switch to Light Map Mode' : 'Switch to Dark Map Mode'}
+          className="w-9 h-9 rounded-xl bg-surface/90 backdrop-blur-md border border-borderDark hover:border-brandGold/60 text-slate-300 hover:text-brandGold transition-all flex items-center justify-center shadow-xl group relative"
+          title={
+            mapTheme === 'auto'
+              ? 'Auto — Pattaya time (click for Light)'
+              : mapTheme === 'light'
+                ? 'Light Map (click for Dark)'
+                : 'Dark Map (click for Auto)'
+          }
         >
-          {mapTheme === 'dark' ? (
+          {mapTheme === 'auto' ? (
+            <>
+              <CloudSun className="w-4 h-4 group-hover:scale-110 transition-transform text-cyan-300" />
+              <span className="absolute -bottom-1 -right-1 px-1 py-0.2 rounded bg-cyan-500/80 text-white font-mono font-black text-[7px] leading-tight">
+                AUTO
+              </span>
+            </>
+          ) : mapTheme === 'light' ? (
             <Sun className="w-4 h-4 group-hover:rotate-90 transition-transform text-brandGold" />
           ) : (
             <Moon className="w-4 h-4 group-hover:-rotate-12 transition-transform text-indigo-400" />
@@ -236,7 +251,11 @@ export default function LayerToggleHUD({
             </div>
             <div className="flex items-center gap-2">
               <span className="text-[9px] text-slate-400 uppercase">
-                {mapTheme === 'dark' ? 'Dark Matter' : 'Light Map'}
+                {mapTheme === 'auto'
+                  ? 'Auto — Pattaya time'
+                  : (mapThemeEffective || mapTheme) === 'dark'
+                    ? 'Dark Matter'
+                    : 'Light Map'}
               </span>
               <button
                 onClick={() => updatePanelState(false)}
@@ -365,8 +384,16 @@ export default function LayerToggleHUD({
               <div className="bg-canvas/90 p-2 rounded-lg border border-teal-500/30 flex flex-col gap-1.5 mt-0.5">
                 <div className="flex items-center justify-between text-[10px] font-mono h-6">
                   <span className="text-teal-400 font-bold truncate w-[130px]">{radarState.frameLabel || radarState.formattedTime || 'Live Rain Radar'}</span>
-                  <span className={`text-[8.5px] px-1 py-0.5 rounded font-bold w-[82px] justify-center text-center shrink-0 flex items-center gap-1 ${radarState.currentFrame?.isForecast ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40' : 'bg-teal-500/20 text-teal-300 border border-teal-500/30'}`}>
-                    {radarState.currentFrame?.isForecast ? '🔮 Forecast' : '🛰️ Live Radar'}
+                  <span className={`text-[8.5px] px-1 py-0.5 rounded font-bold w-[82px] justify-center text-center shrink-0 flex items-center gap-1 ${
+                    !radarState.hasForecast
+                      ? 'bg-slate-500/20 text-slate-400 border border-slate-500/40'
+                      : (radarState.currentFrame?.isForecast
+                        ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40'
+                        : 'bg-teal-500/20 text-teal-300 border border-teal-500/30')
+                  }`}>
+                    {!radarState.hasForecast
+                      ? '🔮 Forecast Unavailable'
+                      : (radarState.currentFrame?.isForecast ? '🔮 Forecast' : '🛰️ Live Radar')}
                   </span>
                 </div>
 
@@ -386,7 +413,7 @@ export default function LayerToggleHUD({
                   <input
                     type="range"
                     min="0"
-                    max={Math.max(0, radarState.frames.length - 1)}
+                    max={Math.max(0, (!radarState.hasForecast ? radarState.frames.filter(f => !f.isForecast).length - 1 : radarState.frames.length - 1))}
                     value={radarState.currentIdx}
                     onChange={(e) => {
                       radarState.setIsPlaying(false);
@@ -399,7 +426,11 @@ export default function LayerToggleHUD({
                 <div className="flex justify-between items-center text-[8px] text-slate-400 font-mono px-0.5">
                   <span>-2 Hours</span>
                   <span className="text-slate-300 font-semibold">Now</span>
-                  <span className="text-amber-400 font-semibold">+30m Forecast</span>
+                  {radarState.hasForecast ? (
+                    <span className="text-amber-400 font-semibold">+30m Forecast</span>
+                  ) : (
+                    <span className="text-slate-500 font-semibold">+30m (n/a)</span>
+                  )}
                 </div>
               </div>
             )}

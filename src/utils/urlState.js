@@ -17,12 +17,12 @@ import cctvData from '@/public/data/cctv_cams.json';
 import creatorsData from '@/public/data/creators.json';
 
 /**
- * Synchronizes current app state into browser URL query parameters
+ * Builds the search-param-only URL string for a given app state.
+ * Pure function — no DOM access, no history side effects. Shared by
+ * syncStateToUrl (replaceState) and pushStateToUrl (pushState).
  */
-export function syncStateToUrl({ lat, lng, zoom, target, layers, view }) {
-  if (typeof window === 'undefined') return;
-
-  const url = new URL(window.location.href);
+function buildStateSearch({ lat, lng, zoom, target, layers, view }) {
+  const url = new URL('http://placeholder.local' + (typeof window !== 'undefined' ? window.location.pathname : '/'));
 
   // Map Coordinates & Zoom
   if (typeof lat === 'number' && typeof lng === 'number') {
@@ -65,9 +65,40 @@ export function syncStateToUrl({ lat, lng, zoom, target, layers, view }) {
     }
   }
 
-  // Replace URL without triggering Next.js routing transitions
-  const newRelativePathQuery = url.pathname + url.search;
+  return url.pathname + url.search;
+}
+
+/**
+ * Synchronizes current app state into browser URL query parameters.
+ * Uses history.replaceState — caller is signaling "this is the same screen,
+ * just a minor change (pan, view-mode toggle)". Does NOT push a new history
+ * entry; the mobile browser back button will not undo this change.
+ */
+export function syncStateToUrl(state) {
+  if (typeof window === 'undefined') return;
+  const newRelativePathQuery = buildStateSearch(state);
   window.history.replaceState({ path: newRelativePathQuery }, '', newRelativePathQuery);
+}
+
+/**
+ * Pushes a new history entry reflecting the current app state. Caller is
+ * signaling "this is a user-visible navigation step" — typically opening
+ * a drawer/modal that the user will want to dismiss with the browser back
+ * button. Pairs with a window.addEventListener('popstate', …) handler that
+ * closes the drawer when the user navigates back.
+ *
+ * The `mode` option is reserved for future expansion (e.g. `mode: 'replace'`)
+ * and currently only `'push'` is meaningful. Defaults to `'push'`.
+ */
+export function pushStateToUrl(state, options = {}) {
+  if (typeof window === 'undefined') return;
+  const mode = options?.mode || 'push';
+  const newRelativePathQuery = buildStateSearch(state);
+  if (mode === 'push') {
+    window.history.pushState({ path: newRelativePathQuery, pushedBy: 'urlState' }, '', newRelativePathQuery);
+  } else {
+    window.history.replaceState({ path: newRelativePathQuery }, '', newRelativePathQuery);
+  }
 }
 
 /**

@@ -26,7 +26,7 @@ module.exports = {
       fontFamily: {
         sans: ['var(--font-inter)', 'Inter', 'sans-serif'],
         mono: ['var(--font-mono)', 'JetBrains Mono', 'monospace'],
-        wordmark: ['var(--font-wordmark)', 'Bricolage Grotesque', 'system-ui', 'sans-serif'],
+        wordmark: ['var(--font-wordmark)', 'Anton', 'Bebas Neue', 'Impact', 'sans-serif'],
       },
     },
   },

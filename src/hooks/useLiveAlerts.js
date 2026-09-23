@@ -32,7 +32,7 @@ export function useLiveAlerts(streamStatus) {
       if (next) {
         new Notification('PattayaCams Live Radar', {
           body: '🔔 Live alerts enabled! You will be notified when streamers go live.',
-          icon: '/images/logo-dark.png',
+          icon: '/favicon.ico',
         });
       }
       return;
@@ -45,7 +45,7 @@ export function useLiveAlerts(streamStatus) {
         localStorage.setItem(ALERTS_STORAGE_KEY, 'true');
         new Notification('PattayaCams Live Radar', {
           body: '🔔 Subscribed! You will be notified when streamers go live.',
-          icon: '/images/logo-dark.png',
+          icon: '/favicon.ico',
         });
       }
     } else {
@@ -70,7 +70,7 @@ export function useLiveAlerts(streamStatus) {
           const channelName = info.name || key.replace(/^(venue-|streamer-)/, '');
           new Notification('🔴 Live in Pattaya!', {
             body: `${channelName} is now broadcasting live!`,
-            icon: '/images/logo-dark.png',
+            icon: '/favicon.ico',
           });
         } catch (e) {
           console.warn('Live notification dispatch error:', e);

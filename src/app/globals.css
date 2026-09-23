@@ -242,6 +242,12 @@ path.leaflet-transit-flow,
   animation: tactical-glow 2s ease-in-out infinite;
 }
 
+/* Vice City wordmark pulse — preserves the skew while gently breathing scale. */
+@keyframes vice-pulse {
+  0%, 100% { transform: skewX(-8deg) scale(1); }
+  50%      { transform: skewX(-8deg) scale(1.02); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -260,6 +266,9 @@ path.leaflet-transit-flow,
   .marker-cluster-medium,
   .marker-cluster-large,
   .animate-tactical-glow {
+    animation: none !important;
+  }
+  .animate-\[vice-pulse_2\.5s_ease-in-out_infinite\] {
     animation: none !important;
   }
 }

@@ -1,13 +1,34 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
-import { Clock, ChevronDown, TrendingUp } from 'lucide-react';
+import { Clock, ChevronDown, TrendingUp, Sun } from 'lucide-react';
 import { useTickerData } from '@/src/hooks/useTickerData';
 import { usePattayaTelemetry } from '@/src/hooks/usePattayaTelemetry';
 import { getSunsetStatus } from '@/src/utils/suncalc';
 import { getNightlifeVibe } from '@/src/utils/nightlife';
 import { playTacticalClick } from '@/src/utils/sfx';
 import TickerOverflowMenu from './TickerOverflowMenu';
+
+function uvLabel(uv) {
+  if (uv < 3) return 'Low';
+  if (uv < 6) return 'Moderate';
+  if (uv < 8) return 'High';
+  if (uv < 11) return 'Very High';
+  return 'Extreme';
+}
+
+function uvColor(uv) {
+  if (uv < 3) return 'text-emerald-400';
+  if (uv < 6) return 'text-amber-400';
+  if (uv < 8) return 'text-orange-400';
+  if (uv < 11) return 'text-rose-400';
+  return 'text-purple-400';
+}
+
+function degreesToCompass(deg) {
+  const dirs = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
+  return dirs[Math.round(((deg % 360) / 45)) % 8];
+}
 
 export default function TickerBar({
   onOpenKohLarn,
@@ -102,6 +123,44 @@ export default function TickerBar({
             <span className="hidden lg:inline text-slate-600">•</span>
             <span className="hidden lg:inline text-amber-300 font-mono">€1=<strong className="text-amber-300">{rates?.EUR || '—'}฿</strong></span>
           </button>
+
+          <span className="text-slate-600 shrink-0 hidden lg:inline" aria-hidden="true">•</span>
+
+          {/* UV index chip (clickable → Weather modal for full forecast) */}
+          {weather && typeof weather.uvIndex === 'number' && (
+            <button
+              onClick={() => {
+                playTacticalClick();
+                if (onOpenWeather) onOpenWeather();
+              }}
+              className="hidden lg:flex items-center gap-1 px-2 py-0.5 rounded-md bg-canvas/50 border border-borderDark/70 text-slate-300 hover:text-white hover:border-borderDark transition-colors shrink-0 cursor-pointer"
+              title={`UV Index today: ${weather.uvIndex} (${uvLabel(weather.uvIndex)}). Click for full forecast.`}
+            >
+              <Sun className={`w-3 h-3 shrink-0 ${uvColor(weather.uvIndex)}`} />
+              <span className="text-slate-400">UV</span>
+              <strong className={uvColor(weather.uvIndex)}>{weather.uvIndex}</strong>
+              <span className={`text-[10px] ${uvColor(weather.uvIndex)}`}>{uvLabel(weather.uvIndex)}</span>
+            </button>
+          )}
+
+          {/* Wind chip (compact, shows direction + speed) */}
+          {weather && typeof weather.windDirection === 'number' && (
+            <span
+              className="hidden xl:flex items-center gap-1 px-2 py-0.5 rounded-md bg-canvas/50 border border-borderDark/70 text-slate-300 shrink-0"
+              title={`Wind ${weather.wind} km/h from ${degreesToCompass(weather.windDirection)}`}
+            >
+              <span
+                className="text-base text-cyan-400 leading-none"
+                style={{ transform: `rotate(${weather.windDirection}deg)` }}
+                aria-hidden="true"
+              >
+                ↑
+              </span>
+              <span className="text-slate-400">Wind</span>
+              <strong className="text-cyan-300">{weather.wind}</strong>
+              <span className="text-slate-500 text-[10px]">km/h</span>
+            </span>
+          )}
         </div>
 
         {/* Right side: More overflow toggle */}

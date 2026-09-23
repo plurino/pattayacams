@@ -9,6 +9,7 @@ import LayerToggleHUD from './LayerToggleHUD';
 import SceneSelector from './SceneSelector';
 import { useStreamStatus } from '@/src/hooks/useStreamStatus';
 import { useRainViewer } from '@/src/hooks/useRainViewer';
+import { getSunsetStatus } from '@/src/utils/suncalc';
 
 export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn, onStartTour }) {
   const streamStatus = useStreamStatus();
@@ -34,7 +35,7 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
   const [showTransit, setShowTransit] = useState(true);
   const [showRadar, setShowRadar] = useState(false);
   const [bearing, setBearing] = useState(0);
-  const [mapTheme, setMapTheme] = useState('dark');
+  const [mapTheme, setMapTheme] = useState('auto');
 
   // Derive active scenes based on currently enabled layers
   const activeSceneIds = useMemo(() => {
@@ -56,17 +57,26 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
       : `https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png?key=${cartoKey}`;
   }, [cartoKey]);
 
+  // Resolve a theme mode to its concrete light/dark value.
+  // 'auto' follows Pattaya solar time (suncalc).
+  const resolveTheme = useCallback((mode) => {
+    if (mode === 'auto') {
+      return getSunsetStatus(new Date()).isNight ? 'dark' : 'light';
+    }
+    return mode;
+  }, []);
+
+  // The concrete theme currently displayed (light or dark).
+  const mapThemeEffective = resolveTheme(mapTheme);
+
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const savedTheme = localStorage.getItem('pattayacams_map_theme');
-      if (savedTheme === 'light' || savedTheme === 'dark') {
+      if (savedTheme === 'light' || savedTheme === 'dark' || savedTheme === 'auto') {
         setMapTheme(savedTheme);
       } else {
-        // Auto Solar Day/Night: 06:00 - 18:00 ICT is daytime
-        const now = new Date();
-        const ictHours = (now.getUTCHours() + 7) % 24;
-        const autoTheme = (ictHours >= 6 && ictHours < 18) ? 'light' : 'dark';
-        setMapTheme(autoTheme);
+        // Default to auto if no saved preference.
+        setMapTheme('auto');
       }
     }
   }, []);
@@ -103,15 +113,34 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
   }, [activeSceneIds]);
 
   const handleToggleTheme = useCallback(() => {
-    const nextTheme = mapTheme === 'dark' ? 'light' : 'dark';
+    // Cycle: auto → light → dark → auto
+    const nextTheme =
+      mapTheme === 'auto' ? 'light' :
+      mapTheme === 'light' ? 'dark' :
+      'auto';
     setMapTheme(nextTheme);
     if (typeof window !== 'undefined') {
       localStorage.setItem('pattayacams_map_theme', nextTheme);
     }
     if (tileLayerRef.current) {
-      tileLayerRef.current.setUrl(getTileUrl(nextTheme));
+      tileLayerRef.current.setUrl(getTileUrl(resolveTheme(nextTheme)));
     }
-  }, [mapTheme, getTileUrl]);
+  }, [mapTheme, getTileUrl, resolveTheme]);
+
+  // Re-evaluate 'auto' theme every 60s so the map switches around sunset/sunrise.
+  // Force a re-render by bumping a counter; mapThemeEffective is derived from mapTheme + current time.
+  const [, setAutoTick] = useState(0);
+  useEffect(() => {
+    if (mapTheme !== 'auto') return undefined;
+    const interval = setInterval(() => setAutoTick((n) => n + 1), 60_000);
+    return () => clearInterval(interval);
+  }, [mapTheme]);
+
+  // When the resolved (effective) theme changes, swap the basemap tiles without remounting.
+  useEffect(() => {
+    if (!tileLayerRef.current) return;
+    tileLayerRef.current.setUrl(getTileUrl(mapThemeEffective));
+  }, [mapThemeEffective, getTileUrl]);
 
   const handleRotateBy = useCallback((delta) => {
     if (!mapRef.current) return;
@@ -447,10 +476,8 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
 
       const Leaflet = L.default || L;
 
-      // Determine initial theme
-      const currentTheme = typeof window !== 'undefined'
-        ? localStorage.getItem('pattayacams_map_theme') || 'dark'
-        : 'dark';
+      // Determine initial theme — resolve from current mapTheme state ('auto' → light/dark).
+      const currentTheme = resolveTheme(mapTheme);
 
       // Initialize map centered at Central Pattaya / Soi Buakhao with rotation support
       const map = Leaflet.map(mapContainerRef.current, {
@@ -768,7 +795,7 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
         mapRef.current = null;
       }
     };
-  }, [onSelectEntity, onMapInstance, getTileUrl]);
+  }, [onSelectEntity, onMapInstance, getTileUrl, resolveTheme]);
 
   // Handle Layer Visibility Toggles
   useEffect(() => {
@@ -900,6 +927,7 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
         onRotateRight={() => handleRotateBy(45)}
         onResetNorth={handleResetNorth}
         mapTheme={mapTheme}
+        mapThemeEffective={mapThemeEffective}
         onToggleTheme={handleToggleTheme}
         onLocateMe={handleLocateMe}
         onStartTour={onStartTour}

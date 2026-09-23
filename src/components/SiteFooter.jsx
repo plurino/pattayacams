@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Mail, FileText } from 'lucide-react';
+import { Mail, FileText, Scale } from 'lucide-react';
 
 export default function SiteFooter({ onOpenContact }) {
   return (
@@ -42,6 +42,16 @@ export default function SiteFooter({ onOpenContact }) {
               <span>Contact</span>
             </a>
           )}
+
+          {/* Terms */}
+          <Link
+            href="/terms"
+            className="flex items-center gap-1 text-slate-300 hover:text-white transition-colors"
+            title="Terms of Service"
+          >
+            <Scale className="w-3 h-3 text-slate-400 shrink-0" />
+            <span>Terms</span>
+          </Link>
 
           {/* Privacy & Terms */}
           <Link

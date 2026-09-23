@@ -94,6 +94,29 @@ export default async function VenuePage({ params }) {
         },
       },
       {
+        '@type': 'LocalBusiness',
+        '@id': `https://pattayacams.com/venues/${venue.slug}/#localbusiness`,
+        name: venue.name,
+        image: Array.isArray(venue.photos) ? venue.photos.map((p) => p.url).filter(Boolean) : [],
+        description: venue.description,
+        url: `https://pattayacams.com/venues/${venue.slug}/`,
+        address: {
+          '@type': 'PostalAddress',
+          streetAddress: venue.google_name || venue.name,
+          addressLocality: 'Pattaya',
+          addressRegion: 'Chon Buri',
+          addressCountry: 'TH',
+        },
+        geo: {
+          '@type': 'GeoCoordinates',
+          latitude: venue.lat,
+          longitude: venue.lng,
+        },
+        sameAs: venue.youtube_channel_id
+          ? [`https://www.youtube.com/channel/${venue.youtube_channel_id}`]
+          : [],
+      },
+      {
         '@type': 'BreadcrumbList',
         itemListElement: [
           {

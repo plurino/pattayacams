@@ -7,6 +7,7 @@ export function useRainViewer(enabled = false) {
   const [frames, setFrames] = useState([]);
   const [currentIdx, setCurrentIdx] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [hasForecast, setHasForecast] = useState(false);
   const playTimerRef = useRef(null);
 
   // Fetch RainViewer public frames
@@ -47,6 +48,7 @@ export function useRainViewer(enabled = false) {
         }
 
         const combined = [...past, ...nowcast];
+        setHasForecast(nowcast.length > 0);
 
         if (combined.length > 0) {
           setFrames(combined);
@@ -149,5 +151,6 @@ export function useRainViewer(enabled = false) {
     formattedTime,
     frameLabel,
     getTileUrl,
+    hasForecast,
   };
 }
