@@ -1,7 +1,17 @@
 {
-  "last_updated": "2026-09-23T02:37:32.242Z",
-  "total_videos": 90,
+  "last_updated": "2026-09-23T08:08:32.084Z",
+  "total_videos": 89,
   "videos": [
+    {
+      "id": "XSmwmuY7ues",
+      "title": "9PM Vespa Ride Up & Down Soi Buakhao | Quick Look at Pattaya Nightlife",
+      "channel_name": "Vespa Life Thailand",
+      "channel_slug": "vespa-life-thailand",
+      "channel_avatar": "https://yt3.googleusercontent.com/_0ocieqX7Bpx3CZLLsmLCQpq7TMttO_TCmaiSI8z75xbWgW7Q7N9NeHHt8yGUPoEjQwEA19c7hs=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i1.ytimg.com/vi/XSmwmuY7ues/hqdefault.jpg",
+      "published_at": "2026-09-23T06:06:01+00:00",
+      "url": "https://www.youtube.com/watch?v=XSmwmuY7ues"
+    },
     {
       "id": "y9AwHimmPOw",
       "title": "Ling Ling can drink with the best of us! #thailand #traebadd #pattaya #bangkok #funny #irl #phuket",
@@ -881,26 +891,6 @@
       "thumbnail_url": "https://i2.ytimg.com/vi/ay64FW1Etlc/hqdefault.jpg",
       "published_at": "2026-09-16T08:55:38+00:00",
       "url": "https://www.youtube.com/watch?v=ay64FW1Etlc"
-    },
-    {
-      "id": "5Iv88vKfDeY",
-      "title": "just what Pattaya needs another over priced beer bar complex",
-      "channel_name": "Welsh Boy Webby",
-      "channel_slug": "welsh-boy-webby",
-      "channel_avatar": "https://yt3.googleusercontent.com/1wL2fKxZy6Mxi5KZgy_5FU09HIwBXyr-AMsXIlo5C5buRKPJoGor75e_KNbzqD4oyP4n6Qqr=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i2.ytimg.com/vi/5Iv88vKfDeY/hqdefault.jpg",
-      "published_at": "2026-09-16T07:45:55+00:00",
-      "url": "https://www.youtube.com/watch?v=5Iv88vKfDeY"
-    },
-    {
-      "id": "-a8NAL0aarw",
-      "title": "Chinese Fugitive wanted for decades caught in Pattaya",
-      "channel_name": "The Pattaya News",
-      "channel_slug": "the-pattaya-news",
-      "channel_avatar": "https://yt3.googleusercontent.com/ED2V0oAQI1iJpeAFvbuEi0wj97DQIsDXma7rxuSOhPxt4wfxf_-hmIINVdUbCWQnBAmfyHavxw=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i2.ytimg.com/vi/-a8NAL0aarw/hqdefault.jpg",
-      "published_at": "2026-09-16T05:47:44+00:00",
-      "url": "https://www.youtube.com/watch?v=-a8NAL0aarw"
     }
   ]
 }
