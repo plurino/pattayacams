@@ -115,10 +115,28 @@ async function checkYouTubeBatch(entities) {
 // ------------------------------------------------------------------
 // Build the nextEntities map
 // ------------------------------------------------------------------
+
+/**
+ * Decide whether an entity should be checked for live status on this run.
+ *
+ * Per-entity `check_live_status` flag (default: true):
+ *   true  → include in batch / RSS-discovery
+ *   false → mark as `idle` immediately, skip API calls entirely
+ *           (saves quota for channels that publish VODs only)
+ *
+ * This lets the user manually opt specific creators / streamers out of
+ * live polling — useful for channels that only upload pre-recorded
+ * videos and never stream live.
+ */
+function shouldCheckLive(entity) {
+  return entity?.check_live_status !== false;
+}
+
 async function buildStatusMap() {
   const nextEntities = { ...previousStatus.entities };
 
   // YouTube entities — venues, live cams, streamers, creators
+  // Each entity can opt out of live polling via check_live_status: false
   const youTubeEntities = [
     ...venues.map((v) => ({ ...v, _kind: 'venue' })),
     ...liveCams.map((c) => ({ ...c, _kind: 'livecam' })),
@@ -128,9 +146,41 @@ async function buildStatusMap() {
       .map((c) => ({ ...c, _kind: 'creator' })),
   ];
 
-  const verdicts = await checkYouTubeBatch(youTubeEntities);
+  // Pre-mark opted-out entities as idle so they appear in stream_status.json
+  // with `is_live: false` but don't consume API quota.
+  for (const e of youTubeEntities) {
+    if (!shouldCheckLive(e)) {
+      const entityKey = e._kind === 'livecam'
+        ? `livecam-${e.slug}`
+        : e._kind === 'venue'
+          ? `venue-${e.slug}`
+          : e._kind === 'streamer'
+            ? `streamer-${e.id}`
+            : `creator-${e.slug}`;
+      nextEntities[entityKey] = {
+        is_live: false,
+        is_upcoming: false,
+        video_id: null,
+        last_live_at: previousStatus.entities?.[entityKey]?.last_live_at || null,
+        status: 'opted_out',
+        name: e.name,
+        platform: 'youtube',
+        handle: e.youtube_handle || e.handle || null,
+        verified_at: nowIso,
+      };
+    }
+  }
 
-  for (const entity of youTubeEntities) {
+  // Only check entities that haven't opted out
+  const checkableEntities = youTubeEntities.filter(shouldCheckLive);
+  const skippedCount = youTubeEntities.length - checkableEntities.length;
+  if (skippedCount > 0) {
+    console.log(`\n[opt-out] ${skippedCount} entities marked check_live_status:false — skipping API calls`);
+  }
+
+  const verdicts = await checkYouTubeBatch(checkableEntities);
+
+  for (const entity of checkableEntities) {
     const entityKey = entity._kind === 'livecam'
       ? `livecam-${entity.slug}`
       : entity._kind === 'venue'

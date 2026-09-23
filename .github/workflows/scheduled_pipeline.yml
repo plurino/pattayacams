@@ -2,8 +2,11 @@ name: Creator VOD Pipeline & Stream Health
 
 on:
   schedule:
-    # Run every 3 hours
-    - cron: '0 */3 * * *'
+    # Peak hours: every 15 min, 14:00–03:00 ICT (= 07:00–19:59 UTC)
+    - cron: '*/15 7-19 * * *'
+    # Off-peak: every 30 min, 03:00–14:00 ICT (= 20:00–06:59 UTC, split across midnight)
+    - cron: '*/30 20-23 * * *'
+    - cron: '*/30 0-6 * * *'
   workflow_dispatch:
 
 permissions:
