@@ -1,25 +1,28 @@
 {
-  "last_check": "2026-09-23T09:31:50.704Z",
+  "last_check": "2026-09-23T16:07:56.928Z",
+  "source": "youtube_data_api_v3",
   "entities": {
     "venue-pattaya-oh-bar": {
-      "is_live": false,
-      "is_upcoming": true,
-      "video_id": "7oQETDBk_s8",
-      "last_live_at": "2026-09-18T15:59:50.159Z",
+      "is_live": true,
+      "is_upcoming": false,
+      "video_id": "sTdTzwOrxD4",
+      "last_live_at": "2026-09-23T16:07:56.928Z",
       "status": "active",
       "name": "Pattaya Oh Bar",
       "platform": "youtube",
-      "handle": "@PattayaOhBar"
+      "handle": "@PattayaOhBar",
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "livecam-pattaya-beach-road-live-cam": {
-      "is_live": false,
+      "is_live": true,
       "is_upcoming": false,
-      "video_id": "WgSrfstUvIc",
-      "last_live_at": "2026-09-21T14:10:09.114Z",
+      "video_id": "Qa5LqU9xxtc",
+      "last_live_at": "2026-09-23T16:07:56.928Z",
       "status": "active",
       "name": "Pattaya Beach Road Live Cam",
       "platform": "youtube",
-      "handle": "@pattayabob"
+      "handle": "@pattayabob",
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "livecam-soi-buakhao-live-cam-ismannen": {
       "is_live": false,
@@ -35,20 +38,22 @@
       "is_upcoming": false,
       "video_id": "MQamtIyvLvw",
       "last_live_at": null,
-      "status": "active",
+      "status": "unknown",
       "name": "Green Stop Dispensary & Bar",
       "platform": "youtube",
-      "handle": "@amazingtravellive213"
+      "handle": "@amazingtravellive213",
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "venue-smoky-bar-lounge": {
       "is_live": false,
       "is_upcoming": false,
       "video_id": null,
       "last_live_at": null,
-      "status": "active",
+      "status": "unknown",
       "name": "Smoky Bar & Cannabis Lounge",
       "platform": "youtube",
-      "handle": "@smokybar"
+      "handle": "@smokybar",
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "venue-ud-restaurant-shokudo": {
       "is_live": false,
@@ -65,70 +70,77 @@
       "is_upcoming": true,
       "video_id": "mgTChsJzH3Q",
       "last_live_at": null,
-      "status": "active",
+      "status": "idle",
       "name": "Nine Star Restaurant & Bar",
       "platform": "youtube",
-      "handle": "@SUGARBxPATTAYA"
+      "handle": "@SUGARBxPATTAYA",
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "venue-x-club-pattaya": {
-      "is_live": false,
+      "is_live": true,
       "is_upcoming": false,
-      "video_id": "kVrWVKmlN7Y",
-      "last_live_at": "2026-09-21T14:10:09.114Z",
+      "video_id": "GLdiPDsGFt4",
+      "last_live_at": "2026-09-23T16:07:56.928Z",
       "status": "active",
       "name": "X Club Pattaya",
       "platform": "youtube",
-      "handle": "@XClubPattayaSoiChaiapoon"
+      "handle": "@XClubPattayaSoiChaiapoon",
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "venue-las-vegas-beer-garden": {
-      "is_live": false,
+      "is_live": true,
       "is_upcoming": false,
-      "video_id": "34XJcn0lETI",
-      "last_live_at": "2026-09-21T14:10:09.114Z",
+      "video_id": "t3aqbTCVHYY",
+      "last_live_at": "2026-09-23T16:07:56.928Z",
       "status": "active",
       "name": "Las Vegas Beer Garden",
       "platform": "youtube",
-      "handle": "@LasVegasBeerGarden-PKBar"
+      "handle": "@LasVegasBeerGarden-PKBar",
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "venue-gold-bar-soi-6": {
-      "is_live": false,
-      "is_upcoming": true,
-      "video_id": "ODensH9FL5o",
-      "last_live_at": "2026-09-21T14:10:09.114Z",
+      "is_live": true,
+      "is_upcoming": false,
+      "video_id": "xtgPIjBCpYc",
+      "last_live_at": "2026-09-23T16:07:56.928Z",
       "status": "active",
       "name": "Gold Bar Soi 6",
       "platform": "youtube",
-      "handle": "@GoldBarSoi6"
+      "handle": "@GoldBarSoi6",
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "venue-s3xy-bar-pattaya": {
       "is_live": false,
       "is_upcoming": true,
       "video_id": "hs3ODqDmeCw",
       "last_live_at": "2026-09-12T17:06:58.644Z",
-      "status": "active",
+      "status": "idle",
       "name": "Sexy Bar Pattaya",
       "platform": "youtube",
-      "handle": "@s3xybarpattayalivestream333"
+      "handle": "@s3xybarpattayalivestream333",
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "venue-mafia-bar-pattaya": {
-      "is_live": false,
+      "is_live": true,
       "is_upcoming": false,
-      "video_id": "oUn-P6Md3gI",
-      "last_live_at": "2026-09-18T15:59:50.159Z",
+      "video_id": "OpUf9KjUk3I",
+      "last_live_at": "2026-09-23T16:07:56.928Z",
       "status": "active",
       "name": "Mafia Bar (The Godfather)",
       "platform": "youtube",
-      "handle": "@MafiaBarPattaya"
+      "handle": "@MafiaBarPattaya",
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "venue-luckynana-bar": {
-      "is_live": false,
-      "is_upcoming": true,
-      "video_id": "eqd3wDMmwbs",
-      "last_live_at": "2026-09-12T17:06:58.644Z",
+      "is_live": true,
+      "is_upcoming": false,
+      "video_id": "6XO7UNH6B40",
+      "last_live_at": "2026-09-23T16:07:56.928Z",
       "status": "active",
       "name": "LuckyNaNa Bar Pattaya",
       "platform": "youtube",
-      "handle": "@luckynanabarpattayalivestr2350"
+      "handle": "@luckynanabarpattayalivestr2350",
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "venue-rum-runner-bar": {
       "is_live": false,
@@ -145,100 +157,110 @@
       "is_upcoming": false,
       "video_id": "FYC7ALX94U4",
       "last_live_at": "2026-09-16T16:50:06.408Z",
-      "status": "active",
+      "status": "unknown",
       "name": "Miso Bar Pattaya",
       "platform": "youtube",
-      "handle": "@MisoBarPattaya"
+      "handle": "@MisoBarPattaya",
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "streamer-RS-001": {
       "is_live": false,
       "is_upcoming": false,
       "video_id": "8IlGRFPkpK8",
       "last_live_at": null,
-      "status": "active",
+      "status": "unknown",
       "name": "Pattaya 4K Walker",
       "platform": "youtube",
-      "handle": "@Pattaya4KWalker"
+      "handle": "@Pattaya4KWalker",
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "streamer-RS-002": {
       "is_live": false,
       "is_upcoming": false,
       "video_id": "I7mx3u720Tw",
       "last_live_at": null,
-      "status": "active",
+      "status": "unknown",
       "name": "Walk East",
       "platform": "youtube",
-      "handle": "@WalkEast"
+      "handle": "@WalkEast",
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "streamer-RS-003": {
       "is_live": false,
       "is_upcoming": false,
       "video_id": "03WPmik_H00",
       "last_live_at": null,
-      "status": "active",
+      "status": "unknown",
       "name": "Live Love Thailand",
       "platform": "youtube",
-      "handle": "@LiveLoveThailand"
+      "handle": "@LiveLoveThailand",
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "streamer-RS-004": {
       "is_live": false,
       "is_upcoming": false,
       "video_id": "6HyWEmryDRQ",
       "last_live_at": null,
-      "status": "active",
+      "status": "unknown",
       "name": "Everything Pattaya",
       "platform": "youtube",
-      "handle": "@EverythingPattaya"
+      "handle": "@EverythingPattaya",
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "streamer-RS-005": {
       "is_live": false,
       "is_upcoming": false,
       "video_id": "xEhM0Qp28vg",
       "last_live_at": null,
-      "status": "active",
+      "status": "unknown",
       "name": "David Strachan Pattaya",
       "platform": "youtube",
-      "handle": "@DSPattaya"
+      "handle": "@DSPattaya",
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "streamer-RS-006": {
       "is_live": false,
       "is_upcoming": false,
       "video_id": "qI18dDc-FgI",
       "last_live_at": null,
-      "status": "active",
+      "status": "unknown",
       "name": "NDtvi Thailand",
       "platform": "youtube",
-      "handle": "@NDTViThailand"
+      "handle": "@NDTViThailand",
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "streamer-RS-007": {
       "is_live": false,
       "is_upcoming": false,
       "video_id": "sDiv5qeGxWY",
       "last_live_at": null,
-      "status": "active",
+      "status": "unknown",
       "name": "Buzzin Pattaya",
       "platform": "youtube",
-      "handle": "@Buzzinpattaya"
+      "handle": "@Buzzinpattaya",
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "streamer-RS-008": {
       "is_live": false,
       "is_upcoming": false,
       "video_id": null,
       "last_live_at": null,
-      "status": "error_404",
+      "status": "unknown",
       "name": "4K Pimmy",
       "platform": "youtube",
-      "handle": "@4kpimmy"
+      "handle": "@4kpimmy",
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "streamer-RS-009": {
       "is_live": false,
       "is_upcoming": false,
       "video_id": "G9cbE420EXg",
       "last_live_at": null,
-      "status": "active",
+      "status": "unknown",
       "name": "SLYMAN TRAVELS",
       "platform": "youtube",
-      "handle": "@slyman6666"
+      "handle": "@slyman6666",
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "streamer-RS-010": {
       "is_live": true,
@@ -255,102 +277,99 @@
       "is_upcoming": false,
       "video_id": "S42N_YGu2SA",
       "last_live_at": null,
-      "status": "active",
+      "status": "unknown",
       "name": "JWINTHAI",
       "platform": "youtube",
-      "handle": "@jwinthai"
+      "handle": "@jwinthai",
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "streamer-RS-012": {
       "is_live": false,
       "is_upcoming": false,
       "video_id": null,
       "last_live_at": null,
-      "status": "active",
+      "status": "unknown",
       "name": "Global Street Walk",
       "platform": "youtube",
-      "handle": "@GlobalStreetWalk"
+      "handle": "@GlobalStreetWalk",
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "streamer-RS-013": {
       "is_live": false,
       "is_upcoming": false,
       "video_id": null,
       "last_live_at": null,
-      "status": "error_404",
+      "status": "unknown",
       "name": "Vespa Life Thailand",
       "platform": "youtube",
-      "handle": "@VespaLifeThailand"
+      "handle": "@VespaLifeThailand",
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "creator-buzzin-pattaya": {
       "is_live": false,
       "is_upcoming": false,
       "video_id": "sDiv5qeGxWY",
       "last_live_at": null,
-      "status": "active",
+      "status": "unknown",
       "name": "Buzzin Pattaya",
       "platform": "youtube",
       "handle": "@Buzzinpattaya",
-      "kick_channel": null,
-      "avatar_url": "https://yt3.googleusercontent.com/ytc/AIdro_nUp8SB8KN3NvJvUA_3DilXu6v2Qp_M0Tb3AL54jjLlPm0=s900-c-k-c0x00ffffff-no-rj"
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "creator-walk-east": {
       "is_live": false,
       "is_upcoming": false,
       "video_id": "I7mx3u720Tw",
       "last_live_at": null,
-      "status": "active",
+      "status": "unknown",
       "name": "Walk East",
       "platform": "youtube",
       "handle": "@WalkEast",
-      "kick_channel": null,
-      "avatar_url": "https://yt3.googleusercontent.com/ZYTU0Rr4aTNKKi6XWjBMk38_Qb13ULfXgM2JxgZo6N6mKNUff6YP13-dogqXUM-unjcy6TJeUA8=s900-c-k-c0x00ffffff-no-rj"
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "creator-pattaya-4k-walker": {
       "is_live": false,
       "is_upcoming": false,
       "video_id": "8IlGRFPkpK8",
       "last_live_at": null,
-      "status": "active",
+      "status": "unknown",
       "name": "Pattaya 4K Walker",
       "platform": "youtube",
       "handle": "@Pattaya4KWalker",
-      "kick_channel": null,
-      "avatar_url": "https://yt3.googleusercontent.com/q5kKsHGR7OGmXcSnkbb_fNiFDSIuZZxz-geKO_M_fF8s5n9gAZ2U07BVG746s_VB38MVRQ9whA=s900-c-k-c0x00ffffff-no-rj"
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "creator-ndtvi-thailand": {
       "is_live": false,
       "is_upcoming": false,
       "video_id": "qI18dDc-FgI",
       "last_live_at": null,
-      "status": "active",
+      "status": "unknown",
       "name": "NDtvi Thailand",
       "platform": "youtube",
       "handle": "@NDtviThailand",
-      "kick_channel": null,
-      "avatar_url": "https://yt3.googleusercontent.com/3Y-8EvHSWFMADaSoarlgl9npq8T4FTiU8c7gAsoVAIBfLsSggo0c5TT5mA1A_UhdNlc5pFPnmDs=s900-c-k-c0x00ffffff-no-rj"
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "creator-everything-pattaya": {
       "is_live": false,
       "is_upcoming": false,
       "video_id": "6HyWEmryDRQ",
       "last_live_at": null,
-      "status": "active",
+      "status": "unknown",
       "name": "Everything Pattaya",
       "platform": "youtube",
       "handle": "@EverythingPattaya",
-      "kick_channel": null,
-      "avatar_url": "https://yt3.googleusercontent.com/ytc/AIdro_m4uLkSA24Sg_pCFTDGGu77nuKXc5CcWM6ipNH-TPtmIQ=s900-c-k-c0x00ffffff-no-rj"
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "creator-live-love-thailand": {
       "is_live": false,
       "is_upcoming": false,
       "video_id": "03WPmik_H00",
       "last_live_at": null,
-      "status": "active",
+      "status": "unknown",
       "name": "Live Love Thailand",
       "platform": "youtube",
       "handle": "@LiveLoveThailand",
-      "kick_channel": null,
-      "avatar_url": "https://yt3.googleusercontent.com/4o7Zbm4j-zSzkZsFc0Ksb12zXwtPZmCerD_dfcZ_zoNOy0Rf-jBU1XdjwevLwWj_ZxdKIfHU4Q=s900-c-k-c0x00ffffff-no-rj"
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "creator-rikasian": {
       "is_live": false,
@@ -362,43 +381,41 @@
       "platform": "kick",
       "handle": "rikasian",
       "kick_channel": null,
-      "avatar_url": null
+      "avatar_url": null,
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "creator-vespa-life-thailand": {
       "is_live": false,
       "is_upcoming": false,
       "video_id": "F_fpnQgoLoM",
       "last_live_at": null,
-      "status": "active",
+      "status": "unknown",
       "name": "Vespa Life Thailand",
       "platform": "youtube",
       "handle": "@Vespa_Life_Thailand",
-      "kick_channel": null,
-      "avatar_url": "https://yt3.googleusercontent.com/_0ocieqX7Bpx3CZLLsmLCQpq7TMttO_TCmaiSI8z75xbWgW7Q7N9NeHHt8yGUPoEjQwEA19c7hs=s900-c-k-c0x00ffffff-no-rj"
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "creator-4k-pimmy": {
       "is_live": false,
       "is_upcoming": false,
       "video_id": null,
       "last_live_at": null,
-      "status": "error_404",
+      "status": "unknown",
       "name": "4K Pimmy",
       "platform": "youtube",
       "handle": "@4kpimmy",
-      "kick_channel": null,
-      "avatar_url": "https://yt3.googleusercontent.com/xev2kobBOzB5Nt0_oSvlWjf_FKWZNY3JtXeAY7nY_EceMZmHxKzmrPuDH4NN_jyUdLLc4RqWmg=s900-c-k-c0x00ffffff-no-rj"
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "creator-slyman-travels": {
       "is_live": false,
       "is_upcoming": false,
       "video_id": "G9cbE420EXg",
       "last_live_at": null,
-      "status": "active",
+      "status": "unknown",
       "name": "SLYMAN TRAVELS",
       "platform": "youtube",
       "handle": "@slyman6666",
-      "kick_channel": null,
-      "avatar_url": "https://yt3.googleusercontent.com/ABt-AgPlwBy2SB-QMz8SIHPi0B1IOUC5mDMuwhj1cw8TY80-n3qos4fjSd463wKNguj4EVJMRA=s900-c-k-c0x00ffffff-no-rj"
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "creator-pattaya-beach-live": {
       "is_live": false,
@@ -417,156 +434,143 @@
       "is_upcoming": false,
       "video_id": "S42N_YGu2SA",
       "last_live_at": null,
-      "status": "active",
+      "status": "unknown",
       "name": "JWINTHAI",
       "platform": "youtube",
       "handle": "@jwinthai",
-      "kick_channel": null,
-      "avatar_url": "https://yt3.googleusercontent.com/vrDpU7p6Kfk6gy37xaRu9ovhYrpaRR4vkNKoc0K84Q2A0HYi5mvSju7BOFA_KwbJKoRctumoT7w=s900-c-k-c0x00ffffff-no-rj"
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "creator-global-street-walk": {
       "is_live": false,
       "is_upcoming": false,
       "video_id": null,
       "last_live_at": null,
-      "status": "active",
+      "status": "unknown",
       "name": "Global Street Walk",
       "platform": "youtube",
       "handle": "@GlobalStreetWalk",
-      "kick_channel": null,
-      "avatar_url": "https://yt3.googleusercontent.com/pntr3Y54gPYF7YpWYnMyz3NduwnUaw8VJ1-5jkx6Yy5lVJEfaaJySQIRnSljnRw697_MJ14J=s900-c-k-c0x00ffffff-no-rj"
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "creator-bryan-flowers": {
       "is_live": false,
       "is_upcoming": false,
       "video_id": null,
       "last_live_at": null,
-      "status": "active",
+      "status": "unknown",
       "name": "Bryan Flowers",
       "platform": "youtube",
       "handle": "@BryanFlowers",
-      "kick_channel": null,
-      "avatar_url": "https://yt3.googleusercontent.com/ytc/AIdro_l5ZIbBEgwtZgFkpa5rNV02u-8Vx6YggfmL2j0PeAXobTQsCm2wmmfwdUlmilBjHqr4mA=s900-c-k-c0x00ffffff-no-rj"
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "creator-the-pattaya-news": {
       "is_live": false,
       "is_upcoming": false,
       "video_id": "eLd0cXSIwfU",
       "last_live_at": null,
-      "status": "active",
+      "status": "unknown",
       "name": "The Pattaya News",
       "platform": "youtube",
       "handle": "@ThePattayaNews",
-      "kick_channel": null,
-      "avatar_url": "https://yt3.googleusercontent.com/ED2V0oAQI1iJpeAFvbuEi0wj97DQIsDXma7rxuSOhPxt4wfxf_-hmIINVdUbCWQnBAmfyHavxw=s900-c-k-c0x00ffffff-no-rj"
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "creator-dan-about-thailand": {
       "is_live": false,
       "is_upcoming": false,
       "video_id": "TFGluRCOyLg",
       "last_live_at": null,
-      "status": "active",
+      "status": "unknown",
       "name": "Dan About Thailand",
       "platform": "youtube",
       "handle": "@DanAboutThailand",
-      "kick_channel": null,
-      "avatar_url": "https://yt3.googleusercontent.com/Yyj8-Dsl31kWZGfIFv8KbVT9BfXbzvKHKNyE8VddmTPXz4bpUB1t8iXSU4KJKZFdyME1bzhjkOk=s900-c-k-c0x00ffffff-no-rj"
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "creator-dean-in-thailand": {
       "is_live": false,
       "is_upcoming": false,
       "video_id": "Z14e3Bee_wo",
       "last_live_at": null,
-      "status": "active",
+      "status": "unknown",
       "name": "Dean in Thailand",
       "platform": "youtube",
       "handle": "@DeanInThailand",
-      "kick_channel": null,
-      "avatar_url": "https://yt3.googleusercontent.com/ytc/AIdro_nKOyQ_9-y06QgfYh-FkUjI8igpv8YV00RYCD0orSQ=s900-c-k-c0x00ffffff-no-rj"
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "creator-kev-in-thailand": {
       "is_live": false,
       "is_upcoming": false,
       "video_id": "kts3dI1zQdg",
       "last_live_at": null,
-      "status": "active",
+      "status": "unknown",
       "name": "Kev-in-Thailand",
       "platform": "youtube",
       "handle": "@KevInThailand",
-      "kick_channel": null,
-      "avatar_url": "https://yt3.googleusercontent.com/Codtgbm9LDBrbLC95y7zvMjRtzxDlXnfuUXWjjxT1lwR4W-wvYLHHfSBIbKtfifePAbfeDww=s900-c-k-c0x00ffffff-no-rj"
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "creator-ride-with-joel": {
       "is_live": false,
       "is_upcoming": false,
       "video_id": "oDsw8cGWL08",
       "last_live_at": null,
-      "status": "active",
+      "status": "unknown",
       "name": "Ride with Joel",
       "platform": "youtube",
       "handle": "@RideWithJoel",
-      "kick_channel": null,
-      "avatar_url": "https://yt3.googleusercontent.com/ytc/AIdro_lkvQhjZDYSNj8SXW05AimhtkOE-zbiK-hI5wxQHrxhMQ=s900-c-k-c0x00ffffff-no-rj"
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "creator-travel-with-luke": {
       "is_live": false,
       "is_upcoming": false,
       "video_id": null,
       "last_live_at": null,
-      "status": "active",
+      "status": "unknown",
       "name": "Travel with Luke",
       "platform": "youtube",
       "handle": "@TravelWithLuke",
-      "kick_channel": null,
-      "avatar_url": "https://yt3.googleusercontent.com/VIraMTslQT6EWzZOKNUyU9AglSeXGcu0prY6Q3VWaMXX_tm8mSLcXDLvjguMx9P7UVjpj3NA=s900-c-k-c0x00ffffff-no-rj"
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "creator-bangkok-pat": {
       "is_live": false,
       "is_upcoming": false,
       "video_id": "gRv9UAEdsjo",
       "last_live_at": null,
-      "status": "active",
+      "status": "unknown",
       "name": "Bangkok Pat",
       "platform": "youtube",
       "handle": "@BangkokPat",
-      "kick_channel": null,
-      "avatar_url": "https://yt3.googleusercontent.com/lsLR1m_capz7QvX1AGgxg08iOQ7NtdlFijeBXpB_R-cXunMCqT-r6swbIQNTSiue5LoI_g4Pnkg=s900-c-k-c0x00ffffff-no-rj"
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "creator-thailand-rob": {
       "is_live": false,
-      "is_upcoming": true,
+      "is_upcoming": false,
       "video_id": "1OPNxFj6t5w",
       "last_live_at": null,
-      "status": "active",
+      "status": "unknown",
       "name": "Thailand Rob",
       "platform": "youtube",
       "handle": "@ThailandRob",
-      "kick_channel": null,
-      "avatar_url": "https://yt3.googleusercontent.com/ytc/AIdro_lACxUgHiSVBCZnxB3y0AiiOJr0gopsUA7ediB7uV_UEBY=s900-c-k-c0x00ffffff-no-rj"
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "creator-fabulous-pattaya": {
       "is_live": false,
       "is_upcoming": false,
       "video_id": "fO5-t-Fpp1Y",
       "last_live_at": null,
-      "status": "active",
+      "status": "unknown",
       "name": "Fabulous Pattaya",
       "platform": "youtube",
       "handle": "@FabulousPattaya",
-      "kick_channel": null,
-      "avatar_url": "https://yt3.googleusercontent.com/ytc/AIdro_kPG_DbiOWTBNwUUiepocpGOBrtTV781UaES92xL50vPxg=s900-c-k-c0x00ffffff-no-rj"
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "creator-pattaya-city-walk-4k": {
       "is_live": false,
       "is_upcoming": false,
       "video_id": "QCtP4uIINS8",
       "last_live_at": null,
-      "status": "active",
+      "status": "unknown",
       "name": "Pattaya City Walk 4K",
       "platform": "youtube",
       "handle": "@4KWalking7",
-      "kick_channel": null,
-      "avatar_url": "https://yt3.googleusercontent.com/Gx1l7ov_ghpoZ92MN3FECPRVYmvtwcHCRXSy40y7B8_ZhoRjYzo_3wHZwjY-XHX6pTQsRf9Jmg=s900-c-k-c0x00ffffff-no-rj"
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "creator-thaivibelive": {
       "is_live": false,
@@ -578,7 +582,8 @@
       "platform": "kick",
       "handle": "thaivibelive",
       "kick_channel": null,
-      "avatar_url": null
+      "avatar_url": null,
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "creator-icecoldkick": {
       "is_live": false,
@@ -590,7 +595,8 @@
       "platform": "kick",
       "handle": "icecoldkick",
       "kick_channel": null,
-      "avatar_url": null
+      "avatar_url": null,
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "creator-pattayairl": {
       "is_live": false,
@@ -602,7 +608,8 @@
       "platform": "kick",
       "handle": "pattayairl",
       "kick_channel": null,
-      "avatar_url": null
+      "avatar_url": null,
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "creator-paulpattaya": {
       "is_live": false,
@@ -614,387 +621,383 @@
       "platform": "kick",
       "handle": "paulpattaya",
       "kick_channel": null,
-      "avatar_url": null
+      "avatar_url": null,
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "creator-david-strachan-pattaya": {
       "is_live": false,
       "is_upcoming": false,
       "video_id": "xEhM0Qp28vg",
       "last_live_at": null,
-      "status": "active",
+      "status": "unknown",
       "name": "David Strachan Pattaya",
       "platform": "youtube",
       "handle": "@DSPattaya",
-      "kick_channel": null,
-      "avatar_url": "https://yt3.googleusercontent.com/OO0mpFyUuBKI5W2ft-lnTYPzfY1jPy2ps2JL0LbuLZhSTRRXcEzMz_LnKZFwgVEwEuCoFoGO=s900-c-k-c0x00ffffff-no-rj"
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "creator-trevor-in-thailand": {
       "is_live": false,
       "is_upcoming": false,
       "video_id": "LVaUgldEBZs",
       "last_live_at": null,
-      "status": "active",
+      "status": "unknown",
       "name": "Trevor in Thailand",
       "platform": "youtube",
       "handle": "@TrevorInThailand",
-      "kick_channel": null,
-      "avatar_url": "https://yt3.googleusercontent.com/Islv3EbNauvUwUbGlT6yeEW1pQLP3uKALdByjS3-PjcKEr0Mqwd7tvl4JSbg49C1AZ3ZKr_k=s900-c-k-c0x00ffffff-no-rj"
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "creator-walking-in-paradise": {
       "is_live": false,
       "is_upcoming": false,
       "video_id": "9l0onQBkfTM",
       "last_live_at": null,
-      "status": "active",
+      "status": "unknown",
       "name": "Walking In Paradise",
       "platform": "youtube",
       "handle": "@WalkingInParadise",
-      "kick_channel": null,
-      "avatar_url": "https://yt3.googleusercontent.com/ow7rytUm1tbrVA-4vzkMqftrpAU2psZ_LhMkEhi08Oe70fJrgZleasKoK9v7NtMSDTfOTiI_=s900-c-k-c0x00ffffff-no-rj"
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "creator-look-at-thailand": {
       "is_live": false,
       "is_upcoming": false,
       "video_id": "oCaHcVdvg0A",
       "last_live_at": null,
-      "status": "active",
+      "status": "unknown",
       "name": "Look at Thailand",
       "platform": "youtube",
       "handle": "@LookAtThailand",
-      "kick_channel": null,
-      "avatar_url": "https://yt3.googleusercontent.com/oK7VhO9e6xGLoHFnWG0RJFWsk0ZyiOH5gdQA_YPqzgJ2dEJQUgy9shgRbTtuzkaSlIaugpH6JQ=s900-c-k-c0x00ffffff-no-rj"
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "creator-walking-the-world-4k": {
       "is_live": false,
       "is_upcoming": false,
       "video_id": "oTVRfGqv5AM",
       "last_live_at": null,
-      "status": "active",
+      "status": "unknown",
       "name": "Walking The World 4K",
       "platform": "youtube",
       "handle": "@WalkingTheWorld4K",
-      "kick_channel": null,
-      "avatar_url": "https://yt3.googleusercontent.com/ytc/AIdro_mZc4zmVJypLMNHULLyrOLIH5j4ROdhNY4GzlNL_IBrxVgUQS4IT_UqjXMrykjAWMs9HA=s900-c-k-c0x00ffffff-no-rj"
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "creator-steve-in-thailand": {
       "is_live": false,
       "is_upcoming": false,
       "video_id": "kjCJWiDskNo",
       "last_live_at": null,
-      "status": "active",
+      "status": "unknown",
       "name": "Steve in Thailand",
       "platform": "youtube",
       "handle": "@SteveInThailand",
-      "kick_channel": null,
-      "avatar_url": "https://yt3.googleusercontent.com/ytc/AIdro_mXAsQHHTtVYKoo9wC9q0CqAPYEABRGXE5gfkDZbVwgRnh4=s900-c-k-c0x00ffffff-no-rj"
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "creator-thailand-street-view": {
       "is_live": false,
       "is_upcoming": false,
       "video_id": "bKK5H0D2gsE",
       "last_live_at": null,
-      "status": "active",
+      "status": "unknown",
       "name": "Thailand Street View",
       "platform": "youtube",
       "handle": "@ThailandStreetView",
-      "kick_channel": null,
-      "avatar_url": "https://yt3.googleusercontent.com/6GS7T_pCqHAsewQtNL6Guf0LC1cJadn2zRElCZH52RlIJczk5TLwlpTv7MRD7LoinFyVD41H_ZI=s900-c-k-c0x00ffffff-no-rj"
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "venue-smile-bar-pattaya": {
-      "is_live": false,
-      "is_upcoming": true,
-      "video_id": "dLUfBRNcJW8",
-      "last_live_at": "2026-09-21T14:10:09.114Z",
+      "is_live": true,
+      "is_upcoming": false,
+      "video_id": "pyIZbTAhzBI",
+      "last_live_at": "2026-09-23T16:07:56.928Z",
       "status": "active",
       "name": "Smile Bar Pattaya",
       "platform": "youtube",
-      "handle": "@smilebarpattayathailand467"
+      "handle": "@smilebarpattayathailand467",
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "venue-true-blue-aussie-bar": {
-      "is_live": false,
-      "is_upcoming": true,
-      "video_id": "-pFdQx7DAJE",
-      "last_live_at": "2026-09-21T14:10:09.114Z",
+      "is_live": true,
+      "is_upcoming": false,
+      "video_id": "FjN7NeuhVWc",
+      "last_live_at": "2026-09-23T16:07:56.928Z",
       "status": "active",
       "name": "True Blue Aussie Bar & Boomerang Bar",
       "platform": "youtube",
-      "handle": "@Trueblueaussiebar"
+      "handle": "@Trueblueaussiebar",
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "livecam-soi-buakhao-live-cam": {
-      "is_live": false,
+      "is_live": true,
       "is_upcoming": false,
-      "video_id": "gL_CQ8f9mb4",
-      "last_live_at": "2026-09-21T14:10:09.114Z",
+      "video_id": "eF5Utg6Rx6s",
+      "last_live_at": "2026-09-23T16:07:56.928Z",
       "status": "active",
       "name": "Soi Buakhao Live Cam",
       "platform": "youtube",
-      "handle": "@ismannen"
+      "handle": "@ismannen",
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "creator-mac-tv": {
       "is_live": false,
       "is_upcoming": false,
       "video_id": "PMbGA8Kw2VA",
       "last_live_at": null,
-      "status": "active",
+      "status": "idle",
       "name": "Mac TV",
-      "platform": "youtube",
+      "platform": "youtube+kick",
       "handle": "@mactvtravel",
       "kick_channel": "imactv",
-      "avatar_url": "https://yt3.googleusercontent.com/oSFiARQTu2FbqFOLPVtIROpM-sPXcE_g-T8hrfJXj0QO-ATDEtOcUIsFaq0B-_fPeAMBR1A-FxQ=s900-c-k-c0x00ffffff-no-rj"
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "creator-trae-badd-tv": {
       "is_live": false,
       "is_upcoming": false,
       "video_id": "ZTIsZvPjssA",
       "last_live_at": "2026-09-18T15:59:50.159Z",
-      "status": "active",
+      "status": "unknown",
       "name": "Trae Badd TV",
       "platform": "youtube",
       "handle": "@TraeBaddTV",
-      "kick_channel": null,
-      "avatar_url": "https://yt3.googleusercontent.com/YnO5xc6T7pk1Q_nnG5ruJbMOBqHi_YBRWLsAxO_4de-xBE_Dr1qoDnJ407dfBd2m_0CBLYL5yg=s900-c-k-c0x00ffffff-no-rj"
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "creator-welsh-boy-webby": {
       "is_live": false,
       "is_upcoming": false,
       "video_id": "yhFYLl5vKTQ",
       "last_live_at": null,
-      "status": "active",
+      "status": "unknown",
       "name": "Welsh Boy Webby",
       "platform": "youtube",
       "handle": "@welshboywebby",
-      "kick_channel": null,
-      "avatar_url": "https://yt3.googleusercontent.com/1wL2fKxZy6Mxi5KZgy_5FU09HIwBXyr-AMsXIlo5C5buRKPJoGor75e_KNbzqD4oyP4n6Qqr=s900-c-k-c0x00ffffff-no-rj"
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "creator-travel-glitch": {
       "is_live": false,
       "is_upcoming": false,
       "video_id": "Z-xaMfyoNNU",
       "last_live_at": null,
-      "status": "active",
+      "status": "unknown",
       "name": "Travel Glitch",
       "platform": "youtube",
       "handle": "@TravelGlitch",
-      "kick_channel": null,
-      "avatar_url": "https://yt3.googleusercontent.com/WyZQSOhd2hSV4WHhxEVosiqiPpzVbwo25D67oCIQKr3_Ga2fd9E_8TDyJ7Yv8TuG_DcZKaHJwg=s900-c-k-c0x00ffffff-no-rj"
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "creator-settled-in-siam": {
       "is_live": false,
       "is_upcoming": false,
       "video_id": "QJ0n77xRCcI",
       "last_live_at": null,
-      "status": "active",
+      "status": "unknown",
       "name": "Settled in SIAM",
       "platform": "youtube",
       "handle": "@settledinSIAM",
-      "kick_channel": null,
-      "avatar_url": "https://yt3.googleusercontent.com/hUjrQt2-RhdItsiQsjbsSAKEJIv1tpwpxtB3D-k1GmjsXVdFG20FWwBTLDW6gLQufYZCDiQjmnc=s900-c-k-c0x00ffffff-no-rj"
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "creator-the-tysin-show": {
       "is_live": false,
       "is_upcoming": false,
       "video_id": "ywtaadxIleg",
       "last_live_at": "2026-09-21T11:32:54.975Z",
-      "status": "active",
+      "status": "unknown",
       "name": "The Tysin Show",
       "platform": "youtube",
       "handle": "@TheTysinShow",
-      "kick_channel": null,
-      "avatar_url": "https://yt3.googleusercontent.com/3tMHDr_3VQy3AXy0yW7XsFwHJWBAJj66W8dqKHYTQ3JB9vEX8LbKVhHWjEodtG8TbCcIy9aV0w=s900-c-k-c0x00ffffff-no-rj"
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "creator-beach-road-channel": {
       "is_live": false,
       "is_upcoming": false,
       "video_id": "KkXOUT3m9oI",
       "last_live_at": null,
-      "status": "active",
+      "status": "unknown",
       "name": "BEACH ROAD",
       "platform": "youtube",
       "handle": "@BEACHROADchannel",
-      "kick_channel": null,
-      "avatar_url": "https://yt3.googleusercontent.com/CWW0rQ6f5ZKIE2_T9vOK3Km3eiBJEAdih3hwx_POm5n_uuG8EDZcL7IK7BLoEnWL0F5f7pnm=s900-c-k-c0x00ffffff-no-rj"
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "creator-pattaya-joker-tv": {
       "is_live": false,
       "is_upcoming": false,
       "video_id": "m1Ec60rsVec",
       "last_live_at": null,
-      "status": "active",
+      "status": "unknown",
       "name": "Pattaya Joker TV",
       "platform": "youtube",
       "handle": "@PattayaJokerTV",
-      "kick_channel": null,
-      "avatar_url": "https://yt3.googleusercontent.com/g1UFe8UV9XnO9syJa2Ayq2Knbg88D0ukIHS4wjd9o0AGwuHNZcPyWLSWAf1oqqkSS7HA6Vcw=s900-c-k-c0x00ffffff-no-rj"
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "creator-dv-media-pattaya": {
       "is_live": false,
       "is_upcoming": false,
       "video_id": "z8Ma5z1njSU",
       "last_live_at": null,
-      "status": "active",
+      "status": "unknown",
       "name": "DV Media Pattaya",
       "platform": "youtube",
       "handle": "@dvmedia6309",
-      "kick_channel": null,
-      "avatar_url": "https://yt3.googleusercontent.com/ugj2a216u5s5JhG4iireKvsOCK9lky14pZHt1tGGRm4I9na4HTsC7_8QRPb6xinI7mb8u4ZD=s900-c-k-c0x00ffffff-no-rj"
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "venue-lust-on-soi-6": {
-      "is_live": false,
+      "is_live": true,
       "is_upcoming": false,
-      "video_id": "2ET6uT8-t7U",
-      "last_live_at": "2026-09-21T14:10:09.114Z",
+      "video_id": "oj0XvzPzGIE",
+      "last_live_at": "2026-09-23T16:07:56.928Z",
       "status": "active",
       "name": "Lust on Soi 6",
       "platform": "youtube",
-      "handle": "@LustonSoi6"
+      "handle": "@LustonSoi6",
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "venue-desire-on-soi-6": {
-      "is_live": false,
+      "is_live": true,
       "is_upcoming": false,
-      "video_id": "7CLkn93X2bA",
-      "last_live_at": "2026-09-21T14:10:09.114Z",
+      "video_id": "ndsYjTf-7Fw",
+      "last_live_at": "2026-09-23T16:07:56.928Z",
       "status": "active",
       "name": "Desire on Soi 6",
       "platform": "youtube",
-      "handle": "@DesireonSoi6"
+      "handle": "@DesireonSoi6",
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "venue-dolls-a-go-go": {
-      "is_live": false,
+      "is_live": true,
       "is_upcoming": false,
-      "video_id": "JqImL1MBIxQ",
-      "last_live_at": "2026-09-22T15:32:31.210Z",
+      "video_id": "-_5c1Y8lg3E",
+      "last_live_at": "2026-09-23T16:07:56.928Z",
       "status": "active",
       "name": "Dolls A Go Go",
       "platform": "youtube",
-      "handle": "@DOLLSAGOGOSOI6LIVE"
+      "handle": "@DOLLSAGOGOSOI6LIVE",
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "venue-maju-bar": {
-      "is_live": false,
+      "is_live": true,
       "is_upcoming": false,
-      "video_id": "xP3dqCPj0QY",
-      "last_live_at": "2026-09-21T14:10:09.114Z",
+      "video_id": "ATN1-diUG7c",
+      "last_live_at": "2026-09-23T16:07:56.928Z",
       "status": "active",
       "name": "Maju Bar",
       "platform": "youtube",
-      "handle": "@maju_bar_thailand"
+      "handle": "@maju_bar_thailand",
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "venue-the-elite-bar": {
       "is_live": false,
-      "is_upcoming": true,
-      "video_id": "ohv4nH-m50g",
+      "is_upcoming": false,
+      "video_id": "dvmC2mv3vP0",
       "last_live_at": "2026-09-23T00:07:58.085Z",
-      "status": "active",
+      "status": "idle",
       "name": "The Elite Bar",
       "platform": "youtube",
-      "handle": "@theelitebar246"
+      "handle": "@theelitebar246",
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "venue-bandits-hideout": {
-      "is_live": false,
+      "is_live": true,
       "is_upcoming": false,
-      "video_id": "Whk80i2TDNo",
-      "last_live_at": "2026-09-21T14:10:09.114Z",
+      "video_id": "q1yJvc0fmSU",
+      "last_live_at": "2026-09-23T16:07:56.928Z",
       "status": "active",
       "name": "Bandits Hideout",
       "platform": "youtube",
-      "handle": "@BanditsHideout-lm6ho"
+      "handle": "@BanditsHideout-lm6ho",
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "livecam-south-pattaya-live-cam": {
-      "is_live": false,
-      "is_upcoming": true,
-      "video_id": "OtbCY7Juk7w",
-      "last_live_at": "2026-09-21T14:10:09.114Z",
+      "is_live": true,
+      "is_upcoming": false,
+      "video_id": "5jhgWRQWCgA",
+      "last_live_at": "2026-09-23T16:07:56.928Z",
       "status": "active",
       "name": "South Pattaya Live Cam",
       "platform": "youtube",
-      "handle": "@southpattayalivecam"
+      "handle": "@southpattayalivecam",
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "streamer-RS-014": {
       "is_live": false,
-      "is_upcoming": true,
+      "is_upcoming": false,
       "video_id": "RDw3E4i-Mr4",
       "last_live_at": null,
-      "status": "active",
-      "name": "Benzie Asia Babe",
-      "platform": "youtube",
-      "handle": "@BenzieAsiaBabe"
-    },
-    "creator-benzie-asia-babe": {
-      "is_live": false,
-      "is_upcoming": true,
-      "video_id": "RDw3E4i-Mr4",
-      "last_live_at": null,
-      "status": "active",
+      "status": "unknown",
       "name": "Benzie Asia Babe",
       "platform": "youtube",
       "handle": "@BenzieAsiaBabe",
-      "kick_channel": null,
-      "avatar_url": "https://yt3.googleusercontent.com/5rhmkpsV871PdyLO4CnmE5BTvKFBEqYbjUg5wU-HWF7Ky-HmdKOhmZXXOh2RebOrXnhmgCNjrQ=s900-c-k-c0x00ffffff-no-rj"
+      "verified_at": "2026-09-23T16:07:56.928Z"
+    },
+    "creator-benzie-asia-babe": {
+      "is_live": false,
+      "is_upcoming": false,
+      "video_id": "RDw3E4i-Mr4",
+      "last_live_at": null,
+      "status": "unknown",
+      "name": "Benzie Asia Babe",
+      "platform": "youtube",
+      "handle": "@BenzieAsiaBabe",
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "creator-pattaya-101": {
       "is_live": false,
       "is_upcoming": false,
       "video_id": "DNDgasJ2ft4",
       "last_live_at": null,
-      "status": "active",
+      "status": "unknown",
       "name": "Pattaya 101",
       "platform": "youtube",
       "handle": "@Pattaya101",
-      "kick_channel": null,
-      "avatar_url": "https://yt3.googleusercontent.com/lcgGQd_VWXbva3sOEvgXp_eISmaA20LSeUnPFagnga7AK9P6Kz4v06ESJt0mwR-TkJEZoF6l=s900-c-k-c0x00ffffff-no-rj"
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "livecam-pattaya-beach-live": {
       "is_live": false,
       "is_upcoming": true,
       "video_id": "0bGNCCBXAKI",
       "last_live_at": "2026-09-21T12:24:51.659Z",
-      "status": "active",
+      "status": "idle",
       "name": "Pattaya Beach Live",
       "platform": "youtube",
-      "handle": "@williamgilday"
+      "handle": "@williamgilday",
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "streamer-RS-015": {
       "is_live": false,
       "is_upcoming": false,
       "video_id": "w7GZY_nxqLc",
       "last_live_at": null,
-      "status": "active",
+      "status": "unknown",
       "name": "UD Thailand",
       "platform": "youtube",
-      "handle": "@udthailand6560"
+      "handle": "@udthailand6560",
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "streamer-RS-016": {
       "is_live": false,
       "is_upcoming": false,
       "video_id": "rQboqU9pyGY",
       "last_live_at": null,
-      "status": "active",
+      "status": "unknown",
       "name": "Mr Egg Thailand",
       "platform": "youtube",
-      "handle": "@mreggthailand"
+      "handle": "@mreggthailand",
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "creator-ud-thailand": {
       "is_live": false,
       "is_upcoming": false,
       "video_id": "w7GZY_nxqLc",
       "last_live_at": null,
-      "status": "active",
+      "status": "unknown",
       "name": "UD Thailand",
       "platform": "youtube",
       "handle": "@udthailand6560",
-      "kick_channel": null,
-      "avatar_url": "https://yt3.googleusercontent.com/ytc/AIdro_k6p2pK8BY9F57E6AD_BXywffZajUAEWVqzS0C5ph-WHA=s900-c-k-c0x00ffffff-no-rj"
+      "verified_at": "2026-09-23T16:07:56.928Z"
     },
     "creator-mr-egg-thailand": {
       "is_live": false,
       "is_upcoming": false,
       "video_id": "rQboqU9pyGY",
       "last_live_at": null,
-      "status": "active",
+      "status": "unknown",
       "name": "Mr Egg Thailand",
       "platform": "youtube",
       "handle": "@mreggthailand",
-      "kick_channel": null,
-      "avatar_url": "https://yt3.googleusercontent.com/C37NsrbPKJp2P8VS8y108GSiXtIaJG6Gi7yhhYnDd7aSJL0ILG1eRza8ojpV5pXvGxQq1Gf1=s900-c-k-c0x00ffffff-no-rj"
+      "verified_at": "2026-09-23T16:07:56.928Z"
     }
   }
 }
