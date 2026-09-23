@@ -541,7 +541,16 @@ export default function VideoDrawer({ entity, onClose, onSelectEntity, onLiveShu
       <div className="h-14 border-b border-borderDark px-4 sm:px-5 flex items-center justify-between shrink-0 bg-surface/80">
         <div className="flex items-center gap-2.5 min-w-0 pr-2">
           {isTrulyLive ? (
-            <span className="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse shrink-0 shadow-[0_0_8px_#EF4444]" />
+            <span
+              className="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse shrink-0 shadow-[0_0_8px_#EF4444]"
+              title={
+                freshVerdict?.fetchedAt
+                  ? `Verified live by PattayaCams at ${new Date(freshVerdict.fetchedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} ICT`
+                  : lastVerifiedAt
+                    ? `Last verified ${new Date(lastVerifiedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} ICT`
+                    : 'Live (status from GH Actions cron)'
+              }
+            />
           ) : (
             <span className="w-2.5 h-2.5 rounded-full bg-slate-500 shrink-0" />
           )}

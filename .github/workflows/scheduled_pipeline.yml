@@ -25,6 +25,8 @@ jobs:
         run: node scripts/fetch_creator_vods.mjs
 
       - name: Run Stream Health Checker
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
         run: node scripts/check_streams.mjs
 
       - name: Commit and Push Updates

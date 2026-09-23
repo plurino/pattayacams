@@ -1,16 +1,24 @@
 /**
- * PattayaCams.com - Cloudflare Worker Edge M3U8 Manifest Proxy
- * 
- * Strict Bandwidth & SSRF Guard:
- * 1. Strict Upstream Allowlist: ONLY proxies from official municipal CCTV domain (livestream.pattaya.go.th).
- * 2. Hard 4-Second Upstream Connect Timeout to prevent hanging socket exhaustion.
- * 3. EGRESS GUARD: Explicitly blocks (403 Forbidden) all .ts, .m4s, .mp4, and .aac binary media segments
- *    to guarantee ZERO bandwidth egress fees on Cloudflare.
- * 4. Manifest Rewriter: Automatically rewrites relative media segment URLs in .m3u8 playlists to
- *    absolute upstream CDN URLs, ensuring client video players stream segments directly from Pattaya City Hall.
- * 5. Spoofs Origin and Referer headers to satisfy City Hall streaming server security policies.
- * 6. Injects full CORS headers for browser player compatibility.
+ * PattayaCams.com - Cloudflare Worker Edge Proxy
+ *
+ * Responsibilities:
+ *  1. /api/check-live — Real-time YouTube live status via YouTube Data API v3.
+ *                       Batched (up to 50 IDs per call, 1 quota unit), 5-min Worker cache.
+ *                       RSS feed discovery for channel handles when no video_id is known.
+ *  2. Edge proxy for municipal HLS streams (livestream.pattaya.go.th):
+ *     Strict bandwith & SSRF guard — only proxies from the official municipal CCTV domain.
+ *     Hard 4-second upstream connect timeout.
+ *     Blocks (.ts, .m4s, .mp4, .aac) binary segments to guarantee ZERO bandwidth egress fees.
+ *     Rewrites relative media segment URLs in .m3u8 playlists to absolute upstream URLs.
+ *
+ * Secrets: YOUTUBE_API_KEY  (wrangler secret put YOUTUBE_API_KEY)
+ *          Source:           src/utils/youtubeClient.js  (bundled by wrangler)
  */
+
+import {
+  batchCheckVideos,
+  getLatestLiveVideoFromChannel,
+} from '../src/utils/youtubeClient.js';
 
 const CORS_HEADERS = {
   'Access-Control-Allow-Origin': '*',
@@ -50,27 +58,125 @@ export default {
     // The API key is bound as a Worker secret (wrangler secret put AISSTREAM_API_KEY)
     // and NEVER appears in client JS or git-tracked files.
 
-    // 0. Route: /api/check-live — Real-time YouTube live status verification.
-    // Replaces the failing GH Actions cron (which keeps getting blocked by YouTube's
-    // datacenter IP filter). Frontend polls this for entities whose static status is
-    // unknown or stale. Cache 60s per (platform, id) tuple to avoid rate limits.
+    // 0. Route: /api/check-live — Real-time YouTube live status verification via
+    // YouTube Data API v3. Replaces brittle watch-page scraping (which YouTube
+    // blocks from server IPs) with the official batched /videos.list endpoint.
+    //
+    // Query options (in priority order):
+    //   ?ids=A,B,C…    Batch check up to 50 video IDs (1 quota unit total).
+    //   ?v=A           Single video ID lookup.
+    //   ?channel_id=X  RSS discovery + API check on the most recent video.
+    //   ?handle=@X     (Legacy; rare) Channel handle → RSS discovery.
+    //
+    // Caching: 5-minute Worker-memory cache per (key) to stay polite to the
+    // YouTube API. Quota usage: 200 batch polls/day = ~200 units of 10,000.
     if (url.pathname === '/api/check-live') {
+      const apiKey = env.YOUTUBE_API_KEY;
+      if (!apiKey) {
+        return new Response(
+          JSON.stringify({
+            is_live: null,
+            source: 'worker_no_api_key',
+            reason: 'YOUTUBE_API_KEY secret not bound to Worker',
+            fetchedAt: new Date().toISOString(),
+          }),
+          {
+            status: 200,
+            headers: {
+              'Content-Type': 'application/json',
+              'Cache-Control': 'no-store',
+              ...CORS_HEADERS,
+            },
+          }
+        );
+      }
+
       const cacheKey = '__checkLiveCache';
-      const cacheTtlMs = 60_000;
+      const cacheTtlMs = 5 * 60 * 1000;
 
-      const videoId = url.searchParams.get('v');
-      const handle = url.searchParams.get('handle');
+      // ---- Build the request signature so cache hits work ----
+      const idsParam = url.searchParams.get('ids');
+      const singleVideoId = url.searchParams.get('v');
       const channelId = url.searchParams.get('channel_id');
-      const cacheId = (videoId || handle || channelId || '').toLowerCase();
+      const handle = url.searchParams.get('handle');
 
-      if (!cacheId) {
+      let requestKey;
+      let runCheck;
+      if (idsParam) {
+        requestKey = `ids:${idsParam}`;
+        runCheck = async () => {
+          const ids = idsParam.split(',').filter(Boolean);
+          const verdicts = await batchCheckVideos(apiKey, ids);
+          return {
+            source: 'batch_videos_list',
+            results: verdicts,
+            fetchedAt: new Date().toISOString(),
+          };
+        };
+      } else if (singleVideoId) {
+        requestKey = `v:${singleVideoId}`;
+        runCheck = async () => {
+          const verdicts = await batchCheckVideos(apiKey, [singleVideoId]);
+          return {
+            source: 'videos_list',
+            video_id: singleVideoId,
+            ...(verdicts[singleVideoId] || { is_live: null, is_vod: null }),
+            fetchedAt: new Date().toISOString(),
+          };
+        };
+      } else if (channelId) {
+        requestKey = `channel_id:${channelId}`;
+        runCheck = async () => {
+          const fresh = await getLatestLiveVideoFromChannel(apiKey, channelId);
+          return {
+            source: 'rss_discovery',
+            channel_id: channelId,
+            ...(fresh || { video_id: null, is_live: false }),
+            fetchedAt: new Date().toISOString(),
+          };
+        };
+      } else if (handle) {
+        // Legacy: handle-based lookup without a known channel_id. Use RSS on
+        // the handle URL pattern; for full reliability callers should resolve
+        // handle → channel_id upstream (youTube channels.list?forHandle=@x).
+        requestKey = `handle:${handle.toLowerCase()}`;
+        runCheck = async () => {
+          const clean = handle.startsWith('@') ? handle.slice(1) : handle;
+          // Best-effort: try to read RSS via the handle URL directly
+          // (works for older channels; modern handles use /@name as the page URL)
+          const rssUrl = `https://www.youtube.com/feeds/videos.xml?user=${clean}`;
+          try {
+            const r = await fetch(rssUrl);
+            if (r.ok) {
+              const xml = await r.text();
+              const cidMatch = xml.match(/<yt:channelId>([^<]+)<\/yt:channelId>/);
+              if (cidMatch) {
+                const fresh = await getLatestLiveVideoFromChannel(apiKey, cidMatch[1]);
+                return {
+                  source: 'rss_handle_resolved',
+                  handle,
+                  channel_id: cidMatch[1],
+                  ...(fresh || { video_id: null, is_live: false }),
+                  fetchedAt: new Date().toISOString(),
+                };
+              }
+            }
+          } catch (_) {}
+          return {
+            source: 'rss_handle_failed',
+            handle,
+            is_live: null,
+            fetchedAt: new Date().toISOString(),
+          };
+        };
+      } else {
         return new Response(
           JSON.stringify({ is_live: null, source: 'noop', reason: 'missing id' }),
           { status: 400, headers: { 'Content-Type': 'application/json', ...CORS_HEADERS } }
         );
       }
 
-      const cached = globalThis[cacheKey]?.[cacheId];
+      const cached = globalThis[cacheKey]?.[requestKey];
       if (cached && (Date.now() - cached.fetchedAtMs) < cacheTtlMs) {
         return new Response(JSON.stringify(cached.payload), {
           status: 200,
@@ -82,133 +188,11 @@ export default {
         });
       }
 
-      const YOUTUBE_COOKIES = [
-        'SOCS=CAISNQgDEitib3FfaWRlbnRpdHlmcm9udGVuZHVpc2VydmVyXzIwMjMwODI5LjA3X3AwGgJlbiACGgYIgPzytgY',
-        'PREF=hl=en&gl=US',
-      ].join('; ');
-
-      const commonHeaders = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36',
-        'Accept-Language': 'en-US,en;q=0.9',
-        'Cookie': YOUTUBE_COOKIES,
-      };
-
-      const parsePlayerResponse = (html) => {
-        const match =
-          html.match(/var ytInitialPlayerResponse\s*=\s*({.+?});(?:var|<\/script>)/s) ||
-          html.match(/ytInitialPlayerResponse\s*=\s*({.+?});/s);
-        if (!match) return null;
-        try { return JSON.parse(match[1]); } catch (_) { return null; }
-      };
-
-      const inspectWatchHtml = (html) => {
-        const pr = parsePlayerResponse(html);
-        if (pr) {
-          const playabilityStatus = pr.playabilityStatus?.status;
-          const isLiveDetails = pr.microformat?.playerMicroformatRenderer?.liveBroadcastDetails;
-          const videoDetails = pr.videoDetails;
-          const isLiveNow =
-            isLiveDetails?.isLiveNow === true ||
-            (videoDetails?.isLive === true && playabilityStatus === 'OK');
-          const isUpcoming =
-            playabilityStatus === 'LIVE_STREAM_OFFLINE' ||
-            !!pr.playabilityStatus?.liveStreamability?.liveStreamabilityRenderer?.offlineSlate;
-          const isError = playabilityStatus === 'ERROR' || playabilityStatus === 'LOGIN_REQUIRED';
-          return { is_live: isLiveNow && !isUpcoming, is_upcoming: isUpcoming && !isLiveNow, is_error: isError };
-        }
-        // Fallback string check
-        const hasLiveNow = html.includes('"isLiveNow":true');
-        const hasOffline = html.includes('LIVE_STREAM_OFFLINE') || html.includes('"isUpcoming":true');
-        return {
-          is_live: hasLiveNow && !hasOffline,
-          is_upcoming: hasOffline && !hasLiveNow,
-          is_error: html.includes('"playabilityStatus":{"status":"ERROR"'),
-        };
-      };
-
-      const checkVideoId = async (id) => {
-        const controller = new AbortController();
-        const t = setTimeout(() => controller.abort(), 8000);
-        try {
-          const r = await fetch(`https://www.youtube.com/watch?v=${id}&gl=US&hl=en`, {
-            headers: commonHeaders,
-            signal: controller.signal,
-          });
-          clearTimeout(t);
-          if (r.status === 404) return { is_live: false, is_upcoming: false, is_error: true, source: '404' };
-          const html = await r.text();
-          const verdict = inspectWatchHtml(html);
-          return { ...verdict, source: 'watch' };
-        } catch (e) {
-          clearTimeout(t);
-          return { is_live: null, is_upcoming: null, is_error: true, source: 'fetch_error', reason: e?.message };
-        }
-      };
-
-      const checkChannelHandle = async (h) => {
-        const clean = h.startsWith('@') ? h : `@${h}`;
-        const controller = new AbortController();
-        const t = setTimeout(() => controller.abort(), 8000);
-        try {
-          const r = await fetch(`https://www.youtube.com/${clean}/live?gl=US&hl=en`, {
-            headers: commonHeaders,
-            redirect: 'follow',
-            signal: controller.signal,
-          });
-          clearTimeout(t);
-          const html = await r.text();
-          const canonicalMatch = html.match(/<link rel="canonical" href="([^"]+)"/);
-          const canonicalUrl = canonicalMatch ? canonicalMatch[1] : r.url;
-          const watchMatch = canonicalUrl.match(/watch\?v=([a-zA-Z0-9_-]{11})/);
-          if (!watchMatch) {
-            return { is_live: false, is_upcoming: false, is_error: false, source: 'channel_no_live' };
-          }
-          return { ...(await checkVideoId(watchMatch[1])), video_id: watchMatch[1], source: 'channel_live' };
-        } catch (e) {
-          clearTimeout(t);
-          return { is_live: null, is_upcoming: null, is_error: true, source: 'fetch_error', reason: e?.message };
-        }
-      };
-
-      let result;
-      if (videoId) {
-        result = await checkVideoId(videoId);
-        result.video_id = videoId;
-      } else if (handle) {
-        result = await checkChannelHandle(handle);
-      } else if (channelId) {
-        // Fall back to RSS feed which exposes recent video IDs without scraping watch pages
-        try {
-          const controller = new AbortController();
-          const t = setTimeout(() => controller.abort(), 6000);
-          const r = await fetch(`https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`, {
-            headers: { 'User-Agent': 'Mozilla/5.0' },
-            signal: controller.signal,
-          });
-          clearTimeout(t);
-          if (r.ok) {
-            const xml = await r.text();
-            const ids = [...xml.matchAll(/<yt:videoId>([^<]+)<\/yt:videoId>/g)].map((m) => m[1]);
-            let foundLive = null;
-            for (const id of ids.slice(0, 2)) {
-              const v = await checkVideoId(id);
-              if (v.is_live) { foundLive = { ...v, video_id: id, source: 'rss' }; break; }
-            }
-            result = foundLive || { is_live: false, is_upcoming: false, is_error: false, source: 'rss_none_live' };
-          } else {
-            result = { is_live: null, is_upcoming: null, is_error: true, source: 'rss_failed' };
-          }
-        } catch (e) {
-          result = { is_live: null, is_upcoming: null, is_error: true, source: 'fetch_error', reason: e?.message };
-        }
-      }
-
-      const payload = { ...result, fetchedAt: new Date().toISOString() };
-
-      // Cache the verdict (only on definitive answers — don't cache errors for 60s)
+      const payload = await runCheck();
       if (globalThis[cacheKey] === undefined) globalThis[cacheKey] = {};
-      if (result.is_live !== null) {
-        globalThis[cacheKey][cacheId] = { payload, fetchedAtMs: Date.now() };
+      // Cache on success (only when not explicitly errored)
+      if (payload.is_live !== undefined && !payload.error) {
+        globalThis[cacheKey][requestKey] = { payload, fetchedAtMs: Date.now() };
       }
 
       return new Response(JSON.stringify(payload), {

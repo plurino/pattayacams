@@ -5,106 +5,161 @@ import { useEffect, useRef, useState } from 'react';
 /**
  * useLiveStatusVerify - Real-time YouTube live status verification via Worker.
  *
- * The static `stream_status.json` is updated by a GH Actions cron that keeps
- * getting blocked by YouTube's datacenter IP filter, so live verdicts there
- * frequently lag reality by hours or days. This hook polls the Worker at
- * `/api/check-live?video_id=...` (or `handle=...`) for each entity the page
- * is currently displaying, returning a fresh verdict every few minutes.
+ * Polls `/api/check-live?ids=...` every 90 s for the entities currently on screen.
+ * Up to 50 IDs per call (1 quota unit via YouTube Data API v3, never blocked).
  *
- * Used by MultiCamGrid and the Live Shuffle empty-state to verify that the
- * streams the user is about to watch are actually live right now — not stale
- * VODs from days ago.
+ * Static `stream_status.json` is the baseline (refreshed by GH Actions cron every 3 h);
+ * this hook is the *real-time overlay* that keeps the badge truthful for entities the
+ * user is actively viewing. If the Worker is unreachable, we keep the last-known verdict.
  */
 
 const WORKER_BASE = 'https://pattayacams.plurinoltd.workers.dev';
-const VERIFY_INTERVAL_MS = 90_000; // 90 s — avoids hammering YouTube via Worker
+const VERIFY_INTERVAL_MS = 90_000;
+const BATCH_SIZE = 50;
 const REQUEST_TIMEOUT_MS = 9_000;
 
-/**
- * @param {Array} entities - list of objects with one or more of: video_id, youtube_handle, youtube_channel_id, handle, channel_id, slug, name
- * @param {boolean} enabled - gate polling (e.g., only run on Map View / MultiCam)
- */
+const entityKey = (e) => e?.key || e?.slug || e?.id || e?.video_id || e?.handle;
+
 export function useLiveStatusVerify(entities = [], enabled = true) {
   const [verdicts, setVerdicts] = useState({});
   const [lastVerifiedAt, setLastVerifiedAt] = useState(null);
-  const inFlightRef = useRef(new Set());
-
-  const entityKey = (e) => e?.key || e?.slug || e?.id || e?.video_id || e?.handle;
+  const inFlightRef = useRef(false);
 
   useEffect(() => {
     if (!enabled) return undefined;
     if (!Array.isArray(entities) || entities.length === 0) return undefined;
 
     let cancelled = false;
-    let intervalId = null;
 
-    const fetchOne = async (entity) => {
-      const key = entityKey(entity);
-      if (!key) return;
-      if (inFlightRef.current.has(key)) return; // de-dupe overlapping requests
-      inFlightRef.current.add(key);
-
-      // Build the query — prefer video_id (most direct), then channel id, then handle
-      const params = new URLSearchParams();
-      if (entity.video_id) params.set('v', entity.video_id);
-      if (entity.youtube_channel_id || entity.channel_id) {
-        params.set('channel_id', entity.youtube_channel_id || entity.channel_id);
-      } else if (entity.youtube_handle || entity.handle) {
-        params.set('handle', entity.youtube_handle || entity.handle);
-      }
-
-      const url = `${WORKER_BASE}/api/check-live?${params.toString()}`;
+    const fetchBatch = async () => {
+      if (inFlightRef.current) return;
+      inFlightRef.current = true;
       try {
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
-        const res = await fetch(url, { signal: controller.signal });
-        clearTimeout(timeoutId);
-        if (!res.ok) throw new Error(`status ${res.status}`);
-        const data = await res.json();
-        if (cancelled) return;
-        setVerdicts((prev) => ({
-          ...prev,
-          [key]: {
-            is_live: data.is_live === true,
-            is_upcoming: data.is_upcoming === true,
-            is_error: data.is_error === true,
-            source: data.source,
-            video_id: data.video_id || entity.video_id,
-            fetchedAt: data.fetchedAt,
-          },
-        }));
-      } catch (err) {
-        if (cancelled) return;
-        setVerdicts((prev) => ({
-          ...prev,
-          [key]: { is_live: false, is_upcoming: false, is_error: true, source: 'fetch_failed', fetchedAt: new Date().toISOString() },
-        }));
+        // Build the work list: prefer video_id (1 API unit covers 50 of them).
+        // Fall back to channel_id when video_id is missing.
+        const byId = [];
+        const byChannelId = [];
+        for (const e of entities) {
+          const k = entityKey(e);
+          if (!k) continue;
+          if (e.video_id && /^[A-Za-z0-9_-]{11}$/.test(e.video_id)) {
+            byId.push({ key: k, video_id: e.video_id });
+          } else if (e.youtube_channel_id || e.channel_id) {
+            byChannelId.push({ key: k, channel_id: e.youtube_channel_id || e.channel_id });
+          }
+        }
+
+        // ---- Batch 1: all known video_ids, single API call ----
+        if (byId.length > 0) {
+          for (let i = 0; i < byId.length; i += BATCH_SIZE) {
+            if (cancelled) return;
+            const chunk = byId.slice(i, i + BATCH_SIZE);
+            const ids = chunk.map((c) => c.video_id).join(',');
+            try {
+              const controller = new AbortController();
+              const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+              const res = await fetch(
+                `${WORKER_BASE}/api/check-live?ids=${ids}`,
+                { signal: controller.signal }
+              );
+              clearTimeout(timeoutId);
+              if (!res.ok) throw new Error(`status ${res.status}`);
+              const data = await res.json();
+              if (cancelled) return;
+              const results = data?.results || {};
+              setVerdicts((prev) => {
+                const next = { ...prev };
+                for (const { key, video_id } of chunk) {
+                  const v = results[video_id];
+                  if (v) {
+                    next[key] = {
+                      is_live: v.is_live === true,
+                      is_upcoming: v.is_upcoming === true,
+                      is_error: false,
+                      source: data.source || 'youtube_api',
+                      video_id: v.video_id || video_id,
+                      title: v.title,
+                      viewers: v.concurrent_viewers,
+                      started_at: v.started_at,
+                      fetchedAt: data.fetchedAt,
+                    };
+                  } else if (v === null) {
+                    // API explicitly returned nothing for this ID → video deleted/private
+                    next[key] = {
+                      is_live: false,
+                      is_upcoming: false,
+                      is_error: true,
+                      source: 'deleted',
+                      video_id,
+                      fetchedAt: data.fetchedAt,
+                    };
+                  }
+                  // undefined → keep prior verdict
+                }
+                return next;
+              });
+            } catch (err) {
+              if (cancelled) return;
+              // Mark the batch as unverified rather than wiping verdicts
+              setVerdicts((prev) => {
+                const next = { ...prev };
+                for (const { key, video_id } of chunk) {
+                  if (!next[key]) {
+                    next[key] = { is_live: false, is_upcoming: false, is_error: true, source: 'fetch_failed', video_id, fetchedAt: new Date().toISOString() };
+                  }
+                }
+                return next;
+              });
+            }
+          }
+        }
+
+        // ---- Batch 2: entities without a known video_id → channel discovery ----
+        // RSS-discovery polls are expensive (one API call per channel), so only
+        // run them for entities where no verdict exists yet.
+        if (byChannelId.length > 0 && !cancelled) {
+          for (const { key, channel_id } of byChannelId) {
+            if (cancelled) return;
+            if (verdicts[key]) continue; // already have one
+            try {
+              const controller = new AbortController();
+              const tid = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+              const res = await fetch(
+                `${WORKER_BASE}/api/check-live?channel_id=${encodeURIComponent(channel_id)}`,
+                { signal: controller.signal }
+              );
+              clearTimeout(tid);
+              if (!res.ok) continue;
+              const data = await res.json();
+              if (cancelled) return;
+              if (data.video_id) {
+                setVerdicts((prev) => ({
+                  ...prev,
+                  [key]: {
+                    is_live: data.is_live === true,
+                    is_upcoming: false,
+                    is_error: false,
+                    source: data.source || 'rss_discovery',
+                    video_id: data.video_id,
+                    fetchedAt: data.fetchedAt,
+                  },
+                }));
+              }
+            } catch (_) { /* silent — try again next interval */ }
+          }
+        }
+
+        if (!cancelled) setLastVerifiedAt(new Date());
       } finally {
-        inFlightRef.current.delete(key);
+        inFlightRef.current = false;
       }
     };
 
-    const verifyAll = () => {
-      // Prioritise entities without a verdict; only verify each at most once per interval
-      const toVerify = entities.filter((e) => {
-        const k = entityKey(e);
-        return k && !verdicts[k];
-      });
-      // If everything has a verdict, refresh the oldest one to keep data fresh
-      const candidates = toVerify.length > 0
-        ? toVerify
-        : entities.filter((e) => entityKey(e));
-      // Cap concurrent fetches at 4 to be polite to the Worker / YouTube
-      candidates.slice(0, 4).forEach(fetchOne);
-      setLastVerifiedAt(new Date());
-    };
-
-    verifyAll();
-    intervalId = setInterval(verifyAll, VERIFY_INTERVAL_MS);
-
+    fetchBatch();
+    const intervalId = setInterval(fetchBatch, VERIFY_INTERVAL_MS);
     return () => {
       cancelled = true;
-      if (intervalId) clearInterval(intervalId);
+      clearInterval(intervalId);
     };
   }, [entities, enabled]);
 
