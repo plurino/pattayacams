@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-09-23T00:07:58.085Z",
+  "last_check": "2026-09-23T02:37:41.605Z",
   "entities": {
     "venue-pattaya-oh-bar": {
       "is_live": false,
@@ -879,9 +879,9 @@
       "handle": "@maju_bar_thailand"
     },
     "venue-the-elite-bar": {
-      "is_live": true,
-      "is_upcoming": false,
-      "video_id": "dvmC2mv3vP0",
+      "is_live": false,
+      "is_upcoming": true,
+      "video_id": "ohv4nH-m50g",
       "last_live_at": "2026-09-23T00:07:58.085Z",
       "status": "active",
       "name": "The Elite Bar",
