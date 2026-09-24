@@ -81,12 +81,23 @@ async function checkYouTubeBatch(entities) {
   const verdicts = await batchCheckVideos(YOUTUBE_API_KEY, knownIds);
   console.log(`  → ${Object.values(verdicts).filter((v) => v?.is_live).length} confirmed live`);
 
-  // Step 2: for entities that aren't live on their stored ID, try to discover
-  // the current live stream via RSS + a quick follow-up API check.
+  // Step 2: trigger RSS-based fresh stream discovery for any entity whose
+  // stored video_id is NOT live right now. This covers every stale-state case:
+  //
+  //   - verdict is null/undefined → stored video_id was deleted/private on YouTube
+  //   - verdict.is_live === false → stored video_id is upcoming, ended, or was never live
+  //   - entity has no stored video_id at all (verdicts[undefined] is undefined)
+  //
+  // For ALL of these cases we MUST try to discover the channel's current live
+  // stream via RSS so that venues/creators who restart streaming with a new
+  // video_id get auto-detected within one cron cycle (≤15 min on the peak
+  // schedule). Without this, stale video_ids stick around forever until the
+  // operator manually edits venues.json.
   const needDiscovery = entities.filter((e) => {
     if (!e.youtube_channel_id) return false; // can't discover without channel_id
     const v = verdicts[e.video_id];
-    return !v || !v.is_live; // stored ID is stale or unknown
+    const isStoredLive = v?.is_live === true;
+    return !isStoredLive;
   });
 
   if (needDiscovery.length > 0) {
@@ -98,9 +109,22 @@ async function checkYouTubeBatch(entities) {
           e.youtube_channel_id
         );
         if (fresh?.video_id) {
-          verdicts[fresh.video_id] = { video_id: fresh.video_id, is_live: fresh.is_live, checked_at: nowIso };
+          // Always record the verdict for the discovered ID so the final
+          // status map reflects the freshest data we observed.
+          verdicts[fresh.video_id] = {
+            video_id: fresh.video_id,
+            is_live: fresh.is_live,
+            checked_at: nowIso,
+          };
           if (fresh.is_live) {
-            e.video_id = fresh.video_id; // mutate the source JSON in memory
+            // Mutate the source-JSON entity in memory. writeBackIfChanged()
+            // later writes venues.json/live_cams.json with this new ID so the
+            // next cron run picks it up directly (no RSS round-trip needed).
+            const oldId = e.video_id;
+            e.video_id = fresh.video_id;
+            if (oldId !== fresh.video_id) {
+              console.log(`  🔄 ${e.slug || e.name}: ${oldId || '(none)'} → ${fresh.video_id}`);
+            }
           }
         }
       } catch (err) {

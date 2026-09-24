@@ -16,9 +16,14 @@ export default function SceneSelector({ activeSceneIds = [], onToggleScene }) {
   return (
     <div
       aria-label="Scene filters"
-      className="flex items-center gap-1 sm:gap-1.5 px-2 md:px-2.5 max-h-[44px] md:max-h-none overflow-x-auto overflow-y-hidden snap-x snap-mandatory md:snap-none scrollbar-none select-none p-1 rounded-xl bg-surface/90 backdrop-blur-md border border-borderDark/80 shadow-2xl"
+      // Mobile sizing tightened in Sep 2026 redesign:
+      // - smaller gaps + padding so the pill strip doesn't blow past the Leaflet compass / direction
+      //   controls at top-24 right-3 on small screens
+      // - max-w-[calc(100vw-6rem)] keeps horizontal scroll inside the viewport even after the
+      //   parent wrapper pads away the right gutter; on md+ the wrapper is centred, full width is fine
+      className="flex items-center gap-0.5 sm:gap-1.5 px-1 sm:px-2 md:px-2.5 max-w-[calc(100vw-6rem)] md:max-w-none max-h-[40px] md:max-h-none overflow-x-auto overflow-y-hidden snap-x snap-mandatory md:snap-none scrollbar-none select-none p-1 rounded-xl bg-surface/90 backdrop-blur-md border border-borderDark/80 shadow-2xl"
     >
-      <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider px-1.5 font-bold shrink-0 hidden md:inline">
+      <span className="text-[9px] md:text-[10px] font-mono text-slate-400 uppercase tracking-wider px-1 md:px-1.5 font-bold shrink-0 hidden md:inline">
         SCENES:
       </span>
       {scenesData.map((scene) => {
@@ -29,15 +34,17 @@ export default function SceneSelector({ activeSceneIds = [], onToggleScene }) {
           <button
             key={scene.id}
             onClick={() => onToggleScene && onToggleScene(scene)}
-            className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold border transition-all shrink-0 snap-start min-h-[44px] cursor-pointer ${
+            // Mobile tap target stays at 40px (iOS HIG friendly) but text + icon shrink so
+            // 4-5 pills fit on a 375px-wide phone without horizontal scroll.
+            className={`flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-1 rounded-lg text-[10px] sm:text-xs font-semibold border transition-all shrink-0 snap-start min-h-[40px] md:min-h-[44px] cursor-pointer ${
               isActive
                 ? `${activeClass} font-bold scale-105`
                 : 'text-slate-400 hover:text-white border-transparent hover:bg-surfaceLight/80 opacity-75 hover:opacity-100'
             }`}
             title={`${scene.description} (Click to toggle)`}
           >
-            <span>{scene.icon}</span>
-            <span className="text-[11px] whitespace-nowrap">{scene.name}</span>
+            <span className="text-xs sm:text-base">{scene.icon}</span>
+            <span className="text-[10px] sm:text-[11px] whitespace-nowrap hidden sm:inline">{scene.name}</span>
             <span className={`w-1.5 h-1.5 rounded-full ${isActive ? 'bg-white animate-pulse' : 'bg-slate-600'}`} />
           </button>
         );

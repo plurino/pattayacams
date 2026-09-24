@@ -1,55 +1,21 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import { Map as MapIcon, Grid, Film, Users } from 'lucide-react';
 // QUICK_JUMP_TARGETS is no longer rendered in the navbar — the zone selector
 // has moved into the LayerToggleHUD's panel (Phase 1.3). Importing the
 // constants is no longer required here.
-import { getSavedTripDate } from '@/src/utils/storage';
-import TripModal from '@/src/components/TripModal';
+// The Trip Countdown button has moved to TickerOverflowMenu.jsx (Sep 2026
+// redesign) — TripModal + trip-state lives there now to keep the navbar
+// focused on view-switching.
 
 export default function Navbar({
   viewMode = 'map',
   setViewMode,
   onQuickJump,
-  onOpenTripModal,
-  onOpenSponsorModal,
   onLiveShuffle,
 }) {
-  const [tripDays, setTripDays] = useState(null);
-  const [isInternalTripOpen, setIsInternalTripOpen] = useState(false);
-
-  useEffect(() => {
-    function calculateDays() {
-      const saved = getSavedTripDate();
-      if (!saved) {
-        setTripDays(null);
-        return;
-      }
-      const target = new Date(saved);
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
-      target.setHours(0, 0, 0, 0);
-      const diffMs = target.getTime() - today.getTime();
-      const days = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
-      setTripDays(days > 0 ? days : 0);
-    }
-
-    calculateDays();
-
-    window.addEventListener('pattayacams_trip_updated', calculateDays);
-    return () => window.removeEventListener('pattayacams_trip_updated', calculateDays);
-  }, []);
-
-
-  const handleTripClick = () => {
-    if (onOpenTripModal) {
-      onOpenTripModal();
-    } else {
-      setIsInternalTripOpen(true);
-    }
-  };
 
   const handleViewChange = (mode) => {
     if (setViewMode) {
@@ -97,30 +63,8 @@ export default function Navbar({
 
       {/* 2. (Center Zone selector REMOVED in Phase 1.3 — now lives inside LayerToggleHUD's panel) */}
 
-      {/* 3. Right: Trip Countdown & View Switcher (Countdown to the LEFT of View Switcher) */}
+      {/* 3. Right: View Switcher (Trip Countdown now lives in TickerOverflowMenu) */}
       <div className="flex items-center gap-1 sm:gap-2 shrink-0">
-        {/* Icon-only Trip Countdown / Date Picker Button — always shows palm + days,
-            never the longer "to Pattaya" text. Wider labels live only inside the modal. */}
-        <button
-          onClick={handleTripClick}
-          className="flex items-center gap-1 px-1.5 sm:px-2.5 py-1 sm:py-1.5 rounded-xl bg-surfaceLight hover:bg-surfaceLight/80 border border-borderDark text-xs font-mono transition-all text-slate-200 hover:border-brandPink/50 shrink-0"
-          title={
-            tripDays !== null
-              ? `${tripDays} day${tripDays === 1 ? '' : 's'} until your trip to Pattaya — click to change`
-              : 'Click to set your departure date & start the countdown'
-          }
-          aria-label={
-            tripDays !== null
-              ? `Trip countdown: ${tripDays} day${tripDays === 1 ? '' : 's'} until Pattaya`
-              : 'Set your trip departure date'
-          }
-        >
-          <span aria-hidden="true">{tripDays !== null ? '🌴' : '📅'}</span>
-          <span className="text-brandPink font-bold text-[11px] sm:text-xs">
-            {tripDays !== null ? `${tripDays}d` : 'Trip'}
-          </span>
-        </button>
-
         {/* View Mode Switcher: Map, Multi, Videos, Creators — monochrome lifted state, no neon gradients */}
         <div className="flex items-center bg-canvas/90 p-0.5 rounded-xl border border-borderDark/90 shadow-inner">
           {/* 1. Live Map */}
@@ -197,14 +141,6 @@ export default function Navbar({
           </Link>
         </div>
       </div>
-
-      {/* Internal Trip Modal if opened from page without external state */}
-      {!onOpenTripModal && (
-        <TripModal
-          isOpen={isInternalTripOpen}
-          onClose={() => setIsInternalTripOpen(false)}
-        />
-      )}
     </header>
   );
 }

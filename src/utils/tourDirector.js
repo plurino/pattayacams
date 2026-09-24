@@ -2,12 +2,15 @@
 // Automated cinematic drone tour director across Pattaya hotspots
 
 export const TOUR_WAYPOINTS = [
-  { name: 'Bali Hai Pier', subtitle: 'Koh Larn Ferries & Harbor', coords: [12.9255, 100.8675], zoom: 16.5, duration: 11000 },
-  { name: 'Walking Street', subtitle: 'Nightclubs & Neon Strip', coords: [12.9255, 100.8725], zoom: 17, duration: 11000 },
-  { name: 'Soi Buakhao', subtitle: 'Tree Town & Bar Strip', coords: [12.9315, 100.8870], zoom: 17, duration: 11000 },
-  { name: 'Central Beach Road', subtitle: 'Promenade & Waterfront', coords: [12.9380, 100.8840], zoom: 16.5, duration: 10000 },
-  { name: 'Soi 6', subtitle: 'Party Corridor & Day Bars', coords: [12.9430, 100.8885], zoom: 17, duration: 11000 },
-  { name: 'Pratumnak Hill Viewpoint', subtitle: 'Pattaya Bay Panorama', coords: [12.9221, 100.8659], zoom: 16, duration: 11000 },
+  // Durations shortened to 5s per stop (Sep 2026) — the previous 10–11s dwell
+  // made the tour feel stuck in one spot. The cinematic flyTo animation is
+  // 2.5s, so 5s gives ~2.5s of settled "look around" time before moving on.
+  { name: 'Bali Hai Pier', subtitle: 'Koh Larn Ferries & Harbor', coords: [12.9255, 100.8675], zoom: 16.5, duration: 5000 },
+  { name: 'Walking Street', subtitle: 'Nightclubs & Neon Strip', coords: [12.9255, 100.8725], zoom: 17, duration: 5000 },
+  { name: 'Soi Buakhao', subtitle: 'Tree Town & Bar Strip', coords: [12.9315, 100.8870], zoom: 17, duration: 5000 },
+  { name: 'Central Beach Road', subtitle: 'Promenade & Waterfront', coords: [12.9380, 100.8840], zoom: 16.5, duration: 5000 },
+  { name: 'Soi 6', subtitle: 'Party Corridor & Day Bars', coords: [12.9430, 100.8885], zoom: 17, duration: 5000 },
+  { name: 'Pratumnak Hill Viewpoint', subtitle: 'Pattaya Bay Panorama', coords: [12.9221, 100.8659], zoom: 16, duration: 5000 },
 ];
 
 export class TourDirector {

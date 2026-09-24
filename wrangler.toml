@@ -4,6 +4,17 @@ compatibility_date = "2024-09-23"
 workers_dev = true
 preview_urls = true
 
+# Required secrets (bind via `wrangler secret put <NAME>` per env, NEVER commit values):
+#   YOUTUBE_API_KEY   - YouTube Data API v3 key, used by /api/check-live.
+#                       Bind:  wrangler secret put YOUTUBE_API_KEY
+#   WAQI_API_TOKEN    - WAQI free-tier token, used by /api/aqi (Pattaya AQI).
+#                       Free tier: 1000 req/day. Bind once on each env.
+#                       Bind:  wrangler secret put WAQI_API_TOKEN
+#
+# The /api/aqi route returns a stable 200 + {aqi:null, source:"waqi_no_token"}
+# response when the secret is missing, so the site stays online - but the AQI
+# layer will simply render no data until the secret is bound.
+
 [assets]
 directory = "./out"
 html_handling = "auto-trailing-slash"

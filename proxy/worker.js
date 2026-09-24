@@ -1,19 +1,11 @@
 /**
  * PattayaCams.com - Cloudflare Worker Edge Proxy
  *
- * Responsibilities:
+ * Responsibilities: see PLANS/2026-09-23-master-redesign.md §Phase 5.2 (WAQI AQI), §Phase 0 (live status fix) & §Phase 2 (HLS proxy below). Summary of edge routes here in priority order (top wins over HLS proxy fallback):
  *  1. /api/check-live — Real-time YouTube live status via YouTube Data API v3.
  *                       Batched (up to 50 IDs per call, 1 quota unit), 5-min Worker cache.
  *                       RSS feed discovery for channel handles when no video_id is known.
- *  2. Edge proxy for municipal HLS streams (livestream.pattaya.go.th):
- *     Strict bandwith & SSRF guard — only proxies from the official municipal CCTV domain.
- *     Hard 4-second upstream connect timeout.
- *     Blocks (.ts, .m4s, .mp4, .aac) binary segments to guarantee ZERO bandwidth egress fees.
- *     Rewrites relative media segment URLs in .m3u8 playlists to absolute upstream URLs.
- *
- * Secrets: YOUTUBE_API_KEY  (wrangler secret put YOUTUBE_API_KEY)
- *          Source:           src/utils/youtubeClient.js  (bundled by wrangler)
- */
+ *  2. /api/aqi        — Pattaya air-quality (WAQI /feed/here). Proxies the WAQI API token so it never reaches the browser. 15-min Worker memory cache (matches hook poll cadence). Free WAQI tier = 1000 req/day, so this matters even on a single user session with multiple tabs/components re-mounting after hot-reload. Returns a normalised, stable shape regardless of upstream WAQI drift. If WAQI errors, returns `{aqi:null, source:"waqi_error", error:...}` so the frontend can degrade gracefully (just hides the layer marker — no toast / no spinner forever). Defaults to Pattaya downtown (12.9276, 100.8771, 10 km radius) so a bare `/api/aqi` works for the home anchor. Override with `?lat=&lon=&radius=` (radius in metres, default 10000). Requires `WAQI_API_TOKEN` Worker secret — bind via `wrangler secret put WAQI_API_TOKEN`. Without the secret the route returns a stable error response (status 200, body `{aqi:null, source:"waqi_no_token"}`) so the browser never crashes on a missing config and Cloudflare logs stay quiet (no error stack to surface to users). See also `src/hooks/useAirQuality.js` (15-min poll) and `src/components/AirQualityLayer.jsx` (Leaflet circleMarker + AQI-tier colouring + pulse when AQI ≥ 151 Unhealthy or worse). No localStorage cache here on purpose — the Worker memory cache already covers multi-tab / multi-mount revalidation; per-tab localStorage would just confuse the "stale" UI on a slow network without saving any WAQI quota (it's gated by the Worker's 15-min TTL either way). 3. Edge proxy for municipal HLS streams (livestream.pattaya.go.th): Strict bandwith & SSRF guard — only proxies from the official municipal CCTV domain. Hard 4-second upstream connect timeout. Blocks (.ts, .m4s, .mp4, .aac) binary segments to guarantee ZERO bandwidth egress fees. Rewrites relative media segment URLs in .m3u8 playlists to absolute upstream URLs. Secrets: YOUTUBE_API_KEY (wrangler secret put YOUTUBE_API_KEY) WAQI_API_TOKEN (wrangler secret put WAQI_API_TOKEN) Source: src/utils/youtubeClient.js (bundled by wrangler) */
 
 import {
   batchCheckVideos,
@@ -204,7 +196,243 @@ export default {
         },
       });
     }
-    // 1b. Route: Live Flights REMOVED.
+    // 1b. Route: /api/aqi — Pattaya air-quality via WAQI.
+    //
+    // Upstream: https://api.waqi.info/feed/here/?lat=X&lon=Y&radius=M&token=...
+    //   (free tier: 1000 req/day. We must cache aggressively.)
+    //
+    // Defaults match useTickerData + useAirQuality: Pattaya downtown 12.9276/100.8771.
+    // If the secret is missing, returns 200 + error shape (no 5xx surface to users).
+    // If the upstream errors or rate-limits, returns 200 + {aqi:null, source:"waqi_error"}.
+    if (url.pathname === '/api/aqi') {
+      const token = env.WAQI_API_TOKEN;
+
+      // Stable error if the secret isn't bound yet — never throw, never 500.
+      if (!token) {
+        return new Response(
+          JSON.stringify({
+            aqi: null,
+            source: 'waqi_no_token',
+            error: 'WAQI_API_TOKEN secret not bound to Worker',
+            fetchedAt: new Date().toISOString(),
+          }),
+          {
+            status: 200,
+            headers: {
+              'Content-Type': 'application/json',
+              'Cache-Control': 'no-store',
+              ...CORS_HEADERS,
+            },
+          }
+        );
+      }
+
+      // ---- Parse query params (with sane defaults) ----
+      const DEFAULT_LAT = 12.9276;
+      const DEFAULT_LON = 100.8771;
+      const DEFAULT_RADIUS = 10000;
+
+      let lat = DEFAULT_LAT;
+      let lon = DEFAULT_LON;
+      let radius = DEFAULT_RADIUS;
+
+      const latRaw = url.searchParams.get('lat');
+      const lonRaw = url.searchParams.get('lon');
+      const radiusRaw = url.searchParams.get('radius');
+
+      if (latRaw !== null) {
+        const n = Number(latRaw);
+        if (Number.isFinite(n) && n >= -90 && n <= 90) lat = n;
+      }
+      if (lonRaw !== null) {
+        const n = Number(lonRaw);
+        if (Number.isFinite(n) && n >= -180 && n <= 180) lon = n;
+      }
+      if (radiusRaw !== null) {
+        const n = Number(radiusRaw);
+        if (Number.isFinite(n) && n > 0 && n <= 50000) radius = n;
+      }
+
+      // ---- Worker-memory cache (15 min TTL) ----
+      const cacheKey = '__aqiCache';
+      const cacheTtlMs = 15 * 60 * 1000;
+      const requestKey = `${lat.toFixed(4)},${lon.toFixed(4)},${Math.round(radius)}`;
+
+      const cached = globalThis[cacheKey]?.[requestKey];
+      if (cached && (Date.now() - cached.fetchedAtMs) < cacheTtlMs) {
+        return new Response(JSON.stringify(cached.payload), {
+          status: 200,
+          headers: {
+            'Content-Type': 'application/json',
+            'Cache-Control': 'public, max-age=60',
+            ...CORS_HEADERS,
+          },
+        });
+      }
+
+      // ---- Build upstream URL ----
+      const upstreamUrl = `https://api.waqi.info/feed/here/?lat=${encodeURIComponent(
+        lat
+      )}&lon=${encodeURIComponent(lon)}&radius=${encodeURIComponent(radius)}&token=${encodeURIComponent(
+        token
+      )}`;
+
+      // ---- Fetch with a 6s safety timeout (WAQI is normally sub-second) ----
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 6000);
+
+      let upstream;
+      try {
+        upstream = await fetch(upstreamUrl, {
+          method: 'GET',
+          headers: { Accept: 'application/json' },
+          signal: controller.signal,
+        });
+      } catch (err) {
+        clearTimeout(timeoutId);
+        const isTimeout = err && err.name === 'AbortError';
+        const payload = {
+          aqi: null,
+          source: 'waqi_error',
+          error: isTimeout ? 'timeout' : 'fetch_failed',
+          fetchedAt: new Date().toISOString(),
+        };
+        return new Response(JSON.stringify(payload), {
+          status: 200,
+          headers: {
+            'Content-Type': 'application/json',
+            'Cache-Control': 'no-store',
+            ...CORS_HEADERS,
+          },
+        });
+      }
+      clearTimeout(timeoutId);
+
+      if (!upstream.ok) {
+        const payload = {
+          aqi: null,
+          source: 'waqi_error',
+          error: upstream.status === 429 ? 'rate_limited' : `http_${upstream.status}`,
+          fetchedAt: new Date().toISOString(),
+        };
+        // Cache the rate-limit error briefly (60s) to back off; cache other
+        // errors for the normal 15 min to avoid hammering WAQI on a bad day.
+        const errorTtl = upstream.status === 429 ? 60 * 1000 : 15 * 60 * 1000;
+        if (globalThis[cacheKey] === undefined) globalThis[cacheKey] = {};
+        globalThis[cacheKey][`err:${requestKey}`] = {
+          payload,
+          fetchedAtMs: Date.now() - (cacheTtlMs - errorTtl),
+        };
+        return new Response(JSON.stringify(payload), {
+          status: 200,
+          headers: {
+            'Content-Type': 'application/json',
+            'Cache-Control': upstream.status === 429 ? 'no-store' : 'public, max-age=60',
+            ...CORS_HEADERS,
+          },
+        });
+      }
+
+      let json;
+      try {
+        json = await upstream.json();
+      } catch (_) {
+        const payload = {
+          aqi: null,
+          source: 'waqi_error',
+          error: 'invalid_json',
+          fetchedAt: new Date().toISOString(),
+        };
+        return new Response(JSON.stringify(payload), {
+          status: 200,
+          headers: {
+            'Content-Type': 'application/json',
+            'Cache-Control': 'no-store',
+            ...CORS_HEADERS,
+          },
+        });
+      }
+
+      // ---- Normalise WAQI's response ----
+      // WAQI shape (success):
+      //   { status: "ok", data: { aqi: 84, idx: 9410, city: { name, url, geo },
+      //     iaqi: { pm25: {v}, pm10: {v}, o3, no2, so2, co, t, w, h, ... },
+      //     time: { iso, tz }, forecast: {...} } }
+      // Failure:
+      //   { status: "error", data: "Unknown station" | "over quota" | ... }
+      if (!json || json.status !== 'ok' || !json.data) {
+        const payload = {
+          aqi: null,
+          source: 'waqi_error',
+          error: typeof json?.data === 'string' ? json.data : 'upstream_not_ok',
+          fetchedAt: new Date().toISOString(),
+        };
+        if (globalThis[cacheKey] === undefined) globalThis[cacheKey] = {};
+        globalThis[cacheKey][`err:${requestKey}`] = {
+          payload,
+          fetchedAtMs: Date.now() - (cacheTtlMs - 60 * 1000), // 60s on upstream-not-ok
+        };
+        return new Response(JSON.stringify(payload), {
+          status: 200,
+          headers: {
+            'Content-Type': 'application/json',
+            'Cache-Control': 'no-store',
+            ...CORS_HEADERS,
+          },
+        });
+      }
+
+      const data = json.data;
+      const iaqi = data.iaqi || {};
+      const pick = (key) => {
+        const node = iaqi[key];
+        if (!node || node.v === undefined || node.v === null) return null;
+        const n = typeof node.v === 'number' ? node.v : Number(node.v);
+        return Number.isFinite(n) ? n : null;
+      };
+      // AQI may come as "84" or "-" (no data); coerce non-numeric to null.
+      let aqiVal = null;
+      if (typeof data.aqi === 'number' && Number.isFinite(data.aqi)) {
+        aqiVal = data.aqi;
+      } else if (typeof data.aqi === 'string' && data.aqi !== '-') {
+        const n = Number(data.aqi);
+        if (Number.isFinite(n)) aqiVal = n;
+      }
+
+      const payload = {
+        aqi: aqiVal,
+        pm25: pick('pm25'),
+        pm10: pick('pm10'),
+        o3: pick('o3'),
+        no2: pick('no2'),
+        so2: pick('so2'),
+        co: pick('co'),
+        t: pick('t'),
+        w: pick('w'),
+        h: pick('h'),
+        city: data.city && data.city.name ? data.city.name : 'Pattaya',
+        station: data.city && data.city.name ? data.city.name : 'Pattaya, Thailand',
+        // WAQI doesn't return a distance field directly; the `geo` array is the
+        // exact station coords. Derive a very rough distance so the tooltip
+        // can say "X m from your query" if the upstream doesn't tell us.
+        distance_m: null,
+        fetchedAt: new Date().toISOString(),
+        source: 'waqi',
+      };
+
+      if (globalThis[cacheKey] === undefined) globalThis[cacheKey] = {};
+      globalThis[cacheKey][requestKey] = { payload, fetchedAtMs: Date.now() };
+
+      return new Response(JSON.stringify(payload), {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json',
+          'Cache-Control': 'public, max-age=60',
+          ...CORS_HEADERS,
+        },
+      });
+    }
+    // 1c. Route: Live Flights REMOVED.
     // adsb.lol, OpenSky Network, and airplanes.live all block server IPs (429/522/403).
     // Until the user signs up for an OpenSky account (free, 4000 req/day authenticated)
     // or we adopt a paid aggregator, the flight layer is permanently offline.

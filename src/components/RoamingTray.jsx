@@ -2,7 +2,7 @@
 
 import React, { useMemo, useCallback } from 'react';
 import Link from 'next/link';
-import { Star, Play, Radio, Users, Mail, Tv, MapPin, Video } from 'lucide-react';
+import { Star, Play, Radio, Users, Tv, MapPin, Video } from 'lucide-react';
 import streamersData from '@/public/data/roaming_streamers.json';
 import creatorsData from '@/public/data/creators.json';
 import venuesData from '@/public/data/venues.json';
@@ -44,12 +44,15 @@ function describeType(item) {
 const FALLBACK_AVATAR =
   'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&fit=crop&q=60';
 
-export default function RoamingTray({ onSelectStreamer, onOpenSponsorModal, onOpenContact }) {
+export default function RoamingTray({ onSelectStreamer, onOpenSponsorModal }) {
   const streamStatus = useStreamStatus();
 
   // Index all entities with physical locations on the map (Venues & 24/7 Webcams)
-  // We still want venues + livecams to appear in the bottom strip — but we
-  // dedupe against the creator pool so the same channel doesn't show twice.
+  // so we can *exclude* them from this tray — the Sep 2026 redesign explicitly
+  // scoped this strip to "live creators that aren't tied to a venue address".
+  // (If a stream is already represented by a map pin, surfacing it again here
+  // would just be visual noise.) The index still exists because dedupe against
+  // the creator pool is the right hygiene step.
   const physicalKeys = useMemo(() => {
     const keys = new Set();
     venuesData.forEach((v) => {
@@ -77,9 +80,10 @@ export default function RoamingTray({ onSelectStreamer, onOpenSponsorModal, onOp
     return physicalKeys.has(slug) || physicalKeys.has(handle) || physicalKeys.has(cid) || physicalKeys.has(name);
   }, [physicalKeys]);
 
-  // Combine roaming streamers, creators, AND live venues / live cams into one
-  // pool so the bottom strip surfaces every kind of live stream, not just
-  // location-less ones.
+  // Pool is restricted to roaming streamers + creators (no venue/livecam entries).
+  // Venues & cams are already visible as map pins; duplicating them here made the
+  // tray feel like a "second map" rather than a discovery surface for the
+  // location-less IRL creators.
   const allPool = useMemo(() => {
     const list = [];
     const seen = new Set();
@@ -101,8 +105,7 @@ export default function RoamingTray({ onSelectStreamer, onOpenSponsorModal, onOp
       list.push(item);
     };
 
-    // 1. Creators (skip if already on map as a venue/livecam — but those
-    //    would have been picked up first so dedupe handles this anyway).
+    // 1. Creators (no map pin of their own → most "on the move")
     creatorsData.forEach((c) => {
       addItem({
         id: c.slug,
@@ -117,7 +120,7 @@ export default function RoamingTray({ onSelectStreamer, onOpenSponsorModal, onOp
       });
     });
 
-    // 2. Roaming streamers
+    // 2. Roaming streamers (location-less by definition)
     streamersData.forEach((s) => {
       addItem({
         id: s.id,
@@ -131,45 +134,8 @@ export default function RoamingTray({ onSelectStreamer, onOpenSponsorModal, onOp
       });
     });
 
-    // 3. Venues with YouTube channels (bars, dispensaries, restaurants, etc.)
-    venuesData.forEach((v) => {
-      if (!v.youtube_channel_id && !v.youtube_handle) return;
-      addItem({
-        id: v.slug,
-        slug: v.slug,
-        name: v.name,
-        handle: v.youtube_handle,
-        avatar_url: null,
-        photos: v.photos,
-        category: v.category,
-        platform: 'youtube',
-        channel_id: v.youtube_channel_id,
-        zone: v.zone,
-        lat: v.lat,
-        lng: v.lng,
-        type: 'venue',
-      });
-    });
-
-    // 4. 24/7 Live Cams (already a map entity — but they're the most
-    //    reliable "always broadcasting" source so they belong here too).
-    liveCamsData.forEach((c) => {
-      addItem({
-        id: c.slug,
-        slug: c.slug,
-        name: c.name,
-        handle: c.youtube_handle,
-        avatar_url: null,
-        photos: c.photos,
-        category: 'live_cam',
-        platform: 'youtube',
-        channel_id: c.youtube_channel_id,
-        zone: c.zone,
-        lat: c.lat,
-        lng: c.lng,
-        type: 'livecam',
-      });
-    });
+    // 3. Venues are deliberately excluded — they appear on the map.
+    // 4. 24/7 Live Cams are deliberately excluded — they appear on the map.
 
     return list;
   }, []);
@@ -209,11 +175,9 @@ export default function RoamingTray({ onSelectStreamer, onOpenSponsorModal, onOp
           concurrent_viewers: status?.concurrent_viewers || null,
         };
       })
-      // Keep the most interesting streams up front: venues/livecams first
-      // (they're the most "concrete" — a real place you can visit), then
-      // creators/streamers alphabetically.
+      // Pool is creators + streamers only; creators sort before streamers, then alphabetical by name.
       .sort((a, b) => {
-        const order = { livecam: 0, venue: 1, creator: 2, streamer: 3 };
+        const order = { creator: 0, streamer: 1 };
         const ao = order[a.type] ?? 9;
         const bo = order[b.type] ?? 9;
         if (ao !== bo) return ao - bo;
@@ -230,7 +194,10 @@ export default function RoamingTray({ onSelectStreamer, onOpenSponsorModal, onOp
       className="h-16 sm:h-[72px] border-t border-borderDark bg-surface flex items-center justify-between px-2 sm:px-4 md:px-5 shrink-0 z-40 select-none shadow-[0_-4px_18px_rgba(0,0,0,0.35)] gap-2"
     >
       <div className="flex items-center gap-2 sm:gap-3 overflow-x-auto py-1 scrollbar-none flex-1 min-w-0">
-        {/* Dock Header — pulsing live pill + count badge */}
+        {/* Dock Header — pulsing live pill + count badge.
+            Renamed in Sep 2026 from "LIVE NOW" to "Live on the Move in Pattaya"
+            to reflect the new scope: only roaming creators + streamers (not
+            venues or 24/7 cams, which already have map pins). */}
         <div className="flex items-center gap-1.5 sm:gap-2 shrink-0 pr-2 sm:pr-3 border-r border-borderDark">
           {hasLive ? (
             <>
@@ -240,10 +207,10 @@ export default function RoamingTray({ onSelectStreamer, onOpenSponsorModal, onOp
               </span>
               <div className="flex items-center gap-1 font-mono text-[10px] sm:text-[11px] font-bold">
                 <span className="text-white uppercase tracking-wider hidden sm:inline">
-                  ● LIVE NOW
+                  ● Live on the Move in Pattaya
                 </span>
                 <span className="text-white uppercase tracking-wider sm:hidden">
-                  ● LIVE
+                  ● On the Move
                 </span>
                 <span
                   className="px-1.5 py-0.5 rounded-full bg-red-600 text-white text-[9px] font-extrabold shadow-[0_0_8px_#EF4444]"
@@ -257,7 +224,7 @@ export default function RoamingTray({ onSelectStreamer, onOpenSponsorModal, onOp
             <>
               <Radio className="w-3.5 h-3.5 text-slate-400" aria-hidden="true" />
               <span className="font-mono text-[10px] sm:text-[11px] font-bold text-slate-400 uppercase tracking-wider">
-                Standby
+                On the Move — Standby
               </span>
             </>
           )}
@@ -267,7 +234,7 @@ export default function RoamingTray({ onSelectStreamer, onOpenSponsorModal, onOp
         {!hasLive ? (
           <div className="flex items-center gap-2 text-xs font-mono text-slate-400 truncate">
             <span className="hidden sm:inline">
-              No live streams at the moment — check back later.
+              No roaming streams right now — check back later.
             </span>
             <span className="sm:hidden text-[11px]">No streams live.</span>
             <span className="text-slate-600" aria-hidden="true">•</span>
@@ -348,19 +315,10 @@ export default function RoamingTray({ onSelectStreamer, onOpenSponsorModal, onOp
         )}
       </div>
 
-      {/* Action Buttons: Contact Desk & B2B Self-Serve List Venue */}
+      {/* Action Buttons: B2B Self-Serve List Venue
+          (Contact button removed in Sep 2026 — same CTA is already in SiteFooter
+          and the TickerOverflowMenu so three contact entry-points was overkill.) */}
       <div className="flex items-center gap-1.5 shrink-0">
-        {onOpenContact && (
-          <button
-            onClick={onOpenContact}
-            className="hidden md:flex items-center gap-1 px-2.5 py-1 sm:py-1.5 rounded-lg bg-surfaceLight hover:bg-borderDark border border-borderDark text-slate-300 hover:text-white text-xs font-semibold transition-all cursor-pointer"
-            title="Submit Live Stream, Feature Venue, or Report Bug"
-          >
-            <Mail className="w-3.5 h-3.5 text-brandPink" aria-hidden="true" />
-            <span>Contact</span>
-          </button>
-        )}
-
         {FEATURES.SHOW_B2B_SPONSOR_MODAL && (
           <button
             onClick={onOpenSponsorModal}

@@ -15,6 +15,7 @@ import {
   Pause,
   CloudRain,
   Crosshair,
+  Wind,
 } from 'lucide-react';
 import { playTacticalClick } from '@/src/utils/sfx';
 
@@ -31,6 +32,9 @@ export default function LayerToggleHUD({
   setShowRadar,
   showFlights = false, // unused — flights layer removed
   setShowFlights, // unused
+  showAQI = false,
+  setShowAQI,
+  aqiValue = null, // current AQI reading (number | null) — drives the badge
   radarState,
   venueCount = 0,
   liveCamCount = 2,
@@ -360,6 +364,42 @@ export default function LayerToggleHUD({
                 checked={showTransit}
                 onChange={(e) => setShowTransit(e.target.checked)}
                 className="w-4 h-4 rounded border-borderDark bg-surface text-brandBlue focus:ring-brandBlue focus:ring-offset-0 cursor-pointer accent-brandBlue"
+              />
+            </div>
+          </label>
+
+          {/* Air Quality (WAQI) Toggle — single Pattaya station marker */}
+          <label className="flex items-center justify-between gap-3 cursor-pointer py-1 px-1.5 rounded-lg hover:bg-surfaceLight/50 transition-colors mt-1 pt-1.5 border-t border-borderDark/60">
+            <div className="flex items-center gap-2">
+              <Wind className={`w-3.5 h-3.5 ${showAQI ? 'text-emerald-400' : 'text-slate-400'}`} />
+              <div className="flex flex-col">
+                <span className="text-slate-200">Air Quality</span>
+                <span className="text-[9px] font-mono text-slate-400 -mt-0.5">
+                  WAQI Pattaya Station
+                </span>
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              <span
+                className={`text-[10px] font-mono px-1.5 py-0.5 rounded ${
+                  typeof aqiValue === 'number'
+                    ? 'text-emerald-300 bg-emerald-500/10 border border-emerald-500/30'
+                    : 'text-slate-400 bg-surfaceLight'
+                }`}
+                title={
+                  typeof aqiValue === 'number'
+                    ? `Current AQI: ${aqiValue}`
+                    : 'AQI reading unavailable'
+                }
+              >
+                {typeof aqiValue === 'number' ? aqiValue : '—'}
+              </span>
+              <input
+                type="checkbox"
+                checked={showAQI}
+                onChange={(e) => setShowAQI && setShowAQI(e.target.checked)}
+                className="w-4 h-4 rounded border-borderDark bg-surface text-emerald-400 focus:ring-emerald-400 focus:ring-offset-0 cursor-pointer accent-emerald-400"
+                aria-label="Toggle Air Quality layer"
               />
             </div>
           </label>

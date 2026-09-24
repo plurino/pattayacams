@@ -8,7 +8,6 @@ import MultiCamGrid from '@/src/components/MultiCamGrid';
 import CreatorVODFeed from '@/src/components/CreatorVODFeed';
 import VideoDrawer from '@/src/components/VideoDrawer';
 import RoamingTray from '@/src/components/RoamingTray';
-import TripModal from '@/src/components/TripModal';
 import SponsorModal from '@/src/components/SponsorModal';
 import venuesData from '@/public/data/venues.json';
 import liveCamsData from '@/public/data/live_cams.json';
@@ -28,7 +27,7 @@ import Toast from '@/src/components/Toast';
 import CurrencyConverterModal from '@/src/components/CurrencyConverterModal';
 import TouristEmergencyModal from '@/src/components/TouristEmergencyModal';
 import SiteFooter from '@/src/components/SiteFooter';
-import { parseUrlState, syncStateToUrl } from '@/src/utils/urlState';
+import { parseUrlState, syncStateToUrl, pushStateToUrl } from '@/src/utils/urlState';
 import { getLiveEntities } from '@/src/utils/liveEntities';
 import { TourDirector } from '@/src/utils/tourDirector';
 import { getNextNightlifeHint, formatNightlifeTime } from '@/src/utils/nightlife';
@@ -77,7 +76,6 @@ function playShuffleChime() {
 export default function AppRoot() {
   const [viewMode, setViewMode] = useState('map'); // 'map' | 'grid' | 'vids'
   const [selectedEntity, setSelectedEntity] = useState(null);
-  const [isTripModalOpen, setIsTripModalOpen] = useState(false);
   const [isSponsorModalOpen, setIsSponsorModalOpen] = useState(false);
   const [isKohLarnModalOpen, setIsKohLarnModalOpen] = useState(false);
   const [isEventsModalOpen, setIsEventsModalOpen] = useState(false);
@@ -245,9 +243,29 @@ export default function AppRoot() {
   }, []);
 
   // Sync state changes to URL query params without reload
+  // - selectedEntity opens → pushState (creates a back-button entry so users can dismiss the drawer with browser back)
+  // - selectedEntity closes → replaceState (no new history entry; just clear the param)
+  // - viewMode changes → replaceState (a view switch is a same-screen nav, not a back-able step)
   useEffect(() => {
-    syncStateToUrl({ target: selectedEntity, view: viewMode });
-  }, [selectedEntity, viewMode]);
+    if (selectedEntity) {
+      pushStateToUrl({ target: selectedEntity });
+    } else {
+      syncStateToUrl({ target: null });
+    }
+  }, [selectedEntity]);
+
+  useEffect(() => {
+    syncStateToUrl({ view: viewMode });
+  }, [viewMode]);
+
+  // Browser back button closes the venue drawer (pops the history entry we pushed when it opened).
+  useEffect(() => {
+    function handlePopState() {
+      setSelectedEntity(null);
+    }
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
 
   // 🎲 Live Shuffle (City Roulette): Filter active live streams, play chime, smooth flyTo([lat, lng], 17), and open drawer
   const handleLiveShuffle = useCallback(() => {
@@ -365,7 +383,6 @@ export default function AppRoot() {
         setViewMode={setViewMode}
         onQuickJump={handleQuickJump}
         onLiveShuffle={handleLiveShuffle}
-        onOpenTripModal={() => setIsTripModalOpen(true)}
         onOpenSponsorModal={() => setIsSponsorModalOpen(true)}
       />
 
@@ -430,7 +447,10 @@ export default function AppRoot() {
         {tourState.isRunning && tourState.currentWaypoint && (
           <aside
             aria-label="Cinematic Drone Tour Active"
-            className="absolute top-4 left-1/2 -translate-x-1/2 z-30 pointer-events-auto max-w-lg w-[92%] sm:w-auto"
+            // z-[60] so the cinematic banner floats ABOVE the SceneSelector popover (z-20)
+            // and the Live Shuffle / drawer chrome (z-30). Without this the SceneSelector
+            // can paint over the tour banner on small viewports.
+            className="absolute top-4 left-1/2 -translate-x-1/2 z-[60] pointer-events-auto max-w-lg w-[92%] sm:w-auto"
           >
             <div className="bg-surface/95 backdrop-blur-md border border-brandPink/60 rounded-2xl px-4 py-2.5 flex items-center justify-between gap-4 shadow-[0_0_28px_rgba(255,42,109,0.35)]">
               <div className="flex items-center gap-3">
@@ -481,15 +501,12 @@ export default function AppRoot() {
 
 
         {/* Floating Live Shuffle Popup in Corner of Map.
-            - Always visible on the map (panel-open or not) — bottom-right is clear of
-              both Leaflet zoom (top-left) and the Layers panel (bottom-left).
-            - Slides to the left when a video drawer opens so it doesn't sit on top. */}
-        {viewMode === 'map' && (
-          <div className={`absolute bottom-4 z-30 pointer-events-auto transition-all duration-300 ${
-            selectedEntity
-              ? 'left-4 sm:left-6'
-              : 'right-4 sm:bottom-6 sm:right-6'
-          }`}>
+            - Hidden (not repositioned) when a venue drawer opens so it can't fight
+              with the drawer for the right edge / over the Layers panel.
+            - Otherwise anchored bottom-right which is clear of Leaflet zoom (top-left)
+              and the Layers panel (bottom-left). */}
+        {viewMode === 'map' && !selectedEntity && (
+          <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 z-30 pointer-events-auto">
             {activeLiveCount > 0 ? (
               <button
                 onClick={handleLiveShuffle}
@@ -527,12 +544,12 @@ export default function AppRoot() {
         )}
       </main>
 
-      {/* 3. Bottom Roaming Streamers Tray (shown on map and grid views) */}
-      {viewMode !== 'vids' && viewMode !== 'pulse' && (
+      {/* 3. Bottom Roaming Streamers Tray (map view only — grid view has its own multi-cam grid
+            that supersedes the strip, and vids/pulse already have the CreatorVODFeed) */}
+      {viewMode === 'map' && (
         <RoamingTray
           onSelectStreamer={handleSelectEntity}
           onOpenSponsorModal={() => setIsSponsorModalOpen(true)}
-          onOpenContact={() => setIsContactModalOpen(true)}
         />
       )}
 
@@ -545,11 +562,6 @@ export default function AppRoot() {
       />
 
       {/* 5. Conversion Modals */}
-      <TripModal
-        isOpen={isTripModalOpen}
-        onClose={() => setIsTripModalOpen(false)}
-      />
-
       <SponsorModal
         isOpen={isSponsorModalOpen}
         onClose={() => setIsSponsorModalOpen(false)}

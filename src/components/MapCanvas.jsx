@@ -897,8 +897,8 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
     <div className="relative w-full h-full overflow-hidden bg-canvas">
       <div ref={mapContainerRef} className="w-full h-full z-0" />
 
-      {/* Curated Mission & Scene Selector (Top Center on md+, Top Right on mobile to avoid Leaflet zoom overlap) */}
-      <div className="absolute top-3 right-3 md:left-1/2 md:right-auto md:-translate-x-1/2 z-20 pointer-events-auto max-w-[calc(100vw-1.5rem)] md:max-w-none">
+      {/* Curated Mission & Scene Selector (lower on mobile so it doesn't cover the compass at top-24 right-3) */}
+      <div className="absolute top-14 right-3 md:top-3 md:left-1/2 md:right-auto md:-translate-x-1/2 z-20 pointer-events-auto max-w-[calc(100vw-1.5rem)] md:max-w-none">
         <SceneSelector
           activeSceneIds={activeSceneIds}
           onToggleScene={handleToggleScene}

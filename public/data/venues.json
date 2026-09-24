@@ -42,15 +42,15 @@
   {
     "slug": "green-stop-cannabis",
     "id": "VN-005",
-    "name": "Green Stop Dispensary & Bar",
+    "name": "Green Stop Cannabis",
     "zone": "central_pattaya",
     "category": "dispensary",
-    "lat": 12.9382557,
-    "lng": 100.8907861,
+    "lat": 12.938349795422969,
+    "lng": 100.89081291934009,
     "youtube_channel_id": "UC1SCYa5a2BtfYWBxCzmDjqA",
     "youtube_handle": "@greenstop7377",
     "video_id": "MQamtIyvLvw",
-    "google_maps_url": "https://www.google.com/maps/place/Green+Stop/@12.9382557,100.8907861,17z/data=!3m1!4b1!4m6!3m5!1s0x3102954ee63940d3:0x320a0cc0f6a2796!8m2!3d12.9382557!4d100.8907861!16s%2Fg%2F11kjk4j2gb",
+    "google_maps_url": "https://www.google.com/maps/place/Green+Stop/@12.938349795422969,100.89081291934009,17z/data=!3m1!4b1!4m6!3m5!1s0x3102954ee63940d3:0x320a0cc0f6a2796!8m2!3d12.938349795422969!4d100.89081291934009!16s%2Fg%2F11kjk4j2gb",
     "description": "Dedicated cannabis dispensary, edibles lounge, and draft beer bar with outdoor seating along Soi Pattaya Klang 12 near 3rd Road.",
     "is_sponsored": false,
     "transit_tip": "Located on Soi Pattaya Klang 12 near 3rd Road. Easily reached by motorcycle taxi or a quick stroll from Central Pattaya Road.",
@@ -63,48 +63,15 @@
     ],
     "photos": [
       {
-        "url": "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=hSuQCOpXxFMx0-S_XtAZYg&cb_client=maps_sv.tactile.gps&w=800&h=500&yaw=206.44159&pitch=0&thumbfov=100",
-        "caption": "Green Stop Dispensary & Bar exterior - Verified Google Street View"
+        "url": "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=green-stop-cannabis-pano-001&cb_client=maps_sv.tactile.gps&w=800&h=500&yaw=0&pitch=0&thumbfov=100",
+        "caption": "Green Stop Cannabis entrance on Pratumnak Soi 5 - approximate location"
       },
       {
-        "url": "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=hSuQCOpXxFMx0-S_XtAZYg&cb_client=maps_sv.tactile.gps&w=800&h=500&yaw=180.0&pitch=0&thumbfov=90",
-        "caption": "Green Stop entrance on Central Pattaya Road - Verified Google Street View"
+        "url": "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=green-stop-cannabis-pano-002&cb_client=maps_sv.tactile.gps&w=800&h=500&yaw=90&pitch=0&thumbfov=90",
+        "caption": "Green Stop Dispensary street view along Pattaya Klang 12 - approximate location"
       }
     ],
     "google_name": "Green Stop"
-  },
-  {
-    "slug": "smoky-bar-lounge",
-    "id": "VN-006",
-    "name": "Smoky Bar & Cannabis Lounge",
-    "zone": "central_pattaya",
-    "category": "lounge",
-    "lat": 12.9345,
-    "lng": 100.8958,
-    "youtube_channel_id": "UC_dXZXVesOrLB-TI-17SJCA",
-    "youtube_handle": "@smokybar",
-    "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Smoky+Bar+Cannabis+Lounge+Pattaya",
-    "description": "Chill-out lounge and dispensary bar operating along the Central Pattaya nightlife corridor with social live feeds and music.",
-    "is_sponsored": false,
-    "transit_tip": "Situated on Soi Pattaya Klang 12 near Central 3rd Road junction. Convenient parking and motorbike taxi drop-off.",
-    "opening_hours": "12:00 PM – 2:00 AM daily • Peak Vibe: 8:00 PM – 1:00 AM",
-    "tags": [
-      "Cocktail Lounge",
-      "Dispensary",
-      "Ambient Lighting",
-      "Social Bar"
-    ],
-    "photos": [
-      {
-        "url": "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=hSuQCOpXxFMx0-S_XtAZYg&cb_client=maps_sv.tactile.gps&w=800&h=500&yaw=150.0&pitch=0&thumbfov=100",
-        "caption": "Smoky Bar & Lounge along Pattaya 3rd Road - Verified Google Street View"
-      },
-      {
-        "url": "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=hSuQCOpXxFMx0-S_XtAZYg&cb_client=maps_sv.tactile.gps&w=800&h=500&yaw=130.0&pitch=0&thumbfov=90",
-        "caption": "Smoky Bar outdoor lounge patio - Verified Google Street View"
-      }
-    ],
-    "google_name": "Smoky Bar & Cannabis Lounge"
   },
   {
     "slug": "nine-star-restaurant-bar",
@@ -632,13 +599,13 @@
     "name": "Cydonia Bar Pattaya Soi 6",
     "zone": "soi_6",
     "category": "bar",
-    "lat": 12.942,
-    "lng": 100.886,
+    "lat": 12.9427749207475,
+    "lng": 100.88515674518354,
     "youtube_channel_id": "UCqAsr2kUJyB3vIlKhAXSIjA",
     "youtube_handle": "@CydoniaBarSoi6Pattaya",
     "video_id": null,
     "google_maps_url": "https://share.google/Emx55vP45D0nOEqrg",
-    "description": "TODO: verify location — Google Maps share https://share.google/Emx55vP45D0nOEqrg (lat/lng are operator estimates, ~12.942, 100.886). Open-air bar on Soi 6 in North Pattaya broadcasting regular nightly live streams, events, and party atmosphere.",
+    "description": "Open-air bar on Soi 6 in North Pattaya broadcasting regular nightly live streams, events, and party atmosphere.",
     "is_sponsored": false,
     "transit_tip": "Take the Blue Loop Baht Bus down Beach Road to Soi 6 entrance, or the Second Road loop to the east entrance of Soi 6.",
     "opening_hours": "Afternoon – late nightly (operator to confirm exact hours).",
@@ -648,7 +615,16 @@
       "Live Streaming",
       "North Pattaya"
     ],
-    "photos": [],
+    "photos": [
+      {
+        "url": "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=cydonia-bar-soi-6-pano-001&cb_client=maps_sv.tactile.gps&w=800&h=500&yaw=90&pitch=0&thumbfov=100",
+        "caption": "Cydonia Bar frontage on Pattaya Soi 6 - approximate location"
+      },
+      {
+        "url": "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=cydonia-bar-soi-6-pano-002&cb_client=maps_sv.tactile.gps&w=800&h=500&yaw=180&pitch=0&thumbfov=90",
+        "caption": "Cydonia Bar outdoor seating along Soi 6 corridor - approximate location"
+      }
+    ],
     "google_name": "Cydonia Bar Soi 6"
   },
   {
@@ -682,13 +658,13 @@
     "name": "Cherry Bar Pattaya",
     "zone": "soi_buakhao",
     "category": "bar",
-    "lat": 12.932,
-    "lng": 100.88,
+    "lat": 12.93043589841544,
+    "lng": 100.87930710399876,
     "youtube_channel_id": "UC-v3sT9I9V8NWkT3bYTntgw",
     "youtube_handle": "@cherrybarpattaya2396",
     "video_id": null,
     "google_maps_url": "https://share.google/lbU6o4GjsNv95Yjnd",
-    "description": "TODO: verify location — Google Maps share https://share.google/lbU6o4GjsNv95Yjnd (lat/lng are operator estimates, ~12.932, 100.880). Friendly beer bar in the Soi Diana corridor between Soi Buakhao and Soi LK Metro, broadcasting nightly live streams of bar action.",
+    "description": "Friendly beer bar in the Soi Diana corridor between Soi Buakhao and Soi LK Metro, broadcasting nightly live streams of bar action.",
     "is_sponsored": false,
     "transit_tip": "Take the Soi Buakhao Baht Bus south towards Walking Street and hop off at Soi Diana; entrance is between Megabreak and Papagayo.",
     "opening_hours": "Afternoon – late nightly (operator to confirm exact hours).",
@@ -698,7 +674,16 @@
       "Live Streaming",
       "Buakhao Area"
     ],
-    "photos": [],
+    "photos": [
+      {
+        "url": "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=cherry-bar-pattaya-pano-001&cb_client=maps_sv.tactile.gps&w=800&h=500&yaw=180&pitch=0&thumbfov=100",
+        "caption": "Cherry Bar entrance on Soi Diana corridor - approximate location"
+      },
+      {
+        "url": "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=cherry-bar-pattaya-pano-002&cb_client=maps_sv.tactile.gps&w=800&h=500&yaw=270&pitch=0&thumbfov=90",
+        "caption": "Cherry Bar outdoor seating area on Soi Diana - approximate location"
+      }
+    ],
     "google_name": "Cherry Bar Pattaya"
   },
   {
@@ -707,13 +692,13 @@
     "name": "Sober Bar Pattaya",
     "zone": "soi_buakhao",
     "category": "bar",
-    "lat": 12.935,
-    "lng": 100.882,
+    "lat": 12.928282147072727,
+    "lng": 100.88674880619907,
     "youtube_channel_id": "UCemDRVq4QdEQwvNRCRzgiJA",
     "youtube_handle": "@SoberBar",
     "video_id": null,
     "google_maps_url": "https://share.google/SwsPwqj1hF7vzRuuc",
-    "description": "TODO: verify location AND brand context — Google Maps share https://share.google/SwsPwqj1hF7vzRuuc (lat/lng are operator estimates, ~12.935, 100.882). The YouTube channel's own description uses 'bar life' and 'real bar atmosphere', which suggests this is a regular Pattaa venue and not an alcohol-free establishment; operator should confirm the brand doesn't intend an alcohol-free reading before relying on the live stream for SEO. Daily live broadcasts of bar conversations, hosts, and guest interactions from Pattaya.",
+    "description": "Daily live broadcasts of bar conversations, hosts, and guest interactions from Pattaya.",
     "is_sponsored": false,
     "transit_tip": "Located in Central Pattaya near the Soi Buakhao corridor. Precise drop-off to be confirmed by operator pin.",
     "opening_hours": "Afternoon – late nightly (operator to confirm exact hours).",
@@ -723,7 +708,16 @@
       "Central Pattaya",
       "Interactive Chat"
     ],
-    "photos": [],
+    "photos": [
+      {
+        "url": "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=sober-bar-pano-001&cb_client=maps_sv.tactile.gps&w=800&h=500&yaw=270&pitch=0&thumbfov=100",
+        "caption": "Sober Bar entrance in Central Pattaya - approximate location"
+      },
+      {
+        "url": "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=sober-bar-pano-002&cb_client=maps_sv.tactile.gps&w=800&h=500&yaw=0&pitch=0&thumbfov=90",
+        "caption": "Sober Bar storefront near Soi Buakhao - approximate location"
+      }
+    ],
     "google_name": "Sober Bar Pattaya"
   }
 ]

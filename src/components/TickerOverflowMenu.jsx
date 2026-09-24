@@ -1,11 +1,12 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   Bell,
   Calculator,
   CloudSun,
   Droplets,
+  Palmtree,
   Ship,
   Sparkles,
   ShieldAlert,
@@ -14,8 +15,10 @@ import {
   X,
 } from 'lucide-react';
 import { playTacticalClick } from '@/src/utils/sfx';
+import { getSavedTripDate } from '@/src/utils/storage';
 import DryDayAlert from './DryDayAlert';
 import AmbientRadioPlayer from './AmbientRadioPlayer';
+import TripModal from './TripModal';
 
 const PANEL_CLASSES =
   'absolute right-2 top-full mt-1 w-[min(92vw,360px)] rounded-xl bg-surface border border-borderDark shadow-2xl p-2.5 z-50 backdrop-blur-md text-slate-200 font-mono';
@@ -49,6 +52,8 @@ export default function TickerOverflowMenu({
 }) {
   const panelRef = useRef(null);
   const previouslyFocusedRef = useRef(null);
+  const [isTripModalOpen, setIsTripModalOpen] = useState(false);
+  const [tripDays, setTripDays] = useState(null);
 
   // Close on Escape + simple focus trap (Tab cycles inside the panel)
   useEffect(() => {
@@ -114,6 +119,28 @@ export default function TickerOverflowMenu({
     };
   }, [isOpen]);
 
+  // Trip countdown (was previously in the navbar; moved here in Sep 2026 redesign)
+  // - Updates whenever the panel opens OR the trip-saved event fires
+  useEffect(() => {
+    function calculateDays() {
+      const saved = getSavedTripDate();
+      if (!saved) {
+        setTripDays(null);
+        return;
+      }
+      const target = new Date(saved);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      target.setHours(0, 0, 0, 0);
+      const diffMs = target.getTime() - today.getTime();
+      const days = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
+      setTripDays(days > 0 ? days : 0);
+    }
+    calculateDays();
+    window.addEventListener('pattayacams_trip_updated', calculateDays);
+    return () => window.removeEventListener('pattayacams_trip_updated', calculateDays);
+  }, []);
+
   if (!isOpen) return null;
 
   const aqi = telemetry?.aqiLabel ?? 'Good';
@@ -127,6 +154,14 @@ export default function TickerOverflowMenu({
     playTacticalClick();
     if (fn) fn();
     onClose();
+  };
+
+  const handleOpenTrip = () => {
+    playTacticalClick();
+    // Close the overflow menu first so the TripModal stacks above everything cleanly.
+    onClose();
+    // Defer opening one tick so the menu's outside-click handler doesn't immediately close the modal.
+    setTimeout(() => setIsTripModalOpen(true), 0);
   };
 
   return (
@@ -243,6 +278,31 @@ export default function TickerOverflowMenu({
         </button>
       </div>
 
+      {/* Pattaya Trip Countdown (was previously in Navbar; moved here so the navbar stays focused on view-switching) */}
+      <div className={SECTION_TITLE_CLASSES}>Pattaya Trip Countdown</div>
+      <button
+        onClick={handleOpenTrip}
+        className={`${ACTION_BTN_CLASSES} w-full mt-1 mb-2 justify-between`}
+        title={
+          tripDays !== null
+            ? `${tripDays} day${tripDays === 1 ? '' : 's'} until your trip to Pattaya — click to change`
+            : 'Click to set your departure date & start the countdown'
+        }
+        aria-label={
+          tripDays !== null
+            ? `Trip countdown: ${tripDays} day${tripDays === 1 ? '' : 's'} until Pattaya`
+            : 'Set your trip departure date'
+        }
+      >
+        <span className="flex items-center gap-1.5">
+          <Palmtree className={`w-3 h-3 shrink-0 ${tripDays !== null ? 'text-emerald-400' : 'text-amber-300'}`} />
+          <span>{tripDays !== null ? `${tripDays} day${tripDays === 1 ? '' : 's'} to Pattaya` : 'Set Trip Date'}</span>
+        </span>
+        <span className="text-[10px] font-bold font-mono text-brandPink">
+          {tripDays !== null ? `${tripDays}d` : 'New'}
+        </span>
+      </button>
+
       {/* Radio + Alerts */}
       <div className="flex items-center justify-between gap-2 pt-1 border-t border-borderDark/60">
         <AmbientRadioPlayer />
@@ -259,6 +319,12 @@ export default function TickerOverflowMenu({
           <span>{hasLiveAlerts ? 'Alerts ON' : 'Alerts'}</span>
         </button>
       </div>
+
+      {/* TripModal is rendered here (not in the navbar) so the entry point and modal stack together. */}
+      <TripModal
+        isOpen={isTripModalOpen}
+        onClose={() => setIsTripModalOpen(false)}
+      />
     </div>
   );
 }

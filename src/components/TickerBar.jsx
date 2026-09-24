@@ -178,7 +178,7 @@ export default function TickerBar({
             aria-haspopup="dialog"
             title="More telemetry, actions & radio"
           >
-            <span>More</span>
+            <span>{isOverflowOpen ? 'Less' : 'More'}</span>
             <ChevronDown className={`w-3 h-3 transition-transform ${isOverflowOpen ? 'rotate-180' : ''}`} />
           </button>
 
