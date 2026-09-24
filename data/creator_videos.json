@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-09-23T22:52:07.623Z",
-  "total_videos": 96,
+  "last_updated": "2026-09-24T01:16:36.358Z",
+  "total_videos": 95,
   "videos": [
     {
       "id": "kbkSfhYWeKo",
@@ -951,16 +951,6 @@
       "thumbnail_url": "https://i1.ytimg.com/vi/pjTUJlTYQoo/hqdefault.jpg",
       "published_at": "2026-09-17T02:00:15+00:00",
       "url": "https://www.youtube.com/watch?v=pjTUJlTYQoo"
-    },
-    {
-      "id": "rdO3tc0rfzA",
-      "title": "Bangkok Wakes Up 🇹🇭 Phrom Phong Early Morning Walk | 4K HDR • Binaural Audio 🎧",
-      "channel_name": "JWINTHAI",
-      "channel_slug": "jwinthai",
-      "channel_avatar": "https://yt3.googleusercontent.com/vrDpU7p6Kfk6gy37xaRu9ovhYrpaRR4vkNKoc0K84Q2A0HYi5mvSju7BOFA_KwbJKoRctumoT7w=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i3.ytimg.com/vi/rdO3tc0rfzA/hqdefault.jpg",
-      "published_at": "2026-09-17T00:00:08+00:00",
-      "url": "https://www.youtube.com/watch?v=rdO3tc0rfzA"
     }
   ]
 }
