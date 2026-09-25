@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Map as MapIcon, Grid, Film, Users } from 'lucide-react';
 // QUICK_JUMP_TARGETS is no longer rendered in the navbar — the zone selector
 // has moved into the LayerToggleHUD's panel (Phase 1.3). Importing the
@@ -39,17 +40,22 @@ export default function Navbar({
 
   return (
     <header className="h-14 border-b border-borderDark bg-surface/95 backdrop-blur-md flex items-center justify-between px-2.5 sm:px-4 md:px-5 shrink-0 z-50 select-none shadow-lg">
-      {/* 1. Left: Vice City-style Wordmark (Anton font, pink stroke, black drop shadow, pulsing) */}
+      {/* 1. Left: PattayaCams Logo with interactive neon glow & scale hover */}
       <div className="flex items-center gap-2 sm:gap-3 shrink-0">
         <Link
           href="/"
           onClick={() => { if (setViewMode) setViewMode('map'); }}
-          className="flex items-center gap-1.5 group shrink-0"
+          className="flex items-center group shrink-0 py-0.5"
           title="PattayaCams - The city that never sleeps"
         >
-          <span className="font-wordmark text-[28px] sm:text-[34px] leading-none whitespace-nowrap select-none italic text-white [transform:skewX(-8deg)] [paint-order:stroke_fill] [-webkit-text-stroke:2px_#FF2A6D] [text-shadow:2px_2px_0_#000,-1px_-1px_0_#000,2px_-1px_0_#000,-1px_2px_0_#000,3px_3px_0_#000] hover:text-black hover:scale-[1.04] transition-all duration-200 ease-out animate-[vice-pulse_2.5s_ease-in-out_infinite]">
-            PattayaCams
-          </span>
+          <Image
+            src="/images/logo.png"
+            alt="PattayaCams Logo"
+            width={160}
+            height={89}
+            priority
+            className="h-9 sm:h-10 md:h-11 w-auto object-contain transition-all duration-300 ease-out filter drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)] group-hover:scale-105 group-hover:brightness-110 group-hover:drop-shadow-[0_0_16px_rgba(255,42,109,0.75)] active:scale-95 select-none"
+          />
         </Link>
 
         {/* Live Network Status Indicator */}
