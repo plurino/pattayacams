@@ -1,7 +1,27 @@
 {
-  "last_updated": "2026-09-25T09:24:19.023Z",
+  "last_updated": "2026-09-25T12:35:32.611Z",
   "total_videos": 101,
   "videos": [
+    {
+      "id": "fjQFf3MHzA8",
+      "title": "A rainy night before day one of the Pattaya Marathon. The race will continue rain or shine.",
+      "channel_name": "The Pattaya News",
+      "channel_slug": "the-pattaya-news",
+      "channel_avatar": "https://yt3.googleusercontent.com/ED2V0oAQI1iJpeAFvbuEi0wj97DQIsDXma7rxuSOhPxt4wfxf_-hmIINVdUbCWQnBAmfyHavxw=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i3.ytimg.com/vi/fjQFf3MHzA8/hqdefault.jpg",
+      "published_at": "2026-09-25T10:48:54+00:00",
+      "url": "https://www.youtube.com/watch?v=fjQFf3MHzA8"
+    },
+    {
+      "id": "e_kbCBsWJUg",
+      "title": "🇹🇭 [4K] Soi 8, Second Road, Myth Night Town, Central Festival Mall - Pattaya Thailand 2026",
+      "channel_name": "DV Media Pattaya",
+      "channel_slug": "dv-media-pattaya",
+      "channel_avatar": "https://yt3.googleusercontent.com/ugj2a216u5s5JhG4iireKvsOCK9lky14pZHt1tGGRm4I9na4HTsC7_8QRPb6xinI7mb8u4ZD=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i2.ytimg.com/vi/e_kbCBsWJUg/hqdefault.jpg",
+      "published_at": "2026-09-25T10:30:21+00:00",
+      "url": "https://www.youtube.com/watch?v=e_kbCBsWJUg"
+    },
     {
       "id": "rqrz_eVczBg",
       "title": "Walking Around Pattaya: Honey, Chaiyapoon, Buakhao,  & Myth Night Town - 2026",
@@ -991,26 +1011,6 @@
       "thumbnail_url": "https://i2.ytimg.com/vi/YYw3Z3oSTBU/hqdefault.jpg",
       "published_at": "2026-09-18T13:00:28+00:00",
       "url": "https://www.youtube.com/watch?v=YYw3Z3oSTBU"
-    },
-    {
-      "id": "cG4uY4fagE8",
-      "title": "2026年9月18日 タイ パタヤ レート 両替 Exchange amount  2569 September 18th  #shorts",
-      "channel_name": "UD Thailand",
-      "channel_slug": "ud-thailand",
-      "channel_avatar": "https://yt3.googleusercontent.com/ytc/AIdro_k6p2pK8BY9F57E6AD_BXywffZajUAEWVqzS0C5ph-WHA=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i4.ytimg.com/vi/cG4uY4fagE8/hqdefault.jpg",
-      "published_at": "2026-09-18T12:27:54+00:00",
-      "url": "https://www.youtube.com/watch?v=cG4uY4fagE8"
-    },
-    {
-      "id": "kdkKFmRlT0k",
-      "title": "🇹🇭 [4K] Soi 3, Beach Road, Second Road - Pattaya Thailand 2026",
-      "channel_name": "DV Media Pattaya",
-      "channel_slug": "dv-media-pattaya",
-      "channel_avatar": "https://yt3.googleusercontent.com/ugj2a216u5s5JhG4iireKvsOCK9lky14pZHt1tGGRm4I9na4HTsC7_8QRPb6xinI7mb8u4ZD=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i4.ytimg.com/vi/kdkKFmRlT0k/hqdefault.jpg",
-      "published_at": "2026-09-18T10:30:28+00:00",
-      "url": "https://www.youtube.com/watch?v=kdkKFmRlT0k"
     }
   ]
 }
