@@ -7,14 +7,18 @@ import cctvData from '@/public/data/cctv_cams.json';
 import busRoutes from '@/public/data/pattaya_baht_bus.json';
 import LayerToggleHUD from './LayerToggleHUD';
 import SceneSelector from './SceneSelector';
+import AirQualityLayer from './AirQualityLayer';
 import { useStreamStatus } from '@/src/hooks/useStreamStatus';
 import { useRainViewer } from '@/src/hooks/useRainViewer';
+import { useAirQuality } from '@/src/hooks/useAirQuality';
 import { getSunsetStatus } from '@/src/utils/suncalc';
 
 export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn, onStartTour }) {
   const streamStatus = useStreamStatus();
+  const { aqi: currentAqi } = useAirQuality();
   const mapContainerRef = useRef(null);
   const mapRef = useRef(null);
+  const [mapInstance, setMapInstance] = useState(null);
   const tileLayerRef = useRef(null);
   const radarTileLayerRef = useRef(null);
   const zoomControlRef = useRef(null);
@@ -34,6 +38,7 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
   const [showCams, setShowCams] = useState(true);
   const [showTransit, setShowTransit] = useState(true);
   const [showRadar, setShowRadar] = useState(false);
+  const [showAQI, setShowAQI] = useState(false);
   const [bearing, setBearing] = useState(0);
   const [mapTheme, setMapTheme] = useState('auto');
 
@@ -762,6 +767,7 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
       if (onMapInstance) {
         onMapInstance(map);
       }
+      setMapInstance(map);
 
       // Automatic container size observation for immediate tile recovery when unhiding
       if (typeof ResizeObserver !== 'undefined' && mapContainerRef.current) {
@@ -905,6 +911,9 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
         />
       </div>
 
+      {/* Air Quality Layer (WAQI / Open-Meteo single station overlay) */}
+      <AirQualityLayer map={mapInstance || mapRef.current} visible={showAQI} />
+
       {/* Floating Map Controls & Layer Toggle HUD */}
       <LayerToggleHUD
         showVenues={showVenues}
@@ -917,6 +926,9 @@ export default function MapCanvas({ onSelectEntity, onMapInstance, onOpenKohLarn
         setShowTransit={setShowTransit}
         showRadar={showRadar}
         setShowRadar={setShowRadar}
+        showAQI={showAQI}
+        setShowAQI={setShowAQI}
+        aqiValue={currentAqi}
         radarState={radarState}
         venueCount={venuesData.filter(v => streamStatus?.entities?.[`venue-${v.slug}`]?.status !== 'error_404').length}
         liveCamCount={liveCamsData.length}

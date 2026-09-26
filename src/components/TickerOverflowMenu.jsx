@@ -5,6 +5,7 @@ import {
   Bell,
   Calculator,
   CloudSun,
+  Download,
   Droplets,
   Palmtree,
   Ship,
@@ -19,6 +20,7 @@ import { getSavedTripDate } from '@/src/utils/storage';
 import DryDayAlert from './DryDayAlert';
 import AmbientRadioPlayer from './AmbientRadioPlayer';
 import TripModal from './TripModal';
+import { triggerPwaInstall } from './InstallPrompt';
 
 const PANEL_CLASSES =
   'absolute right-2 top-full mt-1 w-[min(92vw,360px)] rounded-xl bg-surface border border-borderDark shadow-2xl p-2.5 z-50 backdrop-blur-md text-slate-200 font-mono';
@@ -29,7 +31,7 @@ const ROW_CLASSES =
 const ROW_TITLE_CLASSES = 'text-[9px] font-bold uppercase tracking-wider text-slate-400';
 
 const ACTION_BTN_CLASSES =
-  'flex items-center gap-1.5 px-2 py-1.5 rounded-md bg-canvas/40 hover:bg-surfaceLight border border-borderDark/60 hover:border-borderDark text-[11px] font-semibold text-slate-200 hover:text-white transition-colors';
+  'flex items-center gap-1.5 px-2 py-1.5 rounded-md bg-canvas/40 hover:bg-surfaceLight border border-borderDark/60 hover:border-borderDark text-[11px] font-semibold text-slate-200 hover:text-white transition-colors cursor-pointer';
 
 const SECTION_TITLE_CLASSES =
   'px-1.5 pt-1 pb-0.5 text-[9px] font-bold uppercase tracking-wider text-slate-500';
@@ -37,6 +39,7 @@ const SECTION_TITLE_CLASSES =
 export default function TickerOverflowMenu({
   isOpen,
   onClose,
+  triggerRef,
   weather,
   rates,
   telemetry,
@@ -86,17 +89,21 @@ export default function TickerOverflowMenu({
     return () => document.removeEventListener('keydown', handleKey, true);
   }, [isOpen, onClose]);
 
-  // Close on outside click
+  // Close on outside click (ignoring trigger button so clicking "Less" cleanly collapses)
   useEffect(() => {
     if (!isOpen) return undefined;
     function handleMouseDown(e) {
-      if (panelRef.current && !panelRef.current.contains(e.target)) {
+      if (
+        panelRef.current &&
+        !panelRef.current.contains(e.target) &&
+        (!triggerRef?.current || !triggerRef.current.contains(e.target))
+      ) {
         onClose();
       }
     }
     document.addEventListener('mousedown', handleMouseDown);
     return () => document.removeEventListener('mousedown', handleMouseDown);
-  }, [isOpen, onClose]);
+  }, [isOpen, onClose, triggerRef]);
 
   // Auto-focus the close button on open + restore focus on close (for keyboard users)
   useEffect(() => {
@@ -184,8 +191,15 @@ export default function TickerOverflowMenu({
       {/* Solar + Vibe row */}
       <div className="flex flex-col gap-1.5 mb-2">
         {sunsetInfo && (
-          <div className={ROW_CLASSES} title={`Sunset at ${sunsetInfo.sunsetTime} ICT`}>
-            <span className="text-base shrink-0">{sunsetInfo.isGoldenHour ? '✨' : '🌅'}</span>
+          <div
+            className={ROW_CLASSES}
+            title={
+              sunsetInfo.sunriseTime && sunsetInfo.sunsetTime
+                ? `Sunrise: ${sunsetInfo.sunriseTime} ICT • Sunset: ${sunsetInfo.sunsetTime} ICT`
+                : sunsetInfo.label
+            }
+          >
+            <span className="text-base shrink-0">{sunsetInfo.isNight ? '🌙' : sunsetInfo.isGoldenHour ? '✨' : '🌅'}</span>
             <span className="font-semibold text-amber-300 truncate">{sunsetInfo.label}</span>
           </div>
         )}
@@ -276,6 +290,22 @@ export default function TickerOverflowMenu({
           <ShieldAlert className="w-3 h-3 text-rose-400 shrink-0" />
           <span>Hotlines</span>
         </button>
+        <button onClick={handleAction(onOpenConverter)} className={ACTION_BTN_CLASSES}>
+          <Calculator className="w-3 h-3 text-amber-400 shrink-0" />
+          <span>Converter</span>
+        </button>
+        <button
+          onClick={() => {
+            playTacticalClick();
+            triggerPwaInstall();
+            onClose();
+          }}
+          className={ACTION_BTN_CLASSES}
+          title="Install PattayaCams app to home screen"
+        >
+          <Download className="w-3 h-3 text-brandPink shrink-0" />
+          <span>Install App</span>
+        </button>
       </div>
 
       {/* Pattaya Trip Countdown (was previously in Navbar; moved here so the navbar stays focused on view-switching) */}
@@ -304,20 +334,25 @@ export default function TickerOverflowMenu({
       </button>
 
       {/* Radio + Alerts */}
-      <div className="flex items-center justify-between gap-2 pt-1 border-t border-borderDark/60">
-        <AmbientRadioPlayer />
-        <button
-          onClick={handleAction(onToggleAlerts)}
-          className={`flex items-center gap-1.5 px-2 py-1 rounded-md border text-[11px] font-semibold transition-colors ${
-            hasLiveAlerts
-              ? 'bg-brandPink/20 border-brandPink/60 text-brandPink'
-              : 'bg-canvas/40 hover:bg-surfaceLight border-borderDark/60 text-slate-300 hover:text-white'
-          }`}
-          title={hasLiveAlerts ? 'Stream Go-Live Alerts Active' : 'Enable Stream Go-Live Browser Alerts'}
-        >
-          <Bell className={`w-3 h-3 shrink-0 ${hasLiveAlerts ? 'text-brandPink fill-brandPink animate-pulse' : 'text-slate-400'}`} />
-          <span>{hasLiveAlerts ? 'Alerts ON' : 'Alerts'}</span>
-        </button>
+      <div className="pt-2 border-t border-borderDark/60">
+        <div className="px-1.5 pb-1 text-[9px] font-bold uppercase tracking-wider text-slate-400">
+          Fabulous 103 FM (Fabulous Radio Pattaya)
+        </div>
+        <div className="flex items-center justify-between gap-2">
+          <AmbientRadioPlayer />
+          <button
+            onClick={handleAction(onToggleAlerts)}
+            className={`flex items-center gap-1.5 px-2 py-1 rounded-md border text-[11px] font-semibold transition-colors ${
+              hasLiveAlerts
+                ? 'bg-brandPink/20 border-brandPink/60 text-brandPink'
+                : 'bg-canvas/40 hover:bg-surfaceLight border-borderDark/60 text-slate-300 hover:text-white'
+            }`}
+            title={hasLiveAlerts ? 'Stream Go-Live Alerts Active' : 'Enable Stream Go-Live Browser Alerts'}
+          >
+            <Bell className={`w-3 h-3 shrink-0 ${hasLiveAlerts ? 'text-brandPink fill-brandPink animate-pulse' : 'text-slate-400'}`} />
+            <span>{hasLiveAlerts ? 'Alerts ON' : 'Alerts'}</span>
+          </button>
+        </div>
       </div>
 
       {/* TripModal is rendered here (not in the navbar) so the entry point and modal stack together. */}

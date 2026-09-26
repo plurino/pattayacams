@@ -213,6 +213,10 @@ export function useTickerData() {
           GBP: (thb / (r.GBP || 0.75)).toFixed(2),
           EUR: (thb / (r.EUR || 0.86)).toFixed(2),
           AUD: (thb / (r.AUD || 1.39)).toFixed(2),
+          CAD: (thb / (r.CAD || 1.36)).toFixed(2),
+          JPY: (thb / (r.JPY || 150)).toFixed(3),
+          SGD: (thb / (r.SGD || 1.30)).toFixed(2),
+          CHF: (thb / (r.CHF || 0.85)).toFixed(2),
         };
 
         setRates(ratesPayload);

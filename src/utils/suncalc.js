@@ -50,20 +50,24 @@ export function getSunsetStatus(date = new Date()) {
       return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
     };
 
+    const sunriseFormatted = toTimeStr(sunriseHoursIct);
     const sunsetFormatted = toTimeStr(sunsetHoursIct);
 
-    // 1. Golden Hour (45 min leading to sunset)
-    if (ictHours >= goldenHourStartIct && ictHours < sunsetHoursIct) {
-      const remainingMin = Math.max(1, Math.round((sunsetHoursIct - ictHours) * 60));
+    // 1. Early morning before sunrise (00:00 - sunrise)
+    if (ictHours < sunriseHoursIct) {
+      const diff = sunriseHoursIct - ictHours;
+      const h = Math.floor(diff);
+      const m = Math.round((diff - h) * 60);
       return {
-        isGoldenHour: true,
-        isNight: false,
-        label: `✨ Golden Hour (Sunset in ${remainingMin}m at ${sunsetFormatted})`,
+        isGoldenHour: false,
+        isNight: true,
+        label: `🌅 Sunrise at ${sunriseFormatted} (in ${h > 0 ? `${h}h ` : ''}${m}m) • Sunset was ${sunsetFormatted}`,
+        sunriseTime: sunriseFormatted,
         sunsetTime: sunsetFormatted,
       };
     }
 
-    // 2. Daytime before golden hour
+    // 2. Daytime before golden hour (sunrise - golden hour)
     if (ictHours >= sunriseHoursIct && ictHours < goldenHourStartIct) {
       const diffHours = sunsetHoursIct - ictHours;
       const h = Math.floor(diffHours);
@@ -71,33 +75,52 @@ export function getSunsetStatus(date = new Date()) {
       return {
         isGoldenHour: false,
         isNight: false,
-        label: `🌅 Sunset at ${sunsetFormatted} (${h > 0 ? `${h}h ` : ''}${m}m)`,
+        label: `☀️ Sunrise was ${sunriseFormatted} • Sunset at ${sunsetFormatted} (${h > 0 ? `${h}h ` : ''}${m}m)`,
+        sunriseTime: sunriseFormatted,
         sunsetTime: sunsetFormatted,
       };
     }
 
-    // 3. Dusk Twilight (up to 30 min after sunset)
+    // 3. Golden Hour (45 min leading to sunset)
+    if (ictHours >= goldenHourStartIct && ictHours < sunsetHoursIct) {
+      const remainingMin = Math.max(1, Math.round((sunsetHoursIct - ictHours) * 60));
+      return {
+        isGoldenHour: true,
+        isNight: false,
+        label: `✨ Golden Hour (Sunset in ${remainingMin}m at ${sunsetFormatted} • Sunrise was ${sunriseFormatted})`,
+        sunriseTime: sunriseFormatted,
+        sunsetTime: sunsetFormatted,
+      };
+    }
+
+    // 4. Dusk Twilight (up to 30 min after sunset)
     if (ictHours >= sunsetHoursIct && ictHours < sunsetHoursIct + 0.5) {
       return {
         isGoldenHour: false,
         isNight: true,
-        label: '🌆 Twilight over Pattaya Bay',
+        label: `🌆 Twilight • Sunset was ${sunsetFormatted} • Sunrise at ${sunriseFormatted}`,
+        sunriseTime: sunriseFormatted,
         sunsetTime: sunsetFormatted,
       };
     }
 
-    // 4. Nighttime
+    // 5. Nighttime after sunset (until midnight)
+    const diffToSunrise = (24 - ictHours) + sunriseHoursIct;
+    const h = Math.floor(diffToSunrise);
+    const m = Math.round((diffToSunrise - h) * 60);
     return {
       isGoldenHour: false,
       isNight: true,
-      label: `🌙 Night • Sunset was ${sunsetFormatted}`,
+      label: `🌙 Night • Sunset was ${sunsetFormatted} • Sunrise at ${sunriseFormatted} (in ${h}h ${m}m)`,
+      sunriseTime: sunriseFormatted,
       sunsetTime: sunsetFormatted,
     };
   } catch {
     return {
       isGoldenHour: false,
       isNight: true,
-      label: '🌅 Sunset 18:25 ICT',
+      label: '🌅 Sunrise 06:08 • Sunset 18:25 ICT',
+      sunriseTime: '06:08',
       sunsetTime: '18:25',
     };
   }

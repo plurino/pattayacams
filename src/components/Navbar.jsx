@@ -39,27 +39,27 @@ export default function Navbar({
       : 'text-slate-400 hover:text-white hover:bg-surfaceLight/60 border border-transparent';
 
   return (
-    <header className="h-14 border-b border-borderDark bg-surface/95 backdrop-blur-md flex items-center justify-between px-2.5 sm:px-4 md:px-5 shrink-0 z-50 select-none shadow-lg">
+    <header className="h-18 sm:h-20 border-b border-borderDark bg-surface/95 backdrop-blur-md flex items-center justify-between px-3 sm:px-5 md:px-6 shrink-0 z-50 select-none shadow-lg">
       {/* 1. Left: PattayaCams Logo with interactive neon glow & scale hover */}
-      <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+      <div className="flex items-center gap-2.5 sm:gap-4 shrink-0">
         <Link
           href="/"
           onClick={() => { if (setViewMode) setViewMode('map'); }}
-          className="flex items-center group shrink-0 py-0.5"
+          className="flex items-center group shrink-0 py-1"
           title="PattayaCams - The city that never sleeps"
         >
           <Image
             src="/images/logo.png"
             alt="PattayaCams Logo"
-            width={160}
-            height={89}
+            width={240}
+            height={134}
             priority
-            className="h-9 sm:h-10 md:h-11 w-auto object-contain transition-all duration-300 ease-out filter drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)] group-hover:scale-105 group-hover:brightness-110 group-hover:drop-shadow-[0_0_16px_rgba(255,42,109,0.75)] active:scale-95 select-none"
+            className="h-12 sm:h-14 md:h-16 w-auto object-contain transition-all duration-300 ease-out filter drop-shadow-[0_3px_10px_rgba(0,0,0,0.6)] group-hover:scale-105 group-hover:brightness-110 group-hover:drop-shadow-[0_0_20px_rgba(255,42,109,0.85)] active:scale-95 select-none"
           />
         </Link>
 
         {/* Live Network Status Indicator */}
-        <div className="hidden lg:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surfaceLight border border-borderDark text-[10px] font-mono text-slate-300">
+        <div className="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-full bg-surfaceLight border border-borderDark text-[11px] font-mono text-slate-300">
           <span className="w-2 h-2 rounded-full bg-brandPink animate-pulse shadow-[0_0_8px_#FF2A6D]"></span>
           <span className="font-semibold text-brandPink">Live Radar</span>
           <span className="text-slate-500">•</span>
@@ -70,27 +70,27 @@ export default function Navbar({
       {/* 2. (Center Zone selector REMOVED in Phase 1.3 — now lives inside LayerToggleHUD's panel) */}
 
       {/* 3. Right: View Switcher (Trip Countdown now lives in TickerOverflowMenu) */}
-      <div className="flex items-center gap-1 sm:gap-2 shrink-0">
-        {/* View Mode Switcher: Map, Multi, Videos, Creators — monochrome lifted state, no neon gradients */}
-        <div className="flex items-center bg-canvas/90 p-0.5 rounded-xl border border-borderDark/90 shadow-inner">
+      <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
+        {/* View Mode Switcher: Map, Multi, Videos, Creators — enlarged buttons */}
+        <div className="flex items-center bg-canvas/90 p-1 rounded-2xl border border-borderDark/90 shadow-inner gap-0.5 sm:gap-1">
           {/* 1. Live Map */}
           {setViewMode ? (
             <button
               onClick={() => handleViewChange('map')}
-              className={`flex items-center gap-1 px-1.5 sm:px-2.5 py-1 sm:py-1.5 rounded-lg text-xs font-bold transition-all whitespace-nowrap shrink-0 ${navBtnClass(viewMode === 'map')}`}
+              className={`flex items-center gap-1.5 px-2 sm:px-3.5 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-bold transition-all whitespace-nowrap shrink-0 ${navBtnClass(viewMode === 'map')}`}
               title="Interactive Live Map & City Overview"
             >
-              <MapIcon className={`w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0 ${viewMode === 'map' ? 'text-brandPink' : ''}`} />
-              <span className="text-[11px] sm:text-xs">Map</span>
+              <MapIcon className={`w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0 ${viewMode === 'map' ? 'text-brandPink' : ''}`} />
+              <span>Map</span>
             </button>
           ) : (
             <Link
               href="/?view=map"
-              className={`flex items-center gap-1 px-1.5 sm:px-2.5 py-1 sm:py-1.5 rounded-lg text-xs font-bold transition-all whitespace-nowrap shrink-0 ${navBtnClass(viewMode === 'map')}`}
+              className={`flex items-center gap-1.5 px-2 sm:px-3.5 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-bold transition-all whitespace-nowrap shrink-0 ${navBtnClass(viewMode === 'map')}`}
               title="Interactive Live Map & City Overview"
             >
-              <MapIcon className={`w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0 ${viewMode === 'map' ? 'text-brandPink' : ''}`} />
-              <span className="text-[11px] sm:text-xs">Map</span>
+              <MapIcon className={`w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0 ${viewMode === 'map' ? 'text-brandPink' : ''}`} />
+              <span>Map</span>
             </Link>
           )}
 
@@ -98,20 +98,20 @@ export default function Navbar({
           {setViewMode ? (
             <button
               onClick={() => handleViewChange('grid')}
-              className={`flex items-center gap-1 px-1.5 sm:px-2.5 py-1 sm:py-1.5 rounded-lg text-xs font-bold transition-all whitespace-nowrap shrink-0 ${navBtnClass(viewMode === 'grid')}`}
+              className={`flex items-center gap-1.5 px-2 sm:px-3.5 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-bold transition-all whitespace-nowrap shrink-0 ${navBtnClass(viewMode === 'grid')}`}
               title="Multi Cam Command Grid"
             >
-              <Grid className={`w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0 ${viewMode === 'grid' ? 'text-brandPink' : ''}`} />
-              <span className="text-[11px] sm:text-xs">Multi</span>
+              <Grid className={`w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0 ${viewMode === 'grid' ? 'text-brandPink' : ''}`} />
+              <span>Multi</span>
             </button>
           ) : (
             <Link
               href="/?view=grid"
-              className={`flex items-center gap-1 px-1.5 sm:px-2.5 py-1 sm:py-1.5 rounded-lg text-xs font-bold transition-all whitespace-nowrap shrink-0 ${navBtnClass(viewMode === 'grid')}`}
+              className={`flex items-center gap-1.5 px-2 sm:px-3.5 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-bold transition-all whitespace-nowrap shrink-0 ${navBtnClass(viewMode === 'grid')}`}
               title="Multi Cam Command Grid"
             >
-              <Grid className={`w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0 ${viewMode === 'grid' ? 'text-brandPink' : ''}`} />
-              <span className="text-[11px] sm:text-xs">Multi</span>
+              <Grid className={`w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0 ${viewMode === 'grid' ? 'text-brandPink' : ''}`} />
+              <span>Multi</span>
             </Link>
           )}
 
@@ -119,31 +119,31 @@ export default function Navbar({
           {setViewMode ? (
             <button
               onClick={() => handleViewChange('vids')}
-              className={`flex items-center gap-1 px-1.5 sm:px-2.5 py-1 sm:py-1.5 rounded-lg text-xs font-bold transition-all whitespace-nowrap shrink-0 ${navBtnClass(isVidsActive)}`}
+              className={`flex items-center gap-1.5 px-2 sm:px-3.5 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-bold transition-all whitespace-nowrap shrink-0 ${navBtnClass(isVidsActive)}`}
               title="Curated 4K Street Walks, Nightlife Highlights & Expat Guides"
             >
-              <Film className={`w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0 ${isVidsActive ? 'text-brandPink' : ''}`} />
-              <span className="text-[11px] sm:text-xs">Videos</span>
+              <Film className={`w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0 ${isVidsActive ? 'text-brandPink' : ''}`} />
+              <span>Videos</span>
             </button>
           ) : (
             <Link
               href="/?view=vids"
-              className={`flex items-center gap-1 px-1.5 sm:px-2.5 py-1 sm:py-1.5 rounded-lg text-xs font-bold transition-all whitespace-nowrap shrink-0 ${navBtnClass(isVidsActive)}`}
+              className={`flex items-center gap-1.5 px-2 sm:px-3.5 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-bold transition-all whitespace-nowrap shrink-0 ${navBtnClass(isVidsActive)}`}
               title="Curated 4K Street Walks, Nightlife Highlights & Expat Guides"
             >
-              <Film className={`w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0 ${isVidsActive ? 'text-brandPink' : ''}`} />
-              <span className="text-[11px] sm:text-xs">Videos</span>
+              <Film className={`w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0 ${isVidsActive ? 'text-brandPink' : ''}`} />
+              <span>Videos</span>
             </Link>
           )}
 
           {/* 4. Creators */}
           <Link
             href="/creators"
-            className={`flex items-center gap-1 px-1.5 sm:px-2.5 py-1 sm:py-1.5 rounded-lg text-xs font-bold transition-all whitespace-nowrap shrink-0 ${navBtnClass(isCreatorsActive)}`}
+            className={`flex items-center gap-1.5 px-2 sm:px-3.5 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-bold transition-all whitespace-nowrap shrink-0 ${navBtnClass(isCreatorsActive)}`}
             title="Pattaya Creators & Live Venues Directory"
           >
-            <Users className={`w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0 ${isCreatorsActive ? 'text-brandPink' : ''}`} />
-            <span className="text-[11px] sm:text-xs">Creators</span>
+            <Users className={`w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0 ${isCreatorsActive ? 'text-brandPink' : ''}`} />
+            <span>Creators</span>
           </Link>
         </div>
       </div>

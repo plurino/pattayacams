@@ -185,6 +185,7 @@ export default function TickerBar({
           <TickerOverflowMenu
             isOpen={isOverflowOpen}
             onClose={() => setIsOverflowOpen(false)}
+            triggerRef={overflowButtonRef}
             weather={weather}
             rates={rates}
             telemetry={telemetry}

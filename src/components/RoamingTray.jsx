@@ -191,14 +191,11 @@ export default function RoamingTray({ onSelectStreamer, onOpenSponsorModal }) {
   return (
     <aside
       aria-label="Currently Broadcasting"
-      className="h-16 sm:h-[72px] border-t border-borderDark bg-surface flex items-center justify-between px-2 sm:px-4 md:px-5 shrink-0 z-40 select-none shadow-[0_-4px_18px_rgba(0,0,0,0.35)] gap-2"
+      className="h-10 sm:h-12 md:h-13 border-t border-borderDark bg-surface flex items-center justify-between px-2 sm:px-4 md:px-5 shrink-0 z-40 select-none shadow-[0_-4px_18px_rgba(0,0,0,0.35)] gap-1.5 sm:gap-2"
     >
-      <div className="flex items-center gap-2 sm:gap-3 overflow-x-auto py-1 scrollbar-none flex-1 min-w-0">
-        {/* Dock Header — pulsing live pill + count badge.
-            Renamed in Sep 2026 from "LIVE NOW" to "Live on the Move in Pattaya"
-            to reflect the new scope: only roaming creators + streamers (not
-            venues or 24/7 cams, which already have map pins). */}
-        <div className="flex items-center gap-1.5 sm:gap-2 shrink-0 pr-2 sm:pr-3 border-r border-borderDark">
+      <div className="flex items-center gap-1.5 sm:gap-3 overflow-x-auto py-0.5 scrollbar-none flex-1 min-w-0">
+        {/* Dock Header — pulsing live pill + count badge. */}
+        <div className="flex items-center gap-1 sm:gap-2 shrink-0 pr-1.5 sm:pr-3 border-r border-borderDark">
           {hasLive ? (
             <>
               <span className="relative flex h-2.5 sm:h-3 w-2.5 sm:w-3" aria-hidden="true">
@@ -273,28 +270,28 @@ export default function RoamingTray({ onSelectStreamer, onOpenSponsorModal }) {
                       <img
                         src={thumb}
                         alt={stream.name}
-                        className="w-7 h-7 rounded-full object-cover border border-red-500 shrink-0"
+                        className="w-5 h-5 sm:w-6 sm:h-6 rounded-full object-cover border border-red-500 shrink-0"
                         loading="lazy"
                         onError={(e) => {
                           e.currentTarget.src = FALLBACK_AVATAR;
                         }}
                       />
                     ) : (
-                      <span className="w-7 h-7 rounded-full border border-red-500 bg-red-900/80 flex items-center justify-center shrink-0">
-                        <TypeIcon className="w-3.5 h-3.5 text-red-200" aria-hidden="true" />
+                      <span className="w-5 h-5 sm:w-6 sm:h-6 rounded-full border border-red-500 bg-red-900/80 flex items-center justify-center shrink-0">
+                        <TypeIcon className="w-3 h-3 text-red-200" aria-hidden="true" />
                       </span>
                     )}
                     <span
-                      className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-red-500 border border-surface animate-pulse"
+                      className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 rounded-full bg-red-500 border border-surface animate-pulse"
                       aria-hidden="true"
                     />
                   </div>
 
-                  <div className="flex flex-col text-left min-w-0 max-w-[120px] sm:max-w-[160px]">
-                    <span className="text-xs font-bold font-mono text-white group-hover:text-red-200 leading-tight truncate">
+                  <div className="flex flex-col text-left min-w-0 max-w-[110px] sm:max-w-[150px]">
+                    <span className="text-[11px] sm:text-xs font-bold font-mono text-white group-hover:text-red-200 leading-tight truncate">
                       {stream.name}
                     </span>
-                    <span className="text-[9px] font-mono text-slate-300 leading-tight truncate flex items-center gap-1">
+                    <span className="text-[8px] sm:text-[9px] font-mono text-slate-300 leading-tight truncate flex items-center gap-1">
                       <TypeIcon className="w-2.5 h-2.5 shrink-0" aria-hidden="true" />
                       <span className="truncate">{typeLabel}</span>
                       {handle ? <span className="truncate opacity-70">· {handle}</span> : null}
@@ -304,8 +301,8 @@ export default function RoamingTray({ onSelectStreamer, onOpenSponsorModal }) {
                     </span>
                   </div>
 
-                  <span className="flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-gradient-to-r from-red-600 to-rose-600 group-hover:from-red-500 group-hover:to-rose-500 text-white text-[9px] font-mono font-bold tracking-wider shrink-0 shadow-[0_0_6px_rgba(239,68,68,0.6)] ml-0.5">
-                    <Play className="w-2.5 h-2.5 fill-white" aria-hidden="true" />
+                  <span className="flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-gradient-to-r from-red-600 to-rose-600 group-hover:from-red-500 group-hover:to-rose-500 text-white text-[8px] sm:text-[9px] font-mono font-bold tracking-wider shrink-0 shadow-[0_0_6px_rgba(239,68,68,0.6)] ml-0.5">
+                    <Play className="w-2 h-2 fill-white" aria-hidden="true" />
                     <span className="hidden sm:inline">WATCH</span>
                   </span>
                 </button>
@@ -315,17 +312,15 @@ export default function RoamingTray({ onSelectStreamer, onOpenSponsorModal }) {
         )}
       </div>
 
-      {/* Action Buttons: B2B Self-Serve List Venue
-          (Contact button removed in Sep 2026 — same CTA is already in SiteFooter
-          and the TickerOverflowMenu so three contact entry-points was overkill.) */}
+      {/* Action Buttons: B2B Self-Serve List Venue */}
       <div className="flex items-center gap-1.5 shrink-0">
         {FEATURES.SHOW_B2B_SPONSOR_MODAL && (
           <button
             onClick={onOpenSponsorModal}
-            className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-gradient-to-r from-brandGold/20 to-brandAmber/20 hover:from-brandGold/30 hover:to-brandAmber/30 border border-brandGold/60 text-brandGold text-xs font-bold transition-all shadow-[0_0_12px_rgba(234,179,8,0.25)] hover:shadow-[0_0_16px_rgba(234,179,8,0.4)] cursor-pointer"
+            className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-lg bg-gradient-to-r from-brandGold/20 to-brandAmber/20 hover:from-brandGold/30 hover:to-brandAmber/30 border border-brandGold/60 text-brandGold text-[10px] sm:text-xs font-bold transition-all shadow-[0_0_12px_rgba(234,179,8,0.25)] hover:shadow-[0_0_16px_rgba(234,179,8,0.4)] cursor-pointer"
             title="List your Pattaya Venue"
           >
-            <Star className="w-3.5 h-3.5 fill-brandGold" aria-hidden="true" />
+            <Star className="w-3 h-3 fill-brandGold" aria-hidden="true" />
             <span className="hidden sm:inline whitespace-nowrap">List Venue</span>
           </button>
         )}

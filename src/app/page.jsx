@@ -447,10 +447,7 @@ export default function AppRoot() {
         {tourState.isRunning && tourState.currentWaypoint && (
           <aside
             aria-label="Cinematic Drone Tour Active"
-            // z-[60] so the cinematic banner floats ABOVE the SceneSelector popover (z-20)
-            // and the Live Shuffle / drawer chrome (z-30). Without this the SceneSelector
-            // can paint over the tour banner on small viewports.
-            className="absolute top-4 left-1/2 -translate-x-1/2 z-[60] pointer-events-auto max-w-lg w-[92%] sm:w-auto"
+            className="absolute bottom-20 md:bottom-auto md:top-16 left-1/2 -translate-x-1/2 z-[60] pointer-events-auto max-w-md w-[92%] sm:w-auto transition-all duration-300"
           >
             <div className="bg-surface/95 backdrop-blur-md border border-brandPink/60 rounded-2xl px-4 py-2.5 flex items-center justify-between gap-4 shadow-[0_0_28px_rgba(255,42,109,0.35)]">
               <div className="flex items-center gap-3">

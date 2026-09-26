@@ -8,20 +8,22 @@ export default function SiteFooter({ onOpenContact }) {
   return (
     <footer
       aria-label="PattayaCams Permanent Global Footer"
-      className="w-full bg-surface border-t border-borderDark/80 py-2.5 px-3 sm:px-6 text-[11px] font-mono text-slate-400 select-none z-30 shrink-0"
+      className="w-full bg-surface border-t border-borderDark/80 py-1.5 sm:py-2 px-3 sm:px-6 text-[10px] sm:text-[11px] font-mono text-slate-400 select-none z-30 shrink-0"
     >
-      <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2.5">
-        {/* Left: Brand & Legal Disclaimer */}
-        <div className="flex items-center gap-2 text-center sm:text-left flex-wrap justify-center sm:justify-start">
-          <span className="font-bold text-slate-200">PattayaCams.com © 2026</span>
-          <span className="text-slate-600 hidden xs:inline">•</span>
-          <span className="text-slate-400 hidden xs:inline">
+      <div className="max-w-7xl mx-auto flex flex-row items-center justify-between gap-2">
+        {/* Left: Brand & Legal Disclaimer (hidden on narrow screens to prevent multi-line wrap) */}
+        <div className="flex items-center gap-2 shrink-0">
+          <span className="font-bold text-slate-200 hidden sm:inline whitespace-nowrap">
+            PattayaCams.com © 2026
+          </span>
+          <span className="text-slate-600 hidden md:inline">•</span>
+          <span className="text-slate-400 hidden md:inline truncate max-w-xs lg:max-w-none">
             Non-Commercial Tourism Guide & City Transit Radar
           </span>
         </div>
 
         {/* Right: Quick Links */}
-        <div className="flex items-center gap-3 sm:gap-4 flex-wrap justify-center text-[10px]">
+        <div className="flex items-center gap-3 sm:gap-4 ml-auto justify-end text-[10px] sm:text-[11px] shrink-0 whitespace-nowrap">
           {/* Contact */}
           {onOpenContact ? (
             <button
