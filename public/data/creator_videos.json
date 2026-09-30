@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-09-30T10:38:36.816Z",
-  "total_videos": 106,
+  "last_updated": "2026-09-30T13:21:42.040Z",
+  "total_videos": 103,
   "videos": [
     {
       "id": "pk4k8qGGegU",
@@ -1031,36 +1031,6 @@
       "thumbnail_url": "https://i2.ytimg.com/vi/i3gMmVgV3fs/hqdefault.jpg",
       "published_at": "2026-09-23T15:12:25+00:00",
       "url": "https://www.youtube.com/watch?v=i3gMmVgV3fs"
-    },
-    {
-      "id": "O3PYGsZqblA",
-      "title": "ミャオミャオ姉さんにTシャツプレゼント",
-      "channel_name": "UD Thailand",
-      "channel_slug": "ud-thailand",
-      "channel_avatar": "https://yt3.googleusercontent.com/ytc/AIdro_k6p2pK8BY9F57E6AD_BXywffZajUAEWVqzS0C5ph-WHA=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i4.ytimg.com/vi/O3PYGsZqblA/hqdefault.jpg",
-      "published_at": "2026-09-23T12:46:33+00:00",
-      "url": "https://www.youtube.com/watch?v=O3PYGsZqblA"
-    },
-    {
-      "id": "GgoVTk3G4jk",
-      "title": "2026年9月23日 タイ パタヤ レート 両替 Exchange amount  2569 September 23th  #shorts",
-      "channel_name": "UD Thailand",
-      "channel_slug": "ud-thailand",
-      "channel_avatar": "https://yt3.googleusercontent.com/ytc/AIdro_k6p2pK8BY9F57E6AD_BXywffZajUAEWVqzS0C5ph-WHA=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i4.ytimg.com/vi/GgoVTk3G4jk/hqdefault.jpg",
-      "published_at": "2026-09-23T12:38:21+00:00",
-      "url": "https://www.youtube.com/watch?v=GgoVTk3G4jk"
-    },
-    {
-      "id": "z9uCiPIfKb0",
-      "title": "Where to Live - UK or Thailand?",
-      "channel_name": "Dan About Thailand",
-      "channel_slug": "dan-about-thailand",
-      "channel_avatar": "https://yt3.googleusercontent.com/Yyj8-Dsl31kWZGfIFv8KbVT9BfXbzvKHKNyE8VddmTPXz4bpUB1t8iXSU4KJKZFdyME1bzhjkOk=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i3.ytimg.com/vi/z9uCiPIfKb0/hqdefault.jpg",
-      "published_at": "2026-09-23T10:52:53+00:00",
-      "url": "https://www.youtube.com/watch?v=z9uCiPIfKb0"
     }
   ]
 }
