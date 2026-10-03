@@ -1,7 +1,17 @@
 {
-  "last_updated": "2026-10-03T12:15:27.224Z",
+  "last_updated": "2026-10-03T16:35:39.306Z",
   "total_videos": 93,
   "videos": [
+    {
+      "id": "J8RZFXZoyx8",
+      "title": "Pattaya at 5:30 PM: Buakhao to Soi Diana as the Night begins",
+      "channel_name": "Vespa Life Thailand",
+      "channel_slug": "vespa-life-thailand",
+      "channel_avatar": "https://yt3.googleusercontent.com/_0ocieqX7Bpx3CZLLsmLCQpq7TMttO_TCmaiSI8z75xbWgW7Q7N9NeHHt8yGUPoEjQwEA19c7hs=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i3.ytimg.com/vi/J8RZFXZoyx8/hqdefault.jpg",
+      "published_at": "2026-10-03T12:36:39+00:00",
+      "url": "https://www.youtube.com/watch?v=J8RZFXZoyx8"
+    },
     {
       "id": "jCC2AGykoCI",
       "title": "🇹🇭 [4K] Second Road massage shops, Soi 9, Tree Town - Pattaya Thailand 2026",
@@ -921,16 +931,6 @@
       "thumbnail_url": "https://i1.ytimg.com/vi/D5RwXXDnl18/hqdefault.jpg",
       "published_at": "2026-09-26T17:04:23+00:00",
       "url": "https://www.youtube.com/watch?v=D5RwXXDnl18"
-    },
-    {
-      "id": "-Lyl4mc02zo",
-      "title": "PATTAYA flood heavy rain",
-      "channel_name": "UD Thailand",
-      "channel_slug": "ud-thailand",
-      "channel_avatar": "https://yt3.googleusercontent.com/ytc/AIdro_k6p2pK8BY9F57E6AD_BXywffZajUAEWVqzS0C5ph-WHA=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i2.ytimg.com/vi/-Lyl4mc02zo/hqdefault.jpg",
-      "published_at": "2026-09-26T12:50:12+00:00",
-      "url": "https://www.youtube.com/watch?v=-Lyl4mc02zo"
     }
   ]
 }
