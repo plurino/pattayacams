@@ -1,5 +1,916 @@
 {
-  "last_updated": "2026-10-08T04:41:21.625Z",
-  "total_videos": 0,
-  "videos": []
+  "last_updated": "2026-10-08T11:47:15.724Z",
+  "total_videos": 91,
+  "videos": [
+    {
+      "id": "y1BqBPgmuSk",
+      "title": "LIVING THE DREAM OR JUST BROKE IN PARADISE? 😂🇹🇭 | Pattaya Pool LIVE 📱",
+      "channel_name": "The Tysin Show",
+      "channel_slug": "the-tysin-show",
+      "channel_avatar": "https://yt3.googleusercontent.com/3tMHDr_3VQy3AXy0yW7XsFwHJWBAJj66W8dqKHYTQ3JB9vEX8LbKVhHWjEodtG8TbCcIy9aV0w=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i2.ytimg.com/vi/y1BqBPgmuSk/hqdefault.jpg",
+      "published_at": "2026-10-08T11:03:17+00:00",
+      "url": "https://www.youtube.com/watch?v=y1BqBPgmuSk"
+    },
+    {
+      "id": "SzAq0HHiZik",
+      "title": "🇹🇭 [4K] Pattaya Klang Road massages shops - Pattaya Thailand 2026",
+      "channel_name": "DV Media Pattaya",
+      "channel_slug": "dv-media-pattaya",
+      "channel_avatar": "https://yt3.googleusercontent.com/ugj2a216u5s5JhG4iireKvsOCK9lky14pZHt1tGGRm4I9na4HTsC7_8QRPb6xinI7mb8u4ZD=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i4.ytimg.com/vi/SzAq0HHiZik/hqdefault.jpg",
+      "published_at": "2026-10-08T10:30:23+00:00",
+      "url": "https://www.youtube.com/watch?v=SzAq0HHiZik"
+    },
+    {
+      "id": "Wt0U43UHZ8c",
+      "title": "Walking Around Pattaya: Chaiyapoon, Honey, Buakhao, Diana, & Myth Night Town - 2026",
+      "channel_name": "Pattaya 101",
+      "channel_slug": "pattaya-101",
+      "channel_avatar": "https://yt3.googleusercontent.com/lcgGQd_VWXbva3sOEvgXp_eISmaA20LSeUnPFagnga7AK9P6Kz4v06ESJt0mwR-TkJEZoF6l=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i4.ytimg.com/vi/Wt0U43UHZ8c/hqdefault.jpg",
+      "published_at": "2026-10-08T10:00:31+00:00",
+      "url": "https://www.youtube.com/watch?v=Wt0U43UHZ8c"
+    },
+    {
+      "id": "o_azFPHeVSY",
+      "title": "Pattaya Beach Road Walk 🇹🇭 | October 7, 2026",
+      "channel_name": "Vespa Life Thailand",
+      "channel_slug": "vespa-life-thailand",
+      "channel_avatar": "https://yt3.googleusercontent.com/_0ocieqX7Bpx3CZLLsmLCQpq7TMttO_TCmaiSI8z75xbWgW7Q7N9NeHHt8yGUPoEjQwEA19c7hs=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i4.ytimg.com/vi/o_azFPHeVSY/hqdefault.jpg",
+      "published_at": "2026-10-08T10:00:22+00:00",
+      "url": "https://www.youtube.com/watch?v=o_azFPHeVSY"
+    },
+    {
+      "id": "3SC6A7DnnOg",
+      "title": "LIVING THE DREAM OR JUST BROKE IN PARADISE? Welcome back to TheTysinShow!",
+      "channel_name": "The Tysin Show",
+      "channel_slug": "the-tysin-show",
+      "channel_avatar": "https://yt3.googleusercontent.com/3tMHDr_3VQy3AXy0yW7XsFwHJWBAJj66W8dqKHYTQ3JB9vEX8LbKVhHWjEodtG8TbCcIy9aV0w=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i4.ytimg.com/vi/3SC6A7DnnOg/hqdefault.jpg",
+      "published_at": "2026-10-08T08:03:46+00:00",
+      "url": "https://www.youtube.com/watch?v=3SC6A7DnnOg"
+    },
+    {
+      "id": "ONwYaga1ptc",
+      "title": "CHAOS on Soi 6! 😱 Where Is Tysin?!",
+      "channel_name": "The Tysin Show",
+      "channel_slug": "the-tysin-show",
+      "channel_avatar": "https://yt3.googleusercontent.com/3tMHDr_3VQy3AXy0yW7XsFwHJWBAJj66W8dqKHYTQ3JB9vEX8LbKVhHWjEodtG8TbCcIy9aV0w=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i4.ytimg.com/vi/ONwYaga1ptc/hqdefault.jpg",
+      "published_at": "2026-10-08T08:02:10+00:00",
+      "url": "https://www.youtube.com/watch?v=ONwYaga1ptc"
+    },
+    {
+      "id": "exHZoGrPqVM",
+      "title": "2026年10月8日 タイ パタヤ レート 両替 Exchange amount  2569 October 8th  #shorts",
+      "channel_name": "UD Thailand",
+      "channel_slug": "ud-thailand",
+      "channel_avatar": "https://yt3.googleusercontent.com/ytc/AIdro_k6p2pK8BY9F57E6AD_BXywffZajUAEWVqzS0C5ph-WHA=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i2.ytimg.com/vi/exHZoGrPqVM/hqdefault.jpg",
+      "published_at": "2026-10-08T07:02:41+00:00",
+      "url": "https://www.youtube.com/watch?v=exHZoGrPqVM"
+    },
+    {
+      "id": "mfFY7mmufTE",
+      "title": "Jomtien Night Market for Dinner 🇹🇭 | Pattaya Thailand Night Walk — October 7",
+      "channel_name": "Vespa Life Thailand",
+      "channel_slug": "vespa-life-thailand",
+      "channel_avatar": "https://yt3.googleusercontent.com/_0ocieqX7Bpx3CZLLsmLCQpq7TMttO_TCmaiSI8z75xbWgW7Q7N9NeHHt8yGUPoEjQwEA19c7hs=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i2.ytimg.com/vi/mfFY7mmufTE/hqdefault.jpg",
+      "published_at": "2026-10-08T05:42:27+00:00",
+      "url": "https://www.youtube.com/watch?v=mfFY7mmufTE"
+    },
+    {
+      "id": "wCQkzp_REJM",
+      "title": "TheTysinshow I DON’T NEED A CHAPERONE! 😂  📱",
+      "channel_name": "The Tysin Show",
+      "channel_slug": "the-tysin-show",
+      "channel_avatar": "https://yt3.googleusercontent.com/3tMHDr_3VQy3AXy0yW7XsFwHJWBAJj66W8dqKHYTQ3JB9vEX8LbKVhHWjEodtG8TbCcIy9aV0w=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i4.ytimg.com/vi/wCQkzp_REJM/hqdefault.jpg",
+      "published_at": "2026-10-08T03:41:13+00:00",
+      "url": "https://www.youtube.com/watch?v=wCQkzp_REJM"
+    },
+    {
+      "id": "EdElttj1kKk",
+      "title": "TheTysinshow I DON’T NEED A CHAPERONE! 😂",
+      "channel_name": "The Tysin Show",
+      "channel_slug": "the-tysin-show",
+      "channel_avatar": "https://yt3.googleusercontent.com/3tMHDr_3VQy3AXy0yW7XsFwHJWBAJj66W8dqKHYTQ3JB9vEX8LbKVhHWjEodtG8TbCcIy9aV0w=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i2.ytimg.com/vi/EdElttj1kKk/hqdefault.jpg",
+      "published_at": "2026-10-08T03:14:17+00:00",
+      "url": "https://www.youtube.com/watch?v=EdElttj1kKk"
+    },
+    {
+      "id": "hEz_0hCUHBA",
+      "title": "fantastic condo options around Jomtien and up on Pratumnak Hill.  #shorts #pattaya #pattayathailand",
+      "channel_name": "Buzzin Pattaya",
+      "channel_slug": "buzzin-pattaya",
+      "channel_avatar": "https://yt3.googleusercontent.com/ytc/AIdro_nUp8SB8KN3NvJvUA_3DilXu6v2Qp_M0Tb3AL54jjLlPm0=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i1.ytimg.com/vi/hEz_0hCUHBA/hqdefault.jpg",
+      "published_at": "2026-10-08T02:00:37+00:00",
+      "url": "https://www.youtube.com/watch?v=hEz_0hCUHBA"
+    },
+    {
+      "id": "Z6RaXOHO4lk",
+      "title": "VERY LATEST NEWS FROM THAILAND in English (8 October 2026) from Fabulous Radio Pattaya",
+      "channel_name": "Fabulous Pattaya",
+      "channel_slug": "fabulous-pattaya",
+      "channel_avatar": "https://yt3.googleusercontent.com/ytc/AIdro_kPG_DbiOWTBNwUUiepocpGOBrtTV781UaES92xL50vPxg=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i3.ytimg.com/vi/Z6RaXOHO4lk/hqdefault.jpg",
+      "published_at": "2026-10-08T02:00:06+00:00",
+      "url": "https://www.youtube.com/watch?v=Z6RaXOHO4lk"
+    },
+    {
+      "id": "Imt6V8AHCRQ",
+      "title": "How to scout around Pattaya Bars using a New Phone App",
+      "channel_name": "Everything Pattaya",
+      "channel_slug": "everything-pattaya",
+      "channel_avatar": "https://yt3.googleusercontent.com/ytc/AIdro_m4uLkSA24Sg_pCFTDGGu77nuKXc5CcWM6ipNH-TPtmIQ=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i2.ytimg.com/vi/Imt6V8AHCRQ/hqdefault.jpg",
+      "published_at": "2026-10-08T02:00:05+00:00",
+      "url": "https://www.youtube.com/watch?v=Imt6V8AHCRQ"
+    },
+    {
+      "id": "a20HNYWCZ_0",
+      "title": "TheTysinshow I DON’T NEED A CHAPERONE! 😂",
+      "channel_name": "The Tysin Show",
+      "channel_slug": "the-tysin-show",
+      "channel_avatar": "https://yt3.googleusercontent.com/3tMHDr_3VQy3AXy0yW7XsFwHJWBAJj66W8dqKHYTQ3JB9vEX8LbKVhHWjEodtG8TbCcIy9aV0w=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i2.ytimg.com/vi/a20HNYWCZ_0/hqdefault.jpg",
+      "published_at": "2026-10-07T17:54:12+00:00",
+      "url": "https://www.youtube.com/watch?v=a20HNYWCZ_0"
+    },
+    {
+      "id": "5HSsbfePZlU",
+      "title": "TheTysinshow I DON’T NEED A CHAPERONE! 😂  📱",
+      "channel_name": "The Tysin Show",
+      "channel_slug": "the-tysin-show",
+      "channel_avatar": "https://yt3.googleusercontent.com/3tMHDr_3VQy3AXy0yW7XsFwHJWBAJj66W8dqKHYTQ3JB9vEX8LbKVhHWjEodtG8TbCcIy9aV0w=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i2.ytimg.com/vi/5HSsbfePZlU/hqdefault.jpg",
+      "published_at": "2026-10-07T17:53:39+00:00",
+      "url": "https://www.youtube.com/watch?v=5HSsbfePZlU"
+    },
+    {
+      "id": "G_323dzevfs",
+      "title": "Pattaya police step up patrols in entertainment areas to reassure tourists",
+      "channel_name": "The Pattaya News",
+      "channel_slug": "the-pattaya-news",
+      "channel_avatar": "https://yt3.googleusercontent.com/ED2V0oAQI1iJpeAFvbuEi0wj97DQIsDXma7rxuSOhPxt4wfxf_-hmIINVdUbCWQnBAmfyHavxw=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i4.ytimg.com/vi/G_323dzevfs/hqdefault.jpg",
+      "published_at": "2026-10-07T17:41:49+00:00",
+      "url": "https://www.youtube.com/watch?v=G_323dzevfs"
+    },
+    {
+      "id": "PEP8AGe94pc",
+      "title": "DJi receiver dongle breaks again",
+      "channel_name": "Mr Egg Thailand",
+      "channel_slug": "mr-egg-thailand",
+      "channel_avatar": "https://yt3.googleusercontent.com/C37NsrbPKJp2P8VS8y108GSiXtIaJG6Gi7yhhYnDd7aSJL0ILG1eRza8ojpV5pXvGxQq1Gf1=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i1.ytimg.com/vi/PEP8AGe94pc/hqdefault.jpg",
+      "published_at": "2026-10-07T16:52:10+00:00",
+      "url": "https://www.youtube.com/watch?v=PEP8AGe94pc"
+    },
+    {
+      "id": "GarJqBsIQgQ",
+      "title": "First Time in Rompho 🇹🇭 A Quieter Side of Pattaya | Walking Tour",
+      "channel_name": "Vespa Life Thailand",
+      "channel_slug": "vespa-life-thailand",
+      "channel_avatar": "https://yt3.googleusercontent.com/_0ocieqX7Bpx3CZLLsmLCQpq7TMttO_TCmaiSI8z75xbWgW7Q7N9NeHHt8yGUPoEjQwEA19c7hs=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i4.ytimg.com/vi/GarJqBsIQgQ/hqdefault.jpg",
+      "published_at": "2026-10-07T15:19:29+00:00",
+      "url": "https://www.youtube.com/watch?v=GarJqBsIQgQ"
+    },
+    {
+      "id": "UjNTG531xAM",
+      "title": "Pattaya’s Night Lights Through the Clouds 🌃 #Shorts",
+      "channel_name": "Vespa Life Thailand",
+      "channel_slug": "vespa-life-thailand",
+      "channel_avatar": "https://yt3.googleusercontent.com/_0ocieqX7Bpx3CZLLsmLCQpq7TMttO_TCmaiSI8z75xbWgW7Q7N9NeHHt8yGUPoEjQwEA19c7hs=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i2.ytimg.com/vi/UjNTG531xAM/hqdefault.jpg",
+      "published_at": "2026-10-07T15:02:17+00:00",
+      "url": "https://www.youtube.com/watch?v=UjNTG531xAM"
+    },
+    {
+      "id": "NQ9WEXIfhOo",
+      "title": "YouTube Sent Me This for My Birthday… After 12 Years in Thailand V833",
+      "channel_name": "Thailand Rob",
+      "channel_slug": "thailand-rob",
+      "channel_avatar": "https://yt3.googleusercontent.com/ytc/AIdro_lACxUgHiSVBCZnxB3y0AiiOJr0gopsUA7ediB7uV_UEBY=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i3.ytimg.com/vi/NQ9WEXIfhOo/hqdefault.jpg",
+      "published_at": "2026-10-07T14:39:29+00:00",
+      "url": "https://www.youtube.com/watch?v=NQ9WEXIfhOo"
+    },
+    {
+      "id": "7B91K5p29II",
+      "title": "DAYTIME PATTAYA: Real Life All Around the City",
+      "channel_name": "BEACH ROAD",
+      "channel_slug": "beach-road-channel",
+      "channel_avatar": "https://yt3.googleusercontent.com/CWW0rQ6f5ZKIE2_T9vOK3Km3eiBJEAdih3hwx_POm5n_uuG8EDZcL7IK7BLoEnWL0F5f7pnm=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i4.ytimg.com/vi/7B91K5p29II/hqdefault.jpg",
+      "published_at": "2026-10-07T13:00:23+00:00",
+      "url": "https://www.youtube.com/watch?v=7B91K5p29II"
+    },
+    {
+      "id": "qLgl_CtpeTM",
+      "title": "Chonburi Police Seize 2,800 Ketamine Zombie Vape Pods, Gun, and Meth in Sri Racha Raid",
+      "channel_name": "The Pattaya News",
+      "channel_slug": "the-pattaya-news",
+      "channel_avatar": "https://yt3.googleusercontent.com/ED2V0oAQI1iJpeAFvbuEi0wj97DQIsDXma7rxuSOhPxt4wfxf_-hmIINVdUbCWQnBAmfyHavxw=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i2.ytimg.com/vi/qLgl_CtpeTM/hqdefault.jpg",
+      "published_at": "2026-10-07T12:41:57+00:00",
+      "url": "https://www.youtube.com/watch?v=qLgl_CtpeTM"
+    },
+    {
+      "id": "SbIs-GkI4LQ",
+      "title": "曼谷沉沒！全城災區！洪水損失到底有多大？暹羅奇妙樂園或將倒閉，洪災重創黃金周中國遊客，泰國近千頭牛檢出瘦肉精！（泰國週刊 379 期 • 社會）",
+      "channel_name": "Kev-in-Thailand",
+      "channel_slug": "kev-in-thailand",
+      "channel_avatar": "https://yt3.googleusercontent.com/Codtgbm9LDBrbLC95y7zvMjRtzxDlXnfuUXWjjxT1lwR4W-wvYLHHfSBIbKtfifePAbfeDww=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i4.ytimg.com/vi/SbIs-GkI4LQ/hqdefault.jpg",
+      "published_at": "2026-10-07T12:30:06+00:00",
+      "url": "https://www.youtube.com/watch?v=SbIs-GkI4LQ"
+    },
+    {
+      "id": "yI2_YtBcpiM",
+      "title": "The Key to a Man’s Heart? Simple As… Fried Chicken!",
+      "channel_name": "The Tysin Show",
+      "channel_slug": "the-tysin-show",
+      "channel_avatar": "https://yt3.googleusercontent.com/3tMHDr_3VQy3AXy0yW7XsFwHJWBAJj66W8dqKHYTQ3JB9vEX8LbKVhHWjEodtG8TbCcIy9aV0w=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i2.ytimg.com/vi/yI2_YtBcpiM/hqdefault.jpg",
+      "published_at": "2026-10-07T10:59:11+00:00",
+      "url": "https://www.youtube.com/watch?v=yI2_YtBcpiM"
+    },
+    {
+      "id": "Yoo55upa3TM",
+      "title": "Pattaya Thailand Low Season 2026",
+      "channel_name": "Settled in SIAM",
+      "channel_slug": "settled-in-siam",
+      "channel_avatar": "https://yt3.googleusercontent.com/hUjrQt2-RhdItsiQsjbsSAKEJIv1tpwpxtB3D-k1GmjsXVdFG20FWwBTLDW6gLQufYZCDiQjmnc=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i2.ytimg.com/vi/Yoo55upa3TM/hqdefault.jpg",
+      "published_at": "2026-10-07T10:45:35+00:00",
+      "url": "https://www.youtube.com/watch?v=Yoo55upa3TM"
+    },
+    {
+      "id": "WXMcEN5hI5s",
+      "title": "🇹🇭 [4K] Soi 3, Second Road - Pattaya Thailand 2026",
+      "channel_name": "DV Media Pattaya",
+      "channel_slug": "dv-media-pattaya",
+      "channel_avatar": "https://yt3.googleusercontent.com/ugj2a216u5s5JhG4iireKvsOCK9lky14pZHt1tGGRm4I9na4HTsC7_8QRPb6xinI7mb8u4ZD=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i4.ytimg.com/vi/WXMcEN5hI5s/hqdefault.jpg",
+      "published_at": "2026-10-07T10:30:20+00:00",
+      "url": "https://www.youtube.com/watch?v=WXMcEN5hI5s"
+    },
+    {
+      "id": "7UCtx2KUVOM",
+      "title": "A WILD MONKEY Through Pattaya! You Won’t Believe This!",
+      "channel_name": "The Tysin Show",
+      "channel_slug": "the-tysin-show",
+      "channel_avatar": "https://yt3.googleusercontent.com/3tMHDr_3VQy3AXy0yW7XsFwHJWBAJj66W8dqKHYTQ3JB9vEX8LbKVhHWjEodtG8TbCcIy9aV0w=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i4.ytimg.com/vi/7UCtx2KUVOM/hqdefault.jpg",
+      "published_at": "2026-10-07T03:24:32+00:00",
+      "url": "https://www.youtube.com/watch?v=7UCtx2KUVOM"
+    },
+    {
+      "id": "kgaPvqFNd4A",
+      "title": "VERY LATEST NEWS FROM THAILAND in English (7 October 2026) from Fabulous Radio Pattaya",
+      "channel_name": "Fabulous Pattaya",
+      "channel_slug": "fabulous-pattaya",
+      "channel_avatar": "https://yt3.googleusercontent.com/ytc/AIdro_kPG_DbiOWTBNwUUiepocpGOBrtTV781UaES92xL50vPxg=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i4.ytimg.com/vi/kgaPvqFNd4A/hqdefault.jpg",
+      "published_at": "2026-10-07T02:00:09+00:00",
+      "url": "https://www.youtube.com/watch?v=kgaPvqFNd4A"
+    },
+    {
+      "id": "MJ33dghUsa0",
+      "title": "JOMTIEN’S Rapidly changing with lot’s happening, take a look for yourself!",
+      "channel_name": "Buzzin Pattaya",
+      "channel_slug": "buzzin-pattaya",
+      "channel_avatar": "https://yt3.googleusercontent.com/ytc/AIdro_nUp8SB8KN3NvJvUA_3DilXu6v2Qp_M0Tb3AL54jjLlPm0=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i2.ytimg.com/vi/MJ33dghUsa0/hqdefault.jpg",
+      "published_at": "2026-10-07T02:00:01+00:00",
+      "url": "https://www.youtube.com/watch?v=MJ33dghUsa0"
+    },
+    {
+      "id": "HZVY4mkfJWM",
+      "title": "2026年10月7日 タイ パタヤ レート 両替 Exchange amount  2569 October 7th  #shorts",
+      "channel_name": "UD Thailand",
+      "channel_slug": "ud-thailand",
+      "channel_avatar": "https://yt3.googleusercontent.com/ytc/AIdro_k6p2pK8BY9F57E6AD_BXywffZajUAEWVqzS0C5ph-WHA=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i1.ytimg.com/vi/HZVY4mkfJWM/hqdefault.jpg",
+      "published_at": "2026-10-07T01:35:17+00:00",
+      "url": "https://www.youtube.com/watch?v=HZVY4mkfJWM"
+    },
+    {
+      "id": "Kfi13LMyeKM",
+      "title": "Bangkok Sudden Heavy Rain & Thunder 🇹🇭 On Nut Rush Hour | 4K HDR • Binaural Audio 🎧",
+      "channel_name": "JWINTHAI",
+      "channel_slug": "jwinthai",
+      "channel_avatar": "https://yt3.googleusercontent.com/vrDpU7p6Kfk6gy37xaRu9ovhYrpaRR4vkNKoc0K84Q2A0HYi5mvSju7BOFA_KwbJKoRctumoT7w=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i4.ytimg.com/vi/Kfi13LMyeKM/hqdefault.jpg",
+      "published_at": "2026-10-07T00:00:31+00:00",
+      "url": "https://www.youtube.com/watch?v=Kfi13LMyeKM"
+    },
+    {
+      "id": "_dzvQHI-P-M",
+      "title": "Trae Badd - Smoke Break",
+      "channel_name": "Trae Badd TV",
+      "channel_slug": "trae-badd-tv",
+      "channel_avatar": "https://yt3.googleusercontent.com/YnO5xc6T7pk1Q_nnG5ruJbMOBqHi_YBRWLsAxO_4de-xBE_Dr1qoDnJ407dfBd2m_0CBLYL5yg=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i4.ytimg.com/vi/_dzvQHI-P-M/hqdefault.jpg",
+      "published_at": "2026-10-06T22:21:18+00:00",
+      "url": "https://www.youtube.com/watch?v=_dzvQHI-P-M"
+    },
+    {
+      "id": "lM7eznC12hE",
+      "title": "Tysin SOLO in Pattaya Tonight!  They Left Me By Myself part 2",
+      "channel_name": "The Tysin Show",
+      "channel_slug": "the-tysin-show",
+      "channel_avatar": "https://yt3.googleusercontent.com/3tMHDr_3VQy3AXy0yW7XsFwHJWBAJj66W8dqKHYTQ3JB9vEX8LbKVhHWjEodtG8TbCcIy9aV0w=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i1.ytimg.com/vi/lM7eznC12hE/hqdefault.jpg",
+      "published_at": "2026-10-06T20:31:41+00:00",
+      "url": "https://www.youtube.com/watch?v=lM7eznC12hE"
+    },
+    {
+      "id": "tAU14tKynKs",
+      "title": "Tysin SOLO in Pattaya Tonight!  They Left Me By Myself part 2 📱",
+      "channel_name": "The Tysin Show",
+      "channel_slug": "the-tysin-show",
+      "channel_avatar": "https://yt3.googleusercontent.com/3tMHDr_3VQy3AXy0yW7XsFwHJWBAJj66W8dqKHYTQ3JB9vEX8LbKVhHWjEodtG8TbCcIy9aV0w=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i1.ytimg.com/vi/tAU14tKynKs/hqdefault.jpg",
+      "published_at": "2026-10-06T20:23:34+00:00",
+      "url": "https://www.youtube.com/watch?v=tAU14tKynKs"
+    },
+    {
+      "id": "HTQaAoC0EkM",
+      "title": "Tysin SOLO in Pattaya Tonight!  They Left Me By Myself",
+      "channel_name": "The Tysin Show",
+      "channel_slug": "the-tysin-show",
+      "channel_avatar": "https://yt3.googleusercontent.com/3tMHDr_3VQy3AXy0yW7XsFwHJWBAJj66W8dqKHYTQ3JB9vEX8LbKVhHWjEodtG8TbCcIy9aV0w=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i1.ytimg.com/vi/HTQaAoC0EkM/hqdefault.jpg",
+      "published_at": "2026-10-06T17:49:29+00:00",
+      "url": "https://www.youtube.com/watch?v=HTQaAoC0EkM"
+    },
+    {
+      "id": "sN-5UKlxVPE",
+      "title": "Tysin SOLO in Pattaya Tonight!  They Left Me By Myself  📱",
+      "channel_name": "The Tysin Show",
+      "channel_slug": "the-tysin-show",
+      "channel_avatar": "https://yt3.googleusercontent.com/3tMHDr_3VQy3AXy0yW7XsFwHJWBAJj66W8dqKHYTQ3JB9vEX8LbKVhHWjEodtG8TbCcIy9aV0w=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i4.ytimg.com/vi/sN-5UKlxVPE/hqdefault.jpg",
+      "published_at": "2026-10-06T17:42:24+00:00",
+      "url": "https://www.youtube.com/watch?v=sN-5UKlxVPE"
+    },
+    {
+      "id": "3sYvxbqGDbo",
+      "title": "Pattaya Soi 6, 7 & 8 Walking Tour | October 6, 2026",
+      "channel_name": "Vespa Life Thailand",
+      "channel_slug": "vespa-life-thailand",
+      "channel_avatar": "https://yt3.googleusercontent.com/_0ocieqX7Bpx3CZLLsmLCQpq7TMttO_TCmaiSI8z75xbWgW7Q7N9NeHHt8yGUPoEjQwEA19c7hs=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i4.ytimg.com/vi/3sYvxbqGDbo/hqdefault.jpg",
+      "published_at": "2026-10-06T14:50:42+00:00",
+      "url": "https://www.youtube.com/watch?v=3sYvxbqGDbo"
+    },
+    {
+      "id": "ukAabJoij3A",
+      "title": "Pattaya News Update - Hookup Club Conversion Starts this Week!",
+      "channel_name": "NDtvi Thailand",
+      "channel_slug": "ndtvi-thailand",
+      "channel_avatar": "https://yt3.googleusercontent.com/3Y-8EvHSWFMADaSoarlgl9npq8T4FTiU8c7gAsoVAIBfLsSggo0c5TT5mA1A_UhdNlc5pFPnmDs=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i2.ytimg.com/vi/ukAabJoij3A/hqdefault.jpg",
+      "published_at": "2026-10-06T12:36:54+00:00",
+      "url": "https://www.youtube.com/watch?v=ukAabJoij3A"
+    },
+    {
+      "id": "TaXUJtxkDeQ",
+      "title": "Why Dating in Thailand Confuses American Men V832",
+      "channel_name": "Thailand Rob",
+      "channel_slug": "thailand-rob",
+      "channel_avatar": "https://yt3.googleusercontent.com/ytc/AIdro_lACxUgHiSVBCZnxB3y0AiiOJr0gopsUA7ediB7uV_UEBY=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i1.ytimg.com/vi/TaXUJtxkDeQ/hqdefault.jpg",
+      "published_at": "2026-10-06T10:38:29+00:00",
+      "url": "https://www.youtube.com/watch?v=TaXUJtxkDeQ"
+    },
+    {
+      "id": "bbSNdNddIWw",
+      "title": "🇹🇭 [4K] Second Road massage shops, Soi 9, Tree Town - Pattaya Thailand 2026",
+      "channel_name": "DV Media Pattaya",
+      "channel_slug": "dv-media-pattaya",
+      "channel_avatar": "https://yt3.googleusercontent.com/ugj2a216u5s5JhG4iireKvsOCK9lky14pZHt1tGGRm4I9na4HTsC7_8QRPb6xinI7mb8u4ZD=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i3.ytimg.com/vi/bbSNdNddIWw/hqdefault.jpg",
+      "published_at": "2026-10-06T10:30:28+00:00",
+      "url": "https://www.youtube.com/watch?v=bbSNdNddIWw"
+    },
+    {
+      "id": "OeNHV9C1Vww",
+      "title": "7-Eleven Workers Called Me “CHOCOLATE MAN!” 🇹🇭🍫",
+      "channel_name": "The Tysin Show",
+      "channel_slug": "the-tysin-show",
+      "channel_avatar": "https://yt3.googleusercontent.com/3tMHDr_3VQy3AXy0yW7XsFwHJWBAJj66W8dqKHYTQ3JB9vEX8LbKVhHWjEodtG8TbCcIy9aV0w=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i4.ytimg.com/vi/OeNHV9C1Vww/hqdefault.jpg",
+      "published_at": "2026-10-06T10:20:03+00:00",
+      "url": "https://www.youtube.com/watch?v=OeNHV9C1Vww"
+    },
+    {
+      "id": "f7UEeWzSikE",
+      "title": "2026年10月6日 タイ パタヤ レート 両替 Exchange amount  2569 October 6th  #shorts",
+      "channel_name": "UD Thailand",
+      "channel_slug": "ud-thailand",
+      "channel_avatar": "https://yt3.googleusercontent.com/ytc/AIdro_k6p2pK8BY9F57E6AD_BXywffZajUAEWVqzS0C5ph-WHA=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i3.ytimg.com/vi/f7UEeWzSikE/hqdefault.jpg",
+      "published_at": "2026-10-06T09:18:04+00:00",
+      "url": "https://www.youtube.com/watch?v=f7UEeWzSikE"
+    },
+    {
+      "id": "81yE2qjrJio",
+      "title": "VERY LATEST NEWS FROM THAILAND in English (6 October 2026) from Fabulous Radio Pattaya",
+      "channel_name": "Fabulous Pattaya",
+      "channel_slug": "fabulous-pattaya",
+      "channel_avatar": "https://yt3.googleusercontent.com/ytc/AIdro_kPG_DbiOWTBNwUUiepocpGOBrtTV781UaES92xL50vPxg=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i1.ytimg.com/vi/81yE2qjrJio/hqdefault.jpg",
+      "published_at": "2026-10-06T02:00:39+00:00",
+      "url": "https://www.youtube.com/watch?v=81yE2qjrJio"
+    },
+    {
+      "id": "pl43rc4NFn8",
+      "title": "【4K HDR】Bangkok Morning Commute Traffic 🇹🇭 On Nut - Sukhumvit - Siam | Real City Sounds",
+      "channel_name": "JWINTHAI",
+      "channel_slug": "jwinthai",
+      "channel_avatar": "https://yt3.googleusercontent.com/vrDpU7p6Kfk6gy37xaRu9ovhYrpaRR4vkNKoc0K84Q2A0HYi5mvSju7BOFA_KwbJKoRctumoT7w=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i1.ytimg.com/vi/pl43rc4NFn8/hqdefault.jpg",
+      "published_at": "2026-10-06T00:00:18+00:00",
+      "url": "https://www.youtube.com/watch?v=pl43rc4NFn8"
+    },
+    {
+      "id": "-GyFb14tPwk",
+      "title": "Pattaya Beach Road at Midnight 🌙 | Night Walk — October 5",
+      "channel_name": "Vespa Life Thailand",
+      "channel_slug": "vespa-life-thailand",
+      "channel_avatar": "https://yt3.googleusercontent.com/_0ocieqX7Bpx3CZLLsmLCQpq7TMttO_TCmaiSI8z75xbWgW7Q7N9NeHHt8yGUPoEjQwEA19c7hs=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i2.ytimg.com/vi/-GyFb14tPwk/hqdefault.jpg",
+      "published_at": "2026-10-05T15:30:13+00:00",
+      "url": "https://www.youtube.com/watch?v=-GyFb14tPwk"
+    },
+    {
+      "id": "RFWZVM14-M4",
+      "title": "Cooking eggs 🫪 #ฝรั่งพูดไทย #เรียนภาษาไทย #คนต่างชาติพูดไทย #พูดภาษาไทย #ชีวิตในไทย",
+      "channel_name": "Travel Glitch",
+      "channel_slug": "travel-glitch",
+      "channel_avatar": "https://yt3.googleusercontent.com/WyZQSOhd2hSV4WHhxEVosiqiPpzVbwo25D67oCIQKr3_Ga2fd9E_8TDyJ7Yv8TuG_DcZKaHJwg=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i3.ytimg.com/vi/RFWZVM14-M4/hqdefault.jpg",
+      "published_at": "2026-10-05T10:50:32+00:00",
+      "url": "https://www.youtube.com/watch?v=RFWZVM14-M4"
+    },
+    {
+      "id": "8qggVtND17w",
+      "title": "Pattaya Night Walk 🌙 Second Road to Myth Night Beer Town | October 4, 11:30 PM",
+      "channel_name": "Vespa Life Thailand",
+      "channel_slug": "vespa-life-thailand",
+      "channel_avatar": "https://yt3.googleusercontent.com/_0ocieqX7Bpx3CZLLsmLCQpq7TMttO_TCmaiSI8z75xbWgW7Q7N9NeHHt8yGUPoEjQwEA19c7hs=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i1.ytimg.com/vi/8qggVtND17w/hqdefault.jpg",
+      "published_at": "2026-10-05T10:33:30+00:00",
+      "url": "https://www.youtube.com/watch?v=8qggVtND17w"
+    },
+    {
+      "id": "JbKtvEcsJt4",
+      "title": "They Had Contracts. Thailand Sold the Land Anyway. V831",
+      "channel_name": "Thailand Rob",
+      "channel_slug": "thailand-rob",
+      "channel_avatar": "https://yt3.googleusercontent.com/ytc/AIdro_lACxUgHiSVBCZnxB3y0AiiOJr0gopsUA7ediB7uV_UEBY=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i3.ytimg.com/vi/JbKtvEcsJt4/hqdefault.jpg",
+      "published_at": "2026-10-05T10:31:53+00:00",
+      "url": "https://www.youtube.com/watch?v=JbKtvEcsJt4"
+    },
+    {
+      "id": "oBkKZIksulM",
+      "title": "🇹🇭 [4K] Soi 9, Tree Town, Myth Night Town -  Pattaya Thailand 2026",
+      "channel_name": "DV Media Pattaya",
+      "channel_slug": "dv-media-pattaya",
+      "channel_avatar": "https://yt3.googleusercontent.com/ugj2a216u5s5JhG4iireKvsOCK9lky14pZHt1tGGRm4I9na4HTsC7_8QRPb6xinI7mb8u4ZD=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i4.ytimg.com/vi/oBkKZIksulM/hqdefault.jpg",
+      "published_at": "2026-10-05T10:30:14+00:00",
+      "url": "https://www.youtube.com/watch?v=oBkKZIksulM"
+    },
+    {
+      "id": "TedyHuvsDL0",
+      "title": "High Quality! Beach Road Pattaya Immersive Walk. October 2026",
+      "channel_name": "Pattaya 101",
+      "channel_slug": "pattaya-101",
+      "channel_avatar": "https://yt3.googleusercontent.com/lcgGQd_VWXbva3sOEvgXp_eISmaA20LSeUnPFagnga7AK9P6Kz4v06ESJt0mwR-TkJEZoF6l=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i1.ytimg.com/vi/TedyHuvsDL0/hqdefault.jpg",
+      "published_at": "2026-10-05T09:00:13+00:00",
+      "url": "https://www.youtube.com/watch?v=TedyHuvsDL0"
+    },
+    {
+      "id": "8iePgKS7Axw",
+      "title": "ฝรั่งอังกฤษเรียนภาษาไทยมา 7 เดือน 🇹🇭  #เรียนภาษาไทย #ฝรั่งพูดไทย #คนต่างชาติพูดไทย #พูดภาษาไทย",
+      "channel_name": "Travel Glitch",
+      "channel_slug": "travel-glitch",
+      "channel_avatar": "https://yt3.googleusercontent.com/WyZQSOhd2hSV4WHhxEVosiqiPpzVbwo25D67oCIQKr3_Ga2fd9E_8TDyJ7Yv8TuG_DcZKaHJwg=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i1.ytimg.com/vi/8iePgKS7Axw/hqdefault.jpg",
+      "published_at": "2026-10-05T08:44:17+00:00",
+      "url": "https://www.youtube.com/watch?v=8iePgKS7Axw"
+    },
+    {
+      "id": "u1wMRDTwbSQ",
+      "title": "Rough Seas Sink Boats, Wonder People Festival Returns & Pattaya Bar Updates! | Pattaya News",
+      "channel_name": "Buzzin Pattaya",
+      "channel_slug": "buzzin-pattaya",
+      "channel_avatar": "https://yt3.googleusercontent.com/ytc/AIdro_nUp8SB8KN3NvJvUA_3DilXu6v2Qp_M0Tb3AL54jjLlPm0=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i2.ytimg.com/vi/u1wMRDTwbSQ/hqdefault.jpg",
+      "published_at": "2026-10-05T02:00:33+00:00",
+      "url": "https://www.youtube.com/watch?v=u1wMRDTwbSQ"
+    },
+    {
+      "id": "7FISs-C7Aj0",
+      "title": "VERY LATEST NEWS FROM THAILAND in English (5 October 2026) from Fabulous Radio Pattaya",
+      "channel_name": "Fabulous Pattaya",
+      "channel_slug": "fabulous-pattaya",
+      "channel_avatar": "https://yt3.googleusercontent.com/ytc/AIdro_kPG_DbiOWTBNwUUiepocpGOBrtTV781UaES92xL50vPxg=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i4.ytimg.com/vi/7FISs-C7Aj0/hqdefault.jpg",
+      "published_at": "2026-10-05T02:00:20+00:00",
+      "url": "https://www.youtube.com/watch?v=7FISs-C7Aj0"
+    },
+    {
+      "id": "K_kswcdmoO0",
+      "title": "How To Not Be A Simp In Thailand",
+      "channel_name": "Trae Badd TV",
+      "channel_slug": "trae-badd-tv",
+      "channel_avatar": "https://yt3.googleusercontent.com/YnO5xc6T7pk1Q_nnG5ruJbMOBqHi_YBRWLsAxO_4de-xBE_Dr1qoDnJ407dfBd2m_0CBLYL5yg=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i4.ytimg.com/vi/K_kswcdmoO0/hqdefault.jpg",
+      "published_at": "2026-10-05T01:27:36+00:00",
+      "url": "https://www.youtube.com/watch?v=K_kswcdmoO0"
+    },
+    {
+      "id": "TnoNvw8LW98",
+      "title": "Pattaya Nightlife Walk | Soi Buakhao, Tree Town & LK Metro",
+      "channel_name": "Vespa Life Thailand",
+      "channel_slug": "vespa-life-thailand",
+      "channel_avatar": "https://yt3.googleusercontent.com/_0ocieqX7Bpx3CZLLsmLCQpq7TMttO_TCmaiSI8z75xbWgW7Q7N9NeHHt8yGUPoEjQwEA19c7hs=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i1.ytimg.com/vi/TnoNvw8LW98/hqdefault.jpg",
+      "published_at": "2026-10-05T00:32:18+00:00",
+      "url": "https://www.youtube.com/watch?v=TnoNvw8LW98"
+    },
+    {
+      "id": "FE2hkG6I0qE",
+      "title": "2026年10月5日 タイ バンコク スワンナプーム国際空港地下１階 パタヤとのレート 両替 Exchange amount  2569 October  5th #shorts",
+      "channel_name": "UD Thailand",
+      "channel_slug": "ud-thailand",
+      "channel_avatar": "https://yt3.googleusercontent.com/ytc/AIdro_k6p2pK8BY9F57E6AD_BXywffZajUAEWVqzS0C5ph-WHA=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i3.ytimg.com/vi/FE2hkG6I0qE/hqdefault.jpg",
+      "published_at": "2026-10-04T22:13:27+00:00",
+      "url": "https://www.youtube.com/watch?v=FE2hkG6I0qE"
+    },
+    {
+      "id": "NDf9CHpdYsI",
+      "title": "Why American Men Don't Ask Women Out Anymore V830",
+      "channel_name": "Thailand Rob",
+      "channel_slug": "thailand-rob",
+      "channel_avatar": "https://yt3.googleusercontent.com/ytc/AIdro_lACxUgHiSVBCZnxB3y0AiiOJr0gopsUA7ediB7uV_UEBY=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i3.ytimg.com/vi/NDf9CHpdYsI/hqdefault.jpg",
+      "published_at": "2026-10-04T16:13:48+00:00",
+      "url": "https://www.youtube.com/watch?v=NDf9CHpdYsI"
+    },
+    {
+      "id": "qe8Ky8nT9Hc",
+      "title": "Pattaya Night Walk 🇹🇭 Soi Buakhao, Soi Pothole & Soi Xzyte",
+      "channel_name": "Vespa Life Thailand",
+      "channel_slug": "vespa-life-thailand",
+      "channel_avatar": "https://yt3.googleusercontent.com/_0ocieqX7Bpx3CZLLsmLCQpq7TMttO_TCmaiSI8z75xbWgW7Q7N9NeHHt8yGUPoEjQwEA19c7hs=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i2.ytimg.com/vi/qe8Ky8nT9Hc/hqdefault.jpg",
+      "published_at": "2026-10-04T15:24:53+00:00",
+      "url": "https://www.youtube.com/watch?v=qe8Ky8nT9Hc"
+    },
+    {
+      "id": "t1J67bGLBr0",
+      "title": "A CLOSER LOOK AT PATTAYA: Street Life 2026",
+      "channel_name": "BEACH ROAD",
+      "channel_slug": "beach-road-channel",
+      "channel_avatar": "https://yt3.googleusercontent.com/CWW0rQ6f5ZKIE2_T9vOK3Km3eiBJEAdih3hwx_POm5n_uuG8EDZcL7IK7BLoEnWL0F5f7pnm=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i1.ytimg.com/vi/t1J67bGLBr0/hqdefault.jpg",
+      "published_at": "2026-10-04T13:00:12+00:00",
+      "url": "https://www.youtube.com/watch?v=t1J67bGLBr0"
+    },
+    {
+      "id": "3lmZA63kFdk",
+      "title": "2026年10月4日 タイ パタヤ レート 両替 Exchange amount  2569 October 4th  #shorts",
+      "channel_name": "UD Thailand",
+      "channel_slug": "ud-thailand",
+      "channel_avatar": "https://yt3.googleusercontent.com/ytc/AIdro_k6p2pK8BY9F57E6AD_BXywffZajUAEWVqzS0C5ph-WHA=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i4.ytimg.com/vi/3lmZA63kFdk/hqdefault.jpg",
+      "published_at": "2026-10-04T11:32:01+00:00",
+      "url": "https://www.youtube.com/watch?v=3lmZA63kFdk"
+    },
+    {
+      "id": "eddDdN2zbPM",
+      "title": "A Romantic Homestay In CHIANG MAI 🇹🇭",
+      "channel_name": "Live Love Thailand",
+      "channel_slug": "live-love-thailand",
+      "channel_avatar": "https://yt3.googleusercontent.com/4o7Zbm4j-zSzkZsFc0Ksb12zXwtPZmCerD_dfcZ_zoNOy0Rf-jBU1XdjwevLwWj_ZxdKIfHU4Q=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i2.ytimg.com/vi/eddDdN2zbPM/hqdefault.jpg",
+      "published_at": "2026-10-04T11:00:35+00:00",
+      "url": "https://www.youtube.com/watch?v=eddDdN2zbPM"
+    },
+    {
+      "id": "A-s0BSsoP_k",
+      "title": "MICHELIN Guide Thai Restaurant Less Than 1 Hour From PATTAYA",
+      "channel_name": "Settled in SIAM",
+      "channel_slug": "settled-in-siam",
+      "channel_avatar": "https://yt3.googleusercontent.com/hUjrQt2-RhdItsiQsjbsSAKEJIv1tpwpxtB3D-k1GmjsXVdFG20FWwBTLDW6gLQufYZCDiQjmnc=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i2.ytimg.com/vi/A-s0BSsoP_k/hqdefault.jpg",
+      "published_at": "2026-10-04T10:45:13+00:00",
+      "url": "https://www.youtube.com/watch?v=A-s0BSsoP_k"
+    },
+    {
+      "id": "SrJyfv77DwY",
+      "title": "🇹🇭 [4K] Nakluea Soi 18, Nakluea Main Road - Pattaya Thailand 2026",
+      "channel_name": "DV Media Pattaya",
+      "channel_slug": "dv-media-pattaya",
+      "channel_avatar": "https://yt3.googleusercontent.com/ugj2a216u5s5JhG4iireKvsOCK9lky14pZHt1tGGRm4I9na4HTsC7_8QRPb6xinI7mb8u4ZD=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i4.ytimg.com/vi/SrJyfv77DwY/hqdefault.jpg",
+      "published_at": "2026-10-04T10:30:09+00:00",
+      "url": "https://www.youtube.com/watch?v=SrJyfv77DwY"
+    },
+    {
+      "id": "0yZwF93qfgE",
+      "title": "【タイ・パタヤ】ターミナル２１からビーチロードを散策 最近のパタヤはどんな感じ!? 10月上旬最新情報【注意喚起】",
+      "channel_name": "UD Thailand",
+      "channel_slug": "ud-thailand",
+      "channel_avatar": "https://yt3.googleusercontent.com/ytc/AIdro_k6p2pK8BY9F57E6AD_BXywffZajUAEWVqzS0C5ph-WHA=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i1.ytimg.com/vi/0yZwF93qfgE/hqdefault.jpg",
+      "published_at": "2026-10-04T10:22:04+00:00",
+      "url": "https://www.youtube.com/watch?v=0yZwF93qfgE"
+    },
+    {
+      "id": "h1XmZ9JsO8M",
+      "title": "Pattaya Second Road Walkabout: What to Expect #shorts #pattaya #pattayathailand",
+      "channel_name": "Buzzin Pattaya",
+      "channel_slug": "buzzin-pattaya",
+      "channel_avatar": "https://yt3.googleusercontent.com/ytc/AIdro_nUp8SB8KN3NvJvUA_3DilXu6v2Qp_M0Tb3AL54jjLlPm0=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i1.ytimg.com/vi/h1XmZ9JsO8M/hqdefault.jpg",
+      "published_at": "2026-10-04T02:00:04+00:00",
+      "url": "https://www.youtube.com/watch?v=h1XmZ9JsO8M"
+    },
+    {
+      "id": "WXkR7kR_JfQ",
+      "title": "Bangkok Bangrak Walk 🇹🇭 Saphan Taksin & Sathorn Pier | 4K HDR • Binaural Audio 🎧",
+      "channel_name": "JWINTHAI",
+      "channel_slug": "jwinthai",
+      "channel_avatar": "https://yt3.googleusercontent.com/vrDpU7p6Kfk6gy37xaRu9ovhYrpaRR4vkNKoc0K84Q2A0HYi5mvSju7BOFA_KwbJKoRctumoT7w=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i4.ytimg.com/vi/WXkR7kR_JfQ/hqdefault.jpg",
+      "published_at": "2026-10-04T00:00:34+00:00",
+      "url": "https://www.youtube.com/watch?v=WXkR7kR_JfQ"
+    },
+    {
+      "id": "LD6OZpYySJc",
+      "title": "Pattaya Nightlife in 360° 🛵 Soi 6, 7 & 8 Vespa Ride | You Control the View!",
+      "channel_name": "Vespa Life Thailand",
+      "channel_slug": "vespa-life-thailand",
+      "channel_avatar": "https://yt3.googleusercontent.com/_0ocieqX7Bpx3CZLLsmLCQpq7TMttO_TCmaiSI8z75xbWgW7Q7N9NeHHt8yGUPoEjQwEA19c7hs=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i1.ytimg.com/vi/LD6OZpYySJc/hqdefault.jpg",
+      "published_at": "2026-10-03T22:00:28+00:00",
+      "url": "https://www.youtube.com/watch?v=LD6OZpYySJc"
+    },
+    {
+      "id": "UqgqAoGLem0",
+      "title": "Pattaya Night Ride in 360° 🛵 Soi Buakhao & Tree Town | Look Around!",
+      "channel_name": "Vespa Life Thailand",
+      "channel_slug": "vespa-life-thailand",
+      "channel_avatar": "https://yt3.googleusercontent.com/_0ocieqX7Bpx3CZLLsmLCQpq7TMttO_TCmaiSI8z75xbWgW7Q7N9NeHHt8yGUPoEjQwEA19c7hs=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i2.ytimg.com/vi/UqgqAoGLem0/hqdefault.jpg",
+      "published_at": "2026-10-03T18:15:38+00:00",
+      "url": "https://www.youtube.com/watch?v=UqgqAoGLem0"
+    },
+    {
+      "id": "sLDhBZZ4iG8",
+      "title": "After Party at Trae House",
+      "channel_name": "Trae Badd TV",
+      "channel_slug": "trae-badd-tv",
+      "channel_avatar": "https://yt3.googleusercontent.com/YnO5xc6T7pk1Q_nnG5ruJbMOBqHi_YBRWLsAxO_4de-xBE_Dr1qoDnJ407dfBd2m_0CBLYL5yg=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i4.ytimg.com/vi/sLDhBZZ4iG8/hqdefault.jpg",
+      "published_at": "2026-10-03T17:19:06+00:00",
+      "url": "https://www.youtube.com/watch?v=sLDhBZZ4iG8"
+    },
+    {
+      "id": "J8RZFXZoyx8",
+      "title": "Pattaya at 5:30 PM: Buakhao to Soi Diana as the Night begins",
+      "channel_name": "Vespa Life Thailand",
+      "channel_slug": "vespa-life-thailand",
+      "channel_avatar": "https://yt3.googleusercontent.com/_0ocieqX7Bpx3CZLLsmLCQpq7TMttO_TCmaiSI8z75xbWgW7Q7N9NeHHt8yGUPoEjQwEA19c7hs=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i3.ytimg.com/vi/J8RZFXZoyx8/hqdefault.jpg",
+      "published_at": "2026-10-03T12:36:39+00:00",
+      "url": "https://www.youtube.com/watch?v=J8RZFXZoyx8"
+    },
+    {
+      "id": "jCC2AGykoCI",
+      "title": "🇹🇭 [4K] Second Road massage shops, Soi 9, Tree Town - Pattaya Thailand 2026",
+      "channel_name": "DV Media Pattaya",
+      "channel_slug": "dv-media-pattaya",
+      "channel_avatar": "https://yt3.googleusercontent.com/ugj2a216u5s5JhG4iireKvsOCK9lky14pZHt1tGGRm4I9na4HTsC7_8QRPb6xinI7mb8u4ZD=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i3.ytimg.com/vi/jCC2AGykoCI/hqdefault.jpg",
+      "published_at": "2026-10-03T10:30:07+00:00",
+      "url": "https://www.youtube.com/watch?v=jCC2AGykoCI"
+    },
+    {
+      "id": "85div3Tf95I",
+      "title": "2026年10月3日 タイ パタヤ レート 両替 Exchange amount  2569 October 3rd  #shorts",
+      "channel_name": "UD Thailand",
+      "channel_slug": "ud-thailand",
+      "channel_avatar": "https://yt3.googleusercontent.com/ytc/AIdro_k6p2pK8BY9F57E6AD_BXywffZajUAEWVqzS0C5ph-WHA=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i1.ytimg.com/vi/85div3Tf95I/hqdefault.jpg",
+      "published_at": "2026-10-03T09:03:55+00:00",
+      "url": "https://www.youtube.com/watch?v=85div3Tf95I"
+    },
+    {
+      "id": "gDEutvBoKtY",
+      "title": "Walking Around Pattaya: Honey, Chaiyapoon, Buakhao, Diana, & Myth Night Town - 2026",
+      "channel_name": "Pattaya 101",
+      "channel_slug": "pattaya-101",
+      "channel_avatar": "https://yt3.googleusercontent.com/lcgGQd_VWXbva3sOEvgXp_eISmaA20LSeUnPFagnga7AK9P6Kz4v06ESJt0mwR-TkJEZoF6l=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i4.ytimg.com/vi/gDEutvBoKtY/hqdefault.jpg",
+      "published_at": "2026-10-03T09:00:14+00:00",
+      "url": "https://www.youtube.com/watch?v=gDEutvBoKtY"
+    },
+    {
+      "id": "4j2gVvgHIL8",
+      "title": "LIVE Lets Have Your Music For The Bar w Egg",
+      "channel_name": "Mr Egg Thailand",
+      "channel_slug": "mr-egg-thailand",
+      "channel_avatar": "https://yt3.googleusercontent.com/C37NsrbPKJp2P8VS8y108GSiXtIaJG6Gi7yhhYnDd7aSJL0ILG1eRza8ojpV5pXvGxQq1Gf1=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i1.ytimg.com/vi/4j2gVvgHIL8/hqdefault.jpg",
+      "published_at": "2026-10-03T08:11:19+00:00",
+      "url": "https://www.youtube.com/watch?v=4j2gVvgHIL8"
+    },
+    {
+      "id": "IeNEfuQq0WI",
+      "title": "Bangkok Pratunam Night Shopping Area in the Rain 🇹🇭 4K HDR • Binaural Audio 🎧",
+      "channel_name": "JWINTHAI",
+      "channel_slug": "jwinthai",
+      "channel_avatar": "https://yt3.googleusercontent.com/vrDpU7p6Kfk6gy37xaRu9ovhYrpaRR4vkNKoc0K84Q2A0HYi5mvSju7BOFA_KwbJKoRctumoT7w=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i2.ytimg.com/vi/IeNEfuQq0WI/hqdefault.jpg",
+      "published_at": "2026-10-03T00:00:24+00:00",
+      "url": "https://www.youtube.com/watch?v=IeNEfuQq0WI"
+    },
+    {
+      "id": "3qvW5aLcR9Q",
+      "title": "Pattaya After Dark 🇹🇭 Beach Road & Soi 13/1 | Friday 11:30 PM Walk",
+      "channel_name": "Vespa Life Thailand",
+      "channel_slug": "vespa-life-thailand",
+      "channel_avatar": "https://yt3.googleusercontent.com/_0ocieqX7Bpx3CZLLsmLCQpq7TMttO_TCmaiSI8z75xbWgW7Q7N9NeHHt8yGUPoEjQwEA19c7hs=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i4.ytimg.com/vi/3qvW5aLcR9Q/hqdefault.jpg",
+      "published_at": "2026-10-02T18:07:49+00:00",
+      "url": "https://www.youtube.com/watch?v=3qvW5aLcR9Q"
+    },
+    {
+      "id": "kyNYHdh9IVI",
+      "title": "Pattaya Friday Night Walk 🇹🇭 | Soi 6, 7 & 8 at 9:30 PM",
+      "channel_name": "Vespa Life Thailand",
+      "channel_slug": "vespa-life-thailand",
+      "channel_avatar": "https://yt3.googleusercontent.com/_0ocieqX7Bpx3CZLLsmLCQpq7TMttO_TCmaiSI8z75xbWgW7Q7N9NeHHt8yGUPoEjQwEA19c7hs=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i4.ytimg.com/vi/kyNYHdh9IVI/hqdefault.jpg",
+      "published_at": "2026-10-02T16:32:45+00:00",
+      "url": "https://www.youtube.com/watch?v=kyNYHdh9IVI"
+    },
+    {
+      "id": "CRmFHy2Rs-4",
+      "title": "Trae and Jasmine are Undefeated! #thailand #traebadd #pattaya #bangkok #funny #podcast #rizz #kick",
+      "channel_name": "Trae Badd TV",
+      "channel_slug": "trae-badd-tv",
+      "channel_avatar": "https://yt3.googleusercontent.com/YnO5xc6T7pk1Q_nnG5ruJbMOBqHi_YBRWLsAxO_4de-xBE_Dr1qoDnJ407dfBd2m_0CBLYL5yg=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i4.ytimg.com/vi/CRmFHy2Rs-4/hqdefault.jpg",
+      "published_at": "2026-10-02T13:36:57+00:00",
+      "url": "https://www.youtube.com/watch?v=CRmFHy2Rs-4"
+    },
+    {
+      "id": "nWIHZ5EeJmc",
+      "title": "THE REAL STREETS OF PATTAYA. Thailand Daytime Life",
+      "channel_name": "BEACH ROAD",
+      "channel_slug": "beach-road-channel",
+      "channel_avatar": "https://yt3.googleusercontent.com/CWW0rQ6f5ZKIE2_T9vOK3Km3eiBJEAdih3hwx_POm5n_uuG8EDZcL7IK7BLoEnWL0F5f7pnm=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i3.ytimg.com/vi/nWIHZ5EeJmc/hqdefault.jpg",
+      "published_at": "2026-10-02T13:00:47+00:00",
+      "url": "https://www.youtube.com/watch?v=nWIHZ5EeJmc"
+    },
+    {
+      "id": "TsTPm41ESkM",
+      "title": "2026年10月2日 タイ パタヤ レート 両替 Exchange amount  2569 October 2nd  #shorts",
+      "channel_name": "UD Thailand",
+      "channel_slug": "ud-thailand",
+      "channel_avatar": "https://yt3.googleusercontent.com/ytc/AIdro_k6p2pK8BY9F57E6AD_BXywffZajUAEWVqzS0C5ph-WHA=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i1.ytimg.com/vi/TsTPm41ESkM/hqdefault.jpg",
+      "published_at": "2026-10-02T11:07:58+00:00",
+      "url": "https://www.youtube.com/watch?v=TsTPm41ESkM"
+    },
+    {
+      "id": "osgHAAoDzNU",
+      "title": "🇹🇭 [4K] Tree Town, Myth Night Town, Second Road, Soi 9, Soi MiT - Pattaya Thailand 2026",
+      "channel_name": "DV Media Pattaya",
+      "channel_slug": "dv-media-pattaya",
+      "channel_avatar": "https://yt3.googleusercontent.com/ugj2a216u5s5JhG4iireKvsOCK9lky14pZHt1tGGRm4I9na4HTsC7_8QRPb6xinI7mb8u4ZD=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i4.ytimg.com/vi/osgHAAoDzNU/hqdefault.jpg",
+      "published_at": "2026-10-02T10:30:35+00:00",
+      "url": "https://www.youtube.com/watch?v=osgHAAoDzNU"
+    },
+    {
+      "id": "2DXwnsXspBg",
+      "title": "Index SOFA & LIVING CLEARANCE SALE NOW HAPPENING Up to 70 Percent Off!",
+      "channel_name": "The Pattaya News",
+      "channel_slug": "the-pattaya-news",
+      "channel_avatar": "https://yt3.googleusercontent.com/ED2V0oAQI1iJpeAFvbuEi0wj97DQIsDXma7rxuSOhPxt4wfxf_-hmIINVdUbCWQnBAmfyHavxw=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i3.ytimg.com/vi/2DXwnsXspBg/hqdefault.jpg",
+      "published_at": "2026-10-02T09:42:33+00:00",
+      "url": "https://www.youtube.com/watch?v=2DXwnsXspBg"
+    },
+    {
+      "id": "Tnalw5rAsFo",
+      "title": "WHAT'S HAPPENING IN PATTAYA? Fabulous Radio Pattaya (2nd October 2026)",
+      "channel_name": "Fabulous Pattaya",
+      "channel_slug": "fabulous-pattaya",
+      "channel_avatar": "https://yt3.googleusercontent.com/ytc/AIdro_kPG_DbiOWTBNwUUiepocpGOBrtTV781UaES92xL50vPxg=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i1.ytimg.com/vi/Tnalw5rAsFo/hqdefault.jpg",
+      "published_at": "2026-10-02T05:00:31+00:00",
+      "url": "https://www.youtube.com/watch?v=Tnalw5rAsFo"
+    },
+    {
+      "id": "Eo1CJ6KnyEQ",
+      "title": "Hacked",
+      "channel_name": "Buzzin Pattaya",
+      "channel_slug": "buzzin-pattaya",
+      "channel_avatar": "https://yt3.googleusercontent.com/ytc/AIdro_nUp8SB8KN3NvJvUA_3DilXu6v2Qp_M0Tb3AL54jjLlPm0=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i2.ytimg.com/vi/Eo1CJ6KnyEQ/hqdefault.jpg",
+      "published_at": "2026-10-02T03:14:29+00:00",
+      "url": "https://www.youtube.com/watch?v=Eo1CJ6KnyEQ"
+    },
+    {
+      "id": "i-wEarwPnUE",
+      "title": "VERY LATEST NEWS FROM THAILAND in English (2 October 2026) from Fabulous Radio Pattaya",
+      "channel_name": "Fabulous Pattaya",
+      "channel_slug": "fabulous-pattaya",
+      "channel_avatar": "https://yt3.googleusercontent.com/ytc/AIdro_kPG_DbiOWTBNwUUiepocpGOBrtTV781UaES92xL50vPxg=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i2.ytimg.com/vi/i-wEarwPnUE/hqdefault.jpg",
+      "published_at": "2026-10-02T02:00:38+00:00",
+      "url": "https://www.youtube.com/watch?v=i-wEarwPnUE"
+    },
+    {
+      "id": "dKb5vhf0Lyk",
+      "title": "Is GREED Ruining Pattaya? Reacting to a Viewer's Brutally Honest Email!",
+      "channel_name": "Buzzin Pattaya",
+      "channel_slug": "buzzin-pattaya",
+      "channel_avatar": "https://yt3.googleusercontent.com/ytc/AIdro_nUp8SB8KN3NvJvUA_3DilXu6v2Qp_M0Tb3AL54jjLlPm0=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i1.ytimg.com/vi/dKb5vhf0Lyk/hqdefault.jpg",
+      "published_at": "2026-10-02T02:00:36+00:00",
+      "url": "https://www.youtube.com/watch?v=dKb5vhf0Lyk"
+    },
+    {
+      "id": "JfZH9_ytrBY",
+      "title": "How to Understand the Pattaya Game",
+      "channel_name": "Everything Pattaya",
+      "channel_slug": "everything-pattaya",
+      "channel_avatar": "https://yt3.googleusercontent.com/ytc/AIdro_m4uLkSA24Sg_pCFTDGGu77nuKXc5CcWM6ipNH-TPtmIQ=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i3.ytimg.com/vi/JfZH9_ytrBY/hqdefault.jpg",
+      "published_at": "2026-10-02T02:00:23+00:00",
+      "url": "https://www.youtube.com/watch?v=JfZH9_ytrBY"
+    },
+    {
+      "id": "kRS-8-q9hEc",
+      "title": "Bangkok Silom Walk 🇹🇭 Nightlife & Business Area | 4K HDR • Binaural Audio 🎧",
+      "channel_name": "JWINTHAI",
+      "channel_slug": "jwinthai",
+      "channel_avatar": "https://yt3.googleusercontent.com/vrDpU7p6Kfk6gy37xaRu9ovhYrpaRR4vkNKoc0K84Q2A0HYi5mvSju7BOFA_KwbJKoRctumoT7w=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i4.ytimg.com/vi/kRS-8-q9hEc/hqdefault.jpg",
+      "published_at": "2026-10-02T00:00:24+00:00",
+      "url": "https://www.youtube.com/watch?v=kRS-8-q9hEc"
+    },
+    {
+      "id": "CQXfAExHIXE",
+      "title": "Pattaya at 8PM 🇹🇭 Soi Diana to Tree Town | Night Walk",
+      "channel_name": "Vespa Life Thailand",
+      "channel_slug": "vespa-life-thailand",
+      "channel_avatar": "https://yt3.googleusercontent.com/_0ocieqX7Bpx3CZLLsmLCQpq7TMttO_TCmaiSI8z75xbWgW7Q7N9NeHHt8yGUPoEjQwEA19c7hs=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i4.ytimg.com/vi/CQXfAExHIXE/hqdefault.jpg",
+      "published_at": "2026-10-01T15:20:16+00:00",
+      "url": "https://www.youtube.com/watch?v=CQXfAExHIXE"
+    },
+    {
+      "id": "prcO6-SIRXQ",
+      "title": "I Had To Send It Back On SOI 6! Pattaya Thailand",
+      "channel_name": "Settled in SIAM",
+      "channel_slug": "settled-in-siam",
+      "channel_avatar": "https://yt3.googleusercontent.com/hUjrQt2-RhdItsiQsjbsSAKEJIv1tpwpxtB3D-k1GmjsXVdFG20FWwBTLDW6gLQufYZCDiQjmnc=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i1.ytimg.com/vi/prcO6-SIRXQ/hqdefault.jpg",
+      "published_at": "2026-10-01T13:00:22+00:00",
+      "url": "https://www.youtube.com/watch?v=prcO6-SIRXQ"
+    },
+    {
+      "id": "J1xvrGrGpIY",
+      "title": "Pattaya: Club 7 DELAYED, here's why..",
+      "channel_name": "NDtvi Thailand",
+      "channel_slug": "ndtvi-thailand",
+      "channel_avatar": "https://yt3.googleusercontent.com/3Y-8EvHSWFMADaSoarlgl9npq8T4FTiU8c7gAsoVAIBfLsSggo0c5TT5mA1A_UhdNlc5pFPnmDs=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i3.ytimg.com/vi/J1xvrGrGpIY/hqdefault.jpg",
+      "published_at": "2026-10-01T12:00:35+00:00",
+      "url": "https://www.youtube.com/watch?v=J1xvrGrGpIY"
+    }
+  ]
 }
