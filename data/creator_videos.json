@@ -1,7 +1,27 @@
 {
-  "last_updated": "2026-10-08T14:23:49.409Z",
+  "last_updated": "2026-10-08T20:02:14.065Z",
   "total_videos": 89,
   "videos": [
+    {
+      "id": "9KqSRHw4bR0",
+      "title": "Maison & Co. Opens Flagship Store in Pattaya, Partnering with Velo Café",
+      "channel_name": "The Pattaya News",
+      "channel_slug": "the-pattaya-news",
+      "channel_avatar": "https://yt3.googleusercontent.com/ED2V0oAQI1iJpeAFvbuEi0wj97DQIsDXma7rxuSOhPxt4wfxf_-hmIINVdUbCWQnBAmfyHavxw=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i2.ytimg.com/vi/9KqSRHw4bR0/hqdefault.jpg",
+      "published_at": "2026-10-08T15:40:30+00:00",
+      "url": "https://www.youtube.com/watch?v=9KqSRHw4bR0"
+    },
+    {
+      "id": "PpCGVYUsmjk",
+      "title": "Pattaya Night Walk 🇹🇭 Soi Buakhao, Pothole + Hidden Alley & Honey | October 6",
+      "channel_name": "Vespa Life Thailand",
+      "channel_slug": "vespa-life-thailand",
+      "channel_avatar": "https://yt3.googleusercontent.com/_0ocieqX7Bpx3CZLLsmLCQpq7TMttO_TCmaiSI8z75xbWgW7Q7N9NeHHt8yGUPoEjQwEA19c7hs=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i1.ytimg.com/vi/PpCGVYUsmjk/hqdefault.jpg",
+      "published_at": "2026-10-08T15:00:05+00:00",
+      "url": "https://www.youtube.com/watch?v=PpCGVYUsmjk"
+    },
     {
       "id": "y1BqBPgmuSk",
       "title": "LIVING THE DREAM OR JUST BROKE IN PARADISE? 😂🇹🇭 | Pattaya Pool LIVE 📱",
@@ -161,16 +181,6 @@
       "thumbnail_url": "https://i4.ytimg.com/vi/G_323dzevfs/hqdefault.jpg",
       "published_at": "2026-10-07T17:41:49+00:00",
       "url": "https://www.youtube.com/watch?v=G_323dzevfs"
-    },
-    {
-      "id": "PEP8AGe94pc",
-      "title": "DJi receiver dongle breaks again",
-      "channel_name": "Mr Egg Thailand",
-      "channel_slug": "mr-egg-thailand",
-      "channel_avatar": "https://yt3.googleusercontent.com/C37NsrbPKJp2P8VS8y108GSiXtIaJG6Gi7yhhYnDd7aSJL0ILG1eRza8ojpV5pXvGxQq1Gf1=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i1.ytimg.com/vi/PEP8AGe94pc/hqdefault.jpg",
-      "published_at": "2026-10-07T16:52:10+00:00",
-      "url": "https://www.youtube.com/watch?v=PEP8AGe94pc"
     },
     {
       "id": "GarJqBsIQgQ",
@@ -881,16 +891,6 @@
       "thumbnail_url": "https://i4.ytimg.com/vi/kRS-8-q9hEc/hqdefault.jpg",
       "published_at": "2026-10-02T00:00:24+00:00",
       "url": "https://www.youtube.com/watch?v=kRS-8-q9hEc"
-    },
-    {
-      "id": "CQXfAExHIXE",
-      "title": "Pattaya at 8PM 🇹🇭 Soi Diana to Tree Town | Night Walk",
-      "channel_name": "Vespa Life Thailand",
-      "channel_slug": "vespa-life-thailand",
-      "channel_avatar": "https://yt3.googleusercontent.com/_0ocieqX7Bpx3CZLLsmLCQpq7TMttO_TCmaiSI8z75xbWgW7Q7N9NeHHt8yGUPoEjQwEA19c7hs=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i4.ytimg.com/vi/CQXfAExHIXE/hqdefault.jpg",
-      "published_at": "2026-10-01T15:20:16+00:00",
-      "url": "https://www.youtube.com/watch?v=CQXfAExHIXE"
     }
   ]
 }
