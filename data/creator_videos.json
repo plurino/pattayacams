@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-10-08T11:47:15.724Z",
-  "total_videos": 91,
+  "last_updated": "2026-10-08T14:23:49.409Z",
+  "total_videos": 89,
   "videos": [
     {
       "id": "y1BqBPgmuSk",
@@ -891,26 +891,6 @@
       "thumbnail_url": "https://i4.ytimg.com/vi/CQXfAExHIXE/hqdefault.jpg",
       "published_at": "2026-10-01T15:20:16+00:00",
       "url": "https://www.youtube.com/watch?v=CQXfAExHIXE"
-    },
-    {
-      "id": "prcO6-SIRXQ",
-      "title": "I Had To Send It Back On SOI 6! Pattaya Thailand",
-      "channel_name": "Settled in SIAM",
-      "channel_slug": "settled-in-siam",
-      "channel_avatar": "https://yt3.googleusercontent.com/hUjrQt2-RhdItsiQsjbsSAKEJIv1tpwpxtB3D-k1GmjsXVdFG20FWwBTLDW6gLQufYZCDiQjmnc=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i1.ytimg.com/vi/prcO6-SIRXQ/hqdefault.jpg",
-      "published_at": "2026-10-01T13:00:22+00:00",
-      "url": "https://www.youtube.com/watch?v=prcO6-SIRXQ"
-    },
-    {
-      "id": "J1xvrGrGpIY",
-      "title": "Pattaya: Club 7 DELAYED, here's why..",
-      "channel_name": "NDtvi Thailand",
-      "channel_slug": "ndtvi-thailand",
-      "channel_avatar": "https://yt3.googleusercontent.com/3Y-8EvHSWFMADaSoarlgl9npq8T4FTiU8c7gAsoVAIBfLsSggo0c5TT5mA1A_UhdNlc5pFPnmDs=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i3.ytimg.com/vi/J1xvrGrGpIY/hqdefault.jpg",
-      "published_at": "2026-10-01T12:00:35+00:00",
-      "url": "https://www.youtube.com/watch?v=J1xvrGrGpIY"
     }
   ]
 }
