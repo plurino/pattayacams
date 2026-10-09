@@ -1,7 +1,27 @@
 {
-  "last_updated": "2026-10-08T20:02:14.065Z",
-  "total_videos": 89,
+  "last_updated": "2026-10-09T00:23:07.927Z",
+  "total_videos": 90,
   "videos": [
+    {
+      "id": "BzJWhLWbErE",
+      "title": "I Didn't Expect Lanzhou to Look Like THIS",
+      "channel_name": "Walk East",
+      "channel_slug": "walk-east",
+      "channel_avatar": "https://yt3.googleusercontent.com/ZYTU0Rr4aTNKKi6XWjBMk38_Qb13ULfXgM2JxgZo6N6mKNUff6YP13-dogqXUM-unjcy6TJeUA8=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i3.ytimg.com/vi/BzJWhLWbErE/hqdefault.jpg",
+      "published_at": "2026-10-09T00:00:29+00:00",
+      "url": "https://www.youtube.com/watch?v=BzJWhLWbErE"
+    },
+    {
+      "id": "cLSLgzjo0_U",
+      "title": "Bangkok Comes Alive at Dusk 🇹🇭 Evening Rush in Sutthisan | 4K HDR • Binaural Audio 🎧",
+      "channel_name": "JWINTHAI",
+      "channel_slug": "jwinthai",
+      "channel_avatar": "https://yt3.googleusercontent.com/vrDpU7p6Kfk6gy37xaRu9ovhYrpaRR4vkNKoc0K84Q2A0HYi5mvSju7BOFA_KwbJKoRctumoT7w=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i4.ytimg.com/vi/cLSLgzjo0_U/hqdefault.jpg",
+      "published_at": "2026-10-09T00:00:16+00:00",
+      "url": "https://www.youtube.com/watch?v=cLSLgzjo0_U"
+    },
     {
       "id": "9KqSRHw4bR0",
       "title": "Maison & Co. Opens Flagship Store in Pattaya, Partnering with Velo Café",
@@ -881,16 +901,6 @@
       "thumbnail_url": "https://i3.ytimg.com/vi/JfZH9_ytrBY/hqdefault.jpg",
       "published_at": "2026-10-02T02:00:23+00:00",
       "url": "https://www.youtube.com/watch?v=JfZH9_ytrBY"
-    },
-    {
-      "id": "kRS-8-q9hEc",
-      "title": "Bangkok Silom Walk 🇹🇭 Nightlife & Business Area | 4K HDR • Binaural Audio 🎧",
-      "channel_name": "JWINTHAI",
-      "channel_slug": "jwinthai",
-      "channel_avatar": "https://yt3.googleusercontent.com/vrDpU7p6Kfk6gy37xaRu9ovhYrpaRR4vkNKoc0K84Q2A0HYi5mvSju7BOFA_KwbJKoRctumoT7w=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i4.ytimg.com/vi/kRS-8-q9hEc/hqdefault.jpg",
-      "published_at": "2026-10-02T00:00:24+00:00",
-      "url": "https://www.youtube.com/watch?v=kRS-8-q9hEc"
     }
   ]
 }
