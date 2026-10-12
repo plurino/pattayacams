@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-10-12T12:46:09.201Z",
-  "total_videos": 99,
+  "last_updated": "2026-10-12T16:31:31.135Z",
+  "total_videos": 97,
   "videos": [
     {
       "id": "ccJOY1AR-9M",
@@ -971,26 +971,6 @@
       "thumbnail_url": "https://i1.ytimg.com/vi/81yE2qjrJio/hqdefault.jpg",
       "published_at": "2026-10-06T02:00:39+00:00",
       "url": "https://www.youtube.com/watch?v=81yE2qjrJio"
-    },
-    {
-      "id": "pl43rc4NFn8",
-      "title": "【4K HDR】Bangkok Morning Commute Traffic 🇹🇭 On Nut - Sukhumvit - Siam | Real City Sounds",
-      "channel_name": "JWINTHAI",
-      "channel_slug": "jwinthai",
-      "channel_avatar": "https://yt3.googleusercontent.com/vrDpU7p6Kfk6gy37xaRu9ovhYrpaRR4vkNKoc0K84Q2A0HYi5mvSju7BOFA_KwbJKoRctumoT7w=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i1.ytimg.com/vi/pl43rc4NFn8/hqdefault.jpg",
-      "published_at": "2026-10-06T00:00:18+00:00",
-      "url": "https://www.youtube.com/watch?v=pl43rc4NFn8"
-    },
-    {
-      "id": "-GyFb14tPwk",
-      "title": "Pattaya Beach Road at Midnight 🌙 | Night Walk — October 5",
-      "channel_name": "Vespa Life Thailand",
-      "channel_slug": "vespa-life-thailand",
-      "channel_avatar": "https://yt3.googleusercontent.com/_0ocieqX7Bpx3CZLLsmLCQpq7TMttO_TCmaiSI8z75xbWgW7Q7N9NeHHt8yGUPoEjQwEA19c7hs=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i2.ytimg.com/vi/-GyFb14tPwk/hqdefault.jpg",
-      "published_at": "2026-10-05T15:30:13+00:00",
-      "url": "https://www.youtube.com/watch?v=-GyFb14tPwk"
     }
   ]
 }
