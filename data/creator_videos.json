@@ -1,7 +1,57 @@
 {
-  "last_updated": "2026-10-13T14:49:15.270Z",
-  "total_videos": 104,
+  "last_updated": "2026-10-13T20:31:11.621Z",
+  "total_videos": 105,
   "videos": [
+    {
+      "id": "wRALvxCKqgQ",
+      "title": "This Monkey Followed Me Home in Pattaya!",
+      "channel_name": "The Tysin Show",
+      "channel_slug": "the-tysin-show",
+      "channel_avatar": "https://yt3.googleusercontent.com/3tMHDr_3VQy3AXy0yW7XsFwHJWBAJj66W8dqKHYTQ3JB9vEX8LbKVhHWjEodtG8TbCcIy9aV0w=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i4.ytimg.com/vi/wRALvxCKqgQ/hqdefault.jpg",
+      "published_at": "2026-10-13T19:46:29+00:00",
+      "url": "https://www.youtube.com/watch?v=wRALvxCKqgQ"
+    },
+    {
+      "id": "Sc9fITASKkI",
+      "title": "A Monkey Followed Me Home in Pattaya!",
+      "channel_name": "The Tysin Show",
+      "channel_slug": "the-tysin-show",
+      "channel_avatar": "https://yt3.googleusercontent.com/3tMHDr_3VQy3AXy0yW7XsFwHJWBAJj66W8dqKHYTQ3JB9vEX8LbKVhHWjEodtG8TbCcIy9aV0w=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i4.ytimg.com/vi/Sc9fITASKkI/hqdefault.jpg",
+      "published_at": "2026-10-13T19:33:33+00:00",
+      "url": "https://www.youtube.com/watch?v=Sc9fITASKkI"
+    },
+    {
+      "id": "Of7B1xvx89o",
+      "title": "When an Old Man Mistakes Attention for Authority…",
+      "channel_name": "Pattaya Joker TV",
+      "channel_slug": "pattaya-joker-tv",
+      "channel_avatar": "https://yt3.googleusercontent.com/g1UFe8UV9XnO9syJa2Ayq2Knbg88D0ukIHS4wjd9o0AGwuHNZcPyWLSWAf1oqqkSS7HA6Vcw=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i4.ytimg.com/vi/Of7B1xvx89o/hqdefault.jpg",
+      "published_at": "2026-10-13T18:05:18+00:00",
+      "url": "https://www.youtube.com/watch?v=Of7B1xvx89o"
+    },
+    {
+      "id": "R0rbMU_nbqQ",
+      "title": "MYTH NIGHT Pattaya at 9:30 PM | Soi Buakhao to Made in Thailand",
+      "channel_name": "Vespa Life Thailand",
+      "channel_slug": "vespa-life-thailand",
+      "channel_avatar": "https://yt3.googleusercontent.com/_0ocieqX7Bpx3CZLLsmLCQpq7TMttO_TCmaiSI8z75xbWgW7Q7N9NeHHt8yGUPoEjQwEA19c7hs=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i3.ytimg.com/vi/R0rbMU_nbqQ/hqdefault.jpg",
+      "published_at": "2026-10-13T16:59:33+00:00",
+      "url": "https://www.youtube.com/watch?v=R0rbMU_nbqQ"
+    },
+    {
+      "id": "5LiBBGCl0sU",
+      "title": "One way to get the Girls Motivated at Deluzion!",
+      "channel_name": "Mac TV",
+      "channel_slug": "mac-tv",
+      "channel_avatar": "https://yt3.googleusercontent.com/oSFiARQTu2FbqFOLPVtIROpM-sPXcE_g-T8hrfJXj0QO-ATDEtOcUIsFaq0B-_fPeAMBR1A-FxQ=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i2.ytimg.com/vi/5LiBBGCl0sU/hqdefault.jpg",
+      "published_at": "2026-10-13T16:34:32+00:00",
+      "url": "https://www.youtube.com/watch?v=5LiBBGCl0sU"
+    },
     {
       "id": "GYPRnZyoULk",
       "title": "Back in Pattaya! Hookup Club Slow Progress..",
@@ -111,16 +161,6 @@
       "thumbnail_url": "https://i3.ytimg.com/vi/jiVXlzGtePQ/hqdefault.jpg",
       "published_at": "2026-10-13T00:00:24+00:00",
       "url": "https://www.youtube.com/watch?v=jiVXlzGtePQ"
-    },
-    {
-      "id": "Of7B1xvx89o",
-      "title": "Pandora's Box Has Been Opened.",
-      "channel_name": "Pattaya Joker TV",
-      "channel_slug": "pattaya-joker-tv",
-      "channel_avatar": "https://yt3.googleusercontent.com/g1UFe8UV9XnO9syJa2Ayq2Knbg88D0ukIHS4wjd9o0AGwuHNZcPyWLSWAf1oqqkSS7HA6Vcw=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i4.ytimg.com/vi/Of7B1xvx89o/hqdefault.jpg",
-      "published_at": "2026-10-12T19:07:22+00:00",
-      "url": "https://www.youtube.com/watch?v=Of7B1xvx89o"
     },
     {
       "id": "479hj4xhU1Q",
@@ -523,16 +563,6 @@
       "url": "https://www.youtube.com/watch?v=lb799svm-9I"
     },
     {
-      "id": "Tb2UwG2VTfI",
-      "title": "Even the Monkeys Love Pattaya!",
-      "channel_name": "The Tysin Show",
-      "channel_slug": "the-tysin-show",
-      "channel_avatar": "https://yt3.googleusercontent.com/3tMHDr_3VQy3AXy0yW7XsFwHJWBAJj66W8dqKHYTQ3JB9vEX8LbKVhHWjEodtG8TbCcIy9aV0w=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i1.ytimg.com/vi/Tb2UwG2VTfI/hqdefault.jpg",
-      "published_at": "2026-10-10T15:40:42+00:00",
-      "url": "https://www.youtube.com/watch?v=Tb2UwG2VTfI"
-    },
-    {
       "id": "y6HdzpNDv44",
       "title": "Soi 6 Was CRAZY at 11:30 PM! | Pattaya Night Walk 🇹🇭",
       "channel_name": "Vespa Life Thailand",
@@ -651,16 +681,6 @@
       "thumbnail_url": "https://i2.ytimg.com/vi/ETMbYCc7qTE/hqdefault.jpg",
       "published_at": "2026-10-10T06:42:04+00:00",
       "url": "https://www.youtube.com/watch?v=ETMbYCc7qTE"
-    },
-    {
-      "id": "h2LRNUyh1LE",
-      "title": "No Money, No Honey… My Brain Won’t Let Me Walk in Peace",
-      "channel_name": "The Tysin Show",
-      "channel_slug": "the-tysin-show",
-      "channel_avatar": "https://yt3.googleusercontent.com/3tMHDr_3VQy3AXy0yW7XsFwHJWBAJj66W8dqKHYTQ3JB9vEX8LbKVhHWjEodtG8TbCcIy9aV0w=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i1.ytimg.com/vi/h2LRNUyh1LE/hqdefault.jpg",
-      "published_at": "2026-10-10T06:13:22+00:00",
-      "url": "https://www.youtube.com/watch?v=h2LRNUyh1LE"
     },
     {
       "id": "UPyt-b_Cgtg",
@@ -1031,16 +1051,6 @@
       "thumbnail_url": "https://i4.ytimg.com/vi/Kfi13LMyeKM/hqdefault.jpg",
       "published_at": "2026-10-07T00:00:31+00:00",
       "url": "https://www.youtube.com/watch?v=Kfi13LMyeKM"
-    },
-    {
-      "id": "3sYvxbqGDbo",
-      "title": "Pattaya Soi 6, 7 & 8 Walking Tour | October 6, 2026",
-      "channel_name": "Vespa Life Thailand",
-      "channel_slug": "vespa-life-thailand",
-      "channel_avatar": "https://yt3.googleusercontent.com/_0ocieqX7Bpx3CZLLsmLCQpq7TMttO_TCmaiSI8z75xbWgW7Q7N9NeHHt8yGUPoEjQwEA19c7hs=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i4.ytimg.com/vi/3sYvxbqGDbo/hqdefault.jpg",
-      "published_at": "2026-10-06T14:50:42+00:00",
-      "url": "https://www.youtube.com/watch?v=3sYvxbqGDbo"
     }
   ]
 }
