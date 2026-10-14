@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-10-14T17:37:21.078Z",
-  "total_videos": 109,
+  "last_updated": "2026-10-14T20:58:14.897Z",
+  "total_videos": 108,
   "videos": [
     {
       "id": "TNmrCBN-l8c",
@@ -1081,16 +1081,6 @@
       "thumbnail_url": "https://i2.ytimg.com/vi/Imt6V8AHCRQ/hqdefault.jpg",
       "published_at": "2026-10-08T02:00:05+00:00",
       "url": "https://www.youtube.com/watch?v=Imt6V8AHCRQ"
-    },
-    {
-      "id": "G_323dzevfs",
-      "title": "Pattaya police step up patrols in entertainment areas to reassure tourists",
-      "channel_name": "The Pattaya News",
-      "channel_slug": "the-pattaya-news",
-      "channel_avatar": "https://yt3.googleusercontent.com/ED2V0oAQI1iJpeAFvbuEi0wj97DQIsDXma7rxuSOhPxt4wfxf_-hmIINVdUbCWQnBAmfyHavxw=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i4.ytimg.com/vi/G_323dzevfs/hqdefault.jpg",
-      "published_at": "2026-10-07T17:41:49+00:00",
-      "url": "https://www.youtube.com/watch?v=G_323dzevfs"
     }
   ]
 }
