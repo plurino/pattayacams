@@ -1,17 +1,7 @@
 {
-  "last_updated": "2026-10-16T19:42:46.595Z",
+  "last_updated": "2026-10-16T22:12:57.535Z",
   "total_videos": 110,
   "videos": [
-    {
-      "id": "2AqdD5MND5o",
-      "title": "Soi 6 at 10 PM 🇹🇭 | Pattaya After Dark — October 15",
-      "channel_name": "Vespa Life Thailand",
-      "channel_slug": "vespa-life-thailand",
-      "channel_avatar": "https://yt3.googleusercontent.com/_0ocieqX7Bpx3CZLLsmLCQpq7TMttO_TCmaiSI8z75xbWgW7Q7N9NeHHt8yGUPoEjQwEA19c7hs=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i3.ytimg.com/vi/2AqdD5MND5o/hqdefault.jpg",
-      "published_at": "2026-10-16T15:00:14+00:00",
-      "url": "https://www.youtube.com/watch?v=2AqdD5MND5o"
-    },
     {
       "id": "h5klP2V5WTQ",
       "title": "We’re Opening Our Restaurant! 🇯🇲 Jomtien | Jermakingmecrazy × The Meltdown 📱",
@@ -19,7 +9,7 @@
       "channel_slug": "the-tysin-show",
       "channel_avatar": "https://yt3.googleusercontent.com/3tMHDr_3VQy3AXy0yW7XsFwHJWBAJj66W8dqKHYTQ3JB9vEX8LbKVhHWjEodtG8TbCcIy9aV0w=s900-c-k-c0x00ffffff-no-rj",
       "thumbnail_url": "https://i1.ytimg.com/vi/h5klP2V5WTQ/hqdefault.jpg",
-      "published_at": "2026-10-16T13:03:20+00:00",
+      "published_at": "2026-10-16T21:37:00+00:00",
       "url": "https://www.youtube.com/watch?v=h5klP2V5WTQ"
     },
     {
@@ -29,8 +19,18 @@
       "channel_slug": "the-tysin-show",
       "channel_avatar": "https://yt3.googleusercontent.com/3tMHDr_3VQy3AXy0yW7XsFwHJWBAJj66W8dqKHYTQ3JB9vEX8LbKVhHWjEodtG8TbCcIy9aV0w=s900-c-k-c0x00ffffff-no-rj",
       "thumbnail_url": "https://i2.ytimg.com/vi/9nJNV3FM4JE/hqdefault.jpg",
-      "published_at": "2026-10-16T13:03:20+00:00",
+      "published_at": "2026-10-16T20:02:38+00:00",
       "url": "https://www.youtube.com/watch?v=9nJNV3FM4JE"
+    },
+    {
+      "id": "2AqdD5MND5o",
+      "title": "Soi 6 at 10 PM 🇹🇭 | Pattaya After Dark — October 15",
+      "channel_name": "Vespa Life Thailand",
+      "channel_slug": "vespa-life-thailand",
+      "channel_avatar": "https://yt3.googleusercontent.com/_0ocieqX7Bpx3CZLLsmLCQpq7TMttO_TCmaiSI8z75xbWgW7Q7N9NeHHt8yGUPoEjQwEA19c7hs=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i3.ytimg.com/vi/2AqdD5MND5o/hqdefault.jpg",
+      "published_at": "2026-10-16T15:00:14+00:00",
+      "url": "https://www.youtube.com/watch?v=2AqdD5MND5o"
     },
     {
       "id": "v3FZZZrxLrk",
