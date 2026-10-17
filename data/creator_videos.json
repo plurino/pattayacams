@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-10-17T21:45:04.610Z",
-  "total_videos": 106,
+  "last_updated": "2026-10-17T23:30:09.412Z",
+  "total_videos": 105,
   "videos": [
     {
       "id": "gy-rUsEuYuU",
@@ -1051,16 +1051,6 @@
       "thumbnail_url": "https://i2.ytimg.com/vi/ElF25iHBXTc/hqdefault.jpg",
       "published_at": "2026-10-11T00:00:23+00:00",
       "url": "https://www.youtube.com/watch?v=ElF25iHBXTc"
-    },
-    {
-      "id": "yIrpJaeYqqA",
-      "title": "One question I get asked about my Bar in Thailand?!",
-      "channel_name": "Mac TV",
-      "channel_slug": "mac-tv",
-      "channel_avatar": "https://yt3.googleusercontent.com/oSFiARQTu2FbqFOLPVtIROpM-sPXcE_g-T8hrfJXj0QO-ATDEtOcUIsFaq0B-_fPeAMBR1A-FxQ=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i2.ytimg.com/vi/yIrpJaeYqqA/hqdefault.jpg",
-      "published_at": "2026-10-10T22:04:44+00:00",
-      "url": "https://www.youtube.com/watch?v=yIrpJaeYqqA"
     }
   ]
 }
