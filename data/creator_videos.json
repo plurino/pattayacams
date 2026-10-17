@@ -1,7 +1,47 @@
 {
-  "last_updated": "2026-10-17T11:24:38.389Z",
-  "total_videos": 111,
+  "last_updated": "2026-10-17T14:19:31.217Z",
+  "total_videos": 113,
   "videos": [
+    {
+      "id": "kwC8p7taYnU",
+      "title": "I've struck GOLD in Thailand.. But at What cost?!",
+      "channel_name": "Mac TV",
+      "channel_slug": "mac-tv",
+      "channel_avatar": "https://yt3.googleusercontent.com/oSFiARQTu2FbqFOLPVtIROpM-sPXcE_g-T8hrfJXj0QO-ATDEtOcUIsFaq0B-_fPeAMBR1A-FxQ=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i4.ytimg.com/vi/kwC8p7taYnU/hqdefault.jpg",
+      "published_at": "2026-10-17T13:08:13+00:00",
+      "url": "https://www.youtube.com/watch?v=kwC8p7taYnU"
+    },
+    {
+      "id": "gy-rUsEuYuU",
+      "title": "LIVE in Jomtien! Jerk Chicken & Laughs at The Meltdown 🇯🇲🇹🇭 📱",
+      "channel_name": "The Tysin Show",
+      "channel_slug": "the-tysin-show",
+      "channel_avatar": "https://yt3.googleusercontent.com/3tMHDr_3VQy3AXy0yW7XsFwHJWBAJj66W8dqKHYTQ3JB9vEX8LbKVhHWjEodtG8TbCcIy9aV0w=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i4.ytimg.com/vi/gy-rUsEuYuU/hqdefault.jpg",
+      "published_at": "2026-10-17T11:58:33+00:00",
+      "url": "https://www.youtube.com/watch?v=gy-rUsEuYuU"
+    },
+    {
+      "id": "HWvzTK9pGe4",
+      "title": "LIVE in Jomtien! Jerk Chicken & Laughs at The Meltdown 🇯🇲🇹🇭",
+      "channel_name": "The Tysin Show",
+      "channel_slug": "the-tysin-show",
+      "channel_avatar": "https://yt3.googleusercontent.com/3tMHDr_3VQy3AXy0yW7XsFwHJWBAJj66W8dqKHYTQ3JB9vEX8LbKVhHWjEodtG8TbCcIy9aV0w=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i1.ytimg.com/vi/HWvzTK9pGe4/hqdefault.jpg",
+      "published_at": "2026-10-17T11:58:32+00:00",
+      "url": "https://www.youtube.com/watch?v=HWvzTK9pGe4"
+    },
+    {
+      "id": "BkBRE5QUI9M",
+      "title": "2026年10月17日 タイ パタヤからライブ配信 菜食週間ギンジェーとは？ライブ詳細は説明欄へ",
+      "channel_name": "UD Thailand",
+      "channel_slug": "ud-thailand",
+      "channel_avatar": "https://yt3.googleusercontent.com/ytc/AIdro_k6p2pK8BY9F57E6AD_BXywffZajUAEWVqzS0C5ph-WHA=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i3.ytimg.com/vi/BkBRE5QUI9M/hqdefault.jpg",
+      "published_at": "2026-10-17T11:54:01+00:00",
+      "url": "https://www.youtube.com/watch?v=BkBRE5QUI9M"
+    },
     {
       "id": "n0-TugJGqmk",
       "title": "We’re Opening Our Restaurant! 🇯🇲 Jomtien | Jermakingmecrazy × The Meltdown",
@@ -191,16 +231,6 @@
       "thumbnail_url": "https://i1.ytimg.com/vi/TABU9IFM7Lo/hqdefault.jpg",
       "published_at": "2026-10-16T02:22:35+00:00",
       "url": "https://www.youtube.com/watch?v=TABU9IFM7Lo"
-    },
-    {
-      "id": "BkBRE5QUI9M",
-      "title": "2026年10月17日 タイ パタヤからライブ配信 菜食週間ギンジェーとは？ライブ詳細は説明欄へ",
-      "channel_name": "UD Thailand",
-      "channel_slug": "ud-thailand",
-      "channel_avatar": "https://yt3.googleusercontent.com/ytc/AIdro_k6p2pK8BY9F57E6AD_BXywffZajUAEWVqzS0C5ph-WHA=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i3.ytimg.com/vi/BkBRE5QUI9M/hqdefault.jpg",
-      "published_at": "2026-10-16T02:18:40+00:00",
-      "url": "https://www.youtube.com/watch?v=BkBRE5QUI9M"
     },
     {
       "id": "vFtmrbPpuSQ",
@@ -871,16 +901,6 @@
       "thumbnail_url": "https://i3.ytimg.com/vi/2N0wZ64qN3U/hqdefault.jpg",
       "published_at": "2026-10-11T21:20:17+00:00",
       "url": "https://www.youtube.com/watch?v=2N0wZ64qN3U"
-    },
-    {
-      "id": "Bq4-kn7KMv4",
-      "title": "Pool First… Pattaya Nightlife Later!",
-      "channel_name": "The Tysin Show",
-      "channel_slug": "the-tysin-show",
-      "channel_avatar": "https://yt3.googleusercontent.com/3tMHDr_3VQy3AXy0yW7XsFwHJWBAJj66W8dqKHYTQ3JB9vEX8LbKVhHWjEodtG8TbCcIy9aV0w=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i3.ytimg.com/vi/Bq4-kn7KMv4/hqdefault.jpg",
-      "published_at": "2026-10-11T17:34:54+00:00",
-      "url": "https://www.youtube.com/watch?v=Bq4-kn7KMv4"
     },
     {
       "id": "D_S6oVWGgRs",
