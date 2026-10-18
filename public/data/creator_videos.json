@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-10-18T20:57:34.085Z",
-  "total_videos": 103,
+  "last_updated": "2026-10-18T22:56:31.738Z",
+  "total_videos": 102,
   "videos": [
     {
       "id": "PbM4B-_zLMQ",
@@ -1021,16 +1021,6 @@
       "thumbnail_url": "https://i3.ytimg.com/vi/RAUzEDZibJ0/hqdefault.jpg",
       "published_at": "2026-10-12T02:00:02+00:00",
       "url": "https://www.youtube.com/watch?v=RAUzEDZibJ0"
-    },
-    {
-      "id": "2N0wZ64qN3U",
-      "title": "Two UNHINGED YouTubers Arrange a FIGHT Over Internet Drama!",
-      "channel_name": "Pattaya Joker TV",
-      "channel_slug": "pattaya-joker-tv",
-      "channel_avatar": "https://yt3.googleusercontent.com/g1UFe8UV9XnO9syJa2Ayq2Knbg88D0ukIHS4wjd9o0AGwuHNZcPyWLSWAf1oqqkSS7HA6Vcw=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i3.ytimg.com/vi/2N0wZ64qN3U/hqdefault.jpg",
-      "published_at": "2026-10-11T21:20:17+00:00",
-      "url": "https://www.youtube.com/watch?v=2N0wZ64qN3U"
     }
   ]
 }
