@@ -1,7 +1,27 @@
 {
-  "last_updated": "2026-10-18T15:40:40.561Z",
-  "total_videos": 104,
+  "last_updated": "2026-10-18T18:16:42.573Z",
+  "total_videos": 103,
   "videos": [
+    {
+      "id": "PbM4B-_zLMQ",
+      "title": "Sunday in Jomtien! Jerk Chicken & Laughs at The Meltdown 🇯🇲🇹🇭 Jermakingmecrazy!",
+      "channel_name": "The Tysin Show",
+      "channel_slug": "the-tysin-show",
+      "channel_avatar": "https://yt3.googleusercontent.com/3tMHDr_3VQy3AXy0yW7XsFwHJWBAJj66W8dqKHYTQ3JB9vEX8LbKVhHWjEodtG8TbCcIy9aV0w=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i1.ytimg.com/vi/PbM4B-_zLMQ/hqdefault.jpg",
+      "published_at": "2026-10-18T17:21:28+00:00",
+      "url": "https://www.youtube.com/watch?v=PbM4B-_zLMQ"
+    },
+    {
+      "id": "WsAZbqWCFns",
+      "title": "Sunday in Jomtien! Jerk Chicken & Laughs at The Meltdown 🇯🇲🇹🇭 Jermakingmecrazy! 📱",
+      "channel_name": "The Tysin Show",
+      "channel_slug": "the-tysin-show",
+      "channel_avatar": "https://yt3.googleusercontent.com/3tMHDr_3VQy3AXy0yW7XsFwHJWBAJj66W8dqKHYTQ3JB9vEX8LbKVhHWjEodtG8TbCcIy9aV0w=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i4.ytimg.com/vi/WsAZbqWCFns/hqdefault.jpg",
+      "published_at": "2026-10-18T17:21:08+00:00",
+      "url": "https://www.youtube.com/watch?v=WsAZbqWCFns"
+    },
     {
       "id": "HKLz4C89CvE",
       "title": "Im upping the Anti with the Thai Girls at my Bar!!",
@@ -51,26 +71,6 @@
       "thumbnail_url": "https://i3.ytimg.com/vi/2RH5za8lXlc/hqdefault.jpg",
       "published_at": "2026-10-18T11:17:20+00:00",
       "url": "https://www.youtube.com/watch?v=2RH5za8lXlc"
-    },
-    {
-      "id": "WsAZbqWCFns",
-      "title": "Sunday in Jomtien! Jerk Chicken & Laughs at The Meltdown 🇯🇲🇹🇭 Jermakingmecrazy! 📱",
-      "channel_name": "The Tysin Show",
-      "channel_slug": "the-tysin-show",
-      "channel_avatar": "https://yt3.googleusercontent.com/3tMHDr_3VQy3AXy0yW7XsFwHJWBAJj66W8dqKHYTQ3JB9vEX8LbKVhHWjEodtG8TbCcIy9aV0w=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i4.ytimg.com/vi/WsAZbqWCFns/hqdefault.jpg",
-      "published_at": "2026-10-18T11:10:18+00:00",
-      "url": "https://www.youtube.com/watch?v=WsAZbqWCFns"
-    },
-    {
-      "id": "PbM4B-_zLMQ",
-      "title": "Sunday in Jomtien! Jerk Chicken & Laughs at The Meltdown 🇯🇲🇹🇭 Jermakingmecrazy!",
-      "channel_name": "The Tysin Show",
-      "channel_slug": "the-tysin-show",
-      "channel_avatar": "https://yt3.googleusercontent.com/3tMHDr_3VQy3AXy0yW7XsFwHJWBAJj66W8dqKHYTQ3JB9vEX8LbKVhHWjEodtG8TbCcIy9aV0w=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i1.ytimg.com/vi/PbM4B-_zLMQ/hqdefault.jpg",
-      "published_at": "2026-10-18T11:10:18+00:00",
-      "url": "https://www.youtube.com/watch?v=PbM4B-_zLMQ"
     },
     {
       "id": "IFVUN1_kOwA",
@@ -1031,16 +1031,6 @@
       "thumbnail_url": "https://i3.ytimg.com/vi/2N0wZ64qN3U/hqdefault.jpg",
       "published_at": "2026-10-11T21:20:17+00:00",
       "url": "https://www.youtube.com/watch?v=2N0wZ64qN3U"
-    },
-    {
-      "id": "D_S6oVWGgRs",
-      "title": "Australian Vlogger Accused of Flirting With 8 Year Old Child in Hua Hin",
-      "channel_name": "Pattaya Joker TV",
-      "channel_slug": "pattaya-joker-tv",
-      "channel_avatar": "https://yt3.googleusercontent.com/g1UFe8UV9XnO9syJa2Ayq2Knbg88D0ukIHS4wjd9o0AGwuHNZcPyWLSWAf1oqqkSS7HA6Vcw=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i1.ytimg.com/vi/D_S6oVWGgRs/hqdefault.jpg",
-      "published_at": "2026-10-11T16:28:19+00:00",
-      "url": "https://www.youtube.com/watch?v=D_S6oVWGgRs"
     }
   ]
 }
