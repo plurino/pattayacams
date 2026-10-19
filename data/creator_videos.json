@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-10-19T14:22:59.076Z",
+  "last_updated": "2026-10-19T20:05:16.965Z",
   "total_videos": 102,
   "videos": [
     {
@@ -9,7 +9,7 @@
       "channel_slug": "the-tysin-show",
       "channel_avatar": "https://yt3.googleusercontent.com/3tMHDr_3VQy3AXy0yW7XsFwHJWBAJj66W8dqKHYTQ3JB9vEX8LbKVhHWjEodtG8TbCcIy9aV0w=s900-c-k-c0x00ffffff-no-rj",
       "thumbnail_url": "https://i2.ytimg.com/vi/E-aGijqhHxI/hqdefault.jpg",
-      "published_at": "2026-10-19T12:10:57+00:00",
+      "published_at": "2026-10-19T18:09:22+00:00",
       "url": "https://www.youtube.com/watch?v=E-aGijqhHxI"
     },
     {
@@ -19,8 +19,18 @@
       "channel_slug": "the-tysin-show",
       "channel_avatar": "https://yt3.googleusercontent.com/3tMHDr_3VQy3AXy0yW7XsFwHJWBAJj66W8dqKHYTQ3JB9vEX8LbKVhHWjEodtG8TbCcIy9aV0w=s900-c-k-c0x00ffffff-no-rj",
       "thumbnail_url": "https://i3.ytimg.com/vi/nPhslA2fitY/hqdefault.jpg",
-      "published_at": "2026-10-19T12:10:57+00:00",
+      "published_at": "2026-10-19T18:08:34+00:00",
       "url": "https://www.youtube.com/watch?v=nPhslA2fitY"
+    },
+    {
+      "id": "XqpqdTzOLWw",
+      "title": "3 and a half Years In Thailand And Still Not Satisfied",
+      "channel_name": "Mac TV",
+      "channel_slug": "mac-tv",
+      "channel_avatar": "https://yt3.googleusercontent.com/oSFiARQTu2FbqFOLPVtIROpM-sPXcE_g-T8hrfJXj0QO-ATDEtOcUIsFaq0B-_fPeAMBR1A-FxQ=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i1.ytimg.com/vi/XqpqdTzOLWw/hqdefault.jpg",
+      "published_at": "2026-10-19T17:56:11+00:00",
+      "url": "https://www.youtube.com/watch?v=XqpqdTzOLWw"
     },
     {
       "id": "ivvd2r9H6Ug",
@@ -1011,16 +1021,6 @@
       "thumbnail_url": "https://i4.ytimg.com/vi/o23Ml14a0aI/hqdefault.jpg",
       "published_at": "2026-10-13T02:00:32+00:00",
       "url": "https://www.youtube.com/watch?v=o23Ml14a0aI"
-    },
-    {
-      "id": "479hj4xhU1Q",
-      "title": "Things are starting to look up at Deluzion after almost 1 year!",
-      "channel_name": "Mac TV",
-      "channel_slug": "mac-tv",
-      "channel_avatar": "https://yt3.googleusercontent.com/oSFiARQTu2FbqFOLPVtIROpM-sPXcE_g-T8hrfJXj0QO-ATDEtOcUIsFaq0B-_fPeAMBR1A-FxQ=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i1.ytimg.com/vi/479hj4xhU1Q/hqdefault.jpg",
-      "published_at": "2026-10-12T17:27:20+00:00",
-      "url": "https://www.youtube.com/watch?v=479hj4xhU1Q"
     }
   ]
 }
