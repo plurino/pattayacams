@@ -1,7 +1,67 @@
 {
-  "last_updated": "2026-10-20T12:33:29.917Z",
-  "total_videos": 101,
+  "last_updated": "2026-10-20T17:32:25.258Z",
+  "total_videos": 105,
   "videos": [
+    {
+      "id": "iOfPPd--eHk",
+      "title": "My Girlfriend Has Left me Today.. I Need to go out",
+      "channel_name": "Mac TV",
+      "channel_slug": "mac-tv",
+      "channel_avatar": "https://yt3.googleusercontent.com/oSFiARQTu2FbqFOLPVtIROpM-sPXcE_g-T8hrfJXj0QO-ATDEtOcUIsFaq0B-_fPeAMBR1A-FxQ=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i2.ytimg.com/vi/iOfPPd--eHk/hqdefault.jpg",
+      "published_at": "2026-10-20T17:01:15+00:00",
+      "url": "https://www.youtube.com/watch?v=iOfPPd--eHk"
+    },
+    {
+      "id": "mbiEYVhKdQI",
+      "title": "Pattaya Beach Road at 11 PM 🇹🇭 | Beachfront & Backstreet Night Walk",
+      "channel_name": "Vespa Life Thailand",
+      "channel_slug": "vespa-life-thailand",
+      "channel_avatar": "https://yt3.googleusercontent.com/_0ocieqX7Bpx3CZLLsmLCQpq7TMttO_TCmaiSI8z75xbWgW7Q7N9NeHHt8yGUPoEjQwEA19c7hs=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i2.ytimg.com/vi/mbiEYVhKdQI/hqdefault.jpg",
+      "published_at": "2026-10-20T14:00:20+00:00",
+      "url": "https://www.youtube.com/watch?v=mbiEYVhKdQI"
+    },
+    {
+      "id": "it6yUKiPikk",
+      "title": "Pattaya's Hidden Nightlife: Where the Girls Go After Work",
+      "channel_name": "Travel Glitch",
+      "channel_slug": "travel-glitch",
+      "channel_avatar": "https://yt3.googleusercontent.com/WyZQSOhd2hSV4WHhxEVosiqiPpzVbwo25D67oCIQKr3_Ga2fd9E_8TDyJ7Yv8TuG_DcZKaHJwg=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i2.ytimg.com/vi/it6yUKiPikk/hqdefault.jpg",
+      "published_at": "2026-10-20T14:00:13+00:00",
+      "url": "https://www.youtube.com/watch?v=it6yUKiPikk"
+    },
+    {
+      "id": "rTmt-mrSAb8",
+      "title": "Rainy season isn't over yet, as Pattaya gets drenched in more afternoon storms this week.",
+      "channel_name": "The Pattaya News",
+      "channel_slug": "the-pattaya-news",
+      "channel_avatar": "https://yt3.googleusercontent.com/ED2V0oAQI1iJpeAFvbuEi0wj97DQIsDXma7rxuSOhPxt4wfxf_-hmIINVdUbCWQnBAmfyHavxw=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i3.ytimg.com/vi/rTmt-mrSAb8/hqdefault.jpg",
+      "published_at": "2026-10-20T13:49:56+00:00",
+      "url": "https://www.youtube.com/watch?v=rTmt-mrSAb8"
+    },
+    {
+      "id": "_OxvYp6kcbI",
+      "title": "RAIN FALLS, PATTAYA CALLS ⛈️ Rainy Season Street Life",
+      "channel_name": "BEACH ROAD",
+      "channel_slug": "beach-road-channel",
+      "channel_avatar": "https://yt3.googleusercontent.com/CWW0rQ6f5ZKIE2_T9vOK3Km3eiBJEAdih3hwx_POm5n_uuG8EDZcL7IK7BLoEnWL0F5f7pnm=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i4.ytimg.com/vi/_OxvYp6kcbI/hqdefault.jpg",
+      "published_at": "2026-10-20T13:00:13+00:00",
+      "url": "https://www.youtube.com/watch?v=_OxvYp6kcbI"
+    },
+    {
+      "id": "sJRw8mkHMv4",
+      "title": "Pattaya Police Hunt for Escaped Criminal Suspect Who Managed to Flee From Pattaya Court",
+      "channel_name": "The Pattaya News",
+      "channel_slug": "the-pattaya-news",
+      "channel_avatar": "https://yt3.googleusercontent.com/ED2V0oAQI1iJpeAFvbuEi0wj97DQIsDXma7rxuSOhPxt4wfxf_-hmIINVdUbCWQnBAmfyHavxw=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i4.ytimg.com/vi/sJRw8mkHMv4/hqdefault.jpg",
+      "published_at": "2026-10-20T12:54:44+00:00",
+      "url": "https://www.youtube.com/watch?v=sJRw8mkHMv4"
+    },
     {
       "id": "VnSF5YteGU8",
       "title": "Taxi Confusion Reigns in Pattaya",
@@ -14,7 +74,7 @@
     },
     {
       "id": "n2ah_qlePn0",
-      "title": "千元離境稅從天而降，入境費照收不誤，旅遊企業奮起反抗！泰國水災損失擴大，投資信心遭受重創，外媒指當局淹農村救城市！（泰國週刊 380 期 • 社會）",
+      "title": "泰國水災損失擴大，投資信心遭受重創，外媒指當局淹農村救城市！離境稅從天而降，入境費照收不誤，旅遊業奮起反抗！（泰國週刊 380 期 • 社會）",
       "channel_name": "Kev-in-Thailand",
       "channel_slug": "kev-in-thailand",
       "channel_avatar": "https://yt3.googleusercontent.com/Codtgbm9LDBrbLC95y7zvMjRtzxDlXnfuUXWjjxT1lwR4W-wvYLHHfSBIbKtfifePAbfeDww=s900-c-k-c0x00ffffff-no-rj",
@@ -991,26 +1051,6 @@
       "thumbnail_url": "https://i4.ytimg.com/vi/Of7B1xvx89o/hqdefault.jpg",
       "published_at": "2026-10-13T18:05:18+00:00",
       "url": "https://www.youtube.com/watch?v=Of7B1xvx89o"
-    },
-    {
-      "id": "R0rbMU_nbqQ",
-      "title": "MYTH NIGHT Pattaya at 9:30 PM | Soi Buakhao to Made in Thailand",
-      "channel_name": "Vespa Life Thailand",
-      "channel_slug": "vespa-life-thailand",
-      "channel_avatar": "https://yt3.googleusercontent.com/_0ocieqX7Bpx3CZLLsmLCQpq7TMttO_TCmaiSI8z75xbWgW7Q7N9NeHHt8yGUPoEjQwEA19c7hs=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i3.ytimg.com/vi/R0rbMU_nbqQ/hqdefault.jpg",
-      "published_at": "2026-10-13T16:59:33+00:00",
-      "url": "https://www.youtube.com/watch?v=R0rbMU_nbqQ"
-    },
-    {
-      "id": "5LiBBGCl0sU",
-      "title": "One way to get the Girls Motivated at Deluzion!",
-      "channel_name": "Mac TV",
-      "channel_slug": "mac-tv",
-      "channel_avatar": "https://yt3.googleusercontent.com/oSFiARQTu2FbqFOLPVtIROpM-sPXcE_g-T8hrfJXj0QO-ATDEtOcUIsFaq0B-_fPeAMBR1A-FxQ=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i2.ytimg.com/vi/5LiBBGCl0sU/hqdefault.jpg",
-      "published_at": "2026-10-13T16:34:32+00:00",
-      "url": "https://www.youtube.com/watch?v=5LiBBGCl0sU"
     }
   ]
 }
