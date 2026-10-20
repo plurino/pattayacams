@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-10-20T17:32:25.258Z",
-  "total_videos": 105,
+  "last_updated": "2026-10-20T20:53:45.773Z",
+  "total_videos": 103,
   "videos": [
     {
       "id": "iOfPPd--eHk",
@@ -1031,26 +1031,6 @@
       "thumbnail_url": "https://i3.ytimg.com/vi/jDXonry0sSw/hqdefault.jpg",
       "published_at": "2026-10-14T00:00:33+00:00",
       "url": "https://www.youtube.com/watch?v=jDXonry0sSw"
-    },
-    {
-      "id": "wRALvxCKqgQ",
-      "title": "This Monkey Followed Me Home in Pattaya!",
-      "channel_name": "The Tysin Show",
-      "channel_slug": "the-tysin-show",
-      "channel_avatar": "https://yt3.googleusercontent.com/3tMHDr_3VQy3AXy0yW7XsFwHJWBAJj66W8dqKHYTQ3JB9vEX8LbKVhHWjEodtG8TbCcIy9aV0w=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i4.ytimg.com/vi/wRALvxCKqgQ/hqdefault.jpg",
-      "published_at": "2026-10-13T19:46:29+00:00",
-      "url": "https://www.youtube.com/watch?v=wRALvxCKqgQ"
-    },
-    {
-      "id": "Of7B1xvx89o",
-      "title": "When an Old Man Mistakes Attention for Authority…",
-      "channel_name": "Pattaya Joker TV",
-      "channel_slug": "pattaya-joker-tv",
-      "channel_avatar": "https://yt3.googleusercontent.com/g1UFe8UV9XnO9syJa2Ayq2Knbg88D0ukIHS4wjd9o0AGwuHNZcPyWLSWAf1oqqkSS7HA6Vcw=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i4.ytimg.com/vi/Of7B1xvx89o/hqdefault.jpg",
-      "published_at": "2026-10-13T18:05:18+00:00",
-      "url": "https://www.youtube.com/watch?v=Of7B1xvx89o"
     }
   ]
 }
