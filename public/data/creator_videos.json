@@ -1,7 +1,27 @@
 {
-  "last_updated": "2026-10-23T09:07:17.240Z",
+  "last_updated": "2026-10-23T12:26:28.428Z",
   "total_videos": 84,
   "videos": [
+    {
+      "id": "iY84qxwI5mk",
+      "title": "🇹🇭 [4K] Nakluea Soi 18, Nakluea Main Road - Pattaya Thailand 2026",
+      "channel_name": "DV Media Pattaya",
+      "channel_slug": "dv-media-pattaya",
+      "channel_avatar": "https://yt3.googleusercontent.com/ugj2a216u5s5JhG4iireKvsOCK9lky14pZHt1tGGRm4I9na4HTsC7_8QRPb6xinI7mb8u4ZD=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i2.ytimg.com/vi/iY84qxwI5mk/hqdefault.jpg",
+      "published_at": "2026-10-23T10:30:08+00:00",
+      "url": "https://www.youtube.com/watch?v=iY84qxwI5mk"
+    },
+    {
+      "id": "BuXPRnLttZM",
+      "title": "Walking Around Pattaya: Honey, Buakhao, Metro, Boomerang, & Myth Night - October 2026",
+      "channel_name": "Pattaya 101",
+      "channel_slug": "pattaya-101",
+      "channel_avatar": "https://yt3.googleusercontent.com/lcgGQd_VWXbva3sOEvgXp_eISmaA20LSeUnPFagnga7AK9P6Kz4v06ESJt0mwR-TkJEZoF6l=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i3.ytimg.com/vi/BuXPRnLttZM/hqdefault.jpg",
+      "published_at": "2026-10-23T09:00:30+00:00",
+      "url": "https://www.youtube.com/watch?v=BuXPRnLttZM"
+    },
     {
       "id": "BiFIDp8zMU4",
       "title": "welshboyweeby your one lucky boy, living the dream",
@@ -821,26 +841,6 @@
       "thumbnail_url": "https://i3.ytimg.com/vi/v3FZZZrxLrk/hqdefault.jpg",
       "published_at": "2026-10-16T13:00:34+00:00",
       "url": "https://www.youtube.com/watch?v=v3FZZZrxLrk"
-    },
-    {
-      "id": "kS4As_WAWWk",
-      "title": "🇹🇭 [4K] Soi3, Second Road - Pattaya Thailand 2026",
-      "channel_name": "DV Media Pattaya",
-      "channel_slug": "dv-media-pattaya",
-      "channel_avatar": "https://yt3.googleusercontent.com/ugj2a216u5s5JhG4iireKvsOCK9lky14pZHt1tGGRm4I9na4HTsC7_8QRPb6xinI7mb8u4ZD=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i4.ytimg.com/vi/kS4As_WAWWk/hqdefault.jpg",
-      "published_at": "2026-10-16T10:30:20+00:00",
-      "url": "https://www.youtube.com/watch?v=kS4As_WAWWk"
-    },
-    {
-      "id": "HPZoKcpy9FE",
-      "title": "Pattaya After Dark 🇹🇭 Soi 7 & Soi 8 at 10:30 PM",
-      "channel_name": "Vespa Life Thailand",
-      "channel_slug": "vespa-life-thailand",
-      "channel_avatar": "https://yt3.googleusercontent.com/_0ocieqX7Bpx3CZLLsmLCQpq7TMttO_TCmaiSI8z75xbWgW7Q7N9NeHHt8yGUPoEjQwEA19c7hs=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i1.ytimg.com/vi/HPZoKcpy9FE/hqdefault.jpg",
-      "published_at": "2026-10-16T10:00:32+00:00",
-      "url": "https://www.youtube.com/watch?v=HPZoKcpy9FE"
     }
   ]
 }
