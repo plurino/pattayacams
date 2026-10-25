@@ -1,7 +1,37 @@
 {
-  "last_updated": "2026-10-25T12:21:49.995Z",
+  "last_updated": "2026-10-25T16:41:23.184Z",
   "total_videos": 82,
   "videos": [
+    {
+      "id": "w9kFisO18Z4",
+      "title": "WTF Is Going On In Pattaya Thailand",
+      "channel_name": "Trae Badd TV",
+      "channel_slug": "trae-badd-tv",
+      "channel_avatar": "https://yt3.googleusercontent.com/YnO5xc6T7pk1Q_nnG5ruJbMOBqHi_YBRWLsAxO_4de-xBE_Dr1qoDnJ407dfBd2m_0CBLYL5yg=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i4.ytimg.com/vi/w9kFisO18Z4/hqdefault.jpg",
+      "published_at": "2026-10-25T14:52:31+00:00",
+      "url": "https://www.youtube.com/watch?v=w9kFisO18Z4"
+    },
+    {
+      "id": "mA-mmIkiHkw",
+      "title": "here's what Pattaya bar girls REALLY make 💰 🎥",
+      "channel_name": "Mac TV",
+      "channel_slug": "mac-tv",
+      "channel_avatar": "https://yt3.googleusercontent.com/oSFiARQTu2FbqFOLPVtIROpM-sPXcE_g-T8hrfJXj0QO-ATDEtOcUIsFaq0B-_fPeAMBR1A-FxQ=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i2.ytimg.com/vi/mA-mmIkiHkw/hqdefault.jpg",
+      "published_at": "2026-10-25T14:20:25+00:00",
+      "url": "https://www.youtube.com/watch?v=mA-mmIkiHkw"
+    },
+    {
+      "id": "HN-9kVwh0VU",
+      "title": "LIFE ON PATTAYA'S STREETS 👀 You Never Know What You'll See",
+      "channel_name": "BEACH ROAD",
+      "channel_slug": "beach-road-channel",
+      "channel_avatar": "https://yt3.googleusercontent.com/CWW0rQ6f5ZKIE2_T9vOK3Km3eiBJEAdih3hwx_POm5n_uuG8EDZcL7IK7BLoEnWL0F5f7pnm=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i1.ytimg.com/vi/HN-9kVwh0VU/hqdefault.jpg",
+      "published_at": "2026-10-25T13:00:29+00:00",
+      "url": "https://www.youtube.com/watch?v=HN-9kVwh0VU"
+    },
     {
       "id": "U-6obrtwWRM",
       "title": "Pattaya Night Walk at 7:45 PM | Soi 7, Soi 8 & Beach Market / Concert pop up",
@@ -791,36 +821,6 @@
       "thumbnail_url": "https://i2.ytimg.com/vi/i3BQuTJau2A/hqdefault.jpg",
       "published_at": "2026-10-19T02:00:23+00:00",
       "url": "https://www.youtube.com/watch?v=i3BQuTJau2A"
-    },
-    {
-      "id": "HKLz4C89CvE",
-      "title": "Im upping the Anti with the Thai Girls at my Bar!!",
-      "channel_name": "Mac TV",
-      "channel_slug": "mac-tv",
-      "channel_avatar": "https://yt3.googleusercontent.com/oSFiARQTu2FbqFOLPVtIROpM-sPXcE_g-T8hrfJXj0QO-ATDEtOcUIsFaq0B-_fPeAMBR1A-FxQ=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i1.ytimg.com/vi/HKLz4C89CvE/hqdefault.jpg",
-      "published_at": "2026-10-18T15:34:16+00:00",
-      "url": "https://www.youtube.com/watch?v=HKLz4C89CvE"
-    },
-    {
-      "id": "KFGdoWhprf4",
-      "title": "2026年10月18日 タイ パタヤ レート 両替 Exchange amount  2569 October 18th  #shorts",
-      "channel_name": "UD Thailand",
-      "channel_slug": "ud-thailand",
-      "channel_avatar": "https://yt3.googleusercontent.com/ytc/AIdro_k6p2pK8BY9F57E6AD_BXywffZajUAEWVqzS0C5ph-WHA=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i4.ytimg.com/vi/KFGdoWhprf4/hqdefault.jpg",
-      "published_at": "2026-10-18T13:45:16+00:00",
-      "url": "https://www.youtube.com/watch?v=KFGdoWhprf4"
-    },
-    {
-      "id": "K6baddgTTzc",
-      "title": "PATTAYA, JUST AS IT IS: Everyday Life on the Streets",
-      "channel_name": "BEACH ROAD",
-      "channel_slug": "beach-road-channel",
-      "channel_avatar": "https://yt3.googleusercontent.com/CWW0rQ6f5ZKIE2_T9vOK3Km3eiBJEAdih3hwx_POm5n_uuG8EDZcL7IK7BLoEnWL0F5f7pnm=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i4.ytimg.com/vi/K6baddgTTzc/hqdefault.jpg",
-      "published_at": "2026-10-18T13:00:19+00:00",
-      "url": "https://www.youtube.com/watch?v=K6baddgTTzc"
     }
   ]
 }
