@@ -1,7 +1,27 @@
 {
-  "last_updated": "2026-10-28T13:50:44.122Z",
+  "last_updated": "2026-10-28T19:20:53.797Z",
   "total_videos": 99,
   "videos": [
+    {
+      "id": "OS2371gshyw",
+      "title": "PATTAYA, MORE THAN YOU EXPECTED ⛱️ Street Life in Thailand",
+      "channel_name": "BEACH ROAD",
+      "channel_slug": "beach-road-channel",
+      "channel_avatar": "https://yt3.googleusercontent.com/CWW0rQ6f5ZKIE2_T9vOK3Km3eiBJEAdih3hwx_POm5n_uuG8EDZcL7IK7BLoEnWL0F5f7pnm=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i4.ytimg.com/vi/OS2371gshyw/hqdefault.jpg",
+      "published_at": "2026-10-28T14:00:24+00:00",
+      "url": "https://www.youtube.com/watch?v=OS2371gshyw"
+    },
+    {
+      "id": "ZSfVwP_cpH0",
+      "title": "Pattaya at 10:30 PM 🇹🇭 Second Road & Soi Honey Night Walk",
+      "channel_name": "Vespa Life Thailand",
+      "channel_slug": "vespa-life-thailand",
+      "channel_avatar": "https://yt3.googleusercontent.com/_0ocieqX7Bpx3CZLLsmLCQpq7TMttO_TCmaiSI8z75xbWgW7Q7N9NeHHt8yGUPoEjQwEA19c7hs=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i3.ytimg.com/vi/ZSfVwP_cpH0/hqdefault.jpg",
+      "published_at": "2026-10-28T13:51:53+00:00",
+      "url": "https://www.youtube.com/watch?v=ZSfVwP_cpH0"
+    },
     {
       "id": "16KGQiRITiA",
       "title": "Pattaya Street Walk | Soi Buakhao to Soi Xzyte & Soi Pothole",
@@ -971,26 +991,6 @@
       "thumbnail_url": "https://i4.ytimg.com/vi/WKCY3h1RCQg/hqdefault.jpg",
       "published_at": "2026-10-22T02:00:35+00:00",
       "url": "https://www.youtube.com/watch?v=WKCY3h1RCQg"
-    },
-    {
-      "id": "Q7_yOTpfCM4",
-      "title": "Why Pattaya Bars Keep Closing",
-      "channel_name": "Mac TV",
-      "channel_slug": "mac-tv",
-      "channel_avatar": "https://yt3.googleusercontent.com/oSFiARQTu2FbqFOLPVtIROpM-sPXcE_g-T8hrfJXj0QO-ATDEtOcUIsFaq0B-_fPeAMBR1A-FxQ=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i2.ytimg.com/vi/Q7_yOTpfCM4/hqdefault.jpg",
-      "published_at": "2026-10-21T18:11:28+00:00",
-      "url": "https://www.youtube.com/watch?v=Q7_yOTpfCM4"
-    },
-    {
-      "id": "nL6rOxk5oX4",
-      "title": "Pattaya Is Getting Busier! Soi 7, Soi 8 & Night Out at 10PM",
-      "channel_name": "Vespa Life Thailand",
-      "channel_slug": "vespa-life-thailand",
-      "channel_avatar": "https://yt3.googleusercontent.com/_0ocieqX7Bpx3CZLLsmLCQpq7TMttO_TCmaiSI8z75xbWgW7Q7N9NeHHt8yGUPoEjQwEA19c7hs=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i3.ytimg.com/vi/nL6rOxk5oX4/hqdefault.jpg",
-      "published_at": "2026-10-21T14:00:00+00:00",
-      "url": "https://www.youtube.com/watch?v=nL6rOxk5oX4"
     }
   ]
 }
