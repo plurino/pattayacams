@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-10-30T18:59:40.529Z",
-  "total_videos": 105,
+  "last_updated": "2026-10-30T22:55:13.649Z",
+  "total_videos": 104,
   "videos": [
     {
       "id": "PLer8dye7Pg",
@@ -1041,16 +1041,6 @@
       "thumbnail_url": "https://i4.ytimg.com/vi/wvDLWc0A2do/hqdefault.jpg",
       "published_at": "2026-10-24T00:00:35+00:00",
       "url": "https://www.youtube.com/watch?v=wvDLWc0A2do"
-    },
-    {
-      "id": "B7jxGs6RtnU",
-      "title": "Tysin! 😂🇹🇭 Another day in Pattaya making new friends!",
-      "channel_name": "The Tysin Show",
-      "channel_slug": "the-tysin-show",
-      "channel_avatar": "https://yt3.googleusercontent.com/3tMHDr_3VQy3AXy0yW7XsFwHJWBAJj66W8dqKHYTQ3JB9vEX8LbKVhHWjEodtG8TbCcIy9aV0w=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i3.ytimg.com/vi/B7jxGs6RtnU/hqdefault.jpg",
-      "published_at": "2026-10-23T20:35:51+00:00",
-      "url": "https://www.youtube.com/watch?v=B7jxGs6RtnU"
     }
   ]
 }
