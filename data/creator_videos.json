@@ -1,7 +1,37 @@
 {
-  "last_updated": "2026-11-02T13:07:05.004Z",
+  "last_updated": "2026-11-02T16:51:21.756Z",
   "total_videos": 111,
   "videos": [
+    {
+      "id": "m7JjzWEk-S8",
+      "title": "Chinese Tourists and Bathroom Attendants Brawl at Pattaya Market Over 150 Baht Cleaning Fee",
+      "channel_name": "The Pattaya News",
+      "channel_slug": "the-pattaya-news",
+      "channel_avatar": "https://yt3.googleusercontent.com/ED2V0oAQI1iJpeAFvbuEi0wj97DQIsDXma7rxuSOhPxt4wfxf_-hmIINVdUbCWQnBAmfyHavxw=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i2.ytimg.com/vi/m7JjzWEk-S8/hqdefault.jpg",
+      "published_at": "2026-11-02T15:56:32+00:00",
+      "url": "https://www.youtube.com/watch?v=m7JjzWEk-S8"
+    },
+    {
+      "id": "s1kIOpWAUDo",
+      "title": "Pattaya Walk 🇹🇭 Second Road, Soi Honey & Soi Buakhao",
+      "channel_name": "Vespa Life Thailand",
+      "channel_slug": "vespa-life-thailand",
+      "channel_avatar": "https://yt3.googleusercontent.com/_0ocieqX7Bpx3CZLLsmLCQpq7TMttO_TCmaiSI8z75xbWgW7Q7N9NeHHt8yGUPoEjQwEA19c7hs=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i4.ytimg.com/vi/s1kIOpWAUDo/hqdefault.jpg",
+      "published_at": "2026-11-02T14:53:40+00:00",
+      "url": "https://www.youtube.com/watch?v=s1kIOpWAUDo"
+    },
+    {
+      "id": "-95DVu5SOZc",
+      "title": "Someone left their mark on the Villa in Thailand!!",
+      "channel_name": "Mac TV",
+      "channel_slug": "mac-tv",
+      "channel_avatar": "https://yt3.googleusercontent.com/oSFiARQTu2FbqFOLPVtIROpM-sPXcE_g-T8hrfJXj0QO-ATDEtOcUIsFaq0B-_fPeAMBR1A-FxQ=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i2.ytimg.com/vi/-95DVu5SOZc/hqdefault.jpg",
+      "published_at": "2026-11-02T14:24:59+00:00",
+      "url": "https://www.youtube.com/watch?v=-95DVu5SOZc"
+    },
     {
       "id": "TmrmYyTmijM",
       "title": "Pool party with 17 Thai girls!!",
@@ -863,16 +893,6 @@
       "url": "https://www.youtube.com/watch?v=Ov8XkqWvn4Y"
     },
     {
-      "id": "HMUuHxYFuZI",
-      "title": "A Question I get asked all the Time in Pattaya?!",
-      "channel_name": "Mac TV",
-      "channel_slug": "mac-tv",
-      "channel_avatar": "https://yt3.googleusercontent.com/oSFiARQTu2FbqFOLPVtIROpM-sPXcE_g-T8hrfJXj0QO-ATDEtOcUIsFaq0B-_fPeAMBR1A-FxQ=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i1.ytimg.com/vi/HMUuHxYFuZI/hqdefault.jpg",
-      "published_at": "2026-10-27T23:36:02+00:00",
-      "url": "https://www.youtube.com/watch?v=HMUuHxYFuZI"
-    },
-    {
       "id": "mmAR-w-T-F8",
       "title": "Girls Come & Go… its the Pattaya way!!",
       "channel_name": "The Tysin Show",
@@ -1091,26 +1111,6 @@
       "thumbnail_url": "https://i1.ytimg.com/vi/PD2aaxcoeVs/hqdefault.jpg",
       "published_at": "2026-10-27T02:00:17+00:00",
       "url": "https://www.youtube.com/watch?v=PD2aaxcoeVs"
-    },
-    {
-      "id": "wprK9lcXvOI",
-      "title": "Pattaya After Dark | Soi Buakhao & Tree Town at 11:40 PM",
-      "channel_name": "Vespa Life Thailand",
-      "channel_slug": "vespa-life-thailand",
-      "channel_avatar": "https://yt3.googleusercontent.com/_0ocieqX7Bpx3CZLLsmLCQpq7TMttO_TCmaiSI8z75xbWgW7Q7N9NeHHt8yGUPoEjQwEA19c7hs=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i4.ytimg.com/vi/wprK9lcXvOI/hqdefault.jpg",
-      "published_at": "2026-10-26T14:00:10+00:00",
-      "url": "https://www.youtube.com/watch?v=wprK9lcXvOI"
-    },
-    {
-      "id": "fs871tk60kE",
-      "title": "I Gave Her a Sentimental Gift… Then It Disappeared 🇹🇭 V838",
-      "channel_name": "Thailand Rob",
-      "channel_slug": "thailand-rob",
-      "channel_avatar": "https://yt3.googleusercontent.com/ytc/AIdro_lACxUgHiSVBCZnxB3y0AiiOJr0gopsUA7ediB7uV_UEBY=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i3.ytimg.com/vi/fs871tk60kE/hqdefault.jpg",
-      "published_at": "2026-10-26T13:11:02+00:00",
-      "url": "https://www.youtube.com/watch?v=fs871tk60kE"
     }
   ]
 }
