@@ -1,7 +1,37 @@
 {
-  "last_updated": "2026-11-06T13:08:04.884Z",
-  "total_videos": 102,
+  "last_updated": "2026-11-06T14:48:14.228Z",
+  "total_videos": 104,
   "videos": [
+    {
+      "id": "1YXZzetWfA0",
+      "title": "PATTAYA NOW 👀 One City, A Thousand Little Moments",
+      "channel_name": "BEACH ROAD",
+      "channel_slug": "beach-road-channel",
+      "channel_avatar": "https://yt3.googleusercontent.com/CWW0rQ6f5ZKIE2_T9vOK3Km3eiBJEAdih3hwx_POm5n_uuG8EDZcL7IK7BLoEnWL0F5f7pnm=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i2.ytimg.com/vi/1YXZzetWfA0/hqdefault.jpg",
+      "published_at": "2026-11-06T14:00:19+00:00",
+      "url": "https://www.youtube.com/watch?v=1YXZzetWfA0"
+    },
+    {
+      "id": "ECQdHTmhY6s",
+      "title": "Vespa Life Thailand | 10:30 PM | Second Road to Myth Night",
+      "channel_name": "Vespa Life Thailand",
+      "channel_slug": "vespa-life-thailand",
+      "channel_avatar": "https://yt3.googleusercontent.com/_0ocieqX7Bpx3CZLLsmLCQpq7TMttO_TCmaiSI8z75xbWgW7Q7N9NeHHt8yGUPoEjQwEA19c7hs=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i2.ytimg.com/vi/ECQdHTmhY6s/hqdefault.jpg",
+      "published_at": "2026-11-06T14:00:13+00:00",
+      "url": "https://www.youtube.com/watch?v=ECQdHTmhY6s"
+    },
+    {
+      "id": "Nl0uYFHNJFQ",
+      "title": "Off the Beaten Track in Bangkok – What a Pleasant Surprise! 🇹🇭#eastbangkok #minburi #thailandadventu",
+      "channel_name": "Dan About Thailand",
+      "channel_slug": "dan-about-thailand",
+      "channel_avatar": "https://yt3.googleusercontent.com/Yyj8-Dsl31kWZGfIFv8KbVT9BfXbzvKHKNyE8VddmTPXz4bpUB1t8iXSU4KJKZFdyME1bzhjkOk=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i3.ytimg.com/vi/Nl0uYFHNJFQ/hqdefault.jpg",
+      "published_at": "2026-11-06T13:52:06+00:00",
+      "url": "https://www.youtube.com/watch?v=Nl0uYFHNJFQ"
+    },
     {
       "id": "QArOfNsetVw",
       "title": "🇹🇭 [4K] Soi Honey, Soi 9, Tree Town, Soi Buakhao, Soi Lengkee - Pattaya Thailand 2026",
@@ -1011,16 +1041,6 @@
       "thumbnail_url": "https://i4.ytimg.com/vi/onHIw8Yl4PU/hqdefault.jpg",
       "published_at": "2026-10-30T15:28:49+00:00",
       "url": "https://www.youtube.com/watch?v=onHIw8Yl4PU"
-    },
-    {
-      "id": "fQGSKFyqwns",
-      "title": "Pattaya Soi 6 at 10:30 PM | Night Walk Down and Back",
-      "channel_name": "Vespa Life Thailand",
-      "channel_slug": "vespa-life-thailand",
-      "channel_avatar": "https://yt3.googleusercontent.com/_0ocieqX7Bpx3CZLLsmLCQpq7TMttO_TCmaiSI8z75xbWgW7Q7N9NeHHt8yGUPoEjQwEA19c7hs=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i3.ytimg.com/vi/fQGSKFyqwns/hqdefault.jpg",
-      "published_at": "2026-10-30T13:26:51+00:00",
-      "url": "https://www.youtube.com/watch?v=fQGSKFyqwns"
     }
   ]
 }
