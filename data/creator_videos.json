@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-11-07T18:28:57.812Z",
-  "total_videos": 99,
+  "last_updated": "2026-11-07T22:14:12.649Z",
+  "total_videos": 98,
   "videos": [
     {
       "id": "2rP41sW4YwE",
@@ -981,16 +981,6 @@
       "thumbnail_url": "https://i4.ytimg.com/vi/3HbywDxNSew/hqdefault.jpg",
       "published_at": "2026-11-01T00:00:14+00:00",
       "url": "https://www.youtube.com/watch?v=3HbywDxNSew"
-    },
-    {
-      "id": "sf6BGYCYODE",
-      "title": "New Girls at My bar in Thailand!!",
-      "channel_name": "Mac TV",
-      "channel_slug": "mac-tv",
-      "channel_avatar": "https://yt3.googleusercontent.com/oSFiARQTu2FbqFOLPVtIROpM-sPXcE_g-T8hrfJXj0QO-ATDEtOcUIsFaq0B-_fPeAMBR1A-FxQ=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i4.ytimg.com/vi/sf6BGYCYODE/hqdefault.jpg",
-      "published_at": "2026-10-31T18:43:31+00:00",
-      "url": "https://www.youtube.com/watch?v=sf6BGYCYODE"
     }
   ]
 }
