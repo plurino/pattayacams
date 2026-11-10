@@ -1,7 +1,17 @@
 {
-  "last_updated": "2026-11-10T15:25:55.379Z",
+  "last_updated": "2026-11-10T21:23:15.815Z",
   "total_videos": 82,
   "videos": [
+    {
+      "id": "BwLRrTVynno",
+      "title": "Chinese Led Romance Scam Network Busted in Pattaya, Ten People Arrested",
+      "channel_name": "The Pattaya News",
+      "channel_slug": "the-pattaya-news",
+      "channel_avatar": "https://yt3.googleusercontent.com/ED2V0oAQI1iJpeAFvbuEi0wj97DQIsDXma7rxuSOhPxt4wfxf_-hmIINVdUbCWQnBAmfyHavxw=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i3.ytimg.com/vi/BwLRrTVynno/hqdefault.jpg",
+      "published_at": "2026-11-10T18:22:36+00:00",
+      "url": "https://www.youtube.com/watch?v=BwLRrTVynno"
+    },
     {
       "id": "UEx9MzQuCl0",
       "title": "PATTAYA Race Against Time",
@@ -811,16 +821,6 @@
       "thumbnail_url": "https://i4.ytimg.com/vi/WUk8FTgkcPg/hqdefault.jpg",
       "published_at": "2026-11-03T22:08:15+00:00",
       "url": "https://www.youtube.com/watch?v=WUk8FTgkcPg"
-    },
-    {
-      "id": "76RgY7DPrYw",
-      "title": "My Girlfriend STOLE My Camera.. She Got DRUNK with Friends!",
-      "channel_name": "Mac TV",
-      "channel_slug": "mac-tv",
-      "channel_avatar": "https://yt3.googleusercontent.com/oSFiARQTu2FbqFOLPVtIROpM-sPXcE_g-T8hrfJXj0QO-ATDEtOcUIsFaq0B-_fPeAMBR1A-FxQ=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i4.ytimg.com/vi/76RgY7DPrYw/hqdefault.jpg",
-      "published_at": "2026-11-03T18:24:34+00:00",
-      "url": "https://www.youtube.com/watch?v=76RgY7DPrYw"
     }
   ]
 }
