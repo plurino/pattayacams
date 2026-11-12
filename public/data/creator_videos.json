@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-11-12T15:47:24.749Z",
-  "total_videos": 77,
+  "last_updated": "2026-11-12T22:03:38.285Z",
+  "total_videos": 74,
   "videos": [
     {
       "id": "V4AX-wf7U48",
@@ -741,36 +741,6 @@
       "thumbnail_url": "https://i3.ytimg.com/vi/zzEutt3UTHw/hqdefault.jpg",
       "published_at": "2026-11-06T00:00:34+00:00",
       "url": "https://www.youtube.com/watch?v=zzEutt3UTHw"
-    },
-    {
-      "id": "4ONstHWhEQk",
-      "title": "Life in Thailand: Police Problems & BIG Money! (New Updates?)",
-      "channel_name": "Mac TV",
-      "channel_slug": "mac-tv",
-      "channel_avatar": "https://yt3.googleusercontent.com/oSFiARQTu2FbqFOLPVtIROpM-sPXcE_g-T8hrfJXj0QO-ATDEtOcUIsFaq0B-_fPeAMBR1A-FxQ=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i1.ytimg.com/vi/4ONstHWhEQk/hqdefault.jpg",
-      "published_at": "2026-11-05T19:52:58+00:00",
-      "url": "https://www.youtube.com/watch?v=4ONstHWhEQk"
-    },
-    {
-      "id": "qsuCAPjmoY0",
-      "title": "Police found WHAT on a routine warrant execution near Pattaya?",
-      "channel_name": "The Pattaya News",
-      "channel_slug": "the-pattaya-news",
-      "channel_avatar": "https://yt3.googleusercontent.com/ED2V0oAQI1iJpeAFvbuEi0wj97DQIsDXma7rxuSOhPxt4wfxf_-hmIINVdUbCWQnBAmfyHavxw=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i2.ytimg.com/vi/qsuCAPjmoY0/hqdefault.jpg",
-      "published_at": "2026-11-05T16:52:42+00:00",
-      "url": "https://www.youtube.com/watch?v=qsuCAPjmoY0"
-    },
-    {
-      "id": "XMqosPidjFg",
-      "title": "The BEST Place To Retire In Thailand?",
-      "channel_name": "Settled in SIAM",
-      "channel_slug": "settled-in-siam",
-      "channel_avatar": "https://yt3.googleusercontent.com/hUjrQt2-RhdItsiQsjbsSAKEJIv1tpwpxtB3D-k1GmjsXVdFG20FWwBTLDW6gLQufYZCDiQjmnc=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i1.ytimg.com/vi/XMqosPidjFg/hqdefault.jpg",
-      "published_at": "2026-11-05T16:00:01+00:00",
-      "url": "https://www.youtube.com/watch?v=XMqosPidjFg"
     }
   ]
 }
