@@ -1,7 +1,27 @@
 {
-  "last_updated": "2026-11-14T12:24:02.157Z",
-  "total_videos": 78,
+  "last_updated": "2026-11-14T13:57:36.387Z",
+  "total_videos": 79,
   "videos": [
+    {
+      "id": "3qBEGQjTLCg",
+      "title": "Dating in Thailand: Bangkok vs Pattaya - What You Need to Know",
+      "channel_name": "Travel Glitch",
+      "channel_slug": "travel-glitch",
+      "channel_avatar": "https://yt3.googleusercontent.com/WyZQSOhd2hSV4WHhxEVosiqiPpzVbwo25D67oCIQKr3_Ga2fd9E_8TDyJ7Yv8TuG_DcZKaHJwg=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i4.ytimg.com/vi/3qBEGQjTLCg/hqdefault.jpg",
+      "published_at": "2026-11-14T13:05:14+00:00",
+      "url": "https://www.youtube.com/watch?v=3qBEGQjTLCg"
+    },
+    {
+      "id": "ad5mezMHryg",
+      "title": "I just spent 17,000 Baht on Bar Stools!!!",
+      "channel_name": "Mac TV",
+      "channel_slug": "mac-tv",
+      "channel_avatar": "https://yt3.googleusercontent.com/oSFiARQTu2FbqFOLPVtIROpM-sPXcE_g-T8hrfJXj0QO-ATDEtOcUIsFaq0B-_fPeAMBR1A-FxQ=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i2.ytimg.com/vi/ad5mezMHryg/hqdefault.jpg",
+      "published_at": "2026-11-14T12:55:34+00:00",
+      "url": "https://www.youtube.com/watch?v=ad5mezMHryg"
+    },
     {
       "id": "ivh3I8vjmGk",
       "title": "My Car needs some love in Thailand!!",
@@ -771,16 +791,6 @@
       "thumbnail_url": "https://i4.ytimg.com/vi/Ck5_VUZbVUg/hqdefault.jpg",
       "published_at": "2026-11-07T14:14:50+00:00",
       "url": "https://www.youtube.com/watch?v=Ck5_VUZbVUg"
-    },
-    {
-      "id": "bNq2kmqzTfw",
-      "title": "2026年11月7日 タイ パタヤ レート 両替 Exchange amount  2569 November 7th  #shorts",
-      "channel_name": "UD Thailand",
-      "channel_slug": "ud-thailand",
-      "channel_avatar": "https://yt3.googleusercontent.com/ytc/AIdro_k6p2pK8BY9F57E6AD_BXywffZajUAEWVqzS0C5ph-WHA=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i3.ytimg.com/vi/bNq2kmqzTfw/hqdefault.jpg",
-      "published_at": "2026-11-07T13:29:46+00:00",
-      "url": "https://www.youtube.com/watch?v=bNq2kmqzTfw"
     }
   ]
 }
