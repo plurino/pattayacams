@@ -1,7 +1,17 @@
 {
-  "last_updated": "2026-11-15T12:36:16.768Z",
-  "total_videos": 81,
+  "last_updated": "2026-11-15T14:32:04.632Z",
+  "total_videos": 80,
   "videos": [
+    {
+      "id": "RjyJD3e6A4o",
+      "title": "REAL MOMENTS FROM PATTAYA 👀 Thailand 2026",
+      "channel_name": "BEACH ROAD",
+      "channel_slug": "beach-road-channel",
+      "channel_avatar": "https://yt3.googleusercontent.com/CWW0rQ6f5ZKIE2_T9vOK3Km3eiBJEAdih3hwx_POm5n_uuG8EDZcL7IK7BLoEnWL0F5f7pnm=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i3.ytimg.com/vi/RjyJD3e6A4o/hqdefault.jpg",
+      "published_at": "2026-11-15T13:00:16+00:00",
+      "url": "https://www.youtube.com/watch?v=RjyJD3e6A4o"
+    },
     {
       "id": "Ij1PVOmle60",
       "title": "Pattaya Soi 7 & 8 Night Walk | Nov 14: Sailor Bar Packed",
@@ -791,26 +801,6 @@
       "thumbnail_url": "https://i2.ytimg.com/vi/1ae-WU24fc8/hqdefault.jpg",
       "published_at": "2026-11-08T14:46:09+00:00",
       "url": "https://www.youtube.com/watch?v=1ae-WU24fc8"
-    },
-    {
-      "id": "rQdBSKKEL4o",
-      "title": "PATTAYA'S BIGGEST EYESORE! IS IT FINALLY COMING DOWN?I",
-      "channel_name": "Welsh Boy Webby",
-      "channel_slug": "welsh-boy-webby",
-      "channel_avatar": "https://yt3.googleusercontent.com/1wL2fKxZy6Mxi5KZgy_5FU09HIwBXyr-AMsXIlo5C5buRKPJoGor75e_KNbzqD4oyP4n6Qqr=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i3.ytimg.com/vi/rQdBSKKEL4o/hqdefault.jpg",
-      "published_at": "2026-11-08T13:13:45+00:00",
-      "url": "https://www.youtube.com/watch?v=rQdBSKKEL4o"
-    },
-    {
-      "id": "y6GZhR9aqxw",
-      "title": "THE STREETS OF PATTAYA ARE CALLING 🌴 You Have to Experience It",
-      "channel_name": "BEACH ROAD",
-      "channel_slug": "beach-road-channel",
-      "channel_avatar": "https://yt3.googleusercontent.com/CWW0rQ6f5ZKIE2_T9vOK3Km3eiBJEAdih3hwx_POm5n_uuG8EDZcL7IK7BLoEnWL0F5f7pnm=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i2.ytimg.com/vi/y6GZhR9aqxw/hqdefault.jpg",
-      "published_at": "2026-11-08T13:00:18+00:00",
-      "url": "https://www.youtube.com/watch?v=y6GZhR9aqxw"
     }
   ]
 }
