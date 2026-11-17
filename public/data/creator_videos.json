@@ -1,7 +1,67 @@
 {
-  "last_updated": "2026-11-17T06:43:35.160Z",
-  "total_videos": 86,
+  "last_updated": "2026-11-17T16:42:49.068Z",
+  "total_videos": 89,
   "videos": [
+    {
+      "id": "CpdKJ7yFfmk",
+      "title": "Pattaya Gents Club Mission (Off You Pop Martin)",
+      "channel_name": "NDtvi Thailand",
+      "channel_slug": "ndtvi-thailand",
+      "channel_avatar": "https://yt3.googleusercontent.com/3Y-8EvHSWFMADaSoarlgl9npq8T4FTiU8c7gAsoVAIBfLsSggo0c5TT5mA1A_UhdNlc5pFPnmDs=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i4.ytimg.com/vi/CpdKJ7yFfmk/hqdefault.jpg",
+      "published_at": "2026-11-17T12:30:44+00:00",
+      "url": "https://www.youtube.com/watch?v=CpdKJ7yFfmk"
+    },
+    {
+      "id": "tG8wCPnjSd8",
+      "title": "No one says how hard it is to go from this to this!",
+      "channel_name": "The Tysin Show",
+      "channel_slug": "the-tysin-show",
+      "channel_avatar": "https://yt3.googleusercontent.com/3tMHDr_3VQy3AXy0yW7XsFwHJWBAJj66W8dqKHYTQ3JB9vEX8LbKVhHWjEodtG8TbCcIy9aV0w=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i1.ytimg.com/vi/tG8wCPnjSd8/hqdefault.jpg",
+      "published_at": "2026-11-17T12:01:44+00:00",
+      "url": "https://www.youtube.com/watch?v=tG8wCPnjSd8"
+    },
+    {
+      "id": "KDQDI8XSJks",
+      "title": "Pattaya Beach Road at 11PM 🇹🇭 | November 15, 2026 Night Walk",
+      "channel_name": "Vespa Life Thailand",
+      "channel_slug": "vespa-life-thailand",
+      "channel_avatar": "https://yt3.googleusercontent.com/_0ocieqX7Bpx3CZLLsmLCQpq7TMttO_TCmaiSI8z75xbWgW7Q7N9NeHHt8yGUPoEjQwEA19c7hs=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i4.ytimg.com/vi/KDQDI8XSJks/hqdefault.jpg",
+      "published_at": "2026-11-17T11:05:11+00:00",
+      "url": "https://www.youtube.com/watch?v=KDQDI8XSJks"
+    },
+    {
+      "id": "f2hYczv1E1w",
+      "title": "Pattaya Daytime Lifestyle! Just Another Fun Day in Thailand",
+      "channel_name": "The Tysin Show",
+      "channel_slug": "the-tysin-show",
+      "channel_avatar": "https://yt3.googleusercontent.com/3tMHDr_3VQy3AXy0yW7XsFwHJWBAJj66W8dqKHYTQ3JB9vEX8LbKVhHWjEodtG8TbCcIy9aV0w=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i3.ytimg.com/vi/f2hYczv1E1w/hqdefault.jpg",
+      "published_at": "2026-11-17T10:36:01+00:00",
+      "url": "https://www.youtube.com/watch?v=f2hYczv1E1w"
+    },
+    {
+      "id": "jKWgIZsY2Xo",
+      "title": "🇹🇭 [4K] Soi 7, Soi 8, Second Road - Pattaya Thailand 2026",
+      "channel_name": "DV Media Pattaya",
+      "channel_slug": "dv-media-pattaya",
+      "channel_avatar": "https://yt3.googleusercontent.com/ugj2a216u5s5JhG4iireKvsOCK9lky14pZHt1tGGRm4I9na4HTsC7_8QRPb6xinI7mb8u4ZD=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i3.ytimg.com/vi/jKWgIZsY2Xo/hqdefault.jpg",
+      "published_at": "2026-11-17T10:30:13+00:00",
+      "url": "https://www.youtube.com/watch?v=jKWgIZsY2Xo"
+    },
+    {
+      "id": "LEpY_GiM3y8",
+      "title": "fishing in isan bloody bonkers",
+      "channel_name": "Welsh Boy Webby",
+      "channel_slug": "welsh-boy-webby",
+      "channel_avatar": "https://yt3.googleusercontent.com/1wL2fKxZy6Mxi5KZgy_5FU09HIwBXyr-AMsXIlo5C5buRKPJoGor75e_KNbzqD4oyP4n6Qqr=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i1.ytimg.com/vi/LEpY_GiM3y8/hqdefault.jpg",
+      "published_at": "2026-11-17T07:07:05+00:00",
+      "url": "https://www.youtube.com/watch?v=LEpY_GiM3y8"
+    },
     {
       "id": "M-1il0wmEOo",
       "title": "lets set the record straight once and for all",
@@ -831,36 +891,6 @@
       "thumbnail_url": "https://i3.ytimg.com/vi/BwLRrTVynno/hqdefault.jpg",
       "published_at": "2026-11-10T18:22:36+00:00",
       "url": "https://www.youtube.com/watch?v=BwLRrTVynno"
-    },
-    {
-      "id": "UEx9MzQuCl0",
-      "title": "PATTAYA: From \"CORNER\" to \"CLUB\"......HOOKUP BUILD HEADACHES",
-      "channel_name": "NDtvi Thailand",
-      "channel_slug": "ndtvi-thailand",
-      "channel_avatar": "https://yt3.googleusercontent.com/3Y-8EvHSWFMADaSoarlgl9npq8T4FTiU8c7gAsoVAIBfLsSggo0c5TT5mA1A_UhdNlc5pFPnmDs=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i2.ytimg.com/vi/UEx9MzQuCl0/hqdefault.jpg",
-      "published_at": "2026-11-10T15:00:05+00:00",
-      "url": "https://www.youtube.com/watch?v=UEx9MzQuCl0"
-    },
-    {
-      "id": "S8gQUMxi1L8",
-      "title": "🇹🇭 [4K] Pattaya Klang Road, Second Road - Pattaya Thailand 2026",
-      "channel_name": "DV Media Pattaya",
-      "channel_slug": "dv-media-pattaya",
-      "channel_avatar": "https://yt3.googleusercontent.com/ugj2a216u5s5JhG4iireKvsOCK9lky14pZHt1tGGRm4I9na4HTsC7_8QRPb6xinI7mb8u4ZD=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i4.ytimg.com/vi/S8gQUMxi1L8/hqdefault.jpg",
-      "published_at": "2026-11-10T10:30:01+00:00",
-      "url": "https://www.youtube.com/watch?v=S8gQUMxi1L8"
-    },
-    {
-      "id": "8oyxN_WUhlA",
-      "title": "High Quality! Beach Road Pattaya Memorable Walk. November 2026",
-      "channel_name": "Pattaya 101",
-      "channel_slug": "pattaya-101",
-      "channel_avatar": "https://yt3.googleusercontent.com/lcgGQd_VWXbva3sOEvgXp_eISmaA20LSeUnPFagnga7AK9P6Kz4v06ESJt0mwR-TkJEZoF6l=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i1.ytimg.com/vi/8oyxN_WUhlA/hqdefault.jpg",
-      "published_at": "2026-11-10T09:00:01+00:00",
-      "url": "https://www.youtube.com/watch?v=8oyxN_WUhlA"
     }
   ]
 }
