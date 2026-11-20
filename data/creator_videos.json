@@ -1,7 +1,17 @@
 {
-  "last_updated": "2026-11-20T14:56:18.468Z",
+  "last_updated": "2026-11-20T15:55:39.679Z",
   "total_videos": 90,
   "videos": [
+    {
+      "id": "FOtZuavjyTE",
+      "title": "GTA 6 Marathon With Trae Badd | PART 2",
+      "channel_name": "Trae Badd TV",
+      "channel_slug": "trae-badd-tv",
+      "channel_avatar": "https://yt3.googleusercontent.com/YnO5xc6T7pk1Q_nnG5ruJbMOBqHi_YBRWLsAxO_4de-xBE_Dr1qoDnJ407dfBd2m_0CBLYL5yg=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i3.ytimg.com/vi/FOtZuavjyTE/hqdefault.jpg",
+      "published_at": "2026-11-20T15:21:45+00:00",
+      "url": "https://www.youtube.com/watch?v=FOtZuavjyTE"
+    },
     {
       "id": "KfcYvFp0uGc",
       "title": "What happens when you leave your phone around the girl at DELUZION!!",
@@ -161,16 +171,6 @@
       "thumbnail_url": "https://i3.ytimg.com/vi/Nwrox7UqwQs/hqdefault.jpg",
       "published_at": "2026-11-20T00:00:12+00:00",
       "url": "https://www.youtube.com/watch?v=Nwrox7UqwQs"
-    },
-    {
-      "id": "FOtZuavjyTE",
-      "title": "GTA 6 Marathon With Trae Badd | PART 2",
-      "channel_name": "Trae Badd TV",
-      "channel_slug": "trae-badd-tv",
-      "channel_avatar": "https://yt3.googleusercontent.com/YnO5xc6T7pk1Q_nnG5ruJbMOBqHi_YBRWLsAxO_4de-xBE_Dr1qoDnJ407dfBd2m_0CBLYL5yg=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i3.ytimg.com/vi/FOtZuavjyTE/hqdefault.jpg",
-      "published_at": "2026-11-19T21:00:02+00:00",
-      "url": "https://www.youtube.com/watch?v=FOtZuavjyTE"
     },
     {
       "id": "f90HAucXVq4",
