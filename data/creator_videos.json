@@ -1,7 +1,17 @@
 {
-  "last_updated": "2026-11-20T03:58:16.221Z",
-  "total_videos": 90,
+  "last_updated": "2026-11-20T05:51:22.527Z",
+  "total_videos": 89,
   "videos": [
+    {
+      "id": "7kGeeiOhYgc",
+      "title": "Did the BBC Stitch me up? The Truth",
+      "channel_name": "Mac TV",
+      "channel_slug": "mac-tv",
+      "channel_avatar": "https://yt3.googleusercontent.com/oSFiARQTu2FbqFOLPVtIROpM-sPXcE_g-T8hrfJXj0QO-ATDEtOcUIsFaq0B-_fPeAMBR1A-FxQ=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i4.ytimg.com/vi/7kGeeiOhYgc/hqdefault.jpg",
+      "published_at": "2026-11-20T04:00:01+00:00",
+      "url": "https://www.youtube.com/watch?v=7kGeeiOhYgc"
+    },
     {
       "id": "1wcniWMPN2U",
       "title": "THAILAND NEWS LATEST UPDATE (20 November 2026) in English from Fabulous Radio Pattaya",
@@ -881,26 +891,6 @@
       "thumbnail_url": "https://i3.ytimg.com/vi/JEokql98638/hqdefault.jpg",
       "published_at": "2026-11-13T06:00:52+00:00",
       "url": "https://www.youtube.com/watch?v=JEokql98638"
-    },
-    {
-      "id": "8skrenwKON8",
-      "title": "WHAT'S HAPPENING IN PATTAYA? Fabulous Radio Pattaya (13 November 2026)",
-      "channel_name": "Fabulous Pattaya",
-      "channel_slug": "fabulous-pattaya",
-      "channel_avatar": "https://yt3.googleusercontent.com/ytc/AIdro_kPG_DbiOWTBNwUUiepocpGOBrtTV781UaES92xL50vPxg=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i1.ytimg.com/vi/8skrenwKON8/hqdefault.jpg",
-      "published_at": "2026-11-13T05:00:28+00:00",
-      "url": "https://www.youtube.com/watch?v=8skrenwKON8"
-    },
-    {
-      "id": "oyn5Ez75_Ds",
-      "title": "Soi 7 is getting a NEW club and a documentary?!",
-      "channel_name": "Mac TV",
-      "channel_slug": "mac-tv",
-      "channel_avatar": "https://yt3.googleusercontent.com/oSFiARQTu2FbqFOLPVtIROpM-sPXcE_g-T8hrfJXj0QO-ATDEtOcUIsFaq0B-_fPeAMBR1A-FxQ=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i4.ytimg.com/vi/oyn5Ez75_Ds/hqdefault.jpg",
-      "published_at": "2026-11-13T04:04:58+00:00",
-      "url": "https://www.youtube.com/watch?v=oyn5Ez75_Ds"
     }
   ]
 }
