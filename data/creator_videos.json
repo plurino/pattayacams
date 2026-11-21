@@ -1,7 +1,27 @@
 {
-  "last_updated": "2026-11-20T22:31:17.997Z",
-  "total_videos": 92,
+  "last_updated": "2026-11-21T03:29:47.083Z",
+  "total_videos": 91,
   "videos": [
+    {
+      "id": "ETlmINqNu4A",
+      "title": "Bangkok Sukhumvit Road Walk 🇹🇭 Asok to Phrom Phong | 4K HDR • Binaural Audio 🎧",
+      "channel_name": "JWINTHAI",
+      "channel_slug": "jwinthai",
+      "channel_avatar": "https://yt3.googleusercontent.com/vrDpU7p6Kfk6gy37xaRu9ovhYrpaRR4vkNKoc0K84Q2A0HYi5mvSju7BOFA_KwbJKoRctumoT7w=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i2.ytimg.com/vi/ETlmINqNu4A/hqdefault.jpg",
+      "published_at": "2026-11-21T00:00:37+00:00",
+      "url": "https://www.youtube.com/watch?v=ETlmINqNu4A"
+    },
+    {
+      "id": "rAqT-PpHF9A",
+      "title": "Pattaya Police Crackdown on Illegal Drugs with Raids, Checkpoints, Inspections, and More",
+      "channel_name": "The Pattaya News",
+      "channel_slug": "the-pattaya-news",
+      "channel_avatar": "https://yt3.googleusercontent.com/ED2V0oAQI1iJpeAFvbuEi0wj97DQIsDXma7rxuSOhPxt4wfxf_-hmIINVdUbCWQnBAmfyHavxw=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i3.ytimg.com/vi/rAqT-PpHF9A/hqdefault.jpg",
+      "published_at": "2026-11-20T23:30:18+00:00",
+      "url": "https://www.youtube.com/watch?v=rAqT-PpHF9A"
+    },
     {
       "id": "XHbyxu8uoVg",
       "title": "Young Transgender Woman Arrested in Pattaya for Stealing 74,000 Baht from Turkish Tourist",
@@ -121,16 +141,6 @@
       "thumbnail_url": "https://i2.ytimg.com/vi/eAp8lHMJIlA/hqdefault.jpg",
       "published_at": "2026-11-20T08:32:00+00:00",
       "url": "https://www.youtube.com/watch?v=eAp8lHMJIlA"
-    },
-    {
-      "id": "PaBX9boC3To",
-      "title": "By far the best documentary I have been involved in!",
-      "channel_name": "Mac TV",
-      "channel_slug": "mac-tv",
-      "channel_avatar": "https://yt3.googleusercontent.com/oSFiARQTu2FbqFOLPVtIROpM-sPXcE_g-T8hrfJXj0QO-ATDEtOcUIsFaq0B-_fPeAMBR1A-FxQ=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i1.ytimg.com/vi/PaBX9boC3To/hqdefault.jpg",
-      "published_at": "2026-11-20T07:51:53+00:00",
-      "url": "https://www.youtube.com/watch?v=PaBX9boC3To"
     },
     {
       "id": "69SVSGmeHO8",
@@ -901,26 +911,6 @@
       "thumbnail_url": "https://i2.ytimg.com/vi/5iFI7BKJu6U/hqdefault.jpg",
       "published_at": "2026-11-14T03:43:20+00:00",
       "url": "https://www.youtube.com/watch?v=5iFI7BKJu6U"
-    },
-    {
-      "id": "RWfIivL0v28",
-      "title": "Jomtien Hi Season Bargain Hotels Pattaya",
-      "channel_name": "Everything Pattaya",
-      "channel_slug": "everything-pattaya",
-      "channel_avatar": "https://yt3.googleusercontent.com/ytc/AIdro_m4uLkSA24Sg_pCFTDGGu77nuKXc5CcWM6ipNH-TPtmIQ=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i3.ytimg.com/vi/RWfIivL0v28/hqdefault.jpg",
-      "published_at": "2026-11-14T02:00:05+00:00",
-      "url": "https://www.youtube.com/watch?v=RWfIivL0v28"
-    },
-    {
-      "id": "DB8ZQUnJP_8",
-      "title": "【4K HDR】Bangkok Pratunam Market 🇹🇭 Bangkok's Best Clothing Market Tour",
-      "channel_name": "JWINTHAI",
-      "channel_slug": "jwinthai",
-      "channel_avatar": "https://yt3.googleusercontent.com/vrDpU7p6Kfk6gy37xaRu9ovhYrpaRR4vkNKoc0K84Q2A0HYi5mvSju7BOFA_KwbJKoRctumoT7w=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i1.ytimg.com/vi/DB8ZQUnJP_8/hqdefault.jpg",
-      "published_at": "2026-11-14T00:00:20+00:00",
-      "url": "https://www.youtube.com/watch?v=DB8ZQUnJP_8"
     }
   ]
 }
