@@ -1,7 +1,17 @@
 {
-  "last_updated": "2026-11-22T21:03:24.804Z",
-  "total_videos": 98,
+  "last_updated": "2026-11-23T01:43:31.353Z",
+  "total_videos": 96,
   "videos": [
+    {
+      "id": "tLJRAVwagb8",
+      "title": "I Need A Break From GTA 6 | New Guests",
+      "channel_name": "Trae Badd TV",
+      "channel_slug": "trae-badd-tv",
+      "channel_avatar": "https://yt3.googleusercontent.com/YnO5xc6T7pk1Q_nnG5ruJbMOBqHi_YBRWLsAxO_4de-xBE_Dr1qoDnJ407dfBd2m_0CBLYL5yg=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i1.ytimg.com/vi/tLJRAVwagb8/hqdefault.jpg",
+      "published_at": "2026-11-22T23:22:57+00:00",
+      "url": "https://www.youtube.com/watch?v=tLJRAVwagb8"
+    },
     {
       "id": "F40sQ0x0lLs",
       "title": "Watching a FAMOUS Thai Singer in Pattaya! What has my Life become",
@@ -11,16 +21,6 @@
       "thumbnail_url": "https://i3.ytimg.com/vi/F40sQ0x0lLs/hqdefault.jpg",
       "published_at": "2026-11-22T16:39:54+00:00",
       "url": "https://www.youtube.com/watch?v=F40sQ0x0lLs"
-    },
-    {
-      "id": "tLJRAVwagb8",
-      "title": "I Need A Break From GTA 6 | New Guests",
-      "channel_name": "Trae Badd TV",
-      "channel_slug": "trae-badd-tv",
-      "channel_avatar": "https://yt3.googleusercontent.com/YnO5xc6T7pk1Q_nnG5ruJbMOBqHi_YBRWLsAxO_4de-xBE_Dr1qoDnJ407dfBd2m_0CBLYL5yg=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i1.ytimg.com/vi/tLJRAVwagb8/hqdefault.jpg",
-      "published_at": "2026-11-22T14:57:38+00:00",
-      "url": "https://www.youtube.com/watch?v=tLJRAVwagb8"
     },
     {
       "id": "ZBZ9dDtc86g",
@@ -961,26 +961,6 @@
       "thumbnail_url": "https://i2.ytimg.com/vi/ipQRAE_Z-rU/hqdefault.jpg",
       "published_at": "2026-11-16T02:00:07+00:00",
       "url": "https://www.youtube.com/watch?v=ipQRAE_Z-rU"
-    },
-    {
-      "id": "l77GEzQjfTc",
-      "title": "Am I the only one that lives by a to-do list?!",
-      "channel_name": "Mac TV",
-      "channel_slug": "mac-tv",
-      "channel_avatar": "https://yt3.googleusercontent.com/oSFiARQTu2FbqFOLPVtIROpM-sPXcE_g-T8hrfJXj0QO-ATDEtOcUIsFaq0B-_fPeAMBR1A-FxQ=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i1.ytimg.com/vi/l77GEzQjfTc/hqdefault.jpg",
-      "published_at": "2026-11-16T01:30:13+00:00",
-      "url": "https://www.youtube.com/watch?v=l77GEzQjfTc"
-    },
-    {
-      "id": "-xMBqEjs9g4",
-      "title": "A Simp Intervention in Pattaya With Pastor Trae",
-      "channel_name": "Trae Badd TV",
-      "channel_slug": "trae-badd-tv",
-      "channel_avatar": "https://yt3.googleusercontent.com/YnO5xc6T7pk1Q_nnG5ruJbMOBqHi_YBRWLsAxO_4de-xBE_Dr1qoDnJ407dfBd2m_0CBLYL5yg=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i2.ytimg.com/vi/-xMBqEjs9g4/hqdefault.jpg",
-      "published_at": "2026-11-15T22:54:07+00:00",
-      "url": "https://www.youtube.com/watch?v=-xMBqEjs9g4"
     }
   ]
 }
