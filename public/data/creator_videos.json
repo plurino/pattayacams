@@ -1,7 +1,17 @@
 {
-  "last_updated": "2026-11-25T02:47:37.039Z",
-  "total_videos": 91,
+  "last_updated": "2026-11-25T07:08:27.351Z",
+  "total_videos": 90,
   "videos": [
+    {
+      "id": "844hoaEmQ80",
+      "title": "Chiang Mai’s Mae Ya Waterfall 🇹🇭 | Turn the Sound Up",
+      "channel_name": "Vespa Life Thailand",
+      "channel_slug": "vespa-life-thailand",
+      "channel_avatar": "https://yt3.googleusercontent.com/_0ocieqX7Bpx3CZLLsmLCQpq7TMttO_TCmaiSI8z75xbWgW7Q7N9NeHHt8yGUPoEjQwEA19c7hs=s900-c-k-c0x00ffffff-no-rj",
+      "thumbnail_url": "https://i1.ytimg.com/vi/844hoaEmQ80/hqdefault.jpg",
+      "published_at": "2026-11-25T04:54:20+00:00",
+      "url": "https://www.youtube.com/watch?v=844hoaEmQ80"
+    },
     {
       "id": "aI1S8Jr6vhs",
       "title": "THAILAND NEWS LATEST UPDATE (25 November 2026) in English from Fabulous Radio Pattaya",
@@ -64,7 +74,7 @@
     },
     {
       "id": "snCJfwOMU1Q",
-      "title": "A Busy but Interesting Week in Pattaya",
+      "title": "Auditions Crunch Time !",
       "channel_name": "NDtvi Thailand",
       "channel_slug": "ndtvi-thailand",
       "channel_avatar": "https://yt3.googleusercontent.com/3Y-8EvHSWFMADaSoarlgl9npq8T4FTiU8c7gAsoVAIBfLsSggo0c5TT5mA1A_UhdNlc5pFPnmDs=s900-c-k-c0x00ffffff-no-rj",
@@ -891,26 +901,6 @@
       "thumbnail_url": "https://i2.ytimg.com/vi/eP42Bpl561I/hqdefault.jpg",
       "published_at": "2026-11-18T09:00:26+00:00",
       "url": "https://www.youtube.com/watch?v=eP42Bpl561I"
-    },
-    {
-      "id": "YjU2dO3hXYI",
-      "title": "Ten Days Away! Don't Miss The Pattaya International Fireworks Festival! Nov 27 and 28",
-      "channel_name": "The Pattaya News",
-      "channel_slug": "the-pattaya-news",
-      "channel_avatar": "https://yt3.googleusercontent.com/ED2V0oAQI1iJpeAFvbuEi0wj97DQIsDXma7rxuSOhPxt4wfxf_-hmIINVdUbCWQnBAmfyHavxw=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i2.ytimg.com/vi/YjU2dO3hXYI/hqdefault.jpg",
-      "published_at": "2026-11-18T05:41:07+00:00",
-      "url": "https://www.youtube.com/watch?v=YjU2dO3hXYI"
-    },
-    {
-      "id": "5F6Y4l9s8ec",
-      "title": "farming in isan after a night on the piss",
-      "channel_name": "Welsh Boy Webby",
-      "channel_slug": "welsh-boy-webby",
-      "channel_avatar": "https://yt3.googleusercontent.com/1wL2fKxZy6Mxi5KZgy_5FU09HIwBXyr-AMsXIlo5C5buRKPJoGor75e_KNbzqD4oyP4n6Qqr=s900-c-k-c0x00ffffff-no-rj",
-      "thumbnail_url": "https://i2.ytimg.com/vi/5F6Y4l9s8ec/hqdefault.jpg",
-      "published_at": "2026-11-18T04:23:52+00:00",
-      "url": "https://www.youtube.com/watch?v=5F6Y4l9s8ec"
     }
   ]
 }
